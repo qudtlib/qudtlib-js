@@ -1,0 +1,30 @@
+{
+  "name": "qudtlib-js",
+  "version": "1.0.0",
+  "description": "JS Implementation of the QUDT ontology, allowing for instantiating QUDT units and quantitykinds and for unit conversion. ",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "keywords": [
+    "QUDT",
+    "Unit",
+    "conversion",
+    "Units",
+    "Quantities"
+  ],
+  "author": "Florian Kleedorfer",
+  "license": "CC-BY-4.0",
+  "devDependencies": {
+    "@types/jest": "^28.1.4",
+    "gulp": "^4.0.2",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "jest": "^28.1.2",
+    "ts-jest": "^28.0.5",
+    "ts-node": "^10.8.2",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "decimal.js": "^10.4.0"
+  }
+}
