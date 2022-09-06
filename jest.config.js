@@ -1,7 +1,0 @@
-module.exports = {
-    preset: "ts-jest",
-    testEnvironment: "node",
-    verbose: true,
-    cacheDirectory: "tmp/jest/cache",
-    coverageDirectory: "tmp/jest/coverage"
-};
