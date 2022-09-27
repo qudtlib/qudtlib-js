@@ -8,7 +8,8 @@
     "node": ">=14.16"
   },
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "build": "gulp"
   },
   "keywords": [
     "QUDT",
