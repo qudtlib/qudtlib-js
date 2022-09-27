@@ -1,5 +1,5 @@
 /.idea
-/coverage
-/dist
-/node_modules
-/tmp
+/**/coverage
+/**/dist
+/**/tmp
+/**/node_modules
