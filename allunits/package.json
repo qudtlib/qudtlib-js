@@ -1,20 +1,16 @@
 {
-  "name": "@qudtlib/parent",
+  "name": "@qudtlib/allunits",
   "version": "1.0.0",
   "type": "module",
-  "description": "JS Implementation of the QUDT ontology, allowing for instantiating QUDT units and quantitykinds and for unit conversion. ",
-  "exports": "./dist/qudtlib.js",
+  "description": "Package containing all QUDT units, ek  4[",
+  "exports": "./dist/testunits.js",
+  "main": "./dist/testunits.js",
+  "types": "./src/testunits.ts",
   "engines": {
     "node": ">=14.16"
   },
-  "workspaces": [
-    "core",
-    "testunits",
-    "testunits2",
-    "integrationtest"
-  ],
   "scripts": {
-    "test": "jest --coverage --passWithNoTests"
+    "test": "jest --coverage"
   },
   "keywords": [
     "QUDT",
@@ -36,6 +32,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@qudtlib/core": "^1.0.0",
     "decimal.js": "^10.4.0"
   }
 }

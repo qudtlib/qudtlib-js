@@ -1,4 +1,17 @@
-import {Decimal} from "decimal.js" ;
+import { Decimal } from "decimal.js" ;
+
+console.log("loading module '@qudtlib/core'");
+
+export class Configurator {
+    readonly units: Map<string, Unit>;
+
+    constructor() {
+        this.units = new Map<string, Unit>();
+    }
+
+}
+
+export const config = new Configurator();
 
 interface SupportsEquals<Type> {
     equals(other?: Type): boolean
@@ -598,6 +611,8 @@ export class Unit implements SupportsEquals<Unit> {
 
 
 export class Qudt {
+    //TODO implement akin to qudtlib-java, checking that the configuration has been provided by a units package
+
     derivedUnitFromFactors(factorUnitSpecs: any[]): Unit[] {
         return [];
     }

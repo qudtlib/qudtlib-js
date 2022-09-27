@@ -1,20 +1,14 @@
 {
-  "name": "@qudtlib/parent",
+  "name": "@qudtlib/integrationtest",
   "version": "1.0.0",
   "type": "module",
-  "description": "JS Implementation of the QUDT ontology, allowing for instantiating QUDT units and quantitykinds and for unit conversion. ",
-  "exports": "./dist/qudtlib.js",
+  "description": "Module for integration testing QUDTLib",
+  "exports": "./dist/integrationtest.js",
   "engines": {
     "node": ">=14.16"
   },
-  "workspaces": [
-    "core",
-    "testunits",
-    "testunits2",
-    "integrationtest"
-  ],
   "scripts": {
-    "test": "jest --coverage --passWithNoTests"
+    "test": "jest --coverage"
   },
   "keywords": [
     "QUDT",
@@ -36,6 +30,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
+    "@qudtlib/testunits": "^1.0.0",
     "decimal.js": "^10.4.0"
   }
 }
