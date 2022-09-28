@@ -18,7 +18,6 @@ gulp.task("compress", function() {
 });
 gulp.task('transpile', function() {
     return gulp.src('src/*.ts', { sourcemaps: true })
-        .pipe(sourcemaps.init())
         .pipe(tsProject())
         .pipe(gulp.dest('dist', {
             sourcemaps: '.'

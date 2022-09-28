@@ -2,16 +2,20 @@ import { Decimal } from "decimal.js" ;
 
 console.log("loading module '@qudtlib/core'");
 
-export class Configurator {
+export class QudtlibConfig {
     readonly units: Map<string, Unit>;
+    readonly quantityKinds: Map<string, QuantityKind>;
+    readonly prefixes: Map<string, Prefix>;
 
     constructor() {
         this.units = new Map<string, Unit>();
+        this.quantityKinds = new Map<string, QuantityKind>();
+        this.prefixes = new Map<string, Prefix>();
     }
 
 }
 
-export const config = new Configurator();
+export const config = new QudtlibConfig();
 
 interface SupportsEquals<Type> {
     equals(other?: Type): boolean
@@ -603,12 +607,23 @@ export class Unit implements SupportsEquals<Unit> {
         this.labels.push(label);
     }
 
+    addQuantityKindIri(quantityKindIri: string): void {
+        this.quantityKindIris.push(quantityKindIri);
+    }
+
+    addQuantityKind(quantityKind: QuantityKind): void {
+        this.quantityKinds.push(quantityKind);
+    }
+
     addFactorUnit(factorUnit: FactorUnit): void {
         this.factorUnits.push(factorUnit);
     }
 
 }
 
+const UNIT_BASE_IRI = "http://qudt.org/vocab/unit/";
+const QUANTITYKIND_BASE_IRI = "http://qudt.org/vocab/quantitykind/";
+const PREFIX_BASE_IRI = "http://qudt.org/vocab/prefix/";
 
 export class Qudt {
     //TODO implement akin to qudtlib-java, checking that the configuration has been provided by a units package
@@ -616,6 +631,55 @@ export class Qudt {
     derivedUnitFromFactors(factorUnitSpecs: any[]): Unit[] {
         return [];
     }
+
+    static unitFromLocalname(localname:string):Unit {
+        return Qudt.unit(Qudt.unitIriFromLocalname(localname));
+    }
+
+    static quantityKindFromLocalname(localname:string):QuantityKind {
+        return Qudt.quantityKind(Qudt.quantityKindIriFromLocalname(localname));
+    }
+
+    static prefixFromLocalname(localname:string):Prefix {
+        return Qudt.prefix(Qudt.prefixIriFromLocalname(localname));
+    }
+    
+    static unitIriFromLocalname(localname:string): string{
+        return UNIT_BASE_IRI + localname;
+    }
+
+    static quantityKindIriFromLocalname(localname:string): string{
+        return QUANTITYKIND_BASE_IRI + localname;
+    }
+
+    static prefixIriFromLocalname(localname:string): string{
+        return PREFIX_BASE_IRI + localname;
+    }
+
+    static unit(unitIri:string): Unit {
+        const ret = config.units.get(unitIri);
+        if (typeof ret === "undefined"){
+            throw `Unit ${unitIri} not found`;
+        }
+        return ret;
+    }
+    
+    static quantityKind(quantityKindIri:string): QuantityKind {
+        const ret = config.quantityKinds.get(quantityKindIri);
+        if (typeof ret === "undefined") {
+            throw `QuantityKind ${quantityKindIri} not found`;
+        }
+        return ret;
+    }
+
+    static prefix(prefixIri:string): Prefix {
+        const ret = config.prefixes.get(prefixIri);
+        if (typeof ret === "undefined") {
+            throw `Prefix ${prefixIri} not found`;
+        }
+        return ret;
+    }
+
 }
 
 function getLastIriElement(iri: string) {

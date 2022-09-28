@@ -5,7 +5,7 @@
   "description": "Data model for QUDTLib",
   "exports": "./dist/qudtlib.js",
   "main": "./dist/qudtlib.js",
-  "types": "./src/qudtlib.ts",
+  "types": "./dist/qudtlib.d.ts",
   "files": ["./dist/*"],
   "engines": {
     "node": ">=14.16"

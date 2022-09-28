@@ -2,10 +2,10 @@
   "name": "@qudtlib/allunits",
   "version": "1.0.0",
   "type": "module",
-  "description": "Package containing all QUDT units, ek  4[",
-  "exports": "./dist/testunits.js",
-  "main": "./dist/testunits.js",
-  "types": "./src/testunits.ts",
+  "description": "Package containing all QUDT units, quantityKinds, and prefixes",
+  "exports": "./dist/units.js",
+  "main": "./dist/units.js",
+  "types": "./dist/units.d.ts",
   "engines": {
     "node": ">=14.16"
   },

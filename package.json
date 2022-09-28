@@ -9,6 +9,7 @@
   },
   "workspaces": [
     "core",
+    "allunits",
     "testunits",
     "testunits2",
     "integrationtest"
