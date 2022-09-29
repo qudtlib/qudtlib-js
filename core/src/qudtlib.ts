@@ -619,11 +619,22 @@ export class Unit implements SupportsEquals<Unit> {
         this.factorUnits.push(factorUnit);
     }
 
+    setPrefix(prefix: Prefix): void {
+        if (prefix.iri !== this.prefixIri)
+            throw "prefix.iri does not equal this.prefixIri";
+        this.prefix = prefix;
+    }
+
+    setScalingOf(scalingOf: Unit): void {
+        if (scalingOf.iri !== this.scalingOfIri)
+            throw "scalingOf.iri does not equal this.scalingOfIri";
+        this.scalingOf = scalingOf;
+    }
 }
 
-const UNIT_BASE_IRI = "http://qudt.org/vocab/unit/";
-const QUANTITYKIND_BASE_IRI = "http://qudt.org/vocab/quantitykind/";
-const PREFIX_BASE_IRI = "http://qudt.org/vocab/prefix/";
+export const QUDT_UNIT_BASE_IRI = "http://qudt.org/vocab/unit/";
+export const QUDT_QUANTITYKIND_BASE_IRI = "http://qudt.org/vocab/quantitykind/";
+export const QUDT_PREFIX_BASE_IRI = "http://qudt.org/vocab/prefix/";
 
 export class Qudt {
     //TODO implement akin to qudtlib-java, checking that the configuration has been provided by a units package
@@ -645,15 +656,15 @@ export class Qudt {
     }
     
     static unitIriFromLocalname(localname:string): string{
-        return UNIT_BASE_IRI + localname;
+        return QUDT_UNIT_BASE_IRI + localname;
     }
 
     static quantityKindIriFromLocalname(localname:string): string{
-        return QUANTITYKIND_BASE_IRI + localname;
+        return QUDT_QUANTITYKIND_BASE_IRI + localname;
     }
 
     static prefixIriFromLocalname(localname:string): string{
-        return PREFIX_BASE_IRI + localname;
+        return QUDT_PREFIX_BASE_IRI + localname;
     }
 
     static unit(unitIri:string): Unit {

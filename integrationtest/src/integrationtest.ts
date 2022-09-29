@@ -1,7 +1,5 @@
-import {Units, Unit} from "@qudtlib/testunits";
+import {Qudt, Units} from "@qudtlib/allunits";
 
 console.log("loading module '@qudtlib/integrationtest'");
 console.log("M: " + Units.M);
-const unit = new Unit("bla");
-console.log("unit:  " + unit);
 
