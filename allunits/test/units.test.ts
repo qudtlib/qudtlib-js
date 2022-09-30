@@ -1,81 +1,82 @@
 import { Decimal } from "decimal.js";
 import {
-   Qudt,
-   Units,
-   QuantityKinds,
-   Prefixes,
-   QUDT_UNIT_BASE_IRI,
-   QUDT_QUANTITYKIND_BASE_IRI,
-   QUDT_PREFIX_BASE_IRI,
-   Prefix,
-   Unit,
-   QuantityKind
+  Qudt,
+  Units,
+  QuantityKinds,
+  Prefixes,
+  QUDT_UNIT_BASE_IRI,
+  QUDT_QUANTITYKIND_BASE_IRI,
+  QUDT_PREFIX_BASE_IRI,
+  Prefix,
+  Unit,
+  QuantityKind,
 } from "../src/units";
 
 test("unit()", () => {
-   expect(Qudt.unit(QUDT_UNIT_BASE_IRI + "M")).toBe(Units.M);
+  expect(Qudt.unit(QUDT_UNIT_BASE_IRI + "M")).toBe(Units.M);
 });
 
 test("unitFromLocalname()", () => {
-   expect(Qudt.unitFromLocalname("M")).toBe(Units.M);
+  expect(Qudt.unitFromLocalname("M")).toBe(Units.M);
 });
 
 test("quantityKind()", () => {
-   expect(Qudt.quantityKind(QUDT_QUANTITYKIND_BASE_IRI + "Length")).toBe(QuantityKinds.Length);
+  expect(Qudt.quantityKind(QUDT_QUANTITYKIND_BASE_IRI + "Length")).toBe(
+    QuantityKinds.Length
+  );
 });
 
 test("quantityKindFromLocalname()", () => {
-   expect(Qudt.quantityKindFromLocalname("Length")).toBe(QuantityKinds.Length);
+  expect(Qudt.quantityKindFromLocalname("Length")).toBe(QuantityKinds.Length);
 });
 
 test("prefix()", () => {
-   expect(Qudt.prefix(QUDT_PREFIX_BASE_IRI + "Kilo")).toBe(Prefixes.Kilo);
+  expect(Qudt.prefix(QUDT_PREFIX_BASE_IRI + "Kilo")).toBe(Prefixes.Kilo);
 });
 
 test("prefixFromLocalname()", () => {
-   expect(Qudt.prefixFromLocalname("Kilo")).toBe(Prefixes.Kilo);
+  expect(Qudt.prefixFromLocalname("Kilo")).toBe(Prefixes.Kilo);
 });
 
-test ("testPrefix", () => {
-   const kilo:Prefix = Prefixes.Kilo;
-   expect(kilo.multiplier).toStrictEqual(new Decimal(1000));
-   expect(kilo.iri).toEqual(QUDT_PREFIX_BASE_IRI + "Kilo");
+test("testPrefix", () => {
+  const kilo: Prefix = Prefixes.Kilo;
+  expect(kilo.multiplier).toStrictEqual(new Decimal(1000));
+  expect(kilo.iri).toEqual(QUDT_PREFIX_BASE_IRI + "Kilo");
 });
 
-test( "testUnit", () => {
-   const meter:Unit = Units.M;
-   expect(meter.iri).toEqual(QUDT_UNIT_BASE_IRI + "M");
-   expect(meter.hasLabel("Meter")).toBe(true);
-   expect(meter.hasLabel("Metre")).toBe(true);
-   expect(meter.getLabelForLanguageTag("en")).toBe("Metre");
+test("testUnit", () => {
+  const meter: Unit = Units.M;
+  expect(meter.iri).toEqual(QUDT_UNIT_BASE_IRI + "M");
+  expect(meter.hasLabel("Meter")).toBe(true);
+  expect(meter.hasLabel("Metre")).toBe(true);
+  expect(meter.getLabelForLanguageTag("en")).toBe("Metre");
 });
 
-test ("testQuantityKind", () => {
-   const length:QuantityKind = QuantityKinds.Length;
-   expect(length.hasLabel("Length")).toBe(true);
-   expect(length.iri).toBe(QUDT_QUANTITYKIND_BASE_IRI+"Length");
+test("testQuantityKind", () => {
+  const length: QuantityKind = QuantityKinds.Length;
+  expect(length.hasLabel("Length")).toBe(true);
+  expect(length.iri).toBe(QUDT_QUANTITYKIND_BASE_IRI + "Length");
 });
 
-test ("testUnitFromLabel()", () => {
-   expect(Qudt.unitFromLabel("Newton Meter")).toBe(Units.N__M);
-   expect(Qudt.unitFromLabel("NEWTON_METER")).toBe(Units.N__M);
+test("testUnitFromLabel()", () => {
+  expect(Qudt.unitFromLabel("Newton Meter")).toBe(Units.N__M);
+  expect(Qudt.unitFromLabel("NEWTON_METER")).toBe(Units.N__M);
 });
 
-test ("Qudt.QuantityKinds(Unit)", () => {
-   const quantityKinds: QuantityKind[] = Qudt.quantityKinds(Units.N__M);
-   expect(quantityKinds.includes(QuantityKinds.Torque)).toBe(true);
-   expect(quantityKinds.includes(QuantityKinds.MomentOfForce)).toBe(true);
-   expect(quantityKinds.length).toBe(2);
+test("Qudt.QuantityKinds(Unit)", () => {
+  const quantityKinds: QuantityKind[] = Qudt.quantityKinds(Units.N__M);
+  expect(quantityKinds.includes(QuantityKinds.Torque)).toBe(true);
+  expect(quantityKinds.includes(QuantityKinds.MomentOfForce)).toBe(true);
+  expect(quantityKinds.length).toBe(2);
 });
 
-test ("Qudt.QuantityKindsBroad(Unit)", () => {
-   const broad: QuantityKind[] = Qudt.quantityKindsBroad(Units.PA__PER__BAR);
-   expect(broad.includes(QuantityKinds.PressureRatio)).toBe(true);
-   expect(broad.includes(QuantityKinds.DimensionlessRatio)).toBe(true);
-   expect(broad.includes(QuantityKinds.Dimensionless)).toBe(true);
-   expect(broad.length).toBe(3);
+test("Qudt.QuantityKindsBroad(Unit)", () => {
+  const broad: QuantityKind[] = Qudt.quantityKindsBroad(Units.PA__PER__BAR);
+  expect(broad.includes(QuantityKinds.PressureRatio)).toBe(true);
+  expect(broad.includes(QuantityKinds.DimensionlessRatio)).toBe(true);
+  expect(broad.includes(QuantityKinds.Dimensionless)).toBe(true);
+  expect(broad.length).toBe(3);
 });
-
 
 /*
 

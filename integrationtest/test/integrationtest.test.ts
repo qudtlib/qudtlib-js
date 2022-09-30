@@ -1,4 +1,4 @@
-import {Qudt, QUDT_UNIT_BASE_IRI, Units} from "@qudtlib/allunits";
+import { Qudt, QUDT_UNIT_BASE_IRI, Units } from "@qudtlib/allunits";
 test("unit()", () => {
-    expect(Qudt.unit(QUDT_UNIT_BASE_IRI + "M")).toBe(Units.M);
+  expect(Qudt.unit(QUDT_UNIT_BASE_IRI + "M")).toBe(Units.M);
 });

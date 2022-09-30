@@ -6,7 +6,9 @@
   "exports": "./dist/qudtlib.js",
   "main": "./dist/qudtlib.js",
   "types": "./dist/qudtlib.d.ts",
-  "files": ["./dist/*"],
+  "files": [
+    "./dist/*"
+  ],
   "engines": {
     "node": ">=14.16"
   },
