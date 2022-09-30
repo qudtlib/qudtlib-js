@@ -4,6 +4,8 @@
   "type": "module",
   "description": "Module for integration testing QUDTLib",
   "exports": "./dist/integrationtest.js",
+  "main": "./dist/integrationtest.js",
+  "files": ["./dist/*"],
   "engines": {
     "node": ">=14.16"
   },
@@ -24,14 +26,16 @@
     "@types/jest": "^28.1.4",
     "del": "^7.0.0",
     "gulp": "^4.0.2",
+    "gulp-sourcemaps": "^3.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
+    "gulp-uglify": "^3.0.2",
     "jest": "^28.1.2",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.8.2",
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@qudtlib/testunits": "^1.0.0",
+    "@qudtlib/allunits": "*",
     "decimal.js": "^10.4.0"
   }
 }

@@ -1,7 +1,6 @@
 import gulp from 'gulp';
 import ts from 'gulp-typescript';
 import {deleteAsync} from 'del';
-import sourcemaps from 'gulp-sourcemaps';
 import uglify from "gulp-uglify";
 
 const tsProject = ts.createProject("tsconfig.json");
@@ -23,5 +22,5 @@ gulp.task('transpile', function() {
             sourcemaps: '.'
         } ));
 });
-gulp.task("build", gulp.series("transpile", "compress"));
+gulp.task("build", gulp.series("transpile"));
 gulp.task("default", gulp.series("clean", "build"));

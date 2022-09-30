@@ -1,7 +1,6 @@
 import gulp from 'gulp';
 import ts from 'gulp-typescript';
 import {deleteAsync} from 'del';
-import sourcemaps from 'gulp-sourcemaps';
 import uglify from "gulp-uglify";
 
 const tsProject = ts.createProject("tsconfig.json");
@@ -18,7 +17,6 @@ gulp.task("compress", function() {
 });
 gulp.task('transpile', function() {
     return gulp.src('src/*.ts', { sourcemaps: true })
-        .pipe(sourcemaps.init())
         .pipe(tsProject())
         .pipe(gulp.dest('dist', {
             sourcemaps: '.'

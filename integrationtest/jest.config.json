@@ -1,9 +1,8 @@
 {
     "preset": "ts-jest",
-    "testEnvironment": "jest-environment-node",
+    "testEnvironment": "node",
     "verbose": true,
     "cacheDirectory": "tmp/jest/cache",
     "coverageDirectory": "tmp/jest/coverage",
-    "transform": {},
     "extensionsToTreatAsEsm": [".ts"]
 }

@@ -1,7 +1,6 @@
 import gulp from 'gulp';
 import ts from 'gulp-typescript';
 import {deleteAsync} from 'del';
-import sourcemaps from 'gulp-sourcemaps';
 import uglify from "gulp-uglify";
 
 const tsProject = ts.createProject("tsconfig.json");

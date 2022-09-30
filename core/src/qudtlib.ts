@@ -1,7 +1,5 @@
 import { Decimal } from "decimal.js" ;
 
-console.log("loading module '@qudtlib/core'");
-
 export class QudtlibConfig {
     readonly units: Map<string, Unit>;
     readonly quantityKinds: Map<string, QuantityKind>;
@@ -133,17 +131,17 @@ export class QuantityValue implements SupportsEquals<QuantityValue> {
 export class QuantityKind implements SupportsEquals<QuantityKind> {
     readonly iri: string;
     readonly labels: LangString[];
-    readonly applicableUnits: string[];
-    readonly broaderQuantityKinds: string[];
-    readonly dimensionVector?: string;
+    readonly applicableUnitIris: string[];
+    readonly broaderQuantityKindIris: string[];
+    readonly dimensionVectorIri?: string;
     readonly symbol?: string;
 
 
     constructor(iri: string, dimensionVector?: string, symbol?: string, labels?: LangString[]) {
         this.iri = iri;
-        this.applicableUnits = [];
-        this.broaderQuantityKinds = [];
-        this.dimensionVector = dimensionVector;
+        this.applicableUnitIris = [];
+        this.broaderQuantityKindIris = [];
+        this.dimensionVectorIri = dimensionVector;
         this.symbol = symbol;
         if (typeof labels === 'undefined') {
             this.labels = [];
@@ -156,12 +154,21 @@ export class QuantityKind implements SupportsEquals<QuantityKind> {
         this.labels.push(label);
     }
 
-    addApplicableUnit(unit: string): void {
-        this.applicableUnits.push(unit);
+    hasLabel(label: string):boolean {
+        return this.labels.some(l => label === l.text);
     }
 
-    addBroaderQuantityKind(quantityKind: string): void {
-        this.broaderQuantityKinds.push(quantityKind);
+    getLabelForLanguageTag(languageTag: string): String | undefined {
+        const label = this.labels.find(l => languageTag === l.languageTag);
+        return label?.text;
+    }
+
+    addApplicableUnitIri(unit: string): void {
+        this.applicableUnitIris.push(unit);
+    }
+
+    addBroaderQuantityKindIri(quantityKind: string): void {
+        this.broaderQuantityKindIris.push(quantityKind);
     }
 
     equals(other?: QuantityKind): boolean {
@@ -611,6 +618,15 @@ export class Unit implements SupportsEquals<Unit> {
         this.quantityKindIris.push(quantityKindIri);
     }
 
+    hasLabel(label: string):boolean {
+        return this.labels.some(l => label === l.text);
+    }
+
+    getLabelForLanguageTag(languageTag: string): String | undefined {
+        const label = this.labels.find(l => languageTag === l.languageTag);
+        return label?.text;
+    }
+
     addQuantityKind(quantityKind: QuantityKind): void {
         this.quantityKinds.push(quantityKind);
     }
@@ -636,11 +652,27 @@ export const QUDT_UNIT_BASE_IRI = "http://qudt.org/vocab/unit/";
 export const QUDT_QUANTITYKIND_BASE_IRI = "http://qudt.org/vocab/quantitykind/";
 export const QUDT_PREFIX_BASE_IRI = "http://qudt.org/vocab/prefix/";
 
+function findInIterable<T>(iterable:IterableIterator<T>, predicate: (value:T) => boolean): T | undefined {
+    for (const elem of iterable) {
+        if (predicate(elem)){
+            return elem;
+        }
+    }
+    return undefined;
+}
+
 export class Qudt {
     //TODO implement akin to qudtlib-java, checking that the configuration has been provided by a units package
 
     derivedUnitFromFactors(factorUnitSpecs: any[]): Unit[] {
         return [];
+    }
+
+    static unitFromLabel(label:string):Unit {
+        const matcher:LabelMatcher = new CaseInsensitiveUnderscoreIgnoringLabelMatcher(label);
+        const firstMatch: Unit | undefined = findInIterable(config.units.values(), u => matcher.matchesLangStrings(u.labels));
+        if (!firstMatch) throw `No unit found for label ${label}`;
+        return firstMatch;
     }
 
     static unitFromLocalname(localname:string):Unit {
@@ -691,6 +723,53 @@ export class Qudt {
         return ret;
     }
 
+    static quantityKinds(unit:Unit):QuantityKind[]{
+        return unit.quantityKindIris.map(iri => Qudt.quantityKind(iri));
+    }
+
+    static quantityKindsBroad(unit:Unit):QuantityKind[]{
+        let current:QuantityKind[] = Qudt.quantityKinds(unit);
+        const result: QuantityKind[] = [];
+        current.forEach(qk => result.push(qk));
+        while(current.length){
+            current = current
+                .flatMap(qk => qk.broaderQuantityKindIris)
+                .map(iri => Qudt.quantityKind(iri));
+            current.forEach(qk => result.includes(qk) || result.push(qk));
+        }
+        return result;
+    }
+
+}
+
+interface LabelMatcher {
+    matchesString(searchTerm: string):boolean;
+    matchesLangString(searchTerm: LangString):boolean
+    matchesLangStrings(searchTerms: LangString[]):boolean
+}
+
+class CaseInsensitiveUnderscoreIgnoringLabelMatcher implements LabelMatcher{
+    readonly compareForEquality: string;
+
+    constructor(searchTerm:string) {
+        this.compareForEquality = this.convert(searchTerm);
+    }
+
+    convert(term:string):string{
+        return term.replaceAll("_"," ").toLocaleUpperCase("en-US");
+    }
+
+    matchesString(searchTerm: string):boolean {
+        return this.convert(searchTerm) === this.compareForEquality;
+    }
+
+    matchesLangString(searchTerm: LangString):boolean {
+        return this.convert(searchTerm.text) === this.compareForEquality;
+    }
+
+    matchesLangStrings(searchTerms: LangString[]):boolean {
+        return searchTerms.some(st => this.convert(st.text) === this.compareForEquality);
+    }
 }
 
 function getLastIriElement(iri: string) {

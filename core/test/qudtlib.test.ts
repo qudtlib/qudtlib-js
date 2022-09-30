@@ -134,8 +134,8 @@ test('new QuantityKind, no symbol, no labels', () => {
     const a = new QuantityKind("http://qudt.org/vocab/quantitykind/Temperature", "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0");
     expect(a.symbol).toBe(undefined);
     expect(a.labels).toStrictEqual([]);
-    expect(a.broaderQuantityKinds).toStrictEqual([]);
-    expect(a.dimensionVector).toBe("http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0");
+    expect(a.broaderQuantityKindIris).toStrictEqual([]);
+    expect(a.dimensionVectorIri).toBe("http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0");
     expect(a.iri).toBe("http://qudt.org/vocab/quantitykind/Temperature");
     expect(a.equals(a)).toBeTruthy();
 });
@@ -162,23 +162,23 @@ test('QuantityKind.addLabel', () => {
 
 test('QuantityKind.addApplicableUnit', () => {
     const a = new QuantityKind("http://qudt.org/vocab/quantitykind/Temperature", "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0", "t", [new LangString("temperature", "en"), new LangString("Temperatur", "de")]);
-    expect(a.applicableUnits).toStrictEqual([]);
+    expect(a.applicableUnitIris).toStrictEqual([]);
     a.addApplicableUnit("http://qudt.org/vocab/unit/DEG_R");
     a.addApplicableUnit("http://qudt.org/vocab/unit/MilliDEG_C");
     a.addApplicableUnit("http://qudt.org/vocab/unit/DEG_C");
     a.addApplicableUnit("http://qudt.org/vocab/unit/PlanckTemperature");
     a.addApplicableUnit("http://qudt.org/vocab/unit/K");
     a.addApplicableUnit("http://qudt.org/vocab/unit/DEG_F");
-    expect(a.applicableUnits.length).toBe(6);
-    expect(a.applicableUnits).toStrictEqual(["http://qudt.org/vocab/unit/DEG_R", "http://qudt.org/vocab/unit/MilliDEG_C", "http://qudt.org/vocab/unit/DEG_C", "http://qudt.org/vocab/unit/PlanckTemperature", "http://qudt.org/vocab/unit/K", "http://qudt.org/vocab/unit/DEG_F"]);
+    expect(a.applicableUnitIris.length).toBe(6);
+    expect(a.applicableUnitIris).toStrictEqual(["http://qudt.org/vocab/unit/DEG_R", "http://qudt.org/vocab/unit/MilliDEG_C", "http://qudt.org/vocab/unit/DEG_C", "http://qudt.org/vocab/unit/PlanckTemperature", "http://qudt.org/vocab/unit/K", "http://qudt.org/vocab/unit/DEG_F"]);
 });
 
 test('QuantityKind.addBroaderQuantityKind', () => {
     const a = new QuantityKind("http://qudt.org/vocab/quantitykind/VacuumThrust", "http://qudt.org/vocab/dimensionvector/A0E0L1I0M1H0T-2D0");
     a.addLabel(new LangString("Vacuum Thrust", "en"));
-    expect(a.broaderQuantityKinds).toStrictEqual([]);
+    expect(a.broaderQuantityKindIris).toStrictEqual([]);
     a.addBroaderQuantityKind("http://qudt.org/vocab/quantitykind/Thrust");
-    expect(a.broaderQuantityKinds).toStrictEqual(["http://qudt.org/vocab/quantitykind/Thrust"]);
+    expect(a.broaderQuantityKindIris).toStrictEqual(["http://qudt.org/vocab/quantitykind/Thrust"]);
 });
 
 // FactorUnit tests

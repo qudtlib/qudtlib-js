@@ -12,8 +12,10 @@ The library offers
 
 ## Building
 
+This monorepo project is built with lerna.
+
 At the top level of the project, do
 ```
-npm run build --workspace
-```
+npx lerna run build
+```np
 
