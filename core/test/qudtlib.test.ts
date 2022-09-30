@@ -160,24 +160,24 @@ test('QuantityKind.addLabel', () => {
     expect(a.labels).toStrictEqual([new LangString("temperature", "en"), new LangString("Temperatur", "de")]);
 });
 
-test('QuantityKind.addApplicableUnit', () => {
+test('QuantityKind.addApplicableUnitIri', () => {
     const a = new QuantityKind("http://qudt.org/vocab/quantitykind/Temperature", "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0", "t", [new LangString("temperature", "en"), new LangString("Temperatur", "de")]);
     expect(a.applicableUnitIris).toStrictEqual([]);
-    a.addApplicableUnit("http://qudt.org/vocab/unit/DEG_R");
-    a.addApplicableUnit("http://qudt.org/vocab/unit/MilliDEG_C");
-    a.addApplicableUnit("http://qudt.org/vocab/unit/DEG_C");
-    a.addApplicableUnit("http://qudt.org/vocab/unit/PlanckTemperature");
-    a.addApplicableUnit("http://qudt.org/vocab/unit/K");
-    a.addApplicableUnit("http://qudt.org/vocab/unit/DEG_F");
+    a.addApplicableUnitIri("http://qudt.org/vocab/unit/DEG_R");
+    a.addApplicableUnitIri("http://qudt.org/vocab/unit/MilliDEG_C");
+    a.addApplicableUnitIri("http://qudt.org/vocab/unit/DEG_C");
+    a.addApplicableUnitIri("http://qudt.org/vocab/unit/PlanckTemperature");
+    a.addApplicableUnitIri("http://qudt.org/vocab/unit/K");
+    a.addApplicableUnitIri("http://qudt.org/vocab/unit/DEG_F");
     expect(a.applicableUnitIris.length).toBe(6);
     expect(a.applicableUnitIris).toStrictEqual(["http://qudt.org/vocab/unit/DEG_R", "http://qudt.org/vocab/unit/MilliDEG_C", "http://qudt.org/vocab/unit/DEG_C", "http://qudt.org/vocab/unit/PlanckTemperature", "http://qudt.org/vocab/unit/K", "http://qudt.org/vocab/unit/DEG_F"]);
 });
 
-test('QuantityKind.addBroaderQuantityKind', () => {
+test('QuantityKind.addBroaderQuantityKindIri', () => {
     const a = new QuantityKind("http://qudt.org/vocab/quantitykind/VacuumThrust", "http://qudt.org/vocab/dimensionvector/A0E0L1I0M1H0T-2D0");
     a.addLabel(new LangString("Vacuum Thrust", "en"));
     expect(a.broaderQuantityKindIris).toStrictEqual([]);
-    a.addBroaderQuantityKind("http://qudt.org/vocab/quantitykind/Thrust");
+    a.addBroaderQuantityKindIri("http://qudt.org/vocab/quantitykind/Thrust");
     expect(a.broaderQuantityKindIris).toStrictEqual(["http://qudt.org/vocab/quantitykind/Thrust"]);
 });
 
