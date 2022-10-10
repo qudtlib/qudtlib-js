@@ -56,7 +56,7 @@ export class ScaleFactor implements SupportsEquals<ScaleFactor> {
   }
 
   toString(): string {
-    return `SF{${this.factor.toString()}}`;
+    return `${this.factor.toString()}`;
   }
 
   equals(other?: ScaleFactor): boolean {
@@ -169,7 +169,7 @@ export class QuantityKind implements SupportsEquals<QuantityKind> {
     return this.labels.some((l) => label === l.text);
   }
 
-  getLabelForLanguageTag(languageTag: string): String | undefined {
+  getLabelForLanguageTag(languageTag: string): string | undefined {
     const label = this.labels.find((l) => languageTag === l.languageTag);
     return label?.text;
   }
@@ -194,36 +194,86 @@ export class QuantityKind implements SupportsEquals<QuantityKind> {
   }
 }
 
+function checkInteger(arg: number, argName: string) {
+  if (!Number.isInteger(arg)) {
+    throw `${argName} must be integer, ${arg} (type ${typeof arg}) is not`;
+  }
+}
+
+/**
+ * Governs the algorithm used to find units based on their derived units. The DerivedUnitSearchMode
+ * is mapped to the {@link FactorUnitMatchingMode} which governs individual unit/factor unit
+ * matching.
+ */
+export enum DerivedUnitSearchMode {
+  /** Only select exact matches. */
+  EXACT,
+  /**
+   * Only select exact matches, and if there are multiple matches, select only one of them. The
+   * Unit's IRI is used as the tie-breaker, so the result is stable over multiple executions.
+   */
+  EXACT_ONLY_ONE,
+  /**
+   * Select exact matches and units whose factor units have different scale, but the scale of the
+   * result is equivalent to the cumulative scale of the original factor units
+   */
+  ALLOW_SCALED,
+  /**
+   * Select only one unit. Try EXACT mode first. If no match is found, try ALLOW_SCALED. Break
+   * ties using the matching units' IRIs.
+   */
+  BEST_EFFORT_ONLY_ONE,
+}
+
+/** Specifies the check whether a Unit matches a given set of factor units. */
+export enum FactorUnitMatchingMode {
+  /** Only select exact matches. */
+  EXACT,
+  /**
+   * Select exact matches and units whose factor units have different scale, but the scale of the
+   * result is equivalent to the cumulative scale of the original factor units
+   */
+  ALLOW_SCALED,
+}
+
+/**
+ * Combines a {@link Unit} and an exponent; some Units are a combination of {@link FactorUnit}s. If
+ * a unit is such a 'derived unit', its {@link Unit#getFactorUnits()} method returns a non-empty Set
+ * of FactorUnits.
+ *
+ */
 export class FactorUnit implements SupportsEquals<FactorUnit> {
-  readonly exponent: Decimal;
+  readonly exponent: number;
   readonly unit: Unit;
 
-  constructor(unit: Unit, exponent: Decimal) {
+  constructor(unit: Unit, exponent: number) {
+    checkInteger(exponent, "exponent");
     this.exponent = exponent;
     this.unit = unit;
   }
 
-  getExponentCumulated(cumulatedExponent: Decimal): Decimal {
-    return this.exponent.mul(cumulatedExponent);
+  getExponentCumulated(cumulatedExponent: number): number {
+    checkInteger(cumulatedExponent, "cumulatedExponent");
+    return this.exponent * cumulatedExponent;
   }
 
   equals(other?: FactorUnit): boolean {
     return (
       !!other &&
-      this.exponent.equals(other.exponent) &&
+      this.exponent === other.exponent &&
       this.unit.equals(other.unit)
     );
   }
 
   toString(): string {
-    return "FU{" + this.unit.toString() + "^" + this.exponent.toString() + "}";
+    return this.unit.toString() + "^" + this.exponent;
   }
 
   static combine(left: FactorUnit, right: FactorUnit): FactorUnit {
     if (left.getKind() !== right.getKind()) {
       throw `Cannot combine UnitFactors of different kind (left: ${left}, right: ${right}`;
     }
-    return new FactorUnit(left.unit, left.exponent.add(right.exponent));
+    return new FactorUnit(left.unit, left.exponent + right.exponent);
   }
 
   /**
@@ -232,51 +282,30 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
   getKind(): string {
     return (
       this.unit.iri +
-      (this.exponent.isZero() ? "0" : this.exponent.isPositive() ? "1" : "-1")
+      (this.exponent === 0 ? "0" : this.exponent > 0 ? "1" : "-1")
     );
-  }
-
-  isMatched(selection: FactorUnitSelection, checkedPath: Unit[]): boolean {
-    if (selection.isSelected(this, checkedPath)) {
-      return true;
-    }
-    return this.unit.isMatched(selection, checkedPath);
   }
 
   match(
     factorUnitSelection: FactorUnitSelection[],
-    cumulativeExponent: Decimal,
+    cumulativeExponent: number,
     matchedPath: Unit[],
-    scaleFactor: ScaleFactor
+    scaleFactor: ScaleFactor,
+    matchingMode: FactorUnitMatchingMode
   ): FactorUnitSelection[] {
-    let mySelection: FactorUnitSelection[] = [];
+    const mySelection: FactorUnitSelection[] = [];
     factorUnitSelection.forEach((fus) => mySelection.push(fus));
-    mySelection = this.unit.match(
+    return this.unit.match(
       mySelection,
       this.getExponentCumulated(cumulativeExponent),
       matchedPath,
-      scaleFactor
+      scaleFactor,
+      matchingMode
     );
-    const ret: FactorUnitSelection[] = [];
-    for (const sel of mySelection) {
-      const processedSelection: FactorUnitSelection = sel.forMatch(
-        this,
-        cumulativeExponent,
-        matchedPath,
-        scaleFactor
-      );
-      if (!processedSelection.equals(sel)) {
-        // if there was a match, (i.e, we modified the selection),
-        // it's a new partial solution - return it
-        ret.push(processedSelection);
-      }
-      // also regard the selection without the match as a possible partial solution
-      ret.push(sel);
-    }
-    return ret;
   }
 }
 
+/** Represents a unit that has been matched in a FactorUnitSelection. */
 export class FactorUnitMatch implements SupportsEquals<FactorUnitMatch> {
   readonly matchedFactorUnit: FactorUnit;
   readonly matchedPath: Unit[];
@@ -307,27 +336,33 @@ export class FactorUnitMatch implements SupportsEquals<FactorUnitMatch> {
 
   toString(): string {
     return (
-      "FUM{at " +
-      this.matchedPath.reduce((prev, cur) => prev + "/" + cur, "") +
-      ", MM{" +
-      this.matchedMultiplier +
-      "}, " +
-      this.scaleFactor +
-      "}"
+      this.getPathAsString() +
+      (this.matchedMultiplier.eq(new Decimal(1))
+        ? ""
+        : "*" + this.matchedMultiplier.toString()) +
+      (this.scaleFactor.factor.eq(new Decimal(1))
+        ? ""
+        : "*" + this.scaleFactor.toString())
     );
+  }
+
+  private getPathAsString(): string {
+    let result = "/";
+    if (!!this.matchedPath) {
+      result += this.matchedPath
+        .map((u) => u.toString())
+        .reduce((p, n) => p + "/" + n);
+    }
+    return result;
   }
 }
 
 export class FactorUnitSelector implements SupportsEquals<FactorUnitSelector> {
   readonly unit: Unit;
-  readonly exponent: Decimal;
+  readonly exponent: number;
   readonly factorUnitMatch?: FactorUnitMatch;
 
-  constructor(
-    unit: Unit,
-    exponent: Decimal,
-    factorUnitMatch?: FactorUnitMatch
-  ) {
+  constructor(unit: Unit, exponent: number, factorUnitMatch?: FactorUnitMatch) {
     this.unit = unit;
     this.exponent = exponent;
     this.factorUnitMatch = factorUnitMatch;
@@ -336,7 +371,7 @@ export class FactorUnitSelector implements SupportsEquals<FactorUnitSelector> {
   equals(other?: FactorUnitSelector): boolean {
     return (
       !!other &&
-      this.exponent.equals(other.exponent) &&
+      this.exponent === other.exponent &&
       this.unit.equals(other.unit) &&
       (this.factorUnitMatch === other.factorUnitMatch ||
         (!!this.factorUnitMatch &&
@@ -364,35 +399,47 @@ export class FactorUnitSelector implements SupportsEquals<FactorUnitSelector> {
     return new FactorUnitSelector(this.unit, this.exponent, factorUnitMatch);
   }
 
-  matches(factorUnit: FactorUnit, cumulativeExponent: Decimal) {
-    return (
-      this.exponentMatches(factorUnit, cumulativeExponent) &&
-      this.unit.isSameScaleAs(factorUnit.unit)
-    );
+  matches(
+    factorUnit: FactorUnit,
+    cumulativeExponent: number,
+    mode: FactorUnitMatchingMode
+  ) {
+    switch (mode) {
+      case FactorUnitMatchingMode.EXACT:
+        return (
+          this.unit.equals(factorUnit.unit) &&
+          this.exponentMatches(factorUnit, cumulativeExponent)
+        );
+      case FactorUnitMatchingMode.ALLOW_SCALED:
+        return (
+          this.unit.isSameScaleAs(factorUnit.unit) &&
+          this.exponentMatches(factorUnit, cumulativeExponent)
+        );
+      default:
+    }
+    throw `Cannot handle matching mode ${mode}`;
   }
 
-  exponentMatches(
-    factorUnit: FactorUnit,
-    cumulativeExponent: Decimal
-  ): boolean {
+  exponentMatches(factorUnit: FactorUnit, cumulativeExponent: number): boolean {
     const cumulatedFactorUnitExponent =
       factorUnit.getExponentCumulated(cumulativeExponent);
     return (
-      this.exponent.abs().isPositive() &&
-      this.exponent.abs() >= cumulatedFactorUnitExponent.abs() &&
-      Decimal.sign(this.exponent) === Decimal.sign(cumulatedFactorUnitExponent)
+      Math.abs(this.exponent) > 0 &&
+      Math.abs(this.exponent) >= Math.abs(cumulatedFactorUnitExponent) &&
+      Math.sign(this.exponent) === Math.sign(cumulatedFactorUnitExponent)
     );
   }
 
   forMatch(
     factorUnit: FactorUnit,
-    cumulativeExponent: Decimal,
+    cumulativeExponent: number,
     matchedPath: Unit[],
     scaleFactor: ScaleFactor
   ): FactorUnitSelector[] {
     if (!this.isAvailable()) {
       throw "not available - selector is already bound";
     }
+    checkInteger(cumulativeExponent, "cumulativeExponent");
     if (!this.exponentMatches(factorUnit, cumulativeExponent)) {
       throw "exponents do not match";
     }
@@ -404,7 +451,7 @@ export class FactorUnitSelector implements SupportsEquals<FactorUnitSelector> {
     if (!matchedMultiplier) {
       throw "units do not match";
     }
-    const remainingPower = this.exponent.minus(matchedPower);
+    const remainingPower = this.exponent - matchedPower;
     const ret: FactorUnitSelector[] = [];
     ret.push(
       this.matched(
@@ -416,7 +463,7 @@ export class FactorUnitSelector implements SupportsEquals<FactorUnitSelector> {
         )
       )
     );
-    if (!remainingPower.eq(new Decimal("0"))) {
+    if (remainingPower !== 0) {
       ret.push(new FactorUnitSelector(this.unit, remainingPower));
     }
     return ret;
@@ -424,15 +471,24 @@ export class FactorUnitSelector implements SupportsEquals<FactorUnitSelector> {
 
   private calculateMatchedMultiplier(
     factorUnit: FactorUnit,
-    matchedExponent: Decimal
-  ): Decimal {
+    matchedExponent: number
+  ): Decimal | undefined {
     if (!this.unit.isConvertible(factorUnit.unit)) {
-      throw `Not convertible: ${this.unit} -> ${factorUnit.unit}!`;
+      return undefined;
     }
     const conversionMultiplier = factorUnit.unit.getConversionMultiplier(
       this.unit
     );
     return conversionMultiplier.pow(matchedExponent);
+  }
+
+  toString(): string {
+    return (
+      this.unit.toString() +
+      (this.exponent === 1 ? "" : "^" + this.exponent) +
+      "@" +
+      (!!this.factorUnitMatch ? this.factorUnitMatch.toString() : "?")
+    );
   }
 }
 
@@ -445,6 +501,35 @@ export class FactorUnitSelection
     this.selectors = selectors;
   }
 
+  static fromFactorUnitSpec(
+    ...factorUnitSpec: (Unit | number)[]
+  ): FactorUnitSelection {
+    if (factorUnitSpec.length % 2 !== 0) {
+      throw "An even number of arguments is required";
+    }
+    if (factorUnitSpec.length > 14) {
+      throw "No more than 14 arguments (7 factor units) are supported";
+    }
+    const selectors = [];
+    for (let i = 0; i < factorUnitSpec.length; i += 2) {
+      const requestedUnit = factorUnitSpec[i];
+      const requestedExponent = factorUnitSpec[i + 1];
+      if (!(requestedUnit instanceof Unit)) {
+        throw `argument at 0-based position ${i} is not of type Unit. The input must be between 1 and 7 Unit, exponent pairs`;
+      }
+      if (
+        typeof requestedExponent !== "number" ||
+        !Number.isInteger(requestedExponent)
+      ) {
+        throw `argument at 0-based position ${
+          i + 1
+        } is not of type number or not an integer. The input must be between 1 and 7 Unit, exponent pairs`;
+      }
+      selectors.push(new FactorUnitSelector(requestedUnit, requestedExponent));
+    }
+    return new FactorUnitSelection(selectors);
+  }
+
   equals(other: FactorUnitSelection): boolean {
     return (
       !!other &&
@@ -453,15 +538,11 @@ export class FactorUnitSelection
   }
 
   toString() {
-    return "FUSel{" + this.selectors + "}";
-  }
-
-  isSelected(factorUnit: FactorUnit, checkedPath: Unit[]): boolean {
-    return this.selectors.some(
-      (s) =>
-        s.factorUnitMatch &&
-        factorUnit.equals(s.factorUnitMatch.matchedFactorUnit) &&
-        arrayEquals(checkedPath, s.factorUnitMatch.matchedPath)
+    return (
+      "Select " +
+      "[" +
+      this.selectors.map((s) => s.toString()).reduce((p, n) => p + ", " + n) +
+      "]"
     );
   }
 
@@ -489,11 +570,12 @@ export class FactorUnitSelection
     return cumulativeScale.eq(new Decimal("1"));
   }
 
-  forMatch(
+  forPotentialMatch(
     factorUnit: FactorUnit,
-    cumulativeExponent: Decimal,
+    cumulativeExponent: number,
     matchedPath: Unit[],
-    scaleFactor: ScaleFactor
+    scaleFactor: ScaleFactor,
+    matchingMode: FactorUnitMatchingMode
   ): FactorUnitSelection {
     const newSelectors: FactorUnitSelector[] = [];
     let matched = false;
@@ -501,7 +583,7 @@ export class FactorUnitSelection
       if (
         !matched &&
         sel.isAvailable() &&
-        sel.matches(factorUnit, cumulativeExponent)
+        sel.matches(factorUnit, cumulativeExponent, matchingMode)
       ) {
         matched = true;
         sel
@@ -577,89 +659,120 @@ export class Unit implements SupportsEquals<Unit> {
     return "unit:" + getLastIriElement(this.iri);
   }
 
-  isMatched(selection: FactorUnitSelection, checkedPath: Unit[]): boolean {
-    checkedPath.push(this);
-    let match = false;
-    if (this.hasFactorUnits()) {
-      match = this.factorUnits.every((fu) =>
-        fu.isMatched(selection, checkedPath)
-      );
-    }
-    if (!match) {
-      if (typeof this.scalingOf === "undefined") {
-        match = false;
-      } else {
-        match = this.scalingOf.isMatched(selection, checkedPath);
-      }
-    }
-    checkedPath.pop();
-    return match;
-  }
-
   match(
     selections: FactorUnitSelection[],
-    cumulativeExponent: Decimal,
+    cumulativeExponent: number,
     matchedPath: Unit[],
-    scaleFactor: ScaleFactor
+    scaleFactor: ScaleFactor,
+    matchingMode: FactorUnitMatchingMode
   ): FactorUnitSelection[] {
+    checkInteger(cumulativeExponent, "cumulativeExponent");
     const results: FactorUnitSelection[] = [];
     matchedPath.push(this);
-    if (this.scalingOf && this.prefix) {
-      this.scalingOf
-        .match(
-          selections,
-          cumulativeExponent,
-          matchedPath,
-          scaleFactor.multiplyBy(this.prefix.multiplier)
-        )
-        .forEach((s) => results.push(s));
-    }
     if (this.hasFactorUnits()) {
-      for (const factorUnit of this.factorUnits) {
-        selections = factorUnit.match(
-          selections,
-          cumulativeExponent,
-          matchedPath,
-          scaleFactor
-        );
+      this.matchFactorUnits(
+        selections,
+        cumulativeExponent,
+        matchedPath,
+        scaleFactor,
+        matchingMode
+      ).forEach((s) => results.push(s));
+    } else {
+      if (this.scalingOf && this.prefix && this.scalingOf.hasFactorUnits()) {
+        this.scalingOf
+          .match(
+            selections,
+            cumulativeExponent,
+            matchedPath,
+            scaleFactor.multiplyBy(this.prefix.multiplier),
+            matchingMode
+          )
+          .forEach((s) => results.push(s));
       }
     }
-    selections.forEach((s) => results.push(s));
+    this.matchThisUnit(
+      selections,
+      cumulativeExponent,
+      matchedPath,
+      scaleFactor,
+      matchingMode
+    ).forEach((s) => results.push(s));
     matchedPath.pop();
     return results;
   }
 
-  matches(...factorUnitSpec: any[]): boolean {
-    if (factorUnitSpec.length % 2 !== 0) {
-      throw "An even number of arguments is required";
-    }
-    if (factorUnitSpec.length > 14) {
-      throw "No more than 14 arguments (7 factor units) are supported";
-    }
-    const selectors = [];
-    for (let i = 0; i < factorUnitSpec.length; i += 2) {
-      const requestedUnit = factorUnitSpec[i];
-      let requestedExponent = factorUnitSpec[i + 1];
-      if (!(requestedUnit instanceof Unit)) {
-        throw `argument at 0-based position ${i} is not of type Unit. The input must be between 1 and 7 Unit, exponent pairs`;
+  private matchFactorUnits(
+    selections: FactorUnitSelection[],
+    cumulativeExponent: number,
+    matchedPath: Unit[],
+    scaleFactor: ScaleFactor,
+    matchingMode: FactorUnitMatchingMode
+  ): FactorUnitSelection[] {
+    let lastResults = selections;
+    let subResults = selections;
+    for (const factorUnit of this.factorUnits) {
+      subResults = factorUnit.match(
+        lastResults,
+        cumulativeExponent,
+        matchedPath,
+        scaleFactor,
+        matchingMode
+      );
+      if (arrayEquals(subResults, lastResults)) {
+        //no new matches for current factor unit - abort
+        return selections;
       }
-      if (typeof requestedExponent === "number") {
-        requestedExponent = new Decimal(requestedExponent);
-      } else if (!(requestedExponent instanceof Decimal)) {
-        throw `argument at 0-based position ${
-          i + 1
-        } is not of type Decimal or number. The input must be between 1 and 7 Unit, exponent pairs`;
-      }
-      selectors.push(new FactorUnitSelector(requestedUnit, requestedExponent));
+      lastResults = subResults;
     }
-    let selections = [new FactorUnitSelection(selectors)];
-    selections = this.match(selections, new Decimal(1), [], new ScaleFactor());
+    return subResults;
+  }
+
+  private matchThisUnit(
+    selections: FactorUnitSelection[],
+    cumulativeExponent: number,
+    matchedPath: Unit[],
+    scaleFactor: ScaleFactor,
+    matchingMode: FactorUnitMatchingMode
+  ): FactorUnitSelection[] {
+    const result = [];
+    for (const factorUnitSelection of selections) {
+      const possiblyMatched = factorUnitSelection.forPotentialMatch(
+        new FactorUnit(this, 1),
+        cumulativeExponent,
+        matchedPath,
+        scaleFactor,
+        matchingMode
+      );
+      if (!possiblyMatched.equals(factorUnitSelection)) {
+        // if there was a match, (i.e, we modified the selection),
+        // it's a new partial solution - return it
+        result.push(possiblyMatched);
+      }
+    }
+    return result;
+  }
+
+  matchesFactorUnitSpec(...factorUnitSpec: (number | Unit)[]): boolean {
+    return this.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factorUnitSpec)
+    );
+  }
+
+  matches(
+    selection: FactorUnitSelection,
+    matchingMode: FactorUnitMatchingMode = FactorUnitMatchingMode.EXACT
+  ): boolean {
+    const selections = this.match(
+      [selection],
+      1,
+      [],
+      new ScaleFactor(),
+      matchingMode
+    );
     if (!selections || selections.length == 0) {
       return false;
     }
-    return selections
-      .filter((sel) => sel.isCompleteMatch())
-      .some((sel) => this.isMatched(sel, []));
+    return selections.some((sel) => sel.isCompleteMatch());
   }
 
   hasFactorUnits(): boolean {
@@ -694,8 +807,8 @@ export class Unit implements SupportsEquals<Unit> {
     if (!this.isScaled()) {
       return this.equals(toFind);
     }
-    if (this.scalingOf) {
-      return this.findInBasesRecursively(toFind);
+    if (!!this.scalingOf) {
+      return this.scalingOf.findInBasesRecursively(toFind);
     } else {
       throw `No base unit found for ${this} - this is a bug`;
     }
@@ -705,7 +818,7 @@ export class Unit implements SupportsEquals<Unit> {
     if (this.equals(other)) {
       return true;
     }
-    if (this.scalingOfIri === other.scalingOfIri) {
+    if (!!this.scalingOfIri && this.scalingOfIri === other.scalingOfIri) {
       return true;
     }
     return (
@@ -729,7 +842,7 @@ export class Unit implements SupportsEquals<Unit> {
     return this.labels.some((l) => label === l.text);
   }
 
-  getLabelForLanguageTag(languageTag: string): String | undefined {
+  getLabelForLanguageTag(languageTag: string): string | undefined {
     const label = this.labels.find((l) => languageTag === l.languageTag);
     return label?.text;
   }
@@ -772,33 +885,64 @@ function findInIterable<T>(
 }
 
 export class Qudt {
-  //TODO implement akin to qudtlib-java, checking that the configuration has been provided by a units package
-
-  derivedUnitFromFactors(factorUnitSpecs: any[]): Unit[] {
-    return [];
-  }
-
-  static unitFromLabel(label: string): Unit {
+  static unitFromLabel(label: string): Unit | undefined {
     const matcher: LabelMatcher =
       new CaseInsensitiveUnderscoreIgnoringLabelMatcher(label);
     const firstMatch: Unit | undefined = findInIterable(
       config.units.values(),
       (u) => matcher.matchesLangStrings(u.labels)
     );
-    if (!firstMatch) throw `No unit found for label ${label}`;
     return firstMatch;
   }
 
-  static unitFromLocalname(localname: string): Unit {
+  static unitFromLabelRequired(label: string): Unit {
+    const match = this.unitFromLabel(label);
+    if (!match) throw `No unit found for label ${label}`;
+    return match;
+  }
+
+  static unitFromLocalname(localname: string): Unit | undefined {
     return Qudt.unit(Qudt.unitIriFromLocalname(localname));
   }
 
-  static quantityKindFromLocalname(localname: string): QuantityKind {
+  static unitFromLocalnameRequired(localname: string): Unit {
+    return Qudt.unitRequired(Qudt.unitIriFromLocalname(localname));
+  }
+
+  static quantityKindFromLocalname(
+    localname: string
+  ): QuantityKind | undefined {
     return Qudt.quantityKind(Qudt.quantityKindIriFromLocalname(localname));
   }
 
-  static prefixFromLocalname(localname: string): Prefix {
+  static quantityKindFromLocalnameRequired(localname: string): QuantityKind {
+    return Qudt.quantityKindRequired(
+      Qudt.quantityKindIriFromLocalname(localname)
+    );
+  }
+
+  static prefixFromLabelRequired(label: string): Prefix {
+    const match = this.prefixFromLabel(label);
+    if (!match) throw `No prefix found for label ${label}`;
+    return match;
+  }
+
+  static prefixFromLabel(label: string): Prefix | undefined {
+    const matcher: LabelMatcher =
+      new CaseInsensitiveUnderscoreIgnoringLabelMatcher(label);
+    const firstMatch: Prefix | undefined = findInIterable(
+      config.prefixes.values(),
+      (u) => matcher.matchesLangStrings(u.labels)
+    );
+    return firstMatch;
+  }
+
+  static prefixFromLocalname(localname: string): Prefix | undefined {
     return Qudt.prefix(Qudt.prefixIriFromLocalname(localname));
+  }
+
+  static prefixFromLocalnameRequired(localname: string): Prefix {
+    return Qudt.prefixRequired(Qudt.prefixIriFromLocalname(localname));
   }
 
   static unitIriFromLocalname(localname: string): string {
@@ -813,24 +957,36 @@ export class Qudt {
     return QUDT_PREFIX_BASE_IRI + localname;
   }
 
-  static unit(unitIri: string): Unit {
-    const ret = config.units.get(unitIri);
+  static unit(unitIri: string): Unit | undefined {
+    return config.units.get(unitIri);
+  }
+
+  static unitRequired(unitIri: string): Unit {
+    const ret = Qudt.unit(unitIri);
     if (typeof ret === "undefined") {
       throw `Unit ${unitIri} not found`;
     }
     return ret;
   }
 
-  static quantityKind(quantityKindIri: string): QuantityKind {
-    const ret = config.quantityKinds.get(quantityKindIri);
+  static quantityKind(quantityKindIri: string): QuantityKind | undefined {
+    return config.quantityKinds.get(quantityKindIri);
+  }
+
+  static quantityKindRequired(quantityKindIri: string): QuantityKind {
+    const ret = Qudt.quantityKind(quantityKindIri);
     if (typeof ret === "undefined") {
       throw `QuantityKind ${quantityKindIri} not found`;
     }
     return ret;
   }
 
-  static prefix(prefixIri: string): Prefix {
-    const ret = config.prefixes.get(prefixIri);
+  static prefix(prefixIri: string): Prefix | undefined {
+    return config.prefixes.get(prefixIri);
+  }
+
+  static prefixRequired(prefixIri: string): Prefix {
+    const ret = Qudt.prefix(prefixIri);
     if (typeof ret === "undefined") {
       throw `Prefix ${prefixIri} not found`;
     }
@@ -838,7 +994,7 @@ export class Qudt {
   }
 
   static quantityKinds(unit: Unit): QuantityKind[] {
-    return unit.quantityKindIris.map((iri) => Qudt.quantityKind(iri));
+    return unit.quantityKindIris.map((iri) => Qudt.quantityKindRequired(iri));
   }
 
   static quantityKindsBroad(unit: Unit): QuantityKind[] {
@@ -848,10 +1004,145 @@ export class Qudt {
     while (current.length) {
       current = current
         .flatMap((qk) => qk.broaderQuantityKindIris)
-        .map((iri) => Qudt.quantityKind(iri));
+        .map((iri) => Qudt.quantityKindRequired(iri));
       current.forEach((qk) => result.includes(qk) || result.push(qk));
     }
     return result;
+  }
+
+  static derivedUnitsFromMap(
+    searchMode: DerivedUnitSearchMode,
+    factorUnits: Map<Unit, number>
+  ): Unit[] {
+    const flattened: (Unit | number)[] = [];
+    for (const [key, value] of factorUnits.entries()) {
+      flattened.push(key, value);
+    }
+    return this.derivedUnitsFromExponentUnitPairs(searchMode, ...flattened);
+  }
+
+  static derivedUnitsFromFactorUnits(
+    searchMode: DerivedUnitSearchMode,
+    ...factorUnits: FactorUnit[]
+  ): Unit[] {
+    const flattened = factorUnits.flatMap((fu) => [fu.unit, fu.exponent]);
+    return this.derivedUnitsFromExponentUnitPairs(searchMode, ...flattened);
+  }
+
+  /**
+   * Vararg method, must be an even number of arguments, always alternating types of Unit|String
+   * and Integer.
+   *
+   * @param factorUnitSpec alternating Unit (representing a unit IRI) and Decimal|number (the
+   *     exponent)
+   * @return the units that match
+   */
+  static derivedUnitsFromExponentUnitPairs(
+    searchMode: DerivedUnitSearchMode,
+    ...factorUnitSpecs: (Unit | string | number)[]
+  ): Unit[] {
+    const spec: (Unit | number)[] = [];
+    for (let i = 0; i < factorUnitSpecs.length; i++) {
+      const specAtI: Unit | string | number = factorUnitSpecs[i];
+      if (i % 2 == 0 && specAtI instanceof Unit) {
+        spec[i] = specAtI as Unit;
+      } else if (i % 2 == 0 && typeof specAtI === "string") {
+        const unitString: string = specAtI as string;
+        let unit = Qudt.unit(unitString);
+        if (typeof unit === "undefined") {
+          unit = Qudt.unitFromLocalname(unitString);
+        }
+        if (typeof unit === "undefined") {
+          unit = Qudt.unitFromLabel(unitString);
+        }
+        if (typeof unit === "undefined") {
+          throw `Unable to find unit for string ${unitString}, interpreted as iri, label or localname`;
+        }
+        spec[i] = unit;
+      } else if (i % 2 == 1 && typeof specAtI === "number") {
+        spec[i] = specAtI;
+      } else {
+        throw `Cannot handle input ${specAtI} at 0-based position ${i}`;
+      }
+    }
+    const initialFactorUnitSelection = FactorUnitSelection.fromFactorUnitSpec(
+      ...spec
+    );
+    return Qudt.derivedUnitsFromFactorUnitSelection(
+      searchMode,
+      initialFactorUnitSelection
+    );
+  }
+
+  static derivedUnitsFromFactorUnitSelection(
+    searchMode: DerivedUnitSearchMode,
+    initialFactorUnitSelection: FactorUnitSelection
+  ): Unit[] {
+    const matchingMode =
+      searchMode == DerivedUnitSearchMode.EXACT ||
+      searchMode == DerivedUnitSearchMode.EXACT_ONLY_ONE ||
+      searchMode == DerivedUnitSearchMode.BEST_EFFORT_ONLY_ONE
+        ? FactorUnitMatchingMode.EXACT
+        : FactorUnitMatchingMode.ALLOW_SCALED;
+    let matchingUnits = this.findMatchingUnits(
+      initialFactorUnitSelection,
+      matchingMode
+    );
+    if (
+      searchMode == DerivedUnitSearchMode.EXACT ||
+      searchMode == DerivedUnitSearchMode.ALLOW_SCALED
+    ) {
+      return matchingUnits;
+    }
+    if (searchMode == DerivedUnitSearchMode.EXACT_ONLY_ONE) {
+      return [Qudt.retainOnlyOne(matchingUnits)];
+    }
+    if (searchMode == DerivedUnitSearchMode.BEST_EFFORT_ONLY_ONE) {
+      if (matchingUnits.length == 0) {
+        matchingUnits = this.findMatchingUnits(
+          initialFactorUnitSelection,
+          FactorUnitMatchingMode.ALLOW_SCALED
+        );
+      }
+      return [this.retainOnlyOne(matchingUnits)];
+    }
+    throw `Search mode ${searchMode} was not handled properly, this should never happen - please report as bug`;
+  }
+
+  private static retainOnlyOne(matchingUnits: Unit[]): Unit {
+    return matchingUnits.reduce((p, n) => (p.iri > n.iri ? n : p));
+  }
+
+  private static findMatchingUnits(
+    initialFactorUnitSelection: FactorUnitSelection,
+    matchingMode: FactorUnitMatchingMode
+  ): Unit[] {
+    const matchingUnits: Unit[] = [];
+    for (const unit of config.units.values()) {
+      if (
+        unit.matches(initialFactorUnitSelection, matchingMode) &&
+        !matchingUnits.includes(unit)
+      ) {
+        matchingUnits.push(unit);
+      }
+    }
+    return matchingUnits;
+  }
+
+  static scaledUnit(prefix: Prefix, baseUnit: Unit) {
+    for (const u of config.units.values()) {
+      if (u.prefix?.equals(prefix) && u.scalingOf?.equals(baseUnit)) {
+        return u;
+      }
+    }
+    throw `No scaled unit found with base unit ${baseUnit} and prefix ${prefix}`;
+  }
+
+  static scaledUnitFromLabels(prefixLabel: string, baseUnit: string) {
+    return this.scaledUnit(
+      Qudt.prefixFromLabelRequired(prefixLabel),
+      Qudt.unitFromLabelRequired(baseUnit)
+    );
   }
 }
 

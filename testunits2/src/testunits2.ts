@@ -45,7 +45,7 @@ config.units.set(kiloM.iri, kiloM);
 
 export * from "@qudtlib/core";
 
-export const Units: any = {
+export const Units = {
   M: m,
   DEG_C: degC,
   Kilo_M: kiloM,

@@ -1,50 +1,52 @@
 import { Decimal } from "decimal.js";
 import {
-  Qudt,
-  Units,
-  QuantityKinds,
-  Prefixes,
-  QUDT_UNIT_BASE_IRI,
-  QUDT_QUANTITYKIND_BASE_IRI,
-  QUDT_PREFIX_BASE_IRI,
+  DerivedUnitSearchMode,
+  FactorUnit,
   Prefix,
-  Unit,
+  Prefixes,
   QuantityKind,
+  QuantityKinds,
+  Qudt,
+  QUDT_PREFIX_BASE_IRI,
+  QUDT_QUANTITYKIND_BASE_IRI,
+  QUDT_UNIT_BASE_IRI,
+  Unit,
+  Units,
 } from "../src/units";
 
-test("unit()", () => {
+test("Qudt.unit()", () => {
   expect(Qudt.unit(QUDT_UNIT_BASE_IRI + "M")).toBe(Units.M);
 });
 
-test("unitFromLocalname()", () => {
+test("Qudt.unitFromLocalname()", () => {
   expect(Qudt.unitFromLocalname("M")).toBe(Units.M);
 });
 
-test("quantityKind()", () => {
+test("Qudt.quantityKind()", () => {
   expect(Qudt.quantityKind(QUDT_QUANTITYKIND_BASE_IRI + "Length")).toBe(
     QuantityKinds.Length
   );
 });
 
-test("quantityKindFromLocalname()", () => {
+test("Qudt.quantityKindFromLocalname()", () => {
   expect(Qudt.quantityKindFromLocalname("Length")).toBe(QuantityKinds.Length);
 });
 
-test("prefix()", () => {
+test("Qudt.prefix()", () => {
   expect(Qudt.prefix(QUDT_PREFIX_BASE_IRI + "Kilo")).toBe(Prefixes.Kilo);
 });
 
-test("prefixFromLocalname()", () => {
+test("Qudt.prefixFromLocalname()", () => {
   expect(Qudt.prefixFromLocalname("Kilo")).toBe(Prefixes.Kilo);
 });
 
-test("testPrefix", () => {
+test("Prefixes", () => {
   const kilo: Prefix = Prefixes.Kilo;
   expect(kilo.multiplier).toStrictEqual(new Decimal(1000));
   expect(kilo.iri).toEqual(QUDT_PREFIX_BASE_IRI + "Kilo");
 });
 
-test("testUnit", () => {
+test("Units", () => {
   const meter: Unit = Units.M;
   expect(meter.iri).toEqual(QUDT_UNIT_BASE_IRI + "M");
   expect(meter.hasLabel("Meter")).toBe(true);
@@ -52,13 +54,13 @@ test("testUnit", () => {
   expect(meter.getLabelForLanguageTag("en")).toBe("Metre");
 });
 
-test("testQuantityKind", () => {
+test("QuantityKinds", () => {
   const length: QuantityKind = QuantityKinds.Length;
   expect(length.hasLabel("Length")).toBe(true);
   expect(length.iri).toBe(QUDT_QUANTITYKIND_BASE_IRI + "Length");
 });
 
-test("testUnitFromLabel()", () => {
+test("Qudt.testUnitFromLabel()", () => {
   expect(Qudt.unitFromLabel("Newton Meter")).toBe(Units.N__M);
   expect(Qudt.unitFromLabel("NEWTON_METER")).toBe(Units.N__M);
 });
@@ -78,200 +80,406 @@ test("Qudt.QuantityKindsBroad(Unit)", () => {
   expect(broad.length).toBe(3);
 });
 
-/*
+test("Qudt.derivedUnitsFromFactors(...Unit|number|Decimal[])", () => {
+  expect(() =>
+    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, Units.M)
+  ).toThrowError();
+  expect(() =>
+    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, 1)
+  ).toThrowError();
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.M,
+      3
+    )
+  ).toStrictEqual([Units.M3]);
+  const units = Qudt.derivedUnitsFromExponentUnitPairs(
+    DerivedUnitSearchMode.EXACT,
+    Units.KiloGM,
+    1,
+    Units.M,
+    -3
+  );
+  expect(units.includes(Units.KiloGM__PER__M3)).toBe(true);
+  expect(units.includes(Units.GM__PER__DeciM3)).toBe(false);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.MOL,
+      1,
+      Units.M,
+      -2,
+      Units.SEC,
+      -1
+    )
+  ).toStrictEqual([Units.MOL__PER__M2__SEC]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.K,
+      1,
+      Units.M,
+      2,
+      Units.KiloGM,
+      -1,
+      Units.SEC,
+      -1
+    )
+  ).toStrictEqual([Units.K__M2__PER__KiloGM__SEC]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.BTU_IT,
+      1,
+      Units.FT,
+      1,
+      Units.FT,
+      -2,
+      Units.HR,
+      -1,
+      Units.DEG_F,
+      -1
+    )
+  ).toStrictEqual([Units.BTU_IT__FT__PER__FT2__HR__DEG_F]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.KiloGM,
+      1,
+      Units.M,
+      1,
+      Units.SEC,
+      -2
+    )
+  ).toStrictEqual([Units.N]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.KiloGM,
+      1
+    )
+  ).toStrictEqual([Units.KiloGM]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.KiloGM,
+      1,
+      Units.A,
+      -1
+    ).length
+  ).toBe(0);
+});
 
-    @Test
-    public void testQuantityKindForUnit() {
-        Unit unit = Qudt.unitFromLabel("Newton Meter");
-        Set<QuantityKind> broad = Qudt.quantityKinds(unit);
-        Assertions.assertTrue(broad.contains(Qudt.quantityKindFromLocalname("Torque")));
-        Assertions.assertTrue(broad.contains(Qudt.quantityKindFromLocalname("MomentOfForce")));
-        unit = Qudt.Units.PA__PER__BAR;
-        broad = Qudt.quantityKindsBroad(unit);
-        Assertions.assertTrue(broad.contains(Qudt.QuantityKinds.PressureRatio));
-        Assertions.assertTrue(broad.contains(Qudt.QuantityKinds.DimensionlessRatio));
-    }
+test("Qudt.derivedUnitsFromFactorUnits(...FactorUnit[]", () => {
+  expect(
+    Qudt.derivedUnitsFromFactorUnits(
+      DerivedUnitSearchMode.EXACT,
+      new FactorUnit(Units.M, 3)
+    )
+  ).toStrictEqual([Units.M3]);
+  expect(
+    Qudt.derivedUnitsFromFactorUnits(
+      DerivedUnitSearchMode.EXACT,
+      new FactorUnit(Units.MOL, 1),
+      new FactorUnit(Units.M, -2),
+      new FactorUnit(Units.SEC, -1)
+    )
+  ).toStrictEqual([Units.MOL__PER__M2__SEC]);
+});
 
-    @Test
-    public void testDerivedUnitFromMap() {
-        Assertions.assertTrue(
-                Qudt.derivedUnit(List.of(Map.entry(Qudt.Units.M, -3)))
-                        .contains(Qudt.Units.PER__M3));
-        Assertions.assertTrue(
-                Qudt.derivedUnit(Qudt.Units.MilliA, 1, Qudt.Units.IN, -1)
-                        .contains(Qudt.Units.MilliA__PER__IN));
-        Assertions.assertTrue(
-                Qudt.derivedUnit(Qudt.Units.MOL, 1, Qudt.Units.M, -2, Qudt.Units.SEC, -1)
-                        .contains(Qudt.Units.MOL__PER__M2__SEC));
-    }
+test("Qudt.derivedUnitsFromMap(Map<Unit, number))", () => {
+  const spec = new Map<Unit, number>();
+  spec.set(Units.M, 3);
+  expect(
+    Qudt.derivedUnitsFromMap(DerivedUnitSearchMode.EXACT, spec)
+  ).toStrictEqual([Units.M3]);
+  spec.clear();
+  spec.set(Units.MOL, 1);
+  spec.set(Units.M, -2);
+  spec.set(Units.SEC, -1);
+  expect(
+    Qudt.derivedUnitsFromMap(DerivedUnitSearchMode.EXACT, spec)
+  ).toStrictEqual([Units.MOL__PER__M2__SEC]);
+});
 
-    @Test
-    public void testUnitFromLabel() {
-        Assertions.assertEquals(Qudt.Units.N, Qudt.unitFromLabel("Newton"));
-        Assertions.assertEquals(Qudt.Units.M, Qudt.unitFromLabel("Metre"));
-        Assertions.assertEquals(Qudt.Units.M2, Qudt.unitFromLabel("SQUARE_METRE"));
-        Assertions.assertEquals(Qudt.Units.M2, Qudt.unitFromLabel("SQUARE METRE"));
-        Assertions.assertEquals(Qudt.Units.M3, Qudt.unitFromLabel("Cubic Metre"));
-        Assertions.assertEquals(Qudt.Units.GM, Qudt.unitFromLabel("Gram"));
-        Assertions.assertEquals(Qudt.Units.SEC, Qudt.unitFromLabel("second"));
-        Assertions.assertEquals(Qudt.Units.HZ, Qudt.unitFromLabel("Hertz"));
-        Assertions.assertEquals(Qudt.Units.DEG_C, Qudt.unitFromLabel("degree celsius"));
-        Assertions.assertEquals(Qudt.Units.DEG_F, Qudt.unitFromLabel("degree fahrenheit"));
-        Assertions.assertEquals(Qudt.Units.A, Qudt.unitFromLabel("ampere"));
-        Assertions.assertEquals(Qudt.Units.V, Qudt.unitFromLabel("volt"));
-        Assertions.assertEquals(Qudt.Units.W, Qudt.unitFromLabel("Watt"));
-        Assertions.assertEquals(Qudt.Units.LUX, Qudt.unitFromLabel("Lux"));
-        Assertions.assertEquals(Qudt.Units.LM, Qudt.unitFromLabel("Lumen"));
-        Assertions.assertEquals(Qudt.Units.CD, Qudt.unitFromLabel("Candela"));
-        Assertions.assertEquals(Qudt.Units.PA, Qudt.unitFromLabel("Pascal"));
-        Assertions.assertEquals(Qudt.Units.RAD, Qudt.unitFromLabel("Radian"));
-        Assertions.assertEquals(Qudt.Units.J, Qudt.unitFromLabel("Joule"));
-        Assertions.assertEquals(Qudt.Units.K, Qudt.unitFromLabel("Kelvin"));
-        Assertions.assertEquals(Qudt.Units.SR, Qudt.unitFromLabel("Steradian"));
-    }
+test("Qudt.unitFromLabel(string)", () => {
+  expect(Qudt.unitFromLabel("Newton")).toBe(Units.N);
+  expect(Qudt.unitFromLabel("Metre")).toBe(Units.M);
+  expect(Qudt.unitFromLabel("SQUARE_METRE")).toBe(Units.M2);
+  expect(Qudt.unitFromLabel("SQUARE METRE")).toBe(Units.M2);
+  expect(Qudt.unitFromLabel("Cubic Metre")).toBe(Units.M3);
+  expect(Qudt.unitFromLabel("Gram")).toBe(Units.GM);
+  expect(Qudt.unitFromLabel("second")).toBe(Units.SEC);
+  expect(Qudt.unitFromLabel("Hertz")).toBe(Units.HZ);
+  expect(Qudt.unitFromLabel("degree celsius")).toBe(Units.DEG_C);
+  expect(Qudt.unitFromLabel("degree fahrenheit")).toBe(Units.DEG_F);
+  expect(Qudt.unitFromLabel("ampere")).toBe(Units.A);
+  expect(Qudt.unitFromLabel("volt")).toBe(Units.V);
+  expect(Qudt.unitFromLabel("Watt")).toBe(Units.W);
+  expect(Qudt.unitFromLabel("Lux")).toBe(Units.LUX);
+  expect(Qudt.unitFromLabel("Lumen")).toBe(Units.LM);
+  expect(Qudt.unitFromLabel("Candela")).toBe(Units.CD);
+  expect(Qudt.unitFromLabel("Pascal")).toBe(Units.PA);
+  expect(Qudt.unitFromLabel("Radian")).toBe(Units.RAD);
+  expect(Qudt.unitFromLabel("Joule")).toBe(Units.J);
+  expect(Qudt.unitFromLabel("Kelvin")).toBe(Units.K);
+  expect(Qudt.unitFromLabel("Steradian")).toBe(Units.SR);
+});
 
-    @Test
-    public void testUnitFromFactors() {
-        Assertions.assertThrows(
-                IllegalArgumentException.class, () -> Qudt.derivedUnitFromFactors(Qudt.Units.M));
-        Set<Unit> units = Qudt.derivedUnitFromFactors(Qudt.Units.M, 3);
-        Assertions.assertTrue(units.contains(Qudt.Units.M3));
-        units = Qudt.derivedUnitFromFactors(Qudt.Units.KiloGM, 1, Qudt.Units.M, -3);
-        Assertions.assertTrue(units.contains(Qudt.Units.KiloGM__PER__M3));
-        units = Qudt.derivedUnit(Qudt.Units.MOL, 1, Qudt.Units.M, -2, Qudt.Units.SEC, -1);
-        Assertions.assertTrue(units.contains(Qudt.Units.MOL__PER__M2__SEC));
-        units =
-                Qudt.derivedUnit(
-                        Qudt.Units.K,
-                        1,
-                        Qudt.Units.M,
-                        2,
-                        Qudt.Units.KiloGM,
-                        -1,
-                        Qudt.Units.SEC,
-                        -1);
-        Assertions.assertTrue(units.contains(Qudt.Units.K__M2__PER__KiloGM__SEC));
-        units =
-                Qudt.derivedUnit(
-                        Qudt.Units.BTU_IT,
-                        1,
-                        Qudt.Units.FT,
-                        1,
-                        Qudt.Units.FT,
-                        -2,
-                        Qudt.Units.HR,
-                        -1,
-                        Qudt.Units.DEG_F,
-                        -1);
-        Assertions.assertTrue(units.contains(Qudt.Units.BTU_IT__FT__PER__FT2__HR__DEG_F));
-    }
+test("Qudt.derivedUnitsFromExponentUnitPairs(Unit, number)", () => {
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.M,
+      3
+    )
+  ).toStrictEqual([Units.M3]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.M,
+      2
+    )
+  ).toStrictEqual([Units.M2]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.K,
+      -1
+    )
+  ).toStrictEqual([Units.PER__K]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.M,
+      1
+    )
+  ).toStrictEqual([Units.M]);
+});
 
-    @Test
-    public void testDerivedUnit1() {
-        Set<Unit> units = Qudt.derivedUnit(Qudt.Units.M, 3);
-        Assertions.assertTrue(units.contains(Qudt.Units.M3));
-        units = Qudt.derivedUnit(Qudt.Units.M, 2);
-        Assertions.assertTrue(units.contains(Qudt.Units.M2));
-        units = Qudt.derivedUnit(Qudt.Units.K, -1);
-        Assertions.assertTrue(units.contains(Qudt.Units.PER__K));
-        units = Qudt.derivedUnit(Qudt.Units.M, -2);
-        Assertions.assertTrue(units.contains(Qudt.Units.PER__M2));
-    }
+test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using Iris]", () => {
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.M.iri,
+      3
+    )
+  ).toStrictEqual([Units.M3]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.M.iri,
+      2
+    )
+  ).toStrictEqual([Units.M2]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.K.iri,
+      -1
+    )
+  ).toStrictEqual([Units.PER__K]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.M.iri,
+      1
+    )
+  ).toStrictEqual([Units.M]);
+});
 
-    @Test
-    public void testDerivedUnitByIri1() {
-        Set<Unit> units = Qudt.derivedUnit(Qudt.Units.M.getIri(), 3);
-        Assertions.assertTrue(units.contains(Qudt.Units.M3));
-        units = Qudt.derivedUnit(Qudt.Units.M.getIri(), 2);
-        Assertions.assertTrue(units.contains(Qudt.Units.M2));
-        units = Qudt.derivedUnit(Qudt.Units.K.getIri(), -1);
-        Assertions.assertTrue(units.contains(Qudt.Units.PER__K));
-        units = Qudt.derivedUnit(Qudt.Units.M.getIri(), -2);
-        Assertions.assertTrue(units.contains(Qudt.Units.PER__M2));
-    }
+test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using localnames]", () => {
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, "M", 3)
+  ).toStrictEqual([Units.M3]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, "M", 2)
+  ).toStrictEqual([Units.M2]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, "K", -1)
+  ).toStrictEqual([Units.PER__K]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, "M", 1)
+  ).toStrictEqual([Units.M]);
+});
 
-    @Test
-    public void testDerivedUnit2() {
-        Set<Unit> units = Qudt.derivedUnit(Qudt.Units.KiloGM, 1, Qudt.Units.M, -3);
-        Assertions.assertTrue(units.contains(Qudt.Units.KiloGM__PER__M3));
-        units = Qudt.derivedUnit(Qudt.scaledUnit("Kilo", "Gram"), 1, Qudt.Units.M, -3);
-        Assertions.assertTrue(units.contains(Qudt.Units.KiloGM__PER__M3));
-        units = Qudt.derivedUnit(Qudt.Units.N, 1, Qudt.Units.M, -2);
-        Assertions.assertTrue(units.contains(Qudt.Units.N__PER__M2));
-    }
+test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () => {
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      "Metre",
+      3
+    )
+  ).toStrictEqual([Units.M3]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      "Meter",
+      2
+    )
+  ).toStrictEqual([Units.M2]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      "KELVIN",
+      -1
+    )
+  ).toStrictEqual([Units.PER__K]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      "METER",
+      1
+    )
+  ).toStrictEqual([Units.M]);
+});
 
-    @Test
-    public void testDerivedUnit3() {
-        Set<Unit> units = Qudt.derivedUnit(Qudt.Units.MOL, 1, Qudt.Units.M, -2, Qudt.Units.SEC, -1);
-        Assertions.assertTrue(units.contains(Qudt.Units.MOL__PER__M2__SEC));
-    }
+test("Qudt.derivedUnitsFromExponentUnitPairs(Mode, Unit, number, Unit, number)", () => {
+  let myUnits: Unit[] = Qudt.derivedUnitsFromExponentUnitPairs(
+    DerivedUnitSearchMode.EXACT,
+    Units.KiloGM,
+    1,
+    Units.M,
+    -3
+  );
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.KiloGM,
+      1,
+      Units.M,
+      -3
+    )
+  ).toStrictEqual([Units.KiloGM__PER__M3]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.N,
+      1,
+      Units.M,
+      -2
+    )
+  ).toStrictEqual([Units.N__PER__M2, Units.PA]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.J,
+      1,
+      Units.GM,
+      -1
+    )
+  ).toStrictEqual([Units.J__PER__GM]);
+});
 
-    @Test
-    public void testDerivedUnit4() {
-        Set<Unit> units =
-                Qudt.derivedUnit(
-                        Qudt.Units.K,
-                        1,
-                        Qudt.Units.M,
-                        2,
-                        Qudt.Units.KiloGM,
-                        -1,
-                        Qudt.Units.SEC,
-                        -1);
-        Assertions.assertTrue(units.contains(Qudt.Units.K__M2__PER__KiloGM__SEC));
-        units =
-                Qudt.derivedUnit(
-                        Qudt.Units.M,
-                        1,
-                        Qudt.Units.KiloGM,
-                        1,
-                        Qudt.Units.SEC,
-                        -2,
-                        Qudt.Units.M,
-                        -2);
-        Assertions.assertTrue(units.contains(Qudt.Units.N__PER__M2));
-    }
+test("Qudt.derivedUnitsFromExponentUnitPairs(Mode, Unit, number, Unit, number, Unit, number)", () => {
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.M,
+      1,
+      Units.N,
+      1,
+      Units.SEC,
+      -2
+    )
+  ).toStrictEqual([]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.MOL,
+      1,
+      Units.M,
+      -2,
+      Units.SEC,
+      -1
+    )
+  ).toStrictEqual([Units.MOL__PER__M2__SEC]);
+});
 
-    @Test
-    public void testDerivedUnit5() {
-        Set<Unit> units =
-                Qudt.derivedUnit(
-                        Qudt.Units.BTU_IT,
-                        1,
-                        Qudt.Units.FT,
-                        1,
-                        Qudt.Units.FT,
-                        -2,
-                        Qudt.Units.HR,
-                        -1,
-                        Qudt.Units.DEG_F,
-                        -1);
-        Assertions.assertTrue(units.contains(Qudt.Units.BTU_IT__FT__PER__FT2__HR__DEG_F));
-        units =
-                Qudt.derivedUnit(
-                        Qudt.Units.M,
-                        1,
-                        Qudt.Units.KiloGM,
-                        1,
-                        Qudt.Units.SEC,
-                        -2,
-                        Qudt.Units.M,
-                        -2,
-                        Qudt.Units.M,
-                        1);
-        Assertions.assertTrue(units.contains(Qudt.Units.N__M__PER__M2));
-        units =
-                Qudt.derivedUnit(
-                        Qudt.Units.M,
-                        2,
-                        Qudt.Units.KiloGM,
-                        1,
-                        Qudt.Units.SEC,
-                        -2,
-                        Qudt.Units.M,
-                        -2);
-        Assertions.assertTrue(units.contains(Qudt.Units.N__M__PER__M2));
-    }
+test("Qudt.derivedUnitsFromExponentUnitPairs(Mode, Unit, number, Unit, number, Unit, number, Unit, number)", () => {
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.K,
+      1,
+      Units.M,
+      2,
+      Units.KiloGM,
+      -1,
+      Units.SEC,
+      -1
+    )
+  ).toStrictEqual([Units.K__M2__PER__KiloGM__SEC]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.M,
+      1,
+      Units.KiloGM,
+      1,
+      Units.SEC,
+      -2,
+      Units.M,
+      -2
+    )
+  ).toStrictEqual([Units.N__PER__M2, Units.PA]);
+});
+
+test("Qudt.derivedUnitsFromExponentUnitPairs(Mode, Unit, number, Unit, number, Unit, number, Unit, number, Unit, number)", () => {
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.BTU_IT,
+      1,
+      Units.FT,
+      1,
+      Units.FT,
+      -2,
+      Units.HR,
+      -1,
+      Units.DEG_F,
+      -1
+    )
+  ).toStrictEqual([Units.BTU_IT__FT__PER__FT2__HR__DEG_F]);
+  const units = Qudt.derivedUnitsFromExponentUnitPairs(
+    DerivedUnitSearchMode.EXACT,
+    Units.M,
+    1,
+    Units.KiloGM,
+    1,
+    Units.SEC,
+    -2,
+    Units.M,
+    -2,
+    Units.M,
+    1
+  );
+  expect(units).toStrictEqual([
+    Units.J__PER__M2,
+    Units.N__M__PER__M2,
+    Units.PA__M,
+  ]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.EXACT,
+      Units.M,
+      2,
+      Units.KiloGM,
+      1,
+      Units.SEC,
+      -2,
+      Units.M,
+      -2
+    )
+  ).toStrictEqual([Units.J__PER__M2, Units.N__M__PER__M2, Units.PA__M]);
+});
+
+test("Qudt.scaledUnitFromLabels(String, String)", () => {
+  expect(Qudt.scaledUnitFromLabels("Nano", "Meter")).toStrictEqual(Units.NanoM);
+});
+/**
+
 
     @Test
     public void testScaledUnit() {

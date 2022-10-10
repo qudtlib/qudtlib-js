@@ -68,8 +68,8 @@ const degC__PER__M = new Unit(
   "http://qudt.org/vocab/dimensionvector/A0E0L-1I0M0H1T0D0",
   new Decimal("1.0")
 );
-degC__PER__M.addFactorUnit(new FactorUnit(degC, new Decimal(1)));
-degC__PER__M.addFactorUnit(new FactorUnit(m, new Decimal("-1")));
+degC__PER__M.addFactorUnit(new FactorUnit(degC, 1));
+degC__PER__M.addFactorUnit(new FactorUnit(m, -1));
 
 config.units.set(m.iri, m);
 config.units.set(degC.iri, degC);
@@ -80,7 +80,7 @@ config.units.set(degC__PER__M.iri, degC__PER__M);
 
 export * from "@qudtlib/core";
 
-export const Units: any = {
+export const Units = {
   M: m,
   DEG_C: degC,
   DEG_F: degF,
