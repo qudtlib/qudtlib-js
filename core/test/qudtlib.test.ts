@@ -499,6 +499,12 @@ test("Unit.convert", () => {
   //expect(m.convert)
 });
 
+test("Unit.getLeafFactorUnitsWithCumulativeExponents", () => {
+  expect(
+    degC__PER__M.getLeafFactorUnitsWithCumulativeExponents()
+  ).toStrictEqual([new FactorUnit(degC, 1), new FactorUnit(m, -1)]);
+});
+
 const degC = new Unit(
   "http://qudt.org/vocab/unit/DEG_C",
   [],
@@ -566,5 +572,6 @@ const degC__PER__M = new Unit(
   "http://qudt.org/vocab/dimensionvector/A0E0L-1I0M0H1T0D0",
   new Decimal("1.0")
 );
+
 degC__PER__M.addFactorUnit(new FactorUnit(degC, 1));
 degC__PER__M.addFactorUnit(new FactorUnit(m, -1));

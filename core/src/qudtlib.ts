@@ -252,6 +252,11 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
     this.unit = unit;
   }
 
+  private withExponentMultiplied(by: number): FactorUnit {
+    checkInteger(by, "by");
+    return new FactorUnit(this.unit, this.exponent * by);
+  }
+
   getExponentCumulated(cumulatedExponent: number): number {
     checkInteger(cumulatedExponent, "cumulatedExponent");
     return this.exponent * cumulatedExponent;
@@ -302,6 +307,17 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
       scaleFactor,
       matchingMode
     );
+  }
+
+  getLeafFactorUnitsWithCumulativeExponents(): FactorUnit[] {
+    const leafFactorUnits =
+      this.unit.getLeafFactorUnitsWithCumulativeExponents();
+    if (!!leafFactorUnits?.length) {
+      return leafFactorUnits.map((fu) =>
+        fu.withExponentMultiplied(this.exponent)
+      );
+    }
+    return [this];
   }
 }
 
@@ -826,8 +842,43 @@ export class Unit implements SupportsEquals<Unit> {
     );
   }
 
-  convert(value: Decimal, toUnit: Unit) {
-    throw "TODO";
+  static isUnitless(unit: Unit): boolean {
+    return unit.iri === "http://qudt.org/vocab/unit/UNITLESS";
+  }
+
+  convert(value: Decimal, toUnit: Unit): Decimal {
+    if (!value) {
+      throw "Parameter 'value' is required";
+    }
+    if (!toUnit) {
+      throw "Parameter 'toUnit' is required";
+    }
+    if (this.equals(toUnit)) {
+      return value;
+    }
+    if (Unit.isUnitless(this) || Unit.isUnitless(toUnit)) {
+      return value;
+    }
+    if (!this.isConvertible(toUnit)) {
+      throw `Not convertible: ${this} -> ${toUnit}`;
+    }
+    const fromOffset = this.conversionOffset
+      ? this.conversionOffset
+      : new Decimal(0);
+    const fromMultiplier = this.conversionMultiplier
+      ? this.conversionMultiplier
+      : new Decimal(1);
+    const toOffset = toUnit.conversionOffset
+      ? toUnit.conversionOffset
+      : new Decimal(0);
+    const toMultiplier = toUnit.conversionMultiplier
+      ? toUnit.conversionMultiplier
+      : new Decimal(1);
+    return value
+      .add(fromOffset)
+      .mul(fromMultiplier)
+      .div(toMultiplier)
+      .minus(toOffset);
   }
 
   addLabel(label: LangString): void {
@@ -865,6 +916,15 @@ export class Unit implements SupportsEquals<Unit> {
     if (scalingOf.iri !== this.scalingOfIri)
       throw "scalingOf.iri does not equal this.scalingOfIri";
     this.scalingOf = scalingOf;
+  }
+
+  getLeafFactorUnitsWithCumulativeExponents(): FactorUnit[] {
+    if (!this.factorUnits) {
+      return [];
+    }
+    return this.factorUnits.flatMap((fu) =>
+      fu.getLeafFactorUnitsWithCumulativeExponents()
+    );
   }
 }
 
@@ -1142,6 +1202,46 @@ export class Qudt {
     return this.scaledUnit(
       Qudt.prefixFromLabelRequired(prefixLabel),
       Qudt.unitFromLabelRequired(baseUnit)
+    );
+  }
+
+  static factorUnits(unit: Unit): FactorUnit[] {
+    return Qudt.simplifyFactorUnits(
+      unit.getLeafFactorUnitsWithCumulativeExponents()
+    );
+  }
+
+  static simplifyFactorUnits(factorUnits: FactorUnit[]): FactorUnit[] {
+    const ret: FactorUnit[] = [];
+    const factorUnitsByKind: Map<string, FactorUnit> = factorUnits.reduce(
+      (mapping, cur) => {
+        const kind = cur.getKind();
+        const prevUnit = mapping.get(kind);
+        if (prevUnit) {
+          mapping.set(kind, FactorUnit.combine(prevUnit, cur));
+        } else {
+          mapping.set(kind, cur);
+        }
+        return mapping;
+      },
+      new Map<string, FactorUnit>()
+    );
+    for (const fu of factorUnitsByKind.values()) {
+      ret.push(fu);
+    }
+    return ret;
+  }
+
+  static unscaledUnit(unit: Unit): Unit {
+    if (!unit.scalingOfIri) {
+      return unit;
+    }
+    return this.unitRequired(unit.scalingOfIri);
+  }
+
+  static unscaledFactorUnits(factorUnits: FactorUnit[]): FactorUnit[] {
+    return factorUnits.map(
+      (fu) => new FactorUnit(Qudt.unscaledUnit(fu.unit), fu.exponent)
     );
   }
 }
