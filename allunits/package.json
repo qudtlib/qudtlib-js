@@ -1,6 +1,6 @@
 {
   "name": "@qudtlib/allunits",
-  "version": "1.0.0",
+  "version": "2.0.0-preview",
   "type": "module",
   "description": "Package containing all QUDT units, quantityKinds, and prefixes",
   "exports": "./dist/units.js",

@@ -1,6 +1,6 @@
 {
   "name": "@qudtlib/parent",
-  "version": "1.0.0",
+  "version": "2.0.0-preview",
   "type": "module",
   "description": "JS Implementation of the QUDT ontology, allowing for instantiating QUDT units and quantitykinds and for unit conversion. ",
   "exports": "./dist/qudtlib.js",

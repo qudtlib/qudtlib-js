@@ -625,53 +625,63 @@ test("Unit.matches(FactorUnitSelection) (multiple levels of factor units)", () =
       )
     )
   ).toBe(true);
+  expect(
+    Units.N__PER__KiloGM.matches(
+      FactorUnitSelection.fromFactorUnitSpec(Units.N, 1, Units.KiloGM, -1)
+    )
+  ).toBe(true);
+  expect(
+    Units.N__PER__KiloGM.matches(
+      FactorUnitSelection.fromFactorUnitSpec(
+        Units.KiloGM,
+        -1,
+        Units.M,
+        1,
+        Units.KiloGM,
+        1,
+        Units.SEC,
+        -2,
+        Units.N,
+        1
+      )
+    )
+  ).toBe(false);
+  expect(
+    Units.N__PER__KiloGM.matches(
+      FactorUnitSelection.fromFactorUnitSpec(
+        Units.KiloGM,
+        -1,
+        Units.M,
+        1,
+        Units.KiloGM,
+        1,
+        Units.SEC,
+        -2,
+        Units.N,
+        1,
+        Units.KiloGM,
+        -1
+      )
+    )
+  ).toBe(false);
+  expect(
+    Units.N__PER__KiloGM.matches(
+      FactorUnitSelection.fromFactorUnitSpec(Units.M, -2, Units.KiloGM, 2)
+    )
+  ).toBe(false);
+  expect(
+    Units.N__PER__KiloGM.matches(
+      FactorUnitSelection.fromFactorUnitSpec(Units.M, -2)
+    )
+  ).toBe(false);
+  expect(
+    Units.N__PER__KiloGM.matches(
+      FactorUnitSelection.fromFactorUnitSpec(Units.KiloGM, 1)
+    )
+  ).toBe(false);
 });
 /**
-
- public void testDeepFactorUnit() {
-        Unit du = Qudt.Units.N__PER__KiloGM;
-        assertTrue(
-                du.matches(
-                        Qudt.Units.KiloGM,
-                        -1,
-                        Qudt.Units.M,
-                        1,
-                        Qudt.Units.KiloGM,
-                        1,
-                        Qudt.Units.SEC,
-                        -2));
-        assertTrue(du.matches(Qudt.Units.N, 1, Qudt.Units.KiloGM, -1));
-        assertFalse(
-                du.matches(
-                        Qudt.Units.KiloGM,
-                        -1,
-                        Qudt.Units.M,
-                        1,
-                        Qudt.Units.KiloGM,
-                        1,
-                        Qudt.Units.SEC,
-                        -2,
-                        Qudt.Units.N,
-                        1));
-        assertFalse(
-                du.matches(
-                        Qudt.Units.KiloGM,
-                        -1,
-                        Qudt.Units.M,
-                        1,
-                        Qudt.Units.KiloGM,
-                        1,
-                        Qudt.Units.SEC,
-                        -2,
-                        Qudt.Units.N,
-                        1,
-                        Qudt.Units.KiloGM,
-                        -1));
-        assertFalse(du.matches(Qudt.Units.M, -2, Qudt.Units.KiloGM, 2));
-        assertFalse(du.matches(Qudt.Units.M, -2));
-        assertFalse(du.matches(Qudt.Units.KiloGM, 1));
-    }
-
+  TODO: port these unit tests from qudtlib-java
  @Test
  public void testMatchingModeAllowScaled() {
         assertTrue(
