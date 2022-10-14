@@ -1,6 +1,6 @@
 {
   "name": "@qudtlib/parent",
-  "version": "1.0.0",
+  "version": "2.0.0-preview",
   "type": "module",
   "description": "JS Implementation of the QUDT ontology, allowing for instantiating QUDT units and quantitykinds and for unit conversion. ",
   "exports": "./dist/qudtlib.js",
@@ -9,13 +9,19 @@
   },
   "workspaces": [
     "core",
+    "allunits",
     "testunits",
     "testunits2",
     "integrationtest"
   ],
   "scripts": {
     "test": "jest --coverage --passWithNoTests",
-    "build": "gulp"
+    "build": "gulp",
+    "build-complete": "npm run check && npx lerna run build && npx lerna run build",
+    "format-apply": "npx prettier --write .",
+    "lint": "npx eslint .",
+    "format-check": "npx prettier --check .",
+    "check": "npm run format-check && npm run lint"
   },
   "keywords": [
     "QUDT",
@@ -28,10 +34,17 @@
   "license": "CC-BY-4.0",
   "devDependencies": {
     "@types/jest": "^28.1.4",
+    "@typescript-eslint/eslint-plugin": "^5.38.1",
+    "@typescript-eslint/parser": "^5.38.1",
     "del": "^7.0.0",
+    "eslint": "^8.24.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "gulp": "^4.0.2",
     "gulp-typescript": "^6.0.0-alpha.1",
     "jest": "^28.1.2",
+    "lerna": "^5.5.4",
+    "prettier": "2.7.1",
     "ts-jest": "^28.0.5",
     "ts-node": "^10.8.2",
     "typescript": "^4.7.4"
