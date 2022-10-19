@@ -1,10 +1,15 @@
 {
   "name": "@qudtlib/core",
-  "version": "2.0.0-preview",
-  "type": "module",
+  "version": "2.0.0-preview3",
   "description": "Data model for QUDTLib",
-  "exports": "./dist/qudtlib.js",
-  "main": "./dist/qudtlib.js",
+  "main": "dist/cjs/qudtlib.js",
+  "module": "dist/mjs/qudtlib.js",
+  "exports": {
+    ".": {
+      "import": "./dist/mjs/qudtlib.js",
+      "require": "./dist/cjs/qudtlib.js"
+    }
+  },
   "types": "./dist/qudtlib.d.ts",
   "files": [
     "./dist/*"
