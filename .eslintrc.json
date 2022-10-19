@@ -1,6 +1,6 @@
 {
   "parser": "@typescript-eslint/parser",
-  "ignorePatterns": ["**/dist/*"],
+  "ignorePatterns": ["**/dist/*", "/svelte-test/**", "**/tmp/**"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended"

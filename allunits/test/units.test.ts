@@ -3,9 +3,11 @@ import {
   DerivedUnitSearchMode,
   FactorUnit,
   FactorUnitSelection,
+  FactorUnitMatchingMode,
   Prefix,
   Prefixes,
   QuantityKind,
+  QuantityValue,
   QuantityKinds,
   Qudt,
   QUDT_PREFIX_BASE_IRI,
@@ -204,29 +206,32 @@ test("Qudt.derivedUnitsFromMap(Map<Unit, number))", () => {
   ).toStrictEqual([Units.MOL__PER__M2__SEC]);
 });
 
-test("Qudt.unitFromLabel(string)", () => {
-  expect(Qudt.unitFromLabel("Newton")).toBe(Units.N);
-  expect(Qudt.unitFromLabel("Metre")).toBe(Units.M);
-  expect(Qudt.unitFromLabel("SQUARE_METRE")).toBe(Units.M2);
-  expect(Qudt.unitFromLabel("SQUARE METRE")).toBe(Units.M2);
-  expect(Qudt.unitFromLabel("Cubic Metre")).toBe(Units.M3);
-  expect(Qudt.unitFromLabel("Gram")).toBe(Units.GM);
-  expect(Qudt.unitFromLabel("second")).toBe(Units.SEC);
-  expect(Qudt.unitFromLabel("Hertz")).toBe(Units.HZ);
-  expect(Qudt.unitFromLabel("degree celsius")).toBe(Units.DEG_C);
-  expect(Qudt.unitFromLabel("degree fahrenheit")).toBe(Units.DEG_F);
-  expect(Qudt.unitFromLabel("ampere")).toBe(Units.A);
-  expect(Qudt.unitFromLabel("volt")).toBe(Units.V);
-  expect(Qudt.unitFromLabel("Watt")).toBe(Units.W);
-  expect(Qudt.unitFromLabel("Lux")).toBe(Units.LUX);
-  expect(Qudt.unitFromLabel("Lumen")).toBe(Units.LM);
-  expect(Qudt.unitFromLabel("Candela")).toBe(Units.CD);
-  expect(Qudt.unitFromLabel("Pascal")).toBe(Units.PA);
-  expect(Qudt.unitFromLabel("Radian")).toBe(Units.RAD);
-  expect(Qudt.unitFromLabel("Joule")).toBe(Units.J);
-  expect(Qudt.unitFromLabel("Kelvin")).toBe(Units.K);
-  expect(Qudt.unitFromLabel("Steradian")).toBe(Units.SR);
-});
+describe.each([
+  ["Newton", Units.N],
+  ["Metre", Units.M],
+  ["SQUARE_METRE", Units.M2],
+  ["SQUARE METRE", Units.M2],
+  ["Cubic Metre", Units.M3],
+  ["Gram", Units.GM],
+  ["second", Units.SEC],
+  ["Hertz", Units.HZ],
+  ["degree celsius", Units.DEG_C],
+  ["degree fahrenheit", Units.DEG_F],
+  ["ampere", Units.A],
+  ["volt", Units.V],
+  ["Watt", Units.W],
+  ["Lux", Units.LUX],
+  ["Lumen", Units.LM],
+  ["Candela", Units.CD],
+  ["Pascal", Units.PA],
+  ["Radian", Units.RAD],
+  ["Joule", Units.J],
+  ["Kelvin", Units.K],
+  ["Steradian", Units.SR],
+])("Qudt.unitFromLabel(string)", (label, expected) =>
+  test(`Qudt.unitFromLabel("${label}") = ${expected.toString()}`, () =>
+    expect(Qudt.unitFromLabel(label)).toBe(expected))
+);
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(Unit, number)", () => {
   expect(
@@ -336,108 +341,49 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () 
   ).toStrictEqual([Units.M]);
 });
 
-test("Qudt.derivedUnitsFromExponentUnitPairs(Mode, Unit, number, Unit, number)", () => {
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.KiloGM,
-      1,
-      Units.M,
-      -3
-    )
-  ).toStrictEqual([Units.KiloGM__PER__M3]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.N,
-      1,
-      Units.M,
-      -2
-    )
-  ).toStrictEqual([Units.N__PER__M2, Units.PA]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.J,
-      1,
-      Units.GM,
-      -1
-    )
-  ).toStrictEqual([Units.J__PER__GM]);
-});
-
-test("Qudt.derivedUnitsFromExponentUnitPairs(Mode, Unit, number, Unit, number, Unit, number)", () => {
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.M,
-      1,
-      Units.N,
-      1,
-      Units.SEC,
-      -2
-    )
-  ).toStrictEqual([]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.MOL,
-      1,
-      Units.M,
-      -2,
-      Units.SEC,
-      -1
-    )
-  ).toStrictEqual([Units.MOL__PER__M2__SEC]);
-});
-
-test("Qudt.derivedUnitsFromExponentUnitPairs(Mode, Unit, number, Unit, number, Unit, number, Unit, number)", () => {
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.K,
-      1,
-      Units.M,
-      2,
-      Units.KiloGM,
-      -1,
-      Units.SEC,
-      -1
-    )
-  ).toStrictEqual([Units.K__M2__PER__KiloGM__SEC]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.M,
-      1,
-      Units.KiloGM,
-      1,
-      Units.SEC,
-      -2,
-      Units.M,
-      -2
-    )
-  ).toStrictEqual([Units.N__PER__M2, Units.PA]);
-});
-
-test("Qudt.derivedUnitsFromExponentUnitPairs(Mode, Unit, number, Unit, number, Unit, number, Unit, number, Unit, number)", () => {
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.BTU_IT,
-      1,
-      Units.FT,
-      1,
-      Units.FT,
-      -2,
-      Units.HR,
-      -1,
-      Units.DEG_F,
-      -1
-    )
-  ).toStrictEqual([Units.BTU_IT__FT__PER__FT2__HR__DEG_F]);
-  const units = Qudt.derivedUnitsFromExponentUnitPairs(
-    DerivedUnitSearchMode.EXACT,
+describe.each([
+  [[Units.KiloGM__PER__M3], Units.KiloGM, 1, Units.M, -3],
+  [[Units.N__PER__M2, Units.PA], Units.N, 1, Units.M, -2],
+  [[Units.J__PER__GM], Units.J, 1, Units.GM, -1],
+  [[], Units.M, 1, Units.N, 1, Units.SEC, -2],
+  [[Units.MOL__PER__M2__SEC], Units.MOL, 1, Units.M, -2, Units.SEC, -1],
+  [
+    [Units.K__M2__PER__KiloGM__SEC],
+    Units.K,
+    1,
+    Units.M,
+    2,
+    Units.KiloGM,
+    -1,
+    Units.SEC,
+    -1,
+  ],
+  [
+    [Units.N__PER__M2, Units.PA],
+    Units.M,
+    1,
+    Units.KiloGM,
+    1,
+    Units.SEC,
+    -2,
+    Units.M,
+    -2,
+  ],
+  [
+    [Units.BTU_IT__FT__PER__FT2__HR__DEG_F],
+    Units.BTU_IT,
+    1,
+    Units.FT,
+    1,
+    Units.FT,
+    -2,
+    Units.HR,
+    -1,
+    Units.DEG_F,
+    -1,
+  ],
+  [
+    [Units.J__PER__M2, Units.N__M__PER__M2, Units.PA__M],
     Units.M,
     1,
     Units.KiloGM,
@@ -447,35 +393,38 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(Mode, Unit, number, Unit, number, U
     Units.M,
     -2,
     Units.M,
-    1
-  );
-  expect(units).toStrictEqual([
-    Units.J__PER__M2,
-    Units.N__M__PER__M2,
-    Units.PA__M,
-  ]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.M,
-      2,
-      Units.KiloGM,
-      1,
-      Units.SEC,
-      -2,
-      Units.M,
-      -2
-    )
-  ).toStrictEqual([Units.J__PER__M2, Units.N__M__PER__M2, Units.PA__M]);
-});
+    1,
+  ],
+  [
+    [Units.J__PER__M2, Units.N__M__PER__M2, Units.PA__M],
+    Units.M,
+    2,
+    Units.KiloGM,
+    1,
+    Units.SEC,
+    -2,
+    Units.M,
+    -2,
+  ],
+])(
+  "Qudt.derivedUnitsFromExponentUnitPairs(Mode, (Unit | number)...)",
+  (expected, ...spec) =>
+    test(`Qudt.derivedUnitsFromExponentUnitPairs(EXACT, ${spec.map((s) =>
+      typeof s === "number" ? s : s.toString()
+    )}) = ${expected}`, () =>
+      expect(
+        Qudt.derivedUnitsFromExponentUnitPairs(
+          DerivedUnitSearchMode.EXACT,
+          ...(spec as (number | Unit)[])
+        )
+      ).toStrictEqual(expected))
+);
 
-test("Qudt.scaledUnitFromLabels(String, String)", () => {
-  expect(Qudt.scaledUnitFromLabels("Nano", "Meter")).toStrictEqual(Units.NanoM);
-  expect(Qudt.scaledUnitFromLabels("Giga", "Hertz")).toStrictEqual(
-    Units.GigaHZ
-  );
-  expect(Qudt.scaledUnitFromLabels("NANO", "METER")).toStrictEqual(Units.NanoM);
-  expect(Qudt.scaledUnitFromLabels("kilo", "GRAM")).toStrictEqual(Units.KiloGM);
+test("Qudt.scaleUnitFromLabels(String, String)", () => {
+  expect(Qudt.scaleUnitFromLabels("Nano", "Meter")).toStrictEqual(Units.NanoM);
+  expect(Qudt.scaleUnitFromLabels("Giga", "Hertz")).toStrictEqual(Units.GigaHZ);
+  expect(Qudt.scaleUnitFromLabels("NANO", "METER")).toStrictEqual(Units.NanoM);
+  expect(Qudt.scaleUnitFromLabels("kilo", "GRAM")).toStrictEqual(Units.KiloGM);
 });
 
 test("Qudt.factorUnits(Unit)", () => {
@@ -498,23 +447,115 @@ test("Qudt.factorUnits(Unit)", () => {
     new FactorUnit(Units.M, 1),
   ]);
 });
-test("Qudt.unscaledUnit(Unit)", () => {
-  expect(Qudt.unscaledUnit(Units.YoctoC)).toBe(Units.C);
-  expect(Qudt.unscaledUnit(Units.TeraBYTE)).toBe(Units.BYTE);
-  expect(Qudt.unscaledUnit(Units.KiloGM)).toBe(Units.GM);
-  expect(Qudt.unscaledUnit(Units.MilliGM)).toBe(Units.GM);
-  expect(Qudt.unscaledUnit(Units.MegaGM)).toBe(Units.GM);
-  expect(Qudt.unscaledUnit(Units.TON_Metric)).toBe(Units.GM);
-  expect(Qudt.unscaledUnit(Units.TONNE)).toBe(Units.GM);
-  expect(Qudt.unscaledUnit(Units.KiloM)).toBe(Units.M);
-  expect(Qudt.unscaledUnit(Units.KiloN)).toBe(Units.N);
-});
-test("Qudt.unscaledFactorUnits(FactorUnit[])", () => {
-  const units = Qudt.unscaledFactorUnits(Qudt.factorUnits(Units.KiloN__M));
+
+describe.each([
+  [Units.YoctoC, Units.C],
+  [Units.TeraBYTE, Units.BYTE],
+  [Units.KiloGM, Units.GM],
+  [Units.MilliGM, Units.GM],
+  [Units.MegaGM, Units.GM],
+  [Units.TON_Metric, Units.GM],
+  [Units.TONNE, Units.GM],
+  [Units.KiloM, Units.M],
+  [Units.KiloN, Units.N],
+])("Qudt.unscale(Unit)", (unit, expected) =>
+  test(`Qudt.unscale(${unit.toString()}) = ${expected.toString()}`, () =>
+    expect(Qudt.unscale(unit)).toBe(expected))
+);
+
+test("Qudt.unscaleFactorUnits(FactorUnit[])", () => {
+  const units = Qudt.unscaleFactorUnits(Qudt.factorUnits(Units.KiloN__M));
   expect(units).toStrictEqual([
     new FactorUnit(Units.N, 1),
     new FactorUnit(Units.M, 1),
   ]);
+});
+
+test("Qudt.convert(Decimal, Unit, Unit) (missing values handling)", () => {
+  expect(() => Qudt.convert(new Decimal(1), Units.M, undefined!)).toThrowError(
+    "Parameter 'toUnit' is required"
+  );
+  expect(() => Qudt.convert(new Decimal(1), undefined!, Units.FT)).toThrowError(
+    "Parameter 'fromUnit' is required"
+  );
+  expect(() => Qudt.convert(undefined!, Units.M, Units.FT)).toThrowError(
+    "Parameter 'value' is required"
+  );
+});
+
+test("Qudt.convert(Decimal, Unit, Unit) (UNITLESS)", () => {
+  expect(Qudt.convert(new Decimal(3), Units.M, Units.UNITLESS)).toStrictEqual(
+    new Decimal(3)
+  );
+  expect(Qudt.convert(new Decimal(3), Units.UNITLESS, Units.M)).toStrictEqual(
+    new Decimal(3)
+  );
+  expect(
+    Qudt.convert(new Decimal(3), Units.UNITLESS, Units.UNITLESS)
+  ).toStrictEqual(new Decimal(3));
+});
+
+test("Qudt.convert(Decimal, Unit, Unit) (inconvertible units handling)", () => {
+  expect(() => Qudt.convert(new Decimal(1), Units.M, Units.SEC)).toThrowError(
+    "Not convertible: m -> s"
+  );
+});
+
+describe.each([
+  [new Decimal(1), Units.M, Units.FT, 3.28, 2],
+  [new Decimal(36), Units.DEG_C, Units.DEG_F, 96.8, 2],
+  [new Decimal(100), Units.DEG_F, Units.DEG_C, 37.777, 2],
+  [new Decimal(10), Units.TONNE, Units.TON_UK, 9.84, 2],
+  [new Decimal(1), Units.LB, Units.KiloGM, 0.45359237, 6],
+  [new Decimal(1), Units.N, Units.KiloN, 0.001, 2],
+  [new Decimal(1), Units.L, Units.GAL_US, 0.264, 2],
+  [new Decimal(1048576), Units.BYTE, Units.MegaBYTE, 1, 2],
+  [new Decimal(1), Units.BTU_IT__PER__LB, Units.J__PER__GM, 2.326, 3],
+  [new Decimal(1), Units.FemtoGM, Units.KiloGM, 0.000000000000000001, 15],
+])("Qudt.convert(Decimal, Unit, Unit)", (val, from, to, expected, digits) =>
+  test(`Qudt.convert(${val.toString()}, ${from.toString()}, ${to.toString()}) = ${expected}`, () =>
+    expect(Qudt.convert(val, from, to).toNumber()).toBeCloseTo(
+      expected,
+      digits
+    ))
+);
+
+test.each([
+  [new Decimal(1), Units.M, Units.FT.iri, 3.28, 2],
+  [new Decimal(36), Units.DEG_C.iri, Units.DEG_F, 96.8, 2],
+  [new Decimal(100), Units.DEG_F.iri, Units.DEG_C.iri, 37.777, 2],
+])(
+  "Qudt.convert(Decimal, Unit|string, Unit|string) (mix types)",
+  (val, from, to, expectedVal, decimals) =>
+    expect(Qudt.convert(val, from, to).toNumber()).toBeCloseTo(
+      expectedVal,
+      decimals
+    )
+);
+
+test.each([
+  [new Decimal(10), Units.TONNE.iri + "dontfindme", Units.TON_UK],
+  [new Decimal(1), Units.LB, Units.KiloGM.iri + "dontfindme"],
+])("throw error for unit that cannot be found", (value, from, to) =>
+  expect(() => Qudt.convert(value, from, to)).toThrowError()
+);
+
+test("Qudt.convertQuantityValue(QuantityValue, Unit)", () => {
+  expect(
+    Qudt.convertQuantityValue(
+      new QuantityValue(new Decimal(1), Units.M),
+      Units.FT
+    ).value.toNumber()
+  ).toBeCloseTo(3.28, 2);
+});
+
+test("Qudt.convertQuantityValue(QuantityValue, string)", () => {
+  expect(
+    Qudt.convertQuantityValue(
+      new QuantityValue(new Decimal(1), Units.M),
+      Units.FT.iri
+    ).value.toNumber()
+  ).toBeCloseTo(3.28, 2);
 });
 
 test("Unit.convert(Decimal, Unit) (missing values handling)", () => {
@@ -680,404 +721,528 @@ test("Unit.matches(FactorUnitSelection) (multiple levels of factor units)", () =
     )
   ).toBe(false);
 });
-/**
-  TODO: port these unit tests from qudtlib-java
- @Test
- public void testMatchingModeAllowScaled() {
-        assertTrue(
-                Qudt.Units.GM__PER__DeciM3.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(
-                                Qudt.Units.KiloGM, 1, Qudt.Units.M, -3),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        assertFalse(
-                Qudt.Units.KiloGM__PER__M3.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(Qudt.Units.GM, 1, Qudt.Units.M, -3),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
+
+test("Unit.matches(FactorUnitMatchingMode, Unit...) (mode=ALLOW_SCALED)", () => {
+  expect(
+    Units.GM__PER__DeciM3.matches(
+      FactorUnitSelection.fromFactorUnitSpec(Units.KiloGM, 1, Units.M, -3),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+  expect(
+    Units.KiloGM__PER__M3.matches(
+      FactorUnitSelection.fromFactorUnitSpec(Units.GM, 1, Units.DeciM, -3),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+});
+
+test("Unit.matches(FactorUnitMatchingMode, Unit...) (mode=EXACT)", () => {
+  expect(
+    Units.GM__PER__DeciM3.matches(
+      FactorUnitSelection.fromFactorUnitSpec(Units.KiloGM, 1, Units.M, -3),
+      FactorUnitMatchingMode.EXACT
+    )
+  ).toBe(false);
+  expect(
+    Units.KiloGM__PER__M3.matches(
+      FactorUnitSelection.fromFactorUnitSpec(Units.GM, 1, Units.M, -3),
+      FactorUnitMatchingMode.EXACT
+    )
+  ).toBe(false);
+});
+
+test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=EXACT_ONLY_ONE)", () => {
+  const units = Qudt.derivedUnitsFromExponentUnitPairs(
+    DerivedUnitSearchMode.EXACT_ONLY_ONE,
+    Units.N,
+    1,
+    Units.M,
+    1
+  );
+  expect(units).toStrictEqual([Units.J]);
+});
+
+test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=EXACT, multiple results)", () => {
+  const units = Qudt.derivedUnitsFromExponentUnitPairs(
+    DerivedUnitSearchMode.EXACT,
+    Units.N,
+    1,
+    Units.M,
+    1
+  );
+  expect(units.length).toBe(2);
+  expect(units.includes(Units.J)).toBe(true);
+  expect(units.includes(Units.N__M)).toBe(true);
+});
+
+test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=BEST_EFFORT_ONLY_ONE)", () => {
+  let units = Qudt.derivedUnitsFromExponentUnitPairs(
+    DerivedUnitSearchMode.BEST_EFFORT_ONLY_ONE,
+    "KiloGM",
+    1,
+    "M",
+    -3
+  );
+  expect(units.length).toBe(1);
+  expect(units.includes(Units.KiloGM__PER__M3)).toBe(true);
+  units = Qudt.derivedUnitsFromExponentUnitPairs(
+    DerivedUnitSearchMode.BEST_EFFORT_ONLY_ONE,
+    "KiloN",
+    1,
+    "MilliM",
+    1
+  );
+  expect(units.length).toBe(1);
+  expect(units.includes(Units.J)).toBe(true);
+});
+
+test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=ALLOW_SCALED)", () => {
+  const units = Qudt.derivedUnitsFromExponentUnitPairs(
+    DerivedUnitSearchMode.ALLOW_SCALED,
+    "KiloGM",
+    1,
+    "M",
+    -3
+  );
+  expect(units.length).toBe(2);
+  expect(units.includes(Units.KiloGM__PER__M3)).toBe(true);
+  expect(units.includes(Units.GM__PER__DeciM3)).toBe(true);
+});
+
+test("Unit.matches((Unit|number)...) (deep factor units, duplicated exponent-unit combination)", () => {
+  const du = Units.N__M__PER__KiloGM;
+  expect(
+    du.matches(
+      FactorUnitSelection.fromFactorUnitSpec(
+        Units.N,
+        1,
+        Units.KiloGM,
+        -1,
+        Units.M,
+        1
+      )
+    )
+  ).toBe(true);
+  expect(
+    du.matches(
+      FactorUnitSelection.fromFactorUnitSpec(
+        Units.KiloGM,
+        -1,
+        Units.M,
+        1,
+        Units.KiloGM,
+        1,
+        Units.SEC,
+        -2,
+        Units.M,
+        1,
+        Units.N,
+        1
+      )
+    )
+  ).toBe(false);
+  expect(
+    du.matches(
+      FactorUnitSelection.fromFactorUnitSpec(
+        Units.KiloGM,
+        -1,
+        Units.M,
+        1,
+        Units.KiloGM,
+        1,
+        Units.SEC,
+        -2,
+        Units.N,
+        1
+      )
+    )
+  ).toBe(false);
+  expect(
+    du.matches(
+      FactorUnitSelection.fromFactorUnitSpec(
+        Units.KiloGM,
+        -1,
+        Units.M,
+        1,
+        Units.KiloGM,
+        1,
+        Units.SEC,
+        -2,
+        Units.N,
+        1,
+        Units.KiloGM,
+        -1
+      )
+    )
+  ).toBe(false);
+  expect(
+    du.matches(
+      FactorUnitSelection.fromFactorUnitSpec(
+        Units.KiloGM,
+        1,
+        Units.M,
+        1,
+        Units.SEC,
+        -2,
+        Units.M,
+        1,
+        Units.KiloGM,
+        -1
+      )
+    )
+  ).toBe(true);
+  expect(
+    du.matches(
+      FactorUnitSelection.fromFactorUnitSpec(Units.M, -2, Units.KiloGM, 2)
+    )
+  ).toBe(false);
+  expect(du.matches(FactorUnitSelection.fromFactorUnitSpec(Units.M, -2))).toBe(
+    false
+  );
+  expect(
+    du.matches(FactorUnitSelection.fromFactorUnitSpec(Units.KiloGM, 1))
+  ).toBe(false);
+  expect(
+    du.matches(
+      FactorUnitSelection.fromFactorUnitSpec(Units.N, 1, Units.KiloGM, -1)
+    )
+  ).toBe(false);
+});
+
+test("Unit.matches((Unit|number)...) (deep factor units, duplicate exponent-unit combination, match with aggregated expression)", () => {
+  const du = Units.N__M__PER__KiloGM;
+
+  // now simplify: aggregate the M^1, M^1 to M^2: should still work.
+  expect(
+    du.matches(
+      FactorUnitSelection.fromFactorUnitSpec(
+        Units.KiloGM,
+        1,
+        Units.M,
+        2,
+        Units.SEC,
+        -2,
+        Units.KiloGM,
+        -1
+      )
+    )
+  ).toBe(true);
+  // now simplify: wrongly aggregate the KiloGM^1, KiloGM^-1 to KiloGM^0: should not work
+  expect(
+    du.matches(
+      FactorUnitSelection.fromFactorUnitSpec(
+        Units.M,
+        2,
+        Units.SEC,
+        -2,
+        Units.KiloGM,
+        0
+      )
+    )
+  ).toBe(false);
+});
+
+test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (scaled factors)", () => {
+  expect(
+    Units.KiloN__M.matches(
+      FactorUnitSelection.fromFactorUnitSpec(
+        Units.SEC,
+        -2,
+        Units.KiloGM,
+        1,
+        Units.M,
+        1,
+        Units.KiloM,
+        1
+      ),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+  let factors = [Units.KiloGM, 1, Units.SEC, -2, Units.M, 1, Units.KiloM, 1];
+  expect(
+    Units.KiloN__M.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+  expect(
+    Units.KiloJ.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+  expect(
+    Units.MilliOHM.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(false);
+  expect(
+    Units.MilliS.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(false);
+
+  factors = [Units.KiloGM, 1, Units.K, -1, Units.SEC, -3];
+  expect(
+    Units.W__PER__K.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(false);
+  expect(
+    Units.V__PER__K.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(false);
+});
+
+test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (scaled factors, negative first)", () => {
+  let factors = [Units.SEC, -2, Units.KiloGM, 1, Units.M, 1, Units.KiloM, 1];
+  expect(
+    Units.KiloN__M.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+  factors = [Units.KiloGM, 1, Units.SEC, -2, Units.M, 1, Units.KiloM, 1];
+  expect(
+    Units.KiloN__M.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+});
+
+test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (square in nominator)", () => {
+  let factors = [Units.MilliM, 2, Units.SEC, -1];
+  expect(
+    Units.MilliM2__PER__SEC.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+  factors = [Units.KiloGM, 2, Units.SEC, -2];
+  expect(
+    Units.KiloGM2__PER__SEC2.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+});
+test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (square in denominator)", () => {
+  let factors = [Units.KiloGM, 1, Units.M, 1, Units.M, -2, Units.SEC, -2];
+  expect(
+    Units.N__PER__M2.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
+  ).toBe(true);
+  factors = [Units.M, -2, Units.SEC, -2, Units.KiloGM, 1, Units.M, 1];
+  expect(
+    Units.N__PER__M2.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
+  ).toBe(true);
+});
+
+test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (square in denominator [2])", () => {
+  const factors = [
+    Units.KiloGM,
+    1,
+    Units.M,
+    1,
+    Units.MilliM,
+    -2,
+    Units.KiloSEC,
+    -2,
+  ];
+  expect(
+    Units.N__PER__M2.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+  expect(
+    Units.N__PER__M2.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
+  ).toBe(false);
+});
+
+test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (square in denominator [3])", () => {
+  const factors = [
+    Units.GM,
+    1,
+    Units.MilliM,
+    1,
+    Units.M,
+    -2,
+    Units.MilliSEC,
+    -2,
+  ];
+  expect(
+    Units.N__PER__M2.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+  expect(
+    Units.N__PER__M2.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.EXACT
+    )
+  ).toBe(false);
+});
+
+function combinations<T>(arr: T[]): T[][] {
+  if (arr.length == 1) {
+    return [arr];
+  } else if (arr.length > 1) {
+    const ret: T[][] = [];
+    for (let i = 0; i < arr.length; i++) {
+      const rest = [...arr];
+      rest.splice(i, 1);
+      const restCombinations = combinations(rest);
+      for (const cmb of restCombinations) {
+        ret.push([arr[i], ...cmb]);
+      }
     }
+    return ret;
+  }
+  throw "cannot handle zero-length array";
+}
 
- @Test
- public void testMatchingModeExact() {
-        assertFalse(Qudt.Units.GM__PER__DeciM3.matches(Qudt.Units.KiloGM, 1, Qudt.Units.M, -3));
-        assertFalse(Qudt.Units.KiloGM__PER__M3.matches(Qudt.Units.GM, 1, Qudt.Units.M, -3));
+describe.each(
+  (function (): FactorUnit[][] {
+    const factors = [
+      Units.KiloGM,
+      1,
+      Units.SEC,
+      -2,
+      Units.M,
+      1,
+      Units.KiloM,
+      1,
+    ];
+    const factorUnits: FactorUnit[] = [];
+    for (let i = 0; i < factors.length; i += 2) {
+      factorUnits.push(
+        new FactorUnit(factors[i] as Unit, factors[i + 1] as number)
+      );
     }
+    return combinations(factorUnits);
+  })()
+)(
+  "Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (scaled factors, changing order)",
+  (...factorUnits) => {
+    const factors = factorUnits.flatMap((fu) => [fu.unit, fu.exponent]);
+    test(`Units.KiloN__M should match([${factorUnits.map((f) =>
+      f.toString()
+    )}] under matching mode ALLOW_SCALED `, () =>
+      expect(
+        Units.KiloN__M.matches(
+          FactorUnitSelection.fromFactorUnitSpec(...factors),
+          FactorUnitMatchingMode.ALLOW_SCALED
+        )
+      ).toBe(true));
+    test(`Units.KiloN__M should match([${factorUnits.map((f) =>
+      f.toString()
+    )}] under matching mode EXACT`, () =>
+      expect(
+        Units.KiloN__M.matches(
+          FactorUnitSelection.fromFactorUnitSpec(...factors)
+        )
+      ).toBe(true));
+  }
+);
 
- @Test
- public void testSearchModeExactOnlyOne() {
-        Set<Unit> units =
-                Qudt.derivedUnitsFromUnitExponentPairs(
-                        DerivedUnitSearchMode.EXACT_ONLY_ONE, Qudt.Units.N, 1, Qudt.Units.M, 1);
-        assertEquals(1, units.size());
-        assertTrue(units.contains(Qudt.Units.J));
-    }
+test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (scaled factors, various matches for one spec)", () => {
+  let factors = [Units.KiloGM, 1, Units.SEC, -2, Units.M, 1, Units.KiloM, 1];
+  expect(
+    Units.KiloN__M.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true),
+    expect(
+      Units.KiloJ.matches(
+        FactorUnitSelection.fromFactorUnitSpec(...factors),
+        FactorUnitMatchingMode.ALLOW_SCALED
+      )
+    ).toBe(true);
 
- @Test
- public void testSearchModeExact_2Results() {
-        Set<Unit> units =
-                Qudt.derivedUnitsFromUnitExponentPairs(
-                        DerivedUnitSearchMode.EXACT, Qudt.Units.N, 1, Qudt.Units.M, 1);
-        assertEquals(2, units.size());
-        assertTrue(units.contains(Qudt.Units.J));
-        assertTrue(units.contains(Qudt.Units.N__M));
-    }
+  expect(
+    Units.MilliOHM.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(false);
+  expect(
+    Units.MilliS.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(false);
+  factors = [Units.KiloGM, 1, Units.K, -1, Units.SEC, -3];
+  expect(
+    Units.W__PER__K.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(false);
+  expect(
+    Units.V__PER__K.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(false);
+});
 
- @Test
- public void testSearchModeBestEffortOnlyOne() {
-        Set<Unit> units =
-                Qudt.derivedUnitsFromUnitExponentPairs(
-                        DerivedUnitSearchMode.BEST_EFFORT_ONLY_ONE, "KiloGM", 1, "M", -3);
-        assertEquals(1, units.size());
-        assertTrue(units.contains(Qudt.Units.KiloGM__PER__M3));
-        units =
-                Qudt.derivedUnitsFromUnitExponentPairs(
-                        DerivedUnitSearchMode.BEST_EFFORT_ONLY_ONE, "KiloN", 1, "MilliM", 1);
-        assertEquals(1, units.size());
-        assertTrue(units.contains(Qudt.Units.J));
-    }
+test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (MilliJ)", () => {
+  const factors = [Units.KiloGM, 1, Units.SEC, -2, Units.M, 1, Units.MilliM, 1];
+  expect(
+    Units.MilliN__M.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+  expect(
+    Units.MilliH__PER__KiloOHM.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(false);
+  expect(
+    Units.MilliJ.matches(
+      FactorUnitSelection.fromFactorUnitSpec(...factors),
+      FactorUnitMatchingMode.ALLOW_SCALED
+    )
+  ).toBe(true);
+});
 
- @Test
- public void testSearchModeAllowScaled() {
-        Set<Unit> units =
-                Qudt.derivedUnitsFromUnitExponentPairs(
-                        DerivedUnitSearchMode.ALLOW_SCALED, "KiloGM", 1, "M", -3);
-        assertEquals(2, units.size());
-        assertTrue(units.contains(Qudt.Units.KiloGM__PER__M3));
-        assertTrue(units.contains(Qudt.Units.GM__PER__DeciM3));
-    }
+test("Qudt.testSimplifyFactorUnits()", () => {
+  const simplified = Qudt.simplifyFactorUnits([
+    new FactorUnit(Units.N, 1),
+    new FactorUnit(Units.M, -1),
+    new FactorUnit(Units.M, -1),
+  ]);
+  expect(simplified.length).toBe(2);
+  expect(
+    Qudt.derivedUnitsFromFactorUnits(
+      DerivedUnitSearchMode.EXACT,
+      ...simplified
+    ).includes(Units.N__PER__M2)
+  ).toBe(true);
+  expect(
+    Qudt.derivedUnitsFromFactorUnits(
+      DerivedUnitSearchMode.EXACT,
+      ...simplified
+    ).includes(Units.PA)
+  ).toBe(true);
+});
 
- @Test
- public void testDeepFactorUnitWithDuplicateUnitExponentCombination() {
-        Unit du = Qudt.Units.N__M__PER__KiloGM;
-        boolean matches = du.matches(Qudt.Units.N, 1, Qudt.Units.KiloGM, -1, Qudt.Units.M, 1);
-        assertTrue(matches);
-        assertFalse(
-                du.matches(
-                        Qudt.Units.KiloGM,
-                        -1,
-                        Qudt.Units.M,
-                        1,
-                        Qudt.Units.KiloGM,
-                        1,
-                        Qudt.Units.SEC,
-                        -2,
-                        Qudt.Units.M,
-                        1,
-                        Qudt.Units.N,
-                        1));
-        assertFalse(
-                du.matches(
-                        Qudt.Units.KiloGM,
-                        -1,
-                        Qudt.Units.M,
-                        1,
-                        Qudt.Units.KiloGM,
-                        1,
-                        Qudt.Units.SEC,
-                        -2,
-                        Qudt.Units.N,
-                        1));
-        assertFalse(
-                du.matches(
-                        Qudt.Units.KiloGM,
-                        -1,
-                        Qudt.Units.M,
-                        1,
-                        Qudt.Units.KiloGM,
-                        1,
-                        Qudt.Units.SEC,
-                        -2,
-                        Qudt.Units.N,
-                        1,
-                        Qudt.Units.KiloGM,
-                        -1));
-        assertTrue(
-                du.matches(
-                        Qudt.Units.KiloGM, 1,
-                        Qudt.Units.M, 1,
-                        Qudt.Units.SEC, -2,
-                        Qudt.Units.M, 1,
-                        Qudt.Units.KiloGM, -1));
-        assertFalse(du.matches(Qudt.Units.M, -2, Qudt.Units.KiloGM, 2));
-        assertFalse(du.matches(Qudt.Units.M, -2));
-        assertFalse(du.matches(Qudt.Units.KiloGM, 1));
-        assertFalse(du.matches(Qudt.Units.N, 1, Qudt.Units.KiloGM, -1));
-    }
-
- @Test
- public void
- testDeepFactorUnitWithDuplicateUnitExponentCombination_matchWithAggregatedExpression() {
-        Unit du = Qudt.Units.N__M__PER__KiloGM;
-
-        // now simplify: aggregate the M^1, M^1 to M^2: should still work.
-        assertTrue(
-                du.matches(
-                        Qudt.Units.KiloGM, 1,
-                        Qudt.Units.M, 2,
-                        Qudt.Units.SEC, -2,
-                        Qudt.Units.KiloGM, -1));
-        // now simplify: wrongly aggregate the KiloGM^1, KiloGM^-1 to KiloGM^0: should not work
-        assertFalse(
-                du.matches(
-                        Qudt.Units.M, 2,
-                        Qudt.Units.SEC, -2,
-                        Qudt.Units.KiloGM, 0));
-    }
-
- @Test
- public void testScaledFactors() {
-
-        // mJoule =
-        //               new IfcDerivedUnit(100, IfcUnitType.ENERGYUNIT, Map.of(kg, 1, sec, -2, km,
-        // 2), false);
-        Object[] factors =
-                new Object[] {
-                    Qudt.Units.SEC, -2, Qudt.Units.KiloGM, 1, Qudt.Units.M, 1, Qudt.Units.KiloM, 1
-                };
-        assertTrue(
-                Qudt.Units.KiloN__M.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        factors =
-                new Object[] {
-                    Qudt.Units.KiloGM, 1, Qudt.Units.SEC, -2, Qudt.Units.M, 1, Qudt.Units.KiloM, 1
-                };
-        assertTrue(
-                Qudt.Units.KiloN__M.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        assertTrue(
-                Qudt.Units.KiloJ.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        assertFalse(
-                Qudt.Units.MilliOHM.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        assertFalse(
-                Qudt.Units.MilliS.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-
-        factors = new Object[] {Qudt.Units.KiloGM, 1, Qudt.Units.K, -1, Qudt.Units.SEC, -3};
-        assertFalse(
-                Qudt.Units.W__PER__K.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        assertFalse(
-                Qudt.Units.V__PER__K.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-    }
-
- @Test
- public void testScaledFactors_negExpFirst() {
-        // mJoule =
-        //               new IfcDerivedUnit(100, IfcUnitType.ENERGYUNIT, Map.of(kg, 1, sec, -2, km,
-        // 2), false);
-        Object[] factors =
-                new Object[] {
-                    Qudt.Units.SEC, -2, Qudt.Units.KiloGM, 1, Qudt.Units.M, 1, Qudt.Units.KiloM, 1
-                };
-        assertTrue(
-                Qudt.Units.KiloN__M.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        factors =
-                new Object[] {
-                    Qudt.Units.KiloGM, 1, Qudt.Units.SEC, -2, Qudt.Units.M, 1, Qudt.Units.KiloM, 1
-                };
-        assertTrue(
-                Qudt.Units.KiloN__M.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-    }
-
- @Test
- public void test_squareInNominator() {
-        Object[] factors = new Object[] {Qudt.Units.MilliM, 2, Qudt.Units.SEC, -1};
-        assertTrue(
-                Qudt.Units.MilliM2__PER__SEC.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        factors = new Object[] {Qudt.Units.KiloGM, 2, Qudt.Units.SEC, -2};
-        assertTrue(
-                Qudt.Units.KiloGM2__PER__SEC2.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-    }
-
- @Test
- public void test_squareInDenominator() {
-        Object[] factors =
-                new Object[] {
-                    Qudt.Units.KiloGM, 1, Qudt.Units.M, 1, Qudt.Units.M, -2, Qudt.Units.SEC, -2
-                };
-        assertTrue(Qudt.Units.N__PER__M2.matches(factors));
-        factors =
-                new Object[] {
-                    Qudt.Units.M, -2, Qudt.Units.SEC, -2, Qudt.Units.KiloGM, 1, Qudt.Units.M, 1
-                };
-        assertTrue(Qudt.Units.N__PER__M2.matches(factors));
-    }
-
- @Test
- public void testScale_squareInDenominator1() {
-        Object[] factors =
-                new Object[] {
-                    Qudt.Units.KiloGM,
-                    1,
-                    Qudt.Units.M,
-                    1,
-                    Qudt.Units.MilliM,
-                    -2,
-                    Qudt.Units.KiloSEC,
-                    -2
-                };
-        assertTrue(
-                Qudt.Units.N__PER__M2.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        assertFalse(Qudt.Units.N__PER__M2.matches(FactorUnitSelection.fromFactorUnitSpec(factors)));
-    }
-
- @Test
- public void testScale_squareInDenominator2() {
-        Object[] factors =
-                new Object[] {
-                    Qudt.Units.GM,
-                    1,
-                    Qudt.Units.MilliM,
-                    1,
-                    Qudt.Units.M,
-                    -2,
-                    Qudt.Units.MilliSEC,
-                    -2
-                };
-        assertTrue(
-                Qudt.Units.N__PER__M2.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        assertFalse(
-                Qudt.Units.N__PER__M2.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.EXACT));
-    }
-
- @Test
- public void testScaledFactorsWithChangingOrder() {
-        // mJoule =
-        //               new IfcDerivedUnit(100, IfcUnitType.ENERGYUNIT, Map.of(kg, 1, sec, -2, km,
-        // 2), false);
-        Object[] factors =
-                new Object[] {
-                    Qudt.Units.KiloGM, 1, Qudt.Units.SEC, -2, Qudt.Units.M, 1, Qudt.Units.KiloM, 1
-                };
-        List<List<FactorUnit>> successfulFor = new ArrayList<>();
-        List<FactorUnit> factorUnits = new ArrayList<>();
-        for (int i = 0; i < factors.length; i += 2) {
-            factorUnits.add(new FactorUnit((Unit) factors[i], (Integer) factors[i + 1]));
-        }
-
-        try {
-            for (int i = 0; i < 20; i++) {
-                Collections.shuffle(factorUnits);
-                factors =
-                        factorUnits.stream()
-                                .flatMap(fu -> Stream.of(fu.getUnit(), fu.getExponent()))
-                                .toArray();
-                assertTrue(
-                        Qudt.Units.KiloN__M.matches(
-                                FactorUnitSelection.fromFactorUnitSpec(factors),
-                                FactorUnitMatchingMode.ALLOW_SCALED),
-                        () -> "failed for " + factorUnits);
-                assertFalse(
-                        Qudt.Units.KiloN__M.matches(
-                                FactorUnitSelection.fromFactorUnitSpec(factors)),
-                        () -> "failed for " + factorUnits);
-                successfulFor.add(new ArrayList<>(factorUnits));
-            }
-        } catch (AssertionFailedError e) {
-            System.err.println("test succeeded for: ");
-            successfulFor.forEach(System.err::println);
-            System.err.println("test failed for:");
-            System.err.println(factorUnits);
-            throw e;
-        }
-        assertTrue(
-                Qudt.Units.KiloN__M.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED),
-                () -> "failed for " + factorUnits);
-        assertTrue(
-                Qudt.Units.KiloJ.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED),
-                () -> "failed for " + factorUnits);
-        assertFalse(
-                Qudt.Units.MilliOHM.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED),
-                () -> "failed for " + factorUnits);
-        assertFalse(
-                Qudt.Units.MilliS.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED),
-                () -> "failed for " + factorUnits);
-        factors = new Object[] {Qudt.Units.KiloGM, 1, Qudt.Units.K, -1, Qudt.Units.SEC, -3};
-        assertFalse(
-                Qudt.Units.W__PER__K.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        assertFalse(
-                Qudt.Units.V__PER__K.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-    }
-
- @Test
- public void testMilliJ() {
-        Object[] factors =
-                new Object[] {
-                    Qudt.Units.KiloGM, 1, Qudt.Units.SEC, -2, Qudt.Units.M, 1, Qudt.Units.MilliM, 1
-                };
-        assertTrue(
-                Qudt.Units.MilliN__M.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        assertFalse(
-                Qudt.Units.MilliH__PER__KiloOHM.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-        assertTrue(
-                Qudt.Units.MilliJ.matches(
-                        FactorUnitSelection.fromFactorUnitSpec(factors),
-                        FactorUnitMatchingMode.ALLOW_SCALED));
-    }
-
- @Test
- public void testSimplifyFactorUnits() {
-        List<FactorUnit> simplified =
-                Qudt.simplifyFactorUnits(
-                        List.of(
-                                new FactorUnit(Qudt.Units.N, 1),
-                                new FactorUnit(Qudt.Units.M, -1),
-                                new FactorUnit(Qudt.Units.M, -1)));
-        assertEquals(2, simplified.size());
-        assertTrue(
-                Qudt.derivedUnitsFromFactorUnits(DerivedUnitSearchMode.EXACT, simplified)
-                        .contains(Qudt.Units.N__PER__M2));
-        assertTrue(
-                Qudt.derivedUnitsFromFactorUnits(DerivedUnitSearchMode.EXACT, simplified)
-                        .contains(Qudt.Units.PA));
-    }
-
- @Test
- public void testScaleToBaseUnit() {
-        Map.Entry<Unit, BigDecimal> base = Qudt.scaleToBaseUnit(Qudt.Units.KiloM);
-        assertEquals(Qudt.Units.M, base.getKey());
-        MatcherAssert.assertThat(base.getValue(), Matchers.comparesEqualTo(new BigDecimal("1000")));
-        base = Qudt.scaleToBaseUnit(Qudt.Units.M);
-        MatcherAssert.assertThat(base.getValue(), Matchers.comparesEqualTo(BigDecimal.ONE));
-        assertEquals(Qudt.Units.M, base.getKey());
-    }
-
- */
+test("Qudt.scaleToBaseUnit(Unit)", () => {
+  let base = Qudt.scaleToBaseUnit(Units.KiloM);
+  expect(base.unit).toBe(Units.M);
+  expect(base.factor).toStrictEqual(new Decimal("1000"));
+  base = Qudt.scaleToBaseUnit(Units.M);
+  expect(base.unit).toBe(Units.M);
+  expect(base.factor).toStrictEqual(new Decimal("1"));
+});

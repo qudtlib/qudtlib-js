@@ -40,30 +40,6 @@ export class LangString implements SupportsEquals<LangString> {
   }
 }
 
-export class ScaleFactor implements SupportsEquals<ScaleFactor> {
-  readonly factor: Decimal;
-
-  constructor(factor: Decimal = new Decimal(1)) {
-    this.factor = factor;
-  }
-
-  copy(): ScaleFactor {
-    return new ScaleFactor(this.factor);
-  }
-
-  multiplyBy(by: Decimal): ScaleFactor {
-    return new ScaleFactor(this.factor.mul(by));
-  }
-
-  toString(): string {
-    return `${this.factor.toString()}`;
-  }
-
-  equals(other?: ScaleFactor): boolean {
-    return !!other && this.factor === other.factor;
-  }
-}
-
 export class Prefix implements SupportsEquals<Prefix> {
   iri: string;
   multiplier: Decimal;
@@ -114,24 +90,26 @@ export class Prefix implements SupportsEquals<Prefix> {
 }
 
 export class QuantityValue implements SupportsEquals<QuantityValue> {
-  quantity: Decimal;
+  value: Decimal;
   unit: Unit;
 
   constructor(quantity: Decimal, unit: Unit) {
-    this.quantity = quantity;
+    this.value = quantity;
     this.unit = unit;
   }
 
   equals(other?: QuantityValue): boolean {
     return (
-      !!other &&
-      this.quantity.equals(other.quantity) &&
-      this.unit.equals(other.unit)
+      !!other && this.value.equals(other.value) && this.unit.equals(other.unit)
     );
   }
 
   toString(): string {
-    return this.quantity.toString() + this.unit.toString();
+    return this.value.toString() + this.unit.toString();
+  }
+
+  convert(to: Unit) {
+    return new QuantityValue(this.unit.convert(this.value, to), to);
   }
 }
 
@@ -271,7 +249,9 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
   }
 
   toString(): string {
-    return this.unit.toString() + "^" + this.exponent;
+    return (
+      this.unit.toString() + (this.exponent === 1 ? "" : "^" + this.exponent)
+    );
   }
 
   static combine(left: FactorUnit, right: FactorUnit): FactorUnit {
@@ -295,7 +275,6 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
     factorUnitSelection: FactorUnitSelection[],
     cumulativeExponent: number,
     matchedPath: Unit[],
-    scaleFactor: ScaleFactor,
     matchingMode: FactorUnitMatchingMode
   ): FactorUnitSelection[] {
     const mySelection: FactorUnitSelection[] = [];
@@ -304,7 +283,6 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
       mySelection,
       this.getExponentCumulated(cumulativeExponent),
       matchedPath,
-      scaleFactor,
       matchingMode
     );
   }
@@ -326,18 +304,15 @@ export class FactorUnitMatch implements SupportsEquals<FactorUnitMatch> {
   readonly matchedFactorUnit: FactorUnit;
   readonly matchedPath: Unit[];
   readonly matchedMultiplier: Decimal;
-  readonly scaleFactor: ScaleFactor;
 
   constructor(
     matchedFactorUnit: FactorUnit,
     matchedMultiplier: Decimal,
-    matchedPath: Unit[],
-    scaleFactor: ScaleFactor
+    matchedPath: Unit[]
   ) {
     this.matchedFactorUnit = matchedFactorUnit;
     this.matchedMultiplier = matchedMultiplier;
     this.matchedPath = [...matchedPath];
-    this.scaleFactor = scaleFactor;
   }
 
   equals(other?: FactorUnitMatch): boolean {
@@ -345,8 +320,7 @@ export class FactorUnitMatch implements SupportsEquals<FactorUnitMatch> {
       !!other &&
       this.matchedFactorUnit.equals(other.matchedFactorUnit) &&
       arrayEquals(this.matchedPath, other.matchedPath, compareUsingEquals) &&
-      this.matchedMultiplier.eq(other.matchedMultiplier) &&
-      this.scaleFactor.equals(other.scaleFactor)
+      this.matchedMultiplier.eq(other.matchedMultiplier)
     );
   }
 
@@ -355,10 +329,7 @@ export class FactorUnitMatch implements SupportsEquals<FactorUnitMatch> {
       this.getPathAsString() +
       (this.matchedMultiplier.eq(new Decimal(1))
         ? ""
-        : "*" + this.matchedMultiplier.toString()) +
-      (this.scaleFactor.factor.eq(new Decimal(1))
-        ? ""
-        : "*" + this.scaleFactor.toString())
+        : "*" + this.matchedMultiplier.toString())
     );
   }
 
@@ -449,8 +420,7 @@ export class FactorUnitSelector implements SupportsEquals<FactorUnitSelector> {
   forMatch(
     factorUnit: FactorUnit,
     cumulativeExponent: number,
-    matchedPath: Unit[],
-    scaleFactor: ScaleFactor
+    matchedPath: Unit[]
   ): FactorUnitSelector[] {
     if (!this.isAvailable()) {
       throw "not available - selector is already bound";
@@ -471,12 +441,7 @@ export class FactorUnitSelector implements SupportsEquals<FactorUnitSelector> {
     const ret: FactorUnitSelector[] = [];
     ret.push(
       this.matched(
-        new FactorUnitMatch(
-          factorUnit,
-          matchedMultiplier,
-          matchedPath,
-          scaleFactor
-        )
+        new FactorUnitMatch(factorUnit, matchedMultiplier, matchedPath)
       )
     );
     if (remainingPower !== 0) {
@@ -511,10 +476,38 @@ export class FactorUnitSelector implements SupportsEquals<FactorUnitSelector> {
 export class FactorUnitSelection
   implements SupportsEquals<FactorUnitSelection>
 {
+  /**
+   * If the matched units required scaling to match the unit being checked, the scale factor is
+   * accumulated in this property.
+   */
+  readonly scaleFactor: Decimal;
+  /**
+   * The selectors of this selection, defining the individual units that are being searched or
+   * have already been found.
+   */
   readonly selectors: FactorUnitSelector[];
 
-  constructor(selectors: FactorUnitSelector[]) {
+  constructor(
+    selectors: FactorUnitSelector[],
+    scaleFactor: Decimal = new Decimal(1)
+  ) {
     this.selectors = selectors;
+    this.scaleFactor = scaleFactor;
+  }
+
+  /**
+   * Returns a new FactorUnitSelection with the same selectors as this one, whose <code>
+   * scaleFactor</code> is this FactorUnitSelection's <code>scaleFactor</code> multiplied with the
+   * specified one.
+   *
+   * @param scaleFactor
+   * @return
+   */
+  scale(scaleFactor: Decimal) {
+    return new FactorUnitSelection(
+      this.selectors,
+      this.scaleFactor.mul(scaleFactor)
+    );
   }
 
   static fromFactorUnitSpec(
@@ -555,7 +548,9 @@ export class FactorUnitSelection
 
   toString() {
     return (
-      "Select " +
+      (this.scaleFactor.eq(new Decimal(1))
+        ? ""
+        : this.scaleFactor.toString() + "*") +
       "[" +
       this.selectors.map((s) => s.toString()).reduce((p, n) => p + ", " + n) +
       "]"
@@ -566,13 +561,6 @@ export class FactorUnitSelection
     if (!this.selectors.every((s) => s.isBound())) {
       return false;
     }
-    const accumulatedScaleFactors = this.selectors.reduce(
-      (prev, cur) =>
-        !!cur.factorUnitMatch
-          ? cur.factorUnitMatch.scaleFactor.factor.mul(prev)
-          : prev,
-      new Decimal("1")
-    );
     const accumulatedMatchedMultipliers = this.selectors.reduce(
       (prev, cur) =>
         !!cur.factorUnitMatch
@@ -580,36 +568,52 @@ export class FactorUnitSelection
           : prev,
       new Decimal("1")
     );
-    const cumulativeScale = accumulatedScaleFactors.mul(
-      accumulatedMatchedMultipliers
-    );
+    const cumulativeScale = this.scaleFactor.mul(accumulatedMatchedMultipliers);
     return cumulativeScale.eq(new Decimal("1"));
   }
 
+  /**
+   * If there are matches for the specified data, return all selections resulting from such
+   * matches. If there are no matches, the result is an empty set
+   *
+   * @param factorUnit the factor unit to match
+   * @param cumulativeExponent the exponent accumulated on the path from the root unit to the
+   *     factor unit
+   * @param matchedPath the path from the root unit to the factor unit
+   * @param mode the matching mode
+   * @return FactorUnitSelections resulting from the match, empty set if no matches are found.
+   */
   forPotentialMatch(
     factorUnit: FactorUnit,
     cumulativeExponent: number,
     matchedPath: Unit[],
-    scaleFactor: ScaleFactor,
     matchingMode: FactorUnitMatchingMode
-  ): FactorUnitSelection {
-    const newSelectors: FactorUnitSelector[] = [];
-    let matched = false;
-    for (const sel of this.selectors) {
+  ): FactorUnitSelection[] {
+    const newSelections: FactorUnitSelection[] = [];
+    // we have to iterate by index as we need to replace selectors, which may exist in multiple,
+    // equal instances in the selection
+    for (let index = 0; index < this.selectors.length; index++) {
+      const s: FactorUnitSelector = this.selectors[index];
       if (
-        !matched &&
-        sel.isAvailable() &&
-        sel.matches(factorUnit, cumulativeExponent, matchingMode)
+        s.isAvailable() &&
+        s.matches(factorUnit, cumulativeExponent, matchingMode)
       ) {
-        matched = true;
-        sel
-          .forMatch(factorUnit, cumulativeExponent, matchedPath, scaleFactor)
-          .forEach((s) => newSelectors.push(s));
-      } else {
-        newSelectors.push(sel.copy());
+        const origSelectorsWithOneMatch: FactorUnitSelector[] = [];
+        for (let i = 0; i < this.selectors.length; i++) {
+          if (i === index) {
+            s.forMatch(factorUnit, cumulativeExponent, matchedPath).forEach(
+              (sMatched) => origSelectorsWithOneMatch.push(sMatched)
+            );
+          } else {
+            origSelectorsWithOneMatch.push(this.selectors[i]);
+          }
+        }
+        newSelections.push(
+          new FactorUnitSelection(origSelectorsWithOneMatch, this.scaleFactor)
+        );
       }
     }
-    return new FactorUnitSelection(newSelectors);
+    return newSelections;
   }
 }
 
@@ -679,7 +683,6 @@ export class Unit implements SupportsEquals<Unit> {
     selections: FactorUnitSelection[],
     cumulativeExponent: number,
     matchedPath: Unit[],
-    scaleFactor: ScaleFactor,
     matchingMode: FactorUnitMatchingMode
   ): FactorUnitSelection[] {
     checkInteger(cumulativeExponent, "cumulativeExponent");
@@ -690,27 +693,28 @@ export class Unit implements SupportsEquals<Unit> {
         selections,
         cumulativeExponent,
         matchedPath,
-        scaleFactor,
         matchingMode
       ).forEach((s) => results.push(s));
     } else {
-      if (this.scalingOf && this.prefix && this.scalingOf.hasFactorUnits()) {
-        this.scalingOf
+      if (this.scalingOf?.hasFactorUnits()) {
+        const baseUnit: Unit = this.scalingOf;
+        const scaleFactor: Decimal = this.getConversionMultiplier(baseUnit);
+        baseUnit
           .match(
             selections,
             cumulativeExponent,
             matchedPath,
-            scaleFactor.multiplyBy(this.prefix.multiplier),
-            matchingMode
+            FactorUnitMatchingMode.ALLOW_SCALED //if we do not allow to scale here, we will miss exact matches
           )
-          .forEach((s) => results.push(s));
+          .forEach((s) => results.push(s.scale(scaleFactor)));
       }
     }
+    // match this unit - even if it has factor units, the unit itself may also match,
+    // e.g. if the unit is KiloN__M and the selectors contain M^1 as well as N.
     this.matchThisUnit(
       selections,
       cumulativeExponent,
       matchedPath,
-      scaleFactor,
       matchingMode
     ).forEach((s) => results.push(s));
     matchedPath.pop();
@@ -721,7 +725,6 @@ export class Unit implements SupportsEquals<Unit> {
     selections: FactorUnitSelection[],
     cumulativeExponent: number,
     matchedPath: Unit[],
-    scaleFactor: ScaleFactor,
     matchingMode: FactorUnitMatchingMode
   ): FactorUnitSelection[] {
     let lastResults = selections;
@@ -731,7 +734,6 @@ export class Unit implements SupportsEquals<Unit> {
         lastResults,
         cumulativeExponent,
         matchedPath,
-        scaleFactor,
         matchingMode
       );
       if (arrayEquals(subResults, lastResults)) {
@@ -747,23 +749,18 @@ export class Unit implements SupportsEquals<Unit> {
     selections: FactorUnitSelection[],
     cumulativeExponent: number,
     matchedPath: Unit[],
-    scaleFactor: ScaleFactor,
     matchingMode: FactorUnitMatchingMode
   ): FactorUnitSelection[] {
-    const result = [];
+    const result: FactorUnitSelection[] = [];
     for (const factorUnitSelection of selections) {
-      const possiblyMatched = factorUnitSelection.forPotentialMatch(
-        new FactorUnit(this, 1),
-        cumulativeExponent,
-        matchedPath,
-        scaleFactor,
-        matchingMode
-      );
-      if (!possiblyMatched.equals(factorUnitSelection)) {
-        // if there was a match, (i.e, we modified the selection),
-        // it's a new partial solution - return it
-        result.push(possiblyMatched);
-      }
+      factorUnitSelection
+        .forPotentialMatch(
+          new FactorUnit(this, 1),
+          cumulativeExponent,
+          matchedPath,
+          matchingMode
+        )
+        .forEach((s) => result.push(s));
     }
     return result;
   }
@@ -778,13 +775,7 @@ export class Unit implements SupportsEquals<Unit> {
     selection: FactorUnitSelection,
     matchingMode: FactorUnitMatchingMode = FactorUnitMatchingMode.EXACT
   ): boolean {
-    const selections = this.match(
-      [selection],
-      1,
-      [],
-      new ScaleFactor(),
-      matchingMode
-    );
+    const selections = this.match([selection], 1, [], matchingMode);
     if (!selections || selections.length == 0) {
       return false;
     }
@@ -807,8 +798,8 @@ export class Unit implements SupportsEquals<Unit> {
     if (this.equals(toUnit)) {
       return new Decimal(1);
     }
-    if (this.conversionOffset || toUnit.conversionOffset) {
-      throw `Cannot convert from ${this} to ${toUnit} just by multiplication, one of them has a conversion offset!`;
+    if (this.conversionOffsetDiffers(toUnit)) {
+      throw `Cannot convert from ${this} to ${toUnit} just by multiplication as their conversion offsets differ`;
     }
     const fromMultiplier = this.conversionMultiplier
       ? this.conversionMultiplier
@@ -926,6 +917,22 @@ export class Unit implements SupportsEquals<Unit> {
       fu.getLeafFactorUnitsWithCumulativeExponents()
     );
   }
+
+  public conversionOffsetDiffers(other: Unit): boolean {
+    if (
+      this.hasNonzeroConversionOffset() &&
+      other.hasNonzeroConversionOffset()
+    ) {
+      if (!!this.conversionOffset && !!other.conversionOffset) {
+        return !this.conversionOffset.eq(other.conversionOffset);
+      }
+    }
+    return false;
+  }
+
+  public hasNonzeroConversionOffset(): boolean {
+    return !!this.conversionOffset && !this.conversionOffset.eq(new Decimal(0));
+  }
 }
 
 export const QUDT_UNIT_BASE_IRI = "http://qudt.org/vocab/unit/";
@@ -945,6 +952,14 @@ function findInIterable<T>(
 }
 
 export class Qudt {
+  /**
+   * Returns the first unit found whose label matches the specified label after replacing any
+   * underscore with space and ignoring case (US locale). If more intricate matching is needed,
+   * clients can use `{@link #allUnits()}.filter(...)`.
+   *
+   * @param label the matched label
+   * @return the first unit found
+   */
   static unitFromLabel(label: string): Unit | undefined {
     const matcher: LabelMatcher =
       new CaseInsensitiveUnderscoreIgnoringLabelMatcher(label);
@@ -1017,10 +1032,23 @@ export class Qudt {
     return QUDT_PREFIX_BASE_IRI + localname;
   }
 
+  /**
+   * Returns the {@link Unit} identified the specified IRI. For example, <code>
+   * unit("http://qudt.org/vocab/unit/N-PER-M2")</code> yields `Units.N__PER__M2`,
+   * if that unit has been loaded;
+   *
+   * @param iri the requested unit IRI
+   * @return the unit or `undefined` if no unit is found
+   */
   static unit(unitIri: string): Unit | undefined {
     return config.units.get(unitIri);
   }
 
+  /**
+   * Same as {@link #unit(string)} but throws an exception if no unit is found.
+   * @param unitIri the unit IRI
+   * @return the unit
+   */
   static unitRequired(unitIri: string): Unit {
     const ret = Qudt.unit(unitIri);
     if (typeof ret === "undefined") {
@@ -1070,6 +1098,26 @@ export class Qudt {
     return result;
   }
 
+  /**
+   * Obtains units based on factor units, using the specified {@link FactorUnitMatchingMode}.
+   *
+   * For example,
+   *
+   * ```
+   *   const spec = new Map<Unit, number>();
+   *    spec.set(Units.M, 1);
+   *    spec.set(Units.KiloGM, 1);
+   *    spec.set(Units.SEC, -2);
+   * Qudt.derivedUnitsFrom Map(
+   *    FactorUnitMatchingMode.EXACT, spec);
+   * ```
+   *
+   * will yield an array containing the Newton Unit ({@code Qudt.Units.N})
+   *
+   * @param searchMode the {@link DerivedUnitSearchMode} to use
+   * @param factorUnits a map containing unit to exponent entries.
+   * @return the derived units that match the given factor units
+   */
   static derivedUnitsFromMap(
     searchMode: DerivedUnitSearchMode,
     factorUnits: Map<Unit, number>
@@ -1081,6 +1129,14 @@ export class Qudt {
     return this.derivedUnitsFromExponentUnitPairs(searchMode, ...flattened);
   }
 
+  /**
+   * Obtains units based on factor units.
+   *
+   * @param searchMode the {@link DerivedUnitSearchMode} to use
+   * @param factorUnits the factor units
+   * @return the derived unit that match the given factor units
+   * @see #derivedUnitsFromMap(DerivedUnitSearchMode, Map)
+   */
   static derivedUnitsFromFactorUnits(
     searchMode: DerivedUnitSearchMode,
     ...factorUnits: FactorUnit[]
@@ -1134,6 +1190,12 @@ export class Qudt {
     );
   }
 
+  /**
+   * @param searchMode the {@link DerivedUnitSearchMode} to use
+   * @param selection the factor unit selection
+   * @return the units that match
+   * @see #derivedUnitsFromMap(DerivedUnitSearchMode, Map)
+   */
   static derivedUnitsFromFactorUnitSelection(
     searchMode: DerivedUnitSearchMode,
     initialFactorUnitSelection: FactorUnitSelection
@@ -1189,28 +1251,53 @@ export class Qudt {
     return matchingUnits;
   }
 
-  static scaledUnit(prefix: Prefix, baseUnit: Unit) {
+  /**
+   * Returns the unit resulting from scaling the specified `unit` with the specified `prefix`.
+   *
+   * @param prefix the prefix to use for scaling or its IRI
+   * @param baseUnit the unit to scale or its IRI
+   * @return the resulting unit
+   * @throws exception if no such unit is found
+   */
+  static scale(prefix: Prefix | string, baseUnit: Unit | string) {
+    const thePrefix =
+      prefix instanceof Prefix ? prefix : this.prefixRequired(prefix);
+    const theUnit =
+      baseUnit instanceof Unit ? baseUnit : this.unitRequired(baseUnit);
     for (const u of config.units.values()) {
-      if (u.prefix?.equals(prefix) && u.scalingOf?.equals(baseUnit)) {
+      if (u.prefix?.equals(thePrefix) && u.scalingOf?.equals(theUnit)) {
         return u;
       }
     }
-    throw `No scaled unit found with base unit ${baseUnit} and prefix ${prefix}`;
+    throw `No scaled unit found with base unit ${theUnit.toString()} and prefix ${thePrefix.toString()}`;
   }
 
-  static scaledUnitFromLabels(prefixLabel: string, baseUnit: string) {
-    return this.scaledUnit(
+  static scaleUnitFromLabels(prefixLabel: string, baseUnit: string) {
+    return this.scale(
       Qudt.prefixFromLabelRequired(prefixLabel),
       Qudt.unitFromLabelRequired(baseUnit)
     );
   }
 
+  /**
+   * Returns the list of {@link FactorUnit}s of the specified `unit`.
+   *
+   * @param unit the unit to get factors for
+   * @return the factors of the unit or an empty list if the unit is not a derived unit
+   */
   static factorUnits(unit: Unit): FactorUnit[] {
     return Qudt.simplifyFactorUnits(
       unit.getLeafFactorUnitsWithCumulativeExponents()
     );
   }
 
+  /**
+   * Perform mathematical simplification on factor units. For example, `
+   * `N per M per M -> N per M^2`
+   *
+   * @param factorUnits the factor units to simplify
+   * @return the simplified factor units.
+   */
   static simplifyFactorUnits(factorUnits: FactorUnit[]): FactorUnit[] {
     const ret: FactorUnit[] = [];
     const factorUnitsByKind: Map<string, FactorUnit> = factorUnits.reduce(
@@ -1232,17 +1319,136 @@ export class Qudt {
     return ret;
   }
 
-  static unscaledUnit(unit: Unit): Unit {
+  static unscale(unit: Unit): Unit {
     if (!unit.scalingOfIri) {
       return unit;
     }
     return this.unitRequired(unit.scalingOfIri);
   }
 
-  static unscaledFactorUnits(factorUnits: FactorUnit[]): FactorUnit[] {
+  /**
+   * Return a list of {@link FactorUnit}s with the same exponents as the specified `factorUnits` but their base units as units.
+   *
+   * @param factorUnits the factor units to unscale
+   * @return the unscaled factor units
+   */
+  static unscaleFactorUnits(factorUnits: FactorUnit[]): FactorUnit[] {
     return factorUnits.map(
-      (fu) => new FactorUnit(Qudt.unscaledUnit(fu.unit), fu.exponent)
+      (fu) => new FactorUnit(Qudt.unscale(fu.unit), fu.exponent)
     );
+  }
+
+  /**
+   * Instantiates a QuantityValue.
+   * @param value a Decimal
+   * @param unit a Unit or unit IRI.
+   * @return a QuantityValue with the specified data
+   */
+  static quantityValue(value: Decimal, unit: Unit | string): QuantityValue {
+    if (typeof unit === "string") {
+      return new QuantityValue(value, Qudt.unitRequired(unit));
+    }
+    return new QuantityValue(value, unit);
+  }
+
+  /**
+   * Converts the specified value from the unit it is in (`fromUnit`) to the specified target unit (`toUnit`).
+   * @param value: a Decimal, the value to convert.
+   * @param fromUnit: a Unit or string. A string is interpreted as a Unit IRI.
+   * @param toUnit: a Unit or string. A string is interpreted as a Unit IRI.
+   * @return the resulting value
+   */
+  static convert(
+    value: Decimal,
+    fromUnit: Unit | string,
+    toUnit: Unit | string
+  ): Decimal {
+    if (!fromUnit) {
+      throw "Parameter 'fromUnit' is required";
+    }
+    if (!toUnit) {
+      throw "Parameter 'toUnit' is required";
+    }
+    const from: Unit =
+      typeof fromUnit === "string" ? Qudt.unitRequired(fromUnit) : fromUnit;
+    const to: Unit =
+      typeof toUnit === "string" ? Qudt.unitRequired(toUnit) : toUnit;
+    return from.convert(value, to);
+  }
+
+  /**
+   * Converts the specified QuantityValue from to the specified target unit (`toUnit`).
+   * @param value: a Decimal, the value to convert.
+   * @param fromUnit: a Unit or string. A string is interpreted as a Unit IRI.
+   * @param toUnit: a Unit or string. A string is interpreted as a Unit IRI.
+   * @return a QuantityValue holding the result
+   */
+  static convertQuantityValue(
+    from: QuantityValue,
+    toUnit: Unit | string
+  ): QuantityValue {
+    if (!from) {
+      throw "Parameter 'from' is required";
+    }
+    if (!toUnit) {
+      throw "Parameter 'toUnit' is required";
+    }
+    const to = typeof toUnit === "string" ? Qudt.unitRequired(toUnit) : toUnit;
+    return from.convert(to);
+  }
+
+  /**
+   * Returns `true` if the two units can be converted into each other.
+   * @param fromUnit a Unit or unit IRI
+   * @param toUnit a Unit or unit IRI
+   * @return a boolean indicating whether the units are convertible.
+   */
+  static isConvertible(fromUnit: Unit | string, toUnit: Unit | string) {
+    const from: Unit =
+      typeof fromUnit === "string" ? Qudt.unitRequired(fromUnit) : fromUnit;
+    const to: Unit =
+      typeof toUnit === "string" ? Qudt.unitRequired(toUnit) : toUnit;
+    return from.isConvertible(to);
+  }
+
+  /**
+   * Returns a [Unit, Decimal] tuple containing the base unit of the specified `unit`
+   * along with the scale factor needed to convert values from the base unit to
+   * the specified unit.
+   *
+   * @param unit the unit to scale to its base
+   * @return a [Unit, Decimal] tuple with the base unit and the required scale factor
+   */
+  static scaleToBaseUnit(unit: Unit): { unit: Unit; factor: Decimal } {
+    if (!unit.scalingOf) {
+      return { unit: unit, factor: new Decimal(1) };
+    }
+    const baseUnit = unit.scalingOf;
+    return { unit: baseUnit, factor: unit.getConversionMultiplier(baseUnit) };
+  }
+
+  static allUnits(): Unit[] {
+    const ret = [];
+    for (const unit of config.units.values()) {
+      ret.push(unit);
+    }
+    return ret;
+  }
+
+  static allQuantityKinds(): QuantityKind[] {
+    const ret = [];
+    for (const quantityKind of config.quantityKinds.values()) {
+      ret.push(quantityKind);
+    }
+    return ret;
+  }
+
+  static allPrefixes(): Prefix[] {
+    const ret = [];
+    for (const prefix of config.prefixes.values()) {
+      ret.push(prefix);
+    }
+    return ret;
   }
 }
 

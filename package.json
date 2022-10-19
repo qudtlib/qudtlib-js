@@ -1,7 +1,6 @@
 {
   "name": "@qudtlib/parent",
-  "version": "2.0.0-preview",
-  "type": "module",
+  "version": "2.0.0-preview3",
   "description": "JS Implementation of the QUDT ontology, allowing for instantiating QUDT units and quantitykinds and for unit conversion. ",
   "exports": "./dist/qudtlib.js",
   "engines": {
@@ -17,7 +16,7 @@
   "scripts": {
     "test": "jest --coverage --passWithNoTests",
     "build": "gulp",
-    "build-complete": "npm run check && npx lerna run build && npx lerna run build",
+    "build-complete": "npm run check && npx lerna run build && npx lerna run test",
     "format-apply": "npx prettier --write .",
     "lint": "npx eslint .",
     "format-check": "npx prettier --check .",

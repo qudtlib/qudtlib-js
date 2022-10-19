@@ -1,5 +1,4 @@
 import {
-  ScaleFactor,
   LangString,
   Prefix,
   QuantityValue,
@@ -53,26 +52,6 @@ test("LangString.equals", () => {
   expect(d.equals(e)).toBe(false);
   expect(e.equals(a)).toBe(false);
   expect(a.equals(e)).toBe(false);
-});
-
-// ScaleFactor tests
-test("ScaleFactor.toString()", () => {
-  const sf = new ScaleFactor(new Decimal("1.5"));
-  expect(sf.toString()).toBe("1.5");
-});
-
-test("ScaleFactor.copy()", () => {
-  const sf = new ScaleFactor(new Decimal("1.5"));
-  const cpy = sf.copy();
-  expect(sf).toEqual(cpy);
-  expect(sf.factor).toBe(cpy.factor);
-});
-
-test("ScaleFactor.multiplyBy()", () => {
-  const sf = new ScaleFactor(new Decimal("1.5"));
-  const mult = sf.multiplyBy(new Decimal("10"));
-  expect(mult.factor.equals(new Decimal("15"))).toBe(true);
-  expect(mult === sf).toBe(false);
 });
 
 // Prefix tests
@@ -178,9 +157,9 @@ test("new QuantityValue", () => {
   const value = new Decimal("36");
   const qvC = new QuantityValue(value, degC);
   const qvF = new QuantityValue(value, degF);
-  expect(qvC.quantity).toBe(value);
+  expect(qvC.value).toBe(value);
   expect(qvC.unit).toBe(degC);
-  expect(qvF.quantity).toBe(value);
+  expect(qvF.value).toBe(value);
   expect(qvF.unit).toBe(degF);
   expect(qvC.equals(qvF)).toBe(false);
   expect(qvC.equals(qvC)).toBe(true);
@@ -325,20 +304,16 @@ test("FactorUnit.combine incompatible", () => {
 });
 
 test("FactorUnitMatch.toString", () => {
-  let fum = new FactorUnitMatch(
-    new FactorUnit(m, -1),
-    new Decimal(1),
-    [degC__PER__M, m],
-    new ScaleFactor(new Decimal(1))
-  );
+  let fum = new FactorUnitMatch(new FactorUnit(m, -1), new Decimal(1), [
+    degC__PER__M,
+    m,
+  ]);
   expect(fum.toString()).toBe("/unit:DEG_C-PER-M/m");
-  fum = new FactorUnitMatch(
-    new FactorUnit(m, -1),
-    new Decimal(1),
-    [degC__PER__M, m],
-    new ScaleFactor(new Decimal(1000))
-  );
-  expect(fum.toString()).toBe("/unit:DEG_C-PER-M/m*1000");
+  fum = new FactorUnitMatch(new FactorUnit(m, -1), new Decimal(1), [
+    degC__PER__M,
+    m,
+  ]);
+  expect(fum.toString()).toBe("/unit:DEG_C-PER-M/m");
 });
 
 // FactorUnitSelector tests
@@ -347,12 +322,7 @@ test("FactorUnitSelector.isBound", () => {
   const fus1 = new FactorUnitSelector(
     degC,
     -2,
-    new FactorUnitMatch(
-      fu,
-      new Decimal(-2),
-      [degC],
-      new ScaleFactor(new Decimal(1))
-    )
+    new FactorUnitMatch(fu, new Decimal(-2), [degC])
   );
   const fus2 = new FactorUnitSelector(degC, -2);
   expect(fus1.isBound()).toBe(true);
@@ -364,12 +334,7 @@ test("FactorUnitSelector.isAvailable", () => {
   const fus1 = new FactorUnitSelector(
     degC,
     -2,
-    new FactorUnitMatch(
-      fu,
-      new Decimal(-2),
-      [degC],
-      new ScaleFactor(new Decimal(1))
-    )
+    new FactorUnitMatch(fu, new Decimal(-2), [degC])
   );
   const fus2 = new FactorUnitSelector(degC, -2);
   expect(fus1.isAvailable()).toBe(false);
@@ -381,12 +346,7 @@ test("FactorUnitSelector.toString", () => {
   const fus1 = new FactorUnitSelector(
     degC,
     -2,
-    new FactorUnitMatch(
-      fu,
-      new Decimal(-2),
-      [degC],
-      new ScaleFactor(new Decimal(1))
-    )
+    new FactorUnitMatch(fu, new Decimal(-2), [degC])
   );
   const fus2 = new FactorUnitSelector(degC, -2);
   expect(fus1.toString()).toBe("unit:DEG_C^-2@/unit:DEG_C*-2");
@@ -398,12 +358,7 @@ test("FactorUnitSelection.isCompleteMatch", () => {
   const fus = new FactorUnitSelector(
     degC,
     -2,
-    new FactorUnitMatch(
-      fu,
-      new Decimal(1),
-      [degC],
-      new ScaleFactor(new Decimal(1))
-    )
+    new FactorUnitMatch(fu, new Decimal(1), [degC])
   );
   const fusn = new FactorUnitSelection([fus]);
   expect(fusn.isCompleteMatch()).toBe(true);
@@ -414,15 +369,10 @@ test("FactorUnitSelection.toString", () => {
   const fus = new FactorUnitSelector(
     degC,
     -2,
-    new FactorUnitMatch(
-      fu,
-      new Decimal(1),
-      [degC],
-      new ScaleFactor(new Decimal(1))
-    )
+    new FactorUnitMatch(fu, new Decimal(1), [degC])
   );
   const fusn = new FactorUnitSelection([fus]);
-  expect(fusn.toString()).toBe("Select [unit:DEG_C^-2@/unit:DEG_C]");
+  expect(fusn.toString()).toBe("[unit:DEG_C^-2@/unit:DEG_C]");
 });
 
 // tests for class 'Unit'
@@ -493,10 +443,6 @@ test("Unit.matches", () => {
       FactorUnitSelection.fromFactorUnitSpec(m, -1, degC, 1, degF, -1)
     )
   ).toBe(false);
-});
-
-test("Unit.convert", () => {
-  //expect(m.convert)
 });
 
 test("Unit.getLeafFactorUnitsWithCumulativeExponents", () => {
