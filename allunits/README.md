@@ -1,4 +1,6 @@
-# All QUDT units for qudtlib
+# All QUDT units for [@qudtlib/core]
+
+[Changelog](https://github.com/qudtlib/qudtlib-js/CHANGELOG.md)
 
 This package provides all units, quantitykinds and prefixes defined by the [QUDT ontology](https://qudt.org),
 based on @qudtlib/core.
@@ -28,3 +30,6 @@ const feet = Units.M.convert(new Decimal(1), Units.FT);
 More examples can be found in the package's unit tests.
 
 For more documentation on the core features, refer to the @qudtlib/core package README.
+
+
+[@qudtlib/core]: https://github.com/qudtlib/qudtlib-js

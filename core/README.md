@@ -1,5 +1,7 @@
 # QUDTLib: JS Unit Conversion Library based on QUDT
 
+[Changelog](https://github.com/qudtlib/qudtlib-js/CHANGELOG.md)
+
 Provides unit conversion and related functionality for Javascript (Typescript).
 
 Based on the excellent [QUDT ontology](https://qudt.org), available in
@@ -32,8 +34,8 @@ All units, quantityKinds and prefixes are avalable as constants (exported by the
 The functionality comprises:
 
     Qudt.convert(...): Convert a value
-    Qudt.scaledUnit(...): Scale a unit (e.g., make KiloM from M and kilo)
-    Qudt.unscaledUnit(..): Unscale a unit:
+    Qudt.scaleUnit(...): Scale a unit (e.g., make KiloM from M and kilo)
+    Qudt.unscaleUnit(..): Unscale a unit:
     Qudt.unit(...): Get Unit by IRI
     Qudt.quantityKind(...): Get QuantityKind by IRI
     Qudt.unitFromLocalName(...): Get Unit by local name (i.e., last part of IRI)
