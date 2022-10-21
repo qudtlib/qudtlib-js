@@ -61,9 +61,6 @@ jobs:
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
 
-      - name: Stash changes so we create a clean branch
-        run: git stash
-
       # Update changelog unreleased section with new version
       - name: Update changelog
         uses: superfaceai/release-changelog-action@v1
@@ -74,17 +71,18 @@ jobs:
 
       # Apply formatting (changelog was touched)
       - name: Apply format using spotless:apply
-        run: mvn spotless:apply -DspotlessFiles='.*CHANGELOG.md'
+        run: npx prettier --write CHANGELOG.md
 
       # Commit changes
       - name: Commit CHANGELOG.md
         run: |
-          git add "CHANGELOG.md"
-          git commit -m "Update CHANGELOG.md for release ${{ env.NEW_VERSION }}"
+          git add --all 
+          git commit -m "Release ${{ env.NEW_VERSION }}"
+          git tag v${{ env.NEW_VERSION }}
 
       # Publish version to public repository
       - name: Publish
-        run: npx lerna publish --dist-tag ${{ env.RELEASE_TAG }} --yes
+        run: npx lerna publish from-package --dist-tag ${{ env.RELEASE_TAG }} --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPMJS_ACCESS_TOKEN }}
 
@@ -93,7 +91,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git push origin && git push --tags
+          git push origin && git push tags/v${{ env.NEW_VERSION }}
 
       # Read version changelog
       - id: get-changelog
