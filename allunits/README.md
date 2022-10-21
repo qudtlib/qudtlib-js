@@ -31,5 +31,4 @@ More examples can be found in the package's unit tests.
 
 For more documentation on the core features, refer to the @qudtlib/core package README.
 
-
 [@qudtlib/core]: https://github.com/qudtlib/qudtlib-js

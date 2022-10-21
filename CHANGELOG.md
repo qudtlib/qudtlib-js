@@ -9,6 +9,6 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## [Unreleased]
 
-### Changed 
+### Changed
 
-Initial release.
+- Initial release.
