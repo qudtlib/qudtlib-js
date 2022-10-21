@@ -5,7 +5,7 @@ on:
   workflow_dispatch:
     inputs:
       release-type:
-        description: 'Release type (one of): patch, minor, major, prepatch, preminor, premajor, prerelease'
+        description: 'Release version (such as 3.17.2) or bump type, i.e, one of: patch, minor, major, prepatch, preminor, premajor, or prerelease'
         required: true
     secrets:
       QUDTLIB_BOT_GITHUB_TOKEN:
@@ -45,7 +45,7 @@ jobs:
       - name: Bump release version
         if: startsWith(github.event.inputs.release-type, 'pre') != true
         run: |
-          echo "NEW_VERSION=$(npm --no-git-tag-version version $RELEASE_TYPE)" >> $GITHUB_ENV
+          echo NEW_VERSION=$(echo $(npx lerna version --no-git-tag-version --no-push --yes $RELEASE_TYPE ) | sed -e 's/^.*\=> *//g') >> $GITHUB_ENV
           echo "RELEASE_TAG=latest" >> $GITHUB_ENV
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
@@ -55,37 +55,13 @@ jobs:
       - name: Bump pre-release version
         if: startsWith(github.event.inputs.release-type, 'pre')
         run: |
-          echo "NEW_VERSION=$(npm --no-git-tag-version --preid=beta version $RELEASE_TYPE)" >> $GITHUB_ENV
+          echo NEW_VERSION=$(echo $(npx lerna version --no-git-tag-version --no-push --preid=beta --yes $RELEASE_TYPE ) | sed -e 's/^.*\=> *//g') >> $GITHUB_ENV
           echo "RELEASE_TAG=beta" >> $GITHUB_ENV
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
 
       - name: Stash changes so we create a clean branch
         run: git stash
-
-      # because we protect the main branch, the action cannot push to the repository
-      # Therefore, we create a branch for the release, and if the release succeeds, we will
-      # submit a pull request
-      # Note: outputs the name of the new branch as ${{ steps.create_release_branch.outputs.branch_name }}
-      - name: create branch for this release
-        id: create_release_branch
-        run: |
-          BRANCH_NAME=release-$NEW_VERSION-$(date +%s)
-          git checkout --track -b $BRANCH_NAME
-          echo "branch_name=$BRANCH_NAME" >> $GITHUB_OUTPUT
-      
-
-      # Push to the remote so we create the remote branch without any changes
-      # because the create-pull-request action (see below) will only include unpushed
-      # changes in the PR
-      - name: Push changes to repository
-        env:
-          GITHUB_TOKEN: ${{ secrets.QUDTLIB_BOT_GITHUB_TOKEN }}
-        run: |
-          git push origin
-
-      - name: Apply changes again
-        run: git stash pop
 
       # Update changelog unreleased section with new version
       - name: Update changelog
@@ -107,7 +83,7 @@ jobs:
 
       # Publish version to public repository
       - name: Publish
-        run: npx run publish --verbose --access public --tag ${{ env.RELEASE_TAG }}
+        run: npx lerna publish --dist-tag ${{ env.RELEASE_TAG }} --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPMJS_ACCESS_TOKEN }}
 
@@ -126,30 +102,6 @@ jobs:
           path-to-changelog: CHANGELOG.md
           version: ${{ env.NEW_VERSION }}
           operation: read
-
-      # create the pull request
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
-        with:
-          token: ${{ secrets.QUDTLIB_BOT_GITHUB_TOKEN }}
-          title: Release ${{ inputs.release_version }}
-          base: main
-          branch: ${{ steps.create_release_branch.outputs.branch_name }}
-          delete-branch: true
-          body: |
-            # Changes
-            
-            ${{ steps.get-changelog.outputs.changelog }}
-            
-            # Release info
-            
-            Automated release through workflow: '${{ github.workflow }}'
-            Triggered by: ${{ github.triggering_actor }}
-            New version: ${{ env.NEW_VERSION }}
-            
-            # Next Steps
-            
-            Please rebase this PR on top of `main` after checking the [@qudtlib repositories](https://www.npmjs.com/org/qudtlib)  
 
       # Update GitHub release with changelog
       - name: Update GitHub release documentation
