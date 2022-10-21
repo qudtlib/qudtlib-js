@@ -7,7 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This Changelog contains the changes for all packages of this monorepo, which all use the same version at all times.
 
-## [Unreleased]
+## Unreleased
+
+## 2.0.0 - 2022-10-21
 
 ### Changed
 
