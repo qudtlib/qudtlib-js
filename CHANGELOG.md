@@ -16,6 +16,7 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ### Changed
 
+- Updated QUDT to [v2.1.20](https://github.com/qudt/qudt-public-repo/releases/tag/v2.1.20)
 - Improved the `README.md` files with examples
 
 ## 2.0.0 - 2022-10-21
