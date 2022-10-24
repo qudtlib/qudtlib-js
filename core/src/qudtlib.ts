@@ -258,6 +258,9 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
     if (left.getKind() !== right.getKind()) {
       throw `Cannot combine UnitFactors of different kind (left: ${left}, right: ${right}`;
     }
+    if (!left.unit.equals(right.unit)) {
+      throw `Cannot combine UnitFactors of different units (left: ${left.unit.toString()}, right:${right.unit.toString()}`;
+    }
     return new FactorUnit(left.unit, left.exponent + right.exponent);
   }
 
@@ -471,6 +474,10 @@ export class FactorUnitSelector implements SupportsEquals<FactorUnitSelector> {
       (!!this.factorUnitMatch ? this.factorUnitMatch.toString() : "?")
     );
   }
+
+  static fromFactorUnit(factorUnit: FactorUnit) {
+    return new FactorUnitSelector(factorUnit.unit, factorUnit.exponent);
+  }
 }
 
 export class FactorUnitSelection
@@ -507,6 +514,12 @@ export class FactorUnitSelection
     return new FactorUnitSelection(
       this.selectors,
       this.scaleFactor.mul(scaleFactor)
+    );
+  }
+
+  static fromFactorUnits(factorUnits: FactorUnit[]) {
+    return new FactorUnitSelection(
+      factorUnits.map((fu) => FactorUnitSelector.fromFactorUnit(fu))
     );
   }
 
