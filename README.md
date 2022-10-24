@@ -2,7 +2,13 @@
 
 Provides unit conversion and related functionality for Javascript (Typescript).
 
-Makes all conversions and related functionality defined by the excellent [QUDT o
+Makes all conversions and related functionality defined by the excellent [QUDT ontology](https://qudt.org/)
+
+Packages:
+
+- [@qudtlib/allunits](allunits) ([npm](https://www.npmjs.com/package/@qudtlib/allunits)): contains all units (and other stuff) from QUDT (you probably want this)
+- [@qudtlib/core](core) ([npm](https://www.npmjs.com/package/@qudtlib/core)): contains the library's functionality and data model
+- [@qudtlib/examples](examples) (not published on npm)]: usage examples based on @qudtlib/allunits.
 
 ## Building
 

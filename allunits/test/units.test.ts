@@ -2,13 +2,13 @@ import { Decimal } from "decimal.js";
 import {
   DerivedUnitSearchMode,
   FactorUnit,
-  FactorUnitSelection,
   FactorUnitMatchingMode,
+  FactorUnitSelection,
   Prefix,
   Prefixes,
   QuantityKind,
-  QuantityValue,
   QuantityKinds,
+  QuantityValue,
   Qudt,
   QUDT_PREFIX_BASE_IRI,
   QUDT_QUANTITYKIND_BASE_IRI,
@@ -172,6 +172,15 @@ test("Qudt.derivedUnitsFromFactors(...Unit|number|Decimal[])", () => {
       -1
     ).length
   ).toBe(0);
+  const derived = Qudt.derivedUnitsFromFactorUnits(
+    DerivedUnitSearchMode.EXACT,
+    ...Qudt.simplifyFactorUnits(
+      Units.W.getLeafFactorUnitsWithCumulativeExponents()
+    )
+  );
+  expect(derived.length).toBe(2);
+  expect(derived.some((u) => u.equals(Units.W))).toBe(true);
+  expect(derived.some((u) => u.equals(Units.J__PER__SEC))).toBe(true);
 });
 
 test("Qudt.derivedUnitsFromFactorUnits(...FactorUnit[]", () => {
@@ -720,6 +729,19 @@ test("Unit.matches(FactorUnitSelection) (multiple levels of factor units)", () =
       FactorUnitSelection.fromFactorUnitSpec(Units.KiloGM, 1)
     )
   ).toBe(false);
+  const wattFactors = FactorUnitSelection.fromFactorUnits(Units.W.factorUnits);
+  expect(Units.TeraW.matches(wattFactors, FactorUnitMatchingMode.EXACT)).toBe(
+    false
+  );
+  expect(Units.KiloW.matches(wattFactors, FactorUnitMatchingMode.EXACT)).toBe(
+    false
+  );
+  expect(Units.MegaW.matches(wattFactors, FactorUnitMatchingMode.EXACT)).toBe(
+    false
+  );
+  expect(Units.MilliW.matches(wattFactors, FactorUnitMatchingMode.EXACT)).toBe(
+    false
+  );
 });
 
 test("Unit.matches(FactorUnitMatchingMode, Unit...) (mode=ALLOW_SCALED)", () => {
@@ -1218,7 +1240,7 @@ test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (MilliJ)", () =>
 });
 
 test("Qudt.testSimplifyFactorUnits()", () => {
-  const simplified = Qudt.simplifyFactorUnits([
+  let simplified = Qudt.simplifyFactorUnits([
     new FactorUnit(Units.N, 1),
     new FactorUnit(Units.M, -1),
     new FactorUnit(Units.M, -1),
@@ -1236,6 +1258,22 @@ test("Qudt.testSimplifyFactorUnits()", () => {
       ...simplified
     ).includes(Units.PA)
   ).toBe(true);
+  simplified = Qudt.simplifyFactorUnits(
+    Units.F.getLeafFactorUnitsWithCumulativeExponents()
+  );
+  expect(simplified.length).toBe(4);
+  expect(
+    simplified.some((fu) => fu.equals(new FactorUnit(Units.KiloGM, -1)))
+  ).toBe(true);
+  expect(simplified.some((fu) => fu.equals(new FactorUnit(Units.M, -2)))).toBe(
+    true
+  );
+  expect(simplified.some((fu) => fu.equals(new FactorUnit(Units.SEC, 4)))).toBe(
+    true
+  );
+  expect(simplified.some((fu) => fu.equals(new FactorUnit(Units.A, 2)))).toBe(
+    true
+  );
 });
 
 test("Qudt.scaleToBaseUnit(Unit)", () => {

@@ -1,18 +1,3 @@
-# All QUDT units for [@qudtlib/core]
-
-Package of [qudtlib-js](https://github.com/qudtlib/qudtlib-js)
-
-[Changelog](https://github.com/qudtlib/qudtlib-js/blob/main/CHANGELOG.md)
-
-This package provides all units, quantitykinds and prefixes defined by the [QUDT ontology](https://qudt.org),
-based on @qudtlib/core, allowing for unit conversion, instantiation from labels and factor units, scaling/unscaling
-with prefixes and more.
-
-# Usage by Example
-
-These examples are taken from the [examples](https://github.com/qudtlib/qudtlib-js/blob/main/examples/src/examples.ts) module:
-
-````
 import { Decimal } from "decimal.js";
 import { DerivedUnitSearchMode, Qudt, Units } from "@qudtlib/allunits";
 
@@ -114,9 +99,4 @@ const derivedW = Qudt.derivedUnitsFromFactorUnits(
 console.log(`\n# Fun with W`);
 derivedW.forEach((u) => console.log(`${Units.W.toString()} = ${u.toString()}`));
 // W = unit:J-PER-SEC
-// W = W```
-````
-
-For more documentation on the core features, refer to the @qudtlib/core package README.
-
-[@qudtlib/core]: https://github.com/qudtlib/qudtlib-js
+// W = W

@@ -1,6 +1,8 @@
 # QUDTLib: JS Unit Conversion Library based on QUDT
 
-[Changelog](https://github.com/qudtlib/qudtlib-js/CHANGELOG.md)
+Package of [qudtlib-js](https://github.com/qudtlib/qudtlib-js)
+
+[Changelog](https://github.com/qudtlib/qudtlib-js/blob/main/CHANGELOG.md)
 
 Provides unit conversion and related functionality for Javascript (Typescript).
 
@@ -18,12 +20,13 @@ Most users will want to use `@qudtlib/allunits` (which re-exports everything in 
 ##Usage
 
 `Qudt` is your friend. All functionality is accessed through static methods of that class. You can explore the API from that starting point.
-
 The main Model classes are:
 
     Unit: encapsulates IRI, label, dimension vector, multiplier/offset, factor units (if any). Descriptions are omitted (create an issue if you want them.)
     QuantityKind: IRI, label, applicable units, broader quantity kinds
-    QuantityValue: value and unit. Values are always BigDecimal (using MathContext.DECIMAL128) and there are no convenience methods allowing you to provide other numeric types. This is intentiaonal so as not to mask any conversion problems. You'll be fine. (If you need a different MathContext, make an issue)
+    QuantityValue: value and unit.
+
+Values are always Decimal (from [Decimal.js](https://mikemcl.github.io/decimal.js/)) and there are no convenience methods allowing you to provide other numeric types. This is intentiaonal so as not to mask any conversion problems. You'll be fine. When you need a value, use `new Decimal(number|string)`.
 
 All units, quantityKinds and prefixes are avalable as constants (exported by the package providing the units, such as `@qudtlib/allunits`):
 
