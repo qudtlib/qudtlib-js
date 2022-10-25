@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 2.1.0 - 2022-10-25
+
 ### Added
 
 - New `examples` package (not published to npm) for documentation purposes
