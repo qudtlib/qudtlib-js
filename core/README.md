@@ -17,7 +17,7 @@ that provides units, `@qudtlib/allunits`.
 
 Most users will want to use `@qudtlib/allunits` (which re-exports everything in this package).
 
-##Usage
+## Usage
 
 `Qudt` is your friend. All functionality is accessed through static methods of that class. You can explore the API from that starting point.
 The main Model classes are:
