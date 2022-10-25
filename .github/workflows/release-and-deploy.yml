@@ -46,7 +46,7 @@ jobs:
       - name: Bump release version
         if: startsWith(github.event.inputs.release-type, 'pre') != true
         run: |
-          echo NEW_VERSION=$(echo $(npx lerna version --no-git-tag-version --no-push --yes $RELEASE_TYPE ) | sed -e 's/^.*\=> *//g') >> $GITHUB_ENV
+          echo NEW_VERSION=$(echo $(npx lerna version --no-git-tag-version --no-push --yes $RELEASE_TYPE ) | sed -e 's/^.*\=> *//g' | sed -e 's/ *(private)//g') >> $GITHUB_ENV
           echo "RELEASE_TAG=latest" >> $GITHUB_ENV
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
@@ -56,7 +56,7 @@ jobs:
       - name: Bump pre-release version
         if: startsWith(github.event.inputs.release-type, 'pre')
         run: |
-          echo NEW_VERSION=$(echo $(npx lerna version --no-git-tag-version --no-push --preid=beta --yes $RELEASE_TYPE ) | sed -e 's/^.*\=> *//g') >> $GITHUB_ENV
+          echo NEW_VERSION=$(echo $(npx lerna version --no-git-tag-version --no-push --preid=beta --yes $RELEASE_TYPE ) | sed -e 's/^.*\=> *//g' | sed -e 's/ *(private)//g') >> $GITHUB_ENV
           echo "RELEASE_TAG=beta" >> $GITHUB_ENV
         env:
           RELEASE_TYPE: ${{ github.event.inputs.release-type }}
