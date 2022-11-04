@@ -9,6 +9,10 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+### Changed
+
+- Improve JSDoc for Qudt.scale() and Qudt.scaleUnitFromLabels().
+
 ## 2.2.0 - 2022-10-28
 
 ### Changed
