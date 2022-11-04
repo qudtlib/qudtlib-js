@@ -1266,8 +1266,9 @@ export class Qudt {
 
   /**
    * Returns the unit resulting from scaling the specified `unit` with the specified `prefix`.
+   * NOTE: if you have unit/prefix labels (not IRIs) - such as "KILO", "NEWTON", use {@link #scaleUnitFromLabels(string, string):Unit}.
    *
-   * @param prefix the prefix to use for scaling or its IRI
+   * @param prefix the prefix to use for scaling or its IRI.
    * @param baseUnit the unit to scale or its IRI
    * @return the resulting unit
    * @throws exception if no such unit is found
@@ -1285,10 +1286,17 @@ export class Qudt {
     throw `No scaled unit found with base unit ${theUnit.toString()} and prefix ${thePrefix.toString()}`;
   }
 
-  static scaleUnitFromLabels(prefixLabel: string, baseUnit: string) {
+  /**
+   * Returns the unit resulting from scaling the specified `baseUnitLabel` label
+   * (such as "METER") with the specified `prefixLabel` (such as "KILO").
+   *
+   * @param prefixLabel the label of the prefix, case-insensitive , such as "KILO", or "kilo"
+   * @param baseUnitLabel the label of the base unit, case-insensitive, such as "Meter"
+   */
+  static scaleUnitFromLabels(prefixLabel: string, baseUnitLabel: string) {
     return this.scale(
       Qudt.prefixFromLabelRequired(prefixLabel),
-      Qudt.unitFromLabelRequired(baseUnit)
+      Qudt.unitFromLabelRequired(baseUnitLabel)
     );
   }
 
