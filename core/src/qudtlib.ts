@@ -1,5 +1,7 @@
 import { Decimal } from "decimal.js";
 
+export { Decimal };
+
 export class QudtlibConfig {
   readonly units: Map<string, Unit>;
   readonly quantityKinds: Map<string, QuantityKind>;

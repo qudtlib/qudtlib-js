@@ -1,5 +1,4 @@
-import { Decimal } from "decimal.js";
-import { DerivedUnitSearchMode, Qudt, Units } from "@qudtlib/allunits";
+import { Decimal, DerivedUnitSearchMode, Qudt, Units } from "@qudtlib/allunits";
 
 let value = new Decimal("1.83");
 
