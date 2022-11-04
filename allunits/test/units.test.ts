@@ -1,5 +1,5 @@
-import { Decimal } from "decimal.js";
 import {
+  Decimal,
   DerivedUnitSearchMode,
   FactorUnit,
   FactorUnitMatchingMode,

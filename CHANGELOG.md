@@ -11,6 +11,7 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ### Changed
 
+- Re-export Decimal from [decimal.js](https://mikemcl.github.io/decimal.js/) so clients do not need to install a separate dependency.
 - Improve JSDoc for Qudt.scale() and Qudt.scaleUnitFromLabels().
 
 ## 2.2.0 - 2022-10-28
