@@ -9,7 +9,9 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
-- Add units and quantitykinds required for mapping QUDT to IFC (alpha) 
+### Added
+
+- Add units and quantitykinds required for mapping QUDT to IFC (alpha).
 
 ### Changed
 
