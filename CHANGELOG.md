@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 2.3.0-beta.0 - 2022-11-14
+
 ### Added
 
 - Add units and quantitykinds required for mapping QUDT to IFC (alpha).
