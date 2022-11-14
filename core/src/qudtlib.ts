@@ -770,7 +770,7 @@ export class Unit implements SupportsEquals<Unit> {
     for (const factorUnitSelection of selections) {
       factorUnitSelection
         .forPotentialMatch(
-          new FactorUnit(this, 1),
+          new FactorUnit(this, cumulativeExponent),
           cumulativeExponent,
           matchedPath,
           matchingMode

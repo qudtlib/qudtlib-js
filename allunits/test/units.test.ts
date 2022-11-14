@@ -83,6 +83,13 @@ test("Qudt.QuantityKindsBroad(Unit)", () => {
   expect(broad.length).toBe(3);
 });
 
+test("Qudt.derivedUnitsFromExponentUnitPairs((Unit|number|Decimal)[]), non-base units", () => {
+  expect(Units.KiloGM__PER__M3.matches(FactorUnitSelection.fromFactorUnitSpec(Units.KiloGM, 1, Units.M3, -1))).toBe(true);
+  expect(Units.N__M.matches(FactorUnitSelection.fromFactorUnitSpec(Units.N, 1, Units.M, 1))).toBe(true);
+  expect(Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, Units.N, 1, Units.M, 1)).toStrictEqual([Units.N__M]);
+  expect(Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, Units.KiloGM, 1, Units.M3, -1)).toStrictEqual([Units.KiloGM__PER__M3]);
+});
+
 test("Qudt.derivedUnitsFromFactors(...Unit|number|Decimal[])", () => {
   expect(() =>
     Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, Units.M)
