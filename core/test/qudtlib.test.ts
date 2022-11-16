@@ -8,6 +8,8 @@ import {
   FactorUnitSelector,
   FactorUnitSelection,
   FactorUnitMatch,
+  arrayEquals,
+  arrayEqualsIgnoreOrdering,
 } from "../src/qudtlib";
 import { Decimal } from "decimal.js";
 
@@ -521,3 +523,43 @@ const degC__PER__M = new Unit(
 
 degC__PER__M.addFactorUnit(new FactorUnit(degC, 1));
 degC__PER__M.addFactorUnit(new FactorUnit(m, -1));
+
+describe.each([
+  [[1, 2, 3], [1, 2, 3], true],
+  [["a", "b", "c"], ["a", "b", "c"], true],
+  [["a", "b", "c"], ["a", "b"], false],
+  [["a", "b", "c"], [], false],
+  [["a", "b", "c"], [2], false],
+  [[], [], true],
+  [["a", "b", "c"], ["a", "b", "c", "d"], false],
+])("arrayEquals", (left: any[], right: any[], expectedResult: boolean) =>
+  test(`arrayEquals([${left}], [${right}]) = ${expectedResult}`, () =>
+    expect(arrayEquals(left, right)).toBe(expectedResult))
+);
+
+describe.each([
+  [[1, 2, 3], [1, 2, 3], true],
+  [["a", "b", "c"], ["a", "b", "c"], true],
+  [["a", "b", "c"], ["a", "b"], false],
+  [["a", "b", "c"], [], false],
+  [["a", "b", "c"], [2], false],
+  [[], [], true],
+  [["a", "b", "c"], ["a", "b", "c", "d"], false],
+  [[1, 2, 3], [1, 3, 2], true],
+  [[1, 2, 3], [3, 2, 1], true],
+  [[1, 2, 3], [3, 2, 3], false],
+  [[1, 1, 3], [1, 1, 3], true],
+  [[1, 1, 1], [1, 1, 1], true],
+  [[1, 1, 2], [2, 1, 1], true],
+  [["a", "b", "c"], ["a", "c", "b"], true],
+  [["a", "b", "c"], ["a", "b"], false],
+  [["a", "b", "c"], [], false],
+  [["a", "b", "c"], [2], false],
+  [[], [], true],
+  [["a", "b", "c"], ["a", "b", "c", "d"], false],
+])(
+  "arrayEqualsIgnoreOrdering",
+  (left: any[], right: any[], expectedResult: boolean) =>
+    test(`arrayEqualsIgnoreOrdering([${left}], [${right}]) = ${expectedResult}`, () =>
+      expect(arrayEqualsIgnoreOrdering(left, right)).toBe(expectedResult))
+);

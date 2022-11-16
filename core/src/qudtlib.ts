@@ -16,6 +16,9 @@ export class QudtlibConfig {
 
 export const config = new QudtlibConfig();
 
+export type UnitOrExponent = Unit | number;
+export type ExponentUnitPairs = UnitOrExponent[];
+
 interface SupportsEquals<Type> {
   equals(other?: Type): boolean;
 }
@@ -75,7 +78,7 @@ export class Prefix implements SupportsEquals<Prefix> {
       this.symbol === other.symbol &&
       this.ucumCode === other.ucumCode &&
       this.labels.length == other.labels.length &&
-      arrayEquals(this.labels, other.labels, compareUsingEquals)
+      arrayEqualsIgnoreOrdering(this.labels, other.labels, compareUsingEquals)
     );
   }
 
@@ -230,6 +233,61 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
     checkInteger(exponent, "exponent");
     this.exponent = exponent;
     this.unit = unit;
+  }
+
+  /**
+   * Perform mathematical simplification on factor units. Only simplifies units with exponents of the same sign.
+   *
+   * For example,
+   * ```
+   * N / M * M -> N per M^2
+   * ```
+   *
+   * @param factorUnits the factor units to simplify
+   * @return the simplified factor units.
+   */
+  static contractExponents(factorUnits: FactorUnit[]): FactorUnit[] {
+    const ret: FactorUnit[] = [];
+    const factorUnitsByKind: Map<string, FactorUnit> = factorUnits.reduce(
+      (mapping, cur) => {
+        const kind = cur.getKind();
+        const prevUnit = mapping.get(kind);
+        if (prevUnit) {
+          mapping.set(kind, FactorUnit.combine(prevUnit, cur));
+        } else {
+          mapping.set(kind, cur);
+        }
+        return mapping;
+      },
+      new Map<string, FactorUnit>()
+    );
+    for (const fu of factorUnitsByKind.values()) {
+      ret.push(fu);
+    }
+    return ret;
+  }
+
+  static reduceExponents(factorUnits: FactorUnit[]): FactorUnit[] {
+    const ret: FactorUnit[] = [];
+    const exponentsByUnit: Map<Unit, number> = factorUnits.reduce(
+      (mapping, cur) => {
+        const unit = cur.unit;
+        const prevExponent = mapping.get(unit);
+        if (prevExponent) {
+          mapping.set(unit, prevExponent + cur.exponent);
+        } else {
+          mapping.set(unit, cur.exponent);
+        }
+        return mapping;
+      },
+      new Map<Unit, number>()
+    );
+    for (const [unit, exponent] of exponentsByUnit.entries()) {
+      if (Math.abs(exponent) > 0) {
+        ret.push(new FactorUnit(unit, exponent));
+      }
+    }
+    return ret;
   }
 
   private withExponentMultiplied(by: number): FactorUnit {
@@ -480,6 +538,10 @@ export class FactorUnitSelector implements SupportsEquals<FactorUnitSelector> {
   static fromFactorUnit(factorUnit: FactorUnit) {
     return new FactorUnitSelector(factorUnit.unit, factorUnit.exponent);
   }
+
+  toFactorUnit(): FactorUnit {
+    return new FactorUnit(this.unit, this.exponent);
+  }
 }
 
 export class FactorUnitSelection
@@ -516,6 +578,111 @@ export class FactorUnitSelection
     return new FactorUnitSelection(
       this.selectors,
       this.scaleFactor.mul(scaleFactor)
+    );
+  }
+
+  /**
+   * For each selector in each of the specified selections that uses a derived unit, an alternative
+   * selection is generated that uses its factor units. If there are multiple selectors with derived
+   * units, all expansion combinations are generated.
+   *
+   * For example, the selection
+   * ```
+   * [[ Units.N, 1, Units.M, 1 ]]
+   * ```
+   * is expanded to
+   * ```
+   * [
+   *  [ Units.N, 1, Units.M, 1 ],
+   *  [ Units.KiloGM, 1, Units.M, 1, Units.SEC, -2, Units.M, 1]
+   * ]
+   * ```
+   * @param selections
+   */
+  static expandForDerivedUnits(
+    selections: FactorUnitSelection[]
+  ): FactorUnitSelection[] {
+    // call recursively for each array element
+    // pass array index i (start with 0)
+    // add input to result
+    // if element at i can be expanded, recurse with array element expanded, same index (maybe the expansion can be expanded as well?)
+    //
+    /*
+    [A, X, Y], 0
+    r [A, X, Y], .
+    c [A, X, Y], 1
+    r [A, BX, Y] .,
+    c [A, BX, Y], 2
+    c [A, X, Y], 2
+    r [A, BX, CY, DY] .
+    c [A, BX, CY, DY] - .
+    r [A, X, CY, DY]
+    c [A, X, CY, DY] - .
+    */
+    let results = selections.flatMap((s) => FactorUnitSelection.expand(s, 0));
+    results = arrayDeduplicate(results, compareUsingEquals);
+    results = results.flatMap((s) => [
+      s,
+      s.contractExponents(),
+      s.reduceExponents(),
+    ]);
+    results = arrayDeduplicate(results, compareUsingEquals);
+    return results;
+  }
+
+  private static expand(
+    selection: FactorUnitSelection,
+    position: number
+  ): FactorUnitSelection[] {
+    const ret = [];
+    const factorUnitAtPosition = selection.selectors[position];
+    if (factorUnitAtPosition.unit.hasFactorUnits()) {
+      const selectors = selection.selectors;
+      const expandedSelectors = factorUnitAtPosition.unit.factorUnits.map(
+        (fu) =>
+          new FactorUnitSelector(
+            fu.unit,
+            fu.exponent * factorUnitAtPosition.exponent
+          )
+      );
+      const expandedSelection = new FactorUnitSelection(
+        [
+          ...selectors.slice(0, position),
+          ...expandedSelectors,
+          ...selectors.slice(position + 1),
+        ],
+        selection.scaleFactor
+      );
+      ret.push(expandedSelection);
+      const subResult = FactorUnitSelection.expand(expandedSelection, position);
+      subResult.forEach((fus) => ret.push(fus));
+    }
+    ret.push(selection);
+    if (position + 1 < selection.selectors.length) {
+      const subResultWithoutExpansion = FactorUnitSelection.expand(
+        selection,
+        position + 1
+      );
+      subResultWithoutExpansion.forEach((fus) => ret.push(fus));
+    }
+    return ret;
+  }
+
+  private contractExponents(): FactorUnitSelection {
+    return new FactorUnitSelection(
+      FactorUnit.contractExponents(
+        this.selectors.map((sel) => sel.toFactorUnit())
+      ).map((fu) => FactorUnitSelector.fromFactorUnit(fu)),
+      this.scaleFactor
+    );
+  }
+
+  private reduceExponents(): FactorUnitSelection {
+    return new FactorUnitSelection(
+      FactorUnit.reduceExponents(
+        this.selectors.map((sel) => sel.toFactorUnit())
+      ).map((fu) => FactorUnitSelector.fromFactorUnit(fu)),
+      this.scaleFactor
     );
   }
 
@@ -557,7 +724,11 @@ export class FactorUnitSelection
   equals(other: FactorUnitSelection): boolean {
     return (
       !!other &&
-      arrayEquals(this.selectors, other.selectors, compareUsingEquals)
+      arrayEqualsIgnoreOrdering(
+        this.selectors,
+        other.selectors,
+        compareUsingEquals
+      )
     );
   }
 
@@ -770,7 +941,7 @@ export class Unit implements SupportsEquals<Unit> {
     for (const factorUnitSelection of selections) {
       factorUnitSelection
         .forPotentialMatch(
-          new FactorUnit(this, cumulativeExponent),
+          new FactorUnit(this, 1),
           cumulativeExponent,
           matchedPath,
           matchingMode
@@ -790,7 +961,12 @@ export class Unit implements SupportsEquals<Unit> {
     selection: FactorUnitSelection,
     matchingMode: FactorUnitMatchingMode = FactorUnitMatchingMode.EXACT
   ): boolean {
-    const selections = this.match([selection], 1, [], matchingMode);
+    const selections = this.match(
+      FactorUnitSelection.expandForDerivedUnits([selection]),
+      1,
+      [],
+      matchingMode
+    );
     if (!selections || selections.length == 0) {
       return false;
     }
@@ -1309,37 +1485,33 @@ export class Qudt {
    * @return the factors of the unit or an empty list if the unit is not a derived unit
    */
   static factorUnits(unit: Unit): FactorUnit[] {
-    return Qudt.simplifyFactorUnits(
+    return FactorUnit.contractExponents(
       unit.getLeafFactorUnitsWithCumulativeExponents()
     );
   }
 
   /**
-   * Perform mathematical simplification on factor units. For example, `
-   * `N per M per M -> N per M^2`
+   * Perform mathematical simplification on factor units. Only simplifies units with exponents of the same sign.
+   *
+   * For example,
+   * ```
+   * N / M * M -> N per M^2
+   * ```
    *
    * @param factorUnits the factor units to simplify
    * @return the simplified factor units.
+   * @deprecated `use contractExponents(FactorUnit[]): FactorUnit[]` instead
    */
   static simplifyFactorUnits(factorUnits: FactorUnit[]): FactorUnit[] {
-    const ret: FactorUnit[] = [];
-    const factorUnitsByKind: Map<string, FactorUnit> = factorUnits.reduce(
-      (mapping, cur) => {
-        const kind = cur.getKind();
-        const prevUnit = mapping.get(kind);
-        if (prevUnit) {
-          mapping.set(kind, FactorUnit.combine(prevUnit, cur));
-        } else {
-          mapping.set(kind, cur);
-        }
-        return mapping;
-      },
-      new Map<string, FactorUnit>()
-    );
-    for (const fu of factorUnitsByKind.values()) {
-      ret.push(fu);
-    }
-    return ret;
+    return FactorUnit.contractExponents(factorUnits);
+  }
+
+  static contractFactorUnits(factorUnits: FactorUnit[]): FactorUnit[] {
+    return FactorUnit.contractExponents(factorUnits);
+  }
+
+  static reduceFactorUnits(factorUnits: FactorUnit[]): FactorUnit[] {
+    return FactorUnit.reduceExponents(factorUnits);
   }
 
   static unscale(unit: Unit): Unit {
@@ -1522,7 +1694,21 @@ function compareUsingEquals<Type extends SupportsEquals<Type>>(
   return a.equals(b);
 }
 
-function arrayEquals<Type>(
+function arrayDeduplicate<Type>(
+  arr: Type[],
+  cmp: EqualsComparator<Type> = (a, b) => a === b
+) {
+  if (!arr || !arr.length || arr.length === 0) {
+    return arr;
+  }
+  return arr.reduce(
+    (prev: Type[], cur: Type) =>
+      prev.some((p) => cmp(p, cur)) ? prev : [...prev, cur],
+    []
+  );
+}
+
+export function arrayEquals<Type>(
   left?: Type[],
   right?: Type[],
   cmp: EqualsComparator<Type> = (a, b) => a === b
@@ -1533,4 +1719,25 @@ function arrayEquals<Type>(
     left.length === right.length &&
     left.every((e, i) => cmp(e, right[i]))
   );
+}
+
+export function arrayEqualsIgnoreOrdering<Type>(
+  left?: Type[],
+  right?: Type[],
+  cmp: EqualsComparator<Type> = (a, b) => a === b
+) {
+  if (!!left && !!right && left.length === right.length) {
+    const unmatched = Array.from({ length: left.length }, (v, i) => i);
+    outer: for (let i = 0; i < left.length; i++) {
+      for (let j = 0; j < unmatched.length; j++) {
+        if (cmp(left[i], right[unmatched[j]])) {
+          unmatched.splice(j, 1);
+          continue outer;
+        }
+      }
+      return false;
+    }
+    return true;
+  }
+  return false;
 }
