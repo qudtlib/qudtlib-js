@@ -9,9 +9,9 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
-## Added 
+## Added
 
-- Support non-base units in derived unit specs. For example, derive N__PER__M3 from [N, 1, M3, -1].
+- Support non-base units in derived unit specs. For example, derive N**PER**M3 from [N, 1, M3, -1].
 
 ## 2.3.0-beta.0 - 2022-11-14
 
