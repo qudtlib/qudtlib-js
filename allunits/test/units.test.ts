@@ -467,6 +467,8 @@ describe.each([
   [[Units.N__M, Units.J], Units.N, 1, Units.M, 1],
   [[Units.N__M, Units.J], Units.J, 1],
   [[Units.KiloGM__PER__M3], Units.KiloGM, 1, Units.M3, -1],
+  //[[Units.KiloGM__PER__K__SEC3], Units.KiloGM, 1, Units.K, -1, Units.SEC, -3] // thermal transmittance
+  //[[Units.KiloGM__PER__M2__SEC2], Units.KiloGM, 1, Units.M, -2, Units.SEC, -2] // friction loss
 ])(
   "Qudt.derivedUnitsFromExponentUnitPairs(Mode, (Unit | number)...)",
   (expected: Unit[], ...spec: (number | Unit)[]) => {
