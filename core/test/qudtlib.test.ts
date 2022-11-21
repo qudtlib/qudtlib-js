@@ -10,6 +10,9 @@ import {
   FactorUnitMatch,
   arrayEquals,
   arrayEqualsIgnoreOrdering,
+  arrayCountEqualElements,
+  arrayMin,
+  arrayMax,
 } from "../src/qudtlib";
 import { Decimal } from "decimal.js";
 
@@ -538,6 +541,40 @@ describe.each([
 );
 
 describe.each([
+  [[1, 2, 3], 1],
+  [["a", "b", "c"], "a"],
+])("arrayMin", (arr: any[], expectedResult: any) =>
+  test(`arrayMin([${arr}]) = ${expectedResult}`, () =>
+    expect(
+      arrayMin(arr, (a, b) => {
+        if (typeof a === "number") {
+          return a - b;
+        } else if (typeof a === "string") {
+          return a.localeCompare(b);
+        }
+        throw "cannot handle this type";
+      })
+    ).toBe(expectedResult))
+);
+
+describe.each([
+  [[1, 2, 3], 3],
+  [["a", "b", "c"], "c"],
+])("arrayMaxn", (arr: any[], expectedResult: any) =>
+  test(`arrayMax([${arr}]) = ${expectedResult}`, () =>
+    expect(
+      arrayMax(arr, (a, b) => {
+        if (typeof a === "number") {
+          return a - b;
+        } else if (typeof a === "string") {
+          return a.localeCompare(b);
+        }
+        throw "cannot handle this type";
+      })
+    ).toBe(expectedResult))
+);
+
+describe.each([
   [[1, 2, 3], [1, 2, 3], true],
   [["a", "b", "c"], ["a", "b", "c"], true],
   [["a", "b", "c"], ["a", "b"], false],
@@ -562,4 +599,31 @@ describe.each([
   (left: any[], right: any[], expectedResult: boolean) =>
     test(`arrayEqualsIgnoreOrdering([${left}], [${right}]) = ${expectedResult}`, () =>
       expect(arrayEqualsIgnoreOrdering(left, right)).toBe(expectedResult))
+);
+
+describe.each([
+  [[1, 2, 3], [1, 2, 3], 3],
+  [["a", "b", "c"], ["a", "b", "c"], 3],
+  [["a", "b", "c"], ["a", "b"], 2],
+  [["a", "b", "c"], [], 0],
+  [["a", "b", "c"], [2], 0],
+  [[], [], 0],
+  [["a", "b", "c"], ["a", "b", "c", "d"], 3],
+  [[1, 2, 3], [1, 3, 2], 3],
+  [[1, 2, 3], [3, 2, 1], 3],
+  [[1, 2, 3], [3, 2, 3], 2],
+  [[1, 1, 3], [1, 1, 3], 3],
+  [[1, 1, 1], [1, 1, 1], 3],
+  [[1, 1, 2], [2, 1, 1], 3],
+  [["a", "b", "c"], ["a", "c", "b"], 3],
+  [["a", "b", "c"], ["a", "b"], 2],
+  [["a", "b", "c"], [], 0],
+  [["a", "b", "c"], [2], 0],
+  [[], [], 0],
+  [["a", "b", "c"], ["a", "b", "c", "d"], 3],
+])(
+  "arrayCountEqualElements",
+  (left: any[], right: any[], expectedResult: number) =>
+    test(`arrayCountEqualElements([${left}], [${right}]) = ${expectedResult}`, () =>
+      expect(arrayCountEqualElements(left, right)).toBe(expectedResult))
 );
