@@ -9,13 +9,15 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
-### Changed
-
-- Refactoring of factor unit matching
+## 2.4.0-beta.0 - 2022-11-21
 
 ### Added
 
 - Support non-base units in derived unit specs. For example, derive N**PER**M3 from [N, 1, M3, -1].
+
+### Changed
+
+- Refactoring of factor unit matching
 
 ## 2.3.0-beta.0 - 2022-11-14
 

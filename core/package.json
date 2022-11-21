@@ -1,6 +1,6 @@
 {
   "name": "@qudtlib/core",
-  "version": "2.3.0-beta.0",
+  "version": "2.4.0-beta.0",
   "description": "Data model for QUDTLib",
   "main": "dist/cjs/qudtlib.js",
   "module": "dist/mjs/qudtlib.js",
