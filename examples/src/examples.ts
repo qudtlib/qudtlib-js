@@ -35,7 +35,7 @@ console.log(
 
 // If you have factor units, you can instantiate the derived units:
 const derived = Qudt.derivedUnitsFromExponentUnitPairs(
-  DerivedUnitSearchMode.EXACT,
+  DerivedUnitSearchMode.ALL,
   Units.KiloGM,
   1,
   Units.M,
@@ -90,10 +90,8 @@ console.log(`F =  (${leafFactorsFsimplified})`); // F =  (s^4 A^2 m^-2 kg^-1)
 
 // often, you'll get more than one result for derived units (that's why the result is `Unit[]`):
 const derivedW = Qudt.derivedUnitsFromFactorUnits(
-  DerivedUnitSearchMode.EXACT,
-  ...Qudt.simplifyFactorUnits(
-    Units.W.getLeafFactorUnitsWithCumulativeExponents()
-  )
+  DerivedUnitSearchMode.ALL,
+  ...Qudt.reduceFactorUnits(Units.W.getLeafFactorUnitsWithCumulativeExponents())
 );
 console.log(`\n# Fun with W`);
 derivedW.forEach((u) => console.log(`${Units.W.toString()} = ${u.toString()}`));

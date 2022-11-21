@@ -2,7 +2,6 @@ import {
   Decimal,
   DerivedUnitSearchMode,
   FactorUnit,
-  FactorUnitMatchingMode,
   FactorUnitSelection,
   Prefix,
   Prefixes,
@@ -14,9 +13,17 @@ import {
   QUDT_QUANTITYKIND_BASE_IRI,
   QUDT_UNIT_BASE_IRI,
   Unit,
-  UnitOrExponent,
   Units,
 } from "../src/units";
+
+function modeToString(mode: DerivedUnitSearchMode): string {
+  if (mode === DerivedUnitSearchMode.BEST_MATCH) {
+    return "BEST_MATCH";
+  } else if (mode === DerivedUnitSearchMode.ALL) {
+    return "ALL";
+  }
+  throw "not a valid mode: " + mode;
+}
 
 test("Qudt.unit()", () => {
   expect(Qudt.unit(QUDT_UNIT_BASE_IRI + "M")).toBe(Units.M);
@@ -112,116 +119,25 @@ describe.each([
       ).toBe(true))
 );
 
-test("Qudt.derivedUnitsFromFactors(...Unit|number|Decimal[])", () => {
+test("Qudt.derivedUnitsFromFactors(...Unit|number|Decimal[]) (error cases)", () => {
   expect(() =>
-    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, Units.M)
+    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, Units.M)
   ).toThrowError();
   expect(() =>
-    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, 1)
+    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, 1)
   ).toThrowError();
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.M,
-      3
-    )
-  ).toStrictEqual([Units.M3]);
-  const units = Qudt.derivedUnitsFromExponentUnitPairs(
-    DerivedUnitSearchMode.EXACT,
-    Units.KiloGM,
-    1,
-    Units.M,
-    -3
-  );
-  expect(units.includes(Units.KiloGM__PER__M3)).toBe(true);
-  expect(units.includes(Units.GM__PER__DeciM3)).toBe(false);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.MOL,
-      1,
-      Units.M,
-      -2,
-      Units.SEC,
-      -1
-    )
-  ).toStrictEqual([Units.MOL__PER__M2__SEC]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.K,
-      1,
-      Units.M,
-      2,
-      Units.KiloGM,
-      -1,
-      Units.SEC,
-      -1
-    )
-  ).toStrictEqual([Units.K__M2__PER__KiloGM__SEC]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.BTU_IT,
-      1,
-      Units.FT,
-      1,
-      Units.FT,
-      -2,
-      Units.HR,
-      -1,
-      Units.DEG_F,
-      -1
-    )
-  ).toStrictEqual([Units.BTU_IT__FT__PER__FT2__HR__DEG_F]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.KiloGM,
-      1,
-      Units.M,
-      1,
-      Units.SEC,
-      -2
-    )
-  ).toStrictEqual([Units.N]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.KiloGM,
-      1
-    )
-  ).toStrictEqual([Units.KiloGM]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      Units.KiloGM,
-      1,
-      Units.A,
-      -1
-    ).length
-  ).toBe(0);
-  const derived = Qudt.derivedUnitsFromFactorUnits(
-    DerivedUnitSearchMode.EXACT,
-    ...Qudt.simplifyFactorUnits(
-      Units.W.getLeafFactorUnitsWithCumulativeExponents()
-    )
-  );
-  expect(derived.length).toBe(2);
-  expect(derived.some((u) => u.equals(Units.W))).toBe(true);
-  expect(derived.some((u) => u.equals(Units.J__PER__SEC))).toBe(true);
 });
 
 test("Qudt.derivedUnitsFromFactorUnits(...FactorUnit[]", () => {
   expect(
     Qudt.derivedUnitsFromFactorUnits(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       new FactorUnit(Units.M, 3)
     )
   ).toStrictEqual([Units.M3]);
   expect(
     Qudt.derivedUnitsFromFactorUnits(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       new FactorUnit(Units.MOL, 1),
       new FactorUnit(Units.M, -2),
       new FactorUnit(Units.SEC, -1)
@@ -233,14 +149,14 @@ test("Qudt.derivedUnitsFromMap(Map<Unit, number))", () => {
   const spec = new Map<Unit, number>();
   spec.set(Units.M, 3);
   expect(
-    Qudt.derivedUnitsFromMap(DerivedUnitSearchMode.EXACT, spec)
+    Qudt.derivedUnitsFromMap(DerivedUnitSearchMode.ALL, spec)
   ).toStrictEqual([Units.M3]);
   spec.clear();
   spec.set(Units.MOL, 1);
   spec.set(Units.M, -2);
   spec.set(Units.SEC, -1);
   expect(
-    Qudt.derivedUnitsFromMap(DerivedUnitSearchMode.EXACT, spec)
+    Qudt.derivedUnitsFromMap(DerivedUnitSearchMode.ALL, spec)
   ).toStrictEqual([Units.MOL__PER__M2__SEC]);
 });
 
@@ -274,28 +190,28 @@ describe.each([
 test("Qudt.derivedUnitsFromExponentUnitPairs(Unit, number)", () => {
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       Units.M,
       3
     )
   ).toStrictEqual([Units.M3]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       Units.M,
       2
     )
   ).toStrictEqual([Units.M2]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       Units.K,
       -1
     )
   ).toStrictEqual([Units.PER__K]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       Units.M,
       1
     )
@@ -305,28 +221,28 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(Unit, number)", () => {
 test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using Iris]", () => {
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       Units.M.iri,
       3
     )
   ).toStrictEqual([Units.M3]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       Units.M.iri,
       2
     )
   ).toStrictEqual([Units.M2]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       Units.K.iri,
       -1
     )
   ).toStrictEqual([Units.PER__K]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       Units.M.iri,
       1
     )
@@ -335,44 +251,44 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using Iris]", () =>
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using localnames]", () => {
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, "M", 3)
+    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 3)
   ).toStrictEqual([Units.M3]);
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, "M", 2)
+    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 2)
   ).toStrictEqual([Units.M2]);
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, "K", -1)
+    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "K", -1)
   ).toStrictEqual([Units.PER__K]);
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.EXACT, "M", 1)
+    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 1)
   ).toStrictEqual([Units.M]);
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () => {
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       "Metre",
       3
     )
   ).toStrictEqual([Units.M3]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       "Meter",
       2
     )
   ).toStrictEqual([Units.M2]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       "KELVIN",
       -1
     )
   ).toStrictEqual([Units.PER__K]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       "METER",
       1
     )
@@ -384,18 +300,67 @@ function exponentOrUnitToString(spec: any[]) {
 }
 
 describe.each([
-  [[Units.KiloGM__PER__M3], Units.KiloGM, 1, Units.M, -3],
   [
-    [Units.N__PER__M2, Units.PA, Units.KiloGM__PER__M__SEC2],
+    0.5,
+    DerivedUnitSearchMode.BEST_MATCH,
+    [Units.KiloGM__PER__M3],
+    Units.KiloGM,
+    1,
+    Units.M,
+    -3,
+  ],
+  [
+    1,
+    DerivedUnitSearchMode.ALL,
+    [Units.KiloGM__PER__M3, Units.GM__PER__DeciM3],
+    Units.KiloGM,
+    1,
+    Units.M,
+    -3,
+  ],
+
+  [
+    2,
+    DerivedUnitSearchMode.ALL,
+    [Units.N__PER__M2, Units.PA, Units.KiloGM__PER__M__SEC2, Units.J__PER__M3],
     Units.N,
     1,
     Units.M,
     -2,
   ],
-  [[Units.J__PER__GM], Units.J, 1, Units.GM, -1],
-  [[], Units.M, 1, Units.N, 1, Units.SEC, -2],
-  [[Units.MOL__PER__M2__SEC], Units.MOL, 1, Units.M, -2, Units.SEC, -1],
   [
+    3,
+    DerivedUnitSearchMode.BEST_MATCH,
+    [Units.J__PER__GM],
+    Units.J,
+    1,
+    Units.GM,
+    -1,
+  ],
+  [
+    3.5,
+    DerivedUnitSearchMode.ALL,
+    [Units.J__PER__GM, Units.KiloJ__PER__KiloGM],
+    Units.J,
+    1,
+    Units.GM,
+    -1,
+  ],
+  [4, DerivedUnitSearchMode.ALL, [], Units.M, 1, Units.N, 1, Units.SEC, -2],
+  [
+    5,
+    DerivedUnitSearchMode.ALL,
+    [Units.MOL__PER__M2__SEC],
+    Units.MOL,
+    1,
+    Units.M,
+    -2,
+    Units.SEC,
+    -1,
+  ],
+  [
+    6,
+    DerivedUnitSearchMode.ALL,
     [Units.K__M2__PER__KiloGM__SEC],
     Units.K,
     1,
@@ -407,7 +372,9 @@ describe.each([
     -1,
   ],
   [
-    [Units.N__PER__M2, Units.PA, Units.KiloGM__PER__M__SEC2],
+    7,
+    DerivedUnitSearchMode.ALL,
+    [Units.N__PER__M2, Units.PA, Units.KiloGM__PER__M__SEC2, Units.J__PER__M3],
     Units.M,
     1,
     Units.KiloGM,
@@ -418,6 +385,8 @@ describe.each([
     -2,
   ],
   [
+    8,
+    DerivedUnitSearchMode.ALL,
     [Units.BTU_IT__FT__PER__FT2__HR__DEG_F],
     Units.BTU_IT,
     1,
@@ -431,11 +400,15 @@ describe.each([
     -1,
   ],
   [
+    9,
+    DerivedUnitSearchMode.ALL,
     [
       Units.J__PER__M2,
       Units.N__M__PER__M2,
       Units.PA__M,
+      Units.N__PER__M,
       Units.KiloGM__PER__SEC2,
+      Units.W__SEC__PER__M2,
     ],
     Units.M,
     1,
@@ -449,11 +422,15 @@ describe.each([
     1,
   ],
   [
+    10,
+    DerivedUnitSearchMode.ALL,
     [
       Units.J__PER__M2,
       Units.N__M__PER__M2,
       Units.PA__M,
+      Units.N__PER__M,
       Units.KiloGM__PER__SEC2,
+      Units.W__SEC__PER__M2,
     ],
     Units.M,
     2,
@@ -464,33 +441,161 @@ describe.each([
     Units.M,
     -2,
   ],
-  [[Units.N__M, Units.J], Units.N, 1, Units.M, 1],
-  [[Units.N__M, Units.J], Units.J, 1],
-  [[Units.KiloGM__PER__M3], Units.KiloGM, 1, Units.M3, -1],
-  //[[Units.KiloGM__PER__K__SEC3], Units.KiloGM, 1, Units.K, -1, Units.SEC, -3] // thermal transmittance
-  //[[Units.KiloGM__PER__M2__SEC2], Units.KiloGM, 1, Units.M, -2, Units.SEC, -2] // friction loss
+  [
+    11,
+    DerivedUnitSearchMode.ALL,
+    [Units.N__M, Units.J, Units.W__SEC],
+    Units.N,
+    1,
+    Units.M,
+    1,
+  ],
+  [
+    12,
+    DerivedUnitSearchMode.ALL,
+    [Units.N__M, Units.J, Units.W__SEC],
+    Units.J,
+    1,
+  ],
+  [
+    13,
+    DerivedUnitSearchMode.ALL,
+    [Units.KiloGM__PER__M3, Units.GM__PER__DeciM3],
+    Units.KiloGM,
+    1,
+    Units.M3,
+    -1,
+  ],
+  [
+    13.5,
+    DerivedUnitSearchMode.BEST_MATCH,
+    [Units.KiloGM__PER__M3],
+    Units.KiloGM,
+    1,
+    Units.M3,
+    -1,
+  ],
+  [
+    14,
+    DerivedUnitSearchMode.ALL,
+    [Units.W__PER__M2__K],
+    Units.KiloGM,
+    1,
+    Units.K,
+    -1,
+    Units.SEC,
+    -3,
+  ],
+  [
+    15,
+    DerivedUnitSearchMode.ALL,
+    [
+      Units.KiloGM__PER__M2__SEC2,
+      Units.N__PER__M3,
+      Units.PA__PER__M,
+      Units.J__PER__M4,
+    ],
+    Units.KiloGM,
+    1,
+    Units.M,
+    -2,
+    Units.SEC,
+    -2,
+  ], // friction loss
+  [
+    15.5,
+    DerivedUnitSearchMode.BEST_MATCH,
+    [Units.KiloGM__PER__M2__SEC2],
+    Units.KiloGM,
+    1,
+    Units.M,
+    -2,
+    Units.SEC,
+    -2,
+  ], // friction loss
+  [16, DerivedUnitSearchMode.ALL, [Units.M3], Units.M, 3],
+  [
+    17,
+    DerivedUnitSearchMode.ALL,
+    [Units.KiloGM__PER__M3, Units.GM__PER__DeciM3],
+    Units.KiloGM,
+    1,
+    Units.M,
+    -3,
+  ],
+
+  [
+    18,
+    DerivedUnitSearchMode.ALL,
+    [Units.MOL__PER__M2__SEC],
+    Units.MOL,
+    1,
+    Units.M,
+    -2,
+    Units.SEC,
+    -1,
+  ],
+  [
+    19,
+    DerivedUnitSearchMode.ALL,
+    [Units.K__M2__PER__KiloGM__SEC],
+    Units.K,
+    1,
+    Units.M,
+    2,
+    Units.KiloGM,
+    -1,
+    Units.SEC,
+    -1,
+  ],
+  [
+    20,
+    DerivedUnitSearchMode.ALL,
+    [Units.BTU_IT__FT__PER__FT2__HR__DEG_F],
+    Units.BTU_IT,
+    1,
+    Units.FT,
+    1,
+    Units.FT,
+    -2,
+    Units.HR,
+    -1,
+    Units.DEG_F,
+    -1,
+  ],
+  [
+    21,
+    DerivedUnitSearchMode.ALL,
+    [Units.N, Units.J__PER__M, Units.N__M__PER__M],
+    Units.KiloGM,
+    1,
+    Units.M,
+    1,
+    Units.SEC,
+    -2,
+  ],
+  [21, DerivedUnitSearchMode.ALL, [Units.KiloGM], Units.KiloGM, 1],
+  [22, DerivedUnitSearchMode.ALL, [], Units.KiloGM, 1, Units.A, -1],
 ])(
   "Qudt.derivedUnitsFromExponentUnitPairs(Mode, (Unit | number)...)",
-  (expected: Unit[], ...spec: (number | Unit)[]) => {
-    const actual = Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.EXACT,
-      ...spec
-    );
-    test(`Qudt.derivedUnitsFromExponentUnitPairs(EXACT, ${exponentOrUnitToString(
-      spec
-    )}).length = ${expected.length}`, () => {
+  (caseId, mode, expected: Unit[], ...spec: (number | Unit)[]) => {
+    const actual = Qudt.derivedUnitsFromExponentUnitPairs(mode, ...spec);
+    test(`Case${caseId}: Qudt.derivedUnitsFromExponentUnitPairs(${modeToString(
+      mode
+    )}, ${exponentOrUnitToString(spec)}).length = ${expected.length}`, () => {
       expect(actual.length).toBe(expected.length);
     });
     expected.forEach((exp) =>
-      test(`Qudt.derivedUnitsFromExponentUnitPairs(EXACT, ${exponentOrUnitToString(
-        spec
-      )}) includes ${exp}`, () =>
+      test(`Case${caseId}: Qudt.derivedUnitsFromExponentUnitPairs(${modeToString(
+        mode
+      )}, ${exponentOrUnitToString(spec)}) includes ${exp}`, () =>
         expect(actual.some((a) => a.equals(exp))).toBe(true))
     );
     actual.forEach((act) =>
-      test(`${act.toString()} included in Qudt.derivedUnitsFromExponentUnitPairs(EXACT, ${exponentOrUnitToString(
-        spec
-      )})`, () => expect(expected.some((e) => e.equals(act))).toBe(true))
+      test(`Case${caseId}: actual result ${act.toString()} included in expected result of Qudt.derivedUnitsFromExponentUnitPairs(${modeToString(
+        mode
+      )}, ${exponentOrUnitToString(spec)})`, () =>
+        expect(expected.some((e) => e.equals(act))).toBe(true))
     );
   }
 );
@@ -708,6 +813,26 @@ test("Unit.getConversionMultiplier()", () => {
 });
 
 describe.each([
+  [
+    Units.KiloGM__PER__SEC2,
+    [Units.KiloGM, 1, Units.M, 1, Units.M, -2, Units.M, 1, Units.SEC, -2],
+    true,
+  ],
+  [Units.N__M__PER__KiloGM, [Units.N, 1, Units.M, 1, Units.KiloGM, -1], true],
+  [Units.N__M__PER__KiloGM, [Units.M, 2, Units.SEC, -2], true],
+  [
+    Units.N__M__PER__KiloGM,
+    [Units.M, 1, Units.KiloGM, 1, Units.SEC, -2, Units.M, 1, Units.KiloGM, -1],
+    true,
+  ],
+  [Units.W__PER__M2__K, [Units.KiloGM, 1, Units.K, -1, Units.SEC, -3], true],
+  [Units.GM__PER__CentiM3, [Units.KiloGM, 1, Units.M, -3], false],
+  [Units.KiloGM__PER__DeciM3, [Units.M, -3, Units.KiloGM, 1], false],
+  [Units.KiloGM__PER__M3, [Units.KiloGM, 1, Units.M, -3], true],
+  [Units.KiloGM__PER__M3, [Units.M, -3, Units.KiloGM, 1], true],
+  [Units.KiloGM__PER__M3, [Units.M3, -1, Units.KiloGM, 1], true],
+  [Units.M2__SR, [Units.M, 2], false],
+  [Units.M2, [Units.M, 2, Units.SR, 1], false],
   [Units.M, [Units.M, 1], true],
   [Units.PER__M, [Units.M, -1], true],
   [Units.PER__L, [Units.L, -1], true],
@@ -715,7 +840,7 @@ describe.each([
   [Units.KiloGM, [Units.KiloGM, 1], true],
   [Units.PER__H, [Units.H, -1], true],
 ])(
-  "Unit.matches(FactorUnitSelection) (single factor unit)",
+  "Unit.matches(FactorUnitSelection)",
   (unit: Unit, spec: (Unit | number)[], expectedResult) =>
     test(`${unit.toString()}.matches([${exponentOrUnitToString(
       spec
@@ -795,77 +920,66 @@ test("Unit.matches(FactorUnitSelection) (multiple levels of factor units)", () =
     )
   ).toBe(false);
   const wattFactors = FactorUnitSelection.fromFactorUnits(Units.W.factorUnits);
-  expect(Units.TeraW.matches(wattFactors, FactorUnitMatchingMode.EXACT)).toBe(
-    false
-  );
-  expect(Units.KiloW.matches(wattFactors, FactorUnitMatchingMode.EXACT)).toBe(
-    false
-  );
-  expect(Units.MegaW.matches(wattFactors, FactorUnitMatchingMode.EXACT)).toBe(
-    false
-  );
-  expect(Units.MilliW.matches(wattFactors, FactorUnitMatchingMode.EXACT)).toBe(
-    false
-  );
+  expect(Units.TeraW.matches(wattFactors)).toBe(false);
+  expect(Units.KiloW.matches(wattFactors)).toBe(false);
+  expect(Units.MegaW.matches(wattFactors)).toBe(false);
+  expect(Units.MilliW.matches(wattFactors)).toBe(false);
 });
 
 test("Unit.matches(FactorUnitMatchingMode, Unit...) (mode=ALLOW_SCALED)", () => {
   expect(
     Units.GM__PER__DeciM3.matches(
-      FactorUnitSelection.fromFactorUnitSpec(Units.KiloGM, 1, Units.M, -3),
-      FactorUnitMatchingMode.ALLOW_SCALED
+      FactorUnitSelection.fromFactorUnitSpec(Units.KiloGM, 1, Units.M, -3)
     )
   ).toBe(true);
   expect(
     Units.KiloGM__PER__M3.matches(
-      FactorUnitSelection.fromFactorUnitSpec(Units.GM, 1, Units.DeciM, -3),
-      FactorUnitMatchingMode.ALLOW_SCALED
+      FactorUnitSelection.fromFactorUnitSpec(Units.GM, 1, Units.DeciM, -3)
     )
   ).toBe(true);
 });
 
-test("Unit.matches(FactorUnitMatchingMode, Unit...) (mode=EXACT)", () => {
+test("Unit.matches(FactorUnitMatchingMode, Unit...))", () => {
   expect(
     Units.GM__PER__DeciM3.matches(
-      FactorUnitSelection.fromFactorUnitSpec(Units.KiloGM, 1, Units.M, -3),
-      FactorUnitMatchingMode.EXACT
+      FactorUnitSelection.fromFactorUnitSpec(Units.KiloGM, 1, Units.M, -3)
     )
-  ).toBe(false);
+  ).toBe(true);
   expect(
     Units.KiloGM__PER__M3.matches(
-      FactorUnitSelection.fromFactorUnitSpec(Units.GM, 1, Units.M, -3),
-      FactorUnitMatchingMode.EXACT
+      FactorUnitSelection.fromFactorUnitSpec(Units.GM, 1, Units.DeciM, -3)
     )
-  ).toBe(false);
+  ).toBe(true);
 });
 
-test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=EXACT_ONLY_ONE)", () => {
+test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (BEST_MATCH)", () => {
   const units = Qudt.derivedUnitsFromExponentUnitPairs(
-    DerivedUnitSearchMode.EXACT_ONLY_ONE,
+    DerivedUnitSearchMode.BEST_MATCH,
     Units.N,
     1,
     Units.M,
     1
   );
-  expect(units).toStrictEqual([Units.J]);
+  expect(units).toStrictEqual([Units.N__M]);
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=EXACT, multiple results)", () => {
   const units = Qudt.derivedUnitsFromExponentUnitPairs(
-    DerivedUnitSearchMode.EXACT,
+    DerivedUnitSearchMode.ALL,
     Units.N,
     1,
     Units.M,
     1
   );
-  expect(units.length).toBe(2);
+  expect(units.length).toBe(3);
   expect(units.includes(Units.J)).toBe(true);
   expect(units.includes(Units.N__M)).toBe(true);
+  expect(units.includes(Units.W__SEC)).toBe(true);
 });
 
-test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=BEST_EFFORT_ONLY_ONE)", () => {
+test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=BEST_MATCH)", () => {
   let units = Qudt.derivedUnitsFromExponentUnitPairs(
-    DerivedUnitSearchMode.BEST_EFFORT_ONLY_ONE,
+    DerivedUnitSearchMode.BEST_MATCH,
     "KiloGM",
     1,
     "M",
@@ -874,7 +988,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| numbe
   expect(units.length).toBe(1);
   expect(units.includes(Units.KiloGM__PER__M3)).toBe(true);
   units = Qudt.derivedUnitsFromExponentUnitPairs(
-    DerivedUnitSearchMode.BEST_EFFORT_ONLY_ONE,
+    DerivedUnitSearchMode.BEST_MATCH,
     "KiloN",
     1,
     "MilliM",
@@ -886,7 +1000,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| numbe
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=ALLOW_SCALED)", () => {
   const units = Qudt.derivedUnitsFromExponentUnitPairs(
-    DerivedUnitSearchMode.ALLOW_SCALED,
+    DerivedUnitSearchMode.ALL,
     "KiloGM",
     1,
     "M",
@@ -997,39 +1111,6 @@ test("Unit.matches((Unit|number)...) (deep factor units, duplicated exponent-uni
   ).toBe(false);
 });
 
-test("Unit.matches((Unit|number)...) (deep factor units, duplicate exponent-unit combination, match with aggregated expression)", () => {
-  const du = Units.N__M__PER__KiloGM;
-
-  // now simplify: aggregate the M^1, M^1 to M^2: should still work.
-  expect(
-    du.matches(
-      FactorUnitSelection.fromFactorUnitSpec(
-        Units.KiloGM,
-        1,
-        Units.M,
-        2,
-        Units.SEC,
-        -2,
-        Units.KiloGM,
-        -1
-      )
-    )
-  ).toBe(true);
-  // now simplify: wrongly aggregate the KiloGM^1, KiloGM^-1 to KiloGM^0: should not work
-  expect(
-    du.matches(
-      FactorUnitSelection.fromFactorUnitSpec(
-        Units.M,
-        2,
-        Units.SEC,
-        -2,
-        Units.KiloGM,
-        0
-      )
-    )
-  ).toBe(false);
-});
-
 test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (scaled factors)", () => {
   expect(
     Units.KiloN__M.matches(
@@ -1042,65 +1123,40 @@ test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (scaled factors)
         1,
         Units.KiloM,
         1
-      ),
-      FactorUnitMatchingMode.ALLOW_SCALED
+      )
     )
   ).toBe(true);
   let factors = [Units.KiloGM, 1, Units.SEC, -2, Units.M, 1, Units.KiloM, 1];
   expect(
-    Units.KiloN__M.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.KiloN__M.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(true);
   expect(
-    Units.KiloJ.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.KiloJ.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(true);
   expect(
-    Units.MilliOHM.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.MilliOHM.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(false);
   expect(
-    Units.MilliS.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.MilliS.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(false);
 
   factors = [Units.KiloGM, 1, Units.K, -1, Units.SEC, -3];
   expect(
-    Units.W__PER__K.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.W__PER__K.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(false);
   expect(
-    Units.V__PER__K.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.V__PER__K.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(false);
 });
 
 test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (scaled factors, negative first)", () => {
   let factors = [Units.SEC, -2, Units.KiloGM, 1, Units.M, 1, Units.KiloM, 1];
   expect(
-    Units.KiloN__M.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.KiloN__M.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(true);
   factors = [Units.KiloGM, 1, Units.SEC, -2, Units.M, 1, Units.KiloM, 1];
   expect(
-    Units.KiloN__M.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.KiloN__M.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(true);
 });
 
@@ -1108,15 +1164,13 @@ test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (square in nomin
   let factors = [Units.MilliM, 2, Units.SEC, -1];
   expect(
     Units.MilliM2__PER__SEC.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
+      FactorUnitSelection.fromFactorUnitSpec(...factors)
     )
   ).toBe(true);
   factors = [Units.KiloGM, 2, Units.SEC, -2];
   expect(
     Units.KiloGM2__PER__SEC2.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
+      FactorUnitSelection.fromFactorUnitSpec(...factors)
     )
   ).toBe(true);
 });
@@ -1143,14 +1197,11 @@ test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (square in denom
     -2,
   ];
   expect(
-    Units.N__PER__M2.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.N__PER__M2.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(true);
   expect(
-    Units.N__PER__M2.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
-  ).toBe(false);
+    Units.PA.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
+  ).toBe(true);
 });
 
 test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (square in denominator [3])", () => {
@@ -1165,17 +1216,14 @@ test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (square in denom
     -2,
   ];
   expect(
-    Units.N__PER__M2.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.N__PER__M2.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(true);
   expect(
-    Units.N__PER__M2.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.EXACT
-    )
-  ).toBe(false);
+    Units.PA.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
+  ).toBe(true);
+  expect(
+    Units.J__PER__M3.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
+  ).toBe(true);
 });
 
 function combinations<T>(arr: T[]): T[][] {
@@ -1225,8 +1273,7 @@ describe.each(
     )}] under matching mode ALLOW_SCALED `, () =>
       expect(
         Units.KiloN__M.matches(
-          FactorUnitSelection.fromFactorUnitSpec(...factors),
-          FactorUnitMatchingMode.ALLOW_SCALED
+          FactorUnitSelection.fromFactorUnitSpec(...factors)
         )
       ).toBe(true));
     test(`Units.KiloN__M should match([${factorUnits.map((f) =>
@@ -1240,67 +1287,42 @@ describe.each(
   }
 );
 
-test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (scaled factors, various matches for one spec)", () => {
+test("Unit.matches(FactorUnitSelection) (scaled factors, various matches for one spec)", () => {
   let factors = [Units.KiloGM, 1, Units.SEC, -2, Units.M, 1, Units.KiloM, 1];
   expect(
-    Units.KiloN__M.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.KiloN__M.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(true),
     expect(
-      Units.KiloJ.matches(
-        FactorUnitSelection.fromFactorUnitSpec(...factors),
-        FactorUnitMatchingMode.ALLOW_SCALED
-      )
+      Units.KiloJ.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
     ).toBe(true);
 
   expect(
-    Units.MilliOHM.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.MilliOHM.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(false);
   expect(
-    Units.MilliS.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.MilliS.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(false);
   factors = [Units.KiloGM, 1, Units.K, -1, Units.SEC, -3];
   expect(
-    Units.W__PER__K.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.W__PER__K.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(false);
   expect(
-    Units.V__PER__K.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.V__PER__K.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(false);
 });
 
 test("Unit.matches(FactorUnitSelection, FactorUnitMatchingMode) (MilliJ)", () => {
   const factors = [Units.KiloGM, 1, Units.SEC, -2, Units.M, 1, Units.MilliM, 1];
   expect(
-    Units.MilliN__M.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.MilliN__M.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(true);
   expect(
     Units.MilliH__PER__KiloOHM.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
+      FactorUnitSelection.fromFactorUnitSpec(...factors)
     )
   ).toBe(false);
   expect(
-    Units.MilliJ.matches(
-      FactorUnitSelection.fromFactorUnitSpec(...factors),
-      FactorUnitMatchingMode.ALLOW_SCALED
-    )
+    Units.MilliJ.matches(FactorUnitSelection.fromFactorUnitSpec(...factors))
   ).toBe(true);
 });
 
@@ -1313,13 +1335,13 @@ test("Qudt.testSimplifyFactorUnits()", () => {
   expect(simplified.length).toBe(2);
   expect(
     Qudt.derivedUnitsFromFactorUnits(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       ...simplified
     ).includes(Units.N__PER__M2)
   ).toBe(true);
   expect(
     Qudt.derivedUnitsFromFactorUnits(
-      DerivedUnitSearchMode.EXACT,
+      DerivedUnitSearchMode.ALL,
       ...simplified
     ).includes(Units.PA)
   ).toBe(true);
