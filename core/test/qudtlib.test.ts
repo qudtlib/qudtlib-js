@@ -5,14 +5,12 @@ import {
   Unit,
   QuantityKind,
   FactorUnit,
-  FactorUnitSelector,
-  FactorUnitSelection,
-  FactorUnitMatch,
   arrayEquals,
   arrayEqualsIgnoreOrdering,
   arrayCountEqualElements,
   arrayMin,
   arrayMax,
+  FactorUnits,
 } from "../src/qudtlib";
 import { Decimal } from "decimal.js";
 
@@ -308,76 +306,9 @@ test("FactorUnit.combine incompatible", () => {
   expect(() => FactorUnit.combine(fu1, fu2)).toThrowError();
 });
 
-test("FactorUnitMatch.toString", () => {
-  let fum = new FactorUnitMatch(new FactorUnit(m, -1), new Decimal(1), [
-    degC__PER__M,
-    m,
-  ]);
-  expect(fum.toString()).toBe("/unit:DEG_C-PER-M/m");
-  fum = new FactorUnitMatch(new FactorUnit(m, -1), new Decimal(1), [
-    degC__PER__M,
-    m,
-  ]);
-  expect(fum.toString()).toBe("/unit:DEG_C-PER-M/m");
-});
-
-// FactorUnitSelector tests
-test("FactorUnitSelector.isBound", () => {
-  const fu = new FactorUnit(degC, -2);
-  const fus1 = new FactorUnitSelector(
-    degC,
-    -2,
-    new FactorUnitMatch(fu, new Decimal(-2), [degC])
-  );
-  const fus2 = new FactorUnitSelector(degC, -2);
-  expect(fus1.isBound()).toBe(true);
-  expect(fus2.isBound()).toBe(false);
-});
-
-test("FactorUnitSelector.isAvailable", () => {
-  const fu = new FactorUnit(degC, -2);
-  const fus1 = new FactorUnitSelector(
-    degC,
-    -2,
-    new FactorUnitMatch(fu, new Decimal(-2), [degC])
-  );
-  const fus2 = new FactorUnitSelector(degC, -2);
-  expect(fus1.isAvailable()).toBe(false);
-  expect(fus2.isAvailable()).toBe(true);
-});
-
-test("FactorUnitSelector.toString", () => {
-  const fu = new FactorUnit(degC, -2);
-  const fus1 = new FactorUnitSelector(
-    degC,
-    -2,
-    new FactorUnitMatch(fu, new Decimal(-2), [degC])
-  );
-  const fus2 = new FactorUnitSelector(degC, -2);
-  expect(fus1.toString()).toBe("unit:DEG_C^-2@/unit:DEG_C*-2");
-  expect(fus2.toString()).toBe("unit:DEG_C^-2@?");
-});
-
-test("FactorUnitSelection.isCompleteMatch", () => {
-  const fu = new FactorUnit(degC, -2);
-  const fus = new FactorUnitSelector(
-    degC,
-    -2,
-    new FactorUnitMatch(fu, new Decimal(1), [degC])
-  );
-  const fusn = new FactorUnitSelection([fus]);
-  expect(fusn.isCompleteMatch()).toBe(true);
-});
-
-test("FactorUnitSelection.toString", () => {
-  const fu = new FactorUnit(degC, -2);
-  const fus = new FactorUnitSelector(
-    degC,
-    -2,
-    new FactorUnitMatch(fu, new Decimal(1), [degC])
-  );
-  const fusn = new FactorUnitSelection([fus]);
-  expect(fusn.toString()).toBe("[unit:DEG_C^-2@/unit:DEG_C]");
+test("FactorUnits.toString", () => {
+  const fus = FactorUnits.ofFactorUnitSpec(degC, -2, degC, 1);
+  expect(fus.toString()).toBe("[unit:DEG_C^-2@/unit:DEG_C]");
 });
 
 // tests for class 'Unit'
@@ -405,13 +336,13 @@ test("Unit.getConversionMultiplier", () => {
 });
 
 test("Unit.matches", () => {
-  expect(m.matches(FactorUnitSelection.fromFactorUnitSpec(m, 1)));
+  expect(m.matches(FactorUnits.ofFactorUnitSpec(m, 1)));
   expect(() =>
-    degC__PER__M.matches(FactorUnitSelection.fromFactorUnitSpec(m))
+    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(m))
   ).toThrowError();
   expect(() =>
     degC__PER__M.matches(
-      FactorUnitSelection.fromFactorUnitSpec(
+      FactorUnits.ofFactorUnitSpec(
         m,
         1,
         degC,
@@ -432,21 +363,19 @@ test("Unit.matches", () => {
     )
   ).toThrowError();
   expect(() =>
-    degC__PER__M.matches(FactorUnitSelection.fromFactorUnitSpec(m, m))
+    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(m, m))
   ).toThrowError();
   expect(
-    degC__PER__M.matches(FactorUnitSelection.fromFactorUnitSpec(m, -1, degC, 1))
+    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(m, -1, degC, 1))
   ).toBe(true);
   expect(
-    degC__PER__M.matches(FactorUnitSelection.fromFactorUnitSpec(degC, 1, m, -1))
+    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(degC, 1, m, -1))
   ).toBe(true);
   expect(
-    degC__PER__M.matches(FactorUnitSelection.fromFactorUnitSpec(degC, 1, m, -1))
+    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(degC, 1, m, -1))
   ).toBe(true);
   expect(
-    degC__PER__M.matches(
-      FactorUnitSelection.fromFactorUnitSpec(m, -1, degC, 1, degF, -1)
-    )
+    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(m, -1, degC, 1, degF, -1))
   ).toBe(false);
 });
 
