@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 3.0.0 - 2022-11-22
+
 ### Added
 
 - support for currency code and currency number, accessible for instantiation via `Qudt.unitFromLabel`.
