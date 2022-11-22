@@ -9,6 +9,14 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+### Added
+
+- support for currency code and currency number, accessible for instantiation via `Qudt.unitFromLabel`.
+
+### Changed
+
+- Refactoring of derived unit calculation (breaking)
+
 ## 2.4.0-beta.0 - 2022-11-21
 
 ### Added

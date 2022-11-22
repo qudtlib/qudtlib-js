@@ -308,7 +308,7 @@ test("FactorUnit.combine incompatible", () => {
 
 test("FactorUnits.toString", () => {
   const fus = FactorUnits.ofFactorUnitSpec(degC, -2, degC, 1);
-  expect(fus.toString()).toBe("[unit:DEG_C^-2@/unit:DEG_C]");
+  expect(fus.toString()).toBe("[unit:DEG_C^-2, unit:DEG_C]");
 });
 
 // tests for class 'Unit'

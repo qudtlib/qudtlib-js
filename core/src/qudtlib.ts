@@ -499,6 +499,8 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
 export class Unit implements SupportsEquals<Unit> {
   readonly iri: string;
   readonly labels: LangString[];
+  readonly currencyCode;
+  readonly currencyNumber;
   readonly prefixIri?: string;
   prefix?: Prefix;
   readonly conversionMultiplier?: Decimal;
@@ -521,7 +523,9 @@ export class Unit implements SupportsEquals<Unit> {
     scalingOfIri?: string,
     scalingOf?: Unit,
     symbol?: string,
-    labels?: LangString[]
+    labels?: LangString[],
+    currencyCode?: string,
+    currencyNumber?: number
   ) {
     this.iri = iri;
     this.prefixIri = prefixIri;
@@ -542,6 +546,8 @@ export class Unit implements SupportsEquals<Unit> {
     } else {
       this.labels = labels;
     }
+    this.currencyCode = currencyCode;
+    this.currencyNumber = currencyNumber;
   }
 
   equals(other?: Unit): boolean {
@@ -808,7 +814,9 @@ export class Qudt {
       new CaseInsensitiveUnderscoreIgnoringLabelMatcher(label);
     const firstMatch: Unit | undefined = findInIterable(
       config.units.values(),
-      (u) => matcher.matchesLangStrings(u.labels)
+      (u) =>
+        matcher.matchesLangStrings(u.labels) ||
+        (!!u.currencyCode && matcher.matchesString(u.currencyCode))
     );
     return firstMatch;
   }
