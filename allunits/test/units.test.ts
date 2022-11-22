@@ -71,10 +71,14 @@ test("QuantityKinds", () => {
   expect(length.iri).toBe(QUDT_QUANTITYKIND_BASE_IRI + "Length");
 });
 
-test("Qudt.testUnitFromLabel()", () => {
-  expect(Qudt.unitFromLabel("Newton Meter")).toBe(Units.N__M);
-  expect(Qudt.unitFromLabel("NEWTON_METER")).toBe(Units.N__M);
-});
+describe.each([
+  ["Newton Meter", Units.N__M],
+  ["NEWTON_METER", Units.N__M],
+  ["EUR", Units.Euro],
+])("Qudt.unitFromLabel()", (label, expected) =>
+  test(`Qudt.unitFromLabel(${label}) == ${expected}`, () =>
+    expect(Qudt.unitFromLabel(label)).toBe(expected))
+);
 
 test("Qudt.QuantityKinds(Unit)", () => {
   const quantityKinds: QuantityKind[] = Qudt.quantityKinds(Units.N__M);
