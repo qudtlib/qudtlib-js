@@ -568,43 +568,10 @@ export class Unit implements SupportsEquals<Unit> {
     return this.matches(FactorUnits.ofFactorUnitSpec(...factorUnitSpec));
   }
 
-  private factorUnitsMatch(
-    leftSFU: FactorUnits,
-    rightSFU: FactorUnits,
-    mode: FactorUnitMatchingMode = FactorUnitMatchingMode.EXACT
-  ) {
-    if (mode === FactorUnitMatchingMode.EXACT) {
-      return leftSFU.equals(rightSFU);
-    }
-    const left = leftSFU.factorUnits;
-    const right = rightSFU.factorUnits;
-    let scaleFactor: Decimal = new Decimal(1);
-    if (!left || !right || left.length !== right.length) {
-      return false;
-    }
-    const unmatched = Array.from({ length: left.length }, (v, i) => i);
-    outer: for (let i = 0; i < left.length; i++) {
-      for (let j = 0; j < unmatched.length; j++) {
-        const leftFactorUnit = left[i];
-        const rightFactorUnit = right[unmatched[j]];
-        if (leftFactorUnit.isCompatibleWith(rightFactorUnit)) {
-          scaleFactor = scaleFactor.mul(
-            leftFactorUnit.getConversionMultiplier(rightFactorUnit)
-          );
-          unmatched.splice(j, 1);
-          continue outer;
-        }
-      }
-      return false;
-    }
-    const conversionFactor = leftSFU.scaleFactor(rightSFU);
-    return scaleFactor.eq(conversionFactor);
-  }
-
   matches(selection: FactorUnits): boolean {
     const thisNormalized: FactorUnits = this.normalize();
     const selectionNormalized: FactorUnits = selection.normalize();
-    return this.factorUnitsMatch(thisNormalized, selectionNormalized);
+    return thisNormalized.equals(selectionNormalized);
   }
 
   hasFactorUnits(): boolean {
