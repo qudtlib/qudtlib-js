@@ -9,6 +9,14 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+### Added
+
+- `Unit.getAllPossibleFactorUnitCombinations()`, required for finding the best matching unit for a set of factor units.
+
+### Changed
+
+- Improved algorithm for scoring unit matches in `Qudt.matchScore`.
+
 ## 3.0.0 - 2022-11-22
 
 ### Added

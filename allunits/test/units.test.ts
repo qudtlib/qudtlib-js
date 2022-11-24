@@ -1,4 +1,6 @@
 import {
+  arrayEqualsIgnoreOrdering,
+  compareUsingEquals,
   Decimal,
   DerivedUnitSearchMode,
   FactorUnit,
@@ -301,7 +303,27 @@ function exponentOrUnitToString(spec: any[]) {
 
 describe.each([
   [
-    0.5,
+    15.5,
+    DerivedUnitSearchMode.BEST_MATCH,
+    [Units.KiloGM__PER__M2__SEC2],
+    Units.KiloGM,
+    1,
+    Units.M,
+    -2,
+    Units.SEC,
+    -2,
+  ], // friction loss
+  [
+    0.1,
+    DerivedUnitSearchMode.BEST_MATCH,
+    [Units.N__PER__M2],
+    Units.N,
+    1,
+    Units.M,
+    -2,
+  ],
+  [
+    0.8,
     DerivedUnitSearchMode.BEST_MATCH,
     [Units.KiloGM__PER__M3],
     Units.KiloGM,
@@ -502,17 +524,6 @@ describe.each([
     Units.SEC,
     -2,
   ], // friction loss
-  [
-    15.5,
-    DerivedUnitSearchMode.BEST_MATCH,
-    [Units.KiloGM__PER__M2__SEC2],
-    Units.KiloGM,
-    1,
-    Units.M,
-    -2,
-    Units.SEC,
-    -2,
-  ], // friction loss
   [16, DerivedUnitSearchMode.ALL, [Units.M3], Units.M, 3],
   [
     17,
@@ -597,6 +608,183 @@ describe.each([
       )}, ${exponentOrUnitToString(spec)})`, () =>
         expect(expected.some((e) => e.equals(act))).toBe(true))
     );
+  }
+);
+
+describe.each([
+  [
+    1,
+    Units.N,
+    [
+      [Units.N, 1],
+      [Units.KiloGM, 1, Units.M, 1, Units.SEC, -2],
+    ],
+  ],
+  [
+    2,
+    Units.N__M,
+    [
+      [Units.N__M, 1],
+      [Units.KiloGM, 1, Units.M, 2, Units.SEC, -2],
+      [Units.N, 1, Units.M, 1],
+    ],
+  ],
+  [
+    3,
+    Units.W__PER__K,
+    [
+      [Units.W__PER__K, 1],
+      [Units.W, 1, Units.K, -1],
+      [Units.J, 1, Units.SEC, -1, Units.K, -1],
+      [Units.N, 1, Units.M, 1, Units.SEC, -1, Units.K, -1],
+      [Units.KiloGM, 1, Units.M, 2, Units.SEC, -3, Units.K, -1],
+    ],
+  ],
+  [
+    4,
+    Units.J__PER__KiloGM__K__PA,
+    [
+      [Units.J__PER__KiloGM__K__PA, 1],
+      [Units.J, 1, Units.KiloGM, -1, Units.K, -1, Units.PA, -1],
+      [Units.N, 1, Units.M, 1, Units.KiloGM, -1, Units.K, -1, Units.PA, -1],
+      [
+        Units.KiloGM,
+        1,
+        Units.M,
+        2,
+        Units.SEC,
+        -2,
+        Units.KiloGM,
+        -1,
+        Units.K,
+        -1,
+        Units.PA,
+        -1,
+      ],
+      [Units.M, 2, Units.SEC, -2, Units.K, -1, Units.PA, -1],
+      [Units.J, 1, Units.KiloGM, -1, Units.K, -1, Units.N, -1, Units.M, 2],
+      [
+        Units.J,
+        1,
+        Units.KiloGM,
+        -2,
+        Units.K,
+        -1,
+        Units.M,
+        -1,
+        Units.SEC,
+        2,
+        Units.M,
+        2,
+      ],
+      [Units.J, 1, Units.KiloGM, -2, Units.K, -1, Units.M, 1, Units.SEC, 2],
+      [Units.N, 1, Units.M, 3, Units.KiloGM, -1, Units.K, -1, Units.N, -1],
+      [
+        Units.N,
+        1,
+        Units.M,
+        3,
+        Units.KiloGM,
+        -2,
+        Units.K,
+        -1,
+        Units.M,
+        -1,
+        Units.SEC,
+        2,
+      ],
+      [
+        Units.KiloGM,
+        1,
+        Units.M,
+        4,
+        Units.SEC,
+        -2,
+        Units.KiloGM,
+        -1,
+        Units.K,
+        -1,
+        Units.N,
+        -1,
+      ],
+      [Units.M, 4, Units.SEC, -2, Units.K, -1, Units.N, -1],
+      [
+        Units.KiloGM,
+        1,
+        Units.M,
+        4,
+        Units.SEC,
+        -2,
+        Units.KiloGM,
+        -2,
+        Units.K,
+        -1,
+        Units.M,
+        -1,
+        Units.SEC,
+        2,
+      ],
+      [Units.KiloGM, -1, Units.M, 3, Units.K, -1],
+      [Units.N, 1, Units.M, 2, Units.KiloGM, -2, Units.K, -1, Units.SEC, 2],
+      [
+        Units.M,
+        3,
+        Units.KiloGM,
+        1,
+        Units.SEC,
+        -2,
+        Units.KiloGM,
+        -2,
+        Units.K,
+        -1,
+        Units.SEC,
+        2,
+      ],
+    ],
+  ],
+])(
+  "Unit.getAllPossibleFactorUnitCombinations()",
+  (testId: number, unit: Unit, expectedResultsSpec: (number | Unit)[][]) => {
+    const expectedResults: FactorUnit[][] = expectedResultsSpec.map(
+      (spec) => FactorUnits.ofFactorUnitSpec(...spec).factorUnits
+    );
+    const actual = unit.getAllPossibleFactorUnitCombinations();
+    test(`Case ${testId}: (${unit}).getAllPossibleFactorUnitCombinations().length == ${expectedResults.length}`, () => {
+      expect(actual.length).toBe(expectedResults.length);
+    });
+    test(`Case ${testId}: (${unit}).getAllPossibleFactorUnitCombinations() contains no duplicate results`, () =>
+      expect(
+        actual.some((act, indexOfAct) =>
+          actual.some(
+            (cmp, indexOfCmp) =>
+              indexOfCmp !== indexOfAct &&
+              arrayEqualsIgnoreOrdering(act, cmp, compareUsingEquals)
+          )
+        )
+      ).toBe(false));
+    expectedResults.forEach((expectedResult) => {
+      test(`Case ${testId}: (${unit}).getAllPossibleFactorUnitCombinations() contains [${exponentOrUnitToString(
+        expectedResult
+      )}]`, () => {
+        expect(
+          actual.some((act) =>
+            arrayEqualsIgnoreOrdering(expectedResult, act, compareUsingEquals)
+          )
+        ).toBe(true);
+      });
+    });
+
+    actual.forEach((actualResult) => {
+      test(`Case ${testId}: [${exponentOrUnitToString(
+        actualResult
+      )}], found in (${unit}).getAllPossibleFactorUnitCombinations() is expected`, () => {
+        expect(
+          expectedResults.some((exp) =>
+            arrayEqualsIgnoreOrdering(actualResult, exp, compareUsingEquals)
+          )
+        ).toBe(true);
+      });
+    });
   }
 );
 

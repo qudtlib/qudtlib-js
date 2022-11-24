@@ -329,8 +329,11 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
   }
 
   static combine(left: FactorUnit, right: FactorUnit): FactorUnit {
-    if (left.getKind() !== right.getKind()) {
-      throw `Cannot combine UnitFactors of different kind (left: ${left}, right: ${right}`;
+    if (!left) {
+      return right;
+    }
+    if (!right) {
+      return left;
     }
     if (!left.unit.equals(right.unit)) {
       throw `Cannot combine UnitFactors of different units (left: ${left.unit.toString()}, right:${right.unit.toString()}`;
@@ -360,6 +363,54 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
   normalize(): FactorUnits {
     return this.unit.normalize().pow(this.exponent);
   }
+
+  getAllPossibleFactorUnitCombinations(): FactorUnit[][] {
+    const leafFactorUnits = this.unit.getAllPossibleFactorUnitCombinations();
+    const result = leafFactorUnits.map((fus) =>
+      fus.map((fu) => fu.pow(this.exponent))
+    );
+    return arrayDeduplicate(result, (left, right) =>
+      arrayEqualsIgnoreOrdering(left, right, compareUsingEquals)
+    );
+  }
+
+  static getAllPossibleFactorUnitCombinations(
+    factorUnits: FactorUnit[]
+  ): FactorUnit[][] {
+    const numFactors = factorUnits.length;
+    const subResults: FactorUnit[][][] = factorUnits.map((fu) =>
+      fu.getAllPossibleFactorUnitCombinations()
+    );
+    const subResultLengths = subResults.map((s) => s.length);
+    const currentIndices: number[] = [];
+    currentIndices.length = numFactors;
+    currentIndices.fill(0);
+    const results: FactorUnit[][] = [];
+    do {
+      const curResult: FactorUnit[] = [];
+      let countUp = true;
+      for (let i = 0; i < numFactors; i++) {
+        curResult.push(...subResults[i][currentIndices[i]]);
+        if (countUp) {
+          currentIndices[i]++;
+          if (currentIndices[i] >= subResultLengths[i]) {
+            currentIndices[i] = 0;
+          } else {
+            countUp = false;
+          }
+        }
+      }
+      results.push(FactorUnit.contractExponents(curResult));
+      results.push(FactorUnit.reduceExponents(curResult));
+    } while (!currentIndices.every((val) => val === 0));
+    return arrayDeduplicate(results, (left, right) =>
+      arrayEqualsIgnoreOrdering(left, right, compareUsingEquals)
+    );
+  }
+
+  static ofUnit(unit: Unit) {
+    return new FactorUnit(unit, 1);
+  }
 }
 
 /**
@@ -368,18 +419,18 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
  */
 export class FactorUnits implements SupportsEquals<FactorUnits> {
   readonly factorUnits: FactorUnit[];
-  readonly conversionMultiplier: Decimal;
+  readonly scaleFactor: Decimal;
 
   constructor(
     factorUnits: FactorUnit[],
     scaleFactor: Decimal = new Decimal(1)
   ) {
     this.factorUnits = factorUnits;
-    this.conversionMultiplier = scaleFactor;
+    this.scaleFactor = scaleFactor;
   }
 
   static ofUnit(unit: Unit) {
-    return new FactorUnits([new FactorUnit(unit, 1)]);
+    return new FactorUnits([FactorUnit.ofUnit(unit)]);
   }
 
   static ofFactorUnitSpec(...factorUnitSpec: (Unit | number)[]): FactorUnits {
@@ -416,7 +467,7 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
   pow(power: number) {
     return new FactorUnits(
       this.factorUnits.map((fu) => fu.pow(power)),
-      this.conversionMultiplier.pow(power)
+      this.scaleFactor.pow(power)
     );
   }
 
@@ -430,7 +481,7 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
     }
     return new FactorUnits(
       FactorUnit.contractExponents([...this.factorUnits, ...other.factorUnits]),
-      this.conversionMultiplier.mul(other.conversionMultiplier)
+      this.scaleFactor.mul(other.scaleFactor)
     );
   }
 
@@ -440,11 +491,7 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
    * @param by
    */
   scale(by: Decimal) {
-    return new FactorUnits(this.factorUnits, this.conversionMultiplier.mul(by));
-  }
-
-  scaleFactor(other: FactorUnits) {
-    return this.conversionMultiplier.div(other.conversionMultiplier);
+    return new FactorUnits(this.factorUnits, this.scaleFactor.mul(by));
   }
 
   isRatioOfSameUnits() {
@@ -458,7 +505,14 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
   reduceExponents() {
     return new FactorUnits(
       FactorUnit.reduceExponents(this.factorUnits),
-      this.conversionMultiplier
+      this.scaleFactor
+    );
+  }
+
+  contractExponents() {
+    return new FactorUnits(
+      FactorUnit.contractExponents(this.factorUnits),
+      this.scaleFactor
     );
   }
 
@@ -466,8 +520,12 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
     const normalized = FactorUnit.normalizeFactorUnits(this.factorUnits);
     return new FactorUnits(
       normalized.factorUnits,
-      normalized.conversionMultiplier.mul(this.conversionMultiplier)
+      normalized.scaleFactor.mul(this.scaleFactor)
     );
+  }
+
+  getAllPossibleFactorUnitCombinations(): FactorUnit[][] {
+    return FactorUnit.getAllPossibleFactorUnitCombinations(this.factorUnits);
   }
 
   equals(other?: FactorUnits): boolean {
@@ -475,7 +533,7 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
       return false;
     }
     return (
-      this.conversionMultiplier.eq(other?.conversionMultiplier) &&
+      this.scaleFactor.eq(other?.scaleFactor) &&
       arrayEqualsIgnoreOrdering(
         this.factorUnits,
         other?.factorUnits,
@@ -486,9 +544,9 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
 
   toString(): string {
     return (
-      (this.conversionMultiplier.eq(new Decimal(1))
+      (this.scaleFactor.eq(new Decimal(1))
         ? ""
-        : this.conversionMultiplier.toString() + "*") +
+        : this.scaleFactor.toString() + "*") +
       "[" +
       this.factorUnits.map((s) => s.toString()).reduce((p, n) => p + ", " + n) +
       "]"
@@ -734,6 +792,24 @@ export class Unit implements SupportsEquals<Unit> {
     );
   }
 
+  getAllPossibleFactorUnitCombinations(): FactorUnit[][] {
+    if (!this.hasFactorUnits() || this.factorUnits.length === 0) {
+      return [[new FactorUnit(this, 1)]];
+    }
+    const result = FactorUnit.getAllPossibleFactorUnitCombinations(
+      this.factorUnits
+    );
+    const thisAsResult = [FactorUnit.ofUnit(this)];
+    if (
+      !arrayContains(result, thisAsResult, (l, r) =>
+        l.every((le) => r.some((re) => le.equals(re)))
+      )
+    ) {
+      result.push(thisAsResult);
+    }
+    return result;
+  }
+
   public conversionOffsetDiffers(other: Unit): boolean {
     if (
       this.hasNonzeroConversionOffset() &&
@@ -959,8 +1035,10 @@ export class Qudt {
     searchMode: DerivedUnitSearchMode,
     ...factorUnits: FactorUnit[]
   ): Unit[] {
-    const flattened = factorUnits.flatMap((fu) => [fu.unit, fu.exponent]);
-    return this.derivedUnitsFromExponentUnitPairs(searchMode, ...flattened);
+    return this.derivedUnitsFromFactorUnitSelection(
+      searchMode,
+      new FactorUnits(factorUnits)
+    );
   }
 
   /**
@@ -1020,9 +1098,12 @@ export class Qudt {
       return this.findMatchingUnits(initialFactorUnitSelection);
     } else {
       const requestedUnits: FactorUnit[] =
-        initialFactorUnitSelection.factorUnits;
+        initialFactorUnitSelection.contractExponents().factorUnits;
       const scores: Map<Unit, number> = new Map();
       const results = this.findMatchingUnits(initialFactorUnitSelection);
+      if (results.length < 2) {
+        return results;
+      }
       for (const result of results) {
         scores.set(result, Qudt.matchScore(result, requestedUnits));
       }
@@ -1035,26 +1116,30 @@ export class Qudt {
     }
   }
 
-  private static matchScore(unit: Unit, selection: FactorUnit[]): number {
-    const unitLeafFactors = unit.getLeafFactorUnitsWithCumulativeExponents();
-    const numExactMatches = arrayCountEqualElements(
-      unitLeafFactors,
-      selection,
-      compareUsingEquals
+  private static matchScore(unit: Unit, requested: FactorUnit[]): number {
+    const unitFactors = unit.getAllPossibleFactorUnitCombinations();
+    const requestedFactors =
+      FactorUnit.getAllPossibleFactorUnitCombinations(requested);
+    const overlap = arrayCountEqualElements(
+      unitFactors,
+      requestedFactors,
+      (l, r) => arrayEqualsIgnoreOrdering(l, r, compareUsingEquals)
     );
-    //break ties with string matches in the local names
+    const overlapScore =
+      overlap / (unitFactors.length + requestedFactors.length - overlap);
     const unitLocalName = getLastIriElement(unit.iri);
-    const tiebreaker: number = selection.reduce(
+    const tiebreaker: number = requested.reduce(
       (prev, cur) =>
-        prev + unitLocalName.indexOf(getLastIriElement(cur.unit.iri)) > -1
+        prev +
+        (unitLocalName.match("\\b" + getLastIriElement(cur.unit.iri) + "\\b") !=
+        null
           ? 1
-          : 0,
+          : 0),
       0
     );
-
     return (
-      numExactMatches / selection.length +
-      tiebreaker / selection.length / selection.length
+      overlapScore +
+      tiebreaker / Math.pow(unitFactors.length + requestedFactors.length + 1, 2)
     );
   }
 
@@ -1328,7 +1413,7 @@ interface OrderComparator<Type> {
   (left: Type, right: Type): number;
 }
 
-function compareUsingEquals<Type extends SupportsEquals<Type>>(
+export function compareUsingEquals<Type extends SupportsEquals<Type>>(
   a: Type,
   b: Type
 ) {
@@ -1421,4 +1506,20 @@ export function arrayMin<Type>(arr: Type[], cmp: OrderComparator<Type>): Type {
 
 export function arrayMax<Type>(arr: Type[], cmp: OrderComparator<Type>): Type {
   return arrayMin(arr, (left, right) => -1 * cmp(left, right));
+}
+
+export function arrayContains<Type>(
+  arr: Type[],
+  toFind: Type,
+  cmp: EqualsComparator<Type> = (a, b) => a === b
+) {
+  if (!arr) {
+    throw "array is undefined";
+  }
+  for (const elem of arr as Type[]) {
+    if (cmp(elem, toFind)) {
+      return true;
+    }
+  }
+  return false;
 }
