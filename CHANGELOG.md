@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 3.1.0 - 2022-11-24
+
 ### Added
 
 - `Unit.getAllPossibleFactorUnitCombinations()`, required for finding the best matching unit for a set of factor units.
