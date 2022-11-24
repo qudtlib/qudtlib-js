@@ -300,10 +300,12 @@ test("FactorUnit.combine negative", () => {
   expect(cmb.exponent).toStrictEqual(-4);
 });
 
-test("FactorUnit.combine incompatible", () => {
+test("FactorUnit.combine exponents that cancel each other out", () => {
   const fu1 = new FactorUnit(degC, 2);
   const fu2 = new FactorUnit(degC, -2);
-  expect(() => FactorUnit.combine(fu1, fu2)).toThrowError();
+  expect(FactorUnit.combine(fu1, fu2).equals(new FactorUnit(degC, 0))).toBe(
+    true
+  );
 });
 
 test("FactorUnits.toString", () => {
