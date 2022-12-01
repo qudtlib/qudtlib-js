@@ -11,6 +11,7 @@ import {
   arrayMin,
   arrayMax,
   FactorUnits,
+  AssignmentProblem,
 } from "../src/qudtlib";
 import { Decimal } from "decimal.js";
 
@@ -558,3 +559,73 @@ describe.each([
     test(`arrayCountEqualElements([${left}], [${right}]) = ${expectedResult}`, () =>
       expect(arrayCountEqualElements(left, right)).toBe(expectedResult))
 );
+
+describe.each([
+  [
+    1,
+    [
+      [0, 1],
+      [1, 0],
+    ],
+    [0, 1],
+  ],
+  [
+    2,
+    [
+      [1, 0],
+      [0, 1],
+    ],
+    [1, 0],
+  ],
+  [
+    3,
+    [
+      [0, 0],
+      [0, 0],
+    ],
+    [0, 1],
+  ],
+  [
+    4,
+    [
+      [0, 1, 0],
+      [2, 5, 3],
+    ],
+    [2, 0],
+  ],
+  [
+    5,
+    [
+      [0, 1, 0, 2],
+      [1, 0, 2, 3],
+      [2, 4, 0, 0],
+    ],
+    [0, 1, 2],
+  ],
+  [
+    6,
+    [
+      [0, 1, 0, 2],
+      [1, 4, 3, 3],
+      [4, 5, 4, 6],
+    ],
+    [2, 0, 1],
+  ],
+  [
+    7,
+    [
+      [0, 1, 0, 2],
+      [1, 4, 3, 3],
+      [5, 10, 5, 10],
+    ],
+    [1, 0, 2],
+  ],
+])("solve assignment problem", (testId, mat, expectedResult) => {
+  test(`Test case ${testId}: [${mat.join(
+    "],["
+  )}] should yield [${expectedResult}]`, () => {
+    const instance = AssignmentProblem.instance(mat);
+    const solution = instance.solve();
+    expect(solution.assignment).toStrictEqual(expectedResult);
+  });
+});

@@ -16,6 +16,203 @@ export class QudtlibConfig {
 
 export const config = new QudtlibConfig();
 
+export class AssignmentProblem {
+  static instance(weights: number[][]) {
+    const rows = weights.length;
+    if (!rows) {
+      throw "Cannot create instance with 0x0 weights matrix";
+    }
+    const cols = weights[0].length;
+    if (rows > cols) {
+      throw "The weights matrix may not have more rows than columns";
+    }
+    return new NaiveAlgorithmInstance(AssignmentProblem.copy(weights));
+  }
+
+  private static copy(weights: number[][]): number[][] {
+    const ret: number[][] = [];
+    weights.forEach((row) => ret.push(row));
+    return ret;
+  }
+}
+
+export abstract class Instance {
+  readonly weights: number[][];
+  readonly rows: number;
+  readonly cols: number;
+
+  constructor(weights: number[][]) {
+    if (!weights?.length || !weights[0]?.length) {
+      throw "Not a valid weights matrix: " + weights;
+    }
+    this.weights = weights;
+    this.rows = weights.length;
+    this.cols = weights[0].length;
+  }
+
+  public weightOfAssignment(assignment: number[]): number | undefined {
+    if (!assignment) {
+      throw "Not a valid assignment: " + assignment;
+    }
+    if (assignment?.length === 0) {
+      return undefined;
+    }
+    const sum = assignment
+      .map((col, row) => this.weights[row][col])
+      .reduce((a, b) => a + b);
+    return sum;
+  }
+
+  public abstract solve(): Solution;
+}
+
+export class Solution {
+  readonly assignment: number[];
+  readonly weight: number | undefined;
+  readonly instance: Instance;
+
+  constructor(instance: Instance, assignment?: number[]) {
+    this.instance = instance;
+    this.assignment = assignment || [];
+    this.weight = instance.weightOfAssignment(this.assignment);
+  }
+
+  isComplete(): boolean {
+    return this.assignment.length >= this.instance.rows;
+  }
+
+  isEmpty(): boolean {
+    return this.assignment.length === 0;
+  }
+
+  assignColumnInNextRow(col: number): Solution {
+    if (this.isComplete()) {
+      throw "Solution is already complete";
+    }
+    return new Solution(this.instance, [...this.assignment, col]);
+  }
+
+  isBetterSolutionThan(other: Solution): boolean {
+    if (!(this.isComplete() && other.isComplete())) {
+      throw "Cannot compare incomplete solutions";
+    }
+    if (
+      typeof this.weight === "undefined" ||
+      typeof other.weight === "undefined"
+    ) {
+      throw "Cannot compare empty solutions";
+    }
+    return this.weight < other.weight;
+  }
+}
+
+class ValueWithIndex {
+  readonly value: number;
+  readonly index: number;
+
+  constructor(value: number, index: number) {
+    this.value = value;
+    this.index = index;
+  }
+}
+
+export class NaiveAlgorithmInstance extends Instance {
+  private currentBestSolution?: Solution;
+
+  constructor(weights: number[][]) {
+    super(weights);
+  }
+
+  isLowerThanBestWeight(weightToTest: number): boolean {
+    if (!this.currentBestSolution) {
+      return true;
+    }
+    if (!this.currentBestSolution.isComplete()) {
+      return true;
+    }
+    if (!this.currentBestSolution.weight) {
+      return true;
+    }
+    return this.currentBestSolution.weight > weightToTest;
+  }
+
+  updateBestSolutionIfPossible(candidate: Solution) {
+    if (
+      !this.currentBestSolution ||
+      candidate.isBetterSolutionThan(this.currentBestSolution)
+    ) {
+      this.currentBestSolution = candidate;
+    }
+  }
+
+  solve(): Solution {
+    this.doSolve(0, new Solution(this));
+    if (!this.currentBestSolution) {
+      return new Solution(this);
+    }
+    return this.currentBestSolution;
+  }
+
+  doSolve(row: number, solution: Solution) {
+    if (row >= this.rows) {
+      this.updateBestSolutionIfPossible(solution);
+      return;
+    }
+    if (solution.weight) {
+      const bestAttainableScore = this.sum(
+        this.minPerRow(row, solution.assignment)
+      );
+      if (!this.isLowerThanBestWeight(solution.weight + bestAttainableScore)) {
+        return;
+      }
+    }
+    const nMin = this.rowSortedAscending(row, solution.assignment);
+    for (let i = 0; i < nMin.length; i++) {
+      if (
+        !solution.weight ||
+        this.isLowerThanBestWeight(solution.weight + nMin[i].value)
+      ) {
+        this.doSolve(row + 1, solution.assignColumnInNextRow(nMin[i].index));
+      }
+    }
+  }
+
+  private minPerRow(startRow: number, skipCols: number[]): number[] {
+    const ret = [];
+    for (let r = startRow; r < this.rows; r++) {
+      let min = Number.MAX_VALUE;
+      for (let c = 0; c < this.cols; c++) {
+        if (!arrayContains(skipCols, c)) {
+          const val = this.weights[r][c];
+          if (min > val) {
+            min = val;
+          }
+        }
+      }
+      ret.push(min);
+    }
+    return ret;
+  }
+
+  private sum(arr: number[]) {
+    return arr.reduce((a, b) => a + b);
+  }
+
+  private rowSortedAscending(
+    row: number,
+    skipCols: number[]
+  ): ValueWithIndex[] {
+    const sorted: ValueWithIndex[] = [];
+    for (let i = 0; i < this.cols; i++) {
+      if (!arrayContains(skipCols, i)) {
+        sorted.push(new ValueWithIndex(this.weights[row][i], i));
+      }
+    }
+    sorted.sort((l, r) => l.value - r.value);
+    return sorted;
+  }
+}
+
 export type UnitOrExponent = Unit | number;
 export type ExponentUnitPairs = UnitOrExponent[];
 
@@ -365,8 +562,8 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
   }
 
   getAllPossibleFactorUnitCombinations(): FactorUnit[][] {
-    const leafFactorUnits = this.unit.getAllPossibleFactorUnitCombinations();
-    const result = leafFactorUnits.map((fus) =>
+    const subResult = this.unit.getAllPossibleFactorUnitCombinations();
+    const result = subResult.map((fus) =>
       fus.map((fu) => fu.pow(this.exponent))
     );
     return arrayDeduplicate(result, (left, right) =>
@@ -386,6 +583,7 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
     currentIndices.length = numFactors;
     currentIndices.fill(0);
     const results: FactorUnit[][] = [];
+    // cycle through all possible combinations of results per factor unit and combine them
     do {
       const curResult: FactorUnit[] = [];
       let countUp = true;
@@ -794,7 +992,10 @@ export class Unit implements SupportsEquals<Unit> {
 
   getAllPossibleFactorUnitCombinations(): FactorUnit[][] {
     if (!this.hasFactorUnits() || this.factorUnits.length === 0) {
-      return [[new FactorUnit(this, 1)]];
+      if (!!this.scalingOf) {
+        return this.scalingOf.getAllPossibleFactorUnitCombinations();
+      }
+      return [[FactorUnit.ofUnit(this)]];
     }
     const result = FactorUnit.getAllPossibleFactorUnitCombinations(
       this.factorUnits
@@ -1120,19 +1321,32 @@ export class Qudt {
     const unitFactors = unit.getAllPossibleFactorUnitCombinations();
     const requestedFactors =
       FactorUnit.getAllPossibleFactorUnitCombinations(requested);
-    const overlap = arrayCountEqualElements(
-      unitFactors,
-      requestedFactors,
-      (l, r) => arrayEqualsIgnoreOrdering(l, r, compareUsingEquals)
-    );
-    const overlapScore =
-      overlap / (unitFactors.length + requestedFactors.length - overlap);
+    const smaller =
+      unitFactors.length < requestedFactors.length
+        ? unitFactors
+        : requestedFactors;
+    const larger =
+      unitFactors.length < requestedFactors.length
+        ? requestedFactors
+        : unitFactors;
+
+    const unitSimilarityMatrix = Qudt.getUnitSimilarityMatrix(smaller, larger);
+    let overlapScore = 0.0;
+    if (unitSimilarityMatrix.length > 0) {
+      overlapScore = this.getOverlapScore(unitSimilarityMatrix);
+    }
     const unitLocalName = getLastIriElement(unit.iri);
     const tiebreaker: number = requested.reduce(
       (prev, cur) =>
         prev +
         (unitLocalName.match("\\b" + getLastIriElement(cur.unit.iri) + "\\b") !=
-        null
+          null ||
+        unitLocalName.match(
+          "\\b" +
+            getLastIriElement(cur.unit.iri) +
+            Math.abs(cur.exponent) +
+            "\\b"
+        ) != null
           ? 1
           : 0),
       0
@@ -1143,8 +1357,66 @@ export class Qudt {
     );
   }
 
-  private static retainOnlyOne(matchingUnits: Unit[]): Unit {
-    return matchingUnits.reduce((p, n) => (p.iri > n.iri ? n : p));
+  private static getUnitSimilarityMatrix(
+    smaller: FactorUnit[][],
+    larger: FactorUnit[][]
+  ) {
+    return smaller.map((sFactors) =>
+      larger.map((lFactors) => Qudt.scoreCombinations(sFactors, lFactors))
+    );
+  }
+
+  private static scoreCombinations(
+    leftFactors: FactorUnit[],
+    rightFactors: FactorUnit[]
+  ) {
+    const smaller =
+      leftFactors.length < rightFactors.length ? leftFactors : rightFactors;
+    const larger =
+      leftFactors.length < rightFactors.length ? rightFactors : leftFactors;
+    const similarityMatix = smaller.map((sFactor) =>
+      larger.map((lFactor) => {
+        if (sFactor.equals(lFactor)) {
+          return 0.0;
+        }
+        const sScalingOfOrSelf = sFactor.unit.scalingOf
+          ? sFactor.unit.scalingOf
+          : sFactor.unit;
+        const lScalingOfOrSelf = lFactor.unit.scalingOf
+          ? lFactor.unit.scalingOf
+          : lFactor.unit;
+        if (
+          sFactor.exponent === lFactor.exponent &&
+          sScalingOfOrSelf.equals(lScalingOfOrSelf)
+        ) {
+          return 0.6;
+        }
+        if (sFactor.unit.equals(lFactor.unit)) {
+          return 0.8;
+        }
+        if (sScalingOfOrSelf.equals(lScalingOfOrSelf)) {
+          return 0.9;
+        }
+        return 1.0;
+      })
+    );
+    if (similarityMatix.length === 0) {
+      return 1;
+    } else {
+      return 1 - Qudt.getOverlapScore(similarityMatix);
+    }
+  }
+
+  private static getOverlapScore(mat: number[][]) {
+    const numAssignments = mat.length;
+    const instance = AssignmentProblem.instance(mat);
+    const solution = instance.solve();
+    const minAssignmentScore = solution.isEmpty()
+      ? 1 * numAssignments
+      : solution.weight!;
+    const overlap = numAssignments * (1 - minAssignmentScore / numAssignments);
+    const rowsPlusCols = mat.length + mat[0].length;
+    return overlap / (rowsPlusCols - overlap);
   }
 
   private static findMatchingUnits(
