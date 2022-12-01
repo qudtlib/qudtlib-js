@@ -11,6 +11,10 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## 3.1.1 - 2022-12-01
 
+### Changed
+
+- Changed scoring algorithm for determining best matching unit
+
 ## 3.1.0 - 2022-11-24
 
 ### Added
