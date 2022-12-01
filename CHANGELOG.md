@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 3.1.1 - 2022-12-01
+
 ## 3.1.0 - 2022-11-24
 
 ### Added
