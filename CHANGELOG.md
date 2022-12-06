@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 3.1.2 - 2022-12-06
+
 ### Added
 
 - Add quantity kinds for positive dimensionless ratio and normalized dimensionless ratio temporarily until the canges from the [upstream PR](https://github.com/qudt/qudt-public-repo/pull/619) are released.
