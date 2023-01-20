@@ -9,6 +9,14 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+### Changed
+
+- Updated QUDT to [v2.1.24](https://github.com/qudt/qudt-public-repo/releases/tag/v2.1.24)
+
+### Added
+
+- Temporarily added quantitykinds `PositivePlaneAngle, NonNegativeLength, PositiveLength and Count` until upstream [upstream PR 630](https://github.com/qudt/qudt-public-repo/pull/630) and [upstream PR 631](https://github.com/qudt/qudt-public-repo/pull/631) are released.
+
 ## 3.1.2 - 2022-12-06
 
 ### Added
