@@ -1,8 +1,6 @@
 import {
-  arrayEqualsIgnoreOrdering,
-  compareUsingEquals,
-  Decimal,
   DerivedUnitSearchMode,
+  Decimal,
   FactorUnit,
   FactorUnits,
   Prefix,
@@ -17,6 +15,10 @@ import {
   Unit,
   Units,
 } from "../src/units";
+import {
+  arrayEqualsIgnoreOrdering,
+  compareUsingEquals,
+} from "../../core/src/utils";
 
 function modeToString(mode: DerivedUnitSearchMode): string {
   if (mode === DerivedUnitSearchMode.BEST_MATCH) {
