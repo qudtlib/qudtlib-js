@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 4.0.0 - 2023-02-06
+
 ### Added
 
 - SystemOfUnits as a model class
