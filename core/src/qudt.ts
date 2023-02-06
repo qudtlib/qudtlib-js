@@ -14,25 +14,54 @@ import { FactorUnits } from "./factorUnits";
 import { AssignmentProblem } from "./assignmentProblem";
 import { QuantityValue } from "./quantityValue";
 import { LangString } from "./langString";
+import { Namespace } from "./namespace";
 import { Decimal } from "decimal.js";
+import { QudtNamespaces } from "./qudtNamespaces";
+import { SystemOfUnits } from "./systemOfUnits";
 
-export const QUDT_UNIT_BASE_IRI = "http://qudt.org/vocab/unit/";
-export const QUDT_QUANTITYKIND_BASE_IRI = "http://qudt.org/vocab/quantitykind/";
-export const QUDT_PREFIX_BASE_IRI = "http://qudt.org/vocab/prefix/";
 export class QudtlibConfig {
   readonly units: Map<string, Unit>;
   readonly quantityKinds: Map<string, QuantityKind>;
   readonly prefixes: Map<string, Prefix>;
 
+  readonly systemsOfUnits: Map<string, SystemOfUnits>;
+
   constructor() {
     this.units = new Map<string, Unit>();
     this.quantityKinds = new Map<string, QuantityKind>();
     this.prefixes = new Map<string, Prefix>();
+    this.systemsOfUnits = new Map<string, SystemOfUnits>();
   }
 }
 
 export const config = new QudtlibConfig();
 export class Qudt {
+  public static NAMESPACES = QudtNamespaces;
+
+  /**
+   * Returns the {@link Unit} identified the specified IRI. For example, <code>
+   * unit("http://qudt.org/vocab/unit/N-PER-M2")</code> yields `Units.N__PER__M2`,
+   * if that unit has been loaded;
+   *
+   * @param iri the requested unit IRI
+   * @return the unit or `undefined` if no unit is found
+   */
+  static unit(unitIri: string): Unit | undefined {
+    return config.units.get(unitIri);
+  }
+
+  /**
+   * Same as {@link #unit(string)} but throws an exception if no unit is found.
+   * @param unitIri the unit IRI
+   * @return the unit
+   */
+  static unitRequired(unitIri: string): Unit {
+    const ret = Qudt.unit(unitIri);
+    if (typeof ret === "undefined") {
+      throw `Unit ${unitIri} not found`;
+    }
+    return ret;
+  }
   /**
    * Returns the first unit found whose label matches the specified label after replacing any
    * underscore with space and ignoring case (US locale). If more intricate matching is needed,
@@ -67,6 +96,22 @@ export class Qudt {
     return Qudt.unitRequired(Qudt.unitIriFromLocalname(localname));
   }
 
+  static unitIriFromLocalname(localname: string): string {
+    return Qudt.NAMESPACES.unit.makeIriInNamespace(localname);
+  }
+
+  static quantityKind(quantityKindIri: string): QuantityKind | undefined {
+    return config.quantityKinds.get(quantityKindIri);
+  }
+
+  static quantityKindRequired(quantityKindIri: string): QuantityKind {
+    const ret = Qudt.quantityKind(quantityKindIri);
+    if (typeof ret === "undefined") {
+      throw `QuantityKind ${quantityKindIri} not found`;
+    }
+    return ret;
+  }
+
   static quantityKindFromLocalname(
     localname: string
   ): QuantityKind | undefined {
@@ -77,6 +122,27 @@ export class Qudt {
     return Qudt.quantityKindRequired(
       Qudt.quantityKindIriFromLocalname(localname)
     );
+  }
+
+  static quantityKindIriFromLocalname(localname: string): string {
+    return Qudt.NAMESPACES.quantityKind.makeIriInNamespace(localname);
+  }
+
+  static quantityKinds(unit: Unit): QuantityKind[] {
+    return unit.quantityKindIris.map((iri) => Qudt.quantityKindRequired(iri));
+  }
+
+  static quantityKindsBroad(unit: Unit): QuantityKind[] {
+    let current: QuantityKind[] = Qudt.quantityKinds(unit);
+    const result: QuantityKind[] = [];
+    current.forEach((qk) => result.push(qk));
+    while (current.length) {
+      current = current
+        .flatMap((qk) => qk.broaderQuantityKindIris)
+        .map((iri) => Qudt.quantityKindRequired(iri));
+      current.forEach((qk) => result.includes(qk) || result.push(qk));
+    }
+    return result;
   }
 
   static prefixFromLabelRequired(label: string): Prefix {
@@ -103,53 +169,8 @@ export class Qudt {
     return Qudt.prefixRequired(Qudt.prefixIriFromLocalname(localname));
   }
 
-  static unitIriFromLocalname(localname: string): string {
-    return QUDT_UNIT_BASE_IRI + localname;
-  }
-
-  static quantityKindIriFromLocalname(localname: string): string {
-    return QUDT_QUANTITYKIND_BASE_IRI + localname;
-  }
-
   static prefixIriFromLocalname(localname: string): string {
-    return QUDT_PREFIX_BASE_IRI + localname;
-  }
-
-  /**
-   * Returns the {@link Unit} identified the specified IRI. For example, <code>
-   * unit("http://qudt.org/vocab/unit/N-PER-M2")</code> yields `Units.N__PER__M2`,
-   * if that unit has been loaded;
-   *
-   * @param iri the requested unit IRI
-   * @return the unit or `undefined` if no unit is found
-   */
-  static unit(unitIri: string): Unit | undefined {
-    return config.units.get(unitIri);
-  }
-
-  /**
-   * Same as {@link #unit(string)} but throws an exception if no unit is found.
-   * @param unitIri the unit IRI
-   * @return the unit
-   */
-  static unitRequired(unitIri: string): Unit {
-    const ret = Qudt.unit(unitIri);
-    if (typeof ret === "undefined") {
-      throw `Unit ${unitIri} not found`;
-    }
-    return ret;
-  }
-
-  static quantityKind(quantityKindIri: string): QuantityKind | undefined {
-    return config.quantityKinds.get(quantityKindIri);
-  }
-
-  static quantityKindRequired(quantityKindIri: string): QuantityKind {
-    const ret = Qudt.quantityKind(quantityKindIri);
-    if (typeof ret === "undefined") {
-      throw `QuantityKind ${quantityKindIri} not found`;
-    }
-    return ret;
+    return Qudt.NAMESPACES.prefix.makeIriInNamespace(localname);
   }
 
   static prefix(prefixIri: string): Prefix | undefined {
@@ -164,21 +185,48 @@ export class Qudt {
     return ret;
   }
 
-  static quantityKinds(unit: Unit): QuantityKind[] {
-    return unit.quantityKindIris.map((iri) => Qudt.quantityKindRequired(iri));
+  static systemOfUnitsFromLabelRequired(label: string): SystemOfUnits {
+    const match = this.systemOfUnitsFromLabel(label);
+    if (!match) throw `No systemOfUnits found for label ${label}`;
+    return match;
   }
 
-  static quantityKindsBroad(unit: Unit): QuantityKind[] {
-    let current: QuantityKind[] = Qudt.quantityKinds(unit);
-    const result: QuantityKind[] = [];
-    current.forEach((qk) => result.push(qk));
-    while (current.length) {
-      current = current
-        .flatMap((qk) => qk.broaderQuantityKindIris)
-        .map((iri) => Qudt.quantityKindRequired(iri));
-      current.forEach((qk) => result.includes(qk) || result.push(qk));
+  static systemOfUnitsFromLabel(label: string): SystemOfUnits | undefined {
+    const matcher: LabelMatcher =
+      new CaseInsensitiveUnderscoreIgnoringLabelMatcher(label);
+    const firstMatch: SystemOfUnits | undefined = findInIterable(
+      config.systemsOfUnits.values(),
+      (u) => matcher.matchesLangStrings(u.labels)
+    );
+    return firstMatch;
+  }
+
+  static systemOfUnitsFromLocalname(
+    localname: string
+  ): SystemOfUnits | undefined {
+    return Qudt.systemOfUnits(Qudt.systemOfUnitsIriFromLocalname(localname));
+  }
+
+  static systemOfUnitsFromLocalnameRequired(localname: string): SystemOfUnits {
+    return Qudt.systemOfUnitsRequired(
+      Qudt.systemOfUnitsIriFromLocalname(localname)
+    );
+  }
+
+  static systemOfUnitsIriFromLocalname(localname: string): string {
+    return Qudt.NAMESPACES.systemOfUnits.makeIriInNamespace(localname);
+  }
+
+  static systemOfUnits(systemOfUnitsIri: string): SystemOfUnits | undefined {
+    return config.systemsOfUnits.get(systemOfUnitsIri);
+  }
+
+  static systemOfUnitsRequired(systemOfUnitsIri: string): SystemOfUnits {
+    const ret = Qudt.systemOfUnits(systemOfUnitsIri);
+    if (typeof ret === "undefined") {
+      throw `SystemOfUnits ${systemOfUnitsIri} not found`;
     }
-    return result;
+    return ret;
   }
 
   /**
@@ -620,6 +668,24 @@ export class Qudt {
     const ret = [];
     for (const prefix of config.prefixes.values()) {
       ret.push(prefix);
+    }
+    return ret;
+  }
+
+  static allSystemsOfUnits(): SystemOfUnits[] {
+    const ret = [];
+    for (const prefix of config.systemsOfUnits.values()) {
+      ret.push(prefix);
+    }
+    return ret;
+  }
+
+  static allUnitsOfSystem(system: SystemOfUnits): Unit[] {
+    const ret = [];
+    for (const unit of config.units.values()) {
+      if (system.allowsUnit(unit)) {
+        ret.push(unit);
+      }
     }
     return ret;
   }

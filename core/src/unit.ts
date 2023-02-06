@@ -24,6 +24,8 @@ export class Unit implements SupportsEquals<Unit> {
   readonly dimensionVectorIri?: string;
   readonly factorUnits: FactorUnit[] = [];
 
+  readonly unitOfSystemIris: string[];
+
   constructor(
     iri: string,
     quantityKindIris?: string[],
@@ -36,7 +38,8 @@ export class Unit implements SupportsEquals<Unit> {
     symbol?: string,
     labels?: LangString[],
     currencyCode?: string,
-    currencyNumber?: number
+    currencyNumber?: number,
+    unitOfSystemIris?: string[]
   ) {
     this.iri = iri;
     this.prefixIri = prefixIri;
@@ -59,6 +62,11 @@ export class Unit implements SupportsEquals<Unit> {
     }
     this.currencyCode = currencyCode;
     this.currencyNumber = currencyNumber;
+    if (typeof unitOfSystemIris === "undefined") {
+      this.unitOfSystemIris = [];
+    } else {
+      this.unitOfSystemIris = unitOfSystemIris;
+    }
   }
 
   equals(other?: Unit): boolean {

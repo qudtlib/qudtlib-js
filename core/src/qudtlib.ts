@@ -8,14 +8,9 @@ import { FactorUnits } from "./factorUnits";
 import { AssignmentProblem } from "./assignmentProblem";
 import { QuantityValue } from "./quantityValue";
 import { LangString } from "./langString";
-import {
-  Qudt,
-  config,
-  QudtlibConfig,
-  QUDT_UNIT_BASE_IRI,
-  QUDT_QUANTITYKIND_BASE_IRI,
-  QUDT_PREFIX_BASE_IRI,
-} from "./qudt";
+import { Namespace } from "./namespace";
+import { SystemOfUnits } from "./systemOfUnits";
+import { Qudt, config, QudtlibConfig } from "./qudt";
 
 export {
   Decimal,
@@ -31,7 +26,6 @@ export {
   Qudt,
   config,
   QudtlibConfig,
-  QUDT_UNIT_BASE_IRI,
-  QUDT_QUANTITYKIND_BASE_IRI,
-  QUDT_PREFIX_BASE_IRI,
+  Namespace,
+  SystemOfUnits,
 };
