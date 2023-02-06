@@ -308,30 +308,6 @@ function exponentOrUnitToString(spec: any[]) {
 
 describe.each([
   [
-    25,
-    DerivedUnitSearchMode.BEST_MATCH,
-    [Units.N__M__PER__M2],
-    Units.M,
-    2,
-    Units.KiloGM,
-    1,
-    Units.SEC,
-    -2,
-    Units.M,
-    -2,
-  ],
-  [
-    26,
-    DerivedUnitSearchMode.BEST_MATCH,
-    [Units.N__M__PER__M2],
-    Units.M,
-    1,
-    Units.N,
-    1,
-    Units.M,
-    -2,
-  ],
-  [
     15.5,
     DerivedUnitSearchMode.BEST_MATCH,
     [Units.KiloGM__PER__M2__SEC2],
@@ -653,6 +629,31 @@ describe.each([
     Units.SEC,
     -2,
   ],
+  [
+    25,
+    DerivedUnitSearchMode.BEST_MATCH,
+    [Units.N__M__PER__M2],
+    Units.M,
+    2,
+    Units.KiloGM,
+    1,
+    Units.SEC,
+    -2,
+    Units.M,
+    -2,
+  ],
+  [
+    26,
+    DerivedUnitSearchMode.BEST_MATCH,
+    [Units.N__M__PER__M2],
+    Units.M,
+    1,
+    Units.N,
+    1,
+    Units.M,
+    -2,
+  ],
+  [27, DerivedUnitSearchMode.BEST_MATCH, [Units.RAD], Units.RAD, 1],
 ])(
   "Qudt.derivedUnitsFromExponentUnitPairs(Mode, (Unit | number)...)",
   (caseId, mode, expected: Unit[], ...spec: (number | Unit)[]) => {
@@ -1648,4 +1649,10 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
   expect(units.includes(Units.OZ)).toBe(true);
   expect(units.includes(Units.N__PER__M3)).toBe(false);
   expect(units.length).toBe(152);
+});
+
+test("Unit.normalize()", () => {
+  for (const unit of Qudt.allUnits()) {
+    expect(unit.normalize() instanceof FactorUnits).toBe(true);
+  }
 });
