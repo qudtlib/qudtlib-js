@@ -1,19 +1,19 @@
 import {
-  LangString,
-  Prefix,
-  QuantityValue,
-  Unit,
-  QuantityKind,
-  FactorUnit,
   arrayEquals,
   arrayEqualsIgnoreOrdering,
   arrayCountEqualElements,
   arrayMin,
   arrayMax,
-  FactorUnits,
-  AssignmentProblem,
-} from "../src/qudtlib";
+} from "../src/utils";
+import { AssignmentProblem } from "../src/assignmentProblem";
 import { Decimal } from "decimal.js";
+import { LangString } from "../src/langString";
+import { Prefix } from "../src/prefix";
+import { QuantityValue } from "../src/quantityValue";
+import { QuantityKind } from "../src/quantityKind";
+import { FactorUnit } from "../src/factorUnit";
+import { FactorUnits } from "../src/factorUnits";
+import { Unit } from "../src/unit";
 
 // LangString tests
 

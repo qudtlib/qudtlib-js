@@ -1,22 +1,23 @@
 import {
-  arrayEqualsIgnoreOrdering,
-  compareUsingEquals,
-  Decimal,
   DerivedUnitSearchMode,
+  Decimal,
   FactorUnit,
   FactorUnits,
   Prefix,
-  Prefixes,
   QuantityKind,
-  QuantityKinds,
   QuantityValue,
+  SystemOfUnits,
   Qudt,
-  QUDT_PREFIX_BASE_IRI,
-  QUDT_QUANTITYKIND_BASE_IRI,
-  QUDT_UNIT_BASE_IRI,
   Unit,
+  Prefixes,
+  QuantityKinds,
   Units,
+  SystemsOfUnits,
 } from "../src/units";
+import {
+  arrayEqualsIgnoreOrdering,
+  compareUsingEquals,
+} from "../../core/src/utils";
 
 function modeToString(mode: DerivedUnitSearchMode): string {
   if (mode === DerivedUnitSearchMode.BEST_MATCH) {
@@ -28,7 +29,7 @@ function modeToString(mode: DerivedUnitSearchMode): string {
 }
 
 test("Qudt.unit()", () => {
-  expect(Qudt.unit(QUDT_UNIT_BASE_IRI + "M")).toBe(Units.M);
+  expect(Qudt.unit(Qudt.NAMESPACES.unit.makeIriInNamespace("M"))).toBe(Units.M);
 });
 
 test("Qudt.unitFromLocalname()", () => {
@@ -36,9 +37,9 @@ test("Qudt.unitFromLocalname()", () => {
 });
 
 test("Qudt.quantityKind()", () => {
-  expect(Qudt.quantityKind(QUDT_QUANTITYKIND_BASE_IRI + "Length")).toBe(
-    QuantityKinds.Length
-  );
+  expect(
+    Qudt.quantityKind(Qudt.NAMESPACES.quantityKind.makeIriInNamespace("Length"))
+  ).toBe(QuantityKinds.Length);
 });
 
 test("Qudt.quantityKindFromLocalname()", () => {
@@ -46,7 +47,9 @@ test("Qudt.quantityKindFromLocalname()", () => {
 });
 
 test("Qudt.prefix()", () => {
-  expect(Qudt.prefix(QUDT_PREFIX_BASE_IRI + "Kilo")).toBe(Prefixes.Kilo);
+  expect(Qudt.prefix(Qudt.NAMESPACES.prefix.makeIriInNamespace("Kilo"))).toBe(
+    Prefixes.Kilo
+  );
 });
 
 test("Qudt.prefixFromLocalname()", () => {
@@ -56,12 +59,12 @@ test("Qudt.prefixFromLocalname()", () => {
 test("Prefixes", () => {
   const kilo: Prefix = Prefixes.Kilo;
   expect(kilo.multiplier).toStrictEqual(new Decimal(1000));
-  expect(kilo.iri).toEqual(QUDT_PREFIX_BASE_IRI + "Kilo");
+  expect(kilo.iri).toEqual(Qudt.NAMESPACES.prefix.makeIriInNamespace("Kilo"));
 });
 
 test("Units", () => {
   const meter: Unit = Units.M;
-  expect(meter.iri).toEqual(QUDT_UNIT_BASE_IRI + "M");
+  expect(meter.iri).toEqual(Qudt.NAMESPACES.unit.makeIriInNamespace("M"));
   expect(meter.hasLabel("Meter")).toBe(true);
   expect(meter.hasLabel("Metre")).toBe(true);
   expect(meter.getLabelForLanguageTag("en")).toBe("Metre");
@@ -70,7 +73,9 @@ test("Units", () => {
 test("QuantityKinds", () => {
   const length: QuantityKind = QuantityKinds.Length;
   expect(length.hasLabel("Length")).toBe(true);
-  expect(length.iri).toBe(QUDT_QUANTITYKIND_BASE_IRI + "Length");
+  expect(length.iri).toBe(
+    Qudt.NAMESPACES.quantityKind.makeIriInNamespace("Length")
+  );
 });
 
 describe.each([
@@ -136,7 +141,7 @@ test("Qudt.derivedUnitsFromFactorUnits(...FactorUnit[]", () => {
       DerivedUnitSearchMode.ALL,
       new FactorUnit(Units.M, 3)
     )
-  ).toStrictEqual([Units.M3]);
+  ).toStrictEqual([Units.KiloL, Units.M3]);
   expect(
     Qudt.derivedUnitsFromFactorUnits(
       DerivedUnitSearchMode.ALL,
@@ -152,7 +157,7 @@ test("Qudt.derivedUnitsFromMap(Map<Unit, number))", () => {
   spec.set(Units.M, 3);
   expect(
     Qudt.derivedUnitsFromMap(DerivedUnitSearchMode.ALL, spec)
-  ).toStrictEqual([Units.M3]);
+  ).toStrictEqual([Units.KiloL, Units.M3]);
   spec.clear();
   spec.set(Units.MOL, 1);
   spec.set(Units.M, -2);
@@ -196,7 +201,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(Unit, number)", () => {
       Units.M,
       3
     )
-  ).toStrictEqual([Units.M3]);
+  ).toStrictEqual([Units.KiloL, Units.M3]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
       DerivedUnitSearchMode.ALL,
@@ -227,7 +232,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using Iris]", () =>
       Units.M.iri,
       3
     )
-  ).toStrictEqual([Units.M3]);
+  ).toStrictEqual([Units.KiloL, Units.M3]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
       DerivedUnitSearchMode.ALL,
@@ -254,7 +259,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using Iris]", () =>
 test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using localnames]", () => {
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 3)
-  ).toStrictEqual([Units.M3]);
+  ).toStrictEqual([Units.KiloL, Units.M3]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 2)
   ).toStrictEqual([Units.M2]);
@@ -273,7 +278,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () 
       "Metre",
       3
     )
-  ).toStrictEqual([Units.M3]);
+  ).toStrictEqual([Units.KiloL, Units.M3]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
       DerivedUnitSearchMode.ALL,
@@ -302,30 +307,6 @@ function exponentOrUnitToString(spec: any[]) {
 }
 
 describe.each([
-  [
-    25,
-    DerivedUnitSearchMode.BEST_MATCH,
-    [Units.N__M__PER__M2],
-    Units.M,
-    2,
-    Units.KiloGM,
-    1,
-    Units.SEC,
-    -2,
-    Units.M,
-    -2,
-  ],
-  [
-    26,
-    DerivedUnitSearchMode.BEST_MATCH,
-    [Units.N__M__PER__M2],
-    Units.M,
-    1,
-    Units.N,
-    1,
-    Units.M,
-    -2,
-  ],
   [
     15.5,
     DerivedUnitSearchMode.BEST_MATCH,
@@ -358,7 +339,12 @@ describe.each([
   [
     1,
     DerivedUnitSearchMode.ALL,
-    [Units.KiloGM__PER__M3, Units.GM__PER__DeciM3],
+    [
+      Units.KiloGM__PER__M3,
+      Units.GM__PER__DeciM3,
+      Units.GM__PER__L,
+      Units.MilliGM__PER__MilliL,
+    ],
     Units.KiloGM,
     1,
     Units.M,
@@ -506,7 +492,12 @@ describe.each([
   [
     13,
     DerivedUnitSearchMode.ALL,
-    [Units.KiloGM__PER__M3, Units.GM__PER__DeciM3],
+    [
+      Units.KiloGM__PER__M3,
+      Units.GM__PER__DeciM3,
+      Units.GM__PER__L,
+      Units.MilliGM__PER__MilliL,
+    ],
     Units.KiloGM,
     1,
     Units.M3,
@@ -548,11 +539,16 @@ describe.each([
     Units.SEC,
     -2,
   ], // friction loss
-  [16, DerivedUnitSearchMode.ALL, [Units.M3], Units.M, 3],
+  [16, DerivedUnitSearchMode.ALL, [Units.M3, Units.KiloL], Units.M, 3],
   [
     17,
     DerivedUnitSearchMode.ALL,
-    [Units.KiloGM__PER__M3, Units.GM__PER__DeciM3],
+    [
+      Units.KiloGM__PER__M3,
+      Units.GM__PER__DeciM3,
+      Units.GM__PER__L,
+      Units.MilliGM__PER__MilliL,
+    ],
     Units.KiloGM,
     1,
     Units.M,
@@ -633,6 +629,31 @@ describe.each([
     Units.SEC,
     -2,
   ],
+  [
+    25,
+    DerivedUnitSearchMode.BEST_MATCH,
+    [Units.N__M__PER__M2],
+    Units.M,
+    2,
+    Units.KiloGM,
+    1,
+    Units.SEC,
+    -2,
+    Units.M,
+    -2,
+  ],
+  [
+    26,
+    DerivedUnitSearchMode.BEST_MATCH,
+    [Units.N__M__PER__M2],
+    Units.M,
+    1,
+    Units.N,
+    1,
+    Units.M,
+    -2,
+  ],
+  [27, DerivedUnitSearchMode.BEST_MATCH, [Units.RAD], Units.RAD, 1],
 ])(
   "Qudt.derivedUnitsFromExponentUnitPairs(Mode, (Unit | number)...)",
   (caseId, mode, expected: Unit[], ...spec: (number | Unit)[]) => {
@@ -1236,9 +1257,11 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| numbe
     "M",
     -3
   );
-  expect(units.length).toBe(2);
+  expect(units.length).toBe(4);
   expect(units.includes(Units.KiloGM__PER__M3)).toBe(true);
   expect(units.includes(Units.GM__PER__DeciM3)).toBe(true);
+  expect(units.includes(Units.GM__PER__L)).toBe(true);
+  expect(units.includes(Units.MilliGM__PER__MilliL)).toBe(true);
 });
 
 test("Unit.matches((Unit|number)...) (deep factor units, duplicated exponent-unit combination)", () => {
@@ -1547,7 +1570,7 @@ test("Qudt.testSimplifyFactorUnits()", () => {
     ).includes(Units.PA)
   ).toBe(true);
   simplified = Qudt.simplifyFactorUnits(
-    Units.F.getLeafFactorUnitsWithCumulativeExponents()
+    Units.FARAD.getLeafFactorUnitsWithCumulativeExponents()
   );
   expect(simplified.length).toBe(4);
   expect(
@@ -1571,4 +1594,65 @@ test("Qudt.scaleToBaseUnit(Unit)", () => {
   base = Qudt.scaleToBaseUnit(Units.M);
   expect(base.unit).toBe(Units.M);
   expect(base.factor).toStrictEqual(new Decimal("1"));
+});
+
+test("Unit.getUnitOfSystems()", () => {
+  expect(Units.M.unitOfSystemIris.length === 0).toBe(false);
+  expect(
+    Units.M.unitOfSystemIris.includes(
+      Qudt.NAMESPACES.systemOfUnits.makeIriInNamespace("SI")
+    )
+  );
+});
+
+test("SystemOfUnits.getBaseUnits()", () => {
+  expect(SystemsOfUnits.SI.baseUnitIris.includes(Units.M.iri)).toBe(true);
+  expect(SystemsOfUnits.SI.baseUnitIris.includes(Units.KiloGM.iri)).toBe(true);
+  expect(SystemsOfUnits.SI.baseUnitIris.includes(Units.A.iri)).toBe(true);
+  expect(SystemsOfUnits.SI.baseUnitIris.includes(Units.SEC.iri)).toBe(true);
+  expect(SystemsOfUnits.SI.baseUnitIris.includes(Units.CD.iri)).toBe(true);
+  expect(SystemsOfUnits.SI.baseUnitIris.includes(Units.MOL.iri)).toBe(true);
+  expect(SystemsOfUnits.SI.baseUnitIris.includes(Units.UNITLESS.iri)).toBe(
+    true
+  );
+  expect(SystemsOfUnits.SI.baseUnitIris.includes(Units.K.iri)).toBe(true);
+  expect(SystemsOfUnits.SI.baseUnitIris.length).toBe(8);
+});
+
+test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.SI) ", () => {
+  const units = Qudt.allUnitsOfSystem(SystemsOfUnits.SI);
+  expect(units.includes(Units.M)).toBe(true);
+  expect(units.includes(Units.KiloGM)).toBe(true);
+  expect(units.includes(Units.A)).toBe(true);
+  expect(units.includes(Units.SEC)).toBe(true);
+  expect(units.includes(Units.CD)).toBe(true);
+  expect(units.includes(Units.MOL)).toBe(true);
+  expect(units.includes(Units.UNITLESS)).toBe(true);
+  expect(units.includes(Units.K)).toBe(true);
+  expect(units.includes(Units.FT)).toBe(false);
+  expect(units.includes(Units.OZ)).toBe(false);
+  expect(units.includes(Units.N__PER__M3)).toBe(true);
+  expect(units.length).toBe(879);
+});
+
+test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
+  const units = Qudt.allUnitsOfSystem(SystemsOfUnits.IMPERIAL);
+  expect(units.includes(Units.M)).toBe(false);
+  expect(units.includes(Units.KiloGM)).toBe(false);
+  expect(units.includes(Units.A)).toBe(false);
+  expect(units.includes(Units.SEC)).toBe(false);
+  expect(units.includes(Units.CD)).toBe(false);
+  expect(units.includes(Units.MOL)).toBe(false);
+  expect(units.includes(Units.UNITLESS)).toBe(false);
+  expect(units.includes(Units.K)).toBe(false);
+  expect(units.includes(Units.FT)).toBe(true);
+  expect(units.includes(Units.OZ)).toBe(true);
+  expect(units.includes(Units.N__PER__M3)).toBe(false);
+  expect(units.length).toBe(152);
+});
+
+test("Unit.normalize()", () => {
+  for (const unit of Qudt.allUnits()) {
+    expect(unit.normalize() instanceof FactorUnits).toBe(true);
+  }
 });
