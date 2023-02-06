@@ -563,7 +563,7 @@ describe.each([
     Units.SEC,
     -2,
   ], // friction loss
-  [16, DerivedUnitSearchMode.ALL, [Units.M3], Units.M, 3],
+  [16, DerivedUnitSearchMode.ALL, [Units.M3, Units.KiloL], Units.M, 3],
   [
     17,
     DerivedUnitSearchMode.ALL,
