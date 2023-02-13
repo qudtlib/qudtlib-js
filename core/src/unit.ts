@@ -14,8 +14,8 @@ export class Unit implements SupportsEquals<Unit> {
   readonly currencyNumber;
   readonly prefixIri?: string;
   prefix?: Prefix;
-  readonly conversionMultiplier?: Decimal;
-  readonly conversionOffset?: Decimal;
+  readonly conversionMultiplier: Decimal;
+  readonly conversionOffset: Decimal;
   readonly quantityKindIris: string[];
   readonly quantityKinds: QuantityKind[] = [];
   readonly symbol?: string;
@@ -25,7 +25,6 @@ export class Unit implements SupportsEquals<Unit> {
   readonly factorUnits: FactorUnit[] = [];
 
   readonly unitOfSystemIris: string[];
-
   constructor(
     iri: string,
     quantityKindIris?: string[],
@@ -43,8 +42,14 @@ export class Unit implements SupportsEquals<Unit> {
   ) {
     this.iri = iri;
     this.prefixIri = prefixIri;
-    this.conversionMultiplier = conversionMultiplier;
-    this.conversionOffset = conversionOffset;
+    this.conversionMultiplier =
+      typeof conversionMultiplier === "undefined"
+        ? new Decimal("1.0")
+        : conversionMultiplier;
+    this.conversionOffset =
+      typeof conversionOffset === "undefined"
+        ? new Decimal("0.0")
+        : conversionOffset;
     this.symbol = symbol;
     this.scalingOfIri = scalingOfIri;
     this.scalingOf = scalingOf;
@@ -101,6 +106,9 @@ export class Unit implements SupportsEquals<Unit> {
     return !!this.scalingOfIri;
   }
 
+  hasSymbol(): boolean {
+    return typeof this.symbol !== "undefined";
+  }
   isConvertible(toUnit: Unit): boolean {
     return this.dimensionVectorIri === toUnit.dimensionVectorIri;
   }

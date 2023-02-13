@@ -16,6 +16,20 @@ interface OrderComparator<Type> {
   (left: Type, right: Type): number;
 }
 
+export const BooleanComparator: OrderComparator<boolean> = (
+  left: boolean,
+  right: boolean
+) => (left === right ? 0 : left ? 1 : -1);
+export const NumberComparator: OrderComparator<number> = (
+  left: number,
+  right: number
+) => (left < right ? -1 : left == right ? 0 : 1);
+
+export const StringComparator: OrderComparator<string> = (
+  left: string,
+  right: string
+) => (left < right ? -1 : left === right ? 0 : 1);
+
 export function compareUsingEquals<Type extends SupportsEquals<Type>>(
   a: Type,
   b: Type
