@@ -1,10 +1,14 @@
 import { Unit } from "./unit";
 import {
+  arrayContains,
   arrayDeduplicate,
   arrayMax,
+  BooleanComparator,
   compareUsingEquals,
   findInIterable,
   getLastIriElement,
+  NumberComparator,
+  StringComparator,
 } from "./utils";
 import { QuantityKind } from "./quantityKind";
 import { Prefix } from "./prefix";
@@ -16,6 +20,7 @@ import { QuantityValue } from "./quantityValue";
 import { LangString } from "./langString";
 import { Namespace } from "./namespace";
 import { Decimal } from "decimal.js";
+3;
 import { QudtNamespaces } from "./qudtNamespaces";
 import { SystemOfUnits } from "./systemOfUnits";
 
@@ -688,6 +693,149 @@ export class Qudt {
       }
     }
     return ret;
+  }
+
+  /**
+   * Returns the first unit obtained using {@link #correspondingUnitsInSystem(Unit,
+   * SystemOfUnits)}.
+   *
+   * @return the unit corresponding to the specified unit in the specified systemOfUnits.
+   */
+  static correspondingUnitInSystem(
+    unit: Unit,
+    systemOfUnits: SystemOfUnits
+  ): Unit | undefined {
+    const correspondingUnits = Qudt.correspondingUnitsInSystem(
+      unit,
+      systemOfUnits
+    );
+    if (
+      typeof correspondingUnits !== "undefined" &&
+      correspondingUnits.length > 0
+    ) {
+      return correspondingUnits[0];
+    }
+    return undefined;
+  }
+
+  /**
+   * Gets units that correspond to the specified unit are allowed in the specified systemOfUnits.
+   * The resulting units have to
+   *
+   * <ol>
+   *   <li>have the same dimension vector as the unit
+   *   <li>share at least one quantityKind with unit
+   * </ol>
+   *
+   * and they are ascending sorted by dissimilarity in magnitude to the magnitude of the specified
+   * unit, i.e. the first unit returned is the closest in magnitude.
+   *
+   * <p>If two resulting units have the same magnitude difference from the specified one, the
+   * following comparisons are made consecutively until a difference is found:
+   *
+   * <ol>
+   *   <li>the base unit of the specified system is ranked first
+   *   <li>conversion offset closer to the one of the specified unit is ranked first
+   *   <li>the unscaled unit is ranked first
+   *   <li>the unit that has a symbol is ranked first
+   *   <li>the unit with more quantityKinds is ranked first
+   *   <li>the units are ranked by their IRIs lexicographically
+   * </ol>
+   *
+   * that is a base unit of the system is ranked first. If none or both are base units, the one
+   * with a conversion offset closer to the specified unit's conversion offset is ranked first.
+   *
+   * @param unit
+   * @param systemOfUnits
+   * @return
+   */
+  static correspondingUnitsInSystem(
+    unit: Unit,
+    systemOfUnits: SystemOfUnits
+  ): Unit[] {
+    if (systemOfUnits.allowsUnit(unit)) {
+      return [unit];
+    }
+    const elegible = Array.from(config.units.values())
+      .filter((u) => systemOfUnits.allowsUnit(u))
+      .filter((u) => u.dimensionVectorIri === unit.dimensionVectorIri);
+
+    if (elegible.length === 1) {
+      return elegible;
+    }
+    let candidates = [...elegible];
+    // get the unit that is closest in magnitude (conversionFactor)
+    // recursively check for factor units
+    candidates = candidates.filter(
+      (u) => u.quantityKinds.some((q) => arrayContains(unit.quantityKinds, q))
+    );
+    if (candidates.length === 1) {
+      return candidates;
+    }
+    candidates.sort((l: Unit, r: Unit) => {
+      const scaleDiffL = Math.abs(Qudt.scaleDifference(l, unit));
+      const scaleDiffR = Math.abs(Qudt.scaleDifference(r, unit));
+      const diff = Math.sign(scaleDiffL - scaleDiffR);
+      if (diff !== 0) {
+        return diff;
+      }
+      // tie breaker: base unit ranked before non-base unit
+      let cmp = BooleanComparator(
+        systemOfUnits.hasBaseUnit(r),
+        systemOfUnits.hasBaseUnit(l)
+      );
+      if (cmp !== 0) {
+        return cmp;
+      }
+      // tie breaker: closer offset
+      const offsetDiffL = Math.abs(Qudt.offsetDifference(l, unit));
+      const offsetDiffR = Math.abs(Qudt.offsetDifference(r, unit));
+      cmp = Math.sign(offsetDiffL - offsetDiffR);
+      if (cmp != 0) {
+        return cmp;
+      }
+      // tie breaker: perfer unit that is not scaled
+      cmp = BooleanComparator(l.isScaled(), r.isScaled());
+      if (cmp != 0) {
+        return cmp;
+      }
+      // tie breaker prefer the unit that has a symbol (it's more likely to be
+      // commonly used):
+      cmp = BooleanComparator(r.hasSymbol(), l.hasSymbol());
+      if (cmp != 0) {
+        return cmp;
+      }
+      // tie breaker: prefer unit with more quantity kinds (it's less specific)
+      cmp = NumberComparator(l.quantityKinds.length, r.quantityKinds.length);
+      if (cmp != 0) {
+        return cmp;
+      }
+      // tie breaker: lexicographically compare iris.
+      return StringComparator(l.iri, r.iri);
+    });
+    return candidates;
+  }
+
+  private static scaleDifference(u1: Unit, u2: Unit): number {
+    const u1Log10 = u1.conversionMultiplier.log(10);
+    const u2Log10 = u2.conversionMultiplier.log(10);
+    return u1Log10.toNumber() - u2Log10.toNumber();
+  }
+
+  private static offsetDifference(u1: Unit, u2: Unit) {
+    const u1Log10 = Qudt.logOrZeroRequireNonNegative(u1.conversionOffset.abs());
+    const u2Log10 = Qudt.logOrZeroRequireNonNegative(u2.conversionOffset.abs());
+    return u1Log10.toNumber() - u2Log10.toNumber();
+  }
+
+  private static logOrZeroRequireNonNegative(val: Decimal): Decimal {
+    if (val.isNegative()) {
+      throw `Cannot get logarithm of negative value ${val}`;
+    }
+    if (val.isZero()) {
+      return new Decimal("0");
+    }
+    return val.log(10);
   }
 }
 

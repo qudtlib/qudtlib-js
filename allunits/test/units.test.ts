@@ -1656,3 +1656,27 @@ test("Unit.normalize()", () => {
     expect(unit.normalize() instanceof FactorUnits).toBe(true);
   }
 });
+
+describe.each([
+  [Units.FT, SystemsOfUnits.SI, Units.DeciM],
+  [Units.YD, SystemsOfUnits.SI, Units.M],
+  [Units.IN, SystemsOfUnits.SI, Units.CentiM],
+  [Units.LB, SystemsOfUnits.SI, Units.KiloGM],
+  [Units.MI, SystemsOfUnits.SI, Units.KiloM],
+  [Units.DEG_F, SystemsOfUnits.SI, Units.K],
+  [Units.DEG, SystemsOfUnits.SI, Units.MilliRAD],
+  [Units.QT_UK, SystemsOfUnits.SI, Units.L],
+  [Units.Stone_UK, SystemsOfUnits.SI, Units.KiloGM],
+  [Units.KiloM, SystemsOfUnits.IMPERIAL, Units.MI],
+  [Units.KiloGM, SystemsOfUnits.IMPERIAL, Units.LB],
+  [Units.NanoM, SystemsOfUnits.IMPERIAL, Units.MicroIN],
+  [Units.MegaGM, SystemsOfUnits.IMPERIAL, Units.TON_LONG],
+])(`Find corresponding unit in given unit system`, (unit, system, expected) => {
+  const actual = Qudt.correspondingUnitInSystem(unit, system) || "[no result]";
+  const actualString =
+    actual === expected ? " (correct)" : `, but was ${actual.toString()}`;
+  test(`${unit.toString()} in system '${
+    system.abbreviation
+  }' is expected to be ${expected.toString()}${actualString}`, () =>
+    expect(actual).toStrictEqual(expected));
+});
