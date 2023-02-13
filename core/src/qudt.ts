@@ -766,8 +766,8 @@ export class Qudt {
     let candidates = [...elegible];
     // get the unit that is closest in magnitude (conversionFactor)
     // recursively check for factor units
-    candidates = candidates.filter(
-      (u) => u.quantityKinds.some((q) => arrayContains(unit.quantityKinds, q))
+    candidates = candidates.filter((u) =>
+      u.quantityKinds.some((q) => arrayContains(unit.quantityKinds, q))
     );
     if (candidates.length === 1) {
       return candidates;
