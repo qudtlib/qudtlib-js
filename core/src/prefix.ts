@@ -1,10 +1,10 @@
-import { SupportsEquals } from "./baseTypes";
-import { LangString } from "./langString";
+import { SupportsEquals } from "./baseTypes.js";
+import { LangString } from "./langString.js";
 import {
   arrayEqualsIgnoreOrdering,
   compareUsingEquals,
   getLastIriElement,
-} from "./utils";
+} from "./utils.js";
 import { Decimal } from "decimal.js";
 
 export class Prefix implements SupportsEquals<Prefix> {

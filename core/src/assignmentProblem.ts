@@ -1,4 +1,4 @@
-import { arrayContains } from "./utils";
+import { arrayContains } from "./utils.js";
 export class AssignmentProblem {
   static instance(weights: number[][]) {
     const rows = weights.length;

@@ -1,7 +1,7 @@
-import { SupportsEquals } from "./baseTypes";
-import { FactorUnit } from "./factorUnit";
-import { arrayEqualsIgnoreOrdering, compareUsingEquals } from "./utils";
-import { Unit } from "./unit";
+import { SupportsEquals } from "./baseTypes.js";
+import { FactorUnit } from "./factorUnit.js";
+import { arrayEqualsIgnoreOrdering, compareUsingEquals } from "./utils.js";
+import { Unit } from "./unit.js";
 import { Decimal } from "decimal.js";
 
 /**

@@ -1,6 +1,6 @@
-import { Prefix } from "./prefix";
-import { QuantityKind } from "./quantityKind";
-import { Unit } from "./unit";
+import { Prefix } from "./prefix.js";
+import { QuantityKind } from "./quantityKind.js";
+import { Unit } from "./unit.js";
 
 export type UnitOrExponent = Unit | number;
 export type ExponentUnitPairs = UnitOrExponent[];
