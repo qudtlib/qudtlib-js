@@ -9,14 +9,16 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
-### Fixed
-
-- Fix 'module not found' error: splitting the one big `qudtlib.ts` file into many smaller ones in 4.0 actually did not work as the imports could not be resolved. Fixed that.
-- Adapt jest config to the fix above.
+## 4.1.1 - 2023-02-23
 
 ### Added
 
 - `npm run run-examples` now conveniently runs the examples. This script is also triggered in the complete build.
+
+### Fixed
+
+- Fix 'module not found' error: splitting the one big `qudtlib.ts` file into many smaller ones in 4.0 actually did not work as the imports could not be resolved. Fixed that.
+- Adapt jest config to the fix above.
 
 ## 4.1.0 - 2023-02-13
 
