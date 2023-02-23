@@ -9,12 +9,12 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
-## Fixed
+### Fixed
 
 - Fix 'module not found' error: splitting the one big `qudtlib.ts` file into many smaller ones in 4.0 actually did not work as the imports could not be resolved. Fixed that.
 - Adapt jest config to the fix above.
 
-## Added
+### Added
 
 - `npm run run-examples` now conveniently runs the examples. This script is also triggered in the complete build.
 
