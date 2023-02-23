@@ -1,6 +1,6 @@
-import { SupportsEquals } from "./baseTypes";
-import { LangString } from "./langString";
-import { getLastIriElement } from "./utils";
+import { SupportsEquals } from "./baseTypes.js";
+import { LangString } from "./langString.js";
+import { getLastIriElement } from "./utils.js";
 
 export class QuantityKind implements SupportsEquals<QuantityKind> {
   readonly iri: string;

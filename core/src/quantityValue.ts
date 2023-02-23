@@ -1,5 +1,5 @@
-import { SupportsEquals } from "./baseTypes";
-import { Unit } from "./unit";
+import { SupportsEquals } from "./baseTypes.js";
+import { Unit } from "./unit.js";
 import { Decimal } from "decimal.js";
 
 export class QuantityValue implements SupportsEquals<QuantityValue> {

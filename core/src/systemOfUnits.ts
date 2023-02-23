@@ -1,7 +1,7 @@
-import { SupportsEquals } from "./baseTypes";
-import { LangString } from "./langString";
-import { Unit } from "./unit";
-import { QudtNamespaces } from "./qudtNamespaces";
+import { SupportsEquals } from "./baseTypes.js";
+import { LangString } from "./langString.js";
+import { Unit } from "./unit.js";
+import { QudtNamespaces } from "./qudtNamespaces.js";
 
 export class SystemOfUnits implements SupportsEquals<SystemOfUnits> {
   readonly iri: string;

@@ -1,4 +1,4 @@
-import { Namespace } from "./namespace";
+import { Namespace } from "./namespace.js";
 
 export const QudtNamespaces = Object.freeze({
   quantityKind: new Namespace("http://qudt.org/vocab/quantitykind/", "qk"),

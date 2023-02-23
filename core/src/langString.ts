@@ -1,4 +1,4 @@
-import { SupportsEquals } from "./baseTypes";
+import { SupportsEquals } from "./baseTypes.js";
 
 export class LangString implements SupportsEquals<LangString> {
   readonly text: string;

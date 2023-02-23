@@ -1,4 +1,4 @@
-import { Unit } from "./unit";
+import { Unit } from "./unit.js";
 import {
   arrayContains,
   arrayDeduplicate,
@@ -9,20 +9,20 @@ import {
   getLastIriElement,
   NumberComparator,
   StringComparator,
-} from "./utils";
-import { QuantityKind } from "./quantityKind";
-import { Prefix } from "./prefix";
-import { DerivedUnitSearchMode } from "./derivedUnitSearchMode";
-import { FactorUnit } from "./factorUnit";
-import { FactorUnits } from "./factorUnits";
-import { AssignmentProblem } from "./assignmentProblem";
-import { QuantityValue } from "./quantityValue";
-import { LangString } from "./langString";
-import { Namespace } from "./namespace";
+} from "./utils.js";
+import { QuantityKind } from "./quantityKind.js";
+import { Prefix } from "./prefix.js";
+import { DerivedUnitSearchMode } from "./derivedUnitSearchMode.js";
+import { FactorUnit } from "./factorUnit.js";
+import { FactorUnits } from "./factorUnits.js";
+import { AssignmentProblem } from "./assignmentProblem.js";
+import { QuantityValue } from "./quantityValue.js";
+import { LangString } from "./langString.js";
+import { Namespace } from "./namespace.js";
 import { Decimal } from "decimal.js";
 3;
-import { QudtNamespaces } from "./qudtNamespaces";
-import { SystemOfUnits } from "./systemOfUnits";
+import { QudtNamespaces } from "./qudtNamespaces.js";
+import { SystemOfUnits } from "./systemOfUnits.js";
 
 export class QudtlibConfig {
   readonly units: Map<string, Unit>;

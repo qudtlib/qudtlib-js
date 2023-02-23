@@ -12,8 +12,9 @@
   ],
   "scripts": {
     "test": "jest --coverage --passWithNoTests",
+    "run-examples": "node ./examples/dist/mjs/examples.js",
     "build": "gulp",
-    "build-complete": "npm run check && npx lerna run build && npx lerna run test",
+    "build-complete": "npm run check && npx lerna run build && npm run run-examples && npx lerna run test",
     "format-apply": "npx prettier --write .",
     "lint": "npx eslint .",
     "format-check": "npx prettier --check .",

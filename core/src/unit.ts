@@ -1,10 +1,10 @@
-import { SupportsEquals } from "./baseTypes";
-import { LangString } from "./langString";
-import { Prefix } from "./prefix";
-import { QuantityKind } from "./quantityKind";
-import { FactorUnit } from "./factorUnit";
-import { arrayContains, getLastIriElement } from "./utils";
-import { FactorUnits } from "./factorUnits";
+import { SupportsEquals } from "./baseTypes.js";
+import { LangString } from "./langString.js";
+import { Prefix } from "./prefix.js";
+import { QuantityKind } from "./quantityKind.js";
+import { FactorUnit } from "./factorUnit.js";
+import { arrayContains, getLastIriElement } from "./utils.js";
+import { FactorUnits } from "./factorUnits.js";
 import { Decimal } from "decimal.js";
 
 export class Unit implements SupportsEquals<Unit> {

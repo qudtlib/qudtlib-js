@@ -1,12 +1,12 @@
-import { SupportsEquals } from "./baseTypes";
+import { SupportsEquals } from "./baseTypes.js";
 import {
   arrayDeduplicate,
   arrayEqualsIgnoreOrdering,
   checkInteger,
   compareUsingEquals,
-} from "./utils";
-import { FactorUnits } from "./factorUnits";
-import { Unit } from "./unit";
+} from "./utils.js";
+import { FactorUnits } from "./factorUnits.js";
+import { Unit } from "./unit.js";
 import { Decimal } from "decimal.js";
 
 /**

@@ -1,4 +1,4 @@
-import { SupportsEquals } from "./baseTypes";
+import { SupportsEquals } from "./baseTypes.js";
 
 export function getLastIriElement(iri: string) {
   return iri.replaceAll(/.+\/([^\/]+)/g, "$1");
