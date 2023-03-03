@@ -9,6 +9,14 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+### Changed
+
+- Updated QUDT to [v2.1.25](https://github.com/qudt/qudt-public-repo/releases/tag/v2.1.25)
+
+### Added
+
+- Add qudt namespace to Qudt.NAMESPACES
+
 ## 4.1.1 - 2023-02-23
 
 ### Added
