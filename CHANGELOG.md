@@ -23,14 +23,6 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 - Added currency symbols for major currencies
 
-### Added
-
-- Added currency symbols for major currencies
-
-### Added
-
-- Added currency symbols for major currencies
-
 ## 4.1.1 - 2023-02-23
 
 ### Added
