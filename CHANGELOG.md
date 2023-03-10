@@ -9,19 +9,18 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 4.3.0 - 2023-03-10
+
 ## 4.2.0 - 2023-03-03
 
 ### Added
 
 - Add qudt namespace to Qudt.NAMESPACES
+- Added currency symbols for major currencies
 
 ### Changed
 
 - Updated QUDT to [v2.1.25](https://github.com/qudt/qudt-public-repo/releases/tag/v2.1.25)
-
-### Added
-
-- Added currency symbols for major currencies
 
 ## 4.1.1 - 2023-02-23
 
