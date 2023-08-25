@@ -9,6 +9,10 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+### Changed
+
+- Updated QUDT to [v2.1.29](https://github.com/qudt/qudt-public-repo/releases/tag/v2.1.29)
+
 ## 4.3.0 - 2023-03-10
 
 ## 4.2.0 - 2023-03-03
