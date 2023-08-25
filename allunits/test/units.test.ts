@@ -81,7 +81,7 @@ test("QuantityKinds", () => {
 describe.each([
   ["Newton Meter", Units.N__M],
   ["NEWTON_METER", Units.N__M],
-  ["EUR", Units.Euro],
+  ["EUR", Units.EUR_Currency],
 ])("Qudt.unitFromLabel()", (label, expected) =>
   test(`Qudt.unitFromLabel(${label}) == ${expected}`, () =>
     expect(Qudt.unitFromLabel(label)).toBe(expected))
@@ -1632,7 +1632,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.SI) ", () => {
   expect(units.includes(Units.FT)).toBe(false);
   expect(units.includes(Units.OZ)).toBe(false);
   expect(units.includes(Units.N__PER__M3)).toBe(true);
-  expect(units.length).toBe(876);
+  expect(units.length).toBe(1002);
 });
 
 test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
@@ -1640,7 +1640,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
   expect(units.includes(Units.M)).toBe(false);
   expect(units.includes(Units.KiloGM)).toBe(false);
   expect(units.includes(Units.A)).toBe(false);
-  expect(units.includes(Units.SEC)).toBe(false);
+  expect(units.includes(Units.SEC)).toBe(true);
   expect(units.includes(Units.CD)).toBe(false);
   expect(units.includes(Units.MOL)).toBe(false);
   expect(units.includes(Units.UNITLESS)).toBe(false);
@@ -1664,13 +1664,13 @@ describe.each([
   [Units.LB, SystemsOfUnits.SI, Units.KiloGM],
   [Units.MI, SystemsOfUnits.SI, Units.KiloM],
   [Units.DEG_F, SystemsOfUnits.SI, Units.K],
-  [Units.DEG, SystemsOfUnits.SI, Units.MilliRAD],
+  [Units.DEG, SystemsOfUnits.SI, Units.DEG],
   [Units.QT_UK, SystemsOfUnits.SI, Units.L],
   [Units.Stone_UK, SystemsOfUnits.SI, Units.KiloGM],
   [Units.KiloM, SystemsOfUnits.IMPERIAL, Units.MI],
   [Units.KiloGM, SystemsOfUnits.IMPERIAL, Units.LB],
   [Units.NanoM, SystemsOfUnits.IMPERIAL, Units.MicroIN],
-  [Units.MegaGM, SystemsOfUnits.IMPERIAL, Units.TON_LONG],
+  [Units.MegaGM, SystemsOfUnits.IMPERIAL, Units.TON_UK],
 ])(`Find corresponding unit in given unit system`, (unit, system, expected) => {
   const actual = Qudt.correspondingUnitInSystem(unit, system) || "[no result]";
   const actualString =

@@ -1,6 +1,6 @@
 {
   "name": "@qudtlib/core",
-  "version": "4.3.0",
+  "version": "4.4.0",
   "description": "Data model for QUDTLib",
   "main": "dist/cjs/qudtlib.js",
   "module": "dist/mjs/qudtlib.js",
@@ -32,8 +32,8 @@
   "license": "CC-BY-4.0",
   "devDependencies": {
     "@types/jest": "^29.2.0",
-    "@typescript-eslint/eslint-plugin": "^5.38.1",
-    "@typescript-eslint/parser": "^5.38.1",
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
     "del": "^7.0.0",
     "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.5.0",
