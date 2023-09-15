@@ -105,6 +105,18 @@ export class Qudt {
     return Qudt.NAMESPACES.unit.makeIriInNamespace(localname);
   }
 
+  static currencyFromLocalname(localname: string): Unit | undefined {
+    return Qudt.unit(Qudt.currencyIriFromLocalname(localname));
+  }
+
+  static currencyFromLocalnameRequired(localname: string): Unit {
+    return Qudt.unitRequired(Qudt.currencyIriFromLocalname(localname));
+  }
+
+  static currencyIriFromLocalname(localname: string): string {
+    return Qudt.NAMESPACES.currency.makeIriInNamespace(localname);
+  }
+
   static quantityKind(quantityKindIri: string): QuantityKind | undefined {
     return config.quantityKinds.get(quantityKindIri);
   }

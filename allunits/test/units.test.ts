@@ -66,13 +66,12 @@ test("Units", () => {
   const meter: Unit = Units.M;
   expect(meter.iri).toEqual(Qudt.NAMESPACES.unit.makeIriInNamespace("M"));
   expect(meter.hasLabel("Meter")).toBe(true);
-  expect(meter.hasLabel("Metre")).toBe(true);
-  expect(meter.getLabelForLanguageTag("en")).toBe("Metre");
+  expect(meter.getLabelForLanguageTag("en")).toBe("metre");
 });
 
 test("QuantityKinds", () => {
   const length: QuantityKind = QuantityKinds.Length;
-  expect(length.hasLabel("Length")).toBe(true);
+  expect(length.hasLabel("length")).toBe(true);
   expect(length.iri).toBe(
     Qudt.NAMESPACES.quantityKind.makeIriInNamespace("Length")
   );
@@ -81,7 +80,7 @@ test("QuantityKinds", () => {
 describe.each([
   ["Newton Meter", Units.N__M],
   ["NEWTON_METER", Units.N__M],
-  ["EUR", Units.Euro],
+  ["EUR", Units.EUR_Currency],
 ])("Qudt.unitFromLabel()", (label, expected) =>
   test(`Qudt.unitFromLabel(${label}) == ${expected}`, () =>
     expect(Qudt.unitFromLabel(label)).toBe(expected))
@@ -216,13 +215,12 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(Unit, number)", () => {
       -1
     )
   ).toStrictEqual([Units.PER__K]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.ALL,
-      Units.M,
-      1
-    )
-  ).toStrictEqual([Units.M]);
+  const result = Qudt.derivedUnitsFromExponentUnitPairs(
+    DerivedUnitSearchMode.ALL,
+    Units.M,
+    1
+  );
+  expect(result).toStrictEqual([Units.M, Units.M3__PER__M2]);
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using Iris]", () => {
@@ -247,13 +245,12 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using Iris]", () =>
       -1
     )
   ).toStrictEqual([Units.PER__K]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.ALL,
-      Units.M.iri,
-      1
-    )
-  ).toStrictEqual([Units.M]);
+  const result = Qudt.derivedUnitsFromExponentUnitPairs(
+    DerivedUnitSearchMode.ALL,
+    Units.M.iri,
+    1
+  );
+  expect(result).toStrictEqual([Units.M, Units.M3__PER__M2]);
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using localnames]", () => {
@@ -268,7 +265,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using localnames]",
   ).toStrictEqual([Units.PER__K]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 1)
-  ).toStrictEqual([Units.M]);
+  ).toStrictEqual([Units.M, Units.M3__PER__M2]);
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () => {
@@ -296,6 +293,13 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () 
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
       DerivedUnitSearchMode.ALL,
+      "METER",
+      1
+    )
+  ).toStrictEqual([Units.M, Units.M3__PER__M2]);
+  expect(
+    Qudt.derivedUnitsFromExponentUnitPairs(
+      DerivedUnitSearchMode.BEST_MATCH,
       "METER",
       1
     )
@@ -1632,7 +1636,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.SI) ", () => {
   expect(units.includes(Units.FT)).toBe(false);
   expect(units.includes(Units.OZ)).toBe(false);
   expect(units.includes(Units.N__PER__M3)).toBe(true);
-  expect(units.length).toBe(876);
+  expect(units.length).toBe(1002);
 });
 
 test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
@@ -1640,15 +1644,15 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
   expect(units.includes(Units.M)).toBe(false);
   expect(units.includes(Units.KiloGM)).toBe(false);
   expect(units.includes(Units.A)).toBe(false);
-  expect(units.includes(Units.SEC)).toBe(false);
+  expect(units.includes(Units.SEC)).toBe(true);
   expect(units.includes(Units.CD)).toBe(false);
   expect(units.includes(Units.MOL)).toBe(false);
-  expect(units.includes(Units.UNITLESS)).toBe(false);
+  expect(units.includes(Units.UNITLESS)).toBe(true);
   expect(units.includes(Units.K)).toBe(false);
   expect(units.includes(Units.FT)).toBe(true);
   expect(units.includes(Units.OZ)).toBe(true);
   expect(units.includes(Units.N__PER__M3)).toBe(false);
-  expect(units.length).toBe(153);
+  expect(units.length).toBe(421);
 });
 
 test("Unit.normalize()", () => {
@@ -1664,13 +1668,13 @@ describe.each([
   [Units.LB, SystemsOfUnits.SI, Units.KiloGM],
   [Units.MI, SystemsOfUnits.SI, Units.KiloM],
   [Units.DEG_F, SystemsOfUnits.SI, Units.K],
-  [Units.DEG, SystemsOfUnits.SI, Units.MilliRAD],
+  [Units.DEG, SystemsOfUnits.SI, Units.DEG],
   [Units.QT_UK, SystemsOfUnits.SI, Units.L],
   [Units.Stone_UK, SystemsOfUnits.SI, Units.KiloGM],
   [Units.KiloM, SystemsOfUnits.IMPERIAL, Units.MI],
   [Units.KiloGM, SystemsOfUnits.IMPERIAL, Units.LB],
   [Units.NanoM, SystemsOfUnits.IMPERIAL, Units.MicroIN],
-  [Units.MegaGM, SystemsOfUnits.IMPERIAL, Units.TON_LONG],
+  [Units.MegaGM, SystemsOfUnits.IMPERIAL, Units.TON_UK],
 ])(`Find corresponding unit in given unit system`, (unit, system, expected) => {
   const actual = Qudt.correspondingUnitInSystem(unit, system) || "[no result]";
   const actualString =
