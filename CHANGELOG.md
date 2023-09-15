@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 5.0.0-beta.0 - 2023-09-15
+
 ## 4.3.0 - 2023-03-10
 
 ## 4.2.0 - 2023-03-03
