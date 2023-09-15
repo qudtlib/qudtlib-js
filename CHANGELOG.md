@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 5.0.0-beta.0 - 2023-09-15
+
 ### Changed
 
 - Breaking change: special handling for currencies (cannot be instantiated by localname as before)
