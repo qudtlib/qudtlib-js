@@ -9,6 +9,15 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+### Changed
+
+- Breaking change: special handling for currencies (cannot be instantiated by localname as before)
+- Changes to the system of unit handling likely to produce different results in some cases
+
+### Added
+
+- `Qudt.currencyFromLocalName*` methods to obtain currency units
+
 ## 4.3.0 - 2023-03-10
 
 ## 4.2.0 - 2023-03-03
