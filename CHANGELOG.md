@@ -9,6 +9,11 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+### Fixed
+
+- `quantitykind:Currency` was missing in 5.0.0. Its definition was moved to the currencies file in the QUDT repo
+  which used to be ingested only for units code generation. Now it is also used for quantity kinds code generation.
+
 ## 5.0.0 - 2023-09-15
 
 ## 5.0.0-beta.0 - 2023-09-15
