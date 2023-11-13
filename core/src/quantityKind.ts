@@ -9,6 +9,7 @@ export class QuantityKind implements SupportsEquals<QuantityKind> {
   readonly broaderQuantityKindIris: string[];
   readonly dimensionVectorIri?: string;
   readonly symbol?: string;
+  readonly exactMatchIris: string[];
 
   constructor(
     iri: string,
@@ -19,6 +20,7 @@ export class QuantityKind implements SupportsEquals<QuantityKind> {
     this.iri = iri;
     this.applicableUnitIris = [];
     this.broaderQuantityKindIris = [];
+    this.exactMatchIris = [];
     this.dimensionVectorIri = dimensionVector;
     this.symbol = symbol;
     if (typeof labels === "undefined") {
@@ -47,6 +49,9 @@ export class QuantityKind implements SupportsEquals<QuantityKind> {
 
   addBroaderQuantityKindIri(quantityKind: string): void {
     this.broaderQuantityKindIris.push(quantityKind);
+  }
+  addExactMatchIri(exactMatch: string): void {
+    this.exactMatchIris.push(exactMatch);
   }
 
   equals(other?: QuantityKind): boolean {

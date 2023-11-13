@@ -18,6 +18,7 @@ export class Unit implements SupportsEquals<Unit> {
   readonly conversionOffset: Decimal;
   readonly quantityKindIris: string[];
   readonly quantityKinds: QuantityKind[] = [];
+  readonly exactMatchIris: string[];
   readonly symbol?: string;
   readonly scalingOfIri?: string;
   scalingOf?: Unit;
@@ -28,6 +29,7 @@ export class Unit implements SupportsEquals<Unit> {
   constructor(
     iri: string,
     quantityKindIris?: string[],
+    exactMatchIris?: string[],
     dimensionVectorIri?: string,
     conversionMultiplier?: Decimal,
     conversionOffset?: Decimal,
@@ -59,6 +61,11 @@ export class Unit implements SupportsEquals<Unit> {
       this.quantityKindIris = [];
     } else {
       this.quantityKindIris = quantityKindIris;
+    }
+    if (typeof exactMatchIris === "undefined") {
+      this.exactMatchIris = [];
+    } else {
+      this.exactMatchIris = exactMatchIris;
     }
     if (typeof labels === "undefined") {
       this.labels = [];
@@ -197,6 +204,9 @@ export class Unit implements SupportsEquals<Unit> {
 
   addQuantityKindIri(quantityKindIri: string): void {
     this.quantityKindIris.push(quantityKindIri);
+  }
+  addExactMatchIri(exactMatchIri: string): void {
+    this.exactMatchIris.push(exactMatchIri);
   }
 
   hasLabel(label: string): boolean {
