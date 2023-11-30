@@ -162,6 +162,22 @@ export class Qudt {
     return result;
   }
 
+  static isBroaderQuantityKind(
+    suspectedBroader: QuantityKind,
+    quantityKind: QuantityKind
+  ): boolean {
+    const broader = quantityKind.broaderQuantityKindIris;
+    if (broader.length === 0) {
+      return false;
+    }
+    if (broader.includes(suspectedBroader.iri)) {
+      return true;
+    }
+    return broader.some((b) =>
+      Qudt.isBroaderQuantityKind(Qudt.quantityKindRequired(b), suspectedBroader)
+    );
+  }
+
   static prefixFromLabelRequired(label: string): Prefix {
     const match = this.prefixFromLabel(label);
     if (!match) throw `No prefix found for label ${label}`;
