@@ -28,6 +28,10 @@ function modeToString(mode: DerivedUnitSearchMode): string {
   throw "not a valid mode: " + mode;
 }
 
+function toSortedIriList(unitList: Array<Unit>): Array<string> {
+  return unitList.map((u) => u.iri).sort();
+}
+
 test("Qudt.unit()", () => {
   expect(Qudt.unit(Qudt.NAMESPACES.unit.makeIriInNamespace("M"))).toBe(Units.M);
 });
@@ -208,19 +212,24 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(Unit, number)", () => {
       2
     )
   ).toStrictEqual([Units.M2]);
-  expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.ALL,
-      Units.K,
-      -1
-    )
-  ).toStrictEqual([Units.PER__K]);
-  const result = Qudt.derivedUnitsFromExponentUnitPairs(
+  let result = Qudt.derivedUnitsFromExponentUnitPairs(
+    DerivedUnitSearchMode.ALL,
+    Units.K,
+    -1
+  );
+  let expected = [Units.KiloGM__PER__KiloGM__K, Units.PER__DEG_C, Units.PER__K]
+    .map((u) => u.iri)
+    .sort();
+  expect(result.map((u) => u.iri).sort()).toStrictEqual(expected);
+  result = Qudt.derivedUnitsFromExponentUnitPairs(
     DerivedUnitSearchMode.ALL,
     Units.M,
     1
   );
-  expect(result).toStrictEqual([Units.M, Units.M3__PER__M2]);
+  expected = [Units.M, Units.M3__PER__M2, Units.M2__PER__M]
+    .map((u) => u.iri)
+    .sort();
+  expect(result.map((u) => u.iri).sort()).toStrictEqual(expected);
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using Iris]", () => {
@@ -239,18 +248,28 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using Iris]", () =>
     )
   ).toStrictEqual([Units.M2]);
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.ALL,
-      Units.K.iri,
-      -1
+    toSortedIriList(
+      Qudt.derivedUnitsFromExponentUnitPairs(
+        DerivedUnitSearchMode.ALL,
+        Units.K.iri,
+        -1
+      )
     )
-  ).toStrictEqual([Units.PER__K]);
+  ).toStrictEqual(
+    toSortedIriList([
+      Units.PER__K,
+      Units.PER__DEG_C,
+      Units.KiloGM__PER__KiloGM__K,
+    ])
+  );
   const result = Qudt.derivedUnitsFromExponentUnitPairs(
     DerivedUnitSearchMode.ALL,
     Units.M.iri,
     1
   );
-  expect(result).toStrictEqual([Units.M, Units.M3__PER__M2]);
+  expect(toSortedIriList(result)).toStrictEqual(
+    toSortedIriList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
+  );
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using localnames]", () => {
@@ -261,11 +280,23 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using localnames]",
     Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 2)
   ).toStrictEqual([Units.M2]);
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "K", -1)
-  ).toStrictEqual([Units.PER__K]);
+    toSortedIriList(
+      Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "K", -1)
+    )
+  ).toStrictEqual(
+    toSortedIriList([
+      Units.PER__K,
+      Units.PER__DEG_C,
+      Units.KiloGM__PER__KiloGM__K,
+    ])
+  );
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 1)
-  ).toStrictEqual([Units.M, Units.M3__PER__M2]);
+    toSortedIriList(
+      Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 1)
+    )
+  ).toStrictEqual(
+    toSortedIriList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
+  );
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () => {
@@ -289,14 +320,24 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () 
       "KELVIN",
       -1
     )
-  ).toStrictEqual([Units.PER__K]);
+      .map((u) => u.iri)
+      .sort()
+  ).toStrictEqual(
+    [Units.PER__K, Units.PER__DEG_C, Units.KiloGM__PER__KiloGM__K]
+      .map((u) => u.iri)
+      .sort()
+  );
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.ALL,
-      "METER",
-      1
+    toSortedIriList(
+      Qudt.derivedUnitsFromExponentUnitPairs(
+        DerivedUnitSearchMode.ALL,
+        "METER",
+        1
+      )
     )
-  ).toStrictEqual([Units.M, Units.M3__PER__M2]);
+  ).toStrictEqual(
+    toSortedIriList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
+  );
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
       DerivedUnitSearchMode.BEST_MATCH,
@@ -519,7 +560,7 @@ describe.each([
   [
     14,
     DerivedUnitSearchMode.ALL,
-    [Units.W__PER__M2__K],
+    [Units.W__PER__M2__K, Units.KiloGM__PER__SEC3__K],
     Units.KiloGM,
     1,
     Units.K,
@@ -1636,7 +1677,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.SI) ", () => {
   expect(units.includes(Units.FT)).toBe(false);
   expect(units.includes(Units.OZ)).toBe(false);
   expect(units.includes(Units.N__PER__M3)).toBe(true);
-  expect(units.length).toBe(1002);
+  expect(units.length).toBe(1061);
 });
 
 test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
@@ -1652,7 +1693,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
   expect(units.includes(Units.FT)).toBe(true);
   expect(units.includes(Units.OZ)).toBe(true);
   expect(units.includes(Units.N__PER__M3)).toBe(false);
-  expect(units.length).toBe(421);
+  expect(units.length).toBe(427);
 });
 
 test("Unit.normalize()", () => {
