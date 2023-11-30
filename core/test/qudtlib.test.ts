@@ -137,6 +137,7 @@ test("new QuantityValue", () => {
   const degC = new Unit(
     "http://qudt.org/vocab/unit/DEG_C",
     [],
+    [],
     "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
     new Decimal("1.0"),
     new Decimal("273.15"),
@@ -148,6 +149,7 @@ test("new QuantityValue", () => {
   );
   const degF = new Unit(
     "http://qudt.org/vocab/unit/DEG_F",
+    [],
     [],
     "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
     new Decimal("0.5555555555555556"),
@@ -391,6 +393,7 @@ test("Unit.getLeafFactorUnitsWithCumulativeExponents", () => {
 const degC = new Unit(
   "http://qudt.org/vocab/unit/DEG_C",
   [],
+  [],
   "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
   new Decimal("1.0"),
   new Decimal("273.15"),
@@ -402,6 +405,7 @@ const degC = new Unit(
 );
 const degF = new Unit(
   "http://qudt.org/vocab/unit/DEG_F",
+  [],
   [],
   "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
   new Decimal("0.5555555555555556"),
@@ -415,6 +419,7 @@ const degF = new Unit(
 const degK = new Unit(
   "http://qudt.org/vocab/unit/DEG_F",
   [],
+  [],
   "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
   new Decimal("0.5555555555555556"),
   new Decimal("459.669607"),
@@ -426,6 +431,7 @@ const degK = new Unit(
 );
 const m = new Unit(
   "http://qudt.org/vocab/unit/M",
+  [],
   [],
   "http://qudt.org/vocab/dimensionvector/A0E0L1I0M0H0T0D0",
   undefined,
@@ -439,6 +445,7 @@ const m = new Unit(
 const kiloM = new Unit(
   "http://qudt.org/vocab/unit/KiloM",
   [],
+  [],
   "http://qudt.org/vocab/dimensionvector/A0E0L1I0M0H0T0D0",
   new Decimal("1000"),
   undefined,
@@ -451,6 +458,7 @@ const kiloM = new Unit(
 kiloM.scalingOf = m;
 const degC__PER__M = new Unit(
   "http://qudt.org/vocab/unit/DEG_C-PER-M",
+  [],
   [],
   "http://qudt.org/vocab/dimensionvector/A0E0L-1I0M0H1T0D0",
   new Decimal("1.0")
