@@ -30,6 +30,10 @@ export class QuantityKind implements SupportsEquals<QuantityKind> {
     }
   }
 
+  getIriLocalname(): string {
+    return getLastIriElement(this.iri);
+  }
+
   addLabel(label: LangString): void {
     this.labels.push(label);
   }

@@ -95,6 +95,10 @@ export class Unit implements SupportsEquals<Unit> {
     return "unit:" + getLastIriElement(this.iri);
   }
 
+  getIriLocalname(): string {
+    return getLastIriElement(this.iri);
+  }
+
   matchesFactorUnitSpec(...factorUnitSpec: (number | Unit)[]): boolean {
     return this.matches(FactorUnits.ofFactorUnitSpec(...factorUnitSpec));
   }
