@@ -217,9 +217,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(Unit, number)", () => {
     Units.K,
     -1
   );
-  let expected = [Units.KiloGM__PER__KiloGM__K, Units.PER__DEG_C, Units.PER__K]
-    .map((u) => u.iri)
-    .sort();
+  let expected = [Units.PER__DEG_C, Units.PER__K].map((u) => u.iri).sort();
   expect(result.map((u) => u.iri).sort()).toStrictEqual(expected);
   result = Qudt.derivedUnitsFromExponentUnitPairs(
     DerivedUnitSearchMode.ALL,
@@ -255,13 +253,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using Iris]", () =>
         -1
       )
     )
-  ).toStrictEqual(
-    toSortedIriList([
-      Units.PER__K,
-      Units.PER__DEG_C,
-      Units.KiloGM__PER__KiloGM__K,
-    ])
-  );
+  ).toStrictEqual(toSortedIriList([Units.PER__K, Units.PER__DEG_C]));
   const result = Qudt.derivedUnitsFromExponentUnitPairs(
     DerivedUnitSearchMode.ALL,
     Units.M.iri,
@@ -283,13 +275,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using localnames]",
     toSortedIriList(
       Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "K", -1)
     )
-  ).toStrictEqual(
-    toSortedIriList([
-      Units.PER__K,
-      Units.PER__DEG_C,
-      Units.KiloGM__PER__KiloGM__K,
-    ])
-  );
+  ).toStrictEqual(toSortedIriList([Units.PER__K, Units.PER__DEG_C]));
   expect(
     toSortedIriList(
       Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 1)
@@ -322,11 +308,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () 
     )
       .map((u) => u.iri)
       .sort()
-  ).toStrictEqual(
-    [Units.PER__K, Units.PER__DEG_C, Units.KiloGM__PER__KiloGM__K]
-      .map((u) => u.iri)
-      .sort()
-  );
+  ).toStrictEqual([Units.PER__K, Units.PER__DEG_C].map((u) => u.iri).sort());
   expect(
     toSortedIriList(
       Qudt.derivedUnitsFromExponentUnitPairs(
@@ -1677,7 +1659,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.SI) ", () => {
   expect(units.includes(Units.FT)).toBe(false);
   expect(units.includes(Units.OZ)).toBe(false);
   expect(units.includes(Units.N__PER__M3)).toBe(true);
-  expect(units.length).toBe(1061);
+  expect(units.length).toBe(1058);
 });
 
 test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
