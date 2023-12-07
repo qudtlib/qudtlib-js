@@ -17,7 +17,7 @@ gulp.task("compress", function () {
     .pipe(
       gulp.dest("dist", {
         sourcemaps: ".",
-      })
+      }),
     );
 });
 gulp.task("transpile-mjs", function () {
@@ -27,7 +27,7 @@ gulp.task("transpile-mjs", function () {
     .pipe(
       gulp.dest("dist/mjs/", {
         sourcemaps: ".",
-      })
+      }),
     );
 });
 gulp.task("transpile-cjs", function () {
@@ -57,7 +57,7 @@ gulp.task(
     "copyDTS",
     "deleteDuplicateDTS",
     "compress",
-    "writePackageJsons"
-  )
+    "writePackageJsons",
+  ),
 );
 gulp.task("default", gulp.series("clean", "build"));

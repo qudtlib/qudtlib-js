@@ -49,7 +49,7 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
         }
         return mapping;
       },
-      new Map<string, FactorUnit>()
+      new Map<string, FactorUnit>(),
     );
     for (const fu of factorUnitsByKind.values()) {
       ret.push(fu);
@@ -70,7 +70,7 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
         }
         return mapping;
       },
-      new Map<Unit, number>()
+      new Map<Unit, number>(),
     );
     for (const [unit, exponent] of exponentsByUnit.entries()) {
       if (Math.abs(exponent) > 0) {
@@ -168,19 +168,19 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
   getAllPossibleFactorUnitCombinations(): FactorUnit[][] {
     const subResult = this.unit.getAllPossibleFactorUnitCombinations();
     const result = subResult.map((fus) =>
-      fus.map((fu) => fu.pow(this.exponent))
+      fus.map((fu) => fu.pow(this.exponent)),
     );
     return arrayDeduplicate(result, (left, right) =>
-      arrayEqualsIgnoreOrdering(left, right, compareUsingEquals)
+      arrayEqualsIgnoreOrdering(left, right, compareUsingEquals),
     );
   }
 
   static getAllPossibleFactorUnitCombinations(
-    factorUnits: FactorUnit[]
+    factorUnits: FactorUnit[],
   ): FactorUnit[][] {
     const numFactors = factorUnits.length;
     const subResults: FactorUnit[][][] = factorUnits.map((fu) =>
-      fu.getAllPossibleFactorUnitCombinations()
+      fu.getAllPossibleFactorUnitCombinations(),
     );
     const subResultLengths = subResults.map((s) => s.length);
     const currentIndices: number[] = [];
@@ -206,7 +206,7 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
       results.push(FactorUnit.reduceExponents(curResult));
     } while (!currentIndices.every((val) => val === 0));
     return arrayDeduplicate(results, (left, right) =>
-      arrayEqualsIgnoreOrdering(left, right, compareUsingEquals)
+      arrayEqualsIgnoreOrdering(left, right, compareUsingEquals),
     );
   }
 

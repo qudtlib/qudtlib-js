@@ -15,7 +15,7 @@ export class QuantityKind implements SupportsEquals<QuantityKind> {
     iri: string,
     dimensionVector?: string,
     symbol?: string,
-    labels?: LangString[]
+    labels?: LangString[],
   ) {
     this.iri = iri;
     this.applicableUnitIris = [];
