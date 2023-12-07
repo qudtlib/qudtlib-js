@@ -34,7 +34,7 @@
     "@types/jest": "^29.2.0",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
-    "del": "^7.0.0",
+    "del": "^7.1.0",
     "eslint": "^8.24.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -50,6 +50,6 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "decimal.js": "10.4.2"
+    "decimal.js": "^10.4.3"
   }
 }

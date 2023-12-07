@@ -1,6 +1,5 @@
 import {
   DerivedUnitSearchMode,
-  Decimal,
   FactorUnit,
   FactorUnits,
   Prefix,
@@ -18,6 +17,53 @@ import {
   arrayEqualsIgnoreOrdering,
   compareUsingEquals,
 } from "../../core/src/utils";
+import { expect } from "@jest/globals";
+import { Decimal } from "decimal.js";
+
+function areDecimalsEqual(a: Decimal, b: Decimal): boolean | undefined {
+  const isADecimal = a.constructor.name === "Decimal";
+  const isBDecimal = b.constructor.name === "Decimal";
+
+  if (isADecimal && isBDecimal) {
+    return a.equals(b);
+  } else if (isADecimal === isBDecimal) {
+    return undefined;
+  } else {
+    return false;
+  }
+}
+function areUnitsEqual(a: Unit, b: Unit): boolean | undefined {
+  const isAUnit = a.constructor.name === "Unit";
+  const isBUnit = b.constructor.name === "Unit";
+
+  if (isAUnit && isBUnit) {
+    return a.iri === b.iri;
+  } else if (isAUnit === isBUnit) {
+    return undefined;
+  } else {
+    return false;
+  }
+}
+function areQuantityKindsEqual(
+  a: QuantityKind,
+  b: QuantityKind
+): boolean | undefined {
+  const isAQuantityKind = a.constructor.name === "QuantityKind";
+  const isBQuantityKind = b.constructor.name === "QuantityKind";
+
+  if (isAQuantityKind && isBQuantityKind) {
+    return a.iri === b.iri;
+  } else if (isAQuantityKind === isBQuantityKind) {
+    return undefined;
+  } else {
+    return false;
+  }
+}
+expect.addEqualityTesters([
+  areDecimalsEqual,
+  areUnitsEqual,
+  areQuantityKindsEqual,
+]);
 
 function modeToString(mode: DerivedUnitSearchMode): string {
   if (mode === DerivedUnitSearchMode.BEST_MATCH) {
@@ -62,7 +108,7 @@ test("Qudt.prefixFromLocalname()", () => {
 
 test("Prefixes", () => {
   const kilo: Prefix = Prefixes.Kilo;
-  expect(kilo.multiplier).toStrictEqual(new Decimal(1000));
+  expect(kilo.multiplier).toEqual(new Decimal(1000));
   expect(kilo.iri).toEqual(Qudt.NAMESPACES.prefix.makeIriInNamespace("Kilo"));
 });
 
@@ -1617,10 +1663,10 @@ test("Qudt.testSimplifyFactorUnits()", () => {
 test("Qudt.scaleToBaseUnit(Unit)", () => {
   let base = Qudt.scaleToBaseUnit(Units.KiloM);
   expect(base.unit).toBe(Units.M);
-  expect(base.factor).toStrictEqual(new Decimal("1000"));
+  expect(base.factor).toEqual(new Decimal("1000"));
   base = Qudt.scaleToBaseUnit(Units.M);
   expect(base.unit).toBe(Units.M);
-  expect(base.factor).toStrictEqual(new Decimal("1"));
+  expect(base.factor).toEqual(new Decimal("1"));
 });
 
 test("Unit.getUnitOfSystems()", () => {
