@@ -7,17 +7,19 @@ import {
   QuantityValue,
   Qudt,
   Unit,
+} from "@qudtlib/core/dist";
+import { expect } from "@jest/globals";
+import { Decimal } from "decimal.js";
+import {
   Prefixes,
-  QuantityKinds,
   Units,
+  QuantityKinds,
   SystemsOfUnits,
-} from "../src/units";
+} from "../src/units.js";
 import {
   arrayEqualsIgnoreOrdering,
   compareUsingEquals,
-} from "../../core/src/utils";
-import { expect } from "@jest/globals";
-import { Decimal } from "decimal.js";
+} from "@qudtlib/core/dist/utils";
 
 function areDecimalsEqual(a: Decimal, b: Decimal): boolean | undefined {
   const isADecimal = a.constructor.name === "Decimal";

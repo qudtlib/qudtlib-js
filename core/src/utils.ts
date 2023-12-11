@@ -121,7 +121,7 @@ export function arrayMin<Type>(arr: Type[], cmp: OrderComparator<Type>): Type {
   return min;
 }
 
-export function npmarrayMax<Type>(arr: Type[], cmp: OrderComparator<Type>): Type {
+export function arrayMax<Type>(arr: Type[], cmp: OrderComparator<Type>): Type {
   return arrayMin(arr, (left, right) => -1 * cmp(left, right));
 }
 
