@@ -143,7 +143,7 @@ export class NaiveAlgorithmInstance extends Instance {
     }
     if (solution.weight) {
       const bestAttainableScore = this.sum(
-        this.minPerRow(row, solution.assignment),
+        this.minPerRow(row, solution.assignment)
       );
       if (!this.isLowerThanBestWeight(solution.weight + bestAttainableScore)) {
         return;
@@ -183,7 +183,7 @@ export class NaiveAlgorithmInstance extends Instance {
 
   private rowSortedAscending(
     row: number,
-    skipCols: number[],
+    skipCols: number[]
   ): ValueWithIndex[] {
     const sorted: ValueWithIndex[] = [];
     for (let i = 0; i < this.cols; i++) {

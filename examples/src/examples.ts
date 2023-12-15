@@ -14,7 +14,7 @@ value = new Decimal(38.5);
 converted = Qudt.convert(
   value,
   Qudt.unitFromLabelRequired(fromLabel),
-  Qudt.unitFromLabelRequired(toLabel),
+  Qudt.unitFromLabelRequired(toLabel)
 );
 console.log("\n# Celsius to Fahrenheit:");
 console.log(`${value}°C = ${converted}°F`); // 38.5°C = 101.30039299999995512°F
@@ -30,7 +30,7 @@ console.log(`${value} kilogram = ${converted} pounds`); // 98 kilogram = 216.053
 // all units, quantitykinds and prefixes have `toString` methods that use the units' symbol if possible:
 console.log("\n# using Unit.toString():");
 console.log(
-  `${value}${Units.KiloGM.toString()} = ${converted}${Units.LB.toString()}`,
+  `${value}${Units.KiloGM.toString()} = ${converted}${Units.LB.toString()}`
 ); // 98kg = 216.05301694118002911lbm
 
 // If you have factor units, you can instantiate the derived units:
@@ -41,14 +41,14 @@ const derived = Qudt.derivedUnitsFromExponentUnitPairs(
   Units.M,
   1,
   Units.SEC,
-  -2,
+  -2
 );
 const newton = derived[0];
 value = new Decimal(250);
 converted = Qudt.convert(value, newton, Units.KiloP);
 console.log("\n# deriving N from (m kg s^-2):");
 console.log(
-  `${value}${newton.toString()} = ${converted}${Units.KiloP.toString()}`,
+  `${value}${newton.toString()} = ${converted}${Units.KiloP.toString()}`
 ); // 250N = 25.492905324448206064kp
 
 // if you need the factor units, you can get them from the unit
@@ -73,12 +73,12 @@ console.log(`F =  (${leafFactorsF})`); // F =  (s A m^-1 kg^-1 s^2 m^-1 s A)
 
 // use `Qudt.simplifyFactorUnits(Unit[])` to aggreagte potential duplicate units
 const leafFactorsWsimplified = Qudt.simplifyFactorUnits(
-  Units.W.getLeafFactorUnitsWithCumulativeExponents(),
+  Units.W.getLeafFactorUnitsWithCumulativeExponents()
 )
   .map((f) => f.toString())
   .join(" ");
 const leafFactorsFsimplified = Qudt.simplifyFactorUnits(
-  Units.F.getLeafFactorUnitsWithCumulativeExponents(),
+  Units.F.getLeafFactorUnitsWithCumulativeExponents()
 )
   .map((f) => f.toString())
   .join(" ");
@@ -91,9 +91,7 @@ console.log(`F =  (${leafFactorsFsimplified})`); // F =  (s^4 A^2 m^-2 kg^-1)
 // often, you'll get more than one result for derived units (that's why the result is `Unit[]`):
 const derivedW = Qudt.derivedUnitsFromFactorUnits(
   DerivedUnitSearchMode.ALL,
-  ...Qudt.reduceFactorUnits(
-    Units.W.getLeafFactorUnitsWithCumulativeExponents(),
-  ),
+  ...Qudt.reduceFactorUnits(Units.W.getLeafFactorUnitsWithCumulativeExponents())
 );
 console.log(`\n# Fun with W`);
 derivedW.forEach((u) => console.log(`${Units.W.toString()} = ${u.toString()}`));

@@ -18,28 +18,28 @@ interface OrderComparator<Type> {
 
 export const BooleanComparator: OrderComparator<boolean> = (
   left: boolean,
-  right: boolean,
+  right: boolean
 ) => (left === right ? 0 : left ? 1 : -1);
 export const NumberComparator: OrderComparator<number> = (
   left: number,
-  right: number,
+  right: number
 ) => (left < right ? -1 : left == right ? 0 : 1);
 
 export const StringComparator: OrderComparator<string> = (
   left: string,
-  right: string,
+  right: string
 ) => (left < right ? -1 : left === right ? 0 : 1);
 
 export function compareUsingEquals<Type extends SupportsEquals<Type>>(
   a: Type,
-  b: Type,
+  b: Type
 ) {
   return a.equals(b);
 }
 
 export function arrayDeduplicate<Type>(
   arr: Type[],
-  cmp: EqualsComparator<Type> = (a, b) => a === b,
+  cmp: EqualsComparator<Type> = (a, b) => a === b
 ): Type[] {
   if (!arr || !arr.length || arr.length === 0) {
     return arr;
@@ -47,14 +47,14 @@ export function arrayDeduplicate<Type>(
   return arr.reduce(
     (prev: Type[], cur: Type) =>
       prev.some((p) => cmp(p, cur)) ? prev : [...prev, cur],
-    [],
+    []
   );
 }
 
 export function arrayEquals<Type>(
   left?: Type[],
   right?: Type[],
-  cmp: EqualsComparator<Type> = (a, b) => a === b,
+  cmp: EqualsComparator<Type> = (a, b) => a === b
 ): boolean {
   return (
     !!left &&
@@ -67,7 +67,7 @@ export function arrayEquals<Type>(
 export function arrayEqualsIgnoreOrdering<Type>(
   left?: Type[],
   right?: Type[],
-  cmp: EqualsComparator<Type> = (a, b) => a === b,
+  cmp: EqualsComparator<Type> = (a, b) => a === b
 ): boolean {
   if (!!left && !!right && left.length === right.length) {
     const unmatched = Array.from({ length: left.length }, (v, i) => i);
@@ -88,7 +88,7 @@ export function arrayEqualsIgnoreOrdering<Type>(
 export function arrayCountEqualElements<Type>(
   left?: Type[],
   right?: Type[],
-  cmp: EqualsComparator<Type> = (a, b) => a === b,
+  cmp: EqualsComparator<Type> = (a, b) => a === b
 ): number {
   if (!!left && !!right) {
     const unmatched = Array.from({ length: left.length }, (v, i) => i);
@@ -128,7 +128,7 @@ export function arrayMax<Type>(arr: Type[], cmp: OrderComparator<Type>): Type {
 export function arrayContains<Type>(
   arr: Type[],
   toFind: Type,
-  cmp: EqualsComparator<Type> = (a, b) => a === b,
+  cmp: EqualsComparator<Type> = (a, b) => a === b
 ) {
   if (!arr) {
     throw "array is undefined";
@@ -149,7 +149,7 @@ export function checkInteger(arg: number, argName: string) {
 
 export function findInIterable<T>(
   iterable: IterableIterator<T>,
-  predicate: (value: T) => boolean,
+  predicate: (value: T) => boolean
 ): T | undefined {
   for (const elem of iterable) {
     if (predicate(elem)) {

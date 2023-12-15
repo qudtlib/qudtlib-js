@@ -5,6 +5,7 @@ import uglify from "gulp-uglify";
 import fs from "fs";
 
 const mjsProject = ts.createProject("tsconfig.json");
+const cjsProject = ts.createProject("tsconfig-cjs.json");
 
 gulp.task("clean", function () {
   return deleteAsync(["./dist", "./tmp"]);
@@ -16,7 +17,7 @@ gulp.task("compress", function () {
     .pipe(
       gulp.dest("dist", {
         sourcemaps: ".",
-      }),
+      })
     );
 });
 gulp.task("transpile-mjs", function () {
@@ -26,11 +27,17 @@ gulp.task("transpile-mjs", function () {
     .pipe(
       gulp.dest("dist/mjs/", {
         sourcemaps: ".",
-      }),
+      })
     );
 });
-
+gulp.task("transpile-cjs", function () {
+  return gulp
+    .src("src/*.ts", { sourcemaps: true })
+    .pipe(cjsProject())
+    .pipe(gulp.dest("dist/cjs/", { sourcemaps: "." }));
+});
 gulp.task("writePackageJsons", function (callback) {
+  fs.writeFile("./dist/cjs/package.json", '{ "type": "commonjs" }', callback);
   fs.writeFile("./dist/mjs/package.json", '{ "type": "module" }', callback);
 });
 gulp.task("copyDTS", function () {
@@ -40,16 +47,17 @@ gulp.task("copyDTS", function () {
 });
 
 gulp.task("deleteDuplicateDTS", function () {
-  return deleteAsync(["./dist/mjs/*.d.ts*"]);
+  return deleteAsync(["./dist/mjs/*.d.ts*", "./dist/cjs/*.d.ts*"]);
 });
 gulp.task(
   "build",
   gulp.series(
+    "transpile-cjs",
     "transpile-mjs",
     "copyDTS",
     "deleteDuplicateDTS",
     //"compress",
-    "writePackageJsons",
-  ),
+    "writePackageJsons"
+  )
 );
 gulp.task("default", gulp.series("clean", "build"));

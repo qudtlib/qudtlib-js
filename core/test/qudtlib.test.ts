@@ -66,7 +66,7 @@ test("new Prefix", () => {
     new Decimal("1.0E+3"),
     "k",
     "k",
-    [new LangString("kilo")],
+    [new LangString("kilo")]
   );
   expect(a.symbol).toBe("k");
   expect(a.multiplier.equals(new Decimal("1000"))).toBeTruthy();
@@ -82,7 +82,7 @@ test("new Prefix, no ucumcode", () => {
     new Decimal("1000"),
     "k",
     undefined,
-    [new LangString("Kilo")],
+    [new LangString("Kilo")]
   );
   expect(a.symbol).toBe("k");
 });
@@ -93,7 +93,7 @@ test("new Prefix, no ucumcode, no labels", () => {
     new Decimal("1.0E+3"),
     "k",
     "k",
-    undefined,
+    undefined
   );
   expect(a.symbol).toBe("k");
 });
@@ -104,7 +104,7 @@ test("Prefix.toString", () => {
     new Decimal("1000"),
     "k",
     undefined,
-    [new LangString("Kilo")],
+    [new LangString("Kilo")]
   );
   expect(a.toString()).toBe("k");
 });
@@ -115,7 +115,7 @@ test("Prefix.addLabel", () => {
     new Decimal("1000"),
     "k",
     undefined,
-    undefined,
+    undefined
   );
   p.addLabel(new LangString("Kilo", "en"));
   const tags = [new LangString("Kilo", "en")];
@@ -126,7 +126,7 @@ test("Prefix.addLabel", () => {
     new Decimal("1000"),
     "k",
     undefined,
-    [],
+    []
   );
   p2.addLabel(new LangString("Kilo", "en"));
   expect(p2.labels.every((a, i) => a.equals(tags[i]))).toBeTruthy();
@@ -145,7 +145,7 @@ test("new QuantityValue", () => {
     undefined,
     undefined,
     undefined,
-    undefined,
+    undefined
   );
   const degF = new Unit(
     "http://qudt.org/vocab/unit/DEG_F",
@@ -158,7 +158,7 @@ test("new QuantityValue", () => {
     undefined,
     undefined,
     undefined,
-    undefined,
+    undefined
   );
   const value = new Decimal("36");
   const qvC = new QuantityValue(value, degC);
@@ -176,13 +176,13 @@ test("new QuantityValue", () => {
 test("new QuantityKind, no symbol, no labels", () => {
   const a = new QuantityKind(
     "http://qudt.org/vocab/quantitykind/Temperature",
-    "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
+    "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0"
   );
   expect(a.symbol).toBe(undefined);
   expect(a.labels).toStrictEqual([]);
   expect(a.broaderQuantityKindIris).toStrictEqual([]);
   expect(a.dimensionVectorIri).toBe(
-    "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
+    "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0"
   );
   expect(a.iri).toBe("http://qudt.org/vocab/quantitykind/Temperature");
   expect(a.equals(a)).toBeTruthy();
@@ -192,7 +192,7 @@ test("new QuantityKind, no labels", () => {
   const a = new QuantityKind(
     "http://qudt.org/vocab/quantitykind/Temperature",
     "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
-    "t",
+    "t"
   );
   expect(a.symbol).toBe("t");
 });
@@ -202,7 +202,7 @@ test("new QuantityKind", () => {
     "http://qudt.org/vocab/quantitykind/Temperature",
     "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
     "t",
-    [new LangString("temperature", "en"), new LangString("Temperatur", "de")],
+    [new LangString("temperature", "en"), new LangString("Temperatur", "de")]
   );
   expect(a.symbol).toBe("t");
   expect(a.labels).toStrictEqual([
@@ -215,7 +215,7 @@ test("QuantityKind.addLabel", () => {
   const a = new QuantityKind(
     "http://qudt.org/vocab/quantitykind/Temperature",
     "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
-    "t",
+    "t"
   );
   expect(a.labels).toStrictEqual([]);
   a.addLabel(new LangString("temperature", "en"));
@@ -232,7 +232,7 @@ test("QuantityKind.addApplicableUnitIri", () => {
     "http://qudt.org/vocab/quantitykind/Temperature",
     "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
     "t",
-    [new LangString("temperature", "en"), new LangString("Temperatur", "de")],
+    [new LangString("temperature", "en"), new LangString("Temperatur", "de")]
   );
   expect(a.applicableUnitIris).toStrictEqual([]);
   a.addApplicableUnitIri("http://qudt.org/vocab/unit/DEG_R");
@@ -255,7 +255,7 @@ test("QuantityKind.addApplicableUnitIri", () => {
 test("QuantityKind.addBroaderQuantityKindIri", () => {
   const a = new QuantityKind(
     "http://qudt.org/vocab/quantitykind/VacuumThrust",
-    "http://qudt.org/vocab/dimensionvector/A0E0L1I0M1H0T-2D0",
+    "http://qudt.org/vocab/dimensionvector/A0E0L1I0M1H0T-2D0"
   );
   a.addLabel(new LangString("Vacuum Thrust", "en"));
   expect(a.broaderQuantityKindIris).toStrictEqual([]);
@@ -307,7 +307,7 @@ test("FactorUnit.combine exponents that cancel each other out", () => {
   const fu1 = new FactorUnit(degC, 2);
   const fu2 = new FactorUnit(degC, -2);
   expect(FactorUnit.combine(fu1, fu2).equals(new FactorUnit(degC, 0))).toBe(
-    true,
+    true
   );
 });
 
@@ -336,14 +336,14 @@ test("Unit.getConversionMultiplier", () => {
   expect(kiloM.getConversionMultiplier(m)).toStrictEqual(new Decimal("1000"));
   expect(degC.getConversionMultiplier(degC)).toStrictEqual(new Decimal(1));
   expect(() => degF.getConversionMultiplier(degC)).toThrow(
-    /Cannot convert.+/gi,
+    /Cannot convert.+/gi
   );
 });
 
 test("Unit.matches", () => {
   expect(m.matches(FactorUnits.ofFactorUnitSpec(m, 1)));
   expect(() =>
-    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(m)),
+    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(m))
   ).toThrowError();
   expect(() =>
     degC__PER__M.matches(
@@ -363,32 +363,30 @@ test("Unit.matches", () => {
         degC,
         -3,
         m,
-        1,
-      ),
-    ),
+        1
+      )
+    )
   ).toThrowError();
   expect(() =>
-    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(m, m)),
+    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(m, m))
   ).toThrowError();
   expect(
-    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(m, -1, degC, 1)),
+    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(m, -1, degC, 1))
   ).toBe(true);
   expect(
-    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(degC, 1, m, -1)),
+    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(degC, 1, m, -1))
   ).toBe(true);
   expect(
-    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(degC, 1, m, -1)),
+    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(degC, 1, m, -1))
   ).toBe(true);
   expect(
-    degC__PER__M.matches(
-      FactorUnits.ofFactorUnitSpec(m, -1, degC, 1, degF, -1),
-    ),
+    degC__PER__M.matches(FactorUnits.ofFactorUnitSpec(m, -1, degC, 1, degF, -1))
   ).toBe(false);
 });
 
 test("Unit.getLeafFactorUnitsWithCumulativeExponents", () => {
   expect(
-    degC__PER__M.getLeafFactorUnitsWithCumulativeExponents(),
+    degC__PER__M.getLeafFactorUnitsWithCumulativeExponents()
   ).toStrictEqual([new FactorUnit(degC, 1), new FactorUnit(m, -1)]);
 });
 
@@ -403,7 +401,7 @@ const degC = new Unit(
   undefined,
   undefined,
   undefined,
-  undefined,
+  undefined
 );
 const degF = new Unit(
   "http://qudt.org/vocab/unit/DEG_F",
@@ -416,7 +414,7 @@ const degF = new Unit(
   undefined,
   undefined,
   undefined,
-  undefined,
+  undefined
 );
 const degK = new Unit(
   "http://qudt.org/vocab/unit/DEG_F",
@@ -429,7 +427,7 @@ const degK = new Unit(
   undefined,
   undefined,
   undefined,
-  undefined,
+  undefined
 );
 const m = new Unit(
   "http://qudt.org/vocab/unit/M",
@@ -442,7 +440,7 @@ const m = new Unit(
   undefined,
   undefined,
   "m",
-  [new LangString("m", "en")],
+  [new LangString("m", "en")]
 );
 const kiloM = new Unit(
   "http://qudt.org/vocab/unit/KiloM",
@@ -455,7 +453,7 @@ const kiloM = new Unit(
   "http://qudt.org/vocab/unit/M",
   m,
   undefined,
-  [new LangString("m", "en")],
+  [new LangString("m", "en")]
 );
 kiloM.scalingOf = m;
 const degC__PER__M = new Unit(
@@ -463,7 +461,7 @@ const degC__PER__M = new Unit(
   [],
   [],
   "http://qudt.org/vocab/dimensionvector/A0E0L-1I0M0H1T0D0",
-  new Decimal("1.0"),
+  new Decimal("1.0")
 );
 
 degC__PER__M.addFactorUnit(new FactorUnit(degC, 1));
@@ -482,10 +480,10 @@ describe.each([
   (
     left: Array<number | string>,
     right: Array<number | string>,
-    expectedResult: boolean,
+    expectedResult: boolean
   ) =>
     test(`arrayEquals([${left}], [${right}]) = ${expectedResult}`, () =>
-      expect(arrayEquals(left, right)).toBe(expectedResult)),
+      expect(arrayEquals(left, right)).toBe(expectedResult))
 );
 
 function cmpNumOrString(a: string | number, b: string | number) {
@@ -502,7 +500,7 @@ describe.each([
   [["a", "b", "c"], "a"],
 ])("arrayMin", (arr: Array<number | string>, expectedResult: number | string) =>
   test(`arrayMin([${arr}]) = ${expectedResult}`, () =>
-    expect(arrayMin(arr, cmpNumOrString)).toBe(expectedResult)),
+    expect(arrayMin(arr, cmpNumOrString)).toBe(expectedResult))
 );
 
 describe.each([
@@ -512,7 +510,7 @@ describe.each([
   "arrayMaxn",
   (arr: Array<number | string>, expectedResult: number | string) =>
     test(`arrayMax([${arr}]) = ${expectedResult}`, () =>
-      expect(arrayMax(arr, cmpNumOrString)).toBe(expectedResult)),
+      expect(arrayMax(arr, cmpNumOrString)).toBe(expectedResult))
 );
 
 describe.each([
@@ -540,10 +538,10 @@ describe.each([
   (
     left: Array<number | string>,
     right: Array<number | string>,
-    expectedResult: boolean,
+    expectedResult: boolean
   ) =>
     test(`arrayEqualsIgnoreOrdering([${left}], [${right}]) = ${expectedResult}`, () =>
-      expect(arrayEqualsIgnoreOrdering(left, right)).toBe(expectedResult)),
+      expect(arrayEqualsIgnoreOrdering(left, right)).toBe(expectedResult))
 );
 
 describe.each([
@@ -571,10 +569,10 @@ describe.each([
   (
     left: Array<number | string>,
     right: Array<number | string>,
-    expectedResult: number,
+    expectedResult: number
   ) =>
     test(`arrayCountEqualElements([${left}], [${right}]) = ${expectedResult}`, () =>
-      expect(arrayCountEqualElements(left, right)).toBe(expectedResult)),
+      expect(arrayCountEqualElements(left, right)).toBe(expectedResult))
 );
 
 describe.each([
@@ -639,7 +637,7 @@ describe.each([
   ],
 ])("solve assignment problem", (testId, mat, expectedResult) => {
   test(`Test case ${testId}: [${mat.join(
-    "],[",
+    "],["
   )}] should yield [${expectedResult}]`, () => {
     const instance = AssignmentProblem.instance(mat);
     const solution = instance.solve();
