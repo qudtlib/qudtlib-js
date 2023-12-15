@@ -81,7 +81,7 @@ export class Qudt {
       config.units.values(),
       (u) =>
         matcher.matchesLangStrings(u.labels) ||
-        (!!u.currencyCode && matcher.matchesString(u.currencyCode)),
+        (!!u.currencyCode && matcher.matchesString(u.currencyCode))
     );
     return firstMatch;
   }
@@ -129,14 +129,14 @@ export class Qudt {
   }
 
   static quantityKindFromLocalname(
-    localname: string,
+    localname: string
   ): QuantityKind | undefined {
     return Qudt.quantityKind(Qudt.quantityKindIriFromLocalname(localname));
   }
 
   static quantityKindFromLocalnameRequired(localname: string): QuantityKind {
     return Qudt.quantityKindRequired(
-      Qudt.quantityKindIriFromLocalname(localname),
+      Qudt.quantityKindIriFromLocalname(localname)
     );
   }
 
@@ -163,7 +163,7 @@ export class Qudt {
 
   static isBroaderQuantityKind(
     suspectedBroader: QuantityKind,
-    quantityKind: QuantityKind,
+    quantityKind: QuantityKind
   ): boolean {
     const broader = quantityKind.broaderQuantityKindIris;
     if (broader.length === 0) {
@@ -173,10 +173,7 @@ export class Qudt {
       return true;
     }
     return broader.some((b) =>
-      Qudt.isBroaderQuantityKind(
-        Qudt.quantityKindRequired(b),
-        suspectedBroader,
-      ),
+      Qudt.isBroaderQuantityKind(Qudt.quantityKindRequired(b), suspectedBroader)
     );
   }
 
@@ -191,7 +188,7 @@ export class Qudt {
       new CaseInsensitiveUnderscoreIgnoringLabelMatcher(label);
     const firstMatch: Prefix | undefined = findInIterable(
       config.prefixes.values(),
-      (u) => matcher.matchesLangStrings(u.labels),
+      (u) => matcher.matchesLangStrings(u.labels)
     );
     return firstMatch;
   }
@@ -231,20 +228,20 @@ export class Qudt {
       new CaseInsensitiveUnderscoreIgnoringLabelMatcher(label);
     const firstMatch: SystemOfUnits | undefined = findInIterable(
       config.systemsOfUnits.values(),
-      (u) => matcher.matchesLangStrings(u.labels),
+      (u) => matcher.matchesLangStrings(u.labels)
     );
     return firstMatch;
   }
 
   static systemOfUnitsFromLocalname(
-    localname: string,
+    localname: string
   ): SystemOfUnits | undefined {
     return Qudt.systemOfUnits(Qudt.systemOfUnitsIriFromLocalname(localname));
   }
 
   static systemOfUnitsFromLocalnameRequired(localname: string): SystemOfUnits {
     return Qudt.systemOfUnitsRequired(
-      Qudt.systemOfUnitsIriFromLocalname(localname),
+      Qudt.systemOfUnitsIriFromLocalname(localname)
     );
   }
 
@@ -286,7 +283,7 @@ export class Qudt {
    */
   static derivedUnitsFromMap(
     searchMode: DerivedUnitSearchMode,
-    factorUnits: Map<Unit, number>,
+    factorUnits: Map<Unit, number>
   ): Unit[] {
     const flattened: (Unit | number)[] = [];
     for (const [key, value] of factorUnits.entries()) {
@@ -309,7 +306,7 @@ export class Qudt {
   ): Unit[] {
     return this.derivedUnitsFromFactorUnitSelection(
       searchMode,
-      new FactorUnits(factorUnits),
+      new FactorUnits(factorUnits)
     );
   }
 
@@ -352,7 +349,7 @@ export class Qudt {
     const initialFactorUnitSelection = FactorUnits.ofFactorUnitSpec(...spec);
     return Qudt.derivedUnitsFromFactorUnitSelection(
       searchMode,
-      initialFactorUnitSelection,
+      initialFactorUnitSelection
     );
   }
 
@@ -364,7 +361,7 @@ export class Qudt {
    */
   static derivedUnitsFromFactorUnitSelection(
     searchMode: DerivedUnitSearchMode,
-    initialFactorUnitSelection: FactorUnits,
+    initialFactorUnitSelection: FactorUnits
   ): Unit[] {
     if (searchMode === DerivedUnitSearchMode.ALL) {
       return this.findMatchingUnits(initialFactorUnitSelection);
@@ -382,7 +379,7 @@ export class Qudt {
       return [
         arrayMax(
           results,
-          (left, right) => (scores.get(left) || 0) - (scores.get(right) || 0),
+          (left, right) => (scores.get(left) || 0) - (scores.get(right) || 0)
         ),
       ];
     }
@@ -416,11 +413,11 @@ export class Qudt {
           "\\b" +
             getLastIriElement(cur.unit.iri) +
             Math.abs(cur.exponent) +
-            "\\b",
+            "\\b"
         ) != null
           ? 1
           : 0),
-      0,
+      0
     );
     return (
       overlapScore +
@@ -430,16 +427,16 @@ export class Qudt {
 
   private static getUnitSimilarityMatrix(
     smaller: FactorUnit[][],
-    larger: FactorUnit[][],
+    larger: FactorUnit[][]
   ) {
     return smaller.map((sFactors) =>
-      larger.map((lFactors) => Qudt.scoreCombinations(sFactors, lFactors)),
+      larger.map((lFactors) => Qudt.scoreCombinations(sFactors, lFactors))
     );
   }
 
   private static scoreCombinations(
     leftFactors: FactorUnit[],
-    rightFactors: FactorUnit[],
+    rightFactors: FactorUnit[]
   ) {
     const smaller =
       leftFactors.length < rightFactors.length ? leftFactors : rightFactors;
@@ -469,7 +466,7 @@ export class Qudt {
           return 0.9;
         }
         return 1.0;
-      }),
+      })
     );
     if (similarityMatix.length === 0) {
       return 1;
@@ -491,7 +488,7 @@ export class Qudt {
   }
 
   private static findMatchingUnits(
-    initialFactorUnitSelection: FactorUnits,
+    initialFactorUnitSelection: FactorUnits
   ): Unit[] {
     const matchingUnits: Unit[] = [];
     for (const unit of config.units.values()) {
@@ -535,7 +532,7 @@ export class Qudt {
   static scaleUnitFromLabels(prefixLabel: string, baseUnitLabel: string) {
     return this.scale(
       Qudt.prefixFromLabelRequired(prefixLabel),
-      Qudt.unitFromLabelRequired(baseUnitLabel),
+      Qudt.unitFromLabelRequired(baseUnitLabel)
     );
   }
 
@@ -547,7 +544,7 @@ export class Qudt {
    */
   static factorUnits(unit: Unit): FactorUnit[] {
     return FactorUnit.contractExponents(
-      unit.getLeafFactorUnitsWithCumulativeExponents(),
+      unit.getLeafFactorUnitsWithCumulativeExponents()
     );
   }
 
@@ -590,7 +587,7 @@ export class Qudt {
    */
   static unscaleFactorUnits(factorUnits: FactorUnit[]): FactorUnit[] {
     return factorUnits.map(
-      (fu) => new FactorUnit(Qudt.unscale(fu.unit), fu.exponent),
+      (fu) => new FactorUnit(Qudt.unscale(fu.unit), fu.exponent)
     );
   }
 
@@ -617,7 +614,7 @@ export class Qudt {
   static convert(
     value: Decimal,
     fromUnit: Unit | string,
-    toUnit: Unit | string,
+    toUnit: Unit | string
   ): Decimal {
     if (!fromUnit) {
       throw "Parameter 'fromUnit' is required";
@@ -641,7 +638,7 @@ export class Qudt {
    */
   static convertQuantityValue(
     from: QuantityValue,
-    toUnit: Unit | string,
+    toUnit: Unit | string
   ): QuantityValue {
     if (!from) {
       throw "Parameter 'from' is required";
@@ -733,11 +730,11 @@ export class Qudt {
    */
   static correspondingUnitInSystem(
     unit: Unit,
-    systemOfUnits: SystemOfUnits,
+    systemOfUnits: SystemOfUnits
   ): Unit | undefined {
     const correspondingUnits = Qudt.correspondingUnitsInSystem(
       unit,
-      systemOfUnits,
+      systemOfUnits
     );
     if (
       typeof correspondingUnits !== "undefined" &&
@@ -781,7 +778,7 @@ export class Qudt {
    */
   static correspondingUnitsInSystem(
     unit: Unit,
-    systemOfUnits: SystemOfUnits,
+    systemOfUnits: SystemOfUnits
   ): Unit[] {
     if (systemOfUnits.allowsUnit(unit)) {
       return [unit];
@@ -797,7 +794,7 @@ export class Qudt {
     // get the unit that is closest in magnitude (conversionFactor)
     // recursively check for factor units
     candidates = candidates.filter((u) =>
-      u.quantityKinds.some((q) => arrayContains(unit.quantityKinds, q)),
+      u.quantityKinds.some((q) => arrayContains(unit.quantityKinds, q))
     );
     if (candidates.length === 1) {
       return candidates;
@@ -812,7 +809,7 @@ export class Qudt {
       // tie breaker: base unit ranked before non-base unit
       let cmp = BooleanComparator(
         systemOfUnits.hasBaseUnit(r),
-        systemOfUnits.hasBaseUnit(l),
+        systemOfUnits.hasBaseUnit(l)
       );
       if (cmp !== 0) {
         return cmp;
@@ -898,7 +895,7 @@ class CaseInsensitiveUnderscoreIgnoringLabelMatcher implements LabelMatcher {
 
   matchesLangStrings(searchTerms: LangString[]): boolean {
     return searchTerms.some(
-      (st) => this.convert(st.text) === this.compareForEquality,
+      (st) => this.convert(st.text) === this.compareForEquality
     );
   }
 }

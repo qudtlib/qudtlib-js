@@ -19,7 +19,7 @@ export class Prefix implements SupportsEquals<Prefix> {
     multiplier: Decimal,
     symbol: string,
     ucumCode?: string,
-    labels?: LangString[],
+    labels?: LangString[]
   ) {
     this.iri = iri;
     this.multiplier = multiplier;

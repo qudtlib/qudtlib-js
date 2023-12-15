@@ -40,7 +40,7 @@ export class Unit implements SupportsEquals<Unit> {
     labels?: LangString[],
     currencyCode?: string,
     currencyNumber?: number,
-    unitOfSystemIris?: string[],
+    unitOfSystemIris?: string[]
   ) {
     this.iri = iri;
     this.prefixIri = prefixIri;
@@ -271,7 +271,7 @@ export class Unit implements SupportsEquals<Unit> {
       return [new FactorUnit(this, 1)];
     }
     return this.factorUnits.flatMap((fu) =>
-      fu.getLeafFactorUnitsWithCumulativeExponents(),
+      fu.getLeafFactorUnitsWithCumulativeExponents()
     );
   }
 
@@ -283,12 +283,12 @@ export class Unit implements SupportsEquals<Unit> {
       return [[FactorUnit.ofUnit(this)]];
     }
     const result = FactorUnit.getAllPossibleFactorUnitCombinations(
-      this.factorUnits,
+      this.factorUnits
     );
     const thisAsResult = [FactorUnit.ofUnit(this)];
     if (
       !arrayContains(result, thisAsResult, (l, r) =>
-        l.every((le) => r.some((re) => le.equals(re))),
+        l.every((le) => r.some((re) => le.equals(re)))
       )
     ) {
       result.push(thisAsResult);
