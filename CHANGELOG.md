@@ -9,6 +9,13 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## Fixed
+
+- Implement a not so recent change in QUDTLib whereby quantitykinds are no longer skos:broader but
+  qudt:exactMatch in certain conditions. See https://github.com/qudtlib/qudtlib-java/issues/61. The change
+  adds an `exactMatch` property to the `QuantityKind` and `Unit` classes and uses the exactMatch property
+  where appropriate in algorithms.
+
 ## 5.0.1 - 2023-09-21
 
 ### Fixed

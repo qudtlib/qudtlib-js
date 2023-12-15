@@ -14,7 +14,7 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
 
   constructor(
     factorUnits: FactorUnit[],
-    scaleFactor: Decimal = new Decimal(1)
+    scaleFactor: Decimal = new Decimal(1),
   ) {
     this.factorUnits = factorUnits;
     this.scaleFactor = scaleFactor;
@@ -58,7 +58,7 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
   pow(power: number) {
     return new FactorUnits(
       this.factorUnits.map((fu) => fu.pow(power)),
-      this.scaleFactor.pow(power)
+      this.scaleFactor.pow(power),
     );
   }
 
@@ -72,7 +72,7 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
     }
     return new FactorUnits(
       FactorUnit.contractExponents([...this.factorUnits, ...other.factorUnits]),
-      this.scaleFactor.mul(other.scaleFactor)
+      this.scaleFactor.mul(other.scaleFactor),
     );
   }
 
@@ -96,14 +96,14 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
   reduceExponents() {
     return new FactorUnits(
       FactorUnit.reduceExponents(this.factorUnits),
-      this.scaleFactor
+      this.scaleFactor,
     );
   }
 
   contractExponents() {
     return new FactorUnits(
       FactorUnit.contractExponents(this.factorUnits),
-      this.scaleFactor
+      this.scaleFactor,
     );
   }
 
@@ -111,7 +111,7 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
     const normalized = FactorUnit.normalizeFactorUnits(this.factorUnits);
     return new FactorUnits(
       normalized.factorUnits,
-      normalized.scaleFactor.mul(this.scaleFactor)
+      normalized.scaleFactor.mul(this.scaleFactor),
     );
   }
 
@@ -128,7 +128,7 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
       arrayEqualsIgnoreOrdering(
         this.factorUnits,
         other?.factorUnits,
-        compareUsingEquals
+        compareUsingEquals,
       )
     );
   }

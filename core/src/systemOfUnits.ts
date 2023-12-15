@@ -17,7 +17,7 @@ export class SystemOfUnits implements SupportsEquals<SystemOfUnits> {
     iri: string,
     labels: LangString[],
     abbreviation?: string,
-    baseUnitIris?: string[]
+    baseUnitIris?: string[],
   ) {
     this.iri = iri;
     this.labels = labels;

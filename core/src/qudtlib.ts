@@ -10,7 +10,8 @@ import { QuantityValue } from "./quantityValue.js";
 import { LangString } from "./langString.js";
 import { Namespace } from "./namespace.js";
 import { SystemOfUnits } from "./systemOfUnits.js";
-import { Qudt, config, QudtlibConfig } from "./qudt.js";
+import { QudtNamespaces } from "./qudtNamespaces.js";
+import { config, Qudt, QudtlibConfig } from "./qudt.js";
 
 export {
   Decimal,
@@ -28,4 +29,5 @@ export {
   QudtlibConfig,
   Namespace,
   SystemOfUnits,
+  QudtNamespaces,
 };

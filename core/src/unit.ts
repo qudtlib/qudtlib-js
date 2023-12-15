@@ -18,6 +18,7 @@ export class Unit implements SupportsEquals<Unit> {
   readonly conversionOffset: Decimal;
   readonly quantityKindIris: string[];
   readonly quantityKinds: QuantityKind[] = [];
+  readonly exactMatchIris: string[];
   readonly symbol?: string;
   readonly scalingOfIri?: string;
   scalingOf?: Unit;
@@ -28,6 +29,7 @@ export class Unit implements SupportsEquals<Unit> {
   constructor(
     iri: string,
     quantityKindIris?: string[],
+    exactMatchIris?: string[],
     dimensionVectorIri?: string,
     conversionMultiplier?: Decimal,
     conversionOffset?: Decimal,
@@ -38,7 +40,7 @@ export class Unit implements SupportsEquals<Unit> {
     labels?: LangString[],
     currencyCode?: string,
     currencyNumber?: number,
-    unitOfSystemIris?: string[]
+    unitOfSystemIris?: string[],
   ) {
     this.iri = iri;
     this.prefixIri = prefixIri;
@@ -59,6 +61,11 @@ export class Unit implements SupportsEquals<Unit> {
       this.quantityKindIris = [];
     } else {
       this.quantityKindIris = quantityKindIris;
+    }
+    if (typeof exactMatchIris === "undefined") {
+      this.exactMatchIris = [];
+    } else {
+      this.exactMatchIris = exactMatchIris;
     }
     if (typeof labels === "undefined") {
       this.labels = [];
@@ -86,6 +93,10 @@ export class Unit implements SupportsEquals<Unit> {
       return this.prefix.symbol + this.scalingOf.symbol;
     }
     return "unit:" + getLastIriElement(this.iri);
+  }
+
+  getIriLocalname(): string {
+    return getLastIriElement(this.iri);
   }
 
   matchesFactorUnitSpec(...factorUnitSpec: (number | Unit)[]): boolean {
@@ -198,6 +209,9 @@ export class Unit implements SupportsEquals<Unit> {
   addQuantityKindIri(quantityKindIri: string): void {
     this.quantityKindIris.push(quantityKindIri);
   }
+  addExactMatchIri(exactMatchIri: string): void {
+    this.exactMatchIris.push(exactMatchIri);
+  }
 
   hasLabel(label: string): boolean {
     return this.labels.some((l) => label === l.text);
@@ -257,7 +271,7 @@ export class Unit implements SupportsEquals<Unit> {
       return [new FactorUnit(this, 1)];
     }
     return this.factorUnits.flatMap((fu) =>
-      fu.getLeafFactorUnitsWithCumulativeExponents()
+      fu.getLeafFactorUnitsWithCumulativeExponents(),
     );
   }
 
@@ -269,12 +283,12 @@ export class Unit implements SupportsEquals<Unit> {
       return [[FactorUnit.ofUnit(this)]];
     }
     const result = FactorUnit.getAllPossibleFactorUnitCombinations(
-      this.factorUnits
+      this.factorUnits,
     );
     const thisAsResult = [FactorUnit.ofUnit(this)];
     if (
       !arrayContains(result, thisAsResult, (l, r) =>
-        l.every((le) => r.some((re) => le.equals(re)))
+        l.every((le) => r.some((re) => le.equals(re))),
       )
     ) {
       result.push(thisAsResult);
