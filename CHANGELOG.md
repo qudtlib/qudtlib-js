@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 6.0.0 - 2023-12-15
+
 ### Fixed
 
 - Implement a not so recent change in QUDTLib whereby quantitykinds are no longer skos:broader but
