@@ -363,8 +363,9 @@ export class Qudt {
     searchMode: DerivedUnitSearchMode,
     initialFactorUnitSelection: FactorUnits
   ): Unit[] {
-    if (searchMode === DerivedUnitSearchMode.ALL) {
-      return this.findMatchingUnits(initialFactorUnitSelection);
+    //if (searchMode === DerivedUnitSearchMode.ALL) {
+    return this.findMatchingUnits(initialFactorUnitSelection);
+    /*
     } else {
       const requestedUnits: FactorUnit[] =
         initialFactorUnitSelection.contractExponents().factorUnits;
@@ -383,6 +384,8 @@ export class Qudt {
         ),
       ];
     }
+
+     */
   }
 
   private static matchScore(unit: Unit, requested: FactorUnit[]): number {
