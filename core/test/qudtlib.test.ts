@@ -15,6 +15,90 @@ import { FactorUnit } from "../src/factorUnit";
 import { FactorUnits } from "../src/factorUnits";
 import { Unit } from "../src/unit";
 
+const degC = new Unit(
+  "http://qudt.org/vocab/unit/DEG_C",
+  [],
+  [],
+  "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
+  new Decimal("1.0"),
+  new Decimal("273.15"),
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined
+);
+const degF = new Unit(
+  "http://qudt.org/vocab/unit/DEG_F",
+  [],
+  [],
+  "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
+  new Decimal("0.5555555555555556"),
+  new Decimal("459.669607"),
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined
+);
+const degK = new Unit(
+  "http://qudt.org/vocab/unit/DEG_F",
+  [],
+  [],
+  "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
+  new Decimal("0.5555555555555556"),
+  new Decimal("459.669607"),
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined
+);
+const m = new Unit(
+  "http://qudt.org/vocab/unit/M",
+  [],
+  [],
+  "http://qudt.org/vocab/dimensionvector/A0E0L1I0M0H0T0D0",
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  undefined,
+  "m",
+  [new LangString("m", "en")]
+);
+const kiloM = new Unit(
+  "http://qudt.org/vocab/unit/KiloM",
+  [],
+  [],
+  "http://qudt.org/vocab/dimensionvector/A0E0L1I0M0H0T0D0",
+  new Decimal("1000"),
+  undefined,
+  "http://qudt.org/vocab/prefix/Kilo",
+  "http://qudt.org/vocab/unit/M",
+  m,
+  undefined,
+  [new LangString("m", "en")]
+);
+kiloM.scalingOf = m;
+const degC__PER__M = new Unit(
+  "http://qudt.org/vocab/unit/DEG_C-PER-M",
+  [],
+  [],
+  "http://qudt.org/vocab/dimensionvector/A0E0L-1I0M0H1T0D0",
+  new Decimal("1.0")
+);
+
+degC__PER__M.setFactorUnits(FactorUnits.ofFactorUnitSpec(degC, 1, m, -1));
+
+const GM = new Unit(
+  "http://qudt.org/vocab/unit/GM",
+  [],
+  [],
+  "http://qudt.org/vocab/dimensionvector/A0E0L0I0M1H1T0D0",
+  new Decimal("1.0")
+);
+
 // LangString tests
 
 test("new LangString", () => {
@@ -385,87 +469,12 @@ test("Unit.matches", () => {
 });
 
 test("Unit.getLeafFactorUnitsWithCumulativeExponents", () => {
-  expect(
-    degC__PER__M.getLeafFactorUnitsWithCumulativeExponents()
-  ).toStrictEqual([new FactorUnit(degC, 1), new FactorUnit(m, -1)]);
+  const result = degC__PER__M.getLeafFactorUnitsWithCumulativeExponents();
+  expect(result).toStrictEqual([
+    new FactorUnit(degC, 1),
+    new FactorUnit(m, -1),
+  ]);
 });
-
-const degC = new Unit(
-  "http://qudt.org/vocab/unit/DEG_C",
-  [],
-  [],
-  "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
-  new Decimal("1.0"),
-  new Decimal("273.15"),
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined
-);
-const degF = new Unit(
-  "http://qudt.org/vocab/unit/DEG_F",
-  [],
-  [],
-  "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
-  new Decimal("0.5555555555555556"),
-  new Decimal("459.669607"),
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined
-);
-const degK = new Unit(
-  "http://qudt.org/vocab/unit/DEG_F",
-  [],
-  [],
-  "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H1T0D0",
-  new Decimal("0.5555555555555556"),
-  new Decimal("459.669607"),
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined
-);
-const m = new Unit(
-  "http://qudt.org/vocab/unit/M",
-  [],
-  [],
-  "http://qudt.org/vocab/dimensionvector/A0E0L1I0M0H0T0D0",
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  undefined,
-  "m",
-  [new LangString("m", "en")]
-);
-const kiloM = new Unit(
-  "http://qudt.org/vocab/unit/KiloM",
-  [],
-  [],
-  "http://qudt.org/vocab/dimensionvector/A0E0L1I0M0H0T0D0",
-  new Decimal("1000"),
-  undefined,
-  "http://qudt.org/vocab/prefix/Kilo",
-  "http://qudt.org/vocab/unit/M",
-  m,
-  undefined,
-  [new LangString("m", "en")]
-);
-kiloM.scalingOf = m;
-const degC__PER__M = new Unit(
-  "http://qudt.org/vocab/unit/DEG_C-PER-M",
-  [],
-  [],
-  "http://qudt.org/vocab/dimensionvector/A0E0L-1I0M0H1T0D0",
-  new Decimal("1.0")
-);
-
-degC__PER__M.addFactorUnit(new FactorUnit(degC, 1));
-degC__PER__M.addFactorUnit(new FactorUnit(m, -1));
 
 describe.each([
   [[1, 2, 3], [1, 2, 3], true],
@@ -644,3 +653,89 @@ describe.each([
     expect(solution.assignment).toStrictEqual(expectedResult);
   });
 });
+
+describe.each([
+  [FactorUnits.ofFactorUnitSpec(m, 1), "M"],
+  [FactorUnits.ofFactorUnitSpec(m, 2), "M2"],
+  [FactorUnits.ofFactorUnitSpec(m, -1), "PER-M"],
+  [FactorUnits.ofFactorUnitSpec(m, -2), "PER-M2"],
+  [FactorUnits.ofFactorUnitSpec(m, 1, degC, -1), "M-PER-DEG_C"],
+  [FactorUnits.ofFactorUnitSpec(m, -1, degC, -1), "PER-M-DEG_C"],
+])(
+  "FactorUnits.getLocalname()",
+  (factorUnits: FactorUnits, expectedResult: string) =>
+    test(`(${factorUnits.toString()}).getLocalName() = ${expectedResult}`, () =>
+      expect(factorUnits.getLocalname()).toBe(expectedResult))
+);
+
+describe.each([
+  [FactorUnits.ofFactorUnitSpec(m, 1), FactorUnits.ofFactorUnitSpec(m, 1)],
+  [FactorUnits.ofFactorUnitSpec(m, 2), FactorUnits.ofFactorUnitSpec(m, 2)],
+  [FactorUnits.ofFactorUnitSpec(m, -1), FactorUnits.empty()],
+  [FactorUnits.ofFactorUnitSpec(m, -2), FactorUnits.empty()],
+  [
+    FactorUnits.ofFactorUnitSpec(m, 1, degC, -1),
+    FactorUnits.ofFactorUnitSpec(m, 1),
+  ],
+  [FactorUnits.ofFactorUnitSpec(m, -1, degC, -1), FactorUnits.empty()],
+])(
+  "FactorUnits.numerator()",
+  (factorUnits: FactorUnits, expectedResult: FactorUnits) =>
+    test(`(${factorUnits.toString()}).numerator() = ${expectedResult.toString()}`, () =>
+      expect(factorUnits.numerator().toString()).toBe(
+        expectedResult.toString()
+      ))
+);
+
+describe.each([
+  [FactorUnits.ofFactorUnitSpec(m, 1), FactorUnits.ofFactorUnitSpec()],
+  [FactorUnits.ofFactorUnitSpec(m, 2), FactorUnits.ofFactorUnitSpec()],
+  [FactorUnits.ofFactorUnitSpec(m, -1), FactorUnits.ofFactorUnitSpec(m, 1)],
+  [FactorUnits.ofFactorUnitSpec(m, -2), FactorUnits.ofFactorUnitSpec(m, 2)],
+  [
+    FactorUnits.ofFactorUnitSpec(m, 1, degC, -1),
+    FactorUnits.ofFactorUnitSpec(degC, 1),
+  ],
+  [
+    FactorUnits.ofFactorUnitSpec(m, -1, degC, -1),
+    FactorUnits.ofFactorUnitSpec(m, 1, degC, 1),
+  ],
+])(
+  "FactorUnits.denominator()",
+  (factorUnits: FactorUnits, expectedResult: FactorUnits) =>
+    test(`(${factorUnits.toString()}).denominator() = ${expectedResult.toString()}`, () =>
+      expect(factorUnits.denominator().toString()).toBe(
+        expectedResult.toString()
+      ))
+);
+
+describe.each([
+  [FactorUnits.ofFactorUnitSpec(m, 1), ["M"]],
+  [FactorUnits.ofFactorUnitSpec(m, 2), ["M2"]],
+  [FactorUnits.ofFactorUnitSpec(m, -1), ["PER-M"]],
+  [FactorUnits.ofFactorUnitSpec(m, -2), ["PER-M2"]],
+  [FactorUnits.ofFactorUnitSpec(m, 1, degC, -1), ["M-PER-DEG_C"]],
+  [FactorUnits.ofFactorUnitSpec(m, 1, degC, 1), ["M-DEG_C", "DEG_C-M"]],
+  [
+    FactorUnits.ofFactorUnitSpec(m, -1, degC, -1),
+    ["PER-M-DEG_C", "PER-DEG_C-M"],
+  ],
+  [
+    FactorUnits.ofFactorUnitSpec(GM, 1, m, 1, degC, 1),
+    [
+      "GM-M-DEG_C",
+      "GM-DEG_C-M",
+      "M-GM-DEG_C",
+      "M-DEG_C-GM",
+      "DEG_C-GM-M",
+      "DEG_C-M-GM",
+    ],
+  ],
+])(
+  "FactorUnits.generateAllLocalnamePossibilities()",
+  (factorUnits: FactorUnits, expectedResult: string[]) =>
+    test(`(${factorUnits.toString()}).generateAllLocalnamePossibilities() = ${expectedResult}`, () =>
+      expect(factorUnits.generateAllLocalnamePossibilities()).toStrictEqual(
+        expectedResult
+      ))
+);

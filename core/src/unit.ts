@@ -3,9 +3,10 @@ import { LangString } from "./langString.js";
 import { Prefix } from "./prefix.js";
 import { QuantityKind } from "./quantityKind.js";
 import { FactorUnit } from "./factorUnit.js";
-import { arrayContains, getLastIriElement } from "./utils.js";
+import { arrayContains, getLastIriElement, ZERO } from "./utils.js";
 import { FactorUnits } from "./factorUnits.js";
 import { Decimal } from "decimal.js";
+import { QudtNamespaces } from "./qudtNamespaces.js";
 
 export class Unit implements SupportsEquals<Unit> {
   readonly iri: string;
@@ -23,7 +24,7 @@ export class Unit implements SupportsEquals<Unit> {
   readonly scalingOfIri?: string;
   scalingOf?: Unit;
   readonly dimensionVectorIri?: string;
-  readonly factorUnits: FactorUnit[] = [];
+  factorUnits: FactorUnits = FactorUnits.empty();
 
   readonly unitOfSystemIris: string[];
   constructor(
@@ -79,6 +80,7 @@ export class Unit implements SupportsEquals<Unit> {
     } else {
       this.unitOfSystemIris = unitOfSystemIris;
     }
+    this.factorUnits = FactorUnits.ofUnit(this); //might be replaced later by this.setFactorUnits().
   }
 
   equals(other?: Unit): boolean {
@@ -99,6 +101,16 @@ export class Unit implements SupportsEquals<Unit> {
     return getLastIriElement(this.iri);
   }
 
+  getIriAbbreviated(): string {
+    return this.isCurrencyUnit()
+      ? QudtNamespaces.currency.abbreviate(this.iri)
+      : QudtNamespaces.unit.abbreviate(this.iri);
+  }
+
+  isCurrencyUnit(): boolean {
+    return QudtNamespaces.currency.isFullNamespaceIri(this.iri);
+  }
+
   matchesFactorUnitSpec(...factorUnitSpec: (number | Unit)[]): boolean {
     return this.matches(FactorUnits.ofFactorUnitSpec(...factorUnitSpec));
   }
@@ -110,7 +122,7 @@ export class Unit implements SupportsEquals<Unit> {
   }
 
   hasFactorUnits(): boolean {
-    return this.factorUnits && this.factorUnits.length > 0;
+    return this.factorUnits.hasFactorUnits();
   }
 
   isScaled(): boolean {
@@ -183,15 +195,11 @@ export class Unit implements SupportsEquals<Unit> {
     if (!this.isConvertible(toUnit)) {
       throw `Not convertible: ${this} -> ${toUnit}`;
     }
-    const fromOffset = this.conversionOffset
-      ? this.conversionOffset
-      : new Decimal(0);
+    const fromOffset = this.conversionOffset ? this.conversionOffset : ZERO;
     const fromMultiplier = this.conversionMultiplier
       ? this.conversionMultiplier
       : new Decimal(1);
-    const toOffset = toUnit.conversionOffset
-      ? toUnit.conversionOffset
-      : new Decimal(0);
+    const toOffset = toUnit.conversionOffset ? toUnit.conversionOffset : ZERO;
     const toMultiplier = toUnit.conversionMultiplier
       ? toUnit.conversionMultiplier
       : new Decimal(1);
@@ -226,8 +234,8 @@ export class Unit implements SupportsEquals<Unit> {
     this.quantityKinds.push(quantityKind);
   }
 
-  addFactorUnit(factorUnit: FactorUnit): void {
-    this.factorUnits.push(factorUnit);
+  setFactorUnits(factorUnits: FactorUnits): void {
+    this.factorUnits = factorUnits;
   }
 
   setPrefix(prefix: Prefix): void {
@@ -249,41 +257,38 @@ export class Unit implements SupportsEquals<Unit> {
    */
   normalize(): FactorUnits {
     if (this.hasFactorUnits()) {
-      const ret = this.factorUnits
-        .flatMap((fu) => fu.normalize())
-        .reduce((prev, cur) => cur.combineWith(prev));
-      if (ret.isRatioOfSameUnits()) {
-        // we don't want to reduce units like M²/M², as such units then match any other unit if they are
-        // compared by the normalization result
-        return FactorUnits.ofUnit(this);
-      }
-      return ret.reduceExponents();
-    } else if (!!this.scalingOf) {
+      return this.factorUnits.normalize();
+    } else if (
+      this.scalingOf !== null &&
+      typeof this.scalingOf !== "undefined"
+    ) {
       return this.scalingOf
         .normalize()
         .scale(this.getConversionMultiplier(this.scalingOf));
     }
-    return FactorUnits.ofUnit(this);
+    return this.factorUnits;
   }
 
   getLeafFactorUnitsWithCumulativeExponents(): FactorUnit[] {
-    if (!this.factorUnits || this.factorUnits.length === 0) {
-      return [new FactorUnit(this, 1)];
+    if (this.hasFactorUnits()) {
+      const result = this.factorUnits.factorUnits.flatMap((fu) =>
+        fu.getLeafFactorUnitsWithCumulativeExponents()
+      );
+      return result;
+    } else {
+      return [FactorUnit.ofUnit(this)];
     }
-    return this.factorUnits.flatMap((fu) =>
-      fu.getLeafFactorUnitsWithCumulativeExponents()
-    );
   }
 
   getAllPossibleFactorUnitCombinations(): FactorUnit[][] {
-    if (!this.hasFactorUnits() || this.factorUnits.length === 0) {
+    if (!this.hasFactorUnits()) {
       if (!!this.scalingOf) {
         return this.scalingOf.getAllPossibleFactorUnitCombinations();
       }
       return [[FactorUnit.ofUnit(this)]];
     }
     const result = FactorUnit.getAllPossibleFactorUnitCombinations(
-      this.factorUnits
+      this.factorUnits.factorUnits
     );
     const thisAsResult = [FactorUnit.ofUnit(this)];
     if (
@@ -309,6 +314,6 @@ export class Unit implements SupportsEquals<Unit> {
   }
 
   public hasNonzeroConversionOffset(): boolean {
-    return !!this.conversionOffset && !this.conversionOffset.eq(new Decimal(0));
+    return !!this.conversionOffset && !this.conversionOffset.eq(ZERO);
   }
 }

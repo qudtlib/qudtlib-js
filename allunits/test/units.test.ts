@@ -18,6 +18,7 @@ import { Decimal } from "decimal.js";
 import {
   arrayEqualsIgnoreOrdering,
   compareUsingEquals,
+  ONE,
 } from "../../core/src/utils";
 
 function areDecimalsEqual(a: Decimal, b: Decimal): boolean | undefined {
@@ -74,8 +75,34 @@ function modeToString(mode: DerivedUnitSearchMode): string {
   throw "not a valid mode: " + mode;
 }
 
-function toSortedIriList(unitList: Array<Unit>): Array<string> {
-  return unitList.map((u) => u.iri).sort();
+function toSortedStringList(
+  unitList: Array<Unit | FactorUnit | FactorUnits>
+): Array<string> {
+  function factorUnitToString(u: FactorUnit) {
+    return u.unit.iri + (u.exponent == 1 ? "" : "^" + u.exponent);
+  }
+
+  function factorUnitsToString(u: FactorUnits) {
+    return u.scaleFactor.eq(ONE)
+      ? ""
+      : u.scaleFactor.toString() +
+          "[" +
+          u.factorUnits.map((fu) => factorUnitToString(fu)).join(",") +
+          "]";
+  }
+
+  if (unitList.length == 0) {
+    return [];
+  }
+  const firstElement = unitList[0];
+  if (firstElement instanceof Unit) {
+    return unitList.map((u) => (u as Unit).iri).sort();
+  } else if (firstElement instanceof FactorUnit) {
+    return unitList.map((u) => factorUnitToString(u as FactorUnit)).sort();
+  } else if (firstElement instanceof FactorUnits) {
+    return unitList.map((u) => factorUnitsToString(u as FactorUnits)).sort();
+  }
+  return unitList.map((u) => JSON.stringify(u)).sort();
 }
 
 const ALL_QUDT_UNITS = Qudt.allUnits();
@@ -168,13 +195,17 @@ describe.each([
 describe.each([
   [Units.KiloGM__PER__M3, [Units.KiloGM, 1, Units.M3, -1], true],
   [Units.N__M, [Units.N, 1, Units.M, 1], true],
+  [Units.N, [Units.KiloGM, 1, Units.M, 1, Units.SEC, -2], true],
+  [Units.A__PER__MilliM, [Units.KiloGM, 1, Units.M, 1, Units.SEC, -2], false],
 ])(
   "Qudt.derivedUnitsFromExponentUnitPairs((Unit|number|Decimal)[]), non-base units",
   (unit: Unit, spec: (Unit | number)[], expectedResult: boolean) =>
     test(`${unit.toString()}.matches(${exponentOrUnitToString(
       spec
     )}) == ${expectedResult}`, () =>
-      expect(unit.matches(FactorUnits.ofFactorUnitSpec(...spec))).toBe(true))
+      expect(unit.matches(FactorUnits.ofFactorUnitSpec(...spec))).toBe(
+        expectedResult
+      ))
 );
 
 test("Qudt.derivedUnitsFromFactors(...Unit|number|Decimal[]) (error cases)", () => {
@@ -195,64 +226,9 @@ test("Qudt.derivedUnitsFromFactorUnits(...FactorUnit[]", () => {
       .map((u) => u.iri)
       .sort()
   ).toStrictEqual([
-    "http://qudt.org/vocab/unit/AC-FT",
-    "http://qudt.org/vocab/unit/ANGSTROM3",
-    "http://qudt.org/vocab/unit/BBL_UK_PET",
-    "http://qudt.org/vocab/unit/BBL_US",
-    "http://qudt.org/vocab/unit/BBL_US_DRY",
-    "http://qudt.org/vocab/unit/BU_UK",
-    "http://qudt.org/vocab/unit/BU_US",
-    "http://qudt.org/vocab/unit/CORD",
-    "http://qudt.org/vocab/unit/CUP",
-    "http://qudt.org/vocab/unit/CUP_US",
-    "http://qudt.org/vocab/unit/CentiL",
-    "http://qudt.org/vocab/unit/CentiM3",
-    "http://qudt.org/vocab/unit/DecaL",
-    "http://qudt.org/vocab/unit/DecaM3",
-    "http://qudt.org/vocab/unit/DeciL",
-    "http://qudt.org/vocab/unit/DeciM3",
-    "http://qudt.org/vocab/unit/FBM",
-    "http://qudt.org/vocab/unit/FT3",
-    "http://qudt.org/vocab/unit/FemtoL",
-    "http://qudt.org/vocab/unit/GAL_IMP",
-    "http://qudt.org/vocab/unit/GAL_UK",
-    "http://qudt.org/vocab/unit/GAL_US",
-    "http://qudt.org/vocab/unit/GAL_US_DRY",
-    "http://qudt.org/vocab/unit/GI_UK",
-    "http://qudt.org/vocab/unit/GI_US",
-    "http://qudt.org/vocab/unit/HectoL",
-    "http://qudt.org/vocab/unit/IN3",
-    "http://qudt.org/vocab/unit/Kilo-FT3",
     "http://qudt.org/vocab/unit/KiloL",
-    "http://qudt.org/vocab/unit/L",
     "http://qudt.org/vocab/unit/M3",
-    "http://qudt.org/vocab/unit/MI3",
-    "http://qudt.org/vocab/unit/MegaL",
-    "http://qudt.org/vocab/unit/MicroL",
-    "http://qudt.org/vocab/unit/MicroM3",
-    "http://qudt.org/vocab/unit/MilliL",
-    "http://qudt.org/vocab/unit/MilliM3",
-    "http://qudt.org/vocab/unit/NanoL",
-    "http://qudt.org/vocab/unit/OZ_VOL_UK",
-    "http://qudt.org/vocab/unit/OZ_VOL_US",
-    "http://qudt.org/vocab/unit/PINT",
-    "http://qudt.org/vocab/unit/PINT_UK",
-    "http://qudt.org/vocab/unit/PINT_US",
-    "http://qudt.org/vocab/unit/PINT_US_DRY",
-    "http://qudt.org/vocab/unit/PK_UK",
-    "http://qudt.org/vocab/unit/PK_US_DRY",
-    "http://qudt.org/vocab/unit/PicoL",
-    "http://qudt.org/vocab/unit/PlanckVolume",
-    "http://qudt.org/vocab/unit/QT_UK",
-    "http://qudt.org/vocab/unit/QT_US",
-    "http://qudt.org/vocab/unit/QT_US_DRY",
-    "http://qudt.org/vocab/unit/RT",
     "http://qudt.org/vocab/unit/STR",
-    "http://qudt.org/vocab/unit/Standard",
-    "http://qudt.org/vocab/unit/TBSP",
-    "http://qudt.org/vocab/unit/TON_SHIPPING_US",
-    "http://qudt.org/vocab/unit/TSP",
-    "http://qudt.org/vocab/unit/YD3",
   ]);
   expect(
     Qudt.derivedUnitsFromFactorUnits(
@@ -263,7 +239,10 @@ test("Qudt.derivedUnitsFromFactorUnits(...FactorUnit[]", () => {
     )
       .map((u) => u.iri)
       .sort()
-  ).toStrictEqual([Units.MOL__PER__M2__SEC]);
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/MOL-PER-M2-SEC",
+    "http://qudt.org/vocab/unit/MOL-PER-M2-SEC-SR",
+  ]);
 });
 
 test("Qudt.derivedUnitsFromMap(Map<Unit, number))", () => {
@@ -274,64 +253,9 @@ test("Qudt.derivedUnitsFromMap(Map<Unit, number))", () => {
       .map((u) => u.iri)
       .sort()
   ).toStrictEqual([
-    "http://qudt.org/vocab/unit/AC-FT",
-    "http://qudt.org/vocab/unit/ANGSTROM3",
-    "http://qudt.org/vocab/unit/BBL_UK_PET",
-    "http://qudt.org/vocab/unit/BBL_US",
-    "http://qudt.org/vocab/unit/BBL_US_DRY",
-    "http://qudt.org/vocab/unit/BU_UK",
-    "http://qudt.org/vocab/unit/BU_US",
-    "http://qudt.org/vocab/unit/CORD",
-    "http://qudt.org/vocab/unit/CUP",
-    "http://qudt.org/vocab/unit/CUP_US",
-    "http://qudt.org/vocab/unit/CentiL",
-    "http://qudt.org/vocab/unit/CentiM3",
-    "http://qudt.org/vocab/unit/DecaL",
-    "http://qudt.org/vocab/unit/DecaM3",
-    "http://qudt.org/vocab/unit/DeciL",
-    "http://qudt.org/vocab/unit/DeciM3",
-    "http://qudt.org/vocab/unit/FBM",
-    "http://qudt.org/vocab/unit/FT3",
-    "http://qudt.org/vocab/unit/FemtoL",
-    "http://qudt.org/vocab/unit/GAL_IMP",
-    "http://qudt.org/vocab/unit/GAL_UK",
-    "http://qudt.org/vocab/unit/GAL_US",
-    "http://qudt.org/vocab/unit/GAL_US_DRY",
-    "http://qudt.org/vocab/unit/GI_UK",
-    "http://qudt.org/vocab/unit/GI_US",
-    "http://qudt.org/vocab/unit/HectoL",
-    "http://qudt.org/vocab/unit/IN3",
-    "http://qudt.org/vocab/unit/Kilo-FT3",
     "http://qudt.org/vocab/unit/KiloL",
-    "http://qudt.org/vocab/unit/L",
     "http://qudt.org/vocab/unit/M3",
-    "http://qudt.org/vocab/unit/MI3",
-    "http://qudt.org/vocab/unit/MegaL",
-    "http://qudt.org/vocab/unit/MicroL",
-    "http://qudt.org/vocab/unit/MicroM3",
-    "http://qudt.org/vocab/unit/MilliL",
-    "http://qudt.org/vocab/unit/MilliM3",
-    "http://qudt.org/vocab/unit/NanoL",
-    "http://qudt.org/vocab/unit/OZ_VOL_UK",
-    "http://qudt.org/vocab/unit/OZ_VOL_US",
-    "http://qudt.org/vocab/unit/PINT",
-    "http://qudt.org/vocab/unit/PINT_UK",
-    "http://qudt.org/vocab/unit/PINT_US",
-    "http://qudt.org/vocab/unit/PINT_US_DRY",
-    "http://qudt.org/vocab/unit/PK_UK",
-    "http://qudt.org/vocab/unit/PK_US_DRY",
-    "http://qudt.org/vocab/unit/PicoL",
-    "http://qudt.org/vocab/unit/PlanckVolume",
-    "http://qudt.org/vocab/unit/QT_UK",
-    "http://qudt.org/vocab/unit/QT_US",
-    "http://qudt.org/vocab/unit/QT_US_DRY",
-    "http://qudt.org/vocab/unit/RT",
     "http://qudt.org/vocab/unit/STR",
-    "http://qudt.org/vocab/unit/Standard",
-    "http://qudt.org/vocab/unit/TBSP",
-    "http://qudt.org/vocab/unit/TON_SHIPPING_US",
-    "http://qudt.org/vocab/unit/TSP",
-    "http://qudt.org/vocab/unit/YD3",
   ]);
   spec.clear();
   spec.set(Units.MOL, 1);
@@ -342,15 +266,8 @@ test("Qudt.derivedUnitsFromMap(Map<Unit, number))", () => {
       .map((u) => u.iri)
       .sort()
   ).toStrictEqual([
-    "http://qudt.org/vocab/unit/MOL-PER-M2-DAY",
     "http://qudt.org/vocab/unit/MOL-PER-M2-SEC",
-    "http://qudt.org/vocab/unit/MicroMOL-PER-M2-DAY",
-    "http://qudt.org/vocab/unit/MicroMOL-PER-M2-HR",
-    "http://qudt.org/vocab/unit/MicroMOL-PER-M2-SEC",
-    "http://qudt.org/vocab/unit/MilliMOL-PER-M2-DAY",
-    "http://qudt.org/vocab/unit/MilliMOL-PER-M2-SEC",
-    "http://qudt.org/vocab/unit/NanoMOL-PER-M2-DAY",
-    "http://qudt.org/vocab/unit/PicoMOL-PER-M2-DAY",
+    "http://qudt.org/vocab/unit/MOL-PER-M2-SEC-SR",
   ]);
 });
 
@@ -391,64 +308,9 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(Unit, number)", () => {
       .map((u) => u.iri)
       .sort()
   ).toStrictEqual([
-    "http://qudt.org/vocab/unit/AC-FT",
-    "http://qudt.org/vocab/unit/ANGSTROM3",
-    "http://qudt.org/vocab/unit/BBL_UK_PET",
-    "http://qudt.org/vocab/unit/BBL_US",
-    "http://qudt.org/vocab/unit/BBL_US_DRY",
-    "http://qudt.org/vocab/unit/BU_UK",
-    "http://qudt.org/vocab/unit/BU_US",
-    "http://qudt.org/vocab/unit/CORD",
-    "http://qudt.org/vocab/unit/CUP",
-    "http://qudt.org/vocab/unit/CUP_US",
-    "http://qudt.org/vocab/unit/CentiL",
-    "http://qudt.org/vocab/unit/CentiM3",
-    "http://qudt.org/vocab/unit/DecaL",
-    "http://qudt.org/vocab/unit/DecaM3",
-    "http://qudt.org/vocab/unit/DeciL",
-    "http://qudt.org/vocab/unit/DeciM3",
-    "http://qudt.org/vocab/unit/FBM",
-    "http://qudt.org/vocab/unit/FT3",
-    "http://qudt.org/vocab/unit/FemtoL",
-    "http://qudt.org/vocab/unit/GAL_IMP",
-    "http://qudt.org/vocab/unit/GAL_UK",
-    "http://qudt.org/vocab/unit/GAL_US",
-    "http://qudt.org/vocab/unit/GAL_US_DRY",
-    "http://qudt.org/vocab/unit/GI_UK",
-    "http://qudt.org/vocab/unit/GI_US",
-    "http://qudt.org/vocab/unit/HectoL",
-    "http://qudt.org/vocab/unit/IN3",
-    "http://qudt.org/vocab/unit/Kilo-FT3",
     "http://qudt.org/vocab/unit/KiloL",
-    "http://qudt.org/vocab/unit/L",
     "http://qudt.org/vocab/unit/M3",
-    "http://qudt.org/vocab/unit/MI3",
-    "http://qudt.org/vocab/unit/MegaL",
-    "http://qudt.org/vocab/unit/MicroL",
-    "http://qudt.org/vocab/unit/MicroM3",
-    "http://qudt.org/vocab/unit/MilliL",
-    "http://qudt.org/vocab/unit/MilliM3",
-    "http://qudt.org/vocab/unit/NanoL",
-    "http://qudt.org/vocab/unit/OZ_VOL_UK",
-    "http://qudt.org/vocab/unit/OZ_VOL_US",
-    "http://qudt.org/vocab/unit/PINT",
-    "http://qudt.org/vocab/unit/PINT_UK",
-    "http://qudt.org/vocab/unit/PINT_US",
-    "http://qudt.org/vocab/unit/PINT_US_DRY",
-    "http://qudt.org/vocab/unit/PK_UK",
-    "http://qudt.org/vocab/unit/PK_US_DRY",
-    "http://qudt.org/vocab/unit/PicoL",
-    "http://qudt.org/vocab/unit/PlanckVolume",
-    "http://qudt.org/vocab/unit/QT_UK",
-    "http://qudt.org/vocab/unit/QT_US",
-    "http://qudt.org/vocab/unit/QT_US_DRY",
-    "http://qudt.org/vocab/unit/RT",
     "http://qudt.org/vocab/unit/STR",
-    "http://qudt.org/vocab/unit/Standard",
-    "http://qudt.org/vocab/unit/TBSP",
-    "http://qudt.org/vocab/unit/TON_SHIPPING_US",
-    "http://qudt.org/vocab/unit/TSP",
-    "http://qudt.org/vocab/unit/YD3",
   ]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
@@ -458,7 +320,11 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(Unit, number)", () => {
     )
       .map((u) => u.iri)
       .sort()
-  ).toStrictEqual([""]);
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/M2",
+    "http://qudt.org/vocab/unit/M2-PER-SR",
+    "http://qudt.org/vocab/unit/M2-SR",
+  ]);
   let result = Qudt.derivedUnitsFromExponentUnitPairs(
     DerivedUnitSearchMode.ALL,
     Units.K,
@@ -486,51 +352,65 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using Iris]", () =>
     )
       .map((u) => u.iri)
       .sort()
-  ).toStrictEqual([Units.KiloL, Units.M3].map((u) => u.iri).sort());
+  ).toStrictEqual([Units.KiloL, Units.M3, Units.STR].map((u) => u.iri).sort());
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
       DerivedUnitSearchMode.ALL,
       Units.M.iri,
       2
     )
-  ).toStrictEqual([Units.M2]);
+      .map((u) => u.iri)
+      .sort()
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/M2",
+    "http://qudt.org/vocab/unit/M2-PER-SR",
+    "http://qudt.org/vocab/unit/M2-SR",
+  ]);
   expect(
-    toSortedIriList(
+    toSortedStringList(
       Qudt.derivedUnitsFromExponentUnitPairs(
         DerivedUnitSearchMode.ALL,
         Units.K.iri,
         -1
       )
     )
-  ).toStrictEqual(toSortedIriList([Units.PER__K, Units.PER__DEG_C]));
+  ).toStrictEqual(toSortedStringList([Units.PER__K, Units.PER__DEG_C]));
   const result = Qudt.derivedUnitsFromExponentUnitPairs(
     DerivedUnitSearchMode.ALL,
     Units.M.iri,
     1
   );
-  expect(toSortedIriList(result)).toStrictEqual(
-    toSortedIriList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
+  expect(toSortedStringList(result)).toStrictEqual(
+    toSortedStringList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
   );
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using localnames]", () => {
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 3)
-  ).toStrictEqual([Units.KiloL, Units.M3]);
+    toSortedStringList(
+      Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 3)
+    )
+  ).toStrictEqual(toSortedStringList([Units.KiloL, Units.M3, Units.STR]));
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 2)
-  ).toStrictEqual([Units.M2]);
+    toSortedStringList(
+      Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 2)
+    )
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/M2",
+    "http://qudt.org/vocab/unit/M2-PER-SR",
+    "http://qudt.org/vocab/unit/M2-SR",
+  ]);
   expect(
-    toSortedIriList(
+    toSortedStringList(
       Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "K", -1)
     )
-  ).toStrictEqual(toSortedIriList([Units.PER__K, Units.PER__DEG_C]));
+  ).toStrictEqual(toSortedStringList([Units.PER__K, Units.PER__DEG_C]));
   expect(
-    toSortedIriList(
+    toSortedStringList(
       Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 1)
     )
   ).toStrictEqual(
-    toSortedIriList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
+    toSortedStringList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
   );
 });
 
@@ -543,14 +423,20 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () 
     )
       .map((u) => u.iri)
       .sort()
-  ).toStrictEqual([Units.KiloL, Units.M3].map((u) => u.iri).sort());
+  ).toStrictEqual([Units.KiloL, Units.M3, Units.STR].map((u) => u.iri).sort());
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.ALL,
-      "Meter",
-      2
+    toSortedStringList(
+      Qudt.derivedUnitsFromExponentUnitPairs(
+        DerivedUnitSearchMode.ALL,
+        "Meter",
+        2
+      )
     )
-  ).toStrictEqual([Units.M2]);
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/M2",
+    "http://qudt.org/vocab/unit/M2-PER-SR",
+    "http://qudt.org/vocab/unit/M2-SR",
+  ]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
       DerivedUnitSearchMode.ALL,
@@ -561,7 +447,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () 
       .sort()
   ).toStrictEqual([Units.PER__K, Units.PER__DEG_C].map((u) => u.iri).sort());
   expect(
-    toSortedIriList(
+    toSortedStringList(
       Qudt.derivedUnitsFromExponentUnitPairs(
         DerivedUnitSearchMode.ALL,
         "METER",
@@ -569,15 +455,17 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () 
       )
     )
   ).toStrictEqual(
-    toSortedIriList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
+    toSortedStringList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
   );
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.BEST_MATCH,
-      "METER",
-      1
+    toSortedStringList(
+      Qudt.derivedUnitsFromExponentUnitPairs(
+        DerivedUnitSearchMode.BEST_MATCH,
+        "METER",
+        1
+      )
     )
-  ).toStrictEqual([Units.M]);
+  ).toStrictEqual(toSortedStringList([Units.M]));
 });
 
 function exponentOrUnitToString(
@@ -598,15 +486,7 @@ describe.each([
     Units.SEC,
     -2,
   ], // friction loss
-  [
-    0.1,
-    DerivedUnitSearchMode.BEST_MATCH,
-    [Units.N__PER__M2],
-    Units.N,
-    1,
-    Units.M,
-    -2,
-  ],
+  [0.1, DerivedUnitSearchMode.BEST_MATCH, [Units.PA], Units.N, 1, Units.M, -2],
   [
     0.8,
     DerivedUnitSearchMode.BEST_MATCH,
@@ -620,53 +500,10 @@ describe.each([
     1,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/FemtoGM-PER-L",
-      "http://qudt.org/vocab/unit/GM-PER-CentiM3",
-      "http://qudt.org/vocab/unit/GM-PER-DeciL",
       "http://qudt.org/vocab/unit/GM-PER-DeciM3",
       "http://qudt.org/vocab/unit/GM-PER-L",
-      "http://qudt.org/vocab/unit/GM-PER-M3",
-      "http://qudt.org/vocab/unit/GM-PER-MilliL",
-      "http://qudt.org/vocab/unit/GRAIN-PER-GAL_US",
-      "http://qudt.org/vocab/unit/GRAIN-PER-M3",
-      "http://qudt.org/vocab/unit/KiloGM-PER-CentiM3",
-      "http://qudt.org/vocab/unit/KiloGM-PER-DeciM3",
-      "http://qudt.org/vocab/unit/KiloGM-PER-L",
       "http://qudt.org/vocab/unit/KiloGM-PER-M3",
-      "http://qudt.org/vocab/unit/LB-PER-FT3",
-      "http://qudt.org/vocab/unit/LB-PER-GAL_UK",
-      "http://qudt.org/vocab/unit/LB-PER-GAL_US",
-      "http://qudt.org/vocab/unit/LB-PER-IN3",
-      "http://qudt.org/vocab/unit/LB-PER-M3",
-      "http://qudt.org/vocab/unit/LB-PER-YD3",
-      "http://qudt.org/vocab/unit/MegaGM-PER-M3",
-      "http://qudt.org/vocab/unit/MicroGM-PER-DeciL",
-      "http://qudt.org/vocab/unit/MicroGM-PER-L",
-      "http://qudt.org/vocab/unit/MicroGM-PER-M3",
-      "http://qudt.org/vocab/unit/MicroGM-PER-MilliL",
-      "http://qudt.org/vocab/unit/MilliGM-PER-DeciL",
-      "http://qudt.org/vocab/unit/MilliGM-PER-L",
-      "http://qudt.org/vocab/unit/MilliGM-PER-M3",
       "http://qudt.org/vocab/unit/MilliGM-PER-MilliL",
-      "http://qudt.org/vocab/unit/NanoGM-PER-DeciL",
-      "http://qudt.org/vocab/unit/NanoGM-PER-L",
-      "http://qudt.org/vocab/unit/NanoGM-PER-M3",
-      "http://qudt.org/vocab/unit/NanoGM-PER-MicroL",
-      "http://qudt.org/vocab/unit/NanoGM-PER-MilliL",
-      "http://qudt.org/vocab/unit/OZ-PER-GAL_UK",
-      "http://qudt.org/vocab/unit/OZ-PER-GAL_US",
-      "http://qudt.org/vocab/unit/OZ-PER-IN3",
-      "http://qudt.org/vocab/unit/OZ-PER-YD3",
-      "http://qudt.org/vocab/unit/PicoGM-PER-L",
-      "http://qudt.org/vocab/unit/PicoGM-PER-MilliL",
-      "http://qudt.org/vocab/unit/PlanckDensity",
-      "http://qudt.org/vocab/unit/SLUG-PER-FT3",
-      "http://qudt.org/vocab/unit/TONNE-PER-M3",
-      "http://qudt.org/vocab/unit/TON_LONG-PER-YD3",
-      "http://qudt.org/vocab/unit/TON_Metric-PER-M3",
-      "http://qudt.org/vocab/unit/TON_SHORT-PER-YD3",
-      "http://qudt.org/vocab/unit/TON_UK-PER-YD3",
-      "http://qudt.org/vocab/unit/TON_US-PER-YD3",
     ],
     Units.KiloGM,
     1,
@@ -678,66 +515,11 @@ describe.each([
     2,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/ATM",
-      "http://qudt.org/vocab/unit/ATM_T",
-      "http://qudt.org/vocab/unit/BAR",
-      "http://qudt.org/vocab/unit/BARAD",
-      "http://qudt.org/vocab/unit/BARYE",
-      "http://qudt.org/vocab/unit/BTU_IT-PER-FT3",
-      "http://qudt.org/vocab/unit/BTU_TH-PER-FT3",
-      "http://qudt.org/vocab/unit/CM_H2O",
-      "http://qudt.org/vocab/unit/CentiBAR",
-      "http://qudt.org/vocab/unit/CentiM_H2O",
-      "http://qudt.org/vocab/unit/CentiM_HG",
-      "http://qudt.org/vocab/unit/DYN-PER-CentiM2",
-      "http://qudt.org/vocab/unit/DecaPA",
-      "http://qudt.org/vocab/unit/DeciBAR",
-      "http://qudt.org/vocab/unit/ERG-PER-CentiM3",
-      "http://qudt.org/vocab/unit/FT_H2O",
-      "http://qudt.org/vocab/unit/FT_HG",
-      "http://qudt.org/vocab/unit/GM_F-PER-CentiM2",
-      "http://qudt.org/vocab/unit/GigaPA",
-      "http://qudt.org/vocab/unit/HectoBAR",
-      "http://qudt.org/vocab/unit/HectoPA",
-      "http://qudt.org/vocab/unit/IN_H2O",
-      "http://qudt.org/vocab/unit/IN_HG",
       "http://qudt.org/vocab/unit/J-PER-M3",
-      "http://qudt.org/vocab/unit/KIP_F-PER-IN2",
-      "http://qudt.org/vocab/unit/KiloBAR",
       "http://qudt.org/vocab/unit/KiloGM-PER-M-SEC2",
-      "http://qudt.org/vocab/unit/KiloGM_F-PER-CentiM2",
-      "http://qudt.org/vocab/unit/KiloGM_F-PER-M2",
-      "http://qudt.org/vocab/unit/KiloGM_F-PER-MilliM2",
-      "http://qudt.org/vocab/unit/KiloLB_F-PER-IN2",
-      "http://qudt.org/vocab/unit/KiloN-PER-M2",
-      "http://qudt.org/vocab/unit/KiloPA",
-      "http://qudt.org/vocab/unit/KiloPA_A",
-      "http://qudt.org/vocab/unit/LB_F-PER-FT2",
-      "http://qudt.org/vocab/unit/LB_F-PER-IN2",
-      "http://qudt.org/vocab/unit/MegaBAR",
-      "http://qudt.org/vocab/unit/MegaJ-PER-M3",
-      "http://qudt.org/vocab/unit/MegaPA",
-      "http://qudt.org/vocab/unit/MegaPSI",
-      "http://qudt.org/vocab/unit/MicroATM",
-      "http://qudt.org/vocab/unit/MicroBAR",
-      "http://qudt.org/vocab/unit/MicroPA",
-      "http://qudt.org/vocab/unit/MicroTORR",
-      "http://qudt.org/vocab/unit/MilliBAR",
-      "http://qudt.org/vocab/unit/MilliM_H2O",
-      "http://qudt.org/vocab/unit/MilliM_HG",
       "http://qudt.org/vocab/unit/MilliM_HGA",
-      "http://qudt.org/vocab/unit/MilliPA",
-      "http://qudt.org/vocab/unit/MilliTORR",
-      "http://qudt.org/vocab/unit/N-PER-CentiM2",
       "http://qudt.org/vocab/unit/N-PER-M2",
-      "http://qudt.org/vocab/unit/N-PER-MilliM2",
       "http://qudt.org/vocab/unit/PA",
-      "http://qudt.org/vocab/unit/PDL-PER-FT2",
-      "http://qudt.org/vocab/unit/PSI",
-      "http://qudt.org/vocab/unit/PicoPA",
-      "http://qudt.org/vocab/unit/PlanckPressure",
-      "http://qudt.org/vocab/unit/TORR",
-      "http://qudt.org/vocab/unit/W-HR-PER-M3",
     ],
     Units.N,
     1,
@@ -757,31 +539,8 @@ describe.each([
     3.5,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/BTU_IT-PER-LB",
-      "http://qudt.org/vocab/unit/BTU_TH-PER-LB",
-      "http://qudt.org/vocab/unit/CAL_IT-PER-GM",
-      "http://qudt.org/vocab/unit/CAL_TH-PER-GM",
-      "http://qudt.org/vocab/unit/ERG-PER-GM",
-      "http://qudt.org/vocab/unit/GRAY",
       "http://qudt.org/vocab/unit/J-PER-GM",
-      "http://qudt.org/vocab/unit/J-PER-KiloGM",
-      "http://qudt.org/vocab/unit/KiloCAL-PER-GM",
       "http://qudt.org/vocab/unit/KiloJ-PER-KiloGM",
-      "http://qudt.org/vocab/unit/KiloLB_F-FT-PER-LB",
-      "http://qudt.org/vocab/unit/M2-HZ2",
-      "http://qudt.org/vocab/unit/M2-PER-SEC2",
-      "http://qudt.org/vocab/unit/MegaJ-PER-KiloGM",
-      "http://qudt.org/vocab/unit/MicroGRAY",
-      "http://qudt.org/vocab/unit/MicroSV",
-      "http://qudt.org/vocab/unit/MilliGRAY",
-      "http://qudt.org/vocab/unit/MilliJ-PER-GM",
-      "http://qudt.org/vocab/unit/MilliRAD_R",
-      "http://qudt.org/vocab/unit/MilliR_man",
-      "http://qudt.org/vocab/unit/MilliSV",
-      "http://qudt.org/vocab/unit/N-M-PER-KiloGM",
-      "http://qudt.org/vocab/unit/RAD_R",
-      "http://qudt.org/vocab/unit/REM",
-      "http://qudt.org/vocab/unit/SV",
     ],
     Units.J,
     1,
@@ -793,15 +552,8 @@ describe.each([
     5,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/MOL-PER-M2-DAY",
       "http://qudt.org/vocab/unit/MOL-PER-M2-SEC",
-      "http://qudt.org/vocab/unit/MicroMOL-PER-M2-DAY",
-      "http://qudt.org/vocab/unit/MicroMOL-PER-M2-HR",
-      "http://qudt.org/vocab/unit/MicroMOL-PER-M2-SEC",
-      "http://qudt.org/vocab/unit/MilliMOL-PER-M2-DAY",
-      "http://qudt.org/vocab/unit/MilliMOL-PER-M2-SEC",
-      "http://qudt.org/vocab/unit/NanoMOL-PER-M2-DAY",
-      "http://qudt.org/vocab/unit/PicoMOL-PER-M2-DAY",
+      "http://qudt.org/vocab/unit/MOL-PER-M2-SEC-SR",
     ],
     Units.MOL,
     1,
@@ -827,66 +579,11 @@ describe.each([
     7,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/ATM",
-      "http://qudt.org/vocab/unit/ATM_T",
-      "http://qudt.org/vocab/unit/BAR",
-      "http://qudt.org/vocab/unit/BARAD",
-      "http://qudt.org/vocab/unit/BARYE",
-      "http://qudt.org/vocab/unit/BTU_IT-PER-FT3",
-      "http://qudt.org/vocab/unit/BTU_TH-PER-FT3",
-      "http://qudt.org/vocab/unit/CM_H2O",
-      "http://qudt.org/vocab/unit/CentiBAR",
-      "http://qudt.org/vocab/unit/CentiM_H2O",
-      "http://qudt.org/vocab/unit/CentiM_HG",
-      "http://qudt.org/vocab/unit/DYN-PER-CentiM2",
-      "http://qudt.org/vocab/unit/DecaPA",
-      "http://qudt.org/vocab/unit/DeciBAR",
-      "http://qudt.org/vocab/unit/ERG-PER-CentiM3",
-      "http://qudt.org/vocab/unit/FT_H2O",
-      "http://qudt.org/vocab/unit/FT_HG",
-      "http://qudt.org/vocab/unit/GM_F-PER-CentiM2",
-      "http://qudt.org/vocab/unit/GigaPA",
-      "http://qudt.org/vocab/unit/HectoBAR",
-      "http://qudt.org/vocab/unit/HectoPA",
-      "http://qudt.org/vocab/unit/IN_H2O",
-      "http://qudt.org/vocab/unit/IN_HG",
       "http://qudt.org/vocab/unit/J-PER-M3",
-      "http://qudt.org/vocab/unit/KIP_F-PER-IN2",
-      "http://qudt.org/vocab/unit/KiloBAR",
       "http://qudt.org/vocab/unit/KiloGM-PER-M-SEC2",
-      "http://qudt.org/vocab/unit/KiloGM_F-PER-CentiM2",
-      "http://qudt.org/vocab/unit/KiloGM_F-PER-M2",
-      "http://qudt.org/vocab/unit/KiloGM_F-PER-MilliM2",
-      "http://qudt.org/vocab/unit/KiloLB_F-PER-IN2",
-      "http://qudt.org/vocab/unit/KiloN-PER-M2",
-      "http://qudt.org/vocab/unit/KiloPA",
-      "http://qudt.org/vocab/unit/KiloPA_A",
-      "http://qudt.org/vocab/unit/LB_F-PER-FT2",
-      "http://qudt.org/vocab/unit/LB_F-PER-IN2",
-      "http://qudt.org/vocab/unit/MegaBAR",
-      "http://qudt.org/vocab/unit/MegaJ-PER-M3",
-      "http://qudt.org/vocab/unit/MegaPA",
-      "http://qudt.org/vocab/unit/MegaPSI",
-      "http://qudt.org/vocab/unit/MicroATM",
-      "http://qudt.org/vocab/unit/MicroBAR",
-      "http://qudt.org/vocab/unit/MicroPA",
-      "http://qudt.org/vocab/unit/MicroTORR",
-      "http://qudt.org/vocab/unit/MilliBAR",
-      "http://qudt.org/vocab/unit/MilliM_H2O",
-      "http://qudt.org/vocab/unit/MilliM_HG",
       "http://qudt.org/vocab/unit/MilliM_HGA",
-      "http://qudt.org/vocab/unit/MilliPA",
-      "http://qudt.org/vocab/unit/MilliTORR",
-      "http://qudt.org/vocab/unit/N-PER-CentiM2",
       "http://qudt.org/vocab/unit/N-PER-M2",
-      "http://qudt.org/vocab/unit/N-PER-MilliM2",
       "http://qudt.org/vocab/unit/PA",
-      "http://qudt.org/vocab/unit/PDL-PER-FT2",
-      "http://qudt.org/vocab/unit/PSI",
-      "http://qudt.org/vocab/unit/PicoPA",
-      "http://qudt.org/vocab/unit/PlanckPressure",
-      "http://qudt.org/vocab/unit/TORR",
-      "http://qudt.org/vocab/unit/W-HR-PER-M3",
     ],
     Units.M,
     1,
@@ -900,24 +597,7 @@ describe.each([
   [
     8,
     DerivedUnitSearchMode.ALL,
-    [
-      "http://qudt.org/vocab/unit/BTU_IT-FT-PER-FT2-HR-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_IT-IN-PER-FT2-HR-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_IT-IN-PER-FT2-SEC-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_IT-IN-PER-HR-FT2-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_IT-IN-PER-SEC-FT2-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_IT-PER-SEC-FT-DEG_R",
-      "http://qudt.org/vocab/unit/BTU_TH-FT-PER-FT2-HR-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_TH-FT-PER-HR-FT2-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_TH-IN-PER-FT2-HR-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_TH-IN-PER-FT2-SEC-DEG_F",
-      "http://qudt.org/vocab/unit/CAL_IT-PER-SEC-CentiM-K",
-      "http://qudt.org/vocab/unit/CAL_TH-PER-CentiM-SEC-DEG_C",
-      "http://qudt.org/vocab/unit/CAL_TH-PER-SEC-CentiM-K",
-      "http://qudt.org/vocab/unit/KiloCAL-PER-CentiM-SEC-DEG_C",
-      "http://qudt.org/vocab/unit/KiloCAL_IT-PER-HR-M-DEG_C",
-      "http://qudt.org/vocab/unit/W-PER-M-K",
-    ],
+    ["http://qudt.org/vocab/unit/BTU_IT-FT-PER-FT2-HR-DEG_F"],
     Units.BTU_IT,
     1,
     Units.FT,
@@ -933,30 +613,11 @@ describe.each([
     9,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/BTU_IT-PER-FT2",
-      "http://qudt.org/vocab/unit/DYN-PER-CentiM",
-      "http://qudt.org/vocab/unit/FT-LB_F-PER-FT2",
-      "http://qudt.org/vocab/unit/FT-LB_F-PER-M2",
-      "http://qudt.org/vocab/unit/GigaJ-PER-M2",
-      "http://qudt.org/vocab/unit/J-PER-CentiM2",
       "http://qudt.org/vocab/unit/J-PER-M2",
-      "http://qudt.org/vocab/unit/KiloBTU_IT-PER-FT2",
-      "http://qudt.org/vocab/unit/KiloCAL-PER-CentiM2",
       "http://qudt.org/vocab/unit/KiloGM-PER-SEC2",
-      "http://qudt.org/vocab/unit/KiloGM_F-M-PER-CentiM2",
-      "http://qudt.org/vocab/unit/KiloLB_F-PER-FT",
-      "http://qudt.org/vocab/unit/KiloN-PER-M",
-      "http://qudt.org/vocab/unit/KiloW-HR-PER-M2",
-      "http://qudt.org/vocab/unit/LB_F-PER-FT",
-      "http://qudt.org/vocab/unit/LB_F-PER-IN",
-      "http://qudt.org/vocab/unit/MegaJ-PER-M2",
-      "http://qudt.org/vocab/unit/MilliN-PER-M",
       "http://qudt.org/vocab/unit/N-M-PER-M2",
-      "http://qudt.org/vocab/unit/N-PER-CentiM",
       "http://qudt.org/vocab/unit/N-PER-M",
-      "http://qudt.org/vocab/unit/N-PER-MilliM",
       "http://qudt.org/vocab/unit/PA-M",
-      "http://qudt.org/vocab/unit/W-HR-PER-M2",
       "http://qudt.org/vocab/unit/W-SEC-PER-M2",
     ],
     Units.M,
@@ -974,30 +635,11 @@ describe.each([
     10,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/BTU_IT-PER-FT2",
-      "http://qudt.org/vocab/unit/DYN-PER-CentiM",
-      "http://qudt.org/vocab/unit/FT-LB_F-PER-FT2",
-      "http://qudt.org/vocab/unit/FT-LB_F-PER-M2",
-      "http://qudt.org/vocab/unit/GigaJ-PER-M2",
-      "http://qudt.org/vocab/unit/J-PER-CentiM2",
       "http://qudt.org/vocab/unit/J-PER-M2",
-      "http://qudt.org/vocab/unit/KiloBTU_IT-PER-FT2",
-      "http://qudt.org/vocab/unit/KiloCAL-PER-CentiM2",
       "http://qudt.org/vocab/unit/KiloGM-PER-SEC2",
-      "http://qudt.org/vocab/unit/KiloGM_F-M-PER-CentiM2",
-      "http://qudt.org/vocab/unit/KiloLB_F-PER-FT",
-      "http://qudt.org/vocab/unit/KiloN-PER-M",
-      "http://qudt.org/vocab/unit/KiloW-HR-PER-M2",
-      "http://qudt.org/vocab/unit/LB_F-PER-FT",
-      "http://qudt.org/vocab/unit/LB_F-PER-IN",
-      "http://qudt.org/vocab/unit/MegaJ-PER-M2",
-      "http://qudt.org/vocab/unit/MilliN-PER-M",
       "http://qudt.org/vocab/unit/N-M-PER-M2",
-      "http://qudt.org/vocab/unit/N-PER-CentiM",
       "http://qudt.org/vocab/unit/N-PER-M",
-      "http://qudt.org/vocab/unit/N-PER-MilliM",
       "http://qudt.org/vocab/unit/PA-M",
-      "http://qudt.org/vocab/unit/W-HR-PER-M2",
       "http://qudt.org/vocab/unit/W-SEC-PER-M2",
     ],
     Units.M,
@@ -1013,66 +655,9 @@ describe.each([
     11,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/AttoJ",
-      "http://qudt.org/vocab/unit/BTU_IT",
-      "http://qudt.org/vocab/unit/BTU_MEAN",
-      "http://qudt.org/vocab/unit/BTU_TH",
-      "http://qudt.org/vocab/unit/CAL_15_DEG_C",
-      "http://qudt.org/vocab/unit/CAL_IT",
-      "http://qudt.org/vocab/unit/CAL_MEAN",
-      "http://qudt.org/vocab/unit/CAL_TH",
-      "http://qudt.org/vocab/unit/CentiN-M",
-      "http://qudt.org/vocab/unit/DYN-CentiM",
-      "http://qudt.org/vocab/unit/DeciN-M",
-      "http://qudt.org/vocab/unit/ERG",
-      "http://qudt.org/vocab/unit/EV",
-      "http://qudt.org/vocab/unit/E_h",
-      "http://qudt.org/vocab/unit/ExaJ",
-      "http://qudt.org/vocab/unit/FT-LB_F",
-      "http://qudt.org/vocab/unit/FT-PDL",
-      "http://qudt.org/vocab/unit/FemtoJ",
-      "http://qudt.org/vocab/unit/GigaEV",
-      "http://qudt.org/vocab/unit/GigaJ",
-      "http://qudt.org/vocab/unit/GigaW-HR",
       "http://qudt.org/vocab/unit/J",
-      "http://qudt.org/vocab/unit/KiloBTU_IT",
-      "http://qudt.org/vocab/unit/KiloBTU_TH",
-      "http://qudt.org/vocab/unit/KiloCAL",
-      "http://qudt.org/vocab/unit/KiloCAL_IT",
-      "http://qudt.org/vocab/unit/KiloCAL_Mean",
-      "http://qudt.org/vocab/unit/KiloCAL_TH",
-      "http://qudt.org/vocab/unit/KiloEV",
-      "http://qudt.org/vocab/unit/KiloGM_F-M",
-      "http://qudt.org/vocab/unit/KiloJ",
-      "http://qudt.org/vocab/unit/KiloN-M",
-      "http://qudt.org/vocab/unit/KiloV-A-HR",
-      "http://qudt.org/vocab/unit/KiloW-HR",
-      "http://qudt.org/vocab/unit/LB_F-FT",
-      "http://qudt.org/vocab/unit/LB_F-IN",
-      "http://qudt.org/vocab/unit/MegaEV",
-      "http://qudt.org/vocab/unit/MegaJ",
-      "http://qudt.org/vocab/unit/MegaN-M",
-      "http://qudt.org/vocab/unit/MegaTOE",
-      "http://qudt.org/vocab/unit/MegaV-A-HR",
-      "http://qudt.org/vocab/unit/MegaW-HR",
-      "http://qudt.org/vocab/unit/MicroJ",
-      "http://qudt.org/vocab/unit/MicroN-M",
-      "http://qudt.org/vocab/unit/MilliJ",
-      "http://qudt.org/vocab/unit/MilliN-M",
-      "http://qudt.org/vocab/unit/N-CentiM",
       "http://qudt.org/vocab/unit/N-M",
-      "http://qudt.org/vocab/unit/OZ_F-IN",
-      "http://qudt.org/vocab/unit/PetaJ",
-      "http://qudt.org/vocab/unit/PlanckEnergy",
-      "http://qudt.org/vocab/unit/QUAD",
-      "http://qudt.org/vocab/unit/THM_US",
-      "http://qudt.org/vocab/unit/TOE",
-      "http://qudt.org/vocab/unit/TON_FG-HR",
-      "http://qudt.org/vocab/unit/TeraJ",
-      "http://qudt.org/vocab/unit/TeraW-HR",
-      "http://qudt.org/vocab/unit/TonEnergy",
-      "http://qudt.org/vocab/unit/V-A-HR",
-      "http://qudt.org/vocab/unit/W-HR",
+      "http://qudt.org/vocab/unit/N-M-PER-RAD",
       "http://qudt.org/vocab/unit/W-SEC",
     ],
     Units.N,
@@ -1084,66 +669,9 @@ describe.each([
     12,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/AttoJ",
-      "http://qudt.org/vocab/unit/BTU_IT",
-      "http://qudt.org/vocab/unit/BTU_MEAN",
-      "http://qudt.org/vocab/unit/BTU_TH",
-      "http://qudt.org/vocab/unit/CAL_15_DEG_C",
-      "http://qudt.org/vocab/unit/CAL_IT",
-      "http://qudt.org/vocab/unit/CAL_MEAN",
-      "http://qudt.org/vocab/unit/CAL_TH",
-      "http://qudt.org/vocab/unit/CentiN-M",
-      "http://qudt.org/vocab/unit/DYN-CentiM",
-      "http://qudt.org/vocab/unit/DeciN-M",
-      "http://qudt.org/vocab/unit/ERG",
-      "http://qudt.org/vocab/unit/EV",
-      "http://qudt.org/vocab/unit/E_h",
-      "http://qudt.org/vocab/unit/ExaJ",
-      "http://qudt.org/vocab/unit/FT-LB_F",
-      "http://qudt.org/vocab/unit/FT-PDL",
-      "http://qudt.org/vocab/unit/FemtoJ",
-      "http://qudt.org/vocab/unit/GigaEV",
-      "http://qudt.org/vocab/unit/GigaJ",
-      "http://qudt.org/vocab/unit/GigaW-HR",
       "http://qudt.org/vocab/unit/J",
-      "http://qudt.org/vocab/unit/KiloBTU_IT",
-      "http://qudt.org/vocab/unit/KiloBTU_TH",
-      "http://qudt.org/vocab/unit/KiloCAL",
-      "http://qudt.org/vocab/unit/KiloCAL_IT",
-      "http://qudt.org/vocab/unit/KiloCAL_Mean",
-      "http://qudt.org/vocab/unit/KiloCAL_TH",
-      "http://qudt.org/vocab/unit/KiloEV",
-      "http://qudt.org/vocab/unit/KiloGM_F-M",
-      "http://qudt.org/vocab/unit/KiloJ",
-      "http://qudt.org/vocab/unit/KiloN-M",
-      "http://qudt.org/vocab/unit/KiloV-A-HR",
-      "http://qudt.org/vocab/unit/KiloW-HR",
-      "http://qudt.org/vocab/unit/LB_F-FT",
-      "http://qudt.org/vocab/unit/LB_F-IN",
-      "http://qudt.org/vocab/unit/MegaEV",
-      "http://qudt.org/vocab/unit/MegaJ",
-      "http://qudt.org/vocab/unit/MegaN-M",
-      "http://qudt.org/vocab/unit/MegaTOE",
-      "http://qudt.org/vocab/unit/MegaV-A-HR",
-      "http://qudt.org/vocab/unit/MegaW-HR",
-      "http://qudt.org/vocab/unit/MicroJ",
-      "http://qudt.org/vocab/unit/MicroN-M",
-      "http://qudt.org/vocab/unit/MilliJ",
-      "http://qudt.org/vocab/unit/MilliN-M",
-      "http://qudt.org/vocab/unit/N-CentiM",
       "http://qudt.org/vocab/unit/N-M",
-      "http://qudt.org/vocab/unit/OZ_F-IN",
-      "http://qudt.org/vocab/unit/PetaJ",
-      "http://qudt.org/vocab/unit/PlanckEnergy",
-      "http://qudt.org/vocab/unit/QUAD",
-      "http://qudt.org/vocab/unit/THM_US",
-      "http://qudt.org/vocab/unit/TOE",
-      "http://qudt.org/vocab/unit/TON_FG-HR",
-      "http://qudt.org/vocab/unit/TeraJ",
-      "http://qudt.org/vocab/unit/TeraW-HR",
-      "http://qudt.org/vocab/unit/TonEnergy",
-      "http://qudt.org/vocab/unit/V-A-HR",
-      "http://qudt.org/vocab/unit/W-HR",
+      "http://qudt.org/vocab/unit/N-M-PER-RAD",
       "http://qudt.org/vocab/unit/W-SEC",
     ],
     Units.J,
@@ -1153,53 +681,10 @@ describe.each([
     13,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/FemtoGM-PER-L",
-      "http://qudt.org/vocab/unit/GM-PER-CentiM3",
-      "http://qudt.org/vocab/unit/GM-PER-DeciL",
       "http://qudt.org/vocab/unit/GM-PER-DeciM3",
       "http://qudt.org/vocab/unit/GM-PER-L",
-      "http://qudt.org/vocab/unit/GM-PER-M3",
-      "http://qudt.org/vocab/unit/GM-PER-MilliL",
-      "http://qudt.org/vocab/unit/GRAIN-PER-GAL_US",
-      "http://qudt.org/vocab/unit/GRAIN-PER-M3",
-      "http://qudt.org/vocab/unit/KiloGM-PER-CentiM3",
-      "http://qudt.org/vocab/unit/KiloGM-PER-DeciM3",
-      "http://qudt.org/vocab/unit/KiloGM-PER-L",
       "http://qudt.org/vocab/unit/KiloGM-PER-M3",
-      "http://qudt.org/vocab/unit/LB-PER-FT3",
-      "http://qudt.org/vocab/unit/LB-PER-GAL_UK",
-      "http://qudt.org/vocab/unit/LB-PER-GAL_US",
-      "http://qudt.org/vocab/unit/LB-PER-IN3",
-      "http://qudt.org/vocab/unit/LB-PER-M3",
-      "http://qudt.org/vocab/unit/LB-PER-YD3",
-      "http://qudt.org/vocab/unit/MegaGM-PER-M3",
-      "http://qudt.org/vocab/unit/MicroGM-PER-DeciL",
-      "http://qudt.org/vocab/unit/MicroGM-PER-L",
-      "http://qudt.org/vocab/unit/MicroGM-PER-M3",
-      "http://qudt.org/vocab/unit/MicroGM-PER-MilliL",
-      "http://qudt.org/vocab/unit/MilliGM-PER-DeciL",
-      "http://qudt.org/vocab/unit/MilliGM-PER-L",
-      "http://qudt.org/vocab/unit/MilliGM-PER-M3",
       "http://qudt.org/vocab/unit/MilliGM-PER-MilliL",
-      "http://qudt.org/vocab/unit/NanoGM-PER-DeciL",
-      "http://qudt.org/vocab/unit/NanoGM-PER-L",
-      "http://qudt.org/vocab/unit/NanoGM-PER-M3",
-      "http://qudt.org/vocab/unit/NanoGM-PER-MicroL",
-      "http://qudt.org/vocab/unit/NanoGM-PER-MilliL",
-      "http://qudt.org/vocab/unit/OZ-PER-GAL_UK",
-      "http://qudt.org/vocab/unit/OZ-PER-GAL_US",
-      "http://qudt.org/vocab/unit/OZ-PER-IN3",
-      "http://qudt.org/vocab/unit/OZ-PER-YD3",
-      "http://qudt.org/vocab/unit/PicoGM-PER-L",
-      "http://qudt.org/vocab/unit/PicoGM-PER-MilliL",
-      "http://qudt.org/vocab/unit/PlanckDensity",
-      "http://qudt.org/vocab/unit/SLUG-PER-FT3",
-      "http://qudt.org/vocab/unit/TONNE-PER-M3",
-      "http://qudt.org/vocab/unit/TON_LONG-PER-YD3",
-      "http://qudt.org/vocab/unit/TON_Metric-PER-M3",
-      "http://qudt.org/vocab/unit/TON_SHORT-PER-YD3",
-      "http://qudt.org/vocab/unit/TON_UK-PER-YD3",
-      "http://qudt.org/vocab/unit/TON_US-PER-YD3",
     ],
     Units.KiloGM,
     1,
@@ -1219,12 +704,6 @@ describe.each([
     14,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/BTU_IT-PER-FT2-HR-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_IT-PER-FT2-SEC-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_IT-PER-HR-FT2-DEG_R",
-      "http://qudt.org/vocab/unit/BTU_IT-PER-SEC-FT2-DEG_R",
-      "http://qudt.org/vocab/unit/CAL_IT-PER-SEC-CentiM2-K",
-      "http://qudt.org/vocab/unit/CAL_TH-PER-SEC-CentiM2-K",
       "http://qudt.org/vocab/unit/KiloGM-PER-SEC3-K",
       "http://qudt.org/vocab/unit/W-PER-M2-K",
     ],
@@ -1241,11 +720,8 @@ describe.each([
     [
       "http://qudt.org/vocab/unit/J-PER-M4",
       "http://qudt.org/vocab/unit/KiloGM-PER-M2-SEC2",
-      "http://qudt.org/vocab/unit/KiloN-PER-M3",
-      "http://qudt.org/vocab/unit/KiloPA-PER-MilliM",
       "http://qudt.org/vocab/unit/N-PER-M3",
       "http://qudt.org/vocab/unit/PA-PER-M",
-      "http://qudt.org/vocab/unit/PicoPA-PER-KiloM",
     ],
     Units.KiloGM,
     1,
@@ -1258,64 +734,9 @@ describe.each([
     16,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/AC-FT",
-      "http://qudt.org/vocab/unit/ANGSTROM3",
-      "http://qudt.org/vocab/unit/BBL_UK_PET",
-      "http://qudt.org/vocab/unit/BBL_US",
-      "http://qudt.org/vocab/unit/BBL_US_DRY",
-      "http://qudt.org/vocab/unit/BU_UK",
-      "http://qudt.org/vocab/unit/BU_US",
-      "http://qudt.org/vocab/unit/CORD",
-      "http://qudt.org/vocab/unit/CUP",
-      "http://qudt.org/vocab/unit/CUP_US",
-      "http://qudt.org/vocab/unit/CentiL",
-      "http://qudt.org/vocab/unit/CentiM3",
-      "http://qudt.org/vocab/unit/DecaL",
-      "http://qudt.org/vocab/unit/DecaM3",
-      "http://qudt.org/vocab/unit/DeciL",
-      "http://qudt.org/vocab/unit/DeciM3",
-      "http://qudt.org/vocab/unit/FBM",
-      "http://qudt.org/vocab/unit/FT3",
-      "http://qudt.org/vocab/unit/FemtoL",
-      "http://qudt.org/vocab/unit/GAL_IMP",
-      "http://qudt.org/vocab/unit/GAL_UK",
-      "http://qudt.org/vocab/unit/GAL_US",
-      "http://qudt.org/vocab/unit/GAL_US_DRY",
-      "http://qudt.org/vocab/unit/GI_UK",
-      "http://qudt.org/vocab/unit/GI_US",
-      "http://qudt.org/vocab/unit/HectoL",
-      "http://qudt.org/vocab/unit/IN3",
-      "http://qudt.org/vocab/unit/Kilo-FT3",
       "http://qudt.org/vocab/unit/KiloL",
-      "http://qudt.org/vocab/unit/L",
       "http://qudt.org/vocab/unit/M3",
-      "http://qudt.org/vocab/unit/MI3",
-      "http://qudt.org/vocab/unit/MegaL",
-      "http://qudt.org/vocab/unit/MicroL",
-      "http://qudt.org/vocab/unit/MicroM3",
-      "http://qudt.org/vocab/unit/MilliL",
-      "http://qudt.org/vocab/unit/MilliM3",
-      "http://qudt.org/vocab/unit/NanoL",
-      "http://qudt.org/vocab/unit/OZ_VOL_UK",
-      "http://qudt.org/vocab/unit/OZ_VOL_US",
-      "http://qudt.org/vocab/unit/PINT",
-      "http://qudt.org/vocab/unit/PINT_UK",
-      "http://qudt.org/vocab/unit/PINT_US",
-      "http://qudt.org/vocab/unit/PINT_US_DRY",
-      "http://qudt.org/vocab/unit/PK_UK",
-      "http://qudt.org/vocab/unit/PK_US_DRY",
-      "http://qudt.org/vocab/unit/PicoL",
-      "http://qudt.org/vocab/unit/PlanckVolume",
-      "http://qudt.org/vocab/unit/QT_UK",
-      "http://qudt.org/vocab/unit/QT_US",
-      "http://qudt.org/vocab/unit/QT_US_DRY",
-      "http://qudt.org/vocab/unit/RT",
       "http://qudt.org/vocab/unit/STR",
-      "http://qudt.org/vocab/unit/Standard",
-      "http://qudt.org/vocab/unit/TBSP",
-      "http://qudt.org/vocab/unit/TON_SHIPPING_US",
-      "http://qudt.org/vocab/unit/TSP",
-      "http://qudt.org/vocab/unit/YD3",
     ],
     Units.M,
     3,
@@ -1324,53 +745,10 @@ describe.each([
     17,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/FemtoGM-PER-L",
-      "http://qudt.org/vocab/unit/GM-PER-CentiM3",
-      "http://qudt.org/vocab/unit/GM-PER-DeciL",
       "http://qudt.org/vocab/unit/GM-PER-DeciM3",
       "http://qudt.org/vocab/unit/GM-PER-L",
-      "http://qudt.org/vocab/unit/GM-PER-M3",
-      "http://qudt.org/vocab/unit/GM-PER-MilliL",
-      "http://qudt.org/vocab/unit/GRAIN-PER-GAL_US",
-      "http://qudt.org/vocab/unit/GRAIN-PER-M3",
-      "http://qudt.org/vocab/unit/KiloGM-PER-CentiM3",
-      "http://qudt.org/vocab/unit/KiloGM-PER-DeciM3",
-      "http://qudt.org/vocab/unit/KiloGM-PER-L",
       "http://qudt.org/vocab/unit/KiloGM-PER-M3",
-      "http://qudt.org/vocab/unit/LB-PER-FT3",
-      "http://qudt.org/vocab/unit/LB-PER-GAL_UK",
-      "http://qudt.org/vocab/unit/LB-PER-GAL_US",
-      "http://qudt.org/vocab/unit/LB-PER-IN3",
-      "http://qudt.org/vocab/unit/LB-PER-M3",
-      "http://qudt.org/vocab/unit/LB-PER-YD3",
-      "http://qudt.org/vocab/unit/MegaGM-PER-M3",
-      "http://qudt.org/vocab/unit/MicroGM-PER-DeciL",
-      "http://qudt.org/vocab/unit/MicroGM-PER-L",
-      "http://qudt.org/vocab/unit/MicroGM-PER-M3",
-      "http://qudt.org/vocab/unit/MicroGM-PER-MilliL",
-      "http://qudt.org/vocab/unit/MilliGM-PER-DeciL",
-      "http://qudt.org/vocab/unit/MilliGM-PER-L",
-      "http://qudt.org/vocab/unit/MilliGM-PER-M3",
       "http://qudt.org/vocab/unit/MilliGM-PER-MilliL",
-      "http://qudt.org/vocab/unit/NanoGM-PER-DeciL",
-      "http://qudt.org/vocab/unit/NanoGM-PER-L",
-      "http://qudt.org/vocab/unit/NanoGM-PER-M3",
-      "http://qudt.org/vocab/unit/NanoGM-PER-MicroL",
-      "http://qudt.org/vocab/unit/NanoGM-PER-MilliL",
-      "http://qudt.org/vocab/unit/OZ-PER-GAL_UK",
-      "http://qudt.org/vocab/unit/OZ-PER-GAL_US",
-      "http://qudt.org/vocab/unit/OZ-PER-IN3",
-      "http://qudt.org/vocab/unit/OZ-PER-YD3",
-      "http://qudt.org/vocab/unit/PicoGM-PER-L",
-      "http://qudt.org/vocab/unit/PicoGM-PER-MilliL",
-      "http://qudt.org/vocab/unit/PlanckDensity",
-      "http://qudt.org/vocab/unit/SLUG-PER-FT3",
-      "http://qudt.org/vocab/unit/TONNE-PER-M3",
-      "http://qudt.org/vocab/unit/TON_LONG-PER-YD3",
-      "http://qudt.org/vocab/unit/TON_Metric-PER-M3",
-      "http://qudt.org/vocab/unit/TON_SHORT-PER-YD3",
-      "http://qudt.org/vocab/unit/TON_UK-PER-YD3",
-      "http://qudt.org/vocab/unit/TON_US-PER-YD3",
     ],
     Units.KiloGM,
     1,
@@ -1382,15 +760,8 @@ describe.each([
     18,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/MOL-PER-M2-DAY",
       "http://qudt.org/vocab/unit/MOL-PER-M2-SEC",
-      "http://qudt.org/vocab/unit/MicroMOL-PER-M2-DAY",
-      "http://qudt.org/vocab/unit/MicroMOL-PER-M2-HR",
-      "http://qudt.org/vocab/unit/MicroMOL-PER-M2-SEC",
-      "http://qudt.org/vocab/unit/MilliMOL-PER-M2-DAY",
-      "http://qudt.org/vocab/unit/MilliMOL-PER-M2-SEC",
-      "http://qudt.org/vocab/unit/NanoMOL-PER-M2-DAY",
-      "http://qudt.org/vocab/unit/PicoMOL-PER-M2-DAY",
+      "http://qudt.org/vocab/unit/MOL-PER-M2-SEC-SR",
     ],
     Units.MOL,
     1,
@@ -1415,24 +786,7 @@ describe.each([
   [
     20,
     DerivedUnitSearchMode.ALL,
-    [
-      "http://qudt.org/vocab/unit/BTU_IT-FT-PER-FT2-HR-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_IT-IN-PER-FT2-HR-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_IT-IN-PER-FT2-SEC-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_IT-IN-PER-HR-FT2-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_IT-IN-PER-SEC-FT2-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_IT-PER-SEC-FT-DEG_R",
-      "http://qudt.org/vocab/unit/BTU_TH-FT-PER-FT2-HR-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_TH-FT-PER-HR-FT2-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_TH-IN-PER-FT2-HR-DEG_F",
-      "http://qudt.org/vocab/unit/BTU_TH-IN-PER-FT2-SEC-DEG_F",
-      "http://qudt.org/vocab/unit/CAL_IT-PER-SEC-CentiM-K",
-      "http://qudt.org/vocab/unit/CAL_TH-PER-CentiM-SEC-DEG_C",
-      "http://qudt.org/vocab/unit/CAL_TH-PER-SEC-CentiM-K",
-      "http://qudt.org/vocab/unit/KiloCAL-PER-CentiM-SEC-DEG_C",
-      "http://qudt.org/vocab/unit/KiloCAL_IT-PER-HR-M-DEG_C",
-      "http://qudt.org/vocab/unit/W-PER-M-K",
-    ],
+    ["http://qudt.org/vocab/unit/BTU_IT-FT-PER-FT2-HR-DEG_F"],
     Units.BTU_IT,
     1,
     Units.FT,
@@ -1448,34 +802,11 @@ describe.each([
     21,
     DerivedUnitSearchMode.ALL,
     [
-      "http://qudt.org/vocab/unit/CentiN",
-      "http://qudt.org/vocab/unit/DYN",
-      "http://qudt.org/vocab/unit/DeciN",
-      "http://qudt.org/vocab/unit/ERG-PER-CentiM",
-      "http://qudt.org/vocab/unit/EV-PER-ANGSTROM",
-      "http://qudt.org/vocab/unit/EV-PER-M",
-      "http://qudt.org/vocab/unit/GM_F",
       "http://qudt.org/vocab/unit/J-PER-M",
-      "http://qudt.org/vocab/unit/KIP_F",
-      "http://qudt.org/vocab/unit/KiloEV-PER-MicroM",
-      "http://qudt.org/vocab/unit/KiloGM_F",
-      "http://qudt.org/vocab/unit/KiloLB_F",
-      "http://qudt.org/vocab/unit/KiloN",
-      "http://qudt.org/vocab/unit/KiloN-M-PER-M",
-      "http://qudt.org/vocab/unit/KiloP",
-      "http://qudt.org/vocab/unit/KiloPOND",
-      "http://qudt.org/vocab/unit/LB_F",
-      "http://qudt.org/vocab/unit/MegaEV-PER-CentiM",
-      "http://qudt.org/vocab/unit/MegaLB_F",
-      "http://qudt.org/vocab/unit/MegaN",
-      "http://qudt.org/vocab/unit/MicroN",
-      "http://qudt.org/vocab/unit/MilliN",
       "http://qudt.org/vocab/unit/N",
       "http://qudt.org/vocab/unit/N-M-PER-M",
-      "http://qudt.org/vocab/unit/OZ_F",
-      "http://qudt.org/vocab/unit/PDL",
-      "http://qudt.org/vocab/unit/PlanckForce",
-      "http://qudt.org/vocab/unit/TON_F_US",
+      "http://qudt.org/vocab/unit/N-M-PER-M-RAD",
+      "http://qudt.org/vocab/unit/N-PER-RAD",
     ],
     Units.KiloGM,
     1,
@@ -1487,57 +818,7 @@ describe.each([
   [
     21.5,
     DerivedUnitSearchMode.ALL,
-    [
-      "http://qudt.org/vocab/unit/AMU",
-      "http://qudt.org/vocab/unit/CARAT",
-      "http://qudt.org/vocab/unit/CWT_LONG",
-      "http://qudt.org/vocab/unit/CWT_SHORT",
-      "http://qudt.org/vocab/unit/CentiGM",
-      "http://qudt.org/vocab/unit/DRAM_UK",
-      "http://qudt.org/vocab/unit/DRAM_US",
-      "http://qudt.org/vocab/unit/DWT",
-      "http://qudt.org/vocab/unit/Da",
-      "http://qudt.org/vocab/unit/DecaGM",
-      "http://qudt.org/vocab/unit/DeciGM",
-      "http://qudt.org/vocab/unit/DeciTONNE",
-      "http://qudt.org/vocab/unit/DeciTON_Metric",
-      "http://qudt.org/vocab/unit/EarthMass",
-      "http://qudt.org/vocab/unit/FemtoGM",
-      "http://qudt.org/vocab/unit/GM",
-      "http://qudt.org/vocab/unit/GRAIN",
-      "http://qudt.org/vocab/unit/HectoGM",
-      "http://qudt.org/vocab/unit/Hundredweight_UK",
-      "http://qudt.org/vocab/unit/Hundredweight_US",
-      "http://qudt.org/vocab/unit/KiloGM",
-      "http://qudt.org/vocab/unit/KiloTONNE",
-      "http://qudt.org/vocab/unit/KiloTON_Metric",
-      "http://qudt.org/vocab/unit/LB",
-      "http://qudt.org/vocab/unit/LB_M",
-      "http://qudt.org/vocab/unit/LB_T",
-      "http://qudt.org/vocab/unit/LunarMass",
-      "http://qudt.org/vocab/unit/MegaGM",
-      "http://qudt.org/vocab/unit/MicroGM",
-      "http://qudt.org/vocab/unit/MilliGM",
-      "http://qudt.org/vocab/unit/NanoGM",
-      "http://qudt.org/vocab/unit/OZ",
-      "http://qudt.org/vocab/unit/OZ_M",
-      "http://qudt.org/vocab/unit/OZ_TROY",
-      "http://qudt.org/vocab/unit/Pennyweight",
-      "http://qudt.org/vocab/unit/PicoGM",
-      "http://qudt.org/vocab/unit/PlanckMass",
-      "http://qudt.org/vocab/unit/Quarter_UK",
-      "http://qudt.org/vocab/unit/SLUG",
-      "http://qudt.org/vocab/unit/SolarMass",
-      "http://qudt.org/vocab/unit/Stone_UK",
-      "http://qudt.org/vocab/unit/TONNE",
-      "http://qudt.org/vocab/unit/TON_Assay",
-      "http://qudt.org/vocab/unit/TON_LONG",
-      "http://qudt.org/vocab/unit/TON_Metric",
-      "http://qudt.org/vocab/unit/TON_SHORT",
-      "http://qudt.org/vocab/unit/TON_UK",
-      "http://qudt.org/vocab/unit/TON_US",
-      "http://qudt.org/vocab/unit/U",
-    ],
+    ["http://qudt.org/vocab/unit/KiloGM"],
     Units.KiloGM,
     1,
   ],
@@ -1567,7 +848,7 @@ describe.each([
   [
     25,
     DerivedUnitSearchMode.BEST_MATCH,
-    [Units.N__M__PER__M2],
+    ["http://qudt.org/vocab/unit/N-PER-M"],
     Units.M,
     2,
     Units.KiloGM,
@@ -1580,7 +861,7 @@ describe.each([
   [
     26,
     DerivedUnitSearchMode.BEST_MATCH,
-    [Units.N__M__PER__M2],
+    ["http://qudt.org/vocab/unit/J-PER-M2"],
     Units.M,
     1,
     Units.N,
@@ -1619,6 +900,7 @@ describe.each([
     [
       [Units.N, 1],
       [Units.GM, 1, Units.M, 1, Units.SEC, -2],
+      [Units.KiloGM, 1, Units.M, 1, Units.SEC, -2],
     ],
   ],
   [
@@ -1627,6 +909,7 @@ describe.each([
     [
       [Units.N__M, 1],
       [Units.GM, 1, Units.M, 2, Units.SEC, -2],
+      [Units.KiloGM, 1, Units.M, 2, Units.SEC, -2],
       [Units.N, 1, Units.M, 1],
     ],
   ],
@@ -1637,110 +920,10 @@ describe.each([
       [Units.N__M__PER__M2, 1],
       [Units.N, 1, Units.M, -1],
       [Units.GM, 1, Units.SEC, -2],
+      [Units.KiloGM, 1, Units.SEC, -2],
       [Units.N, 1, Units.M, 1, Units.M, -2],
       [Units.M, -2, Units.M, 2, Units.GM, 1, Units.SEC, -2],
-    ],
-  ],
-  [
-    4,
-    Units.J__PER__KiloGM__K__PA,
-    [
-      [Units.J__PER__KiloGM__K__PA, 1],
-      [Units.J, 1, Units.GM, -1, Units.K, -1, Units.PA, -1],
-      [Units.N, 1, Units.M, 1, Units.GM, -1, Units.K, -1, Units.PA, -1],
-      [
-        Units.GM,
-        1,
-        Units.M,
-        2,
-        Units.SEC,
-        -2,
-        Units.GM,
-        -1,
-        Units.K,
-        -1,
-        Units.PA,
-        -1,
-      ],
-      [Units.M, 2, Units.SEC, -2, Units.K, -1, Units.PA, -1],
-      [Units.J, 1, Units.GM, -1, Units.K, -1, Units.N, -1, Units.M, 2],
-      [
-        Units.J,
-        1,
-        Units.GM,
-        -2,
-        Units.K,
-        -1,
-        Units.M,
-        -1,
-        Units.SEC,
-        2,
-        Units.M,
-        2,
-      ],
-      [Units.J, 1, Units.GM, -2, Units.K, -1, Units.M, 1, Units.SEC, 2],
-      [Units.N, 1, Units.M, 3, Units.GM, -1, Units.K, -1, Units.N, -1],
-      [
-        Units.N,
-        1,
-        Units.M,
-        3,
-        Units.GM,
-        -2,
-        Units.K,
-        -1,
-        Units.M,
-        -1,
-        Units.SEC,
-        2,
-      ],
-      [
-        Units.GM,
-        1,
-        Units.M,
-        4,
-        Units.SEC,
-        -2,
-        Units.GM,
-        -1,
-        Units.K,
-        -1,
-        Units.N,
-        -1,
-      ],
-      [Units.M, 4, Units.SEC, -2, Units.K, -1, Units.N, -1],
-      [
-        Units.GM,
-        1,
-        Units.M,
-        4,
-        Units.SEC,
-        -2,
-        Units.GM,
-        -2,
-        Units.K,
-        -1,
-        Units.M,
-        -1,
-        Units.SEC,
-        2,
-      ],
-      [Units.GM, -1, Units.M, 3, Units.K, -1],
-      [Units.N, 1, Units.M, 2, Units.GM, -2, Units.K, -1, Units.SEC, 2],
-      [
-        Units.M,
-        3,
-        Units.GM,
-        1,
-        Units.SEC,
-        -2,
-        Units.GM,
-        -2,
-        Units.K,
-        -1,
-        Units.SEC,
-        2,
-      ],
+      [Units.M, -2, Units.M, 2, Units.KiloGM, 1, Units.SEC, -2],
     ],
   ],
 ])(
@@ -1798,45 +981,47 @@ test("Qudt.scaleUnitFromLabels(String, String)", () => {
 
 test("Qudt.factorUnits(Unit)", () => {
   let factorUnits = Qudt.factorUnits(Units.N__M);
-  expect(factorUnits).toStrictEqual([
-    new FactorUnit(Units.M, 2),
-    new FactorUnit(Units.KiloGM, 1),
-    new FactorUnit(Units.SEC, -2),
+  expect(toSortedStringList(factorUnits)).toStrictEqual([
+    "http://qudt.org/vocab/unit/GM",
+    "http://qudt.org/vocab/unit/M^2",
+    "http://qudt.org/vocab/unit/SEC^-2",
   ]);
   factorUnits = Qudt.factorUnits(Units.J__PER__M2);
-  expect(factorUnits).toStrictEqual([
-    new FactorUnit(Units.M, 2),
-    new FactorUnit(Units.KiloGM, 1),
-    new FactorUnit(Units.SEC, -2),
-    new FactorUnit(Units.M, -2),
+  expect(toSortedStringList(factorUnits)).toStrictEqual([
+    "http://qudt.org/vocab/unit/GM",
+    "http://qudt.org/vocab/unit/M^-2",
+    "http://qudt.org/vocab/unit/M^2",
+    "http://qudt.org/vocab/unit/SEC^-2",
   ]);
   factorUnits = Qudt.factorUnits(Units.KiloN__M);
-  expect(factorUnits).toStrictEqual([
-    new FactorUnit(Units.KiloN, 1),
-    new FactorUnit(Units.M, 1),
+  expect(toSortedStringList(factorUnits)).toStrictEqual([
+    "http://qudt.org/vocab/unit/GM",
+    "http://qudt.org/vocab/unit/M^2",
+    "http://qudt.org/vocab/unit/SEC^-2",
   ]);
 });
 
 describe.each([
   [Units.YoctoC, Units.C],
   [Units.TeraBYTE, Units.BYTE],
-  [Units.KiloGM, Units.GM],
+  [Units.KiloGM, Units.KiloGM],
   [Units.MilliGM, Units.GM],
   [Units.MegaGM, Units.GM],
-  [Units.TON_Metric, Units.GM],
-  [Units.TONNE, Units.GM],
+  [Units.TON_Metric, Units.TON_Metric],
+  [Units.TONNE, Units.TONNE],
   [Units.KiloM, Units.M],
   [Units.KiloN, Units.N],
 ])("Qudt.unscale(Unit)", (unit, expected) =>
   test(`Qudt.unscale(${unit.toString()}) = ${expected.toString()}`, () =>
-    expect(Qudt.unscale(unit)).toBe(expected))
+    expect(Qudt.unscale(unit).iri).toBe(expected.iri))
 );
 
 test("Qudt.unscaleFactorUnits(FactorUnit[])", () => {
   const units = Qudt.unscaleFactorUnits(Qudt.factorUnits(Units.KiloN__M));
-  expect(units).toStrictEqual([
-    new FactorUnit(Units.N, 1),
-    new FactorUnit(Units.M, 1),
+  expect(toSortedStringList(units)).toStrictEqual([
+    "http://qudt.org/vocab/unit/GM",
+    "http://qudt.org/vocab/unit/M^2",
+    "http://qudt.org/vocab/unit/SEC^-2",
   ]);
 });
 
@@ -2020,8 +1205,8 @@ describe.each([
   [Units.KiloGM__PER__M3, [Units.KiloGM, 1, Units.M, -3], true],
   [Units.KiloGM__PER__M3, [Units.M, -3, Units.KiloGM, 1], true],
   [Units.KiloGM__PER__M3, [Units.M3, -1, Units.KiloGM, 1], true],
-  [Units.M2__SR, [Units.M, 2], false],
-  [Units.M2, [Units.M, 2, Units.SR, 1], false],
+  [Units.M2__SR, [Units.M, 2], true],
+  [Units.M2, [Units.M, 2, Units.SR, 1], true],
   [Units.M, [Units.M, 1], true],
   [Units.PER__M, [Units.M, -1], true],
   [Units.PER__L, [Units.L, -1], true],
@@ -2104,7 +1289,7 @@ test("Unit.matches(FactorUnits) (multiple levels of factor units)", () => {
   expect(
     Units.N__PER__KiloGM.matches(FactorUnits.ofFactorUnitSpec(Units.KiloGM, 1))
   ).toBe(false);
-  const wattFactors = new FactorUnits(Units.W.factorUnits);
+  const wattFactors = new FactorUnits(Units.W.factorUnits.factorUnits);
   expect(Units.TeraW.matches(wattFactors)).toBe(false);
   expect(Units.KiloW.matches(wattFactors)).toBe(false);
   expect(Units.MegaW.matches(wattFactors)).toBe(false);
@@ -2145,7 +1330,9 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| numbe
     Units.M,
     1
   );
-  expect(units).toStrictEqual([Units.N__M]);
+  expect(toSortedStringList(units)).toStrictEqual(
+    toSortedStringList([Units.J])
+  );
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=EXACT, multiple results)", () => {
@@ -2156,10 +1343,12 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| numbe
     Units.M,
     1
   );
-  expect(units.length).toBe(3);
-  expect(units.includes(Units.J)).toBe(true);
-  expect(units.includes(Units.N__M)).toBe(true);
-  expect(units.includes(Units.W__SEC)).toBe(true);
+  expect(toSortedStringList(units)).toStrictEqual([
+    "http://qudt.org/vocab/unit/J",
+    "http://qudt.org/vocab/unit/N-M",
+    "http://qudt.org/vocab/unit/N-M-PER-RAD",
+    "http://qudt.org/vocab/unit/W-SEC",
+  ]);
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=BEST_MATCH)", () => {
@@ -2484,8 +1673,8 @@ test("Unit.matches(FactorUnits, FactorUnitMatchingMode) (MilliJ)", () => {
   );
 });
 
-test("Qudt.testSimplifyFactorUnits()", () => {
-  let simplified = Qudt.simplifyFactorUnits([
+test("Qudt.testContractExponents()", () => {
+  let simplified = Qudt.contractFactorUnits([
     new FactorUnit(Units.N, 1),
     new FactorUnit(Units.M, -1),
     new FactorUnit(Units.M, -1),
@@ -2503,13 +1692,13 @@ test("Qudt.testSimplifyFactorUnits()", () => {
       ...simplified
     ).includes(Units.PA)
   ).toBe(true);
-  simplified = Qudt.simplifyFactorUnits(
+  simplified = Qudt.contractFactorUnits(
     Units.FARAD.getLeafFactorUnitsWithCumulativeExponents()
   );
   expect(simplified.length).toBe(4);
-  expect(
-    simplified.some((fu) => fu.equals(new FactorUnit(Units.KiloGM, -1)))
-  ).toBe(true);
+  expect(simplified.some((fu) => fu.equals(new FactorUnit(Units.GM, -1)))).toBe(
+    true
+  );
   expect(simplified.some((fu) => fu.equals(new FactorUnit(Units.M, -2)))).toBe(
     true
   );
@@ -2566,7 +1755,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.SI) ", () => {
   expect(units.includes(Units.FT)).toBe(false);
   expect(units.includes(Units.OZ)).toBe(false);
   expect(units.includes(Units.N__PER__M3)).toBe(true);
-  expect(units.length).toBe(1058);
+  expect(units.length).toBe(1008);
 });
 
 test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
@@ -2582,7 +1771,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
   expect(units.includes(Units.FT)).toBe(true);
   expect(units.includes(Units.OZ)).toBe(true);
   expect(units.includes(Units.N__PER__M3)).toBe(false);
-  expect(units.length).toBe(427);
+  expect(units.length).toBe(405);
 });
 
 test("Unit.normalize()", () => {
@@ -2599,7 +1788,7 @@ describe.each([
   [Units.MI, SystemsOfUnits.SI, Units.KiloM],
   [Units.DEG_F, SystemsOfUnits.SI, Units.K],
   [Units.DEG, SystemsOfUnits.SI, Units.DEG],
-  [Units.QT_UK, SystemsOfUnits.SI, Units.L],
+  [Units.QT_UK, SystemsOfUnits.SI, Units.DeciM3],
   [Units.Stone_UK, SystemsOfUnits.SI, Units.KiloGM],
   [Units.KiloM, SystemsOfUnits.IMPERIAL, Units.MI],
   [Units.KiloGM, SystemsOfUnits.IMPERIAL, Units.LB],
@@ -2613,4 +1802,42 @@ describe.each([
     system.abbreviation
   }' is expected to be ${expected.toString()}${actualString}`, () =>
     expect(actual).toStrictEqual(expected));
+});
+
+describe.each([
+  [Units.M, new FactorUnits([FactorUnit.ofUnit(Units.M)], new Decimal(1))],
+  [Units.M2, Units.M2.factorUnits],
+  [
+    Units.MilliM2,
+    new FactorUnits([new FactorUnit(Units.M, 2)], new Decimal(0.000001)),
+  ],
+  [
+    Units.KiloGM,
+    new FactorUnits([FactorUnit.ofUnit(Units.GM)], new Decimal(1000)),
+  ],
+  [
+    Units.KiloP,
+    new FactorUnits(
+      [
+        new FactorUnit(Units.GM, 1),
+        new FactorUnit(Units.M, 1),
+        new FactorUnit(Units.SEC, -2),
+      ],
+      new Decimal("9806.65")
+    ),
+  ],
+  [
+    Units.J__PER__M,
+    new FactorUnits(
+      [
+        new FactorUnit(Units.M, 1),
+        new FactorUnit(Units.GM, 1),
+        new FactorUnit(Units.SEC, -2),
+      ],
+      new Decimal("1000")
+    ),
+  ],
+])("Unit.normalize()", (unit: Unit, expectedResult: FactorUnits): void => {
+  test(`${unit.toString()}.normalize() == (${expectedResult.toString()})`, () =>
+    expect(unit.normalize().toString()).toBe(expectedResult.toString()));
 });

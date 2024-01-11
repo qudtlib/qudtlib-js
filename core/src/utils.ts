@@ -1,4 +1,5 @@
 import { SupportsEquals } from "./baseTypes.js";
+import { Decimal } from "decimal.js";
 
 export function getLastIriElement(iri: string) {
   return iri.replaceAll(/.+\/([^\/]+)/g, "$1");
@@ -12,7 +13,7 @@ interface EqualsComparator<Type> {
  * Compares two instances, `left` and `right`, yielding a negative result if `left` is smaller,
  * a positive result if `left` is greater, and 0 if they are equal.
  */
-interface OrderComparator<Type> {
+export interface OrderComparator<Type> {
   (left: Type, right: Type): number;
 }
 
@@ -158,3 +159,9 @@ export function findInIterable<T>(
   }
   return undefined;
 }
+export function isNullish(val: unknown) {
+  return typeof val === "undefined" || val === null;
+}
+
+export const ONE = new Decimal("1");
+export const ZERO = new Decimal("0");

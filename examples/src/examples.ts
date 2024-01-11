@@ -52,13 +52,19 @@ console.log(
 ); // 250N = 25.492905324448206064kp
 
 // if you need the factor units, you can get them from the unit
-const factorsN = Units.N.factorUnits.map((f) => f.toString()).join(" ");
+const factorsN = Units.N.factorUnits.factorUnits
+  .map((f) => f.toString())
+  .join(" ");
 console.log(`\n# obtaining factor units`);
 console.log(`N =  (${factorsN})`); // N =  (m kg s^-2)
 
 // use `Unit.getLeafFactorUnitsWithCumulativeExponents()` for multiple levels of derived units
-const factorsW = Units.W.factorUnits.map((f) => f.toString()).join(" ");
-const factorsF = Units.F.factorUnits.map((f) => f.toString()).join(" ");
+const factorsW = Units.W.factorUnits.factorUnits
+  .map((f) => f.toString())
+  .join(" ");
+const factorsF = Units.F.factorUnits.factorUnits
+  .map((f) => f.toString())
+  .join(" ");
 const leafFactorsW = Units.W.getLeafFactorUnitsWithCumulativeExponents()
   .map((f) => f.toString())
   .join(" ");
