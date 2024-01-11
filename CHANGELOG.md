@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 6.1.0 - 2024-01-11
+
 ### Changed
 
 - Simplified BEST_MATCH algorithm for obtaining a unit from a set of factor units. Recent additions to the data model (isScalingOf and factorUnit relationships) led to a larger set of candidates and the complexity of the previous algorithm led to very high computation time.
