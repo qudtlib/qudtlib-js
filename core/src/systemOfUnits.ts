@@ -2,6 +2,7 @@ import { SupportsEquals } from "./baseTypes.js";
 import { LangString } from "./langString.js";
 import { Unit } from "./unit.js";
 import { QudtNamespaces } from "./qudtNamespaces.js";
+import { isNullish } from "./utils";
 
 export class SystemOfUnits implements SupportsEquals<SystemOfUnits> {
   readonly iri: string;
@@ -44,11 +45,8 @@ export class SystemOfUnits implements SupportsEquals<SystemOfUnits> {
       // we use gram as the base unit, but SI uses KiloGM, so if we fail for GM, try KiloGM
       return this.baseUnitIris.includes(SystemOfUnits.KiloGM_iri);
     }
-    if (unit.scalingOf) {
+    if (unit.scalingOf && unit.prefix) {
       return this.allowsUnit(unit.scalingOf);
-    }
-    if (unit.hasFactorUnits()) {
-      return unit.factorUnits.every((fu) => this.allowsUnit(fu.unit));
     }
     return false;
   }

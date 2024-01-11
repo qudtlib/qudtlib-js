@@ -18,6 +18,7 @@ import { Decimal } from "decimal.js";
 import {
   arrayEqualsIgnoreOrdering,
   compareUsingEquals,
+  ONE,
 } from "../../core/src/utils";
 
 function areDecimalsEqual(a: Decimal, b: Decimal): boolean | undefined {
@@ -74,9 +75,37 @@ function modeToString(mode: DerivedUnitSearchMode): string {
   throw "not a valid mode: " + mode;
 }
 
-function toSortedIriList(unitList: Array<Unit>): Array<string> {
-  return unitList.map((u) => u.iri).sort();
+function toSortedStringList(
+  unitList: Array<Unit | FactorUnit | FactorUnits>
+): Array<string> {
+  function factorUnitToString(u: FactorUnit) {
+    return u.unit.iri + (u.exponent == 1 ? "" : "^" + u.exponent);
+  }
+
+  function factorUnitsToString(u: FactorUnits) {
+    return u.scaleFactor.eq(ONE)
+      ? ""
+      : u.scaleFactor.toString() +
+          "[" +
+          u.factorUnits.map((fu) => factorUnitToString(fu)).join(",") +
+          "]";
+  }
+
+  if (unitList.length == 0) {
+    return [];
+  }
+  const firstElement = unitList[0];
+  if (firstElement instanceof Unit) {
+    return unitList.map((u) => (u as Unit).iri).sort();
+  } else if (firstElement instanceof FactorUnit) {
+    return unitList.map((u) => factorUnitToString(u as FactorUnit)).sort();
+  } else if (firstElement instanceof FactorUnits) {
+    return unitList.map((u) => factorUnitsToString(u as FactorUnits)).sort();
+  }
+  return unitList.map((u) => JSON.stringify(u)).sort();
 }
+
+const ALL_QUDT_UNITS = Qudt.allUnits();
 
 test("Qudt.unit()", () => {
   expect(Qudt.unit(Qudt.NAMESPACES.unit.makeIriInNamespace("M"))).toBe(Units.M);
@@ -166,13 +195,17 @@ describe.each([
 describe.each([
   [Units.KiloGM__PER__M3, [Units.KiloGM, 1, Units.M3, -1], true],
   [Units.N__M, [Units.N, 1, Units.M, 1], true],
+  [Units.N, [Units.KiloGM, 1, Units.M, 1, Units.SEC, -2], true],
+  [Units.A__PER__MilliM, [Units.KiloGM, 1, Units.M, 1, Units.SEC, -2], false],
 ])(
   "Qudt.derivedUnitsFromExponentUnitPairs((Unit|number|Decimal)[]), non-base units",
   (unit: Unit, spec: (Unit | number)[], expectedResult: boolean) =>
     test(`${unit.toString()}.matches(${exponentOrUnitToString(
       spec
     )}) == ${expectedResult}`, () =>
-      expect(unit.matches(FactorUnits.ofFactorUnitSpec(...spec))).toBe(true))
+      expect(unit.matches(FactorUnits.ofFactorUnitSpec(...spec))).toBe(
+        expectedResult
+      ))
 );
 
 test("Qudt.derivedUnitsFromFactors(...Unit|number|Decimal[]) (error cases)", () => {
@@ -190,7 +223,13 @@ test("Qudt.derivedUnitsFromFactorUnits(...FactorUnit[]", () => {
       DerivedUnitSearchMode.ALL,
       new FactorUnit(Units.M, 3)
     )
-  ).toStrictEqual([Units.KiloL, Units.M3]);
+      .map((u) => u.iri)
+      .sort()
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/KiloL",
+    "http://qudt.org/vocab/unit/M3",
+    "http://qudt.org/vocab/unit/STR",
+  ]);
   expect(
     Qudt.derivedUnitsFromFactorUnits(
       DerivedUnitSearchMode.ALL,
@@ -198,7 +237,12 @@ test("Qudt.derivedUnitsFromFactorUnits(...FactorUnit[]", () => {
       new FactorUnit(Units.M, -2),
       new FactorUnit(Units.SEC, -1)
     )
-  ).toStrictEqual([Units.MOL__PER__M2__SEC]);
+      .map((u) => u.iri)
+      .sort()
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/MOL-PER-M2-SEC",
+    "http://qudt.org/vocab/unit/MOL-PER-M2-SEC-SR",
+  ]);
 });
 
 test("Qudt.derivedUnitsFromMap(Map<Unit, number))", () => {
@@ -206,14 +250,25 @@ test("Qudt.derivedUnitsFromMap(Map<Unit, number))", () => {
   spec.set(Units.M, 3);
   expect(
     Qudt.derivedUnitsFromMap(DerivedUnitSearchMode.ALL, spec)
-  ).toStrictEqual([Units.KiloL, Units.M3]);
+      .map((u) => u.iri)
+      .sort()
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/KiloL",
+    "http://qudt.org/vocab/unit/M3",
+    "http://qudt.org/vocab/unit/STR",
+  ]);
   spec.clear();
   spec.set(Units.MOL, 1);
   spec.set(Units.M, -2);
   spec.set(Units.SEC, -1);
   expect(
     Qudt.derivedUnitsFromMap(DerivedUnitSearchMode.ALL, spec)
-  ).toStrictEqual([Units.MOL__PER__M2__SEC]);
+      .map((u) => u.iri)
+      .sort()
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/MOL-PER-M2-SEC",
+    "http://qudt.org/vocab/unit/MOL-PER-M2-SEC-SR",
+  ]);
 });
 
 describe.each([
@@ -250,14 +305,26 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(Unit, number)", () => {
       Units.M,
       3
     )
-  ).toStrictEqual([Units.KiloL, Units.M3]);
+      .map((u) => u.iri)
+      .sort()
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/KiloL",
+    "http://qudt.org/vocab/unit/M3",
+    "http://qudt.org/vocab/unit/STR",
+  ]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
       DerivedUnitSearchMode.ALL,
       Units.M,
       2
     )
-  ).toStrictEqual([Units.M2]);
+      .map((u) => u.iri)
+      .sort()
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/M2",
+    "http://qudt.org/vocab/unit/M2-PER-SR",
+    "http://qudt.org/vocab/unit/M2-SR",
+  ]);
   let result = Qudt.derivedUnitsFromExponentUnitPairs(
     DerivedUnitSearchMode.ALL,
     Units.K,
@@ -283,51 +350,67 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using Iris]", () =>
       Units.M.iri,
       3
     )
-  ).toStrictEqual([Units.KiloL, Units.M3]);
+      .map((u) => u.iri)
+      .sort()
+  ).toStrictEqual([Units.KiloL, Units.M3, Units.STR].map((u) => u.iri).sort());
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
       DerivedUnitSearchMode.ALL,
       Units.M.iri,
       2
     )
-  ).toStrictEqual([Units.M2]);
+      .map((u) => u.iri)
+      .sort()
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/M2",
+    "http://qudt.org/vocab/unit/M2-PER-SR",
+    "http://qudt.org/vocab/unit/M2-SR",
+  ]);
   expect(
-    toSortedIriList(
+    toSortedStringList(
       Qudt.derivedUnitsFromExponentUnitPairs(
         DerivedUnitSearchMode.ALL,
         Units.K.iri,
         -1
       )
     )
-  ).toStrictEqual(toSortedIriList([Units.PER__K, Units.PER__DEG_C]));
+  ).toStrictEqual(toSortedStringList([Units.PER__K, Units.PER__DEG_C]));
   const result = Qudt.derivedUnitsFromExponentUnitPairs(
     DerivedUnitSearchMode.ALL,
     Units.M.iri,
     1
   );
-  expect(toSortedIriList(result)).toStrictEqual(
-    toSortedIriList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
+  expect(toSortedStringList(result)).toStrictEqual(
+    toSortedStringList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
   );
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using localnames]", () => {
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 3)
-  ).toStrictEqual([Units.KiloL, Units.M3]);
+    toSortedStringList(
+      Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 3)
+    )
+  ).toStrictEqual(toSortedStringList([Units.KiloL, Units.M3, Units.STR]));
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 2)
-  ).toStrictEqual([Units.M2]);
+    toSortedStringList(
+      Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 2)
+    )
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/M2",
+    "http://qudt.org/vocab/unit/M2-PER-SR",
+    "http://qudt.org/vocab/unit/M2-SR",
+  ]);
   expect(
-    toSortedIriList(
+    toSortedStringList(
       Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "K", -1)
     )
-  ).toStrictEqual(toSortedIriList([Units.PER__K, Units.PER__DEG_C]));
+  ).toStrictEqual(toSortedStringList([Units.PER__K, Units.PER__DEG_C]));
   expect(
-    toSortedIriList(
+    toSortedStringList(
       Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, "M", 1)
     )
   ).toStrictEqual(
-    toSortedIriList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
+    toSortedStringList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
   );
 });
 
@@ -338,14 +421,22 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () 
       "Metre",
       3
     )
-  ).toStrictEqual([Units.KiloL, Units.M3]);
+      .map((u) => u.iri)
+      .sort()
+  ).toStrictEqual([Units.KiloL, Units.M3, Units.STR].map((u) => u.iri).sort());
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.ALL,
-      "Meter",
-      2
+    toSortedStringList(
+      Qudt.derivedUnitsFromExponentUnitPairs(
+        DerivedUnitSearchMode.ALL,
+        "Meter",
+        2
+      )
     )
-  ).toStrictEqual([Units.M2]);
+  ).toStrictEqual([
+    "http://qudt.org/vocab/unit/M2",
+    "http://qudt.org/vocab/unit/M2-PER-SR",
+    "http://qudt.org/vocab/unit/M2-SR",
+  ]);
   expect(
     Qudt.derivedUnitsFromExponentUnitPairs(
       DerivedUnitSearchMode.ALL,
@@ -356,7 +447,7 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () 
       .sort()
   ).toStrictEqual([Units.PER__K, Units.PER__DEG_C].map((u) => u.iri).sort());
   expect(
-    toSortedIriList(
+    toSortedStringList(
       Qudt.derivedUnitsFromExponentUnitPairs(
         DerivedUnitSearchMode.ALL,
         "METER",
@@ -364,15 +455,17 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(string, number)[using labels]", () 
       )
     )
   ).toStrictEqual(
-    toSortedIriList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
+    toSortedStringList([Units.M, Units.M3__PER__M2, Units.M2__PER__M])
   );
   expect(
-    Qudt.derivedUnitsFromExponentUnitPairs(
-      DerivedUnitSearchMode.BEST_MATCH,
-      "METER",
-      1
+    toSortedStringList(
+      Qudt.derivedUnitsFromExponentUnitPairs(
+        DerivedUnitSearchMode.BEST_MATCH,
+        "METER",
+        1
+      )
     )
-  ).toStrictEqual([Units.M]);
+  ).toStrictEqual(toSortedStringList([Units.M]));
 });
 
 function exponentOrUnitToString(
@@ -393,15 +486,7 @@ describe.each([
     Units.SEC,
     -2,
   ], // friction loss
-  [
-    0.1,
-    DerivedUnitSearchMode.BEST_MATCH,
-    [Units.N__PER__M2],
-    Units.N,
-    1,
-    Units.M,
-    -2,
-  ],
+  [0.1, DerivedUnitSearchMode.BEST_MATCH, [Units.PA], Units.N, 1, Units.M, -2],
   [
     0.8,
     DerivedUnitSearchMode.BEST_MATCH,
@@ -415,10 +500,10 @@ describe.each([
     1,
     DerivedUnitSearchMode.ALL,
     [
-      Units.KiloGM__PER__M3,
-      Units.GM__PER__DeciM3,
-      Units.GM__PER__L,
-      Units.MilliGM__PER__MilliL,
+      "http://qudt.org/vocab/unit/GM-PER-DeciM3",
+      "http://qudt.org/vocab/unit/GM-PER-L",
+      "http://qudt.org/vocab/unit/KiloGM-PER-M3",
+      "http://qudt.org/vocab/unit/MilliGM-PER-MilliL",
     ],
     Units.KiloGM,
     1,
@@ -429,7 +514,13 @@ describe.each([
   [
     2,
     DerivedUnitSearchMode.ALL,
-    [Units.N__PER__M2, Units.PA, Units.KiloGM__PER__M__SEC2, Units.J__PER__M3],
+    [
+      "http://qudt.org/vocab/unit/J-PER-M3",
+      "http://qudt.org/vocab/unit/KiloGM-PER-M-SEC2",
+      "http://qudt.org/vocab/unit/MilliM_HGA",
+      "http://qudt.org/vocab/unit/N-PER-M2",
+      "http://qudt.org/vocab/unit/PA",
+    ],
     Units.N,
     1,
     Units.M,
@@ -447,7 +538,10 @@ describe.each([
   [
     3.5,
     DerivedUnitSearchMode.ALL,
-    [Units.J__PER__GM, Units.KiloJ__PER__KiloGM],
+    [
+      "http://qudt.org/vocab/unit/J-PER-GM",
+      "http://qudt.org/vocab/unit/KiloJ-PER-KiloGM",
+    ],
     Units.J,
     1,
     Units.GM,
@@ -457,7 +551,10 @@ describe.each([
   [
     5,
     DerivedUnitSearchMode.ALL,
-    [Units.MOL__PER__M2__SEC],
+    [
+      "http://qudt.org/vocab/unit/MOL-PER-M2-SEC",
+      "http://qudt.org/vocab/unit/MOL-PER-M2-SEC-SR",
+    ],
     Units.MOL,
     1,
     Units.M,
@@ -481,7 +578,13 @@ describe.each([
   [
     7,
     DerivedUnitSearchMode.ALL,
-    [Units.N__PER__M2, Units.PA, Units.KiloGM__PER__M__SEC2, Units.J__PER__M3],
+    [
+      "http://qudt.org/vocab/unit/J-PER-M3",
+      "http://qudt.org/vocab/unit/KiloGM-PER-M-SEC2",
+      "http://qudt.org/vocab/unit/MilliM_HGA",
+      "http://qudt.org/vocab/unit/N-PER-M2",
+      "http://qudt.org/vocab/unit/PA",
+    ],
     Units.M,
     1,
     Units.KiloGM,
@@ -494,7 +597,7 @@ describe.each([
   [
     8,
     DerivedUnitSearchMode.ALL,
-    [Units.BTU_IT__FT__PER__FT2__HR__DEG_F],
+    ["http://qudt.org/vocab/unit/BTU_IT-FT-PER-FT2-HR-DEG_F"],
     Units.BTU_IT,
     1,
     Units.FT,
@@ -510,12 +613,12 @@ describe.each([
     9,
     DerivedUnitSearchMode.ALL,
     [
-      Units.J__PER__M2,
-      Units.N__M__PER__M2,
-      Units.PA__M,
-      Units.N__PER__M,
-      Units.KiloGM__PER__SEC2,
-      Units.W__SEC__PER__M2,
+      "http://qudt.org/vocab/unit/J-PER-M2",
+      "http://qudt.org/vocab/unit/KiloGM-PER-SEC2",
+      "http://qudt.org/vocab/unit/N-M-PER-M2",
+      "http://qudt.org/vocab/unit/N-PER-M",
+      "http://qudt.org/vocab/unit/PA-M",
+      "http://qudt.org/vocab/unit/W-SEC-PER-M2",
     ],
     Units.M,
     1,
@@ -532,12 +635,12 @@ describe.each([
     10,
     DerivedUnitSearchMode.ALL,
     [
-      Units.J__PER__M2,
-      Units.N__M__PER__M2,
-      Units.PA__M,
-      Units.N__PER__M,
-      Units.KiloGM__PER__SEC2,
-      Units.W__SEC__PER__M2,
+      "http://qudt.org/vocab/unit/J-PER-M2",
+      "http://qudt.org/vocab/unit/KiloGM-PER-SEC2",
+      "http://qudt.org/vocab/unit/N-M-PER-M2",
+      "http://qudt.org/vocab/unit/N-PER-M",
+      "http://qudt.org/vocab/unit/PA-M",
+      "http://qudt.org/vocab/unit/W-SEC-PER-M2",
     ],
     Units.M,
     2,
@@ -551,7 +654,12 @@ describe.each([
   [
     11,
     DerivedUnitSearchMode.ALL,
-    [Units.N__M, Units.J, Units.W__SEC],
+    [
+      "http://qudt.org/vocab/unit/J",
+      "http://qudt.org/vocab/unit/N-M",
+      "http://qudt.org/vocab/unit/N-M-PER-RAD",
+      "http://qudt.org/vocab/unit/W-SEC",
+    ],
     Units.N,
     1,
     Units.M,
@@ -560,7 +668,12 @@ describe.each([
   [
     12,
     DerivedUnitSearchMode.ALL,
-    [Units.N__M, Units.J, Units.W__SEC],
+    [
+      "http://qudt.org/vocab/unit/J",
+      "http://qudt.org/vocab/unit/N-M",
+      "http://qudt.org/vocab/unit/N-M-PER-RAD",
+      "http://qudt.org/vocab/unit/W-SEC",
+    ],
     Units.J,
     1,
   ],
@@ -568,10 +681,10 @@ describe.each([
     13,
     DerivedUnitSearchMode.ALL,
     [
-      Units.KiloGM__PER__M3,
-      Units.GM__PER__DeciM3,
-      Units.GM__PER__L,
-      Units.MilliGM__PER__MilliL,
+      "http://qudt.org/vocab/unit/GM-PER-DeciM3",
+      "http://qudt.org/vocab/unit/GM-PER-L",
+      "http://qudt.org/vocab/unit/KiloGM-PER-M3",
+      "http://qudt.org/vocab/unit/MilliGM-PER-MilliL",
     ],
     Units.KiloGM,
     1,
@@ -590,7 +703,10 @@ describe.each([
   [
     14,
     DerivedUnitSearchMode.ALL,
-    [Units.W__PER__M2__K, Units.KiloGM__PER__SEC3__K],
+    [
+      "http://qudt.org/vocab/unit/KiloGM-PER-SEC3-K",
+      "http://qudt.org/vocab/unit/W-PER-M2-K",
+    ],
     Units.KiloGM,
     1,
     Units.K,
@@ -602,10 +718,10 @@ describe.each([
     15,
     DerivedUnitSearchMode.ALL,
     [
-      Units.KiloGM__PER__M2__SEC2,
-      Units.N__PER__M3,
-      Units.PA__PER__M,
-      Units.J__PER__M4,
+      "http://qudt.org/vocab/unit/J-PER-M4",
+      "http://qudt.org/vocab/unit/KiloGM-PER-M2-SEC2",
+      "http://qudt.org/vocab/unit/N-PER-M3",
+      "http://qudt.org/vocab/unit/PA-PER-M",
     ],
     Units.KiloGM,
     1,
@@ -614,15 +730,25 @@ describe.each([
     Units.SEC,
     -2,
   ], // friction loss
-  [16, DerivedUnitSearchMode.ALL, [Units.M3, Units.KiloL], Units.M, 3],
+  [
+    16,
+    DerivedUnitSearchMode.ALL,
+    [
+      "http://qudt.org/vocab/unit/KiloL",
+      "http://qudt.org/vocab/unit/M3",
+      "http://qudt.org/vocab/unit/STR",
+    ],
+    Units.M,
+    3,
+  ],
   [
     17,
     DerivedUnitSearchMode.ALL,
     [
-      Units.KiloGM__PER__M3,
-      Units.GM__PER__DeciM3,
-      Units.GM__PER__L,
-      Units.MilliGM__PER__MilliL,
+      "http://qudt.org/vocab/unit/GM-PER-DeciM3",
+      "http://qudt.org/vocab/unit/GM-PER-L",
+      "http://qudt.org/vocab/unit/KiloGM-PER-M3",
+      "http://qudt.org/vocab/unit/MilliGM-PER-MilliL",
     ],
     Units.KiloGM,
     1,
@@ -633,7 +759,10 @@ describe.each([
   [
     18,
     DerivedUnitSearchMode.ALL,
-    [Units.MOL__PER__M2__SEC],
+    [
+      "http://qudt.org/vocab/unit/MOL-PER-M2-SEC",
+      "http://qudt.org/vocab/unit/MOL-PER-M2-SEC-SR",
+    ],
     Units.MOL,
     1,
     Units.M,
@@ -657,7 +786,7 @@ describe.each([
   [
     20,
     DerivedUnitSearchMode.ALL,
-    [Units.BTU_IT__FT__PER__FT2__HR__DEG_F],
+    ["http://qudt.org/vocab/unit/BTU_IT-FT-PER-FT2-HR-DEG_F"],
     Units.BTU_IT,
     1,
     Units.FT,
@@ -672,7 +801,13 @@ describe.each([
   [
     21,
     DerivedUnitSearchMode.ALL,
-    [Units.N, Units.J__PER__M, Units.N__M__PER__M],
+    [
+      "http://qudt.org/vocab/unit/J-PER-M",
+      "http://qudt.org/vocab/unit/N",
+      "http://qudt.org/vocab/unit/N-M-PER-M",
+      "http://qudt.org/vocab/unit/N-M-PER-M-RAD",
+      "http://qudt.org/vocab/unit/N-PER-RAD",
+    ],
     Units.KiloGM,
     1,
     Units.M,
@@ -680,7 +815,13 @@ describe.each([
     Units.SEC,
     -2,
   ],
-  [21, DerivedUnitSearchMode.ALL, [Units.KiloGM], Units.KiloGM, 1],
+  [
+    21.5,
+    DerivedUnitSearchMode.ALL,
+    ["http://qudt.org/vocab/unit/KiloGM"],
+    Units.KiloGM,
+    1,
+  ],
   [22, DerivedUnitSearchMode.ALL, [], Units.KiloGM, 1, Units.A, -1],
   [
     23,
@@ -707,7 +848,7 @@ describe.each([
   [
     25,
     DerivedUnitSearchMode.BEST_MATCH,
-    [Units.N__M__PER__M2],
+    ["http://qudt.org/vocab/unit/N-PER-M"],
     Units.M,
     2,
     Units.KiloGM,
@@ -720,7 +861,7 @@ describe.each([
   [
     26,
     DerivedUnitSearchMode.BEST_MATCH,
-    [Units.N__M__PER__M2],
+    ["http://qudt.org/vocab/unit/J-PER-M2"],
     Units.M,
     1,
     Units.N,
@@ -731,25 +872,24 @@ describe.each([
   [27, DerivedUnitSearchMode.BEST_MATCH, [Units.RAD], Units.RAD, 1],
 ])(
   "Qudt.derivedUnitsFromExponentUnitPairs(Mode, (Unit | number)...)",
-  (caseId, mode, expected: Unit[], ...spec: (number | Unit)[]) => {
-    const actual = Qudt.derivedUnitsFromExponentUnitPairs(mode, ...spec);
+  (caseId, mode, expected: Unit[] | string[], ...spec: (number | Unit)[]) => {
+    const actual: Unit[] = Qudt.derivedUnitsFromExponentUnitPairs(
+      mode,
+      ...spec
+    );
+    let expectedAsStringArray = expected;
+    if (expected.length > 0 && expected[0] instanceof Unit) {
+      expectedAsStringArray = expectedAsStringArray
+        .map((u) => (u as Unit).iri)
+        .sort();
+    }
     test(`Case${caseId}: Qudt.derivedUnitsFromExponentUnitPairs(${modeToString(
       mode
-    )}, ${exponentOrUnitToString(spec)}).length = ${expected.length}`, () => {
-      expect(actual.length).toBe(expected.length);
+    )}`, () => {
+      expect(actual.map((u) => u.iri).sort()).toStrictEqual(
+        expectedAsStringArray
+      );
     });
-    expected.forEach((exp) =>
-      test(`Case${caseId}: Qudt.derivedUnitsFromExponentUnitPairs(${modeToString(
-        mode
-      )}, ${exponentOrUnitToString(spec)}) includes ${exp}`, () =>
-        expect(actual.some((a) => a.equals(exp))).toBe(true))
-    );
-    actual.forEach((act) =>
-      test(`Case${caseId}: actual result ${act.toString()} included in expected result of Qudt.derivedUnitsFromExponentUnitPairs(${modeToString(
-        mode
-      )}, ${exponentOrUnitToString(spec)})`, () =>
-        expect(expected.some((e) => e.equals(act))).toBe(true))
-    );
   }
 );
 
@@ -760,6 +900,7 @@ describe.each([
     [
       [Units.N, 1],
       [Units.GM, 1, Units.M, 1, Units.SEC, -2],
+      [Units.KiloGM, 1, Units.M, 1, Units.SEC, -2],
     ],
   ],
   [
@@ -768,6 +909,7 @@ describe.each([
     [
       [Units.N__M, 1],
       [Units.GM, 1, Units.M, 2, Units.SEC, -2],
+      [Units.KiloGM, 1, Units.M, 2, Units.SEC, -2],
       [Units.N, 1, Units.M, 1],
     ],
   ],
@@ -778,110 +920,10 @@ describe.each([
       [Units.N__M__PER__M2, 1],
       [Units.N, 1, Units.M, -1],
       [Units.GM, 1, Units.SEC, -2],
+      [Units.KiloGM, 1, Units.SEC, -2],
       [Units.N, 1, Units.M, 1, Units.M, -2],
       [Units.M, -2, Units.M, 2, Units.GM, 1, Units.SEC, -2],
-    ],
-  ],
-  [
-    4,
-    Units.J__PER__KiloGM__K__PA,
-    [
-      [Units.J__PER__KiloGM__K__PA, 1],
-      [Units.J, 1, Units.GM, -1, Units.K, -1, Units.PA, -1],
-      [Units.N, 1, Units.M, 1, Units.GM, -1, Units.K, -1, Units.PA, -1],
-      [
-        Units.GM,
-        1,
-        Units.M,
-        2,
-        Units.SEC,
-        -2,
-        Units.GM,
-        -1,
-        Units.K,
-        -1,
-        Units.PA,
-        -1,
-      ],
-      [Units.M, 2, Units.SEC, -2, Units.K, -1, Units.PA, -1],
-      [Units.J, 1, Units.GM, -1, Units.K, -1, Units.N, -1, Units.M, 2],
-      [
-        Units.J,
-        1,
-        Units.GM,
-        -2,
-        Units.K,
-        -1,
-        Units.M,
-        -1,
-        Units.SEC,
-        2,
-        Units.M,
-        2,
-      ],
-      [Units.J, 1, Units.GM, -2, Units.K, -1, Units.M, 1, Units.SEC, 2],
-      [Units.N, 1, Units.M, 3, Units.GM, -1, Units.K, -1, Units.N, -1],
-      [
-        Units.N,
-        1,
-        Units.M,
-        3,
-        Units.GM,
-        -2,
-        Units.K,
-        -1,
-        Units.M,
-        -1,
-        Units.SEC,
-        2,
-      ],
-      [
-        Units.GM,
-        1,
-        Units.M,
-        4,
-        Units.SEC,
-        -2,
-        Units.GM,
-        -1,
-        Units.K,
-        -1,
-        Units.N,
-        -1,
-      ],
-      [Units.M, 4, Units.SEC, -2, Units.K, -1, Units.N, -1],
-      [
-        Units.GM,
-        1,
-        Units.M,
-        4,
-        Units.SEC,
-        -2,
-        Units.GM,
-        -2,
-        Units.K,
-        -1,
-        Units.M,
-        -1,
-        Units.SEC,
-        2,
-      ],
-      [Units.GM, -1, Units.M, 3, Units.K, -1],
-      [Units.N, 1, Units.M, 2, Units.GM, -2, Units.K, -1, Units.SEC, 2],
-      [
-        Units.M,
-        3,
-        Units.GM,
-        1,
-        Units.SEC,
-        -2,
-        Units.GM,
-        -2,
-        Units.K,
-        -1,
-        Units.SEC,
-        2,
-      ],
+      [Units.M, -2, Units.M, 2, Units.KiloGM, 1, Units.SEC, -2],
     ],
   ],
 ])(
@@ -939,45 +981,47 @@ test("Qudt.scaleUnitFromLabels(String, String)", () => {
 
 test("Qudt.factorUnits(Unit)", () => {
   let factorUnits = Qudt.factorUnits(Units.N__M);
-  expect(factorUnits).toStrictEqual([
-    new FactorUnit(Units.M, 2),
-    new FactorUnit(Units.KiloGM, 1),
-    new FactorUnit(Units.SEC, -2),
+  expect(toSortedStringList(factorUnits)).toStrictEqual([
+    "http://qudt.org/vocab/unit/GM",
+    "http://qudt.org/vocab/unit/M^2",
+    "http://qudt.org/vocab/unit/SEC^-2",
   ]);
   factorUnits = Qudt.factorUnits(Units.J__PER__M2);
-  expect(factorUnits).toStrictEqual([
-    new FactorUnit(Units.M, 2),
-    new FactorUnit(Units.KiloGM, 1),
-    new FactorUnit(Units.SEC, -2),
-    new FactorUnit(Units.M, -2),
+  expect(toSortedStringList(factorUnits)).toStrictEqual([
+    "http://qudt.org/vocab/unit/GM",
+    "http://qudt.org/vocab/unit/M^-2",
+    "http://qudt.org/vocab/unit/M^2",
+    "http://qudt.org/vocab/unit/SEC^-2",
   ]);
   factorUnits = Qudt.factorUnits(Units.KiloN__M);
-  expect(factorUnits).toStrictEqual([
-    new FactorUnit(Units.KiloN, 1),
-    new FactorUnit(Units.M, 1),
+  expect(toSortedStringList(factorUnits)).toStrictEqual([
+    "http://qudt.org/vocab/unit/GM",
+    "http://qudt.org/vocab/unit/M^2",
+    "http://qudt.org/vocab/unit/SEC^-2",
   ]);
 });
 
 describe.each([
   [Units.YoctoC, Units.C],
   [Units.TeraBYTE, Units.BYTE],
-  [Units.KiloGM, Units.GM],
+  [Units.KiloGM, Units.KiloGM],
   [Units.MilliGM, Units.GM],
   [Units.MegaGM, Units.GM],
-  [Units.TON_Metric, Units.GM],
-  [Units.TONNE, Units.GM],
+  [Units.TON_Metric, Units.TON_Metric],
+  [Units.TONNE, Units.TONNE],
   [Units.KiloM, Units.M],
   [Units.KiloN, Units.N],
 ])("Qudt.unscale(Unit)", (unit, expected) =>
   test(`Qudt.unscale(${unit.toString()}) = ${expected.toString()}`, () =>
-    expect(Qudt.unscale(unit)).toBe(expected))
+    expect(Qudt.unscale(unit).iri).toBe(expected.iri))
 );
 
 test("Qudt.unscaleFactorUnits(FactorUnit[])", () => {
   const units = Qudt.unscaleFactorUnits(Qudt.factorUnits(Units.KiloN__M));
-  expect(units).toStrictEqual([
-    new FactorUnit(Units.N, 1),
-    new FactorUnit(Units.M, 1),
+  expect(toSortedStringList(units)).toStrictEqual([
+    "http://qudt.org/vocab/unit/GM",
+    "http://qudt.org/vocab/unit/M^2",
+    "http://qudt.org/vocab/unit/SEC^-2",
   ]);
 });
 
@@ -1161,8 +1205,8 @@ describe.each([
   [Units.KiloGM__PER__M3, [Units.KiloGM, 1, Units.M, -3], true],
   [Units.KiloGM__PER__M3, [Units.M, -3, Units.KiloGM, 1], true],
   [Units.KiloGM__PER__M3, [Units.M3, -1, Units.KiloGM, 1], true],
-  [Units.M2__SR, [Units.M, 2], false],
-  [Units.M2, [Units.M, 2, Units.SR, 1], false],
+  [Units.M2__SR, [Units.M, 2], true],
+  [Units.M2, [Units.M, 2, Units.SR, 1], true],
   [Units.M, [Units.M, 1], true],
   [Units.PER__M, [Units.M, -1], true],
   [Units.PER__L, [Units.L, -1], true],
@@ -1245,7 +1289,7 @@ test("Unit.matches(FactorUnits) (multiple levels of factor units)", () => {
   expect(
     Units.N__PER__KiloGM.matches(FactorUnits.ofFactorUnitSpec(Units.KiloGM, 1))
   ).toBe(false);
-  const wattFactors = new FactorUnits(Units.W.factorUnits);
+  const wattFactors = new FactorUnits(Units.W.factorUnits.factorUnits);
   expect(Units.TeraW.matches(wattFactors)).toBe(false);
   expect(Units.KiloW.matches(wattFactors)).toBe(false);
   expect(Units.MegaW.matches(wattFactors)).toBe(false);
@@ -1286,7 +1330,9 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| numbe
     Units.M,
     1
   );
-  expect(units).toStrictEqual([Units.N__M]);
+  expect(toSortedStringList(units)).toStrictEqual(
+    toSortedStringList([Units.J])
+  );
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=EXACT, multiple results)", () => {
@@ -1297,10 +1343,12 @@ test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| numbe
     Units.M,
     1
   );
-  expect(units.length).toBe(3);
-  expect(units.includes(Units.J)).toBe(true);
-  expect(units.includes(Units.N__M)).toBe(true);
-  expect(units.includes(Units.W__SEC)).toBe(true);
+  expect(toSortedStringList(units)).toStrictEqual([
+    "http://qudt.org/vocab/unit/J",
+    "http://qudt.org/vocab/unit/N-M",
+    "http://qudt.org/vocab/unit/N-M-PER-RAD",
+    "http://qudt.org/vocab/unit/W-SEC",
+  ]);
 });
 
 test("Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode, (Unit| number )...) (mode=BEST_MATCH)", () => {
@@ -1625,8 +1673,8 @@ test("Unit.matches(FactorUnits, FactorUnitMatchingMode) (MilliJ)", () => {
   );
 });
 
-test("Qudt.testSimplifyFactorUnits()", () => {
-  let simplified = Qudt.simplifyFactorUnits([
+test("Qudt.testContractExponents()", () => {
+  let simplified = Qudt.contractFactorUnits([
     new FactorUnit(Units.N, 1),
     new FactorUnit(Units.M, -1),
     new FactorUnit(Units.M, -1),
@@ -1644,13 +1692,13 @@ test("Qudt.testSimplifyFactorUnits()", () => {
       ...simplified
     ).includes(Units.PA)
   ).toBe(true);
-  simplified = Qudt.simplifyFactorUnits(
+  simplified = Qudt.contractFactorUnits(
     Units.FARAD.getLeafFactorUnitsWithCumulativeExponents()
   );
   expect(simplified.length).toBe(4);
-  expect(
-    simplified.some((fu) => fu.equals(new FactorUnit(Units.KiloGM, -1)))
-  ).toBe(true);
+  expect(simplified.some((fu) => fu.equals(new FactorUnit(Units.GM, -1)))).toBe(
+    true
+  );
   expect(simplified.some((fu) => fu.equals(new FactorUnit(Units.M, -2)))).toBe(
     true
   );
@@ -1707,7 +1755,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.SI) ", () => {
   expect(units.includes(Units.FT)).toBe(false);
   expect(units.includes(Units.OZ)).toBe(false);
   expect(units.includes(Units.N__PER__M3)).toBe(true);
-  expect(units.length).toBe(1058);
+  expect(units.length).toBe(1008);
 });
 
 test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
@@ -1723,7 +1771,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
   expect(units.includes(Units.FT)).toBe(true);
   expect(units.includes(Units.OZ)).toBe(true);
   expect(units.includes(Units.N__PER__M3)).toBe(false);
-  expect(units.length).toBe(427);
+  expect(units.length).toBe(405);
 });
 
 test("Unit.normalize()", () => {
@@ -1740,7 +1788,7 @@ describe.each([
   [Units.MI, SystemsOfUnits.SI, Units.KiloM],
   [Units.DEG_F, SystemsOfUnits.SI, Units.K],
   [Units.DEG, SystemsOfUnits.SI, Units.DEG],
-  [Units.QT_UK, SystemsOfUnits.SI, Units.L],
+  [Units.QT_UK, SystemsOfUnits.SI, Units.DeciM3],
   [Units.Stone_UK, SystemsOfUnits.SI, Units.KiloGM],
   [Units.KiloM, SystemsOfUnits.IMPERIAL, Units.MI],
   [Units.KiloGM, SystemsOfUnits.IMPERIAL, Units.LB],
@@ -1754,4 +1802,42 @@ describe.each([
     system.abbreviation
   }' is expected to be ${expected.toString()}${actualString}`, () =>
     expect(actual).toStrictEqual(expected));
+});
+
+describe.each([
+  [Units.M, new FactorUnits([FactorUnit.ofUnit(Units.M)], new Decimal(1))],
+  [Units.M2, Units.M2.factorUnits],
+  [
+    Units.MilliM2,
+    new FactorUnits([new FactorUnit(Units.M, 2)], new Decimal(0.000001)),
+  ],
+  [
+    Units.KiloGM,
+    new FactorUnits([FactorUnit.ofUnit(Units.GM)], new Decimal(1000)),
+  ],
+  [
+    Units.KiloP,
+    new FactorUnits(
+      [
+        new FactorUnit(Units.GM, 1),
+        new FactorUnit(Units.M, 1),
+        new FactorUnit(Units.SEC, -2),
+      ],
+      new Decimal("9806.65")
+    ),
+  ],
+  [
+    Units.J__PER__M,
+    new FactorUnits(
+      [
+        new FactorUnit(Units.M, 1),
+        new FactorUnit(Units.GM, 1),
+        new FactorUnit(Units.SEC, -2),
+      ],
+      new Decimal("1000")
+    ),
+  ],
+])("Unit.normalize()", (unit: Unit, expectedResult: FactorUnits): void => {
+  test(`${unit.toString()}.normalize() == (${expectedResult.toString()})`, () =>
+    expect(unit.normalize().toString()).toBe(expectedResult.toString()));
 });

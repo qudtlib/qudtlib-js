@@ -1,6 +1,11 @@
 import { SupportsEquals } from "./baseTypes.js";
 import { FactorUnit } from "./factorUnit.js";
-import { arrayEqualsIgnoreOrdering, compareUsingEquals } from "./utils.js";
+import {
+  arrayEqualsIgnoreOrdering,
+  compareUsingEquals,
+  isNullish,
+  ONE,
+} from "./utils.js";
 import { Unit } from "./unit.js";
 import { Decimal } from "decimal.js";
 
@@ -9,19 +14,25 @@ import { Decimal } from "decimal.js";
  * used to replace any other unit of the same dimensionality.
  */
 export class FactorUnits implements SupportsEquals<FactorUnits> {
+  private static readonly EMPTY_FACTOR_UNITS = new FactorUnits([], ONE);
   readonly factorUnits: FactorUnit[];
   readonly scaleFactor: Decimal;
 
-  constructor(
-    factorUnits: FactorUnit[],
-    scaleFactor: Decimal = new Decimal(1)
-  ) {
+  constructor(factorUnits: FactorUnit[], scaleFactor: Decimal = ONE) {
     this.factorUnits = factorUnits;
     this.scaleFactor = scaleFactor;
   }
 
   static ofUnit(unit: Unit) {
     return new FactorUnits([FactorUnit.ofUnit(unit)]);
+  }
+
+  static ofFactorUnitSpecWithScaleFactor(
+    scalar: Decimal,
+    ...factorUnitSpec: (Unit | number)[]
+  ): FactorUnits {
+    const withoutScalar = this.ofFactorUnitSpec(...factorUnitSpec);
+    return new FactorUnits(withoutScalar.factorUnits, scalar);
   }
 
   static ofFactorUnitSpec(...factorUnitSpec: (Unit | number)[]): FactorUnits {
@@ -49,6 +60,10 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
       factorUnits.push(new FactorUnit(requestedUnit, requestedExponent));
     }
     return new FactorUnits(factorUnits);
+  }
+
+  static empty(): FactorUnits {
+    return FactorUnits.EMPTY_FACTOR_UNITS;
   }
 
   /**
@@ -107,16 +122,165 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
     );
   }
 
+  hasFactorUnits(): boolean {
+    if (isNullish(this.factorUnits)) {
+      return false;
+    }
+    if (this.factorUnits.length === 0) {
+      return false;
+    }
+    if (
+      this.factorUnits.length === 1 &&
+      this.factorUnits[0].unit.factorUnits != this
+    ) {
+      return true;
+    }
+    if (
+      this.factorUnits.length === 1 &&
+      this.factorUnits[0].exponent === 1 &&
+      ONE.equals(this.scaleFactor)
+    ) {
+      return false;
+    }
+    return true;
+  }
+
   normalize(): FactorUnits {
-    const normalized = FactorUnit.normalizeFactorUnits(this.factorUnits);
-    return new FactorUnits(
-      normalized.factorUnits,
-      normalized.scaleFactor.mul(this.scaleFactor)
+    let normalized = null;
+    if (this.hasFactorUnits()) {
+      const mapped = this.factorUnits.map((fu) =>
+        fu.unit.normalize().pow(fu.exponent)
+      );
+      normalized = mapped.reduce((prev, cur) => prev.combineWith(cur));
+    } else {
+      normalized = new FactorUnits(this.factorUnits, this.scaleFactor);
+    }
+    if (!normalized.isRatioOfSameUnits()) {
+      normalized = normalized.reduceExponents();
+    }
+    return normalized.scale(this.scaleFactor);
+  }
+
+  public expand(): FactorUnit[] {
+    return FactorUnits.expandFactors(this);
+  }
+
+  public static expandFactors(factorUnits: FactorUnits): FactorUnit[] {
+    if (!factorUnits.hasFactorUnits()) {
+      return [...factorUnits.factorUnits];
+    }
+    return factorUnits.factorUnits.flatMap((fu) =>
+      FactorUnits.expandFactors(fu.unit.factorUnits)
     );
   }
 
   getAllPossibleFactorUnitCombinations(): FactorUnit[][] {
     return FactorUnit.getAllPossibleFactorUnitCombinations(this.factorUnits);
+  }
+
+  /**
+   * Returns a FactorUnits object containing the scaleFactor and the factors in the numerator of
+   * this FactorUnits object. Note that any derived units in the numerator are returned without
+   * recursive decomposition. For example, for `5.0 * M2-PER-N` a FactorUnit object representing
+   * `N` is returned.
+   *
+   * @return a FactorUnits object representing the scaleFactor and the numerator units of this
+   *     unit.
+   */
+  numerator(): FactorUnits {
+    return new FactorUnits(this.numeratorFactors(), this.scaleFactor);
+  }
+
+  private numeratorFactors(): FactorUnit[] {
+    return this.factorUnits.filter((fu) => fu.exponent > 0);
+  }
+
+  /**
+   * Returns a FactorUnits object containing the factors in the denominator of this FactorUnits
+   * object. Note that any derived units in the denominator are returned without recursive
+   * decomposition. For example, for `5.0 * ` a FactorUnit object representing `5.0 * N` is
+   * returned.
+   *
+   * @return a FactorUnits object representing the scaleFactor and the numerator units of this
+   *     unit.
+   */
+  public denominator(): FactorUnits {
+    return new FactorUnits(this.denominatorFactors());
+  }
+
+  private denominatorFactors(): FactorUnit[] {
+    return this.factorUnits
+      .filter((fu) => fu.exponent < 0)
+      .map((fu) => fu.pow(-1));
+  }
+
+  public getLocalname(): string {
+    return this.generateLocalname(
+      this.numeratorFactors()
+        .map((fu) => FactorUnits.factorUnitLocalname(fu))
+        .join("-"),
+      this.denominatorFactors()
+        .map((fu) => FactorUnits.factorUnitLocalname(fu))
+        .join("-")
+    );
+  }
+
+  private static isEmptyOrNullish(val?: string): boolean {
+    return val === null || typeof val === "undefined" || val.length == 0;
+  }
+
+  private generateLocalname(numerator = "", denominator = ""): string {
+    let completeString = numerator;
+    if (!FactorUnits.isEmptyOrNullish(denominator)) {
+      if (!FactorUnits.isEmptyOrNullish(numerator)) {
+        completeString += "-";
+      }
+      completeString += "PER-" + denominator;
+    }
+    return completeString;
+  }
+
+  private static factorUnitLocalname(fu: FactorUnit): string {
+    return (
+      fu.unit.getIriLocalname() +
+      (Math.abs(fu.exponent) > 1 ? Math.abs(fu.exponent) : "")
+    );
+  }
+
+  private static permutate(strings: string[]): string[][] {
+    const ret = [];
+    if (strings.length <= 1) {
+      ret.push(strings);
+      return ret;
+    }
+    for (let i = 0; i < strings.length; i++) {
+      const otherElements = [...strings];
+      otherElements.splice(i, 1);
+      const othersPermutated = this.permutate(otherElements);
+      for (const otherPermutated of othersPermutated) {
+        otherPermutated.unshift(strings[i]);
+      }
+      ret.push(...othersPermutated);
+    }
+    return ret;
+  }
+
+  private permutateFactorUnitLocalnames(
+    predicate: (fu: FactorUnit) => boolean
+  ): string[] {
+    return FactorUnits.permutate(
+      this.factorUnits.filter(predicate).map(FactorUnits.factorUnitLocalname)
+    ).map((strings) => strings.join("-"));
+  }
+
+  public generateAllLocalnamePossibilities(): string[] {
+    return this.permutateFactorUnitLocalnames((fu) => fu.exponent > 0).flatMap(
+      (numeratorString) =>
+        this.permutateFactorUnitLocalnames((fu) => fu.exponent < 0).map(
+          (denominatorString) =>
+            this.generateLocalname(numeratorString, denominatorString)
+        )
+    );
   }
 
   equals(other?: FactorUnits): boolean {
@@ -135,12 +299,14 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
 
   toString(): string {
     return (
-      (this.scaleFactor.eq(new Decimal(1))
-        ? ""
-        : this.scaleFactor.toString() + "*") +
-      "[" +
-      this.factorUnits.map((s) => s.toString()).reduce((p, n) => p + ", " + n) +
-      "]"
+      (this.scaleFactor.eq(ONE) ? "" : this.scaleFactor.toString() + "*") +
+      (this.factorUnits.length > 0
+        ? "[" +
+          this.factorUnits
+            .map((s) => s.toString())
+            .reduce((p, n) => p + ", " + n) +
+          "]"
+        : "[no factors]")
     );
   }
 }

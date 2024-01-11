@@ -85,18 +85,6 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
     return new FactorUnit(this.unit, this.exponent * by);
   }
 
-  static normalizeFactorUnits(factorUnits: FactorUnit[]) {
-    const ret = factorUnits
-      .flatMap((fu) => fu.normalize())
-      .reduce((prev, cur) => cur.combineWith(prev));
-    if (ret.isRatioOfSameUnits()) {
-      // we don't want to reduce units like M²/M², as such units then match any other unit if they are
-      // compared by the normalization result
-      return ret;
-    }
-    return ret.reduceExponents();
-  }
-
   getExponentCumulated(cumulatedExponent: number): number {
     checkInteger(cumulatedExponent, "cumulatedExponent");
     return this.exponent * cumulatedExponent;

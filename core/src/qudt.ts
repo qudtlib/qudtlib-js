@@ -3,12 +3,16 @@ import {
   arrayContains,
   arrayDeduplicate,
   arrayMax,
+  arrayMin,
   BooleanComparator,
   compareUsingEquals,
   findInIterable,
   getLastIriElement,
   NumberComparator,
   StringComparator,
+  OrderComparator,
+  ONE,
+  ZERO,
 } from "./utils.js";
 import { QuantityKind } from "./quantityKind.js";
 import { Prefix } from "./prefix.js";
@@ -361,130 +365,89 @@ export class Qudt {
    */
   static derivedUnitsFromFactorUnitSelection(
     searchMode: DerivedUnitSearchMode,
-    initialFactorUnitSelection: FactorUnits
+    selection: FactorUnits
   ): Unit[] {
-    if (searchMode === DerivedUnitSearchMode.ALL) {
-      return this.findMatchingUnits(initialFactorUnitSelection);
+    const matchingUnits = this.findMatchingUnits(selection);
+    if (searchMode === DerivedUnitSearchMode.ALL || matchingUnits.length < 2) {
+      return matchingUnits.sort(
+        Qudt.bestMatchForFactorUnitsComparator(selection)
+      );
     } else {
       const requestedUnits: FactorUnit[] =
-        initialFactorUnitSelection.contractExponents().factorUnits;
-      const scores: Map<Unit, number> = new Map();
-      const results = this.findMatchingUnits(initialFactorUnitSelection);
-      if (results.length < 2) {
-        return results;
-      }
-      for (const result of results) {
-        scores.set(result, Qudt.matchScore(result, requestedUnits));
-      }
+        selection.contractExponents().factorUnits;
       return [
-        arrayMax(
-          results,
-          (left, right) => (scores.get(left) || 0) - (scores.get(right) || 0)
+        arrayMin(
+          matchingUnits,
+          Qudt.bestMatchForFactorUnitsComparator(selection)
         ),
       ];
     }
   }
 
-  private static matchScore(unit: Unit, requested: FactorUnit[]): number {
-    const unitFactors = unit.getAllPossibleFactorUnitCombinations();
-    const requestedFactors =
-      FactorUnit.getAllPossibleFactorUnitCombinations(requested);
-    const smaller =
-      unitFactors.length < requestedFactors.length
-        ? unitFactors
-        : requestedFactors;
-    const larger =
-      unitFactors.length < requestedFactors.length
-        ? requestedFactors
-        : unitFactors;
+  private static bestMatchForFactorUnitsComparator(
+    requestedFactorUnits: FactorUnits
+  ): OrderComparator<Unit> {
+    const reqNorm = requestedFactorUnits.normalize();
+    const reqNum = requestedFactorUnits.numerator();
+    const reqNumNorm = reqNum.normalize();
+    const reqDen = requestedFactorUnits.denominator();
+    const reqDenNorm = reqDen.normalize();
+    const reqLocalNamePossibilities: string[] =
+      requestedFactorUnits.generateAllLocalnamePossibilities();
 
-    const unitSimilarityMatrix = Qudt.getUnitSimilarityMatrix(smaller, larger);
-    let overlapScore = 0.0;
-    if (unitSimilarityMatrix.length > 0) {
-      overlapScore = this.getOverlapScore(unitSimilarityMatrix);
-    }
-    const unitLocalName = getLastIriElement(unit.iri);
-    const tiebreaker: number = requested.reduce(
-      (prev, cur) =>
-        prev +
-        (unitLocalName.match("\\b" + getLastIriElement(cur.unit.iri) + "\\b") !=
-          null ||
-        unitLocalName.match(
-          "\\b" +
-            getLastIriElement(cur.unit.iri) +
-            Math.abs(cur.exponent) +
-            "\\b"
-        ) != null
-          ? 1
-          : 0),
-      0
-    );
-    return (
-      overlapScore +
-      tiebreaker / Math.pow(unitFactors.length + requestedFactors.length + 1, 2)
-    );
-  }
+    return (left: Unit, right: Unit) => {
+      if (left.getIriLocalname().indexOf("-") === -1) {
+        if (right.getIriLocalname().indexOf("-") > -1) {
+          return -1; // prefer a derived unit with a new name (such as W, J, N etc.)
+        }
+      } else if (right.getIriLocalname().indexOf("-") === -1) {
+        return 1;
+      }
 
-  private static getUnitSimilarityMatrix(
-    smaller: FactorUnit[][],
-    larger: FactorUnit[][]
-  ) {
-    return smaller.map((sFactors) =>
-      larger.map((lFactors) => Qudt.scoreCombinations(sFactors, lFactors))
-    );
-  }
+      const leftDen: FactorUnits = left.factorUnits.denominator();
+      const rightDen: FactorUnits = right.factorUnits.denominator();
+      const leftFactorsDenCnt: number = leftDen.expand().length;
+      const rightFactorsDenCnt: number = rightDen.expand().length;
+      const reqFactorsDenCnt: number = reqDen.expand().length;
+      const diffFactorsCountDen =
+        Math.abs(reqFactorsDenCnt - leftFactorsDenCnt) -
+        Math.abs(reqFactorsDenCnt - rightFactorsDenCnt);
+      if (diffFactorsCountDen != 0) {
+        return diffFactorsCountDen;
+      }
 
-  private static scoreCombinations(
-    leftFactors: FactorUnit[],
-    rightFactors: FactorUnit[]
-  ) {
-    const smaller =
-      leftFactors.length < rightFactors.length ? leftFactors : rightFactors;
-    const larger =
-      leftFactors.length < rightFactors.length ? rightFactors : leftFactors;
-    const similarityMatix = smaller.map((sFactor) =>
-      larger.map((lFactor) => {
-        if (sFactor.equals(lFactor)) {
-          return 0.0;
+      const leftNum: FactorUnits = left.factorUnits.numerator();
+      const rightNum: FactorUnits = right.factorUnits.denominator();
+      const leftFactorsNumCnt: number = leftNum.expand().length;
+      const rightFactorsNumCnt: number = rightNum.expand().length;
+      const reqFactorsNumCnt: number = reqNum.expand().length;
+      const diffFactorsCountNum: number =
+        Math.abs(reqFactorsNumCnt - leftFactorsNumCnt) -
+        Math.abs(reqFactorsNumCnt - rightFactorsNumCnt);
+      if (diffFactorsCountNum != 0) {
+        return diffFactorsCountNum;
+      }
+      const leftCnt: number = left.factorUnits.expand().length;
+      const rightCnt: number = right.factorUnits.expand().length;
+      const reqCnt: number = requestedFactorUnits.expand().length;
+      if (leftCnt == reqCnt) {
+        if (rightCnt != reqCnt) {
+          return -1;
         }
-        const sScalingOfOrSelf = sFactor.unit.scalingOf
-          ? sFactor.unit.scalingOf
-          : sFactor.unit;
-        const lScalingOfOrSelf = lFactor.unit.scalingOf
-          ? lFactor.unit.scalingOf
-          : lFactor.unit;
-        if (
-          sFactor.exponent === lFactor.exponent &&
-          sScalingOfOrSelf.equals(lScalingOfOrSelf)
-        ) {
-          return 0.6;
+      } else {
+        if (rightCnt == reqCnt) {
+          return 1;
         }
-        if (sFactor.unit.equals(lFactor.unit)) {
-          return 0.8;
+      }
+      if (reqLocalNamePossibilities.includes(left.getIriLocalname())) {
+        if (!reqLocalNamePossibilities.includes(right.getIriLocalname())) {
+          return -1;
         }
-        if (sScalingOfOrSelf.equals(lScalingOfOrSelf)) {
-          return 0.9;
-        }
-        return 1.0;
-      })
-    );
-    if (similarityMatix.length === 0) {
-      return 1;
-    } else {
-      return 1 - Qudt.getOverlapScore(similarityMatix);
-    }
-  }
-
-  private static getOverlapScore(mat: number[][]) {
-    const numAssignments = mat.length;
-    const instance = AssignmentProblem.instance(mat);
-    const solution = instance.solve();
-    const minAssignmentScore = solution.isEmpty()
-      ? 1 * numAssignments
-      : solution.weight!;
-    const overlap = numAssignments * (1 - minAssignmentScore / numAssignments);
-    const rowsPlusCols = mat.length + mat[0].length;
-    return overlap / (rowsPlusCols - overlap);
+      } else if (reqLocalNamePossibilities.includes(right.getIriLocalname())) {
+        return 1;
+      }
+      return StringComparator(left.getIriLocalname(), right.getIriLocalname());
+    };
   }
 
   private static findMatchingUnits(
@@ -572,11 +535,21 @@ export class Qudt {
     return FactorUnit.reduceExponents(factorUnits);
   }
 
-  static unscale(unit: Unit): Unit {
-    if (!unit.scalingOfIri) {
+  static unscale(
+    unit: Unit,
+    treatKiloGmAsUnscaled = true,
+    treatPrefixlessAsUnscaled = true
+  ): Unit {
+    if (!unit.scalingOf) {
       return unit;
     }
-    return this.unitRequired(unit.scalingOfIri);
+    if (treatPrefixlessAsUnscaled && !unit.prefix) {
+      return unit;
+    }
+    if (treatKiloGmAsUnscaled && unit.getIriAbbreviated() === "unit:KiloGM") {
+      return unit;
+    }
+    return unit.scalingOf;
   }
 
   /**
@@ -585,9 +558,21 @@ export class Qudt {
    * @param factorUnits the factor units to unscale
    * @return the unscaled factor units
    */
-  static unscaleFactorUnits(factorUnits: FactorUnit[]): FactorUnit[] {
+  static unscaleFactorUnits(
+    factorUnits: FactorUnit[],
+    treatKiloGMAsUnscaled = true,
+    treatPrefixlessAsUnscaled = true
+  ): FactorUnit[] {
     return factorUnits.map(
-      (fu) => new FactorUnit(Qudt.unscale(fu.unit), fu.exponent)
+      (fu) =>
+        new FactorUnit(
+          Qudt.unscale(
+            fu.unit,
+            treatKiloGMAsUnscaled,
+            treatPrefixlessAsUnscaled
+          ),
+          fu.exponent
+        )
     );
   }
 
@@ -674,7 +659,7 @@ export class Qudt {
    */
   static scaleToBaseUnit(unit: Unit): { unit: Unit; factor: Decimal } {
     if (!unit.scalingOf) {
-      return { unit: unit, factor: new Decimal(1) };
+      return { unit: unit, factor: ONE };
     }
     const baseUnit = unit.scalingOf;
     return { unit: baseUnit, factor: unit.getConversionMultiplier(baseUnit) };
@@ -860,7 +845,7 @@ export class Qudt {
       throw `Cannot get logarithm of negative value ${val}`;
     }
     if (val.isZero()) {
-      return new Decimal("0");
+      return ZERO;
     }
     return val.log(10);
   }
