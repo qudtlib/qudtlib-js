@@ -3545,19 +3545,19 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("ампер", "bg"));
   unit.addLabel(new LangString("安培", "zh"));
   unit.addLabel(new LangString("amperium", "la"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/CurrentLinkage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/DisplacementCurrent"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/TotalCurrent");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ElectricCurrent");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/CurrentLinkage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MagnetomotiveForce"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MagneticTension");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricCurrentPhasor"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MagneticTension");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/TotalCurrent");
   config.units.set("http://qudt.org/vocab/unit/A", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/A-HR",
@@ -3661,10 +3661,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Ampere Per Centimeter", "en-us"));
   unit.addLabel(new LangString("Ampere Per Centimetre", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H"
+    "http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity"
+    "http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H"
   );
   config.units.set("http://qudt.org/vocab/unit/A-PER-CentiM", unit);
   unit = new Unit(
@@ -3801,10 +3801,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("安培每米", "zh"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Coercivity");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H"
+    "http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity"
+    "http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H"
   );
   config.units.set("http://qudt.org/vocab/unit/A-PER-M", unit);
   unit = new Unit(
@@ -3847,13 +3847,13 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("amperio por metro cuadrado", "es"));
   unit.addLabel(new LangString("安培每平方米", "zh"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/DisplacementCurrentDensity"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/TotalCurrentDensity"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricCurrentDensity"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/DisplacementCurrentDensity"
   );
   config.units.set("http://qudt.org/vocab/unit/A-PER-M2", unit);
   unit = new Unit(
@@ -3903,10 +3903,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Ampere Per Millimetre", "en"));
   unit.addLabel(new LangString("Ampere Per Millimeter", "en-us"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H"
+    "http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity"
+    "http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H"
   );
   config.units.set("http://qudt.org/vocab/unit/A-PER-MilliM", unit);
   unit = new Unit(
@@ -4098,8 +4098,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("ArcMinute", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PlaneAngle");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/MIN_Angle");
   config.units.set("http://qudt.org/vocab/unit/ARCMIN", unit);
   unit = new Unit(
@@ -4119,8 +4119,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("ArcSecond", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PlaneAngle");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   config.units.set("http://qudt.org/vocab/unit/ARCSEC", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/ARE",
@@ -4227,8 +4227,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Standard Atmosphere", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/ATM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/ATM-M3-PER-MOL",
@@ -4269,8 +4269,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Technical Atmosphere", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/ATM_T", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/AU",
@@ -4566,13 +4566,13 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("belio", "es"));
   unit.addLabel(new LangString("bel", "sl"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/SoundPressureLevel"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoundExposureLevel"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoundReductionIndex"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SoundPressureLevel"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SoundPowerLevel");
   config.units.set("http://qudt.org/vocab/unit/B", unit);
@@ -4623,8 +4623,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Bar", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/BAR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/BAR-L-PER-SEC",
@@ -4723,8 +4723,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Barad", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/BARYE");
   config.units.set("http://qudt.org/vocab/unit/BARAD", unit);
   unit = new Unit(
@@ -4763,8 +4763,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Barye", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/BARAD");
   config.units.set("http://qudt.org/vocab/unit/BARYE", unit);
   unit = new Unit(
@@ -5399,8 +5399,8 @@ export * from "@qudtlib/core";
   unit.addLabel(
     new LangString("British Thermal Unit (International Definition)", "en")
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   config.units.set("http://qudt.org/vocab/unit/BTU_IT", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/BTU_IT-FT",
@@ -5739,8 +5739,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("BTU per Hour", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/HeatFlowRate");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/BTU_IT-PER-HR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/BTU_IT-PER-HR-FT2",
@@ -6049,8 +6049,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("BTU per Second", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/HeatFlowRate");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/BTU_IT-PER-SEC", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/BTU_IT-PER-SEC-FT-DEG_R",
@@ -6161,8 +6161,8 @@ export * from "@qudtlib/core";
   unit.addLabel(
     new LangString("British Thermal Unit (Thermochemical Definition)", "en")
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   config.units.set("http://qudt.org/vocab/unit/BTU_TH", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/BTU_TH-FT-PER-FT2-HR-DEG_F",
@@ -6942,10 +6942,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Coulomb per Meter", "en-us"));
   unit.addLabel(new LangString("Coulomb per Metre", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ElectricChargeLinearDensity"
+    "http://qudt.org/vocab/quantitykind/ElectricChargeLineDensity"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ElectricChargeLineDensity"
+    "http://qudt.org/vocab/quantitykind/ElectricChargeLinearDensity"
   );
   config.units.set("http://qudt.org/vocab/unit/C-PER-M", unit);
   unit = new Unit(
@@ -6988,13 +6988,13 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("クーロン毎平方メートル", "ja"));
   unit.addLabel(new LangString("coulomb pe metru pătrat", "ro"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/ElectricChargeSurfaceDensity"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricChargePerArea"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPolarization"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ElectricChargeSurfaceDensity"
   );
   config.units.set("http://qudt.org/vocab/unit/C-PER-M2", unit);
   unit = new Unit(
@@ -7231,8 +7231,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("International Table calorie", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   config.units.set("http://qudt.org/vocab/unit/CAL_IT", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/CAL_IT-PER-GM",
@@ -7430,8 +7430,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Thermochemical Calorie", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   config.units.set("http://qudt.org/vocab/unit/CAL_TH", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/CAL_TH-PER-CentiM-SEC-DEG_C",
@@ -7958,8 +7958,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Centimetre of Water", "en"));
   unit.addLabel(new LangString("Centimeter of Water", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/CM_H2O", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/CORD",
@@ -8200,8 +8200,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Centibar", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/CentiBAR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/CentiC",
@@ -8737,10 +8737,10 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Cubic Centimetres per Gram", "en"));
   unit.addLabel(new LangString("Cubic Centimeters per Gram", "en-us"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificVolume");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoilAdsorptionCoefficient"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificVolume");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/MilliL-PER-GM");
   config.units.set("http://qudt.org/vocab/unit/CentiM3-PER-GM", unit);
   unit = new Unit(
@@ -8960,10 +8960,10 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("CentiMole", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AmountOfSubstance"
+    "http://qudt.org/vocab/quantitykind/ExtentOfReaction"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ExtentOfReaction"
+    "http://qudt.org/vocab/quantitykind/AmountOfSubstance"
   );
   config.units.set("http://qudt.org/vocab/unit/CentiMOL", unit);
   unit = new Unit(
@@ -8983,13 +8983,13 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/SI"]
   );
   unit.addLabel(new LangString("Centimole per kilogram", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/IonicStrength");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MolalityOfSolute"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/AmountOfSubstancePerUnitMass"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/IonicStrength");
   config.units.set("http://qudt.org/vocab/unit/CentiMOL-PER-KiloGM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/CentiMOL-PER-L",
@@ -9033,8 +9033,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Conventional Centimetre Of Water", "en"));
   unit.addLabel(new LangString("Conventional Centimeter Of Water", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/CentiM_H2O", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/CentiM_HG",
@@ -9054,8 +9054,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Centimetre Of Mercury", "en"));
   unit.addLabel(new LangString("Centimeter Of Mercury", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/CentiM_HG", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/CentiN",
@@ -9104,8 +9104,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Centinewton Meter", "en-us"));
   unit.addLabel(new LangString("Centinewton Metre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   config.units.set("http://qudt.org/vocab/unit/CentiN-M", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/CentiPOISE",
@@ -9235,10 +9235,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Day", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Time");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/FishBiotransformationHalfLife"
+    "http://qudt.org/vocab/quantitykind/BiodegredationHalfLife"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/BiodegredationHalfLife"
+    "http://qudt.org/vocab/quantitykind/FishBiotransformationHalfLife"
   );
   config.units.set("http://qudt.org/vocab/unit/DAY", unit);
   unit = new Unit(
@@ -9419,8 +9419,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Degree", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PlaneAngle");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   config.units.set("http://qudt.org/vocab/unit/DEG", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DEG-PER-HR",
@@ -9592,8 +9592,8 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("Degree Balling", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/DEGREE_BALLING", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DEGREE_BAUME",
@@ -9612,8 +9612,8 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("Degree Baume (origin Scale)", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/DEGREE_BAUME", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DEGREE_BAUME_US_HEAVY",
@@ -9632,8 +9632,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("Degree Baume (US Heavy)", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/DEGREE_BAUME_US_HEAVY", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DEGREE_BAUME_US_LIGHT",
@@ -9652,8 +9652,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("Degree Baume (US Light)", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/DEGREE_BAUME_US_LIGHT", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DEGREE_BRIX",
@@ -9672,8 +9672,8 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("Degree Brix", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/DEGREE_BRIX", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DEGREE_OECHSLE",
@@ -9692,8 +9692,8 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("Degree Oechsle", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/DEGREE_OECHSLE", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DEGREE_PLATO",
@@ -9712,8 +9712,8 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("Degree Plato", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/DEGREE_PLATO", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DEGREE_TWADDELL",
@@ -9732,8 +9732,8 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("Degree Twaddell", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/DEGREE_TWADDELL", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DEG_C",
@@ -10473,8 +10473,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Dyne Centimeter", "en-us"));
   unit.addLabel(new LangString("Dyne Centimetre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   config.units.set("http://qudt.org/vocab/unit/DYN-CentiM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DYN-PER-CentiM",
@@ -10514,8 +10514,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Dyne per Square Centimetre", "en"));
   unit.addLabel(new LangString("Dyne per Square Centimeter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/DYN-PER-CentiM2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DYN-SEC-PER-CentiM",
@@ -10770,8 +10770,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Decapascal", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -10803,13 +10803,13 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Decibel", "en"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/SoundPressureLevel"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoundExposureLevel"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoundReductionIndex"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SoundPressureLevel"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SoundPowerLevel");
   config.units.set("http://qudt.org/vocab/unit/DeciB", unit);
@@ -10830,8 +10830,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Decibar", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/DeciBAR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DeciBAR-PER-YR",
@@ -10911,13 +10911,13 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Decibel Referred to 1mw", "en"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/SoundPressureLevel"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoundExposureLevel"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoundReductionIndex"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SoundPressureLevel"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SoundPowerLevel");
   config.units.set("http://qudt.org/vocab/unit/DeciB_M", unit);
@@ -11305,8 +11305,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Decinewton Metre", "en"));
   unit.addLabel(new LangString("Decinewton Meter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   config.units.set("http://qudt.org/vocab/unit/DeciN-M", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DeciS",
@@ -11330,8 +11330,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("DeciSiemens", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Conductance");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   config.units.set("http://qudt.org/vocab/unit/DeciS", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/DeciS-PER-M",
@@ -12479,10 +12479,10 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Fraction", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Reflectance");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/DimensionlessRatio"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Reflectance");
   config.units.set("http://qudt.org/vocab/unit/FRACTION", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/FRAME",
@@ -13184,8 +13184,8 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("Foot of Water", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/FT_H2O", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/FT_HG",
@@ -13204,8 +13204,8 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("Foot Of Mercury", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/FT_HG", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/FT_US",
@@ -13359,8 +13359,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Femtograms per litre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/FemtoGM-PER-L", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/FemtoJ",
@@ -13455,10 +13455,10 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("FemtoMole", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AmountOfSubstance"
+    "http://qudt.org/vocab/quantitykind/ExtentOfReaction"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ExtentOfReaction"
+    "http://qudt.org/vocab/quantitykind/AmountOfSubstance"
   );
   config.units.set("http://qudt.org/vocab/unit/FemtoMOL", unit);
   unit = new Unit(
@@ -14249,8 +14249,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Gram Per Cubic Centimeter", "en-us"));
   unit.addLabel(new LangString("Gram Per Cubic Centimetre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/GM-PER-CentiM3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GM-PER-DAY",
@@ -14318,8 +14318,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("grams per decilitre", "en-us"));
   unit.addLabel(new LangString("grams per decilitre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/GM-PER-DeciL", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GM-PER-DeciM3",
@@ -14344,8 +14344,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Gram Per Cubic Decimetre", "en"));
   unit.addLabel(new LangString("Gram Per Cubic Decimeter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/GM-PER-DeciM3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GM-PER-GM",
@@ -14467,8 +14467,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Gram Per Litre", "en"));
   unit.addLabel(new LangString("Gram Per Liter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/GM-PER-L", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GM-PER-M",
@@ -14568,8 +14568,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Gram Per Cubic Metre", "en"));
   unit.addLabel(new LangString("Gram Per Cubic Meter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/GM-PER-M3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GM-PER-MIN",
@@ -14637,8 +14637,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Gram Per Millilitre", "en"));
   unit.addLabel(new LangString("Gram Per Millilitre", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/GM-PER-MilliL", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GM-PER-MilliM",
@@ -14784,8 +14784,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Gram Force Per Square Centimetre", "en"));
   unit.addLabel(new LangString("Gram Force Per Square Centimeter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/GM_F-PER-CentiM2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GM_Nitrogen",
@@ -14855,8 +14855,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Gon", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PlaneAngle");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/GRAD");
   config.units.set("http://qudt.org/vocab/unit/GON", unit);
   unit = new Unit(
@@ -14915,8 +14915,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Grad", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PlaneAngle");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/GON");
   config.units.set("http://qudt.org/vocab/unit/GRAD", unit);
   unit = new Unit(
@@ -14955,8 +14955,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Grain per Gallon", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/GRAIN-PER-GAL", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GRAIN-PER-GAL_US",
@@ -14975,8 +14975,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("Grain Per Gallon (US)", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/GRAIN-PER-GAL_US", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GRAIN-PER-M3",
@@ -15001,8 +15001,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Grains per Cubic Metre", "en"));
   unit.addLabel(new LangString("Grains per Cubic Meter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/GRAIN-PER-M3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GRAY",
@@ -15396,19 +15396,19 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Gigahertz Metre", "en"));
   unit.addLabel(new LangString("Gigahertz Meter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Speed");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Velocity");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoundParticleVelocity"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/PhaseSpeedOfSound"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ConductionSpeed");
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/GroupSpeedOfSound"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ConductionSpeed");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/LinearVelocity");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Speed");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/PhaseSpeedOfSound"
+  );
   config.units.set("http://qudt.org/vocab/unit/GigaHZ-M", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GigaJ",
@@ -15432,8 +15432,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Gigajoule", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   config.units.set("http://qudt.org/vocab/unit/GigaJ", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GigaJ-PER-HR",
@@ -15483,8 +15483,8 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Gigajoule per Square Metre", "en"));
   unit.addLabel(new LangString("Gigajoule per Square Meter", "en-us"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/EnergyFluence");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/EnergyPerArea");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/RadiantFluence");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/EnergyPerArea");
   config.units.set("http://qudt.org/vocab/unit/GigaJ-PER-M2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GigaOHM",
@@ -15533,8 +15533,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Gigapascal", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -15562,8 +15562,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Gigawatt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ActivePower");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/GigaW", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/GigaW-HR",
@@ -16237,8 +16237,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Hectobar", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/HectoBAR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/HectoC",
@@ -16362,8 +16362,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Hectopascal", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -16602,10 +16602,10 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Inch per Second", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Velocity");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/PropellantBurnRate"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Velocity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/LinearVelocity");
   config.units.set("http://qudt.org/vocab/unit/IN-PER-SEC", unit);
   unit = new Unit(
@@ -16774,13 +16774,13 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Quartic Inch", "en"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/SecondMomentOfArea"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SecondAxialMomentOfArea"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SecondPolarMomentOfArea"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SecondMomentOfArea"
   );
   config.units.set("http://qudt.org/vocab/unit/IN4", unit);
   unit = new Unit(
@@ -16800,8 +16800,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("Inch of Water", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/IN_H2O", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/IN_HG",
@@ -16820,8 +16820,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("Inch of Mercury", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/IN_HG", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/IU",
@@ -16951,18 +16951,18 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("ジュール", "ja"));
   unit.addLabel(new LangString("τζάουλ", "el"));
   unit.addLabel(new LangString("ژول", "fa"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/LevelWidth");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ExchangeIntegral"
+    "http://qudt.org/vocab/quantitykind/HamiltonFunction"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LagrangeFunction"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/HamiltonFunction"
+    "http://qudt.org/vocab/quantitykind/ExchangeIntegral"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/LevelWidth");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/N-M");
   config.units.set("http://qudt.org/vocab/unit/J", unit);
   unit = new Unit(
@@ -17154,18 +17154,18 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Joule per Gram Kelvin", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtConstantVolume"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SpecificHeatCapacity"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificEntropy");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtSaturation"
+    "http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtConstantVolume"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtConstantPressure"
   );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtSaturation"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificEntropy");
   config.units.set("http://qudt.org/vocab/unit/J-PER-GM-K", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/J-PER-HR",
@@ -17251,15 +17251,15 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Joule per Kilogram", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SpecificInternalEnergy"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SpecificGibbsEnergy"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SpecificHelmholtzEnergy"
+    "http://qudt.org/vocab/quantitykind/SpecificInternalEnergy"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificEnergy");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/SpecificHelmholtzEnergy"
+  );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SpecificEnthalpy"
   );
@@ -17315,18 +17315,18 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Joule per Kilogram Kelvin", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtConstantVolume"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SpecificHeatCapacity"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificEntropy");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtSaturation"
+    "http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtConstantVolume"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtConstantPressure"
   );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/SpecificHeatCapacityAtSaturation"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificEntropy");
   config.units.set("http://qudt.org/vocab/unit/J-PER-KiloGM-K", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/J-PER-KiloGM-K-M3",
@@ -17397,10 +17397,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Joule Per Metre", "en"));
   unit.addLabel(new LangString("Joule Per Meter", "en-us"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/LinearEnergyTransfer"
+    "http://qudt.org/vocab/quantitykind/TotalLinearStoppingPower"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/TotalLinearStoppingPower"
+    "http://qudt.org/vocab/quantitykind/LinearEnergyTransfer"
   );
   config.units.set("http://qudt.org/vocab/unit/J-PER-M", unit);
   unit = new Unit(
@@ -17427,8 +17427,8 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Joule per Square Meter", "en-us"));
   unit.addLabel(new LangString("Joule per Square Metre", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/EnergyFluence");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/EnergyPerArea");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/RadiantFluence");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/EnergyPerArea");
   config.units.set("http://qudt.org/vocab/unit/J-PER-M2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/J-PER-M3",
@@ -17457,12 +17457,12 @@ export * from "@qudtlib/core";
     "http://qudt.org/vocab/quantitykind/VolumicElectromagneticEnergy"
   );
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/RadiantEnergyDensity"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectromagneticEnergyDensity"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/EnergyDensity");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/RadiantEnergyDensity"
-  );
   config.units.set("http://qudt.org/vocab/unit/J-PER-M3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/J-PER-M3-K",
@@ -17549,10 +17549,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("joule pe mol", "ro"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MolarEnergy");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ChemicalAffinity"
+    "http://qudt.org/vocab/quantitykind/ElectricPolarizability"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ElectricPolarizability"
+    "http://qudt.org/vocab/quantitykind/ChemicalAffinity"
   );
   config.units.set("http://qudt.org/vocab/unit/J-PER-MOL", unit);
   unit = new Unit(
@@ -17707,8 +17707,8 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("ژول ثانیه", "fa"));
   unit.addLabel(new LangString("joule-secundă", "ro"));
   unit.addLabel(new LangString("جول ثانية", "ar"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Action");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/AngularImpulse");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Action");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/AngularMomentum");
   config.units.set("http://qudt.org/vocab/unit/J-SEC", unit);
   unit = new Unit(
@@ -17776,11 +17776,11 @@ export * from "@qudtlib/core";
     "http://qudt.org/vocab/quantitykind/ThermodynamicTemperature"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MeltingPoint");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Temperature");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/FlashPoint");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/CorrelatedColorTemperature"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Temperature");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/FlashPoint");
   config.units.set("http://qudt.org/vocab/unit/K", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/K-DAY",
@@ -18234,8 +18234,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Kip per Square Inch", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -18422,10 +18422,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Kiloampere Per Metre", "en"));
   unit.addLabel(new LangString("Kiloampere Per Meter", "en-us"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H"
+    "http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity"
+    "http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H"
   );
   config.units.set("http://qudt.org/vocab/unit/KiloA-PER-M", unit);
   unit = new Unit(
@@ -18471,8 +18471,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Kilobar", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/KiloBAR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloBIT",
@@ -18556,8 +18556,8 @@ export * from "@qudtlib/core";
   unit.addLabel(
     new LangString("Kilo British Thermal Unit (International Definition)", "en")
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   config.units.set("http://qudt.org/vocab/unit/KiloBTU_IT", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloBTU_IT-PER-FT2",
@@ -18600,8 +18600,8 @@ export * from "@qudtlib/core";
       "en"
     )
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/HeatFlowRate");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/KiloBTU_IT-PER-HR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloBTU_TH",
@@ -18625,8 +18625,8 @@ export * from "@qudtlib/core";
       "en"
     )
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   config.units.set("http://qudt.org/vocab/unit/KiloBTU_TH", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloBTU_TH-PER-HR",
@@ -18801,8 +18801,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Kilocalorie", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   config.units.set("http://qudt.org/vocab/unit/KiloCAL", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloCAL-PER-CentiM-SEC-DEG_C",
@@ -18986,8 +18986,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Kilocalorie Per Minute", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/HeatFlowRate");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/KiloCAL-PER-MIN", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloCAL-PER-MOL",
@@ -19058,8 +19058,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Kilocalorie Per Second", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/HeatFlowRate");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/KiloCAL-PER-SEC", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloCAL_IT",
@@ -19259,8 +19259,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Kilocurie", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/DecayConstant");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Activity");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/DecayConstant");
   config.units.set("http://qudt.org/vocab/unit/KiloCi", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloEV",
@@ -19598,8 +19598,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Kilogram Per Cubic Centimeter", "en-us"));
   unit.addLabel(new LangString("Kilogram Per Cubic Centimetre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/KiloGM-PER-CentiM3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloGM-PER-DAY",
@@ -19648,8 +19648,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Kilogram Per Cubic Decimeter", "en-us"));
   unit.addLabel(new LangString("Kilogram Per Cubic Decimetre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/KiloGM-PER-DeciM3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloGM-PER-FT2",
@@ -19817,8 +19817,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Kilograms per square kilometre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SurfaceDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassPerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SurfaceDensity");
   config.units.set("http://qudt.org/vocab/unit/KiloGM-PER-KiloM2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloGM-PER-KiloMOL",
@@ -19862,8 +19862,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Kilogram Per Litre", "en"));
   unit.addLabel(new LangString("Kilogram Per Liter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/KiloGM-PER-L", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloGM-PER-M",
@@ -19967,8 +19967,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Kilograms per metre per square second", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/PA");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/N-PER-M2");
   config.units.set("http://qudt.org/vocab/unit/KiloGM-PER-M-SEC2", unit);
@@ -19996,9 +19996,9 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Kilogram per Square Metre", "en"));
   unit.addLabel(new LangString("Kilogram per Square Meter", "en-us"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/BodyMassIndex");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SurfaceDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassPerArea");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MeanMassRange");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SurfaceDensity");
   config.units.set("http://qudt.org/vocab/unit/KiloGM-PER-M2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloGM-PER-M2-PA-SEC",
@@ -20127,14 +20127,14 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("kilogram na metr sześcienny", "pl"));
   unit.addLabel(new LangString("Kilogramm je Kubikmeter", "de"));
   unit.addLabel(new LangString("килограм на кубичен метър", "bg"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MassConcentrationOfWaterVapour"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MassConcentrationOfWater"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MassConcentration"
   );
@@ -20473,8 +20473,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Kilogram_force Metre", "en"));
   unit.addLabel(new LangString("Kilogram_force Meter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   config.units.set("http://qudt.org/vocab/unit/KiloGM_F-M", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloGM_F-M-PER-CentiM2",
@@ -20540,8 +20540,8 @@ export * from "@qudtlib/core";
     new LangString("Kilogram Force per Square Centimeter", "en-us")
   );
   unit.addLabel(new LangString("Kilogram Force per Square Centimetre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/KiloGM_F-PER-CentiM2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloGM_F-PER-M2",
@@ -20561,8 +20561,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Kilogram Force Per Square Meter", "en-us"));
   unit.addLabel(new LangString("Kilogram Force Per Square Metre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/KiloGM_F-PER-M2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloGM_F-PER-MilliM2",
@@ -20584,8 +20584,8 @@ export * from "@qudtlib/core";
   unit.addLabel(
     new LangString("Kilogram Force Per Square Millimeter", "en-us")
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/KiloGM_F-PER-MilliM2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloHZ",
@@ -20640,11 +20640,11 @@ export * from "@qudtlib/core";
     "http://qudt.org/vocab/quantitykind/SoundParticleVelocity"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/PhaseSpeedOfSound"
+    "http://qudt.org/vocab/quantitykind/GroupSpeedOfSound"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ConductionSpeed");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/GroupSpeedOfSound"
+    "http://qudt.org/vocab/quantitykind/PhaseSpeedOfSound"
   );
   config.units.set("http://qudt.org/vocab/unit/KiloHZ-M", unit);
   unit = new Unit(
@@ -20687,8 +20687,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Kilojoule", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   config.units.set("http://qudt.org/vocab/unit/KiloJ", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloJ-PER-K",
@@ -20920,8 +20920,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Kilopound Force Per Square Inch", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -21114,13 +21114,13 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/SI"]
   );
   unit.addLabel(new LangString("Kilomol per Kilogram", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/IonicStrength");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MolalityOfSolute"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/AmountOfSubstancePerUnitMass"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/IonicStrength");
   config.units.set("http://qudt.org/vocab/unit/KiloMOL-PER-KiloGM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloMOL-PER-M3",
@@ -21235,8 +21235,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Kilonewton Meter", "en-us"));
   unit.addLabel(new LangString("Kilonewton Metre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   config.units.set("http://qudt.org/vocab/unit/KiloN-M", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloN-M-PER-DEG",
@@ -21447,8 +21447,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Kilopascal", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -21565,8 +21565,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/SI"]
   );
   unit.addLabel(new LangString("Kilopascal Absolute", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/KiloPA_A", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloPOND",
@@ -21635,8 +21635,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Kilosiemens", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Conductance");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   config.units.set("http://qudt.org/vocab/unit/KiloS", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloS-PER-M",
@@ -21785,10 +21785,10 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Kilovolt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotential"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotentialDifference"
   );
@@ -21930,8 +21930,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Kilowatt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ActivePower");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/KiloW", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/KiloW-HR",
@@ -22183,10 +22183,10 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Litre Per Kilogram", "en"));
   unit.addLabel(new LangString("Liter Per Kilogram", "en-us"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificVolume");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoilAdsorptionCoefficient"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificVolume");
   config.units.set("http://qudt.org/vocab/unit/L-PER-KiloGM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/L-PER-L",
@@ -22666,8 +22666,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Pound per Cubic Foot", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/LB-PER-FT3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/LB-PER-GAL",
@@ -22686,8 +22686,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Pound per Gallon", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/LB-PER-GAL", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/LB-PER-GAL_UK",
@@ -22706,8 +22706,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Pound (avoirdupois) Per Gallon (UK)", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/LB-PER-GAL_UK", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/LB-PER-GAL_US",
@@ -22726,8 +22726,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("Pound (avoirdupois) Per Gallon (US)", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/LB-PER-GAL_US", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/LB-PER-HR",
@@ -22789,9 +22789,9 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Pound (avoirdupois) Per Square Inch", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SurfaceDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassPerArea");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MeanMassRange");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SurfaceDensity");
   config.units.set("http://qudt.org/vocab/unit/LB-PER-IN2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/LB-PER-IN3",
@@ -22810,8 +22810,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Pound per Cubic Inch", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/LB-PER-IN3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/LB-PER-M3",
@@ -22831,8 +22831,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Pound per Cubic Meter", "en-us"));
   unit.addLabel(new LangString("Pound per Cubic Metre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/LB-PER-M3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/LB-PER-MIN",
@@ -22898,8 +22898,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Pound per Cubic Yard", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/LB-PER-YD3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/LB_F",
@@ -22937,8 +22937,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Pound Force Foot", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   config.units.set("http://qudt.org/vocab/unit/LB_F-FT", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/LB_F-IN",
@@ -22957,8 +22957,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Pound Force Inch", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   config.units.set("http://qudt.org/vocab/unit/LB_F-IN", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/LB_F-PER-FT",
@@ -22996,8 +22996,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Pound Force per Square Foot", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/LB_F-PER-FT2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/LB_F-PER-IN",
@@ -23036,8 +23036,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Pound Force per Square Inch", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -23647,12 +23647,12 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("metre bölü saniye", "tr"));
   unit.addLabel(new LangString("meter per saat", "ms"));
   unit.addLabel(new LangString("metro al secondo", "it"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Speed");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Velocity");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/LinearVelocity");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectromagneticWavePhaseSpeed"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/LinearVelocity");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Speed");
   config.units.set("http://qudt.org/vocab/unit/M-PER-SEC", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/M-PER-SEC2",
@@ -23771,12 +23771,12 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("平方米", "zh"));
   unit.addLabel(new LangString("Square Meter", "en-us"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/NuclearQuadrupoleMoment"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/HydraulicPermeability"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Area");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/NuclearQuadrupoleMoment"
-  );
   config.units.set("http://qudt.org/vocab/unit/M2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/M2-HR-DEG_C-PER-KiloCAL_IT",
@@ -24170,16 +24170,16 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Square Meter per Kilogram", "en-us"));
   unit.addLabel(new LangString("Square Metre per Kilogram", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MassEnergyTransferCoefficient"
+    "http://qudt.org/vocab/quantitykind/SpecificSurfaceArea"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SpecificSurfaceArea"
+    "http://qudt.org/vocab/quantitykind/MassAbsorptionCoefficient"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MassAttenuationCoefficient"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MassAbsorptionCoefficient"
+    "http://qudt.org/vocab/quantitykind/MassEnergyTransferCoefficient"
   );
   config.units.set("http://qudt.org/vocab/unit/M2-PER-KiloGM", unit);
   unit = new Unit(
@@ -24276,10 +24276,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Square Metre per Mole", "en"));
   unit.addLabel(new LangString("Square Meter per Mole", "en-us"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MolarAttenuationCoefficient"
+    "http://qudt.org/vocab/quantitykind/MolarAbsorptionCoefficient"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MolarAbsorptionCoefficient"
+    "http://qudt.org/vocab/quantitykind/MolarAttenuationCoefficient"
   );
   config.units.set("http://qudt.org/vocab/unit/M2-PER-MOL", unit);
   unit = new Unit(
@@ -24348,13 +24348,13 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("متر مربع في الثانية", "ar"));
   unit.addLabel(new LangString("Square Meter per Second", "en-us"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/DiffusionCoefficient"
+    "http://qudt.org/vocab/quantitykind/ThermalDiffusionRatioCoefficient"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/NeutronDiffusionCoefficient"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ThermalDiffusionRatioCoefficient"
+    "http://qudt.org/vocab/quantitykind/DiffusionCoefficient"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/AreaPerTime");
   config.units.set("http://qudt.org/vocab/unit/M2-PER-SEC", unit);
@@ -24761,10 +24761,10 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Cubic Metre per Kilogram", "en"));
   unit.addLabel(new LangString("Cubic Meter per Kilogram", "en-us"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificVolume");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoilAdsorptionCoefficient"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificVolume");
   config.units.set("http://qudt.org/vocab/unit/M3-PER-KiloGM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/M3-PER-KiloGM-SEC2",
@@ -24960,15 +24960,15 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Cubic Metre per Second", "en"));
   unit.addLabel(new LangString("Cubic Meter per Second", "en-us"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/RecombinationCoefficient"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/VolumePerUnitTime"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VolumeFlowRate");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoundVolumeVelocity"
   );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/RecombinationCoefficient"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VolumeFlowRate");
   config.units.set("http://qudt.org/vocab/unit/M3-PER-SEC", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/M3-PER-SEC2",
@@ -25021,13 +25021,13 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Quartic Meter", "en-us"));
   unit.addLabel(new LangString("Quartic Metre", "en"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/SecondMomentOfArea"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SecondAxialMomentOfArea"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SecondPolarMomentOfArea"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SecondMomentOfArea"
   );
   config.units.set("http://qudt.org/vocab/unit/M4", unit);
   unit = new Unit(
@@ -25218,8 +25218,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Mho", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Conductance");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/S");
   config.units.set("http://qudt.org/vocab/unit/MHO", unit);
   unit = new Unit(
@@ -25387,8 +25387,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Mil Angle (NATO)", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PlaneAngle");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   config.units.set("http://qudt.org/vocab/unit/MIL", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MILLE",
@@ -25482,8 +25482,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Minute Angle", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PlaneAngle");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/ARCMIN");
   config.units.set("http://qudt.org/vocab/unit/MIN_Angle", unit);
   unit = new Unit(
@@ -25679,10 +25679,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Mol", "de"));
   unit.addLabel(new LangString("mól", "hu"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AmountOfSubstance"
+    "http://qudt.org/vocab/quantitykind/ExtentOfReaction"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ExtentOfReaction"
+    "http://qudt.org/vocab/quantitykind/AmountOfSubstance"
   );
   config.units.set("http://qudt.org/vocab/unit/MOL", unit);
   unit = new Unit(
@@ -25810,13 +25810,13 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/SI"]
   );
   unit.addLabel(new LangString("Mol per Kilogram", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/IonicStrength");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MolalityOfSolute"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/AmountOfSubstancePerUnitMass"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/IonicStrength");
   config.units.set("http://qudt.org/vocab/unit/MOL-PER-KiloGM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MOL-PER-KiloGM-PA",
@@ -26332,8 +26332,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Megabar", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/MegaBAR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MegaBIT",
@@ -26438,8 +26438,8 @@ export * from "@qudtlib/core";
       "en"
     )
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/HeatFlowRate");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/MegaBTU_IT-PER-HR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MegaBYTE",
@@ -26768,8 +26768,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Megagram Per Cubic Meter", "en-us"));
   unit.addLabel(new LangString("Megagram Per Cubic Metre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/MegaGM-PER-M3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MegaHZ",
@@ -26908,8 +26908,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Megajoule", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   config.units.set("http://qudt.org/vocab/unit/MegaJ", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MegaJ-PER-HR",
@@ -27143,8 +27143,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Meganewton Meter", "en-us"));
   unit.addLabel(new LangString("Meganewton Metre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   config.units.set("http://qudt.org/vocab/unit/MegaN-M", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MegaOHM",
@@ -27193,8 +27193,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Megapascal", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -27334,8 +27334,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("MPSI", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -27362,8 +27362,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("MegaSiemens", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Conductance");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   config.units.set("http://qudt.org/vocab/unit/MegaS", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MegaS-PER-M",
@@ -27430,10 +27430,10 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Megavolt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotential"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotentialDifference"
   );
@@ -27575,8 +27575,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("MegaW", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ActivePower");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/MegaW", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MegaW-HR",
@@ -27669,8 +27669,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Microatmospheres", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/MicroATM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroBAR",
@@ -27689,8 +27689,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Microbar", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/MicroBAR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroBQ",
@@ -28116,8 +28116,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Microgram Per Deciliter", "en-us"));
   unit.addLabel(new LangString("Microgram Per Decilitre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/MicroGM-PER-DeciL", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroGM-PER-GM",
@@ -28166,8 +28166,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Microgram per Square Inch", "en-us"));
   unit.addLabel(new LangString("Microgram per Square Inch", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SurfaceDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassPerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SurfaceDensity");
   config.units.set("http://qudt.org/vocab/unit/MicroGM-PER-IN2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroGM-PER-KiloGM",
@@ -28216,8 +28216,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Microgram Per Liter", "en-us"));
   unit.addLabel(new LangString("Microgram Per Litre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/MicroGM-PER-L", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroGM-PER-L-HR",
@@ -28290,8 +28290,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Microgram Per Cubic Metre", "en"));
   unit.addLabel(new LangString("Microgram Per Cubic Meter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/MicroGM-PER-M3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroGM-PER-M3-HR",
@@ -28340,8 +28340,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Microgram Per MilliLitre", "en"));
   unit.addLabel(new LangString("Microgram Per Milliliter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MassConcentration"
   );
@@ -28841,8 +28841,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Micromho", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Conductance");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   config.units.set("http://qudt.org/vocab/unit/MicroMHO", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroMOL",
@@ -28882,13 +28882,13 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/SI"]
   );
   unit.addLabel(new LangString("Micromoles per gram", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/IonicStrength");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MolalityOfSolute"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/AmountOfSubstancePerUnitMass"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/IonicStrength");
   config.units.set("http://qudt.org/vocab/unit/MicroMOL-PER-GM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroMOL-PER-GM-HR",
@@ -29184,8 +29184,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Micronewton Meter", "en-us"));
   unit.addLabel(new LangString("Micronewton Metre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   config.units.set("http://qudt.org/vocab/unit/MicroN-M", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroOHM",
@@ -29234,8 +29234,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Micropascal", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -29284,8 +29284,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("microradian", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PlaneAngle");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   config.units.set("http://qudt.org/vocab/unit/MicroRAD", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroS",
@@ -29309,8 +29309,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Microsiemens", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Conductance");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   config.units.set("http://qudt.org/vocab/unit/MicroS", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroS-PER-CentiM",
@@ -29478,8 +29478,8 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("MicroTorr", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/MicroTORR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroV",
@@ -29503,10 +29503,10 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Microvolt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotential"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotentialDifference"
   );
@@ -29563,8 +29563,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Microwatt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ActivePower");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/MicroW", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MicroW-PER-M2",
@@ -29696,10 +29696,10 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Milliampere Per Inch", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H"
+    "http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity"
+    "http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H"
   );
   config.units.set("http://qudt.org/vocab/unit/MilliA-PER-IN", unit);
   unit = new Unit(
@@ -29725,10 +29725,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Milliampere Per Millimeter", "en-us"));
   unit.addLabel(new LangString("Milliampere Per Millimetre", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H"
+    "http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/LinearElectricCurrentDensity"
+    "http://qudt.org/vocab/quantitykind/MagneticFieldStrength_H"
   );
   config.units.set("http://qudt.org/vocab/unit/MilliA-PER-MilliM", unit);
   unit = new Unit(
@@ -29748,8 +29748,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("Milli ArcSecond", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PlaneAngle");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/RAD");
   config.units.set("http://qudt.org/vocab/unit/MilliARCSEC", unit);
   unit = new Unit(
@@ -29769,8 +29769,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Millibar", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/HectoPA");
   config.units.set("http://qudt.org/vocab/unit/MilliBAR", unit);
   unit = new Unit(
@@ -30334,11 +30334,11 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("milligrams per decilitre", "en"));
   unit.addLabel(new LangString("milligrams per decilitre", "en-us"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/BloodGlucoseLevel_Mass"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
   config.units.set("http://qudt.org/vocab/unit/MilliGM-PER-DeciL", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliGM-PER-GM",
@@ -30459,8 +30459,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Milligram Per Liter", "en-us"));
   unit.addLabel(new LangString("Milligram Per Litre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/MilliGM-PER-L", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliGM-PER-M",
@@ -30607,8 +30607,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Milligram Per Cubic Metre", "en"));
   unit.addLabel(new LangString("Milligram Per Cubic Meter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/MilliGM-PER-M3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliGM-PER-M3-DAY",
@@ -30729,8 +30729,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Milligram Per Millilitre", "en"));
   unit.addLabel(new LangString("Milligram Per Milliliter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MassConcentration"
   );
@@ -31093,10 +31093,10 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Milliliter per Gram", "en-us"));
   unit.addLabel(new LangString("Millilitre per Gram", "en"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificVolume");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoilAdsorptionCoefficient"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificVolume");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/CentiM3-PER-GM");
   config.units.set("http://qudt.org/vocab/unit/MilliL-PER-GM", unit);
   unit = new Unit(
@@ -31582,10 +31582,10 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Cubic Millimetre per Gram", "en"));
   unit.addLabel(new LangString("Cubic Millimeter per Gram", "en-us"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificVolume");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoilAdsorptionCoefficient"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificVolume");
   config.units.set("http://qudt.org/vocab/unit/MilliM3-PER-GM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliM3-PER-KiloGM",
@@ -31605,10 +31605,10 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Cubic Millimetre per Kilogram", "en"));
   unit.addLabel(new LangString("Cubic Millimeter per Kilogram", "en-us"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificVolume");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SoilAdsorptionCoefficient"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/SpecificVolume");
   config.units.set("http://qudt.org/vocab/unit/MilliM3-PER-KiloGM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliM3-PER-M3",
@@ -31659,13 +31659,13 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Quartic Millimetre", "en"));
   unit.addLabel(new LangString("Quartic Millimeter", "en-us"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/SecondMomentOfArea"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SecondAxialMomentOfArea"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/SecondPolarMomentOfArea"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SecondMomentOfArea"
   );
   config.units.set("http://qudt.org/vocab/unit/MilliM4", unit);
   unit = new Unit(
@@ -31706,10 +31706,10 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/SI"]
   );
   unit.addLabel(new LangString("Millimole Per Gram", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/IonicStrength");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/AmountOfSubstancePerUnitMass"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/IonicStrength");
   config.units.set("http://qudt.org/vocab/unit/MilliMOL-PER-GM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliMOL-PER-KiloGM",
@@ -31728,10 +31728,10 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/SI"]
   );
   unit.addLabel(new LangString("Millimole Per Kilogram", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/IonicStrength");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/AmountOfSubstancePerUnitMass"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/IonicStrength");
   config.units.set("http://qudt.org/vocab/unit/MilliMOL-PER-KiloGM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliMOL-PER-L",
@@ -31904,8 +31904,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Conventional Millimetre Of Water", "en"));
   unit.addLabel(new LangString("Conventional Millimeter Of Water", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/MilliM_H2O", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliM_HG",
@@ -31925,8 +31925,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Millimetre of Mercury", "en"));
   unit.addLabel(new LangString("Millimeter of Mercury", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/MilliM_HG", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliM_HGA",
@@ -31946,8 +31946,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Millimetre of Mercury - Absolute", "en"));
   unit.addLabel(new LangString("Millimeter of Mercury - Absolute", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/MilliM_HGA", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliN",
@@ -31996,8 +31996,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Millinewton Meter", "en-us"));
   unit.addLabel(new LangString("Millinewton Metre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   config.units.set("http://qudt.org/vocab/unit/MilliN-M", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliN-PER-M",
@@ -32071,8 +32071,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Millipascal", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -32171,8 +32171,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("milliradian", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PlaneAngle");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   config.units.set("http://qudt.org/vocab/unit/MilliRAD", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliRAD_R",
@@ -32217,10 +32217,10 @@ export * from "@qudtlib/core";
     undefined,
     undefined,
     "http://qudt.org/vocab/dimensionvector/A0E0L2I0M0H0T-2D0",
-    new Decimal("0.0001"),
+    new Decimal("0.00001"),
     undefined,
-    undefined,
-    "http://qudt.org/vocab/unit/SV",
+    "http://qudt.org/vocab/prefix/Milli",
+    "http://qudt.org/vocab/unit/R_man",
     undefined,
     "mrem",
     undefined,
@@ -32253,8 +32253,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Millisiemens", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Conductance");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   config.units.set("http://qudt.org/vocab/unit/MilliS", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliS-PER-CentiM",
@@ -32395,8 +32395,8 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("MilliTorr", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/MilliTORR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliV",
@@ -32420,10 +32420,10 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Millivolt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotential"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotentialDifference"
   );
@@ -32505,8 +32505,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("MilliW", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ActivePower");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/MilliW", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/MilliW-PER-CentiM2-MicroM-SR",
@@ -32777,8 +32777,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Newton Centimeter", "en-us"));
   unit.addLabel(new LangString("Newton Centimetre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   config.units.set("http://qudt.org/vocab/unit/N-CentiM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/N-M",
@@ -32822,8 +32822,8 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Newton Meter", "en-us"));
   unit.addLabel(new LangString("newton metr", "cs"));
   unit.addLabel(new LangString("newton meter", "ms"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/J");
   config.units.set("http://qudt.org/vocab/unit/N-M", unit);
   unit = new Unit(
@@ -33300,8 +33300,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Newton Per Square Centimetre", "en"));
   unit.addLabel(new LangString("Newton Per Square Centimeter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/N-PER-CentiM2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/N-PER-KiloGM",
@@ -33397,8 +33397,8 @@ export * from "@qudtlib/core";
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfLinearSubgradeReaction"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/PA");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/KiloGM-PER-M-SEC2");
   config.units.set("http://qudt.org/vocab/unit/N-PER-M2", unit);
@@ -33476,8 +33476,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Newton Per Square Millimeter", "en-us"));
   unit.addLabel(new LangString("Newton Per Square Millimetre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/N-PER-MilliM2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/N-PER-RAD",
@@ -33744,48 +33744,48 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Number", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/IonTransportNumber"
+    "http://qudt.org/vocab/quantitykind/DimensionlessRatio"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/TotalAngularMomentumQuantumNumber"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/StoichiometricNumber"
+    "http://qudt.org/vocab/quantitykind/OrbitalAngularMomentumQuantumNumber"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/NucleonNumber");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassNumber");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ReynoldsNumber");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/QuantumNumber");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MagneticQuantumNumber"
+    "http://qudt.org/vocab/quantitykind/SpinQuantumNumber"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/Landau-GinzburgNumber"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Dimensionless");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/NuclearSpinQuantumNumber"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/FrictionCoefficient"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/NuclearSpinQuantumNumber"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/QuantumNumber");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ReynoldsNumber");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Population");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ChargeNumber");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SpinQuantumNumber"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/DimensionlessRatio"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/Landau-GinzburgNumber"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/PrincipalQuantumNumber"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Dimensionless");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassNumber");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/HyperfineStructureQuantumNumber"
+    "http://qudt.org/vocab/quantitykind/StoichiometricNumber"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/NeutronNumber");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/OrbitalAngularMomentumQuantumNumber"
+    "http://qudt.org/vocab/quantitykind/IonTransportNumber"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/NucleonNumber");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ChargeNumber");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Population");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/HyperfineStructureQuantumNumber"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/MagneticQuantumNumber"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/PrincipalQuantumNumber"
   );
   config.units.set("http://qudt.org/vocab/unit/NUM", unit);
   unit = new Unit(
@@ -34404,8 +34404,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("nanograms per decilitre", "en"));
   unit.addLabel(new LangString("nanograms per decilitre", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/NanoGM-PER-DeciL", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/NanoGM-PER-KiloGM",
@@ -34453,8 +34453,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Nanograms per litre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/NanoGM-PER-L", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/NanoGM-PER-M2-PA-SEC",
@@ -34507,8 +34507,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Nanogram Per Cubic Metre", "en"));
   unit.addLabel(new LangString("Nanogram Per Cubic Meter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/NanoGM-PER-M3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/NanoGM-PER-MicroL",
@@ -34532,8 +34532,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Nanograms per microlitre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/NanoGM-PER-MicroL", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/NanoGM-PER-MilliL",
@@ -34557,8 +34557,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Nanograms per millilitre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MassConcentration"
   );
@@ -34584,8 +34584,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Nanohenry", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Inductance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Permeance");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Inductance");
   config.units.set("http://qudt.org/vocab/unit/NanoH", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/NanoH-PER-M",
@@ -34801,12 +34801,12 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Square Nanometer", "en-us"));
   unit.addLabel(new LangString("Square Nanometre", "en"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/NuclearQuadrupoleMoment"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/HydraulicPermeability"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Area");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/NuclearQuadrupoleMoment"
-  );
   config.units.set("http://qudt.org/vocab/unit/NanoM2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/NanoMOL",
@@ -34826,10 +34826,10 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("NanoMole", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AmountOfSubstance"
+    "http://qudt.org/vocab/quantitykind/ExtentOfReaction"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ExtentOfReaction"
+    "http://qudt.org/vocab/quantitykind/AmountOfSubstance"
   );
   config.units.set("http://qudt.org/vocab/unit/NanoMOL", unit);
   unit = new Unit(
@@ -35053,8 +35053,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("NanoSiemens", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Conductance");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   config.units.set("http://qudt.org/vocab/unit/NanoS", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/NanoS-PER-CentiM",
@@ -35178,8 +35178,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Nanowatt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ActivePower");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/NanoW", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/OCT",
@@ -35296,11 +35296,11 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("om", "pl"));
   unit.addLabel(new LangString("ohm", "ro"));
   unit.addLabel(new LangString("ohm", "tr"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Resistance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Reactance");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfImpedance"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Resistance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Impedance");
   config.units.set("http://qudt.org/vocab/unit/OHM", unit);
   unit = new Unit(
@@ -35520,8 +35520,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Imperial Mass Ounce per Gallon", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/OZ-PER-GAL", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/OZ-PER-GAL_UK",
@@ -35540,8 +35540,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Ounce (avoirdupois) Per Gallon (UK)", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/OZ-PER-GAL_UK", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/OZ-PER-GAL_US",
@@ -35560,8 +35560,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Ounce (avoirdupois) Per Gallon (US)", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/OZ-PER-GAL_US", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/OZ-PER-HR",
@@ -35599,8 +35599,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Imperial Mass Ounce per Cubic Inch", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/OZ-PER-IN3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/OZ-PER-MIN",
@@ -35676,8 +35676,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Ounce (avoirdupois) Per Cubic Yard", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/OZ-PER-YD3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/OZ_F",
@@ -35715,8 +35715,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Imperial Ounce Force Inch", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Torque");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MomentOfForce");
   config.units.set("http://qudt.org/vocab/unit/OZ_F-IN", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/OZ_M",
@@ -36016,10 +36016,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("pascal", "en"));
   unit.addLabel(new LangString("паскал", "bg"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Fugacity");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/BulkModulus");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Fugacity");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -36571,8 +36571,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Poundal per Square Foot", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/PDL-PER-FT2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PER-ANGSTROM",
@@ -36610,11 +36610,11 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Reciprocal Bar", "en"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Compressibility");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InversePressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/IsothermalCompressibility"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Compressibility");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InversePressure");
   config.units.set("http://qudt.org/vocab/unit/PER-BAR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PER-CentiM",
@@ -36948,15 +36948,15 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/SI"]
   );
   unit.addLabel(new LangString("Reciprocal Kelvin", "en"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ExpansionRatio");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/RelativePressureCoefficient"
+    "http://qudt.org/vocab/quantitykind/ThermalExpansionCoefficient"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/InverseTemperature"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ExpansionRatio");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ThermalExpansionCoefficient"
+    "http://qudt.org/vocab/quantitykind/RelativePressureCoefficient"
   );
   config.units.set("http://qudt.org/vocab/unit/PER-K", unit);
   unit = new Unit(
@@ -37004,23 +37004,22 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Reciprocal Kilometre", "en"));
   unit.addLabel(new LangString("Reciprocal Kilometer", "en-us"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/AttenuationCoefficient"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/CurvatureFromRadius"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearAttenuationCoefficient"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/PhaseCoefficient"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/PropagationCoefficient"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InverseLength");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/CurvatureFromRadius"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearIonization"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AttenuationCoefficient"
+    "http://qudt.org/vocab/quantitykind/PhaseCoefficient"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearAbsorptionCoefficient"
@@ -37028,6 +37027,7 @@ export * from "@qudtlib/core";
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/AngularReciprocalLatticeVector"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InverseLength");
   config.units.set("http://qudt.org/vocab/unit/PER-KiloM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PER-KiloV-A-HR",
@@ -37101,23 +37101,22 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Reciprocal Metre", "en"));
   unit.addLabel(new LangString("Reciprocal Meter", "en-us"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/AttenuationCoefficient"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/CurvatureFromRadius"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearAttenuationCoefficient"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/PhaseCoefficient"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/PropagationCoefficient"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InverseLength");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/CurvatureFromRadius"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearIonization"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AttenuationCoefficient"
+    "http://qudt.org/vocab/quantitykind/PhaseCoefficient"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearAbsorptionCoefficient"
@@ -37125,6 +37124,7 @@ export * from "@qudtlib/core";
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/AngularReciprocalLatticeVector"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InverseLength");
   config.units.set("http://qudt.org/vocab/unit/PER-M", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PER-M-K",
@@ -37372,11 +37372,11 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("Reciprocal Mille Per Psi", "en"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Compressibility");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InversePressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/IsothermalCompressibility"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Compressibility");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InversePressure");
   config.units.set("http://qudt.org/vocab/unit/PER-MILLE-PER-PSI", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PER-MIN",
@@ -37475,23 +37475,22 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Reciprocal Micrometre", "en"));
   unit.addLabel(new LangString("Reciprocal Micrometer", "en-us"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/AttenuationCoefficient"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/CurvatureFromRadius"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearAttenuationCoefficient"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/PhaseCoefficient"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/PropagationCoefficient"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InverseLength");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/CurvatureFromRadius"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearIonization"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AttenuationCoefficient"
+    "http://qudt.org/vocab/quantitykind/PhaseCoefficient"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearAbsorptionCoefficient"
@@ -37499,6 +37498,7 @@ export * from "@qudtlib/core";
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/AngularReciprocalLatticeVector"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InverseLength");
   config.units.set("http://qudt.org/vocab/unit/PER-MicroM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PER-MicroMOL-L",
@@ -37568,23 +37568,22 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Reciprocal Millimetre", "en"));
   unit.addLabel(new LangString("Reciprocal Millimeter", "en-us"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/AttenuationCoefficient"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/CurvatureFromRadius"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearAttenuationCoefficient"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/PhaseCoefficient"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/PropagationCoefficient"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InverseLength");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/CurvatureFromRadius"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearIonization"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AttenuationCoefficient"
+    "http://qudt.org/vocab/quantitykind/PhaseCoefficient"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearAbsorptionCoefficient"
@@ -37592,6 +37591,7 @@ export * from "@qudtlib/core";
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/AngularReciprocalLatticeVector"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InverseLength");
   config.units.set("http://qudt.org/vocab/unit/PER-MilliM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PER-MilliM3",
@@ -37668,23 +37668,22 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Reciprocal Nanometre", "en"));
   unit.addLabel(new LangString("Reciprocal Nanometer", "en-us"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/AttenuationCoefficient"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/CurvatureFromRadius"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearAttenuationCoefficient"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/PhaseCoefficient"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/PropagationCoefficient"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InverseLength");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/CurvatureFromRadius"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearIonization"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AttenuationCoefficient"
+    "http://qudt.org/vocab/quantitykind/PhaseCoefficient"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearAbsorptionCoefficient"
@@ -37692,6 +37691,7 @@ export * from "@qudtlib/core";
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/AngularReciprocalLatticeVector"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InverseLength");
   config.units.set("http://qudt.org/vocab/unit/PER-NanoM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PER-PA",
@@ -37715,17 +37715,17 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Reciprocal Pascal", "en"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Compressibility");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/StressOpticCoefficient"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InversePressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/IsothermalCompressibility"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/StressOpticCoefficient"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/IsentropicCompressibility"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Compressibility");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InversePressure");
   config.units.set("http://qudt.org/vocab/unit/PER-PA", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PER-PA-SEC",
@@ -37769,12 +37769,12 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Reciprocal Psi", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/IsothermalCompressibility"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/StressOpticCoefficient"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InversePressure");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/IsothermalCompressibility"
+  );
   config.units.set("http://qudt.org/vocab/unit/PER-PSI", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PER-PicoM",
@@ -37800,23 +37800,22 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Reciprocal Picometre", "en"));
   unit.addLabel(new LangString("Reciprocal Picometer", "en-us"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/AttenuationCoefficient"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/CurvatureFromRadius"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearAttenuationCoefficient"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/PhaseCoefficient"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/PropagationCoefficient"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InverseLength");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/CurvatureFromRadius"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearIonization"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AttenuationCoefficient"
+    "http://qudt.org/vocab/quantitykind/PhaseCoefficient"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LinearAbsorptionCoefficient"
@@ -37824,6 +37823,7 @@ export * from "@qudtlib/core";
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/AngularReciprocalLatticeVector"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/InverseLength");
   config.units.set("http://qudt.org/vocab/unit/PER-PicoM", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PER-PlanckMass2",
@@ -37949,10 +37949,10 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Reciprocal Second Steradian", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PhotonIntensity");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/TemporalSummationFunction"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PhotonIntensity");
   config.units.set("http://qudt.org/vocab/unit/PER-SEC-SR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PER-SEC2",
@@ -38178,32 +38178,32 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Percent", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/RelativeHumidity"
+    "http://qudt.org/vocab/quantitykind/DimensionlessRatio"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/ResistancePercentage"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/LengthPercentage"
   );
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/RelativePartialPressure"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/PressurePercentage"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/VoltagePercentage"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Reflectance");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/DimensionlessRatio"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/TimePercentage");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Prevalence");
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/VoltagePercentage"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/RelativeHumidity"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/RelativeLuminousFlux"
   );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/RelativePartialPressure"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ResistancePercentage"
-  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Reflectance");
   config.units.set("http://qudt.org/vocab/unit/PERCENT", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PERCENT-PER-DAY",
@@ -38445,8 +38445,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Acidity", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PH");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Basicity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Acidity");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Basicity");
   config.units.set("http://qudt.org/vocab/unit/PH", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PHOT",
@@ -39235,8 +39235,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("PSI", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -39726,8 +39726,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Picograms per litre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/PicoGM-PER-L", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PicoGM-PER-MilliL",
@@ -39751,8 +39751,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Picograms per millilitre", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MassConcentration"
   );
@@ -39888,10 +39888,10 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("PicoMole", "en"));
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AmountOfSubstance"
+    "http://qudt.org/vocab/quantitykind/ExtentOfReaction"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ExtentOfReaction"
+    "http://qudt.org/vocab/quantitykind/AmountOfSubstance"
   );
   config.units.set("http://qudt.org/vocab/unit/PicoMOL", unit);
   unit = new Unit(
@@ -40095,10 +40095,10 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("PicoPascal", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ShearModulus");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Fugacity");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/BulkModulus");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Fugacity");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ModulusOfElasticity"
   );
@@ -40152,8 +40152,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("PicoSiemens", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Conductance");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   config.units.set("http://qudt.org/vocab/unit/PicoS", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PicoS-PER-M",
@@ -40228,8 +40228,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Picowatt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ActivePower");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/PicoW", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PicoW-PER-CentiM2-L",
@@ -40377,8 +40377,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/PLANCK"]
   );
   unit.addLabel(new LangString("Planck Density", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/PlanckDensity", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PlanckEnergy",
@@ -40569,8 +40569,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/PLANCK"]
   );
   unit.addLabel(new LangString("Planck Pressure", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/PlanckPressure", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/PlanckTemperature",
@@ -40633,10 +40633,10 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/PLANCK"]
   );
   unit.addLabel(new LangString("Planck Volt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotential"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotentialDifference"
   );
@@ -41005,8 +41005,8 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Radiant", "de"));
   unit.addLabel(new LangString("радиан", "bg"));
   unit.addLabel(new LangString("радиан", "ru"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PlaneAngle");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/MilliARCSEC");
   config.units.set("http://qudt.org/vocab/unit/RAD", unit);
   unit = new Unit(
@@ -41125,10 +41125,10 @@ export * from "@qudtlib/core";
     "http://qudt.org/vocab/quantitykind/FermiAngularWavenumber"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AngularWavenumber"
+    "http://qudt.org/vocab/quantitykind/DebyeAngularWavenumber"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/DebyeAngularWavenumber"
+    "http://qudt.org/vocab/quantitykind/AngularWavenumber"
   );
   config.units.set("http://qudt.org/vocab/unit/RAD-PER-M", unit);
   unit = new Unit(
@@ -41307,8 +41307,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Revolution", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PlaneAngle");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Angle");
   config.units.set("http://qudt.org/vocab/unit/REV", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/REV-PER-HR",
@@ -41424,10 +41424,10 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("Reads Per Kilobase", "en"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Dimensionless");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/GeneFamilyAbundance"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Dimensionless");
   config.units.set("http://qudt.org/vocab/unit/RPK", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/RT",
@@ -41448,6 +41448,25 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Register Ton", "en"));
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Volume");
   config.units.set("http://qudt.org/vocab/unit/RT", unit);
+  unit = new Unit(
+    "http://qudt.org/vocab/unit/R_man",
+    undefined,
+    undefined,
+    "http://qudt.org/vocab/dimensionvector/A0E0L2I0M0H0T-2D0",
+    new Decimal("0.01"),
+    undefined,
+    undefined,
+    "http://qudt.org/vocab/unit/SV",
+    undefined,
+    "rem",
+    undefined,
+    undefined,
+    undefined,
+    []
+  );
+  unit.addLabel(new LangString("roentgen equivalent man", "en"));
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/DoseEquivalent");
+  config.units.set("http://qudt.org/vocab/unit/R_man", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/S",
     undefined,
@@ -41492,8 +41511,8 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("siemens", "it"));
   unit.addLabel(new LangString("सीमैन्स", "hi"));
   unit.addLabel(new LangString("siemens", "fr"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Conductance");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Admittance");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/MHO");
   config.units.set("http://qudt.org/vocab/unit/S", unit);
   unit = new Unit(
@@ -41670,8 +41689,8 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("sekunda", "sl"));
   unit.addLabel(new LangString("שנייה", "he"));
   unit.addLabel(new LangString("Sekunde", "de"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Period");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Time");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Period");
   config.units.set("http://qudt.org/vocab/unit/SEC", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/SEC-FT2",
@@ -41952,8 +41971,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Slug per Cubic Foot", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   config.units.set("http://qudt.org/vocab/unit/SLUG-PER-FT3", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/SLUG-PER-HR",
@@ -42491,8 +42510,8 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("THM_EEC", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   config.units.set("http://qudt.org/vocab/unit/THM_EEC", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/THM_US",
@@ -42511,8 +42530,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("Therm US", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ThermalEnergy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Energy");
   config.units.set("http://qudt.org/vocab/unit/THM_US", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/THM_US-PER-HR",
@@ -42531,8 +42550,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("Therm US per Hour", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/HeatFlowRate");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/THM_US-PER-HR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/TOE",
@@ -42701,8 +42720,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Tonne Per Cubic Metre", "en"));
   unit.addLabel(new LangString("Tonne Per Cubic Meter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/TON_Metric-PER-M3");
   config.units.set("http://qudt.org/vocab/unit/TONNE-PER-M3", unit);
   unit = new Unit(
@@ -42816,8 +42835,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("Ton of Refrigeration", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/HeatFlowRate");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/TON_FG", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/TON_FG-HR",
@@ -42894,8 +42913,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Long Ton per Cubic Yard", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/TON_UK-PER-YD3");
   config.units.set("http://qudt.org/vocab/unit/TON_LONG-PER-YD3", unit);
   unit = new Unit(
@@ -43022,8 +43041,8 @@ export * from "@qudtlib/core";
   );
   unit.addLabel(new LangString("Tonne Per Cubic Metre", "en"));
   unit.addLabel(new LangString("Tonne Per Cubic Meter", "en-us"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/TONNE-PER-M3");
   config.units.set("http://qudt.org/vocab/unit/TON_Metric-PER-M3", unit);
   unit = new Unit(
@@ -43157,8 +43176,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS", "http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Short Ton per Cubic Yard", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/TON_US-PER-YD3");
   config.units.set("http://qudt.org/vocab/unit/TON_SHORT-PER-YD3", unit);
   unit = new Unit(
@@ -43217,8 +43236,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/IMPERIAL"]
   );
   unit.addLabel(new LangString("Long Ton (UK) Per Cubic Yard", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/TON_LONG-PER-YD3");
   config.units.set("http://qudt.org/vocab/unit/TON_UK-PER-YD3", unit);
   unit = new Unit(
@@ -43297,8 +43316,8 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/USCS"]
   );
   unit.addLabel(new LangString("Short Ton (US) Per Cubic Yard", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Density");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassDensity");
   unit.addExactMatchIri("http://qudt.org/vocab/unit/TON_SHORT-PER-YD3");
   config.units.set("http://qudt.org/vocab/unit/TON_US-PER-YD3", unit);
   unit = new Unit(
@@ -43318,8 +43337,8 @@ export * from "@qudtlib/core";
     []
   );
   unit.addLabel(new LangString("Torr", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ForcePerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/VaporPressure");
   config.units.set("http://qudt.org/vocab/unit/TORR", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/TSP",
@@ -43546,8 +43565,8 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Terawatt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ActivePower");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/TeraW", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/TeraW-HR",
@@ -43637,200 +43656,200 @@ export * from "@qudtlib/core";
     ]
   );
   unit.addLabel(new LangString("Unitless", "en"));
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/GeneralizedMomentum"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Reflectance");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/LossFactor");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/RelativeMassRatioOfVapour"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ActivityCoefficient"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/EquilibriumConstant"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/CanonicalPartitionFunction"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MagneticSusceptability"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Chromaticity");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ThermalDiffusionFactor"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/GruneisenParameter"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/DimensionlessRatio"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/LogarithmicFrequencyInterval"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/Long-RangeOrderParameter"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/RadianceFactor");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassFraction");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MadelungConstant"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Reactivity");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/QualityFactor");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MassRatioOfWaterVapourToDryGas"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/NeutronYieldPerFission"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/RefractiveIndex");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/StandardAbsoluteActivity"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PowerFactor");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/BioconcentrationFactor"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ThermalDiffusionRatio"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Count");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/LogOctanolWaterPartitionCoefficient"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/InternalConversionFactor"
-  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Constringence");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/DegreeOfDissociation"
   );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/GeneralizedCoordinate"
-  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MassFraction");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/PermittivityRatio"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MultiplicationFactor"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/LandeGFactor");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AverageLogarithmicEnergyDecrement"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ReflectanceFactor"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/LogOctanolAirPartitionCoefficient"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Emissivity");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Duv");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Dimensionless");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/StructureFactor");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Turns");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/Non-LeakageProbability"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ElectricSusceptibility"
-  );
-  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/RatioOfSpecificHeatCapacities"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Lethargy");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PackingFraction");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AmountOfSubstanceFraction"
+    "http://qudt.org/vocab/quantitykind/OrderOfReflection"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/RelativeMassDensity"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/StatisticalWeight"
+    "http://qudt.org/vocab/quantitykind/RelativeMassConcentrationOfVapour"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ThermalUtilizationFactor"
+    "http://qudt.org/vocab/quantitykind/Non-LeakageProbability"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/OsmoticCoefficient"
+    "http://qudt.org/vocab/quantitykind/GeneralizedVelocity"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MassFractionOfDryMatter"
+    "http://qudt.org/vocab/quantitykind/RelativeMassRatioOfVapour"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/RadianceFactor");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/DoseEquivalentQualityFactor"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/Debye-WallerFactor"
+    "http://qudt.org/vocab/quantitykind/Long-RangeOrderParameter"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/FastFissionFactor"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PoissonRatio");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Chromaticity");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/ResonanceEscapeProbability"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/IsentropicExponent"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/RelativeMassExcess"
+    "http://qudt.org/vocab/quantitykind/LogOctanolAirPartitionCoefficient"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/GeneralizedForce"
+    "http://qudt.org/vocab/quantitykind/MassRatioOfWaterVapourToDryGas"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/TotalIonization");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/DimensionlessRatio"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/LeakageFactor");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/Debye-WallerFactor"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/GFactorOfNucleus"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/Short-RangeOrderParameter"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MassFractionOfWater"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/BindingFraction");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/AtomScatteringFactor"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/NeutronYieldPerAbsorption"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/EinsteinTransitionProbability"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/DoseEquivalentQualityFactor"
-  );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Constringence");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/CouplingFactor");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Absorptance");
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/OrderOfReflection"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/MassRatioOfWaterToDryMatter"
+    "http://qudt.org/vocab/quantitykind/TransmittanceDensity"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/NapierianAbsorbance"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ResonanceEscapeProbability"
+    "http://qudt.org/vocab/quantitykind/ElectricSusceptibility"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PowerFactor");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/FrictionCoefficient"
+    "http://qudt.org/vocab/quantitykind/Short-RangeOrderParameter"
   );
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/MobilityRatio");
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/StandardAbsoluteActivity"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/MassRatioOfWaterToDryMatter"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/LogOctanolWaterPartitionCoefficient"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/EquilibriumConstant"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Count");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/MultiplicationFactor"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/OsmoticCoefficient"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/RelativeMassExcess"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/MagneticSusceptability"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/CanonicalPartitionFunction"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/MassFractionOfDryMatter"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Reflectance");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/ThermalDiffusionRatio"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/StructureFactor");
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/NumberOfParticles"
   );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/AmountOfSubstanceFraction"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/RefractiveIndex");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/LossFactor");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Lethargy");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/ThermalUtilizationFactor"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/GeneralizedMomentum"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Dimensionless");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/AverageLogarithmicEnergyDecrement"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/AtomScatteringFactor"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/GeneralizedForce"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/CouplingFactor");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/GeneralizedCoordinate"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/LandeGFactor");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Dissipance");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PackingFraction");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/TransmittanceDensity"
+    "http://qudt.org/vocab/quantitykind/GFactorOfNucleus"
   );
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/RelativeMassConcentrationOfVapour"
+    "http://qudt.org/vocab/quantitykind/ThermalDiffusionFactor"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PoissonRatio");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/GeneralizedVelocity"
+    "http://qudt.org/vocab/quantitykind/ReflectanceFactor"
   );
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/LeakageFactor");
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/TotalIonization");
   unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/FastFissionFactor"
+    "http://qudt.org/vocab/quantitykind/NeutronYieldPerAbsorption"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/ActivityCoefficient"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/QualityFactor");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/MassFractionOfWater"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Turns");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Duv");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/LogarithmicFrequencyInterval"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/InternalConversionFactor"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/GruneisenParameter"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/EinsteinTransitionProbability"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Emissivity");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Reactivity");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/FrictionCoefficient"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/MadelungConstant"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Absorptance");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/NeutronYieldPerFission"
+  );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/BindingFraction");
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/BioconcentrationFactor"
+  );
+  unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/StatisticalWeight"
   );
   config.units.set("http://qudt.org/vocab/unit/UNITLESS", unit);
   unit = new Unit(
@@ -43915,10 +43934,10 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("ولت", "fa"));
   unit.addLabel(new LangString("volt", "fr"));
   unit.addLabel(new LangString("volt", "hu"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotential"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotentialDifference"
   );
@@ -43955,8 +43974,8 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("вольт-ампер", "ru"));
   unit.addLabel(new LangString("voltampère", "fr"));
   unit.addLabel(new LangString("volt ampere", "it"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/NonActivePower");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ComplexPower");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/NonActivePower");
   config.units.set("http://qudt.org/vocab/unit/V-A", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/V-A-HR",
@@ -44282,13 +44301,13 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Volt Second Per Meter", "en-us"));
   unit.addLabel(new LangString("Volt Second Per Metre", "en"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/ScalarMagneticPotential"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MagneticVectorPotential"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/MagneticFluxPerUnitLength"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/ScalarMagneticPotential"
   );
   config.units.set("http://qudt.org/vocab/unit/V-SEC-PER-M", unit);
   unit = new Unit(
@@ -44329,10 +44348,10 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS-EMU", "http://qudt.org/vocab/sou/CGS"]
   );
   unit.addLabel(new LangString("Abvolt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotential"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotentialDifference"
   );
@@ -44399,10 +44418,10 @@ export * from "@qudtlib/core";
     ["http://qudt.org/vocab/sou/CGS", "http://qudt.org/vocab/sou/CGS-ESU"]
   );
   unit.addLabel(new LangString("Statvolt", "en"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotential"
   );
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Voltage");
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotentialDifference"
   );
@@ -44497,8 +44516,8 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("वाट", "hi"));
   unit.addLabel(new LangString("βατ", "el"));
   unit.addLabel(new LangString("ワット", "ja"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/ActivePower");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/Power");
   config.units.set("http://qudt.org/vocab/unit/W", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/W-HR",
@@ -44877,8 +44896,8 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("watt na kvadratni meter", "sl"));
   unit.addLabel(new LangString("watt por metro quadrado", "pt"));
   unit.addLabel(new LangString("watt al metro quadrato", "it"));
-  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PoyntingVector");
   unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PowerPerArea");
+  unit.addQuantityKindIri("http://qudt.org/vocab/quantitykind/PoyntingVector");
   config.units.set("http://qudt.org/vocab/unit/W-PER-M2", unit);
   unit = new Unit(
     "http://qudt.org/vocab/unit/W-PER-M2-K",
@@ -44899,13 +44918,13 @@ export * from "@qudtlib/core";
   unit.addLabel(new LangString("Watt per Square Meter Kelvin", "en-us"));
   unit.addLabel(new LangString("Watt per Square Metre Kelvin", "en"));
   unit.addQuantityKindIri(
+    "http://qudt.org/vocab/quantitykind/SurfaceCoefficientOfHeatTransfer"
+  );
+  unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/CombinedNonEvaporativeHeatTransferCoefficient"
   );
   unit.addQuantityKindIri(
     "http://qudt.org/vocab/quantitykind/CoefficientOfHeatTransfer"
-  );
-  unit.addQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SurfaceCoefficientOfHeatTransfer"
   );
   config.units.set("http://qudt.org/vocab/unit/W-PER-M2-K", unit);
   unit = new Unit(
@@ -45777,4000 +45796,4002 @@ export * from "@qudtlib/core";
 }
 
 export const Units = {
-  // Acre Foot
-  AC__FT: Qudt.unitFromLocalnameRequired("AC-FT"),
-  // Millimole
-  MilliMOL: Qudt.unitFromLocalnameRequired("MilliMOL"),
-  // Kilocalorie per Mole
-  KiloCAL__PER__MOL: Qudt.unitFromLocalnameRequired("KiloCAL-PER-MOL"),
-  // Mikrometer pro Newton
-  MicroM__PER__N: Qudt.unitFromLocalnameRequired("MicroM-PER-N"),
-  // Terajoule
-  TeraJ: Qudt.unitFromLocalnameRequired("TeraJ"),
-  // Watt Per Kilogram
-  W__PER__KiloGM: Qudt.unitFromLocalnameRequired("W-PER-KiloGM"),
-  // Barrel (UK Petroleum) Per Hour
-  BBL_UK_PET__PER__HR: Qudt.unitFromLocalnameRequired("BBL_UK_PET-PER-HR"),
-  // Meter per Farad
-  M__PER__FARAD: Qudt.unitFromLocalnameRequired("M-PER-FARAD"),
-  // Reciprocal steradian
-  PER__SR: Qudt.unitFromLocalnameRequired("PER-SR"),
-  // Hartley
-  HART: Qudt.unitFromLocalnameRequired("HART"),
-  // Microgravity
-  MicroG: Qudt.unitFromLocalnameRequired("MicroG"),
-  // Tonne
-  TONNE: Qudt.unitFromLocalnameRequired("TONNE"),
-  // Earth mass
-  EarthMass: Qudt.unitFromLocalnameRequired("EarthMass"),
-  // Planck Current
-  PlanckCurrent: Qudt.unitFromLocalnameRequired("PlanckCurrent"),
-  // Djibouti Franc
-  DJF_Currency: Qudt.currencyFromLocalnameRequired("DJF"),
-  // Namibian Dollar
-  NAD_Currency: Qudt.currencyFromLocalnameRequired("NAD"),
-  // Microsiemens Per Metre
-  MicroS__PER__M: Qudt.unitFromLocalnameRequired("MicroS-PER-M"),
-  // Milligram Per Square Meter
-  MilliGM__PER__M2: Qudt.unitFromLocalnameRequired("MilliGM-PER-M2"),
-  // GibiByte
-  GibiBYTE: Qudt.unitFromLocalnameRequired("GibiBYTE"),
-  // Reciprocal Minute
-  PER__MIN: Qudt.unitFromLocalnameRequired("PER-MIN"),
-  // Electron Volt Second
-  EV__SEC: Qudt.unitFromLocalnameRequired("EV-SEC"),
-  // Shannon per Second
-  SHANNON__PER__SEC: Qudt.unitFromLocalnameRequired("SHANNON-PER-SEC"),
-  // Ounce (avoirdupois) Per Gallon (US)
-  OZ__PER__GAL_US: Qudt.unitFromLocalnameRequired("OZ-PER-GAL_US"),
-  // Inch of Mercury
-  IN_HG: Qudt.unitFromLocalnameRequired("IN_HG"),
-  // DEG_C_GROWING_CEREAL
-  DEG_C_GROWING_CEREAL: Qudt.unitFromLocalnameRequired("DEG_C_GROWING_CEREAL"),
-  // Picograms
-  PicoGM: Qudt.unitFromLocalnameRequired("PicoGM"),
-  // Nautical Mile per Minute
-  MI_N__PER__MIN: Qudt.unitFromLocalnameRequired("MI_N-PER-MIN"),
-  // Milliwatts per square metre per nanometre per steradian
-  MilliW__PER__M2__NanoM__SR: Qudt.unitFromLocalnameRequired(
-    "MilliW-PER-M2-NanoM-SR"
-  ),
-  // Mol per Kilogram
-  MOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("MOL-PER-KiloGM"),
-  // Moles per mole
-  MOL__PER__MOL: Qudt.unitFromLocalnameRequired("MOL-PER-MOL"),
-  // Pint (US Liquid) Per Day
-  PINT_US__PER__DAY: Qudt.unitFromLocalnameRequired("PINT_US-PER-DAY"),
-  // méter
-  M: Qudt.unitFromLocalnameRequired("M"),
-  // Kina
-  PGK_Currency: Qudt.currencyFromLocalnameRequired("PGK"),
-  // Degree Fahrenheit per Hour
-  DEG_F__PER__HR: Qudt.unitFromLocalnameRequired("DEG_F-PER-HR"),
-  // Ton (US) Per Hour
-  TON_US__PER__HR: Qudt.unitFromLocalnameRequired("TON_US-PER-HR"),
-  // Zimbabwe Dollar
-  ZWL_Currency: Qudt.currencyFromLocalnameRequired("ZWL"),
-  // Megawatt Hour
-  MegaW__HR: Qudt.unitFromLocalnameRequired("MegaW-HR"),
-  // Millibar Litre Per Second
-  MilliBAR__L__PER__SEC: Qudt.unitFromLocalnameRequired("MilliBAR-L-PER-SEC"),
-  // Millimetre Per Kelvin
-  MilliM__PER__K: Qudt.unitFromLocalnameRequired("MilliM-PER-K"),
-  // Silver (one Troy ounce)
-  XAG_Currency: Qudt.currencyFromLocalnameRequired("XAG"),
-  // Picomoles per square metre per day
-  PicoMOL__PER__M2__DAY: Qudt.unitFromLocalnameRequired("PicoMOL-PER-M2-DAY"),
-  // Cubic Mile
-  MI3: Qudt.unitFromLocalnameRequired("MI3"),
-  // Cubic Meter per Kilogram Square Second
-  M3__PER__KiloGM__SEC2: Qudt.unitFromLocalnameRequired("M3-PER-KiloGM-SEC2"),
-  // Peck (UK)
-  PK_UK: Qudt.unitFromLocalnameRequired("PK_UK"),
-  // ακτίνιο
-  RAD: Qudt.unitFromLocalnameRequired("RAD"),
-  // Gilbert
-  GI: Qudt.unitFromLocalnameRequired("GI"),
-  // Gill (US) Per Minute
-  GI_US__PER__MIN: Qudt.unitFromLocalnameRequired("GI_US-PER-MIN"),
-  // Kelvin per Hour
-  K__PER__HR: Qudt.unitFromLocalnameRequired("K-PER-HR"),
-  // Millikatal Per Liter
-  MilliKAT__PER__L: Qudt.unitFromLocalnameRequired("MilliKAT-PER-L"),
-  // GigaByte
-  GigaBYTE: Qudt.unitFromLocalnameRequired("GigaBYTE"),
-  // PSI
-  PSI: Qudt.unitFromLocalnameRequired("PSI"),
-  // Cape Verde Escudo
-  CVE_Currency: Qudt.currencyFromLocalnameRequired("CVE"),
-  // Short Ton per Hour
-  TON_SHORT__PER__HR: Qudt.unitFromLocalnameRequired("TON_SHORT-PER-HR"),
-  // British Thermal Unit (international Table) Per Second Square Foot degree Rankine
-  BTU_IT__PER__SEC__FT2__DEG_R: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-PER-SEC-FT2-DEG_R"
-  ),
-  // Ampere Second
-  A__SEC: Qudt.unitFromLocalnameRequired("A-SEC"),
-  // Gallon (UK) Per Second
-  GAL_UK__PER__SEC: Qudt.unitFromLocalnameRequired("GAL_UK-PER-SEC"),
-  // Cubic Yard
-  YD3: Qudt.unitFromLocalnameRequired("YD3"),
-  // Kilonewton per square metre
-  KiloN__PER__M2: Qudt.unitFromLocalnameRequired("KiloN-PER-M2"),
-  // Heart Beat
-  HeartBeat: Qudt.unitFromLocalnameRequired("HeartBeat"),
-  // Lilangeni
-  SZL_Currency: Qudt.currencyFromLocalnameRequired("SZL"),
-  // Cubic Centimetre Per Cubic Metre
-  CentiM3__PER__M3: Qudt.unitFromLocalnameRequired("CentiM3-PER-M3"),
-  // Newton Per Millimetre
-  N__PER__MilliM: Qudt.unitFromLocalnameRequired("N-PER-MilliM"),
-  // Volt per second
-  V__PER__SEC: Qudt.unitFromLocalnameRequired("V-PER-SEC"),
-  // Hectolitre
-  HectoL: Qudt.unitFromLocalnameRequired("HectoL"),
-  // Picopascal Per Kilometre
-  PicoPA__PER__KiloM: Qudt.unitFromLocalnameRequired("PicoPA-PER-KiloM"),
-  // Megajoule Per Kilogram
-  MegaJ__PER__KiloGM: Qudt.unitFromLocalnameRequired("MegaJ-PER-KiloGM"),
-  // Horsepower (electric)
-  HP_Electric: Qudt.unitFromLocalnameRequired("HP_Electric"),
-  // US Liquid Cup
-  CUP: Qudt.unitFromLocalnameRequired("CUP"),
-  // Square Kilograms per square second
-  KiloGM2__PER__SEC2: Qudt.unitFromLocalnameRequired("KiloGM2-PER-SEC2"),
-  // Yuan Renminbi
-  CNY_Currency: Qudt.currencyFromLocalnameRequired("CNY"),
-  // Pound Force Per Foot
-  KiloLB_F__PER__FT: Qudt.unitFromLocalnameRequired("KiloLB_F-PER-FT"),
-  // newton metre per Degree
-  N__M__PER__DEG: Qudt.unitFromLocalnameRequired("N-M-PER-DEG"),
-  // Kilogram per Joule
-  KiloGM__PER__J: Qudt.unitFromLocalnameRequired("KiloGM-PER-J"),
-  // Metical
-  MZN_Currency: Qudt.currencyFromLocalnameRequired("MZN"),
-  // Kilo British Thermal Unit (International Definition) per Hour
-  KiloBTU_IT__PER__HR: Qudt.unitFromLocalnameRequired("KiloBTU_IT-PER-HR"),
-  // Erg per Cubic Centimetre
-  ERG__PER__CentiM3: Qudt.unitFromLocalnameRequired("ERG-PER-CentiM3"),
-  // Millijoule Per Gram
-  MilliJ__PER__GM: Qudt.unitFromLocalnameRequired("MilliJ-PER-GM"),
-  // Millipascal Second Per Bar
-  MilliPA__SEC__PER__BAR: Qudt.unitFromLocalnameRequired("MilliPA-SEC-PER-BAR"),
-  // Calorie (thermochemical) Per Second Square Centimeter kelvin
-  CAL_TH__PER__SEC__CentiM2__K: Qudt.unitFromLocalnameRequired(
-    "CAL_TH-PER-SEC-CentiM2-K"
-  ),
-  // Parts per trillion
-  PPTR: Qudt.unitFromLocalnameRequired("PPTR"),
-  // фарад
-  FARAD: Qudt.unitFromLocalnameRequired("FARAD"),
-  // Kyat
-  MMK_Currency: Qudt.currencyFromLocalnameRequired("MMK"),
-  // Shake
-  SH: Qudt.unitFromLocalnameRequired("SH"),
-  // Square Meter Kelvin
-  M2__K: Qudt.unitFromLocalnameRequired("M2-K"),
-  // Gigajoule
-  GigaJ: Qudt.unitFromLocalnameRequired("GigaJ"),
-  // Kilobit per Second
-  KiloBIT__PER__SEC: Qudt.unitFromLocalnameRequired("KiloBIT-PER-SEC"),
-  // Pound per Gallon
-  LB__PER__GAL: Qudt.unitFromLocalnameRequired("LB-PER-GAL"),
-  // Picomoles per litre
-  PicoMOL__PER__L: Qudt.unitFromLocalnameRequired("PicoMOL-PER-L"),
-  // DeciNewton
-  DeciN: Qudt.unitFromLocalnameRequired("DeciN"),
-  // Mexican Peso
-  MXN_Currency: Qudt.currencyFromLocalnameRequired("MXN"),
-  // Gibraltar pound
-  GIP_Currency: Qudt.currencyFromLocalnameRequired("GIP"),
-  // Maltese Lira
-  MTL_Currency: Qudt.currencyFromLocalnameRequired("MTL"),
-  // Pound (avoirdupois) Per Square Inch
-  LB__PER__IN2: Qudt.unitFromLocalnameRequired("LB-PER-IN2"),
-  // Argentine Peso
-  ARS_Currency: Qudt.currencyFromLocalnameRequired("ARS"),
-  // Kilosiemens
-  KiloS: Qudt.unitFromLocalnameRequired("KiloS"),
-  // Milli ArcSecond
-  MilliARCSEC: Qudt.unitFromLocalnameRequired("MilliARCSEC"),
-  // Baht
-  THB_Currency: Qudt.currencyFromLocalnameRequired("THB"),
-  // Cyprus Pound
-  CYP_Currency: Qudt.currencyFromLocalnameRequired("CYP"),
-  // Litre Per Second
-  L__PER__SEC: Qudt.unitFromLocalnameRequired("L-PER-SEC"),
-  // Cubic Yard Per Day
-  YD3__PER__DAY: Qudt.unitFromLocalnameRequired("YD3-PER-DAY"),
-  // Centipoise
-  CentiPOISE: Qudt.unitFromLocalnameRequired("CentiPOISE"),
-  // Centimetres per year
-  CentiM__PER__YR: Qudt.unitFromLocalnameRequired("CentiM-PER-YR"),
-  // Nautical Mile
-  MI_N: Qudt.unitFromLocalnameRequired("MI_N"),
-  // Microcoulomb Per Square Meter
-  MicroC__PER__M2: Qudt.unitFromLocalnameRequired("MicroC-PER-M2"),
-  // Gill (US) Per Second
-  GI_US__PER__SEC: Qudt.unitFromLocalnameRequired("GI_US-PER-SEC"),
-  // Parts per thousand per hour
-  PPTH__PER__HR: Qudt.unitFromLocalnameRequired("PPTH-PER-HR"),
-  // Gigapascal
-  GigaPA: Qudt.unitFromLocalnameRequired("GigaPA"),
-  // Sidereal Hour
-  HR_Sidereal: Qudt.unitFromLocalnameRequired("HR_Sidereal"),
-  // Angstrom
-  ANGSTROM: Qudt.unitFromLocalnameRequired("ANGSTROM"),
-  // Joule per Quartic Metre
-  J__PER__M4: Qudt.unitFromLocalnameRequired("J-PER-M4"),
-  // Ounce Mass
-  OZ_M: Qudt.unitFromLocalnameRequired("OZ_M"),
-  // PSI Cubic Meter Per Second
-  PSI__M3__PER__SEC: Qudt.unitFromLocalnameRequired("PSI-M3-PER-SEC"),
-  // ampere
-  A: Qudt.unitFromLocalnameRequired("A"),
-  // Micromoles per gram
-  MicroMOL__PER__GM: Qudt.unitFromLocalnameRequired("MicroMOL-PER-GM"),
-  // Elementary Charge
-  E: Qudt.unitFromLocalnameRequired("E"),
-  // Pint (UK) Per Minute
-  PINT_UK__PER__MIN: Qudt.unitFromLocalnameRequired("PINT_UK-PER-MIN"),
+  // Reciprocal square second
+  PER__SEC2: Qudt.unitFromLocalnameRequired("PER-SEC2"),
+  // Kilogram per Square Meter Square Second
+  KiloGM__PER__M2__SEC2: Qudt.unitFromLocalnameRequired("KiloGM-PER-M2-SEC2"),
+  // Microbecquerel
+  MicroBQ: Qudt.unitFromLocalnameRequired("MicroBQ"),
+  // FemtoCoulomb
+  FemtoC: Qudt.unitFromLocalnameRequired("FemtoC"),
   // Lebanese Pound
   LBP_Currency: Qudt.currencyFromLocalnameRequired("LBP"),
-  // British Thermal Unit (thermochemical) Per Second
-  BTU_TH__PER__SEC: Qudt.unitFromLocalnameRequired("BTU_TH-PER-SEC"),
-  // Ampere Per Centimeter
-  A__PER__CentiM: Qudt.unitFromLocalnameRequired("A-PER-CentiM"),
-  // Joule Per Metre
-  J__PER__M: Qudt.unitFromLocalnameRequired("J-PER-M"),
-  // chain
-  CH: Qudt.unitFromLocalnameRequired("CH"),
-  // kandela
-  CD: Qudt.unitFromLocalnameRequired("CD"),
-  // Deaths per Million individuals per year
-  DEATHS__PER__1000000I__YR: Qudt.unitFromLocalnameRequired(
-    "DEATHS-PER-1000000I-YR"
+  // Cases per 1000 individuals per year
+  CASES__PER__KiloINDIV__YR: Qudt.unitFromLocalnameRequired(
+    "CASES-PER-KiloINDIV-YR"
   ),
-  // Cubic Metre per Coulomb
-  M3__PER__C: Qudt.unitFromLocalnameRequired("M3-PER-C"),
-  // Millilitre Per Square Centimeter Minute
-  MilliL__PER__CentiM2__MIN: Qudt.unitFromLocalnameRequired(
-    "MilliL-PER-CentiM2-MIN"
+  // Megapascal Per Bar
+  MegaPA__PER__BAR: Qudt.unitFromLocalnameRequired("MegaPA-PER-BAR"),
+  // Kilocalorie (thermochemical)
+  KiloCAL_TH: Qudt.unitFromLocalnameRequired("KiloCAL_TH"),
+  // Square Kilograms per square second
+  KiloGM2__PER__SEC2: Qudt.unitFromLocalnameRequired("KiloGM2-PER-SEC2"),
+  // Nanomoles per micromole per day
+  NanoMOL__PER__MicroMOL__DAY: Qudt.unitFromLocalnameRequired(
+    "NanoMOL-PER-MicroMOL-DAY"
   ),
-  // watt
-  W: Qudt.unitFromLocalnameRequired("W"),
-  // British Thermal Unit (international Table) Per Second Foot Degree Rankine
-  BTU_IT__PER__SEC__FT__DEG_R: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-PER-SEC-FT-DEG_R"
+  // Peck (UK) Per Second
+  PK_UK__PER__SEC: Qudt.unitFromLocalnameRequired("PK_UK-PER-SEC"),
+  // Cubic Centimetre Per Mole
+  CentiM3__PER__MOL: Qudt.unitFromLocalnameRequired("CentiM3-PER-MOL"),
+  // Mol per Tonne
+  MOL__PER__TONNE: Qudt.unitFromLocalnameRequired("MOL-PER-TONNE"),
+  // Pint (US Liquid) Per Day
+  PINT_US__PER__DAY: Qudt.unitFromLocalnameRequired("PINT_US-PER-DAY"),
+  // Maxwell
+  MX: Qudt.unitFromLocalnameRequired("MX"),
+  // Kilonewton Metre per metre
+  KiloN__M__PER__M: Qudt.unitFromLocalnameRequired("KiloN-M-PER-M"),
+  // Mole Per Litre
+  MOL__PER__L: Qudt.unitFromLocalnameRequired("MOL-PER-L"),
+  // Gill (UK) Per Second
+  GI_UK__PER__SEC: Qudt.unitFromLocalnameRequired("GI_UK-PER-SEC"),
+  // Gram Per Cubic Centimeter
+  GM__PER__CentiM3: Qudt.unitFromLocalnameRequired("GM-PER-CentiM3"),
+  // Degree Celsius Centimetre
+  DEG_C__CentiM: Qudt.unitFromLocalnameRequired("DEG_C-CentiM"),
+  // Percent
+  PERCENT: Qudt.unitFromLocalnameRequired("PERCENT"),
+  // Electron Volt per Kelvin
+  EV__PER__K: Qudt.unitFromLocalnameRequired("EV-PER-K"),
+  // MilliAmpere
+  MilliA: Qudt.unitFromLocalnameRequired("MilliA"),
+  // Gram Force
+  GM_F: Qudt.unitFromLocalnameRequired("GM_F"),
+  // Kilogram Square Second
+  KiloGM__SEC2: Qudt.unitFromLocalnameRequired("KiloGM-SEC2"),
+  // Kilocoulomb Per Square Meter
+  KiloC__PER__M2: Qudt.unitFromLocalnameRequired("KiloC-PER-M2"),
+  // BU_US_DRY
+  BU_US_DRY: Qudt.unitFromLocalnameRequired("BU_US_DRY"),
+  // Mole Per Second
+  MOL__PER__SEC: Qudt.unitFromLocalnameRequired("MOL-PER-SEC"),
+  // grams Nitrogen per square meter per day
+  GM_Nitrogen__PER__M2__DAY: Qudt.unitFromLocalnameRequired(
+    "GM_Nitrogen-PER-M2-DAY"
   ),
-  // Atmosphere Cubic Meter per Mole
-  ATM__M3__PER__MOL: Qudt.unitFromLocalnameRequired("ATM-M3-PER-MOL"),
-  // Kilohertz Metre
-  KiloHZ__M: Qudt.unitFromLocalnameRequired("KiloHZ-M"),
-  // Coulomb Per Cubic Centimetre
-  C__PER__CentiM3: Qudt.unitFromLocalnameRequired("C-PER-CentiM3"),
-  // Picomoles per metre per watt per second
-  PicoMOL__PER__M__W__SEC: Qudt.unitFromLocalnameRequired(
-    "PicoMOL-PER-M-W-SEC"
-  ),
-  // Franklin
-  FR: Qudt.unitFromLocalnameRequired("FR"),
-  // Nanomoles per square metre per day
-  NanoMOL__PER__M2__DAY: Qudt.unitFromLocalnameRequired("NanoMOL-PER-M2-DAY"),
-  // Kilogram Per Kilomol
-  KiloGM__PER__KiloMOL: Qudt.unitFromLocalnameRequired("KiloGM-PER-KiloMOL"),
-  // Pound per Cubic Yard
-  LB__PER__YD3: Qudt.unitFromLocalnameRequired("LB-PER-YD3"),
+  // Djibouti Franc
+  DJF_Currency: Qudt.currencyFromLocalnameRequired("DJF"),
   // Stere
   STR: Qudt.unitFromLocalnameRequired("STR"),
-  // Pound Force
-  LB_F: Qudt.unitFromLocalnameRequired("LB_F"),
-  // Femtojoule
-  FemtoJ: Qudt.unitFromLocalnameRequired("FemtoJ"),
-  // Sextic Centietre
-  CentiM6: Qudt.unitFromLocalnameRequired("CentiM6"),
-  // Microkatal Per Liter
-  MicroKAT__PER__L: Qudt.unitFromLocalnameRequired("MicroKAT-PER-L"),
-  // Radian Square Metre per Mole
-  RAD__M2__PER__MOL: Qudt.unitFromLocalnameRequired("RAD-M2-PER-MOL"),
-  // Milliwatt per Milligram
-  MilliW__PER__MilliGM: Qudt.unitFromLocalnameRequired("MilliW-PER-MilliGM"),
-  // Slug Per Minute
-  SLUG__PER__MIN: Qudt.unitFromLocalnameRequired("SLUG-PER-MIN"),
-  // Decagram
-  DecaGM: Qudt.unitFromLocalnameRequired("DecaGM"),
-  // Erg Per Gram
-  ERG__PER__GM: Qudt.unitFromLocalnameRequired("ERG-PER-GM"),
-  // Cubic Yard per Minute
-  YD3__PER__MIN: Qudt.unitFromLocalnameRequired("YD3-PER-MIN"),
-  // Joule Square Metre per Kilogram
-  J__M2__PER__KiloGM: Qudt.unitFromLocalnameRequired("J-M2-PER-KiloGM"),
-  // Kilograms per square metre per Pascal per second
-  KiloGM__PER__M2__PA__SEC: Qudt.unitFromLocalnameRequired(
-    "KiloGM-PER-M2-PA-SEC"
-  ),
-  // Somoni
-  TJS_Currency: Qudt.currencyFromLocalnameRequired("TJS"),
-  // Attofarad
-  AttoFARAD: Qudt.unitFromLocalnameRequired("AttoFARAD"),
-  // PetaCoulomb
-  PetaC: Qudt.unitFromLocalnameRequired("PetaC"),
-  // Reciprocal Nanometre
-  PER__NanoM: Qudt.unitFromLocalnameRequired("PER-NanoM"),
-  // Kilo Newton Square Metre
-  KiloN__M2: Qudt.unitFromLocalnameRequired("KiloN-M2"),
-  // Sextic Meter
-  M6: Qudt.unitFromLocalnameRequired("M6"),
-  // Gram Per Square Meter
-  GM__PER__M2: Qudt.unitFromLocalnameRequired("GM-PER-M2"),
-  // Barrel (UK Petroleum)
-  BBL_UK_PET: Qudt.unitFromLocalnameRequired("BBL_UK_PET"),
-  // Ounce (avoirdupois) Per Gallon (UK)
-  OZ__PER__GAL_UK: Qudt.unitFromLocalnameRequired("OZ-PER-GAL_UK"),
-  // Mole Per Cubic Decimeter
-  MOL__PER__DeciM3: Qudt.unitFromLocalnameRequired("MOL-PER-DeciM3"),
-  // British Thermal Unit (thermochemical) Foot Per Hour Square Foot degree Fahrenheit
-  BTU_TH__FT__PER__HR__FT2__DEG_F: Qudt.unitFromLocalnameRequired(
-    "BTU_TH-FT-PER-HR-FT2-DEG_F"
-  ),
-  // Franc Congolais
-  CDF_Currency: Qudt.currencyFromLocalnameRequired("CDF"),
-  // Psi Cubic Yard Per Second
-  PSI__YD3__PER__SEC: Qudt.unitFromLocalnameRequired("PSI-YD3-PER-SEC"),
-  // Revolution per Square Second
-  REV__PER__SEC2: Qudt.unitFromLocalnameRequired("REV-PER-SEC2"),
-  // Zambian Kwacha
-  ZMW_Currency: Qudt.currencyFromLocalnameRequired("ZMW"),
-  // Number
-  NUM: Qudt.unitFromLocalnameRequired("NUM"),
-  // Cubic Foot Per Hour
-  FT3__PER__HR: Qudt.unitFromLocalnameRequired("FT3-PER-HR"),
-  // Percent per week
-  PERCENT__PER__WK: Qudt.unitFromLocalnameRequired("PERCENT-PER-WK"),
-  // Nanograms per day
-  NanoGM__PER__DAY: Qudt.unitFromLocalnameRequired("NanoGM-PER-DAY"),
-  // Milligram Per Millilitre
-  MilliGM__PER__MilliL: Qudt.unitFromLocalnameRequired("MilliGM-PER-MilliL"),
-  // Cubic Centimetres per Gram
-  CentiM3__PER__GM: Qudt.unitFromLocalnameRequired("CentiM3-PER-GM"),
-  // Degree API
-  DEGREE_API: Qudt.unitFromLocalnameRequired("DEGREE_API"),
-  // Revolution per Hour
-  REV__PER__HR: Qudt.unitFromLocalnameRequired("REV-PER-HR"),
-  // Picograms per litre
-  PicoGM__PER__L: Qudt.unitFromLocalnameRequired("PicoGM-PER-L"),
-  // Volt Per Centimetre
-  V__PER__CentiM: Qudt.unitFromLocalnameRequired("V-PER-CentiM"),
-  // جول لكل كلفن
-  J__PER__K: Qudt.unitFromLocalnameRequired("J-PER-K"),
-  // Gigahertz
-  GigaHZ: Qudt.unitFromLocalnameRequired("GigaHZ"),
-  // Inch Per Degree Fahrenheit
-  IN__PER__DEG_F: Qudt.unitFromLocalnameRequired("IN-PER-DEG_F"),
-  // NanoSiemens
-  NanoS: Qudt.unitFromLocalnameRequired("NanoS"),
-  // Gram Per Second
-  GM__PER__SEC: Qudt.unitFromLocalnameRequired("GM-PER-SEC"),
-  // Megavolt
-  MegaV: Qudt.unitFromLocalnameRequired("MegaV"),
+  // Kilocalorie
+  KiloCAL: Qudt.unitFromLocalnameRequired("KiloCAL"),
+  // Volt Ampere Hour
+  V__A__HR: Qudt.unitFromLocalnameRequired("V-A-HR"),
+  // Millikatal Per Liter
+  MilliKAT__PER__L: Qudt.unitFromLocalnameRequired("MilliKAT-PER-L"),
+  // W-M2-PER-SR
+  W__M2__PER__SR: Qudt.unitFromLocalnameRequired("W-M2-PER-SR"),
   // Statohm
   OHM_Stat: Qudt.unitFromLocalnameRequired("OHM_Stat"),
-  // Abampere per Square Centimeter
-  A_Ab__PER__CentiM2: Qudt.unitFromLocalnameRequired("A_Ab-PER-CentiM2"),
-  // Farad Per Kilometre
-  FARAD__PER__KiloM: Qudt.unitFromLocalnameRequired("FARAD-PER-KiloM"),
-  // Pound Force per Square Foot
-  LB_F__PER__FT2: Qudt.unitFromLocalnameRequired("LB_F-PER-FT2"),
-  // Tanzanian Shilling
-  TZS_Currency: Qudt.currencyFromLocalnameRequired("TZS"),
-  // Litre Per Kilogram
-  L__PER__KiloGM: Qudt.unitFromLocalnameRequired("L-PER-KiloGM"),
-  // Volt Ampere Reactive Hour
-  V__A_Reactive__HR: Qudt.unitFromLocalnameRequired("V-A_Reactive-HR"),
-  // Fiji Dollar
-  FJD_Currency: Qudt.currencyFromLocalnameRequired("FJD"),
-  // Metric Perm
-  PERM_Metric: Qudt.unitFromLocalnameRequired("PERM_Metric"),
-  // Point
-  PT: Qudt.unitFromLocalnameRequired("PT"),
-  // Cubic Centimeter per Mole Second
-  CentiM3__PER__MOL__SEC: Qudt.unitFromLocalnameRequired("CentiM3-PER-MOL-SEC"),
-  // Mohm
-  MOHM: Qudt.unitFromLocalnameRequired("MOHM"),
-  // Picomoles per litre per hour
-  PicoMOL__PER__L__HR: Qudt.unitFromLocalnameRequired("PicoMOL-PER-L-HR"),
-  // Growing Degree Days (Cereals)
-  DEG_C_GROWING_CEREAL__DAY: Qudt.unitFromLocalnameRequired(
-    "DEG_C_GROWING_CEREAL-DAY"
-  ),
-  // British Thermal Unit (thermochemical) Per Minute
-  BTU_TH__PER__MIN: Qudt.unitFromLocalnameRequired("BTU_TH-PER-MIN"),
-  // Millihenry Per Kiloohm
-  MilliH__PER__KiloOHM: Qudt.unitFromLocalnameRequired("MilliH-PER-KiloOHM"),
-  // Watt per Square Centimeter
-  W__PER__CentiM2: Qudt.unitFromLocalnameRequired("W-PER-CentiM2"),
-  // Pound per Hour
-  LB__PER__HR: Qudt.unitFromLocalnameRequired("LB-PER-HR"),
-  // Kilo British Thermal Unit (thermochemical) Per Hour
-  KiloBTU_TH__PER__HR: Qudt.unitFromLocalnameRequired("KiloBTU_TH-PER-HR"),
-  // Newton per Coulomb
-  N__PER__C: Qudt.unitFromLocalnameRequired("N-PER-C"),
-  // Million US Dollars per Flight
-  MegaDOLLAR_US__PER__FLIGHT: Qudt.unitFromLocalnameRequired(
-    "MegaDOLLAR_US-PER-FLIGHT"
-  ),
-  // BTU Inch
-  BTU_IT__IN: Qudt.unitFromLocalnameRequired("BTU_IT-IN"),
-  // Microlitre
-  MicroL: Qudt.unitFromLocalnameRequired("MicroL"),
-  // Cubic Decimetre Per Day
-  DeciM3__PER__DAY: Qudt.unitFromLocalnameRequired("DeciM3-PER-DAY"),
-  // Mole Degree Celsius
-  MOL__DEG_C: Qudt.unitFromLocalnameRequired("MOL-DEG_C"),
-  // Ampere Per Millimetre
-  A__PER__MilliM: Qudt.unitFromLocalnameRequired("A-PER-MilliM"),
-  // Calorie (international Table) Per Gram Kelvin
-  CAL_IT__PER__GM__K: Qudt.unitFromLocalnameRequired("CAL_IT-PER-GM-K"),
-  // Microhenry
-  MicroH: Qudt.unitFromLocalnameRequired("MicroH"),
-  // MilliRad
-  MilliRAD_R: Qudt.unitFromLocalnameRequired("MilliRAD_R"),
-  // Milligravity
-  MilliG: Qudt.unitFromLocalnameRequired("MilliG"),
-  // British Thermal Unit (Thermochemical Definition)
-  BTU_TH: Qudt.unitFromLocalnameRequired("BTU_TH"),
-  // European Monetary Unit (E.M.U.-6) (Bonds market unit)
-  XBB_Currency: Qudt.currencyFromLocalnameRequired("XBB"),
-  // Hartree
-  E_h: Qudt.unitFromLocalnameRequired("E_h"),
-  // Day
-  DAY: Qudt.unitFromLocalnameRequired("DAY"),
-  // Newton je Meter
-  N__PER__M: Qudt.unitFromLocalnameRequired("N-PER-M"),
-  // Cubic Decimeter Per Mole
-  DeciM3__PER__MOL: Qudt.unitFromLocalnameRequired("DeciM3-PER-MOL"),
-  // Kelvin per Minute
-  K__PER__MIN: Qudt.unitFromLocalnameRequired("K-PER-MIN"),
-  // Milligrams per cubic metre per second
-  MilliGM__PER__M3__SEC: Qudt.unitFromLocalnameRequired("MilliGM-PER-M3-SEC"),
-  // Oersted
-  OERSTED: Qudt.unitFromLocalnameRequired("OERSTED"),
-  // Kilolitre Per Hour
-  KiloL__PER__HR: Qudt.unitFromLocalnameRequired("KiloL-PER-HR"),
-  // Microgram Per Kilogram
-  MicroGM__PER__KiloGM: Qudt.unitFromLocalnameRequired("MicroGM-PER-KiloGM"),
-  // Calorie (thermochemical) Per Gram Kelvin
-  CAL_TH__PER__GM__K: Qudt.unitFromLocalnameRequired("CAL_TH-PER-GM-K"),
-  // Weber Metre
-  WB__M: Qudt.unitFromLocalnameRequired("WB-M"),
-  // Slug Per Day
-  SLUG__PER__DAY: Qudt.unitFromLocalnameRequired("SLUG-PER-DAY"),
-  // Iceland Krona
-  ISK_Currency: Qudt.currencyFromLocalnameRequired("ISK"),
-  // Picosiemens Per Metre
-  PicoS__PER__M: Qudt.unitFromLocalnameRequired("PicoS-PER-M"),
-  // Square Coulomb Square Metre per Joule
-  C2__M2__PER__J: Qudt.unitFromLocalnameRequired("C2-M2-PER-J"),
-  // Planck Length
-  PlanckLength: Qudt.unitFromLocalnameRequired("PlanckLength"),
-  // Kayser
-  KY: Qudt.unitFromLocalnameRequired("KY"),
-  // Degree Rankine per Hour
-  DEG_R__PER__HR: Qudt.unitFromLocalnameRequired("DEG_R-PER-HR"),
-  // Riel
-  KHR_Currency: Qudt.currencyFromLocalnameRequired("KHR"),
-  // Cup (US)
-  CUP_US: Qudt.unitFromLocalnameRequired("CUP_US"),
-  // Hectopascal Per Kelvin
-  HectoPA__PER__K: Qudt.unitFromLocalnameRequired("HectoPA-PER-K"),
-  // Cubic Decimetre Per Minute
-  DeciM3__PER__MIN: Qudt.unitFromLocalnameRequired("DeciM3-PER-MIN"),
-  // Reciprocal Mille Per Psi
-  PER__MILLE__PER__PSI: Qudt.unitFromLocalnameRequired("PER-MILLE-PER-PSI"),
-  // Volt per Square Meter
-  V__PER__M2: Qudt.unitFromLocalnameRequired("V-PER-M2"),
-  // Hour Square Foot
-  HR__FT2: Qudt.unitFromLocalnameRequired("HR-FT2"),
-  // Nanomoles per litre per day
-  NanoMOL__PER__L__DAY: Qudt.unitFromLocalnameRequired("NanoMOL-PER-L-DAY"),
-  // Pound Force Foot
-  LB_F__FT: Qudt.unitFromLocalnameRequired("LB_F-FT"),
-  // Ampere per Radian
-  A__PER__RAD: Qudt.unitFromLocalnameRequired("A-PER-RAD"),
-  // Long Ton
-  TON_LONG: Qudt.unitFromLocalnameRequired("TON_LONG"),
+  // Ton Force (US Short)
+  TON_F_US: Qudt.unitFromLocalnameRequired("TON_F_US"),
+  // Millinewton Meter
+  MilliN__M: Qudt.unitFromLocalnameRequired("MilliN-M"),
+  // Rad
+  RAD_R: Qudt.unitFromLocalnameRequired("RAD_R"),
+  // Hectopascals per hour
+  HectoPA__PER__HR: Qudt.unitFromLocalnameRequired("HectoPA-PER-HR"),
   // Japanese yen
   JPY_Currency: Qudt.currencyFromLocalnameRequired("JPY"),
-  // Ban
-  BAN: Qudt.unitFromLocalnameRequired("BAN"),
-  // Quart (UK Liquid) Per Second
-  QT_UK__PER__SEC: Qudt.unitFromLocalnameRequired("QT_UK-PER-SEC"),
-  // Coulomb mal Quadratmeter je Volt
-  C__M2__PER__V: Qudt.unitFromLocalnameRequired("C-M2-PER-V"),
-  // Newton seconds per radian
-  N__SEC__PER__RAD: Qudt.unitFromLocalnameRequired("N-SEC-PER-RAD"),
-  // Milliampere Hour
-  MilliA__HR: Qudt.unitFromLocalnameRequired("MilliA-HR"),
-  // KiloINDIV
-  KiloINDIV: Qudt.unitFromLocalnameRequired("KiloINDIV"),
-  // Milligram
-  MilliGM: Qudt.unitFromLocalnameRequired("MilliGM"),
-  // Mega Electron Volt per Centimetre
-  MegaEV__PER__CentiM: Qudt.unitFromLocalnameRequired("MegaEV-PER-CentiM"),
-  // Mexican Unidad de Inversion (UDI) (Funds code)
-  MXV_Currency: Qudt.currencyFromLocalnameRequired("MXV"),
-  // Centimeter per Square Second
-  CentiM__PER__SEC2: Qudt.unitFromLocalnameRequired("CentiM-PER-SEC2"),
-  // metric tonne per hectare
-  TON_Metric__PER__HA: Qudt.unitFromLocalnameRequired("TON_Metric-PER-HA"),
-  // Picograms per millilitre
-  PicoGM__PER__MilliL: Qudt.unitFromLocalnameRequired("PicoGM-PER-MilliL"),
-  // Nepalese Rupee
-  NPR_Currency: Qudt.currencyFromLocalnameRequired("NPR"),
-  // Joule per Square Meter
-  J__PER__M2: Qudt.unitFromLocalnameRequired("J-PER-M2"),
-  // Kilojoule Per Kelvin
-  KiloJ__PER__K: Qudt.unitFromLocalnameRequired("KiloJ-PER-K"),
-  // Pound Mass
-  LB_M: Qudt.unitFromLocalnameRequired("LB_M"),
-  // Femtometre
-  FemtoM: Qudt.unitFromLocalnameRequired("FemtoM"),
-  // Milliroentgen
-  MilliR: Qudt.unitFromLocalnameRequired("MilliR"),
-  // Number per hectare
-  NUM__PER__HA: Qudt.unitFromLocalnameRequired("NUM-PER-HA"),
-  // Square Meter per Kelvin
-  M2__PER__K: Qudt.unitFromLocalnameRequired("M2-PER-K"),
-  // A_Reactive
-  A_Reactive: Qudt.unitFromLocalnameRequired("A_Reactive"),
-  // kiloampere
-  KiloA: Qudt.unitFromLocalnameRequired("KiloA"),
-  // Henry per Meter
-  H__PER__M: Qudt.unitFromLocalnameRequired("H-PER-M"),
-  // Becquerel per Kilogram
-  BQ__PER__KiloGM: Qudt.unitFromLocalnameRequired("BQ-PER-KiloGM"),
-  // 摩尔
-  MOL: Qudt.unitFromLocalnameRequired("MOL"),
-  // Synodic month
-  MO_Synodic: Qudt.unitFromLocalnameRequired("MO_Synodic"),
-  // British Thermal Unit (international Table) Per Pound of Force
-  BTU_IT__PER__LB_F: Qudt.unitFromLocalnameRequired("BTU_IT-PER-LB_F"),
-  // Pascal Per Bar
-  PA__PER__BAR: Qudt.unitFromLocalnameRequired("PA-PER-BAR"),
-  // calorie (thermochemical) per gram (calTH/g)
-  CAL_TH__PER__G: Qudt.unitFromLocalnameRequired("CAL_TH-PER-G"),
-  // MegaJoule per Kelvin
-  MegaJ__PER__K: Qudt.unitFromLocalnameRequired("MegaJ-PER-K"),
-  // Decinewton Metre
-  DeciN__M: Qudt.unitFromLocalnameRequired("DeciN-M"),
-  // Erg Per Gram Second
-  ERG__PER__GM__SEC: Qudt.unitFromLocalnameRequired("ERG-PER-GM-SEC"),
-  // Moles per square metre
-  MOL__PER__M2: Qudt.unitFromLocalnameRequired("MOL-PER-M2"),
-  // Kilopascal Absolute
-  KiloPA_A: Qudt.unitFromLocalnameRequired("KiloPA_A"),
-  // Second Square Foot
-  SEC__FT2: Qudt.unitFromLocalnameRequired("SEC-FT2"),
-  // Netherlands Antillian Guilder
-  ANG_Currency: Qudt.currencyFromLocalnameRequired("ANG"),
-  // Decare
-  DecaARE: Qudt.unitFromLocalnameRequired("DecaARE"),
-  // Ton (UK)
-  TON_UK: Qudt.unitFromLocalnameRequired("TON_UK"),
-  // Gram Per Cubic Metre
-  GM__PER__M3: Qudt.unitFromLocalnameRequired("GM-PER-M3"),
-  // Milliweber
-  MilliWB: Qudt.unitFromLocalnameRequired("MilliWB"),
-  // Newton per radian
-  N__PER__RAD: Qudt.unitFromLocalnameRequired("N-PER-RAD"),
-  // Kilogram Kelvin
-  KiloGM__K: Qudt.unitFromLocalnameRequired("KiloGM-K"),
-  // Quartic Millimetre
-  MilliM4: Qudt.unitFromLocalnameRequired("MilliM4"),
-  // Dram (US)
-  DRAM_US: Qudt.unitFromLocalnameRequired("DRAM_US"),
-  // Watthour per Cubic meter
-  W__HR__PER__M3: Qudt.unitFromLocalnameRequired("W-HR-PER-M3"),
-  // Lao kip
-  LAK_Currency: Qudt.currencyFromLocalnameRequired("LAK"),
-  // Degrees Celsius per metre
-  DEG_C__PER__M: Qudt.unitFromLocalnameRequired("DEG_C-PER-M"),
-  // Reciprocal Kilometre
-  PER__KiloM: Qudt.unitFromLocalnameRequired("PER-KiloM"),
-  // Pound per Cubic Meter
-  LB__PER__M3: Qudt.unitFromLocalnameRequired("LB-PER-M3"),
-  // Cubic Millimetre per Kilogram
-  MilliM3__PER__KiloGM: Qudt.unitFromLocalnameRequired("MilliM3-PER-KiloGM"),
-  // BTU (IT) per Degree Fahrenheit
-  BTU_IT__PER__DEG_F: Qudt.unitFromLocalnameRequired("BTU_IT-PER-DEG_F"),
-  // Micromoles per gram per hour
-  MicroMOL__PER__GM__HR: Qudt.unitFromLocalnameRequired("MicroMOL-PER-GM-HR"),
-  // Decapascal
-  DecaPA: Qudt.unitFromLocalnameRequired("DecaPA"),
-  // BTU per Second
-  BTU_IT__PER__SEC: Qudt.unitFromLocalnameRequired("BTU_IT-PER-SEC"),
-  // Metric KiloTON
-  KiloTON_Metric: Qudt.unitFromLocalnameRequired("KiloTON_Metric"),
-  // Common Year
-  YR_Common: Qudt.unitFromLocalnameRequired("YR_Common"),
-  // Joule
-  J: Qudt.unitFromLocalnameRequired("J"),
-  // Horsepower
-  HP: Qudt.unitFromLocalnameRequired("HP"),
-  // Abtesla
-  T_Ab: Qudt.unitFromLocalnameRequired("T_Ab"),
-  // US Liquid Quart
-  QT_US: Qudt.unitFromLocalnameRequired("QT_US"),
-  // Kilojoule Per Kilogram Kelvin
-  KiloJ__PER__KiloGM__K: Qudt.unitFromLocalnameRequired("KiloJ-PER-KiloGM-K"),
-  // Pound Force per Inch
-  LB_F__PER__IN: Qudt.unitFromLocalnameRequired("LB_F-PER-IN"),
-  // Gray
-  GRAY: Qudt.unitFromLocalnameRequired("GRAY"),
-  // Cubic Decameter
-  DecaM3: Qudt.unitFromLocalnameRequired("DecaM3"),
-  // Standard
-  Standard: Qudt.unitFromLocalnameRequired("Standard"),
+  // Joule per Square Tesla
+  J__PER__T2: Qudt.unitFromLocalnameRequired("J-PER-T2"),
+  // Ampere per Gram
+  A__PER__GM: Qudt.unitFromLocalnameRequired("A-PER-GM"),
+  // Square Foot per BTU Inch
+  FT2__PER__BTU_IT__IN: Qudt.unitFromLocalnameRequired("FT2-PER-BTU_IT-IN"),
+  // Kip per Square Inch
+  KIP_F__PER__IN2: Qudt.unitFromLocalnameRequired("KIP_F-PER-IN2"),
+  // Millimetre Per Second
+  MilliM__PER__SEC: Qudt.unitFromLocalnameRequired("MilliM-PER-SEC"),
+  // Kilogram Per Kilogram
+  KiloGM__PER__KiloGM: Qudt.unitFromLocalnameRequired("KiloGM-PER-KiloGM"),
+  // Nanotesla
+  NanoT: Qudt.unitFromLocalnameRequired("NanoT"),
+  // Boliviano
+  BOB_Currency: Qudt.currencyFromLocalnameRequired("BOB"),
+  // British Thermal Unit (TH) Per Pound
+  BTU_TH__PER__LB: Qudt.unitFromLocalnameRequired("BTU_TH-PER-LB"),
+  // Kilo British Thermal Unit (International Definition)
+  KiloBTU_IT: Qudt.unitFromLocalnameRequired("KiloBTU_IT"),
+  // Foot
+  FT: Qudt.unitFromLocalnameRequired("FT"),
+  // Long Ton
+  TON_LONG: Qudt.unitFromLocalnameRequired("TON_LONG"),
+  // Quart (US Liquid) Per Hour
+  QT_US__PER__HR: Qudt.unitFromLocalnameRequired("QT_US-PER-HR"),
+  // Atomic mass unit
+  AMU: Qudt.unitFromLocalnameRequired("AMU"),
+  // Gray per Second
+  GRAY__PER__SEC: Qudt.unitFromLocalnameRequired("GRAY-PER-SEC"),
+  // Square Decimetre
+  DeciM2: Qudt.unitFromLocalnameRequired("DeciM2"),
   // Belize Dollar
   BZD_Currency: Qudt.currencyFromLocalnameRequired("BZD"),
-  // Belarussian Ruble
-  BYN_Currency: Qudt.currencyFromLocalnameRequired("BYN"),
+  // Degree Celsius per Second
+  DEG_C__PER__SEC: Qudt.unitFromLocalnameRequired("DEG_C-PER-SEC"),
+  // Milliroentgen
+  MilliR: Qudt.unitFromLocalnameRequired("MilliR"),
+  // Nanomoles per kilogram
+  NanoMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("NanoMOL-PER-KiloGM"),
+  // British Thermal Unit (thermochemical) Per Second
+  BTU_TH__PER__SEC: Qudt.unitFromLocalnameRequired("BTU_TH-PER-SEC"),
+  // British Thermal Unit (International Definition)
+  BTU_IT: Qudt.unitFromLocalnameRequired("BTU_IT"),
+  // Kilopascal Absolute
+  KiloPA_A: Qudt.unitFromLocalnameRequired("KiloPA_A"),
+  // Egyptian Pound
+  EGP_Currency: Qudt.currencyFromLocalnameRequired("EGP"),
+  // Elementary Charge
+  ElementaryCharge: Qudt.unitFromLocalnameRequired("ElementaryCharge"),
+  // Joule per Cubic Meter
+  J__PER__M3: Qudt.unitFromLocalnameRequired("J-PER-M3"),
+  // Kilocalorie per Mole Degree Celsius
+  KiloCAL__PER__MOL__DEG_C: Qudt.unitFromLocalnameRequired(
+    "KiloCAL-PER-MOL-DEG_C"
+  ),
+  // Joule per Cubic Meter Kelvin
+  J__PER__M3__K: Qudt.unitFromLocalnameRequired("J-PER-M3-K"),
+  // Percent Relative Humidity
+  PERCENT_RH: Qudt.unitFromLocalnameRequired("PERCENT_RH"),
+  // Centimeter
+  CentiM: Qudt.unitFromLocalnameRequired("CentiM"),
+  // Cubic Centimeter Per Second
+  CentiM3__PER__SEC: Qudt.unitFromLocalnameRequired("CentiM3-PER-SEC"),
+  // Katal Per Litre
+  KAT__PER__L: Qudt.unitFromLocalnameRequired("KAT-PER-L"),
+  // Megapascal Per Kelvin
+  MegaPA__PER__K: Qudt.unitFromLocalnameRequired("MegaPA-PER-K"),
+  // Microgram Per Cubic Metre
+  MicroGM__PER__M3: Qudt.unitFromLocalnameRequired("MicroGM-PER-M3"),
+  // Cubic Foot per Second
+  FT3__PER__SEC: Qudt.unitFromLocalnameRequired("FT3-PER-SEC"),
+  // Ounce (avoirdupois) Per Cubic Yard
+  OZ__PER__YD3: Qudt.unitFromLocalnameRequired("OZ-PER-YD3"),
+  // Volt per second
+  V__PER__SEC: Qudt.unitFromLocalnameRequired("V-PER-SEC"),
+  // Megabar
+  MegaBAR: Qudt.unitFromLocalnameRequired("MegaBAR"),
+  // Microwatt Per Square Meter
+  MicroW__PER__M2: Qudt.unitFromLocalnameRequired("MicroW-PER-M2"),
+  // Million US Dollars
+  MegaUSD_Currency: Qudt.currencyFromLocalnameRequired("MegaUSD"),
+  // Millilitre Per Cubic Meter
+  MilliL__PER__M3: Qudt.unitFromLocalnameRequired("MilliL-PER-M3"),
+  // Pound Mole Degree Fahrenheit
+  MOL_LB__DEG_F: Qudt.unitFromLocalnameRequired("MOL_LB-DEG_F"),
+  // Nanohenry Per Meter
+  NanoH__PER__M: Qudt.unitFromLocalnameRequired("NanoH-PER-M"),
+  // Stathenry per Centimeter
+  H_Stat__PER__CentiM: Qudt.unitFromLocalnameRequired("H_Stat-PER-CentiM"),
+  // SpeedOfLight
+  SpeedOfLight: Qudt.unitFromLocalnameRequired("SpeedOfLight"),
+  // Norwegian Krone
+  NOK_Currency: Qudt.currencyFromLocalnameRequired("NOK"),
+  // Tanzanian Shilling
+  TZS_Currency: Qudt.currencyFromLocalnameRequired("TZS"),
+  // Picowatts per square centimetre per litre
+  PicoW__PER__CentiM2__L: Qudt.unitFromLocalnameRequired("PicoW-PER-CentiM2-L"),
+  // Millimoles per square metre per second
+  MilliMOL__PER__M2__SEC: Qudt.unitFromLocalnameRequired("MilliMOL-PER-M2-SEC"),
+  // Volt Per Inch
+  V__PER__IN: Qudt.unitFromLocalnameRequired("V-PER-IN"),
+  // Kilo Byte
+  KiloBYTE: Qudt.unitFromLocalnameRequired("KiloBYTE"),
+  // Foot per Day
+  FT__PER__DAY: Qudt.unitFromLocalnameRequired("FT-PER-DAY"),
+  // Gram Per Gram
+  GM__PER__GM: Qudt.unitFromLocalnameRequired("GM-PER-GM"),
+  // Milliohm
+  MilliOHM: Qudt.unitFromLocalnameRequired("MilliOHM"),
+  // Cedi
+  GHS_Currency: Qudt.currencyFromLocalnameRequired("GHS"),
+  // بل
+  B: Qudt.unitFromLocalnameRequired("B"),
+  // Calorie (thermochemical) Per Centimetre Second Degree Celsius
+  CAL_TH__PER__CentiM__SEC__DEG_C: Qudt.unitFromLocalnameRequired(
+    "CAL_TH-PER-CentiM-SEC-DEG_C"
+  ),
+  // Oersted Centimetre
+  OERSTED__CentiM: Qudt.unitFromLocalnameRequired("OERSTED-CentiM"),
+  // Kilomole Per Cubic Metre
+  KiloMOL__PER__M3: Qudt.unitFromLocalnameRequired("KiloMOL-PER-M3"),
+  // Iranian Rial
+  IRR_Currency: Qudt.currencyFromLocalnameRequired("IRR"),
+  // Kilogram Per Day
+  KiloGM__PER__DAY: Qudt.unitFromLocalnameRequired("KiloGM-PER-DAY"),
+  // Kilonewton per square metre
+  KiloN__PER__M2: Qudt.unitFromLocalnameRequired("KiloN-PER-M2"),
+  // Imperial Mass Ounce per Gallon
+  OZ__PER__GAL: Qudt.unitFromLocalnameRequired("OZ-PER-GAL"),
+  // Picomoles per litre
+  PicoMOL__PER__L: Qudt.unitFromLocalnameRequired("PicoMOL-PER-L"),
+  // Inch of Water
+  IN_H2O: Qudt.unitFromLocalnameRequired("IN_H2O"),
+  // nanoampere
+  NanoA: Qudt.unitFromLocalnameRequired("NanoA"),
+  // GigaByte
+  GigaBYTE: Qudt.unitFromLocalnameRequired("GigaBYTE"),
+  // Leone
+  SLE_Currency: Qudt.currencyFromLocalnameRequired("SLE"),
+  // Megaampere
+  MegaA: Qudt.unitFromLocalnameRequired("MegaA"),
+  // हर्ट्ज प्रति कैल्विन
+  HZ__PER__K: Qudt.unitFromLocalnameRequired("HZ-PER-K"),
+  // Slug Per Minute
+  SLUG__PER__MIN: Qudt.unitFromLocalnameRequired("SLUG-PER-MIN"),
+  // Franc Congolais
+  CDF_Currency: Qudt.currencyFromLocalnameRequired("CDF"),
+  // Watt per Meter Kelvin
+  W__PER__M__K: Qudt.unitFromLocalnameRequired("W-PER-M-K"),
+  // Roentgen
+  R: Qudt.unitFromLocalnameRequired("R"),
+  // SAMPLE
+  SAMPLE: Qudt.unitFromLocalnameRequired("SAMPLE"),
+  // Barrel (UK Petroleum) Per Second
+  BBL_UK_PET__PER__SEC: Qudt.unitFromLocalnameRequired("BBL_UK_PET-PER-SEC"),
+  // MegaJoule per Kelvin
+  MegaJ__PER__K: Qudt.unitFromLocalnameRequired("MegaJ-PER-K"),
+  // Bushel (US Dry) Per Hour
+  BU_US_DRY__PER__HR: Qudt.unitFromLocalnameRequired("BU_US_DRY-PER-HR"),
+  // Dry Barrel (US)
+  BBL_US_DRY: Qudt.unitFromLocalnameRequired("BBL_US_DRY"),
+  // Millifarad
+  MilliFARAD: Qudt.unitFromLocalnameRequired("MilliFARAD"),
+  // U.S. Perm
+  PERM_US: Qudt.unitFromLocalnameRequired("PERM_US"),
+  // Hertz Meter
+  HZ__M: Qudt.unitFromLocalnameRequired("HZ-M"),
+  // Chilean Peso
+  CLP_Currency: Qudt.currencyFromLocalnameRequired("CLP"),
+  // Ounce (avoirdupois) Per Hour
+  OZ__PER__HR: Qudt.unitFromLocalnameRequired("OZ-PER-HR"),
+  // Calorie (international Table) Per Gram Kelvin
+  CAL_IT__PER__GM__K: Qudt.unitFromLocalnameRequired("CAL_IT-PER-GM-K"),
+  // kandela
+  CD: Qudt.unitFromLocalnameRequired("CD"),
+  // Pound Force
+  LB_F: Qudt.unitFromLocalnameRequired("LB_F"),
+  // Kilocalorie per Square Centimetre Minute
+  KiloCAL__PER__CentiM2__MIN: Qudt.unitFromLocalnameRequired(
+    "KiloCAL-PER-CentiM2-MIN"
+  ),
+  // Tonne Per Year
+  TONNE__PER__YR: Qudt.unitFromLocalnameRequired("TONNE-PER-YR"),
+  // Inch of Mercury
+  IN_HG: Qudt.unitFromLocalnameRequired("IN_HG"),
+  // South African Rand
+  ZAR_Currency: Qudt.currencyFromLocalnameRequired("ZAR"),
+  // Pound per Foot
+  LB__PER__FT: Qudt.unitFromLocalnameRequired("LB-PER-FT"),
+  // Millicoulomb Per Cubic Meter
+  MilliC__PER__M3: Qudt.unitFromLocalnameRequired("MilliC-PER-M3"),
+  // Penny Weight
+  DWT: Qudt.unitFromLocalnameRequired("DWT"),
+  // Kelvin day
+  K__DAY: Qudt.unitFromLocalnameRequired("K-DAY"),
+  // Millilitre
+  MilliL: Qudt.unitFromLocalnameRequired("MilliL"),
+  // Degree Rankine per Second
+  DEG_R__PER__SEC: Qudt.unitFromLocalnameRequired("DEG_R-PER-SEC"),
+  // Cubic Decimetre
+  DeciM3: Qudt.unitFromLocalnameRequired("DeciM3"),
+  // Newton Per Millimetre
+  N__PER__MilliM: Qudt.unitFromLocalnameRequired("N-PER-MilliM"),
+  // Therm US per Hour
+  THM_US__PER__HR: Qudt.unitFromLocalnameRequired("THM_US-PER-HR"),
+  // Cubic Angstrom
+  ANGSTROM3: Qudt.unitFromLocalnameRequired("ANGSTROM3"),
+  // Kilogram per Meter
+  KiloGM__PER__M: Qudt.unitFromLocalnameRequired("KiloGM-PER-M"),
+  // luks
+  LUX: Qudt.unitFromLocalnameRequired("LUX"),
+  // joule por quilograma grau celsius
+  J__PER__KiloGM__DEG_C: Qudt.unitFromLocalnameRequired("J-PER-KiloGM-DEG_C"),
+  // Moles per square metre per second per metre
+  MOL__PER__M2__SEC__M: Qudt.unitFromLocalnameRequired("MOL-PER-M2-SEC-M"),
+  // Number per square metre
+  NUM__PER__M2: Qudt.unitFromLocalnameRequired("NUM-PER-M2"),
+  // Mach
+  MACH: Qudt.unitFromLocalnameRequired("MACH"),
+  // Moles per square metre per second per steradian
+  MOL__PER__M2__SEC__SR: Qudt.unitFromLocalnameRequired("MOL-PER-M2-SEC-SR"),
+  // Nanomoles per square metre per day
+  NanoMOL__PER__M2__DAY: Qudt.unitFromLocalnameRequired("NanoMOL-PER-M2-DAY"),
+  // Microgram per square centimetre
+  MicroGM__PER__CentiM2: Qudt.unitFromLocalnameRequired("MicroGM-PER-CentiM2"),
+  // Shannon
+  SHANNON: Qudt.unitFromLocalnameRequired("SHANNON"),
+  // Lek
+  ALL_Currency: Qudt.currencyFromLocalnameRequired("ALL"),
+  // Lempira
+  HNL_Currency: Qudt.currencyFromLocalnameRequired("HNL"),
+  // Picomoles per square metre per day
+  PicoMOL__PER__M2__DAY: Qudt.unitFromLocalnameRequired("PicoMOL-PER-M2-DAY"),
+  // Tonne Per Cubic Metre
+  TONNE__PER__M3: Qudt.unitFromLocalnameRequired("TONNE-PER-M3"),
+  // Millivolt Per Meter
+  MilliV__PER__M: Qudt.unitFromLocalnameRequired("MilliV-PER-M"),
+  // Radian per Minute
+  RAD__PER__MIN: Qudt.unitFromLocalnameRequired("RAD-PER-MIN"),
+  // Degree Plato
+  DEGREE_PLATO: Qudt.unitFromLocalnameRequired("DEGREE_PLATO"),
+  // US Gallon per Day
+  GAL_US__PER__DAY: Qudt.unitFromLocalnameRequired("GAL_US-PER-DAY"),
+  // Stathenry
+  H_Stat: Qudt.unitFromLocalnameRequired("H_Stat"),
+  // meter kelvin
+  M__K: Qudt.unitFromLocalnameRequired("M-K"),
+  // Coulomb per Kilogram
+  C__PER__KiloGM: Qudt.unitFromLocalnameRequired("C-PER-KiloGM"),
+  // Degree Oechsle
+  DEGREE_OECHSLE: Qudt.unitFromLocalnameRequired("DEGREE_OECHSLE"),
+  // Megapascal Square Root Meter
+  MegaPA__M0pt5: Qudt.unitFromLocalnameRequired("MegaPA-M0pt5"),
+  // Reciprocal Nanometre
+  PER__NanoM: Qudt.unitFromLocalnameRequired("PER-NanoM"),
+  // TebiByte
+  TebiBYTE: Qudt.unitFromLocalnameRequired("TebiBYTE"),
+  // Square microns per millilitre
+  MicroM__PER__MilliL: Qudt.unitFromLocalnameRequired("MicroM-PER-MilliL"),
+  // Number per cubic millimeter
+  NUM__PER__MilliM3: Qudt.unitFromLocalnameRequired("NUM-PER-MilliM3"),
+  // Pascal Per Meter
+  PA__PER__M: Qudt.unitFromLocalnameRequired("PA-PER-M"),
+  // Maltese Lira
+  MTL_Currency: Qudt.currencyFromLocalnameRequired("MTL"),
+  // British Thermal Unit (mean)
+  BTU_MEAN: Qudt.unitFromLocalnameRequired("BTU_MEAN"),
+  // Microhenry Per Ohm
+  MicroH__PER__OHM: Qudt.unitFromLocalnameRequired("MicroH-PER-OHM"),
+  // Mexican Unidad de Inversion (UDI) (Funds code)
+  MXV_Currency: Qudt.currencyFromLocalnameRequired("MXV"),
+  // Microbecquerels per litre
+  MicroBQ__PER__L: Qudt.unitFromLocalnameRequired("MicroBQ-PER-L"),
+  // Kilogram per Square Metre
+  KiloGM__PER__M2: Qudt.unitFromLocalnameRequired("KiloGM-PER-M2"),
+  // Statvolt per Centimeter
+  V_Stat__PER__CentiM: Qudt.unitFromLocalnameRequired("V_Stat-PER-CentiM"),
+  // Mole Kelvin
+  MOL__K: Qudt.unitFromLocalnameRequired("MOL-K"),
+  // microfarad
+  MicroFARAD: Qudt.unitFromLocalnameRequired("MicroFARAD"),
+  // ExaByte
+  ExaBYTE: Qudt.unitFromLocalnameRequired("ExaBYTE"),
+  // Millibecquerels per gram
+  MilliBQ__PER__GM: Qudt.unitFromLocalnameRequired("MilliBQ-PER-GM"),
+  // Azerbaijanian Manat
+  AZN_Currency: Qudt.currencyFromLocalnameRequired("AZN"),
+  // YoctoCoulomb
+  YoctoC: Qudt.unitFromLocalnameRequired("YoctoC"),
+  // Kilomol per Kilogram
+  KiloMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("KiloMOL-PER-KiloGM"),
+  // Pound Troy
+  LB_T: Qudt.unitFromLocalnameRequired("LB_T"),
+  // Joule per Kilogram
+  J__PER__KiloGM: Qudt.unitFromLocalnameRequired("J-PER-KiloGM"),
+  // Reciprocal Henry
+  PER__H: Qudt.unitFromLocalnameRequired("PER-H"),
+  // Sidereal Minute
+  MIN_Sidereal: Qudt.unitFromLocalnameRequired("MIN_Sidereal"),
   // Micrograms per square centimeter per week
   MicroGM__PER__CentiM2__WK: Qudt.unitFromLocalnameRequired(
     "MicroGM-PER-CentiM2-WK"
   ),
-  // Milligram Per Hour
-  MilliGM__PER__HR: Qudt.unitFromLocalnameRequired("MilliGM-PER-HR"),
-  // picoampere
-  PicoA: Qudt.unitFromLocalnameRequired("PicoA"),
-  // PicoMole
-  PicoMOL: Qudt.unitFromLocalnameRequired("PicoMOL"),
-  // Pound per Inch
-  LB__PER__IN: Qudt.unitFromLocalnameRequired("LB-PER-IN"),
-  // Quartic Coulomb Metre per Cubic Energy
-  C4__M4__PER__J3: Qudt.unitFromLocalnameRequired("C4-M4-PER-J3"),
-  // Newton Metre Squared per Ampere
-  N__M2__PER__A: Qudt.unitFromLocalnameRequired("N-M2-PER-A"),
-  // Reciprocal Bar
-  PER__BAR: Qudt.unitFromLocalnameRequired("PER-BAR"),
-  // Centimetre Per Hour
-  CentiM__PER__HR: Qudt.unitFromLocalnameRequired("CentiM-PER-HR"),
-  // Litre Per Hour
-  L__PER__HR: Qudt.unitFromLocalnameRequired("L-PER-HR"),
-  // Degree Baume (origin Scale)
-  DEGREE_BAUME: Qudt.unitFromLocalnameRequired("DEGREE_BAUME"),
-  // Millinewton
-  MilliN: Qudt.unitFromLocalnameRequired("MilliN"),
-  // British Thermal Unit (TH) Per Pound
-  BTU_TH__PER__LB: Qudt.unitFromLocalnameRequired("BTU_TH-PER-LB"),
-  // Statvolt
-  V_Stat: Qudt.unitFromLocalnameRequired("V_Stat"),
-  // Pa'anga
-  TOP_Currency: Qudt.currencyFromLocalnameRequired("TOP"),
-  // Reciprocal Tesla Second Unit
-  PER__T__SEC: Qudt.unitFromLocalnameRequired("PER-T-SEC"),
-  // Gill (UK) Per Day
-  GI_UK__PER__DAY: Qudt.unitFromLocalnameRequired("GI_UK-PER-DAY"),
-  // Kelvin day
-  K__DAY: Qudt.unitFromLocalnameRequired("K-DAY"),
-  // Cubic Meter Per Cubic Meter
-  M3__PER__M3: Qudt.unitFromLocalnameRequired("M3-PER-M3"),
-  // Parts per billion
-  PPB: Qudt.unitFromLocalnameRequired("PPB"),
-  // Kilojoule Per Kilogram
-  KiloJ__PER__KiloGM: Qudt.unitFromLocalnameRequired("KiloJ-PER-KiloGM"),
-  // Planck Volume
-  PlanckVolume: Qudt.unitFromLocalnameRequired("PlanckVolume"),
-  // Abfarad
-  FARAD_Ab: Qudt.unitFromLocalnameRequired("FARAD_Ab"),
-  // Foot Pound Force
-  FT__LB_F: Qudt.unitFromLocalnameRequired("FT-LB_F"),
-  // microfarad
-  MicroFARAD: Qudt.unitFromLocalnameRequired("MicroFARAD"),
-  // 1000I
-  _1000I: Qudt.unitFromLocalnameRequired("1000I"),
-  // Reciprocal Cubic Millimeter
-  PER__MilliM3: Qudt.unitFromLocalnameRequired("PER-MilliM3"),
-  // Grains per Cubic Metre
-  GRAIN__PER__M3: Qudt.unitFromLocalnameRequired("GRAIN-PER-M3"),
-  // Watt per Square Foot
-  W__PER__FT2: Qudt.unitFromLocalnameRequired("W-PER-FT2"),
-  // Gold (one Troy ounce)
-  XAU_Currency: Qudt.currencyFromLocalnameRequired("XAU"),
-  // joule per gram degree celsius
-  J__PER__GM__DEG_C: Qudt.unitFromLocalnameRequired("J-PER-GM-DEG_C"),
-  // Kilonewton Metre per metre
-  KiloN__M__PER__M: Qudt.unitFromLocalnameRequired("KiloN-M-PER-M"),
-  // Watt Second
-  W__SEC: Qudt.unitFromLocalnameRequired("W-SEC"),
-  // Rial Omani
-  OMR_Currency: Qudt.currencyFromLocalnameRequired("OMR"),
   // ニュートン
   N: Qudt.unitFromLocalnameRequired("N"),
+  // North Korean Won
+  KPW_Currency: Qudt.currencyFromLocalnameRequired("KPW"),
+  // Kilogram Square Meter Per Second
+  KiloGM__M2__PER__SEC: Qudt.unitFromLocalnameRequired("KiloGM-M2-PER-SEC"),
+  // Yard Per Degree Fahrenheit
+  YD__PER__DEG_F: Qudt.unitFromLocalnameRequired("YD-PER-DEG_F"),
+  // Millimetre of Mercury - Absolute
+  MilliM_HGA: Qudt.unitFromLocalnameRequired("MilliM_HGA"),
+  // Gigajoule
+  GigaJ: Qudt.unitFromLocalnameRequired("GigaJ"),
+  // Furlong
+  FUR: Qudt.unitFromLocalnameRequired("FUR"),
+  // NanoCoulomb
+  NanoC: Qudt.unitFromLocalnameRequired("NanoC"),
+  // Imperial Mass Ounce per Cubic Inch
+  OZ__PER__IN3: Qudt.unitFromLocalnameRequired("OZ-PER-IN3"),
+  // Kilovolt Ampere Reactive
+  KiloV__A_Reactive: Qudt.unitFromLocalnameRequired("KiloV-A_Reactive"),
+  // Megavolt Per Metre
+  MegaV__PER__M: Qudt.unitFromLocalnameRequired("MegaV-PER-M"),
+  // Hundredweight (UK)
+  Hundredweight_UK: Qudt.unitFromLocalnameRequired("Hundredweight_UK"),
+  // Micromoles per litre per day
+  MicroM__PER__L__DAY: Qudt.unitFromLocalnameRequired("MicroM-PER-L-DAY"),
+  // Fractional area
+  FA: Qudt.unitFromLocalnameRequired("FA"),
+  // Pascal per Kelvin
+  PA__PER__K: Qudt.unitFromLocalnameRequired("PA-PER-K"),
+  // Pakistan Rupee
+  PKR_Currency: Qudt.currencyFromLocalnameRequired("PKR"),
+  // Reciprocal Minute
+  PER__MIN: Qudt.unitFromLocalnameRequired("PER-MIN"),
+  // Kilopascal Per Kelvin
+  KiloPA__PER__K: Qudt.unitFromLocalnameRequired("KiloPA-PER-K"),
+  // Mega Electron Volt per Centimetre
+  MegaEV__PER__CentiM: Qudt.unitFromLocalnameRequired("MegaEV-PER-CentiM"),
+  // kilogram na kubični sekunda kelvin
+  KiloGM__PER__SEC3__K: Qudt.unitFromLocalnameRequired("KiloGM-PER-SEC3-K"),
+  // Parts per Ten Million
+  PPTM: Qudt.unitFromLocalnameRequired("PPTM"),
+  // Quart (UK Liquid) Per Hour
+  QT_UK__PER__HR: Qudt.unitFromLocalnameRequired("QT_UK-PER-HR"),
+  // Horsepower (electric)
+  HP_Electric: Qudt.unitFromLocalnameRequired("HP_Electric"),
+  // Ounce (avoirdupois) Per Day
+  OZ__PER__DAY: Qudt.unitFromLocalnameRequired("OZ-PER-DAY"),
+  // Megaampere Per Square Meter
+  MegaA__PER__M2: Qudt.unitFromLocalnameRequired("MegaA-PER-M2"),
+  // Reciprocal metre per nanometre
+  PER__M__NanoM: Qudt.unitFromLocalnameRequired("PER-M-NanoM"),
+  // Hour
+  HR: Qudt.unitFromLocalnameRequired("HR"),
+  // Tonne Per Hour
+  TONNE__PER__HR: Qudt.unitFromLocalnameRequired("TONNE-PER-HR"),
+  // Number per nanoliter
+  NUM__PER__NanoL: Qudt.unitFromLocalnameRequired("NUM-PER-NanoL"),
+  // Barrel
+  BBL: Qudt.unitFromLocalnameRequired("BBL"),
+  // Millipascal Second Per Bar
+  MilliPA__SEC__PER__BAR: Qudt.unitFromLocalnameRequired("MilliPA-SEC-PER-BAR"),
+  // Cubic Centimeter Per Hour
+  CentiM3__PER__HR: Qudt.unitFromLocalnameRequired("CentiM3-PER-HR"),
+  // Uzbekistan Som
+  UZS_Currency: Qudt.currencyFromLocalnameRequired("UZS"),
+  // decisiemens per metre
+  DeciS__PER__M: Qudt.unitFromLocalnameRequired("DeciS-PER-M"),
+  // Milliampere Per Millimeter
+  MilliA__PER__MilliM: Qudt.unitFromLocalnameRequired("MilliA-PER-MilliM"),
+  // ньютон-метр-секунда
+  N__M__SEC: Qudt.unitFromLocalnameRequired("N-M-SEC"),
+  // Square Foot Hour Degree Fahrenheit per BTU
+  FT2__HR__DEG_F__PER__BTU_IT: Qudt.unitFromLocalnameRequired(
+    "FT2-HR-DEG_F-PER-BTU_IT"
+  ),
+  // Millicoulomb Per Square Meter
+  MilliC__PER__M2: Qudt.unitFromLocalnameRequired("MilliC-PER-M2"),
+  // Microcoulomb Per Square Meter
+  MicroC__PER__M2: Qudt.unitFromLocalnameRequired("MicroC-PER-M2"),
+  // Oersted
+  OERSTED: Qudt.unitFromLocalnameRequired("OERSTED"),
+  // FRAME
+  FRAME: Qudt.unitFromLocalnameRequired("FRAME"),
+  // Romanian New Leu
+  RON_Currency: Qudt.currencyFromLocalnameRequired("RON"),
+  // Microgram per square centimetre
+  MicroG__PER__CentiM2: Qudt.unitFromLocalnameRequired("MicroG-PER-CentiM2"),
+  // British Thermal Unit (international Table) Per Pound of Force
+  BTU_IT__PER__LB_F: Qudt.unitFromLocalnameRequired("BTU_IT-PER-LB_F"),
+  // Imperial Pint
+  PINT: Qudt.unitFromLocalnameRequired("PINT"),
+  // Foot Pound Force per Minute
+  FT__LB_F__PER__MIN: Qudt.unitFromLocalnameRequired("FT-LB_F-PER-MIN"),
+  // Reads Per Kilobase
+  RPK: Qudt.unitFromLocalnameRequired("RPK"),
+  // Kilometres per day
+  KiloM__PER__DAY: Qudt.unitFromLocalnameRequired("KiloM-PER-DAY"),
+  // joule per gram degree celsius
+  J__PER__GM__DEG_C: Qudt.unitFromLocalnameRequired("J-PER-GM-DEG_C"),
+  // Decare
+  DecaARE: Qudt.unitFromLocalnameRequired("DecaARE"),
+  // Millimoles per mole
+  MilliMOL__PER__MOL: Qudt.unitFromLocalnameRequired("MilliMOL-PER-MOL"),
+  // Millijoule Per Gram
+  MilliJ__PER__GM: Qudt.unitFromLocalnameRequired("MilliJ-PER-GM"),
+  // Picopascal Per Kilometre
+  PicoPA__PER__KiloM: Qudt.unitFromLocalnameRequired("PicoPA-PER-KiloM"),
+  // Milliwatt per Milligram
+  MilliW__PER__MilliGM: Qudt.unitFromLocalnameRequired("MilliW-PER-MilliGM"),
+  // Newton Meter Per Kilogram
+  N__M__PER__KiloGM: Qudt.unitFromLocalnameRequired("N-M-PER-KiloGM"),
+  // Millimoles per square metre
+  MilliMOL__PER__M2: Qudt.unitFromLocalnameRequired("MilliMOL-PER-M2"),
+  // Pint (UK)
+  PINT_UK: Qudt.unitFromLocalnameRequired("PINT_UK"),
+  // Square Foot Hour Degree Fahrenheit
+  FT2__HR__DEG_F: Qudt.unitFromLocalnameRequired("FT2-HR-DEG_F"),
+  // Barrel (UK Petroleum) Per Day
+  BBL_UK_PET__PER__DAY: Qudt.unitFromLocalnameRequired("BBL_UK_PET-PER-DAY"),
+  // Cubic Inch per Minute
+  IN3__PER__MIN: Qudt.unitFromLocalnameRequired("IN3-PER-MIN"),
+  // kilonewton metre per degree metre
+  KiloN__M__PER__DEG__M: Qudt.unitFromLocalnameRequired("KiloN-M-PER-DEG-M"),
+  // BTU (TH) Inch per Square Foot Second Degree Fahrenheit
+  BTU_TH__IN__PER__FT2__SEC__DEG_F: Qudt.unitFromLocalnameRequired(
+    "BTU_TH-IN-PER-FT2-SEC-DEG_F"
+  ),
+  // CentiCoulomb
+  CentiC: Qudt.unitFromLocalnameRequired("CentiC"),
+  // Erg per Second
+  ERG__PER__SEC: Qudt.unitFromLocalnameRequired("ERG-PER-SEC"),
+  // Metical
+  MZN_Currency: Qudt.currencyFromLocalnameRequired("MZN"),
+  // Degree Fahrenheit per Square Second
+  DEG_F__PER__SEC2: Qudt.unitFromLocalnameRequired("DEG_F-PER-SEC2"),
+  // Kilogram Square Meter
+  KiloGM__M2: Qudt.unitFromLocalnameRequired("KiloGM-M2"),
+  // Mega Hertz per Tesla
+  MegaHZ__PER__T: Qudt.unitFromLocalnameRequired("MegaHZ-PER-T"),
+  // Parsec
+  PARSEC: Qudt.unitFromLocalnameRequired("PARSEC"),
+  // Cubic Inch Per Second
+  IN3__PER__SEC: Qudt.unitFromLocalnameRequired("IN3-PER-SEC"),
+  // Kilogram per Joule
+  KiloGM__PER__J: Qudt.unitFromLocalnameRequired("KiloGM-PER-J"),
+  // Mole per Kilogram Pascal
+  MOL__PER__KiloGM__PA: Qudt.unitFromLocalnameRequired("MOL-PER-KiloGM-PA"),
+  // Kilocalorie (thermochemical) Per Hour
+  KiloCAL_TH__PER__HR: Qudt.unitFromLocalnameRequired("KiloCAL_TH-PER-HR"),
+  // Kilojoule Per Kilogram
+  KiloJ__PER__KiloGM: Qudt.unitFromLocalnameRequired("KiloJ-PER-KiloGM"),
+  // Mega Electron Volt Femtometer
+  MegaEV__FemtoM: Qudt.unitFromLocalnameRequired("MegaEV-FemtoM"),
+  // Lambert
+  LA: Qudt.unitFromLocalnameRequired("LA"),
+  // Nanograms per litre
+  NanoGM__PER__L: Qudt.unitFromLocalnameRequired("NanoGM-PER-L"),
+  // Watt per Square Meter Quartic Kelvin
+  W__PER__M2__K4: Qudt.unitFromLocalnameRequired("W-PER-M2-K4"),
+  // Kilogram Force Metre Per Square Centimetre
+  KiloGM_F__M__PER__CentiM2: Qudt.unitFromLocalnameRequired(
+    "KiloGM_F-M-PER-CentiM2"
+  ),
+  // Uganda Shilling
+  UGX_Currency: Qudt.currencyFromLocalnameRequired("UGX"),
+  // MegaINDIV
+  MegaINDIV: Qudt.unitFromLocalnameRequired("MegaINDIV"),
+  // WIR Euro (complementary currency)
+  CHE_Currency: Qudt.currencyFromLocalnameRequired("CHE"),
+  // US Dry Quart
+  QT_US_DRY: Qudt.unitFromLocalnameRequired("QT_US_DRY"),
+  // Cubic Mile
+  MI3: Qudt.unitFromLocalnameRequired("MI3"),
+  // Revolution per Square Second
+  REV__PER__SEC2: Qudt.unitFromLocalnameRequired("REV-PER-SEC2"),
+  // Square metres Hertz
+  M2__HZ: Qudt.unitFromLocalnameRequired("M2-HZ"),
+  // Kilowatthour
+  KiloW__HR: Qudt.unitFromLocalnameRequired("KiloW-HR"),
+  // Relative Permittivity
+  PERMITTIVITY_REL: Qudt.unitFromLocalnameRequired("PERMITTIVITY_REL"),
+  // Ampere Turn per Inch
+  AT__PER__IN: Qudt.unitFromLocalnameRequired("AT-PER-IN"),
+  // Ton (US) Per Hour
+  TON_US__PER__HR: Qudt.unitFromLocalnameRequired("TON_US-PER-HR"),
+  // Gallon (UK)
+  GAL_UK: Qudt.unitFromLocalnameRequired("GAL_UK"),
+  // Slovak Koruna
+  SKK_Currency: Qudt.currencyFromLocalnameRequired("SKK"),
+  // Micrometre Per Kelvin
+  MicroM__PER__K: Qudt.unitFromLocalnameRequired("MicroM-PER-K"),
+  // Unidades de formento (Funds code)
+  CLF_Currency: Qudt.currencyFromLocalnameRequired("CLF"),
+  // Reciprocal micromole per litre
+  PER__MicroMOL__L: Qudt.unitFromLocalnameRequired("PER-MicroMOL-L"),
+  // Megavolt Ampere Hour
+  MegaV__A__HR: Qudt.unitFromLocalnameRequired("MegaV-A-HR"),
+  // Pint (UK) Per Minute
+  PINT_UK__PER__MIN: Qudt.unitFromLocalnameRequired("PINT_UK-PER-MIN"),
+  // Centipoise
+  CentiPOISE: Qudt.unitFromLocalnameRequired("CentiPOISE"),
+  // microsecond
+  MicroSEC: Qudt.unitFromLocalnameRequired("MicroSEC"),
+  // lumen second
+  LM__SEC: Qudt.unitFromLocalnameRequired("LM-SEC"),
+  // Bit per Second
+  BIT__PER__SEC: Qudt.unitFromLocalnameRequired("BIT-PER-SEC"),
+  // NanoSiemens
+  NanoS: Qudt.unitFromLocalnameRequired("NanoS"),
+  // MegaSiemens
+  MegaS: Qudt.unitFromLocalnameRequired("MegaS"),
+  // CFP franc
+  XPF_Currency: Qudt.currencyFromLocalnameRequired("XPF"),
+  // Micromoles per square metre per hour
+  MicroMOL__PER__M2__HR: Qudt.unitFromLocalnameRequired("MicroMOL-PER-M2-HR"),
+  // MilliGals per month
+  MilliGAL__PER__MO: Qudt.unitFromLocalnameRequired("MilliGAL-PER-MO"),
+  // Square metre seconds per radian
+  M2__SEC__PER__RAD: Qudt.unitFromLocalnameRequired("M2-SEC-PER-RAD"),
+  // T-M
+  T__M: Qudt.unitFromLocalnameRequired("T-M"),
+  // Microgram
+  MicroGM: Qudt.unitFromLocalnameRequired("MicroGM"),
+  // BTU per Degree Rankine
+  BTU_IT__PER__DEG_R: Qudt.unitFromLocalnameRequired("BTU_IT-PER-DEG_R"),
+  // Micromoles per square metre per second
+  MicroMOL__PER__M2__SEC: Qudt.unitFromLocalnameRequired("MicroMOL-PER-M2-SEC"),
+  // Kilosiemens Per Metre
+  KiloS__PER__M: Qudt.unitFromLocalnameRequired("KiloS-PER-M"),
+  // Milliliter per Gram
+  MilliL__PER__GM: Qudt.unitFromLocalnameRequired("MilliL-PER-GM"),
+  // Calorie (thermochemical) Per Gram Degree Celsius
+  CAL_TH__PER__GM__DEG_C: Qudt.unitFromLocalnameRequired("CAL_TH-PER-GM-DEG_C"),
+  // Cubic Meter per Square Second
+  M3__PER__SEC2: Qudt.unitFromLocalnameRequired("M3-PER-SEC2"),
+  // Newton Square Metre Per Square Kilogram
+  N__M2__PER__KiloGM2: Qudt.unitFromLocalnameRequired("N-M2-PER-KiloGM2"),
+  // Euro per kilowatt hour
+  EUR__PER__KiloW__HR: Qudt.unitFromLocalnameRequired("EUR-PER-KiloW-HR"),
+  // US Liquid Cup
+  CUP: Qudt.unitFromLocalnameRequired("CUP"),
+  // Kilogram Per Cubic Centimeter
+  KiloGM__PER__CentiM3: Qudt.unitFromLocalnameRequired("KiloGM-PER-CentiM3"),
+  // Volt Ampere Reactive Hour
+  V__A_Reactive__HR: Qudt.unitFromLocalnameRequired("V-A_Reactive-HR"),
+  // Volt per Kelvin
+  V__PER__K: Qudt.unitFromLocalnameRequired("V-PER-K"),
+  // Newtonmetersekunden pro Meter
+  N__M__SEC__PER__M: Qudt.unitFromLocalnameRequired("N-M-SEC-PER-M"),
+  // Newton Meter per Meter per Radian
+  N__M__PER__M__RAD: Qudt.unitFromLocalnameRequired("N-M-PER-M-RAD"),
+  // Attofarad
+  AttoFARAD: Qudt.unitFromLocalnameRequired("AttoFARAD"),
+  // seconde
+  SEC: Qudt.unitFromLocalnameRequired("SEC"),
+  // Kilobecquerel
+  KiloBQ: Qudt.unitFromLocalnameRequired("KiloBQ"),
+  // Megajoule Per Second
+  MegaJ__PER__SEC: Qudt.unitFromLocalnameRequired("MegaJ-PER-SEC"),
+  // Ounce (avoirdupois) Foot
+  OZ__FT: Qudt.unitFromLocalnameRequired("OZ-FT"),
+  // Quart (UK)
+  QT_UK: Qudt.unitFromLocalnameRequired("QT_UK"),
+  // Practical Salinity Unit
+  PSU: Qudt.unitFromLocalnameRequired("PSU"),
+  // Square metres per Hertz per degree
+  M2__PER__HZ__DEG: Qudt.unitFromLocalnameRequired("M2-PER-HZ-DEG"),
+  // Ton of Refrigeration
+  TON_FG: Qudt.unitFromLocalnameRequired("TON_FG"),
+  // Mol per Kilogram
+  MOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("MOL-PER-KiloGM"),
+  // hertz
+  HZ: Qudt.unitFromLocalnameRequired("HZ"),
+  // Reciprocal Month
+  PER__MO: Qudt.unitFromLocalnameRequired("PER-MO"),
+  // Bar Per Bar
+  BAR__PER__BAR: Qudt.unitFromLocalnameRequired("BAR-PER-BAR"),
+  // Parts per thousand
+  PPTH: Qudt.unitFromLocalnameRequired("PPTH"),
+  // GM_Carbon
+  GM_Carbon: Qudt.unitFromLocalnameRequired("GM_Carbon"),
+  // Gram Per Kilogram
+  GM__PER__KiloGM: Qudt.unitFromLocalnameRequired("GM-PER-KiloGM"),
+  // Watthour
+  W__HR: Qudt.unitFromLocalnameRequired("W-HR"),
+  // Peck (UK) Per Hour
+  PK_UK__PER__HR: Qudt.unitFromLocalnameRequired("PK_UK-PER-HR"),
+  // Parts per million
+  PPM: Qudt.unitFromLocalnameRequired("PPM"),
+  // Knot
+  KN: Qudt.unitFromLocalnameRequired("KN"),
+  // Ampere Second
+  A__SEC: Qudt.unitFromLocalnameRequired("A-SEC"),
+  // US Dry Pint
+  PINT_US_DRY: Qudt.unitFromLocalnameRequired("PINT_US_DRY"),
+  // Kayser
+  KY: Qudt.unitFromLocalnameRequired("KY"),
+  // MPSI
+  MegaPSI: Qudt.unitFromLocalnameRequired("MegaPSI"),
+  // Number
+  NUM: Qudt.unitFromLocalnameRequired("NUM"),
+  // GAL
+  GAL: Qudt.unitFromLocalnameRequired("GAL"),
+  // Somoni
+  TJS_Currency: Qudt.currencyFromLocalnameRequired("TJS"),
+  // Metres per year
+  M__PER__YR: Qudt.unitFromLocalnameRequired("M-PER-YR"),
+  // Kilowatt
+  KiloW: Qudt.unitFromLocalnameRequired("KiloW"),
+  // Zambian Kwacha
+  ZMW_Currency: Qudt.currencyFromLocalnameRequired("ZMW"),
+  // Elementary Charge
+  E: Qudt.unitFromLocalnameRequired("E"),
+  // Conventional Centimetre Of Water
+  CentiM_H2O: Qudt.unitFromLocalnameRequired("CentiM_H2O"),
+  // Square metres per gram
+  M2__PER__GM: Qudt.unitFromLocalnameRequired("M2-PER-GM"),
+  // Nanomoles per litre per hour
+  NanoMOL__PER__L__HR: Qudt.unitFromLocalnameRequired("NanoMOL-PER-L-HR"),
+  // Square centimetres per cubic centimetre
+  CentiM2__PER__CentiM3: Qudt.unitFromLocalnameRequired("CentiM2-PER-CentiM3"),
+  // Slug Per Day
+  SLUG__PER__DAY: Qudt.unitFromLocalnameRequired("SLUG-PER-DAY"),
+  // Ounce Mass
+  OZ: Qudt.unitFromLocalnameRequired("OZ"),
+  // Mega byte
+  MegaBYTE: Qudt.unitFromLocalnameRequired("MegaBYTE"),
+  // Year
+  YR: Qudt.unitFromLocalnameRequired("YR"),
+  // Erg Second
+  ERG__SEC: Qudt.unitFromLocalnameRequired("ERG-SEC"),
+  // Growing Degree Days (Cereals)
+  DEG_C_GROWING_CEREAL__DAY: Qudt.unitFromLocalnameRequired(
+    "DEG_C_GROWING_CEREAL-DAY"
+  ),
+  // Kilograms per metre per hour
+  KiloGM__PER__M__HR: Qudt.unitFromLocalnameRequired("KiloGM-PER-M-HR"),
+  // Serbian Dinar
+  RSD_Currency: Qudt.currencyFromLocalnameRequired("RSD"),
+  // Kilomole Per Hour
+  KiloMOL__PER__HR: Qudt.unitFromLocalnameRequired("KiloMOL-PER-HR"),
+  // bushel (US)
+  BU_US: Qudt.unitFromLocalnameRequired("BU_US"),
+  // Centimole per kilogram
+  CentiMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("CentiMOL-PER-KiloGM"),
+  // Degree Celsius per Minute
+  DEG_C__PER__MIN: Qudt.unitFromLocalnameRequired("DEG_C-PER-MIN"),
+  // reciprocal degree Celsius
+  PER__DEG_C: Qudt.unitFromLocalnameRequired("PER-DEG_C"),
+  // Foot Per Degree Fahrenheit
+  FT__PER__DEG_F: Qudt.unitFromLocalnameRequired("FT-PER-DEG_F"),
+  // Cubic Metre Per Square Metre
+  M3__PER__M2: Qudt.unitFromLocalnameRequired("M3-PER-M2"),
+  // Long Ton (UK) Per Cubic Yard
+  TON_UK__PER__YD3: Qudt.unitFromLocalnameRequired("TON_UK-PER-YD3"),
+  // Microkatal Per Liter
+  MicroKAT__PER__L: Qudt.unitFromLocalnameRequired("MicroKAT-PER-L"),
+  // Calorie (international Table) Per Gram
+  CAL_IT__PER__GM: Qudt.unitFromLocalnameRequired("CAL_IT-PER-GM"),
+  // Acre
+  AC: Qudt.unitFromLocalnameRequired("AC"),
+  // Megacoulomb Per Cubic Meter
+  MegaC__PER__M3: Qudt.unitFromLocalnameRequired("MegaC-PER-M3"),
+  // Rupiah
+  IDR_Currency: Qudt.currencyFromLocalnameRequired("IDR"),
+  // US Liquid Pint
+  PINT_US: Qudt.unitFromLocalnameRequired("PINT_US"),
+  // Reciprocal Hour
+  PER__HR: Qudt.unitFromLocalnameRequired("PER-HR"),
+  // MilliW
+  MilliW: Qudt.unitFromLocalnameRequired("MilliW"),
+  // Barad
+  BARAD: Qudt.unitFromLocalnameRequired("BARAD"),
+  // Fluid Ounce (UK)
+  OZ_VOL_UK: Qudt.unitFromLocalnameRequired("OZ_VOL_UK"),
+  // Nanograms per square centimeter per day
+  NanoGM__PER__CentiM2__DAY: Qudt.unitFromLocalnameRequired(
+    "NanoGM-PER-CentiM2-DAY"
+  ),
+  // Seychelles Rupee
+  SCR_Currency: Qudt.currencyFromLocalnameRequired("SCR"),
+  // Pascal Cubic Metre Per Second
+  PA__M3__PER__SEC: Qudt.unitFromLocalnameRequired("PA-M3-PER-SEC"),
+  // Common Year
+  YR_Common: Qudt.unitFromLocalnameRequired("YR_Common"),
+  // Square pascal per square second
+  PA2__PER__SEC2: Qudt.unitFromLocalnameRequired("PA2-PER-SEC2"),
+  // Cubic Millimetre per Kilogram
+  MilliM3__PER__KiloGM: Qudt.unitFromLocalnameRequired("MilliM3-PER-KiloGM"),
+  // Cubic Yard per Minute
+  YD3__PER__MIN: Qudt.unitFromLocalnameRequired("YD3-PER-MIN"),
+  // Millimoles per square metre per day
+  MilliMOL__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MilliMOL-PER-M2-DAY"),
+  // Kilogram Per Cubic Decimeter
+  KiloGM__PER__DeciM3: Qudt.unitFromLocalnameRequired("KiloGM-PER-DeciM3"),
+  // Statampere
+  A_Stat: Qudt.unitFromLocalnameRequired("A_Stat"),
+  // fermi
+  FM: Qudt.unitFromLocalnameRequired("FM"),
+  // Kyat
+  MMK_Currency: Qudt.currencyFromLocalnameRequired("MMK"),
+  // Grade
+  GR: Qudt.unitFromLocalnameRequired("GR"),
+  // Meter Kilogram
+  M__KiloGM: Qudt.unitFromLocalnameRequired("M-KiloGM"),
+  // Euro
+  EUR_Currency: Qudt.currencyFromLocalnameRequired("EUR"),
+  // GM_DRY
+  GM_DRY: Qudt.unitFromLocalnameRequired("GM_DRY"),
+  // Litre Per Mole
+  L__PER__MOL: Qudt.unitFromLocalnameRequired("L-PER-MOL"),
+  // Centilitre
+  CentiL: Qudt.unitFromLocalnameRequired("CentiL"),
+  // Bushel (US Dry) Per Second
+  BU_US_DRY__PER__SEC: Qudt.unitFromLocalnameRequired("BU_US_DRY-PER-SEC"),
+  // Micronewton Meter
+  MicroN__M: Qudt.unitFromLocalnameRequired("MicroN-M"),
+  // Picomoles per cubic metre per second
+  PicoMOL__PER__M3__SEC: Qudt.unitFromLocalnameRequired("PicoMOL-PER-M3-SEC"),
+  // Reciprocal Square Meter Second
+  PER__M2__SEC: Qudt.unitFromLocalnameRequired("PER-M2-SEC"),
+  // Kilogram Per Litre
+  KiloGM__PER__L: Qudt.unitFromLocalnameRequired("KiloGM-PER-L"),
+  // PSI Cubic Meter Per Second
+  PSI__M3__PER__SEC: Qudt.unitFromLocalnameRequired("PSI-M3-PER-SEC"),
+  // Minute Angle
+  MIN_Angle: Qudt.unitFromLocalnameRequired("MIN_Angle"),
+  // Cubic Yard Per Day
+  YD3__PER__DAY: Qudt.unitFromLocalnameRequired("YD3-PER-DAY"),
+  // International Unit per milliliter
+  IU__PER__MilliL: Qudt.unitFromLocalnameRequired("IU-PER-MilliL"),
+  // Nanofarad
+  NanoFARAD: Qudt.unitFromLocalnameRequired("NanoFARAD"),
+  // picoampere
+  PicoA: Qudt.unitFromLocalnameRequired("PicoA"),
+  // Biot
+  BIOT: Qudt.unitFromLocalnameRequired("BIOT"),
+  // Kilomole
+  KiloMOL: Qudt.unitFromLocalnameRequired("KiloMOL"),
+  // Flight
+  Flight: Qudt.unitFromLocalnameRequired("Flight"),
+  // Joule per Kilogram Kelvin per Pascal
+  J__PER__KiloGM__K__PA: Qudt.unitFromLocalnameRequired("J-PER-KiloGM-K-PA"),
+  // Peck (UK) Per Day
+  PK_UK__PER__DAY: Qudt.unitFromLocalnameRequired("PK_UK-PER-DAY"),
+  // newton metre per Degree
+  N__M__PER__DEG: Qudt.unitFromLocalnameRequired("N-M-PER-DEG"),
+  // Micromole
+  MicroMOL: Qudt.unitFromLocalnameRequired("MicroMOL"),
+  // Megacoulomb Per Square Metre
+  MegaC__PER__M2: Qudt.unitFromLocalnameRequired("MegaC-PER-M2"),
+  // Mesh
+  MESH: Qudt.unitFromLocalnameRequired("MESH"),
+  // Quart (US Liquid) Per Minute
+  QT_US__PER__MIN: Qudt.unitFromLocalnameRequired("QT_US-PER-MIN"),
+  // Euro per kilowatt
+  EUR__PER__KiloW: Qudt.unitFromLocalnameRequired("EUR-PER-KiloW"),
+  // Reciprocal Tesla Second Unit
+  PER__T__SEC: Qudt.unitFromLocalnameRequired("PER-T-SEC"),
+  // Joule Per Square Centimeter
+  J__PER__CentiM2: Qudt.unitFromLocalnameRequired("J-PER-CentiM2"),
+  // Kilopascal Per Millimeter
+  KiloPA__PER__MilliM: Qudt.unitFromLocalnameRequired("KiloPA-PER-MilliM"),
+  // microradian
+  MicroRAD: Qudt.unitFromLocalnameRequired("MicroRAD"),
+  // Degree per Minute
+  DEG__PER__MIN: Qudt.unitFromLocalnameRequired("DEG-PER-MIN"),
+  // Ampere Turn per Meter
+  AT__PER__M: Qudt.unitFromLocalnameRequired("AT-PER-M"),
+  // Decibel Referred to 1mw
+  DeciB_M: Qudt.unitFromLocalnameRequired("DeciB_M"),
+  // FLIGHT
+  FLIGHT: Qudt.unitFromLocalnameRequired("FLIGHT"),
+  // Revolution
+  REV: Qudt.unitFromLocalnameRequired("REV"),
+  // Number per Year
+  NUM__PER__YR: Qudt.unitFromLocalnameRequired("NUM-PER-YR"),
+  // Pound per Cubic Foot
+  LB__PER__FT3: Qudt.unitFromLocalnameRequired("LB-PER-FT3"),
+  // Gallon (UK) Per Hour
+  GAL_UK__PER__HR: Qudt.unitFromLocalnameRequired("GAL_UK-PER-HR"),
+  // Bushel (US Dry) Per Day
+  BU_US_DRY__PER__DAY: Qudt.unitFromLocalnameRequired("BU_US_DRY-PER-DAY"),
+  // Gigahertz
+  GigaHZ: Qudt.unitFromLocalnameRequired("GigaHZ"),
+  // Tonne Per Hour
+  TON_Metric__PER__HR: Qudt.unitFromLocalnameRequired("TON_Metric-PER-HR"),
+  // Zloty
+  PLN_Currency: Qudt.currencyFromLocalnameRequired("PLN"),
+  // Millilitre Per Litre
+  MilliL__PER__L: Qudt.unitFromLocalnameRequired("MilliL-PER-L"),
+  // International Unit
+  IU: Qudt.unitFromLocalnameRequired("IU"),
+  // Microinch
+  MicroIN: Qudt.unitFromLocalnameRequired("MicroIN"),
+  // Pound per Cubic Meter
+  LB__PER__M3: Qudt.unitFromLocalnameRequired("LB-PER-M3"),
+  // Thermochemical Calorie
+  CAL_TH: Qudt.unitFromLocalnameRequired("CAL_TH"),
+  // Millivolt
+  MilliV: Qudt.unitFromLocalnameRequired("MilliV"),
+  // Kilogram Per Square Foot
+  KiloGM__PER__FT2: Qudt.unitFromLocalnameRequired("KiloGM-PER-FT2"),
+  // Calorie per Gram Degree Celsius
+  KiloCAL__PER__GM__DEG_C: Qudt.unitFromLocalnameRequired(
+    "KiloCAL-PER-GM-DEG_C"
+  ),
+  // Newton per radian
+  N__PER__RAD: Qudt.unitFromLocalnameRequired("N-PER-RAD"),
+  // Number per square kilometre
+  NUM__PER__KiloM2: Qudt.unitFromLocalnameRequired("NUM-PER-KiloM2"),
+  // Megapascal Cubic Metre Per Second
+  MegaPA__M3__PER__SEC: Qudt.unitFromLocalnameRequired("MegaPA-M3-PER-SEC"),
+  // Millimetre Per Year
+  MilliM__PER__YR: Qudt.unitFromLocalnameRequired("MilliM-PER-YR"),
+  // French Gauge
+  GAUGE_FR: Qudt.unitFromLocalnameRequired("GAUGE_FR"),
+  // Pennyweight
+  Pennyweight: Qudt.unitFromLocalnameRequired("Pennyweight"),
+  // Gibraltar pound
+  GIP_Currency: Qudt.currencyFromLocalnameRequired("GIP"),
+  // Cubic Centimetre Per Cubic Centimetre
+  CentiM3__PER__CentiM3: Qudt.unitFromLocalnameRequired("CentiM3-PER-CentiM3"),
+  // Megalitre
+  MegaL: Qudt.unitFromLocalnameRequired("MegaL"),
+  // Newtonmeter pro Radian
+  N__M__PER__RAD: Qudt.unitFromLocalnameRequired("N-M-PER-RAD"),
+  // Relative Electromagnetic Permeability
+  PERMEABILITY_EM_REL: Qudt.unitFromLocalnameRequired("PERMEABILITY_EM_REL"),
+  // Cubic Millimeter
+  MilliM3: Qudt.unitFromLocalnameRequired("MilliM3"),
+  // Erg per Square Centimeter Second
+  ERG__PER__CentiM2__SEC: Qudt.unitFromLocalnameRequired("ERG-PER-CentiM2-SEC"),
+  // Decibar
+  DeciBAR: Qudt.unitFromLocalnameRequired("DeciBAR"),
+  // Millisievert
+  MilliSV: Qudt.unitFromLocalnameRequired("MilliSV"),
+  // Kilocalorie (international Table) Per Hour Metre Degree Celsius
+  KiloCAL_IT__PER__HR__M__DEG_C: Qudt.unitFromLocalnameRequired(
+    "KiloCAL_IT-PER-HR-M-DEG_C"
+  ),
+  // Kilobyte per Second
+  KiloBYTE__PER__SEC: Qudt.unitFromLocalnameRequired("KiloBYTE-PER-SEC"),
+  // Mega Electron Volt per Speed of Light
+  MegaEV__PER__SpeedOfLight: Qudt.unitFromLocalnameRequired(
+    "MegaEV-PER-SpeedOfLight"
+  ),
+  // Aruban Guilder
+  AWG_Currency: Qudt.currencyFromLocalnameRequired("AWG"),
+  // Degree Fahrenheit Per Kelvin
+  DEG_F__PER__K: Qudt.unitFromLocalnameRequired("DEG_F-PER-K"),
+  // Standard
+  Standard: Qudt.unitFromLocalnameRequired("Standard"),
+  // Gram Per Square Meter
+  GM__PER__M2: Qudt.unitFromLocalnameRequired("GM-PER-M2"),
+  // Cubic Yard Per Hour
+  YD3__PER__HR: Qudt.unitFromLocalnameRequired("YD3-PER-HR"),
+  // Abampere per Square Centimeter
+  A_Ab__PER__CentiM2: Qudt.unitFromLocalnameRequired("A_Ab-PER-CentiM2"),
+  // coulomb meter
+  C__M: Qudt.unitFromLocalnameRequired("C-M"),
+  // سیورت
+  SV: Qudt.unitFromLocalnameRequired("SV"),
+  // Newton Second per Meter
+  N__SEC__PER__M: Qudt.unitFromLocalnameRequired("N-SEC-PER-M"),
+  // Kilopound Force Per Square Inch
+  KiloLB_F__PER__IN2: Qudt.unitFromLocalnameRequired("KiloLB_F-PER-IN2"),
+  // Milligram Per Day
+  MilliGM__PER__DAY: Qudt.unitFromLocalnameRequired("MilliGM-PER-DAY"),
+  // Reciprocal Year
+  PER__YR: Qudt.unitFromLocalnameRequired("PER-YR"),
+  // Femtograms per kilogram
+  FemtoGM__PER__KiloGM: Qudt.unitFromLocalnameRequired("FemtoGM-PER-KiloGM"),
+  // Planck Time
+  PlanckTime: Qudt.unitFromLocalnameRequired("PlanckTime"),
+  // Kuwaiti Dinar
+  KWD_Currency: Qudt.currencyFromLocalnameRequired("KWD"),
+  // BTU (IT) per Degree Fahrenheit
+  BTU_IT__PER__DEG_F: Qudt.unitFromLocalnameRequired("BTU_IT-PER-DEG_F"),
+  // radian per metre
+  RAD__PER__M: Qudt.unitFromLocalnameRequired("RAD-PER-M"),
+  // Poundal per Square Foot
+  PDL__PER__FT2: Qudt.unitFromLocalnameRequired("PDL-PER-FT2"),
+  // Siemens Per Centimetre
+  S__PER__CentiM: Qudt.unitFromLocalnameRequired("S-PER-CentiM"),
+  // Milligram Per Square Meter
+  MilliGM__PER__M2: Qudt.unitFromLocalnameRequired("MilliGM-PER-M2"),
+  // Decibars per year
+  DeciBAR__PER__YR: Qudt.unitFromLocalnameRequired("DeciBAR-PER-YR"),
+  // United Arab Emirates dirham
+  AED_Currency: Qudt.currencyFromLocalnameRequired("AED"),
+  // Mile US Statute
+  MI_US: Qudt.unitFromLocalnameRequired("MI_US"),
+  // Microsiemens
+  MicroS: Qudt.unitFromLocalnameRequired("MicroS"),
+  // Ampere Per Square Millimetre
+  A__PER__MilliM2: Qudt.unitFromLocalnameRequired("A-PER-MilliM2"),
+  // Degree per Square Second
+  DEG__PER__SEC2: Qudt.unitFromLocalnameRequired("DEG-PER-SEC2"),
+  // Number per cubic metre
+  NUM__PER__M3: Qudt.unitFromLocalnameRequired("NUM-PER-M3"),
+  // Surinam Dollar
+  SRD_Currency: Qudt.currencyFromLocalnameRequired("SRD"),
+  // Ampere Hour
+  A__HR: Qudt.unitFromLocalnameRequired("A-HR"),
+  // Reciprocal Mille Per Psi
+  PER__MILLE__PER__PSI: Qudt.unitFromLocalnameRequired("PER-MILLE-PER-PSI"),
+  // Cord
+  CORD: Qudt.unitFromLocalnameRequired("CORD"),
+  // фарад
+  FARAD: Qudt.unitFromLocalnameRequired("FARAD"),
+  // Ohm Square Meter per Meter
+  OHM__M2__PER__M: Qudt.unitFromLocalnameRequired("OHM-M2-PER-M"),
+  // Square centimetres per second
+  CentiM2__PER__SEC: Qudt.unitFromLocalnameRequired("CentiM2-PER-SEC"),
+  // Malagasy Ariary
+  MGA_Currency: Qudt.currencyFromLocalnameRequired("MGA"),
+  // Cubic Decimeter Per Mole
+  DeciM3__PER__MOL: Qudt.unitFromLocalnameRequired("DeciM3-PER-MOL"),
+  // BTU per Pound Mole Degree Fahrenheit
+  BTU_IT__PER__MOL__DEG_F: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-PER-MOL-DEG_F"
+  ),
+  // Volt per Square Meter
+  V__PER__M2: Qudt.unitFromLocalnameRequired("V-PER-M2"),
+  // Degrees Celsius per year
+  DEG_C__PER__YR: Qudt.unitFromLocalnameRequired("DEG_C-PER-YR"),
+  // Ounce (UK Fluid) Per Day
+  OZ_VOL_UK__PER__DAY: Qudt.unitFromLocalnameRequired("OZ_VOL_UK-PER-DAY"),
+  // Kilogram per Square Second
+  KiloGM__PER__SEC2: Qudt.unitFromLocalnameRequired("KiloGM-PER-SEC2"),
+  // Lumen
+  LM: Qudt.unitFromLocalnameRequired("LM"),
+  // Micromoles per square metre
+  MicroMOL__PER__M2: Qudt.unitFromLocalnameRequired("MicroMOL-PER-M2"),
+  // Square centimeters per gram
+  CentiM2__PER__GM: Qudt.unitFromLocalnameRequired("CentiM2-PER-GM"),
+  // PicoMole
+  PicoMOL: Qudt.unitFromLocalnameRequired("PicoMOL"),
+  // Foot per Minute
+  FT__PER__MIN: Qudt.unitFromLocalnameRequired("FT-PER-MIN"),
+  // Euro per square metre
+  EUR__PER__M2: Qudt.unitFromLocalnameRequired("EUR-PER-M2"),
+  // PicoKAT
+  PicoKAT: Qudt.unitFromLocalnameRequired("PicoKAT"),
+  // Lumen per Watt
+  LM__PER__W: Qudt.unitFromLocalnameRequired("LM-PER-W"),
+  // Microatmospheres
+  MicroATM: Qudt.unitFromLocalnameRequired("MicroATM"),
+  // Million US Dollars per Year
+  MillionUSD__PER__YR: Qudt.unitFromLocalnameRequired("MillionUSD-PER-YR"),
+  // Number per square centimetre per thousand years
+  NUM__PER__CentiM__KiloYR: Qudt.unitFromLocalnameRequired(
+    "NUM-PER-CentiM-KiloYR"
+  ),
+  // Argentine Peso
+  ARS_Currency: Qudt.currencyFromLocalnameRequired("ARS"),
+  // Standard Atmosphere
+  ATM: Qudt.unitFromLocalnameRequired("ATM"),
+  // Calorie (international Table) Per Gram Degree Celsius
+  CAL_IT__PER__GM__DEG_C: Qudt.unitFromLocalnameRequired("CAL_IT-PER-GM-DEG_C"),
+  // Kilosiemens
+  KiloS: Qudt.unitFromLocalnameRequired("KiloS"),
+  // Statcoulomb
+  C_Stat: Qudt.unitFromLocalnameRequired("C_Stat"),
+  // ExbiByte
+  ExbiBYTE: Qudt.unitFromLocalnameRequired("ExbiBYTE"),
+  // KiloWeber
+  KiloWB: Qudt.unitFromLocalnameRequired("KiloWB"),
+  // Number per square metre per day
+  NUM__PER__M2__DAY: Qudt.unitFromLocalnameRequired("NUM-PER-M2-DAY"),
+  // Bahraini Dinar
+  BHD_Currency: Qudt.currencyFromLocalnameRequired("BHD"),
+  // joule par tesla
+  J__PER__T: Qudt.unitFromLocalnameRequired("J-PER-T"),
+  // Meganewton
+  MegaN: Qudt.unitFromLocalnameRequired("MegaN"),
+  // BBL_US_PET
+  BBL_US_PET: Qudt.unitFromLocalnameRequired("BBL_US_PET"),
+  // Watt per Square Meter Kelvin
+  W__PER__M2__K: Qudt.unitFromLocalnameRequired("W-PER-M2-K"),
+  // Kilogram per Gigajoule
+  KiloGM__PER__GigaJ: Qudt.unitFromLocalnameRequired("KiloGM-PER-GigaJ"),
+  // Millimeter Per Minute
+  MilliM__PER__MIN: Qudt.unitFromLocalnameRequired("MilliM-PER-MIN"),
+  // Gram Per Hour
+  GM__PER__HR: Qudt.unitFromLocalnameRequired("GM-PER-HR"),
+  // Curie
+  Ci: Qudt.unitFromLocalnameRequired("Ci"),
+  // International Mile
+  MI: Qudt.unitFromLocalnameRequired("MI"),
+  // NanoMole
+  NanoMOL: Qudt.unitFromLocalnameRequired("NanoMOL"),
+  // Planck Volt
+  PlanckVolt: Qudt.unitFromLocalnameRequired("PlanckVolt"),
+  // Newton seconds per radian
+  N__SEC__PER__RAD: Qudt.unitFromLocalnameRequired("N-SEC-PER-RAD"),
+  // Becquerel per Square Meter
+  BQ__PER__M2: Qudt.unitFromLocalnameRequired("BQ-PER-M2"),
+  // Square Nanometer
+  NanoM2: Qudt.unitFromLocalnameRequired("NanoM2"),
+  // Millibecquerels per kilogram
+  MilliBQ__PER__KiloGM: Qudt.unitFromLocalnameRequired("MilliBQ-PER-KiloGM"),
+  // Kenyan Shilling
+  KES_Currency: Qudt.currencyFromLocalnameRequired("KES"),
+  // Tenge
+  KZT_Currency: Qudt.currencyFromLocalnameRequired("KZT"),
+  // Milligrams per cubic metre per hour
+  MilliGM__PER__M3__HR: Qudt.unitFromLocalnameRequired("MilliGM-PER-M3-HR"),
+  // Balboa
+  PAB_Currency: Qudt.currencyFromLocalnameRequired("PAB"),
+  // CASES
+  CASES: Qudt.unitFromLocalnameRequired("CASES"),
+  // Kilometre
+  KiloM: Qudt.unitFromLocalnameRequired("KiloM"),
+  // Picowatt
+  PicoW: Qudt.unitFromLocalnameRequired("PicoW"),
+  // Trinidad and Tobago Dollar
+  TTD_Currency: Qudt.currencyFromLocalnameRequired("TTD"),
+  // US Peck
+  PK_US_DRY: Qudt.unitFromLocalnameRequired("PK_US_DRY"),
+  // Pound Force Inch
+  LB_F__IN: Qudt.unitFromLocalnameRequired("LB_F-IN"),
+  // Megapascal Litre Per Second
+  MegaPA__L__PER__SEC: Qudt.unitFromLocalnameRequired("MegaPA-L-PER-SEC"),
+  // Picohenry
+  PicoH: Qudt.unitFromLocalnameRequired("PicoH"),
+  // Megajoule Per Kilogram
+  MegaJ__PER__KiloGM: Qudt.unitFromLocalnameRequired("MegaJ-PER-KiloGM"),
+  // MicroKAT
+  MicroKAT: Qudt.unitFromLocalnameRequired("MicroKAT"),
+  // Calorie (mean)
+  CAL_MEAN: Qudt.unitFromLocalnameRequired("CAL_MEAN"),
+  // Reciprocal Psi
+  PER__PSI: Qudt.unitFromLocalnameRequired("PER-PSI"),
+  // newton metre per degree metre
+  N__M__PER__DEG__M: Qudt.unitFromLocalnameRequired("N-M-PER-DEG-M"),
+  // Gram Force Per Square Centimetre
+  GM_F__PER__CentiM2: Qudt.unitFromLocalnameRequired("GM_F-PER-CentiM2"),
+  // Earth mass
+  EarthMass: Qudt.unitFromLocalnameRequired("EarthMass"),
+  // Terawatt Hour
+  TeraW__HR: Qudt.unitFromLocalnameRequired("TeraW-HR"),
+  // Reciprocal Second Square Metre Steradian
+  PER__SEC__M2__SR: Qudt.unitFromLocalnameRequired("PER-SEC-M2-SR"),
+  // 1000000I
+  _1000000I: Qudt.unitFromLocalnameRequired("1000000I"),
+  // British Thermal Unit (TH) Per Cubic Foot
+  BTU_TH__PER__FT3: Qudt.unitFromLocalnameRequired("BTU_TH-PER-FT3"),
+  // Hertz per Tesla
+  HZ__PER__T: Qudt.unitFromLocalnameRequired("HZ-PER-T"),
+  // Thousand Cubic Foot
+  Kilo__FT3: Qudt.unitFromLocalnameRequired("Kilo-FT3"),
+  // Bulgarian Lev
+  BGN_Currency: Qudt.currencyFromLocalnameRequired("BGN"),
+  // Planck Current
+  PlanckCurrent: Qudt.unitFromLocalnameRequired("PlanckCurrent"),
+  // British Thermal Unit (international Table) Per Minute
+  BTU_IT__PER__MIN: Qudt.unitFromLocalnameRequired("BTU_IT-PER-MIN"),
+  // Foot per Square Second
+  FT__PER__SEC2: Qudt.unitFromLocalnameRequired("FT-PER-SEC2"),
+  // Imperial Ounce Force Inch
+  OZ_F__IN: Qudt.unitFromLocalnameRequired("OZ_F-IN"),
+  // Kilograms per square metre per second
+  KiloGM__PER__M2__SEC: Qudt.unitFromLocalnameRequired("KiloGM-PER-M2-SEC"),
+  // Nanometer Per Millimeter Megapascal
+  NanoM__PER__MilliM__MegaPA: Qudt.unitFromLocalnameRequired(
+    "NanoM-PER-MilliM-MegaPA"
+  ),
+  // ArcMinute
+  ARCMIN: Qudt.unitFromLocalnameRequired("ARCMIN"),
+  // Lux Hour
+  LUX__HR: Qudt.unitFromLocalnameRequired("LUX-HR"),
+  // Dyne Per Centimetre
+  DYN__PER__CentiM: Qudt.unitFromLocalnameRequired("DYN-PER-CentiM"),
+  // square metre per Kilowatt
+  M2__PER__KiloW: Qudt.unitFromLocalnameRequired("M2-PER-KiloW"),
+  // Kelvin metres per second
+  K__M__PER__SEC: Qudt.unitFromLocalnameRequired("K-M-PER-SEC"),
+  // Coulomb per Mole
+  C__PER__MOL: Qudt.unitFromLocalnameRequired("C-PER-MOL"),
+  // Milligram
+  MilliGM: Qudt.unitFromLocalnameRequired("MilliGM"),
+  // British Thermal Unit (international Table) Per Pound Degree Fahrenheit
+  BTU_IT__PER__LB_F__DEG_F: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-PER-LB_F-DEG_F"
+  ),
+  // ArcSecond
+  ARCSEC: Qudt.unitFromLocalnameRequired("ARCSEC"),
+  // THM_EEC
+  THM_EEC: Qudt.unitFromLocalnameRequired("THM_EEC"),
+  // Iraqi Dinar
+  IQD_Currency: Qudt.currencyFromLocalnameRequired("IQD"),
+  // Jordanian Dinar
+  JOD_Currency: Qudt.currencyFromLocalnameRequired("JOD"),
+  // Barrel (UK Petroleum) Per Minute
+  BBL_UK_PET__PER__MIN: Qudt.unitFromLocalnameRequired("BBL_UK_PET-PER-MIN"),
+  // Reciprocal Pascal
+  PER__PA: Qudt.unitFromLocalnameRequired("PER-PA"),
+  // Microfarad Per Meter
+  MicroFARAD__PER__M: Qudt.unitFromLocalnameRequired("MicroFARAD-PER-M"),
+  // Ampere per Degree Celsius
+  A__PER__DEG_C: Qudt.unitFromLocalnameRequired("A-PER-DEG_C"),
+  // Microvolt Per Metre
+  MicroV__PER__M: Qudt.unitFromLocalnameRequired("MicroV-PER-M"),
+  // Square Metre Steradian
+  M2__SR: Qudt.unitFromLocalnameRequired("M2-SR"),
+  // Reciprocal metre per steradian
+  PER__M__SR: Qudt.unitFromLocalnameRequired("PER-M-SR"),
+  // Cape Verde Escudo
+  CVE_Currency: Qudt.currencyFromLocalnameRequired("CVE"),
+  // Megavolt Ampere
+  MegaV__A: Qudt.unitFromLocalnameRequired("MegaV-A"),
+  // Ampere Square Meter Per Joule Second
+  A__M2__PER__J__SEC: Qudt.unitFromLocalnameRequired("A-M2-PER-J-SEC"),
+  // Millisiemens Per Centimeter
+  MilliS__PER__CentiM: Qudt.unitFromLocalnameRequired("MilliS-PER-CentiM"),
+  // Solomon Islands Dollar
+  SBD_Currency: Qudt.currencyFromLocalnameRequired("SBD"),
+  // Cubic Coulomb Metre per Square Joule
+  C3__M__PER__J2: Qudt.unitFromLocalnameRequired("C3-M-PER-J2"),
+  // Guarani
+  PYG_Currency: Qudt.currencyFromLocalnameRequired("PYG"),
+  // Picowatt Per Square Metre
+  PicoW__PER__M2: Qudt.unitFromLocalnameRequired("PicoW-PER-M2"),
+  // GigaCoulomb
+  GigaC: Qudt.unitFromLocalnameRequired("GigaC"),
+  // Centimetre Second Degree Celsius
+  CentiM__SEC__DEG_C: Qudt.unitFromLocalnameRequired("CentiM-SEC-DEG_C"),
+  // Pascal Per Bar
+  PA__PER__BAR: Qudt.unitFromLocalnameRequired("PA-PER-BAR"),
+  // Reciprocal Cubic Meter Second
+  PER__M3__SEC: Qudt.unitFromLocalnameRequired("PER-M3-SEC"),
+  // Mega British Thermal Unit (International Definition) per Hour
+  MegaBTU_IT__PER__HR: Qudt.unitFromLocalnameRequired("MegaBTU_IT-PER-HR"),
+  // Milligram Per Kilogram
+  MilliGM__PER__KiloGM: Qudt.unitFromLocalnameRequired("MilliGM-PER-KiloGM"),
+  // Moroccan Dirham
+  MAD_Currency: Qudt.currencyFromLocalnameRequired("MAD"),
+  // Gram Per Millimetre
+  GM__PER__MilliM: Qudt.unitFromLocalnameRequired("GM-PER-MilliM"),
+  // Mile per Hour
+  MI__PER__HR: Qudt.unitFromLocalnameRequired("MI-PER-HR"),
+  // Square Centimeter
+  CentiM2: Qudt.unitFromLocalnameRequired("CentiM2"),
+  // Reciprocal Picometre
+  PER__PicoM: Qudt.unitFromLocalnameRequired("PER-PicoM"),
+  // Gill (US)
+  GI_US: Qudt.unitFromLocalnameRequired("GI_US"),
+  // Megajoule Per Cubic Meter
+  MegaJ__PER__M3: Qudt.unitFromLocalnameRequired("MegaJ-PER-M3"),
+  // are
+  ARE: Qudt.unitFromLocalnameRequired("ARE"),
+  // Milliwatts per square centimetre per micrometre per steradian
+  MilliW__PER__CentiM2__MicroM__SR: Qudt.unitFromLocalnameRequired(
+    "MilliW-PER-CentiM2-MicroM-SR"
+  ),
+  // Milligrams per cubic metre per day
+  MilliGM__PER__M3__DAY: Qudt.unitFromLocalnameRequired("MilliGM-PER-M3-DAY"),
+  // British Thermal Unit (international Table) Inch Per Second Square Foot degree Fahrenheit
+  BTU_IT__IN__PER__SEC__FT2__DEG_F: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-IN-PER-SEC-FT2-DEG_F"
+  ),
+  // Kilocalorie per Mole
+  KiloCAL__PER__MOL: Qudt.unitFromLocalnameRequired("KiloCAL-PER-MOL"),
+  // वोल्ट
+  V: Qudt.unitFromLocalnameRequired("V"),
+  // Electronvolt Per Angstrom
+  EV__PER__ANGSTROM: Qudt.unitFromLocalnameRequired("EV-PER-ANGSTROM"),
+  // katal
+  KAT: Qudt.unitFromLocalnameRequired("KAT"),
+  // tesla
+  T: Qudt.unitFromLocalnameRequired("T"),
+  // BTU-IT-PER-lb
+  BTU_IT__PER__LB: Qudt.unitFromLocalnameRequired("BTU_IT-PER-LB"),
+  // Nanomoles per litre
+  NanoMOL__PER__L: Qudt.unitFromLocalnameRequired("NanoMOL-PER-L"),
+  // Volt Per Centimetre
+  V__PER__CentiM: Qudt.unitFromLocalnameRequired("V-PER-CentiM"),
+  // Tonne Per Minute
+  TONNE__PER__MIN: Qudt.unitFromLocalnameRequired("TONNE-PER-MIN"),
+  // Barrel (US) Per Day
+  BBL_US__PER__DAY: Qudt.unitFromLocalnameRequired("BBL_US-PER-DAY"),
+  // Kelvin per Square Second
+  K__PER__SEC2: Qudt.unitFromLocalnameRequired("K-PER-SEC2"),
+  // Dalton
+  Da: Qudt.unitFromLocalnameRequired("Da"),
+  // Ampere Per Square Centimetre
+  A__PER__CentiM2: Qudt.unitFromLocalnameRequired("A-PER-CentiM2"),
+  // Degrees per metre
+  DEG__PER__M: Qudt.unitFromLocalnameRequired("DEG-PER-M"),
+  // Milli-inch
+  MilliIN: Qudt.unitFromLocalnameRequired("MilliIN"),
+  // Heart Beat
+  HeartBeat: Qudt.unitFromLocalnameRequired("HeartBeat"),
+  // Guyana Dollar
+  GYD_Currency: Qudt.currencyFromLocalnameRequired("GYD"),
+  // Pound Force Foot Per Ampere
+  KiloLB_F__FT__PER__A: Qudt.unitFromLocalnameRequired("KiloLB_F-FT-PER-A"),
+  // Micromoles per square metre per day
+  MicroMOL__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MicroMOL-PER-M2-DAY"),
+  // Statsiemens
+  S_Stat: Qudt.unitFromLocalnameRequired("S_Stat"),
+  // Pint (US Liquid) Per Minute
+  PINT_US__PER__MIN: Qudt.unitFromLocalnameRequired("PINT_US-PER-MIN"),
+  // Joule per Quartic Metre
+  J__PER__M4: Qudt.unitFromLocalnameRequired("J-PER-M4"),
+  // Kilogram per Mega BTU
+  KiloGM__PER__MegaBTU_IT: Qudt.unitFromLocalnameRequired(
+    "KiloGM-PER-MegaBTU_IT"
+  ),
+  // Bermuda Dollar
+  BMD_Currency: Qudt.currencyFromLocalnameRequired("BMD"),
+  // Degree Fahrenheit
+  DEG_F: Qudt.unitFromLocalnameRequired("DEG_F"),
+  // Radian per Hour
+  RAD__PER__HR: Qudt.unitFromLocalnameRequired("RAD-PER-HR"),
+  // Fathom
+  FATH: Qudt.unitFromLocalnameRequired("FATH"),
+  // DeciSiemens
+  DeciS: Qudt.unitFromLocalnameRequired("DeciS"),
+  // CentiNewton
+  CentiN: Qudt.unitFromLocalnameRequired("CentiN"),
+  // Picofarad Per Meter
+  PicoFARAD__PER__M: Qudt.unitFromLocalnameRequired("PicoFARAD-PER-M"),
+  // Picoamps per micromole per litre
+  PicoA__PER__MicroMOL__L: Qudt.unitFromLocalnameRequired(
+    "PicoA-PER-MicroMOL-L"
+  ),
+  // Kina
+  PGK_Currency: Qudt.currencyFromLocalnameRequired("PGK"),
+  // BTU per Second
+  BTU_IT__PER__SEC: Qudt.unitFromLocalnameRequired("BTU_IT-PER-SEC"),
+  // Day
+  DAY: Qudt.unitFromLocalnameRequired("DAY"),
+  // Point
+  PT: Qudt.unitFromLocalnameRequired("PT"),
+  // candela per square metre
+  CD__PER__M2: Qudt.unitFromLocalnameRequired("CD-PER-M2"),
+  // Millidarcy
+  MilliDARCY: Qudt.unitFromLocalnameRequired("MilliDARCY"),
+  // KiloTonne
+  KiloTONNE: Qudt.unitFromLocalnameRequired("KiloTONNE"),
+  // Kelvin per Minute
+  K__PER__MIN: Qudt.unitFromLocalnameRequired("K-PER-MIN"),
+  // Hundredweight (US)
+  Hundredweight_US: Qudt.unitFromLocalnameRequired("Hundredweight_US"),
+  // Malaysian Ringgit
+  MYR_Currency: Qudt.currencyFromLocalnameRequired("MYR"),
+  // Weber Metre
+  WB__M: Qudt.unitFromLocalnameRequired("WB-M"),
+  // Siemens Square metre per mole
+  S__M2__PER__MOL: Qudt.unitFromLocalnameRequired("S-M2-PER-MOL"),
+  // Joule Per Second
+  J__PER__SEC: Qudt.unitFromLocalnameRequired("J-PER-SEC"),
+  // Square Micrometre
+  MicroM2: Qudt.unitFromLocalnameRequired("MicroM2"),
+  // Foot Lambert
+  FT__LA: Qudt.unitFromLocalnameRequired("FT-LA"),
+  // Gigajoule Per Hour
+  GigaJ__PER__HR: Qudt.unitFromLocalnameRequired("GigaJ-PER-HR"),
+  // British Thermal Unit (international Table) Per Second Foot Degree Rankine
+  BTU_IT__PER__SEC__FT__DEG_R: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-PER-SEC-FT-DEG_R"
+  ),
+  // Register Ton
+  RT: Qudt.unitFromLocalnameRequired("RT"),
+  // Peck (US Dry) Per Hour
+  PK_US_DRY__PER__HR: Qudt.unitFromLocalnameRequired("PK_US_DRY-PER-HR"),
+  // Kelvin per metre
+  K__PER__M: Qudt.unitFromLocalnameRequired("K-PER-M"),
+  // Decilitre Per Gram
+  DeciL__PER__GM: Qudt.unitFromLocalnameRequired("DeciL-PER-GM"),
+  // Millibecquerels per square metre per day
+  MilliBQ__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MilliBQ-PER-M2-DAY"),
+  // Deaths per Million individuals per year
+  DEATHS__PER__1000000I__YR: Qudt.unitFromLocalnameRequired(
+    "DEATHS-PER-1000000I-YR"
+  ),
+  // Gold franc (special settlement currency)
+  XFO_Currency: Qudt.currencyFromLocalnameRequired("XFO"),
+  // Number per hectare
+  NUM__PER__HA: Qudt.unitFromLocalnameRequired("NUM-PER-HA"),
+  // Tunisian Dinar
+  TND_Currency: Qudt.currencyFromLocalnameRequired("TND"),
+  // Reciprocal Kilometre
+  PER__KiloM: Qudt.unitFromLocalnameRequired("PER-KiloM"),
+  // Reciprocal Second
+  PER__SEC: Qudt.unitFromLocalnameRequired("PER-SEC"),
+  // British Thermal Unit (thermochemical) Per Minute
+  BTU_TH__PER__MIN: Qudt.unitFromLocalnameRequired("BTU_TH-PER-MIN"),
+  // Barrel (US Petroleum) Per Second
+  BBL_US_PET__PER__SEC: Qudt.unitFromLocalnameRequired("BBL_US_PET-PER-SEC"),
+  // Microfarad Per Kilometre
+  MicroFARAD__PER__KiloM: Qudt.unitFromLocalnameRequired(
+    "MicroFARAD-PER-KiloM"
+  ),
+  // Kilogram Force Per Square Meter
+  KiloGM_F__PER__M2: Qudt.unitFromLocalnameRequired("KiloGM_F-PER-M2"),
+  // Millinewton Per Meter
+  MilliN__PER__M: Qudt.unitFromLocalnameRequired("MilliN-PER-M"),
+  // Rod
+  ROD: Qudt.unitFromLocalnameRequired("ROD"),
+  // Tonne Per Day
+  TONNE__PER__DAY: Qudt.unitFromLocalnameRequired("TONNE-PER-DAY"),
+  // weber
+  WB: Qudt.unitFromLocalnameRequired("WB"),
+  // Microcoulomb Per Cubic Metre
+  MicroC__PER__M3: Qudt.unitFromLocalnameRequired("MicroC-PER-M3"),
+  // Pataca
+  MOP_Currency: Qudt.currencyFromLocalnameRequired("MOP"),
+  // Parts per trillion by volume
+  PPTR_VOL: Qudt.unitFromLocalnameRequired("PPTR_VOL"),
+  // Kilogram Per Second Per Square Metre
+  KiloGM__PER__SEC__M2: Qudt.unitFromLocalnameRequired("KiloGM-PER-SEC-M2"),
+  // Centimeter per Square Second
+  CentiM__PER__SEC2: Qudt.unitFromLocalnameRequired("CentiM-PER-SEC2"),
   // kilogram per meter kubik
   KiloGM__PER__M3: Qudt.unitFromLocalnameRequired("KiloGM-PER-M3"),
-  // Falkland Islands Pound
-  FKP_Currency: Qudt.currencyFromLocalnameRequired("FKP"),
-  // Tonne Per Minute
-  TON_Metric__PER__MIN: Qudt.unitFromLocalnameRequired("TON_Metric-PER-MIN"),
-  // Megajoule Per Square Metre
-  MegaJ__PER__M2: Qudt.unitFromLocalnameRequired("MegaJ-PER-M2"),
+  // millimetres per day
+  MilliM__PER__DAY: Qudt.unitFromLocalnameRequired("MilliM-PER-DAY"),
+  // Joule Per Gram
+  J__PER__GM: Qudt.unitFromLocalnameRequired("J-PER-GM"),
+  // BTU per Pound Mole Degree Fahrenheit
+  BTU_IT__PER__MOL_LB__DEG_F: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-PER-MOL_LB-DEG_F"
+  ),
+  // Angstrom
+  ANGSTROM: Qudt.unitFromLocalnameRequired("ANGSTROM"),
+  // Calorie (thermochemical) Per Gram Kelvin
+  CAL_TH__PER__GM__K: Qudt.unitFromLocalnameRequired("CAL_TH-PER-GM-K"),
+  // Square Foot per Hour
+  FT2__PER__HR: Qudt.unitFromLocalnameRequired("FT2-PER-HR"),
+  // Foot Pound Force per Square Foot Second
+  FT__LB_F__PER__FT2__SEC: Qudt.unitFromLocalnameRequired(
+    "FT-LB_F-PER-FT2-SEC"
+  ),
+  // Micropascal
+  MicroPA: Qudt.unitFromLocalnameRequired("MicroPA"),
+  // Cases per 1000 individuals per year
+  CASES__PER__1000I__YR: Qudt.unitFromLocalnameRequired("CASES-PER-1000I-YR"),
+  // Inch per Second
+  IN__PER__SEC: Qudt.unitFromLocalnameRequired("IN-PER-SEC"),
+  // Nanograms
+  NanoGM: Qudt.unitFromLocalnameRequired("NanoGM"),
+  // Radian per Square Second
+  RAD__PER__SEC2: Qudt.unitFromLocalnameRequired("RAD-PER-SEC2"),
+  // Pint (US Liquid) Per Hour
+  PINT_US__PER__HR: Qudt.unitFromLocalnameRequired("PINT_US-PER-HR"),
+  // British Thermal Unit (international Table) Per Second Square Foot degree Rankine
+  BTU_IT__PER__SEC__FT2__DEG_R: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-PER-SEC-FT2-DEG_R"
+  ),
+  // Erg
+  ERG: Qudt.unitFromLocalnameRequired("ERG"),
+  // Kilo Newton Square Metre
+  KiloN__M2: Qudt.unitFromLocalnameRequired("KiloN-M2"),
+  // Millibecquerels per litre
+  MilliBQ__PER__L: Qudt.unitFromLocalnameRequired("MilliBQ-PER-L"),
+  // Degree Fahrenheit Hour
+  DEG_F__HR: Qudt.unitFromLocalnameRequired("DEG_F-HR"),
+  // Stilb
+  STILB: Qudt.unitFromLocalnameRequired("STILB"),
+  // BTU per Pound Mole
+  BTU_IT__PER__MOL_LB: Qudt.unitFromLocalnameRequired("BTU_IT-PER-MOL_LB"),
+  // Foot Candle
+  FC: Qudt.unitFromLocalnameRequired("FC"),
+  // Picofarad
+  PicoFARAD: Qudt.unitFromLocalnameRequired("PicoFARAD"),
+  // milliradian
+  MilliRAD: Qudt.unitFromLocalnameRequired("MilliRAD"),
+  // Cubic Decimeter Per Second
+  DeciM3__PER__SEC: Qudt.unitFromLocalnameRequired("DeciM3-PER-SEC"),
+  // Moles per Square Meter per Day
+  MOL__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MOL-PER-M2-DAY"),
+  // Psi Per Psi
+  PSI__PER__PSI: Qudt.unitFromLocalnameRequired("PSI-PER-PSI"),
+  // Watts per metre
+  W__PER__M: Qudt.unitFromLocalnameRequired("W-PER-M"),
+  // Micromho
+  MicroMHO: Qudt.unitFromLocalnameRequired("MicroMHO"),
+  // Milligray
+  MilliGRAY: Qudt.unitFromLocalnameRequired("MilliGRAY"),
+  // Microgram Per Liter
+  MicroGM__PER__L: Qudt.unitFromLocalnameRequired("MicroGM-PER-L"),
+  // Pound Mass (avoirdupois) Square Foot
+  LB__FT2: Qudt.unitFromLocalnameRequired("LB-FT2"),
+  // Psi Cubic Inch Per Second
+  PSI__IN3__PER__SEC: Qudt.unitFromLocalnameRequired("PSI-IN3-PER-SEC"),
+  // Planck Power
+  PlanckPower: Qudt.unitFromLocalnameRequired("PlanckPower"),
+  // Square degree
+  DEG2: Qudt.unitFromLocalnameRequired("DEG2"),
+  // Square metres per square second
+  M2__PER__SEC2: Qudt.unitFromLocalnameRequired("M2-PER-SEC2"),
+  // Watts per square metre per inverse metre per steradian
+  W__M__PER__M2__SR: Qudt.unitFromLocalnameRequired("W-M-PER-M2-SR"),
+  // Gram Per Meter
+  GM__PER__M: Qudt.unitFromLocalnameRequired("GM-PER-M"),
+  // Dominican Peso
+  DOP_Currency: Qudt.currencyFromLocalnameRequired("DOP"),
+  // Hectogram
+  HectoGM: Qudt.unitFromLocalnameRequired("HectoGM"),
+  // mètre carré par seconde
+  M2__PER__SEC: Qudt.unitFromLocalnameRequired("M2-PER-SEC"),
+  // Pound Force Per Foot
+  KiloLB_F__PER__FT: Qudt.unitFromLocalnameRequired("KiloLB_F-PER-FT"),
+  // Watts per square metre per nanometre per steradian
+  W__PER__M2__NanoM__SR: Qudt.unitFromLocalnameRequired("W-PER-M2-NanoM-SR"),
+  // Cordoba Oro
+  NIO_Currency: Qudt.currencyFromLocalnameRequired("NIO"),
+  // Litre
+  L: Qudt.unitFromLocalnameRequired("L"),
+  // DecaCoulomb
+  DecaC: Qudt.unitFromLocalnameRequired("DecaC"),
+  // Millitesla
+  MilliT: Qudt.unitFromLocalnameRequired("MilliT"),
+  // Metric Ton
+  TON_Metric: Qudt.unitFromLocalnameRequired("TON_Metric"),
+  // Kilocoulomb Per Cubic Meter
+  KiloC__PER__M3: Qudt.unitFromLocalnameRequired("KiloC-PER-M3"),
+  // Bolivian Mvdol (Funds code)
+  BOV_Currency: Qudt.currencyFromLocalnameRequired("BOV"),
+  // BTU (TH) Inch per Square Foot Hour Degree Fahrenheit
+  BTU_TH__IN__PER__FT2__HR__DEG_F: Qudt.unitFromLocalnameRequired(
+    "BTU_TH-IN-PER-FT2-HR-DEG_F"
+  ),
+  // Joule Square Meter
+  J__M2: Qudt.unitFromLocalnameRequired("J-M2"),
+  // Cup (US)
+  CUP_US: Qudt.unitFromLocalnameRequired("CUP_US"),
+  // Abcoulomb per Square Centimetre
+  C_Ab__PER__CentiM2: Qudt.unitFromLocalnameRequired("C_Ab-PER-CentiM2"),
+  // Electron Volt
+  EV: Qudt.unitFromLocalnameRequired("EV"),
+  // MilliBecquerel
+  MilliBQ: Qudt.unitFromLocalnameRequired("MilliBQ"),
+  // Reciprocal Cubic Meter
+  PER__M3: Qudt.unitFromLocalnameRequired("PER-M3"),
+  // Mauritius Rupee
+  MUR_Currency: Qudt.currencyFromLocalnameRequired("MUR"),
+  // Australian Dollar
+  AUD_Currency: Qudt.currencyFromLocalnameRequired("AUD"),
+  // kelvin
+  K: Qudt.unitFromLocalnameRequired("K"),
+  // Jamaican Dollar
+  JMD_Currency: Qudt.currencyFromLocalnameRequired("JMD"),
+  // Nanomoles per microgram per hour
+  NanoMOL__PER__MicroGM__HR: Qudt.unitFromLocalnameRequired(
+    "NanoMOL-PER-MicroGM-HR"
+  ),
+  // MegaCoulomb
+  MegaC: Qudt.unitFromLocalnameRequired("MegaC"),
+  // Kilonewton per metre
+  KiloN__PER__M: Qudt.unitFromLocalnameRequired("KiloN-PER-M"),
+  // Joule per Kilogram Kelvin Cubic Metre
+  J__PER__KiloGM__K__M3: Qudt.unitFromLocalnameRequired("J-PER-KiloGM-K-M3"),
+  // Gram Per Cubic Decimetre
+  GM__PER__DeciM3: Qudt.unitFromLocalnameRequired("GM-PER-DeciM3"),
+  // Degree Fahrenheit Hour per BTU
+  DEG_F__HR__PER__BTU_IT: Qudt.unitFromLocalnameRequired("DEG_F-HR-PER-BTU_IT"),
+  // Kelvin metres
+  K__M: Qudt.unitFromLocalnameRequired("K-M"),
+  // Kilocalorie per Square Centimetre Second
+  KiloCAL__PER__CentiM2__SEC: Qudt.unitFromLocalnameRequired(
+    "KiloCAL-PER-CentiM2-SEC"
+  ),
+  // Nanosiemens Per Centimetre
+  NanoS__PER__CentiM: Qudt.unitFromLocalnameRequired("NanoS-PER-CentiM"),
+  // Zimbabwe Dollar
+  ZWL_Currency: Qudt.currencyFromLocalnameRequired("ZWL"),
+  // Statcoulomb per Mole
+  C_Stat__PER__MOL: Qudt.unitFromLocalnameRequired("C_Stat-PER-MOL"),
+  // Watt per Square Foot
+  W__PER__FT2: Qudt.unitFromLocalnameRequired("W-PER-FT2"),
+  // Gram Per Second
+  GM__PER__SEC: Qudt.unitFromLocalnameRequired("GM-PER-SEC"),
+  // Kilopascal Per Bar
+  KiloPA__PER__BAR: Qudt.unitFromLocalnameRequired("KiloPA-PER-BAR"),
+  // Gigahertz Metre
+  GigaHZ__M: Qudt.unitFromLocalnameRequired("GigaHZ-M"),
+  // metr krychlový na mol
+  M3__PER__MOL: Qudt.unitFromLocalnameRequired("M3-PER-MOL"),
+  // Mil Length
+  MilLength: Qudt.unitFromLocalnameRequired("MilLength"),
+  // Poise
+  POISE: Qudt.unitFromLocalnameRequired("POISE"),
+  // Nanograms per day
+  NanoGM__PER__DAY: Qudt.unitFromLocalnameRequired("NanoGM-PER-DAY"),
+  // Centimetre of Water
+  CM_H2O: Qudt.unitFromLocalnameRequired("CM_H2O"),
+  // Nanofarad Per Meter
+  NanoFARAD__PER__M: Qudt.unitFromLocalnameRequired("NanoFARAD-PER-M"),
+  // Assay Ton
+  TON_Assay: Qudt.unitFromLocalnameRequired("TON_Assay"),
+  // International Table calorie
+  CAL_IT: Qudt.unitFromLocalnameRequired("CAL_IT"),
+  // Microsiemens Per Metre
+  MicroS__PER__M: Qudt.unitFromLocalnameRequired("MicroS-PER-M"),
+  // Quad
+  QUAD: Qudt.unitFromLocalnameRequired("QUAD"),
+  // Number per metre
+  NUM__PER__M: Qudt.unitFromLocalnameRequired("NUM-PER-M"),
+  // Reciprocal Square Joule
+  PER__J2: Qudt.unitFromLocalnameRequired("PER-J2"),
+  // Kilogram Per Millimeter
+  KiloGM__PER__MilliM: Qudt.unitFromLocalnameRequired("KiloGM-PER-MilliM"),
+  // Reciprocal Centimeter
+  PER__CentiM: Qudt.unitFromLocalnameRequired("PER-CentiM"),
+  // ohm-mètre
+  OHM__M: Qudt.unitFromLocalnameRequired("OHM-M"),
+  // Acidity
+  PH: Qudt.unitFromLocalnameRequired("PH"),
+  // Newton Per Square Centimetre
+  N__PER__CentiM2: Qudt.unitFromLocalnameRequired("N-PER-CentiM2"),
+  // Watt Per Cubic Metre
+  W__PER__M3: Qudt.unitFromLocalnameRequired("W-PER-M3"),
+  // V-M
+  V__M: Qudt.unitFromLocalnameRequired("V-M"),
+  // Calorie (international Table) Per Second Centimetre Kelvin
+  CAL_IT__PER__SEC__CentiM__K: Qudt.unitFromLocalnameRequired(
+    "CAL_IT-PER-SEC-CentiM-K"
+  ),
+  // Lilangeni
+  SZL_Currency: Qudt.currencyFromLocalnameRequired("SZL"),
+  // Kelvin Meter Per Watt
+  K__M__PER__W: Qudt.unitFromLocalnameRequired("K-M-PER-W"),
+  // Costa Rican Colon
+  CRC_Currency: Qudt.currencyFromLocalnameRequired("CRC"),
+  // Nephelometry Turbidity Unit
+  NTU: Qudt.unitFromLocalnameRequired("NTU"),
+  // Light Year
+  LY: Qudt.unitFromLocalnameRequired("LY"),
+  // Tonne Per Cubic Metre
+  TON_Metric__PER__M3: Qudt.unitFromLocalnameRequired("TON_Metric-PER-M3"),
+  // Erg Per Centimeter
+  ERG__PER__CentiM: Qudt.unitFromLocalnameRequired("ERG-PER-CentiM"),
+  // Kilogram Force Per Square Millimetre
+  KiloGM_F__PER__MilliM2: Qudt.unitFromLocalnameRequired(
+    "KiloGM_F-PER-MilliM2"
+  ),
+  // Coulomb mal Quadratmeter je Volt
+  C__M2__PER__V: Qudt.unitFromLocalnameRequired("C-M2-PER-V"),
+  // Pica
+  PCA: Qudt.unitFromLocalnameRequired("PCA"),
+  // Acre Foot
+  AC__FT: Qudt.unitFromLocalnameRequired("AC-FT"),
+  // Pound Force per Square Inch Second
+  LB_F__PER__IN2__SEC: Qudt.unitFromLocalnameRequired("LB_F-PER-IN2-SEC"),
+  // Dots Per Inch
+  DPI: Qudt.unitFromLocalnameRequired("DPI"),
+  // Number per litre
+  NUM__PER__L: Qudt.unitFromLocalnameRequired("NUM-PER-L"),
+  // Pascal metres per square second
+  PA__M__PER__SEC2: Qudt.unitFromLocalnameRequired("PA-M-PER-SEC2"),
+  // Conventional Millimetre Of Water
+  MilliM_H2O: Qudt.unitFromLocalnameRequired("MilliM_H2O"),
+  // Pound Mass (avoirdupois) Square Inch
+  LB__IN2: Qudt.unitFromLocalnameRequired("LB-IN2"),
+  // Kilojoule Per Kilogram Kelvin
+  KiloJ__PER__KiloGM__K: Qudt.unitFromLocalnameRequired("KiloJ-PER-KiloGM-K"),
+  // TeraCoulomb
+  TeraC: Qudt.unitFromLocalnameRequired("TeraC"),
+  // BTU Foot
+  BTU_IT__FT: Qudt.unitFromLocalnameRequired("BTU_IT-FT"),
+  // जूल प्रति मोल (इकाई)
+  J__PER__MOL: Qudt.unitFromLocalnameRequired("J-PER-MOL"),
+  // Pascal per Second
+  PA__PER__SEC: Qudt.unitFromLocalnameRequired("PA-PER-SEC"),
+  // Joule Per Hour
+  J__PER__HR: Qudt.unitFromLocalnameRequired("J-PER-HR"),
+  // Circular Mil
+  MIL_Circ: Qudt.unitFromLocalnameRequired("MIL_Circ"),
+  // Calorie (thermochemical) Per Second Square Centimeter kelvin
+  CAL_TH__PER__SEC__CentiM2__K: Qudt.unitFromLocalnameRequired(
+    "CAL_TH-PER-SEC-CentiM2-K"
+  ),
+  // Mikrometer pro Newton
+  MicroM__PER__N: Qudt.unitFromLocalnameRequired("MicroM-PER-N"),
+  // Cubic Metre per Coulomb
+  M3__PER__C: Qudt.unitFromLocalnameRequired("M3-PER-C"),
+  // Planck Force
+  PlanckForce: Qudt.unitFromLocalnameRequired("PlanckForce"),
+  // meter persegi per meter
+  M2__PER__M: Qudt.unitFromLocalnameRequired("M2-PER-M"),
+  // Tonne Per Second
+  TONNE__PER__SEC: Qudt.unitFromLocalnameRequired("TONNE-PER-SEC"),
+  // Millilitre Per Square Centimeter Minute
+  MilliL__PER__CentiM2__MIN: Qudt.unitFromLocalnameRequired(
+    "MilliL-PER-CentiM2-MIN"
+  ),
+  // Ampere Square Metre
+  A__M2: Qudt.unitFromLocalnameRequired("A-M2"),
+  // Reciprocal Liter
+  PER__L: Qudt.unitFromLocalnameRequired("PER-L"),
+  // Slug per Square Foot
+  SLUG__PER__FT2: Qudt.unitFromLocalnameRequired("SLUG-PER-FT2"),
+  // Naira
+  NGN_Currency: Qudt.currencyFromLocalnameRequired("NGN"),
+  // Month
+  MO: Qudt.unitFromLocalnameRequired("MO"),
+  // Planck Current Density
+  PlanckCurrentDensity: Qudt.unitFromLocalnameRequired("PlanckCurrentDensity"),
+  // Unit Pole
+  UnitPole: Qudt.unitFromLocalnameRequired("UnitPole"),
+  // Becquerels second per cubic metre
+  BQ__SEC__PER__M3: Qudt.unitFromLocalnameRequired("BQ-SEC-PER-M3"),
+  // Milligram Per Hour
+  MilliGM__PER__HR: Qudt.unitFromLocalnameRequired("MilliGM-PER-HR"),
+  // Byte
+  BYTE: Qudt.unitFromLocalnameRequired("BYTE"),
+  // Cuban Peso
+  CUP_Currency: Qudt.currencyFromLocalnameRequired("CUP"),
+  // Square Kelvin
+  K2: Qudt.unitFromLocalnameRequired("K2"),
+  // Nakfa
+  ERN_Currency: Qudt.currencyFromLocalnameRequired("ERN"),
+  // Reciprocal Kelvin
+  PER__K: Qudt.unitFromLocalnameRequired("PER-K"),
+  // Newton Per Square Millimeter
+  N__PER__MilliM2: Qudt.unitFromLocalnameRequired("N-PER-MilliM2"),
+  // Magnetic Susceptibility Unit
+  SUSCEPTIBILITY_MAG: Qudt.unitFromLocalnameRequired("SUSCEPTIBILITY_MAG"),
+  // decisecond
+  DeciSEC: Qudt.unitFromLocalnameRequired("DeciSEC"),
+  // MILLE
+  MILLE: Qudt.unitFromLocalnameRequired("MILLE"),
+  // 伏特每米
+  V__PER__M: Qudt.unitFromLocalnameRequired("V-PER-M"),
+  // Ton of Oil Equivalent
+  TOE: Qudt.unitFromLocalnameRequired("TOE"),
+  // Square metres per square Hertz
+  M2__PER__HZ2: Qudt.unitFromLocalnameRequired("M2-PER-HZ2"),
+  // Kilolitre Per Hour
+  KiloL__PER__HR: Qudt.unitFromLocalnameRequired("KiloL-PER-HR"),
+  // International Unit per milligram
+  IU__PER__MilliGM: Qudt.unitFromLocalnameRequired("IU-PER-MilliGM"),
+  // Peck (UK)
+  PK_UK: Qudt.unitFromLocalnameRequired("PK_UK"),
+  // Micromoles per litre per hour
+  MicroMOL__PER__L__HR: Qudt.unitFromLocalnameRequired("MicroMOL-PER-L-HR"),
+  // Number per 100 grams
+  NUM__PER__HectoGM: Qudt.unitFromLocalnameRequired("NUM-PER-HectoGM"),
+  // US Gallon
+  GAL_US: Qudt.unitFromLocalnameRequired("GAL_US"),
+  // Hryvnia
+  UAH_Currency: Qudt.currencyFromLocalnameRequired("UAH"),
+  // Kilo British Thermal Unit (Thermochemical Definition)
+  KiloBTU_TH: Qudt.unitFromLocalnameRequired("KiloBTU_TH"),
+  // Degrees Celsius per metre
+  DEG_C__PER__M: Qudt.unitFromLocalnameRequired("DEG_C-PER-M"),
+  // Abohm
+  OHM_Ab: Qudt.unitFromLocalnameRequired("OHM_Ab"),
+  // centimeter per second
+  CentiM__PER__SEC: Qudt.unitFromLocalnameRequired("CentiM-PER-SEC"),
+  // Square Pascal Second
+  PA2__SEC: Qudt.unitFromLocalnameRequired("PA2-SEC"),
+  // Pa'anga
+  TOP_Currency: Qudt.currencyFromLocalnameRequired("TOP"),
+  // Gallon (US) Per Hour
+  GAL_US__PER__HR: Qudt.unitFromLocalnameRequired("GAL_US-PER-HR"),
+  // Picomoles per kilogram
+  PicoMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("PicoMOL-PER-KiloGM"),
+  // kilogram meter per saat
+  KiloGM__M__PER__SEC: Qudt.unitFromLocalnameRequired("KiloGM-M-PER-SEC"),
+  // Kilogram Per Square Centimeter
+  KiloGM__PER__CentiM2: Qudt.unitFromLocalnameRequired("KiloGM-PER-CentiM2"),
+  // Kilovolt Per Metre
+  KiloV__PER__M: Qudt.unitFromLocalnameRequired("KiloV-PER-M"),
+  // MicroCoulomb
+  MicroC: Qudt.unitFromLocalnameRequired("MicroC"),
+  // Nanograms per microlitre
+  NanoGM__PER__MicroL: Qudt.unitFromLocalnameRequired("NanoGM-PER-MicroL"),
+  // Kiloohm
+  KiloOHM: Qudt.unitFromLocalnameRequired("KiloOHM"),
+  // Gallon (UK) Per Minute
+  GAL_UK__PER__MIN: Qudt.unitFromLocalnameRequired("GAL_UK-PER-MIN"),
+  // Mean Julian Month
+  MO_MeanJulian: Qudt.unitFromLocalnameRequired("MO_MeanJulian"),
+  // Nautical Mile per Hour
+  MI_N__PER__HR: Qudt.unitFromLocalnameRequired("MI_N-PER-HR"),
+  // Square Meter per Kilogram
+  M2__PER__KiloGM: Qudt.unitFromLocalnameRequired("M2-PER-KiloGM"),
+  // Foot Pound Force Second
+  FT__LB_F__SEC: Qudt.unitFromLocalnameRequired("FT-LB_F-SEC"),
+  // T-SEC
+  T__SEC: Qudt.unitFromLocalnameRequired("T-SEC"),
+  // Kilogram Force per Square Centimeter
+  KiloGM_F__PER__CentiM2: Qudt.unitFromLocalnameRequired(
+    "KiloGM_F-PER-CentiM2"
+  ),
+  // Million US Dollars per Flight
+  MegaDOLLAR_US__PER__FLIGHT: Qudt.unitFromLocalnameRequired(
+    "MegaDOLLAR_US-PER-FLIGHT"
+  ),
+  // Microohm
+  MicroOHM: Qudt.unitFromLocalnameRequired("MicroOHM"),
+  // Statvolt
+  V_Stat: Qudt.unitFromLocalnameRequired("V_Stat"),
+  // Cubic Meter per Hour
+  M3__PER__HR: Qudt.unitFromLocalnameRequired("M3-PER-HR"),
+  // ZeptoCoulomb
+  ZeptoC: Qudt.unitFromLocalnameRequired("ZeptoC"),
+  // BTU (IT) Inch per Square Foot Second Degree Fahrenheit
+  BTU_IT__IN__PER__FT2__SEC__DEG_F: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-IN-PER-FT2-SEC-DEG_F"
+  ),
+  // bushel (UK)
+  BU_UK: Qudt.unitFromLocalnameRequired("BU_UK"),
+  // Milligram Per Second
+  MilliGM__PER__SEC: Qudt.unitFromLocalnameRequired("MilliGM-PER-SEC"),
+  // Kilocalorie (thermochemical) Per Minute
+  KiloCAL_TH__PER__MIN: Qudt.unitFromLocalnameRequired("KiloCAL_TH-PER-MIN"),
+  // Radian Square Meter per Kilogram
+  RAD__M2__PER__KiloGM: Qudt.unitFromLocalnameRequired("RAD-M2-PER-KiloGM"),
+  // vatio por metro cuadrado
+  W__PER__M2: Qudt.unitFromLocalnameRequired("W-PER-M2"),
+  // MicroTorr
+  MicroTORR: Qudt.unitFromLocalnameRequired("MicroTORR"),
+  // Petajoule
+  PetaJ: Qudt.unitFromLocalnameRequired("PetaJ"),
+  // Slug
+  SLUG: Qudt.unitFromLocalnameRequired("SLUG"),
+  // Candela per Lumen
+  CD__PER__LM: Qudt.unitFromLocalnameRequired("CD-PER-LM"),
+  // MicroGals per metre
+  MicroGAL__PER__M: Qudt.unitFromLocalnameRequired("MicroGAL-PER-M"),
+  // Newton second per Cubic Meter
+  N__SEC__PER__M3: Qudt.unitFromLocalnameRequired("N-SEC-PER-M3"),
+  // Revolution per Hour
+  REV__PER__HR: Qudt.unitFromLocalnameRequired("REV-PER-HR"),
+  // Dyne Second Per Cubic Centimetre
+  DYN__SEC__PER__CentiM3: Qudt.unitFromLocalnameRequired("DYN-SEC-PER-CentiM3"),
+  // Micrograms per cubic metre per hour
+  MicroGM__PER__M3__HR: Qudt.unitFromLocalnameRequired("MicroGM-PER-M3-HR"),
+  // BEAT
+  BEAT: Qudt.unitFromLocalnameRequired("BEAT"),
+  // Square Metre per Steradian
+  M2__PER__SR: Qudt.unitFromLocalnameRequired("M2-PER-SR"),
+  // Mega Pound Force
+  MegaLB_F: Qudt.unitFromLocalnameRequired("MegaLB_F"),
+  // Denar
+  MKD_Currency: Qudt.currencyFromLocalnameRequired("MKD"),
+  // Kwanza
+  AOA_Currency: Qudt.currencyFromLocalnameRequired("AOA"),
+  // Inch per Square second
+  IN__PER__SEC2: Qudt.unitFromLocalnameRequired("IN-PER-SEC2"),
+  // Poundal
+  PDL: Qudt.unitFromLocalnameRequired("PDL"),
+  // GigaBIT
+  GigaBIT: Qudt.unitFromLocalnameRequired("GigaBIT"),
+  // Cubic Foot
+  FT3: Qudt.unitFromLocalnameRequired("FT3"),
+  // Candlepower
+  CP: Qudt.unitFromLocalnameRequired("CP"),
+  // Phot
+  PHOT: Qudt.unitFromLocalnameRequired("PHOT"),
+  // Carat
+  CARAT: Qudt.unitFromLocalnameRequired("CARAT"),
+  // Hectopascal
+  HectoPA: Qudt.unitFromLocalnameRequired("HectoPA"),
+  // Reciprocal gram
+  PER__GM: Qudt.unitFromLocalnameRequired("PER-GM"),
+  // Fraction
+  FRACTION: Qudt.unitFromLocalnameRequired("FRACTION"),
+  // Kilograms per metre per square second
+  KiloGM__PER__M__SEC2: Qudt.unitFromLocalnameRequired("KiloGM-PER-M-SEC2"),
+  // Kilocalorie per Square Centimeter
+  KiloCAL__PER__CentiM2: Qudt.unitFromLocalnameRequired("KiloCAL-PER-CentiM2"),
+  // Cubic Yard
+  YD3: Qudt.unitFromLocalnameRequired("YD3"),
+  // Oct
+  OCT: Qudt.unitFromLocalnameRequired("OCT"),
+  // Kelvin per Tesla
+  K__PER__T: Qudt.unitFromLocalnameRequired("K-PER-T"),
+  // Gram
+  GM: Qudt.unitFromLocalnameRequired("GM"),
+  // Grain Per Gallon (US)
+  GRAIN__PER__GAL_US: Qudt.unitFromLocalnameRequired("GRAIN-PER-GAL_US"),
+  // Millimetre Per Kelvin
+  MilliM__PER__K: Qudt.unitFromLocalnameRequired("MilliM-PER-K"),
+  // Square Foot Degree Fahrenheit
+  FT2__DEG_F: Qudt.unitFromLocalnameRequired("FT2-DEG_F"),
+  // Cubic Millimetre per Gram
+  MilliM3__PER__GM: Qudt.unitFromLocalnameRequired("MilliM3-PER-GM"),
+  // Micromoles per gram per second
+  MicroMOL__PER__GM__SEC: Qudt.unitFromLocalnameRequired("MicroMOL-PER-GM-SEC"),
+  // Milligrams per square metre per day
+  MilliGM__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MilliGM-PER-M2-DAY"),
+  // Barrel (US Petroleum) Per Hour
+  BBL_US_PET__PER__HR: Qudt.unitFromLocalnameRequired("BBL_US_PET-PER-HR"),
+  // Kilopascal Square Metre per Gram
+  KiloPA__M2__PER__GM: Qudt.unitFromLocalnameRequired("KiloPA-M2-PER-GM"),
+  // Moles per mole
+  MOL__PER__MOL: Qudt.unitFromLocalnameRequired("MOL-PER-MOL"),
+  // Counts per second
+  NUM__PER__SEC: Qudt.unitFromLocalnameRequired("NUM-PER-SEC"),
+  // Sextic Meter
+  M6: Qudt.unitFromLocalnameRequired("M6"),
+  // Kilowatt hour per square metre
+  KiloW__HR__PER__M2: Qudt.unitFromLocalnameRequired("KiloW-HR-PER-M2"),
+  // newton-mètre
+  N__M: Qudt.unitFromLocalnameRequired("N-M"),
+  // A_Reactive
+  A_Reactive: Qudt.unitFromLocalnameRequired("A_Reactive"),
+  // Gill (UK)
+  GI_UK: Qudt.unitFromLocalnameRequired("GI_UK"),
+  // Hectopascal Per Bar
+  HectoPA__PER__BAR: Qudt.unitFromLocalnameRequired("HectoPA-PER-BAR"),
+  // Kilo British Thermal Unit (thermochemical) Per Hour
+  KiloBTU_TH__PER__HR: Qudt.unitFromLocalnameRequired("KiloBTU_TH-PER-HR"),
+  // Metre per Square Second
+  M__PER__SEC2: Qudt.unitFromLocalnameRequired("M-PER-SEC2"),
+  // Kilocalorie Per Minute
+  KiloCAL__PER__MIN: Qudt.unitFromLocalnameRequired("KiloCAL-PER-MIN"),
+  // Kilonewton per cubic metre
+  KiloN__PER__M3: Qudt.unitFromLocalnameRequired("KiloN-PER-M3"),
+  // Metric KiloTON
+  KiloTON_Metric: Qudt.unitFromLocalnameRequired("KiloTON_Metric"),
+  // New Israeli Shekel
+  ILS_Currency: Qudt.currencyFromLocalnameRequired("ILS"),
+  // Nanomoles per cubic centimetre per hour
+  NanoMOL__PER__CentiM3__HR: Qudt.unitFromLocalnameRequired(
+    "NanoMOL-PER-CentiM3-HR"
+  ),
+  // Lithuanian Litas
+  LTL_Currency: Qudt.currencyFromLocalnameRequired("LTL"),
+  // Femtomoles per litre
+  FemtoMOL__PER__L: Qudt.unitFromLocalnameRequired("FemtoMOL-PER-L"),
+  // Cubic Metre per Kelvin
+  M3__PER__K: Qudt.unitFromLocalnameRequired("M3-PER-K"),
+  // British Thermal Unit (international Table) Inch Per Hour Square Foot degree Fahrenheit
+  BTU_IT__IN__PER__HR__FT2__DEG_F: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-IN-PER-HR-FT2-DEG_F"
+  ),
+  // Dyne Centimeter
+  DYN__CentiM: Qudt.unitFromLocalnameRequired("DYN-CentiM"),
+  // Square Meter Hour Degree Celsius Per Kilocalorie (international Table)
+  M2__HR__DEG_C__PER__KiloCAL_IT: Qudt.unitFromLocalnameRequired(
+    "M2-HR-DEG_C-PER-KiloCAL_IT"
+  ),
+  // Ampere Turn
+  AT: Qudt.unitFromLocalnameRequired("AT"),
+  // Dobra
+  STN_Currency: Qudt.currencyFromLocalnameRequired("STN"),
+  // Synodic month
+  MO_Synodic: Qudt.unitFromLocalnameRequired("MO_Synodic"),
+  // Millilitres per square metre per day
+  MilliL__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MilliL-PER-M2-DAY"),
+  // Picomoles per litre per hour
+  PicoMOL__PER__L__HR: Qudt.unitFromLocalnameRequired("PicoMOL-PER-L-HR"),
+  // Ton of Refrigeration Hour
+  TON_FG__HR: Qudt.unitFromLocalnameRequired("TON_FG-HR"),
+  // Planck Pressure
+  PlanckPressure: Qudt.unitFromLocalnameRequired("PlanckPressure"),
+  // Millipascal
+  MilliPA: Qudt.unitFromLocalnameRequired("MilliPA"),
+  // Square Volt per Square Kelvin
+  V2__PER__K2: Qudt.unitFromLocalnameRequired("V2-PER-K2"),
+  // Micromole per micromole of biomass per day
+  MicroMOL__PER__MicroMOL__DAY: Qudt.unitFromLocalnameRequired(
+    "MicroMOL-PER-MicroMOL-DAY"
+  ),
+  // Nanomoles per gram per second
+  NanoMOL__PER__GM__SEC: Qudt.unitFromLocalnameRequired("NanoMOL-PER-GM-SEC"),
+  // Gram Per Square Centimetre
+  GM__PER__CentiM2: Qudt.unitFromLocalnameRequired("GM-PER-CentiM2"),
+  // Barbados Dollar
+  BBD_Currency: Qudt.currencyFromLocalnameRequired("BBD"),
+  // Canadian Dollar
+  CAD_Currency: Qudt.currencyFromLocalnameRequired("CAD"),
+  // Technical Atmosphere
+  ATM_T: Qudt.unitFromLocalnameRequired("ATM_T"),
+  // Volt Second Per Meter
+  V__SEC__PER__M: Qudt.unitFromLocalnameRequired("V-SEC-PER-M"),
+  // Newton per Coulomb
+  N__PER__C: Qudt.unitFromLocalnameRequired("N-PER-C"),
+  // Imperial Gallon
+  GAL_IMP: Qudt.unitFromLocalnameRequired("GAL_IMP"),
+  // Kilonewton Meter
+  KiloN__M: Qudt.unitFromLocalnameRequired("KiloN-M"),
+  // square metre per watt
+  M2__PER__W: Qudt.unitFromLocalnameRequired("M2-PER-W"),
+  // Square Millimeter Per Second
+  MilliM2__PER__SEC: Qudt.unitFromLocalnameRequired("MilliM2-PER-SEC"),
+  // Nautical Mile
+  MI_N: Qudt.unitFromLocalnameRequired("MI_N"),
+  // Centistokes
+  CentiST: Qudt.unitFromLocalnameRequired("CentiST"),
+  // Peck (US Dry) Per Second
+  PK_US_DRY__PER__SEC: Qudt.unitFromLocalnameRequired("PK_US_DRY-PER-SEC"),
+  // Czech Koruna
+  CZK_Currency: Qudt.currencyFromLocalnameRequired("CZK"),
+  // Clo
+  CLO: Qudt.unitFromLocalnameRequired("CLO"),
+  // Micrograms per litre per hour
+  MicroGM__PER__L__HR: Qudt.unitFromLocalnameRequired("MicroGM-PER-L-HR"),
+  // Gross Tonnage
+  GT: Qudt.unitFromLocalnameRequired("GT"),
+  // Heart Beats per Minute
+  BEAT__PER__MIN: Qudt.unitFromLocalnameRequired("BEAT-PER-MIN"),
+  // Netherlands Antillian Guilder
+  ANG_Currency: Qudt.currencyFromLocalnameRequired("ANG"),
+  // Becquerels per litre
+  BQ__PER__L: Qudt.unitFromLocalnameRequired("BQ-PER-L"),
+  // coulomb al metro quadrato
+  C__PER__M2: Qudt.unitFromLocalnameRequired("C-PER-M2"),
+  // Milligram Per Square Centimetre
+  MilliGM__PER__CentiM2: Qudt.unitFromLocalnameRequired("MilliGM-PER-CentiM2"),
+  // Decapascal
+  DecaPA: Qudt.unitFromLocalnameRequired("DecaPA"),
+  // Kilovolt
+  KiloV: Qudt.unitFromLocalnameRequired("KiloV"),
+  // Foot of Water
+  FT_H2O: Qudt.unitFromLocalnameRequired("FT_H2O"),
+  // CFA Franc BEAC
+  XAF_Currency: Qudt.currencyFromLocalnameRequired("XAF"),
+  // Gigabase Pair
+  GigaBasePair: Qudt.unitFromLocalnameRequired("GigaBasePair"),
+  // Gigapascal
+  GigaPA: Qudt.unitFromLocalnameRequired("GigaPA"),
+  // Watts per square metre per nanometre
+  W__PER__M2__NanoM: Qudt.unitFromLocalnameRequired("W-PER-M2-NanoM"),
+  // Kilolitre
+  KiloL: Qudt.unitFromLocalnameRequired("KiloL"),
+  // Pound Force Foot Per Pound
+  KiloLB_F__FT__PER__LB: Qudt.unitFromLocalnameRequired("KiloLB_F-FT-PER-LB"),
+  // Millimetre
+  MilliM: Qudt.unitFromLocalnameRequired("MilliM"),
+  // Philippine Peso
+  PHP_Currency: Qudt.currencyFromLocalnameRequired("PHP"),
+  // Kilocalorie (mean)
+  KiloCAL_Mean: Qudt.unitFromLocalnameRequired("KiloCAL_Mean"),
+  // pascal-seconde
+  PA__SEC: Qudt.unitFromLocalnameRequired("PA-SEC"),
+  // Pound Mass
+  LB_M: Qudt.unitFromLocalnameRequired("LB_M"),
+  // grams per square meter per day
+  GM__PER__M2__DAY: Qudt.unitFromLocalnameRequired("GM-PER-M2-DAY"),
+  // Cubic micrometres (microns)
+  MicroM3: Qudt.unitFromLocalnameRequired("MicroM3"),
+  // Watt per Square Metre Pascal
+  W__PER__M2__PA: Qudt.unitFromLocalnameRequired("W-PER-M2-PA"),
+  // Parts Per Ten Million per Kelvin
+  PPTM__PER__K: Qudt.unitFromLocalnameRequired("PPTM-PER-K"),
+  // Pint (UK) Per Hour
+  PINT_UK__PER__HR: Qudt.unitFromLocalnameRequired("PINT_UK-PER-HR"),
+  // Megabecquerel
+  MegaBQ: Qudt.unitFromLocalnameRequired("MegaBQ"),
+  // Megasiemens Per Meter
+  MegaS__PER__M: Qudt.unitFromLocalnameRequired("MegaS-PER-M"),
+  // Gamma
+  Gamma: Qudt.unitFromLocalnameRequired("Gamma"),
+  // Cubic Kilometer per Square Second
+  KiloM3__PER__SEC2: Qudt.unitFromLocalnameRequired("KiloM3-PER-SEC2"),
+  // Rayl
+  RAYL: Qudt.unitFromLocalnameRequired("RAYL"),
+  // Decilitre
+  DeciL: Qudt.unitFromLocalnameRequired("DeciL"),
+  // Cubic Decimetre Per Day
+  DeciM3__PER__DAY: Qudt.unitFromLocalnameRequired("DeciM3-PER-DAY"),
+  // Quarter (UK)
+  Quarter_UK: Qudt.unitFromLocalnameRequired("Quarter_UK"),
+  // Picomoles per metre per watt per second
+  PicoMOL__PER__M__W__SEC: Qudt.unitFromLocalnameRequired(
+    "PicoMOL-PER-M-W-SEC"
+  ),
+  // Microlitre
+  MicroL: Qudt.unitFromLocalnameRequired("MicroL"),
+  // DEATHS
+  DEATHS: Qudt.unitFromLocalnameRequired("DEATHS"),
   // Horsepower (brake)
   HP_Brake: Qudt.unitFromLocalnameRequired("HP_Brake"),
+  // kBTU per Square Foot
+  KiloBTU_IT__PER__FT2: Qudt.unitFromLocalnameRequired("KiloBTU_IT-PER-FT2"),
+  // MilliCoulomb
+  MilliC: Qudt.unitFromLocalnameRequired("MilliC"),
+  // Gigabit per Second
+  GigaBIT__PER__SEC: Qudt.unitFromLocalnameRequired("GigaBIT-PER-SEC"),
+  // Reciprocal Square Meter
+  PER__M2: Qudt.unitFromLocalnameRequired("PER-M2"),
+  // Reciprocal Week
+  PER__WK: Qudt.unitFromLocalnameRequired("PER-WK"),
+  // BTU per Pound Degree Rankine
+  BTU_IT__PER__LB__DEG_R: Qudt.unitFromLocalnameRequired("BTU_IT-PER-LB-DEG_R"),
+  // calorie (thermochemical) per gram (calTH/g)
+  CAL_TH__PER__G: Qudt.unitFromLocalnameRequired("CAL_TH-PER-G"),
+  // Kilograms per square metre per Pascal per second
+  KiloGM__PER__M2__PA__SEC: Qudt.unitFromLocalnameRequired(
+    "KiloGM-PER-M2-PA-SEC"
+  ),
+  // Kilogram_force Metre
+  KiloGM_F__M: Qudt.unitFromLocalnameRequired("KiloGM_F-M"),
+  // Kilojoule
+  KiloJ: Qudt.unitFromLocalnameRequired("KiloJ"),
+  // Cubic microns per cubic metre
+  MicroM3__PER__M3: Qudt.unitFromLocalnameRequired("MicroM3-PER-M3"),
+  // Picomoles per litre per day
+  PicoMOL__PER__L__DAY: Qudt.unitFromLocalnameRequired("PicoMOL-PER-L-DAY"),
+  // Megavolt Ampere Reactive
+  MegaV__A_Reactive: Qudt.unitFromLocalnameRequired("MegaV-A_Reactive"),
+  // Statcoulomb per Square Centimeter
+  C_Stat__PER__CentiM2: Qudt.unitFromLocalnameRequired("C_Stat-PER-CentiM2"),
+  // Quart (UK Liquid) Per Day
+  QT_UK__PER__DAY: Qudt.unitFromLocalnameRequired("QT_UK-PER-DAY"),
+  // Farad per Meter
+  FARAD__PER__M: Qudt.unitFromLocalnameRequired("FARAD-PER-M"),
+  // Hectare
+  HA: Qudt.unitFromLocalnameRequired("HA"),
+  // Gigabecquerel
+  GigaBQ: Qudt.unitFromLocalnameRequired("GigaBQ"),
+  // Kilograms per cubic metre per second
+  KiloGM__PER__M3__SEC: Qudt.unitFromLocalnameRequired("KiloGM-PER-M3-SEC"),
+  // Inverse Square Planck Mass
+  PER__PlanckMass2: Qudt.unitFromLocalnameRequired("PER-PlanckMass2"),
+  // فولت. أمبير
+  V__A: Qudt.unitFromLocalnameRequired("V-A"),
+  // Calorie (thermochemical) Per Second Centimetre Kelvin
+  CAL_TH__PER__SEC__CentiM__K: Qudt.unitFromLocalnameRequired(
+    "CAL_TH-PER-SEC-CentiM-K"
+  ),
+  // Milligram Per Minute
+  MilliGM__PER__MIN: Qudt.unitFromLocalnameRequired("MilliGM-PER-MIN"),
+  // Coulomb Per Kilogram Second
+  C__PER__KiloGM__SEC: Qudt.unitFromLocalnameRequired("C-PER-KiloGM-SEC"),
+  // méter
+  M: Qudt.unitFromLocalnameRequired("M"),
+  // NanoBecquerel
+  NanoBQ: Qudt.unitFromLocalnameRequired("NanoBQ"),
+  // Megapascal
+  MegaPA: Qudt.unitFromLocalnameRequired("MegaPA"),
+  // Cubic Centimeter per Mole Second
+  CentiM3__PER__MOL__SEC: Qudt.unitFromLocalnameRequired("CentiM3-PER-MOL-SEC"),
+  // Vatu
+  VUV_Currency: Qudt.currencyFromLocalnameRequired("VUV"),
+  // Degree Rankine
+  DEG_R: Qudt.unitFromLocalnameRequired("DEG_R"),
+  // KiloCoulomb
+  KiloC: Qudt.unitFromLocalnameRequired("KiloC"),
+  // Megaohm
+  MegaOHM: Qudt.unitFromLocalnameRequired("MegaOHM"),
+  // Kilocalorie (thermochemical) Per Second
+  KiloCAL_TH__PER__SEC: Qudt.unitFromLocalnameRequired("KiloCAL_TH-PER-SEC"),
+  // BTU per Pound Mole
+  BTU_IT__PER__LB__MOL: Qudt.unitFromLocalnameRequired("BTU_IT-PER-LB-MOL"),
+  // Bushel (UK) Per Day
+  BU_UK__PER__DAY: Qudt.unitFromLocalnameRequired("BU_UK-PER-DAY"),
+  // Watt per Kelvin
+  W__PER__K: Qudt.unitFromLocalnameRequired("W-PER-K"),
+  // Femtomoles per kilogram
+  FemtoMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("FemtoMOL-PER-KiloGM"),
+  // Statmho
+  MHO_Stat: Qudt.unitFromLocalnameRequired("MHO_Stat"),
+  // Abampere
+  A_Ab: Qudt.unitFromLocalnameRequired("A_Ab"),
+  // Saudi Riyal
+  SAR_Currency: Qudt.currencyFromLocalnameRequired("SAR"),
+  // BTU Inch
+  BTU_IT__IN: Qudt.unitFromLocalnameRequired("BTU_IT-IN"),
+  // Microbecquerels per kilogram
+  MicroBQ__PER__KiloGM: Qudt.unitFromLocalnameRequired("MicroBQ-PER-KiloGM"),
+  // Centimetres per year
+  CentiM__PER__YR: Qudt.unitFromLocalnameRequired("CentiM-PER-YR"),
+  // Kilocalorie Per Second
+  KiloCAL__PER__SEC: Qudt.unitFromLocalnameRequired("KiloCAL-PER-SEC"),
+  // Picograms per gram
+  PicoGM__PER__GM: Qudt.unitFromLocalnameRequired("PicoGM-PER-GM"),
+  // Centimole per litre
+  CentiMOL__PER__L: Qudt.unitFromLocalnameRequired("CentiMOL-PER-L"),
+  // Millihenry Per Kiloohm
+  MilliH__PER__KiloOHM: Qudt.unitFromLocalnameRequired("MilliH-PER-KiloOHM"),
+  // Liter Per Minute
+  L__PER__MIN: Qudt.unitFromLocalnameRequired("L-PER-MIN"),
+  // Centinewton Meter
+  CentiN__M: Qudt.unitFromLocalnameRequired("CentiN-M"),
+  // Millivolt Per Minute
+  MilliV__PER__MIN: Qudt.unitFromLocalnameRequired("MilliV-PER-MIN"),
+  // Picograms per millilitre
+  PicoGM__PER__MilliL: Qudt.unitFromLocalnameRequired("PicoGM-PER-MilliL"),
+  // Pound Degree Rankine
+  LB__DEG_R: Qudt.unitFromLocalnameRequired("LB-DEG_R"),
+  // Nanobecquerels per litre
+  NanoBQ__PER__L: Qudt.unitFromLocalnameRequired("NanoBQ-PER-L"),
+  // Picolitre
+  PicoL: Qudt.unitFromLocalnameRequired("PicoL"),
+  // FemtoMole
+  FemtoMOL: Qudt.unitFromLocalnameRequired("FemtoMOL"),
+  // US Liquid Quart
+  QT_US: Qudt.unitFromLocalnameRequired("QT_US"),
+  // Barrel (UK Petroleum)
+  BBL_UK_PET: Qudt.unitFromLocalnameRequired("BBL_UK_PET"),
+  // Millidegree Celsius
+  MilliDEG_C: Qudt.unitFromLocalnameRequired("MilliDEG_C"),
+  // Radian Square Metre per Mole
+  RAD__M2__PER__MOL: Qudt.unitFromLocalnameRequired("RAD-M2-PER-MOL"),
+  // Square Meter Kelvin
+  M2__K: Qudt.unitFromLocalnameRequired("M2-K"),
+  // Short Ton per Cubic Yard
+  TON_SHORT__PER__YD3: Qudt.unitFromLocalnameRequired("TON_SHORT-PER-YD3"),
+  // Quartic Inch
+  IN4: Qudt.unitFromLocalnameRequired("IN4"),
+  // Kilogauss
+  KiloGAUSS: Qudt.unitFromLocalnameRequired("KiloGAUSS"),
+  // Moldovan Leu
+  MDL_Currency: Qudt.currencyFromLocalnameRequired("MDL"),
+  // Newton Per Ampere
+  N__PER__A: Qudt.unitFromLocalnameRequired("N-PER-A"),
+  // Unidad de Valor Real
+  COU_Currency: Qudt.currencyFromLocalnameRequired("COU"),
+  // Reciprocal Cubic Millimeter
+  PER__MilliM3: Qudt.unitFromLocalnameRequired("PER-MilliM3"),
+  // Micromoles per mole
+  MicroMOL__PER__MOL: Qudt.unitFromLocalnameRequired("MicroMOL-PER-MOL"),
+  // Quart (US Liquid) Per Second
+  QT_US__PER__SEC: Qudt.unitFromLocalnameRequired("QT_US-PER-SEC"),
+  // Calorie (thermochemical) Per Minute
+  CAL_TH__PER__MIN: Qudt.unitFromLocalnameRequired("CAL_TH-PER-MIN"),
+  // Coulomb Per Cubic Millimeter
+  C__PER__MilliM3: Qudt.unitFromLocalnameRequired("C-PER-MilliM3"),
+  // Cubic Inch
+  IN3: Qudt.unitFromLocalnameRequired("IN3"),
+  // Reciprocal Cubic Inch
+  PER__IN3: Qudt.unitFromLocalnameRequired("PER-IN3"),
+  // Foot per Hour
+  FT__PER__HR: Qudt.unitFromLocalnameRequired("FT-PER-HR"),
+  // Ounce (US Fluid) Per Hour
+  OZ_VOL_US__PER__HR: Qudt.unitFromLocalnameRequired("OZ_VOL_US-PER-HR"),
+  // Mebibyte
+  MebiBYTE: Qudt.unitFromLocalnameRequired("MebiBYTE"),
+  // Micromoles per second
+  MicroMOL__PER__SEC: Qudt.unitFromLocalnameRequired("MicroMOL-PER-SEC"),
+  // Newtons Per Square Metre
+  N__PER__M2: Qudt.unitFromLocalnameRequired("N-PER-M2"),
+  // KiloBIT
+  KiloBIT: Qudt.unitFromLocalnameRequired("KiloBIT"),
+  // Poise Per Bar
+  POISE__PER__BAR: Qudt.unitFromLocalnameRequired("POISE-PER-BAR"),
+  // Denier
+  Denier: Qudt.unitFromLocalnameRequired("Denier"),
+  // Degree Twaddell
+  DEGREE_TWADDELL: Qudt.unitFromLocalnameRequired("DEGREE_TWADDELL"),
+  // Kilocalorie per Centimeter Second Degree Celsius
+  KiloCAL__PER__CentiM__SEC__DEG_C: Qudt.unitFromLocalnameRequired(
+    "KiloCAL-PER-CentiM-SEC-DEG_C"
+  ),
+  // Pound (avoirdupois) Per Gallon (US)
+  LB__PER__GAL_US: Qudt.unitFromLocalnameRequired("LB-PER-GAL_US"),
+  // CentiMole
+  CentiMOL: Qudt.unitFromLocalnameRequired("CentiMOL"),
+  // Mole Per Hour
+  MOL__PER__HR: Qudt.unitFromLocalnameRequired("MOL-PER-HR"),
+  // Cubic Foot Per Hour
+  FT3__PER__HR: Qudt.unitFromLocalnameRequired("FT3-PER-HR"),
+  // Kilomole Per Minute
+  KiloMOL__PER__MIN: Qudt.unitFromLocalnameRequired("KiloMOL-PER-MIN"),
+  // Reciprocal Cubic Foot
+  PER__FT3: Qudt.unitFromLocalnameRequired("PER-FT3"),
+  // Short Ton (US) Per Cubic Yard
+  TON_US__PER__YD3: Qudt.unitFromLocalnameRequired("TON_US-PER-YD3"),
+  // Attojoule
+  AttoJ: Qudt.unitFromLocalnameRequired("AttoJ"),
+  // Malawi Kwacha
+  MWK_Currency: Qudt.currencyFromLocalnameRequired("MWK"),
+  // Nepalese Rupee
+  NPR_Currency: Qudt.currencyFromLocalnameRequired("NPR"),
+  // Cubic Foot Per Day
+  FT3__PER__DAY: Qudt.unitFromLocalnameRequired("FT3-PER-DAY"),
+  // Ethiopian Birr
+  ETB_Currency: Qudt.currencyFromLocalnameRequired("ETB"),
+  // Belarussian Ruble
+  BYN_Currency: Qudt.currencyFromLocalnameRequired("BYN"),
+  // Farad Per Kilometre
+  FARAD__PER__KiloM: Qudt.unitFromLocalnameRequired("FARAD-PER-KiloM"),
+  // GM_Nitrogen
+  GM_Nitrogen: Qudt.unitFromLocalnameRequired("GM_Nitrogen"),
+  // square meter per square meter
+  M2__PER__M2: Qudt.unitFromLocalnameRequired("M2-PER-M2"),
+  // European Composite Unit (EURCO) (Bonds market unit)
+  XBA_Currency: Qudt.currencyFromLocalnameRequired("XBA"),
+  // Metric DeciTON
+  DeciTON_Metric: Qudt.unitFromLocalnameRequired("DeciTON_Metric"),
+  // Decametre
+  DecaM: Qudt.unitFromLocalnameRequired("DecaM"),
+  // Nanograms per millilitre
+  NanoGM__PER__MilliL: Qudt.unitFromLocalnameRequired("NanoGM-PER-MilliL"),
+  // Syrian Pound
+  SYP_Currency: Qudt.currencyFromLocalnameRequired("SYP"),
+  // Gravity
+  G: Qudt.unitFromLocalnameRequired("G"),
+  // British Thermal Unit (international Table) Inch Per Hour Square Foot Degree Fahrenheit
+  BTU_IT__IN__PER__FT2__HR__DEG_F: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-IN-PER-FT2-HR-DEG_F"
+  ),
+  // Inch Per Degree Fahrenheit
+  IN__PER__DEG_F: Qudt.unitFromLocalnameRequired("IN-PER-DEG_F"),
+  // Samoan Tala
+  WST_Currency: Qudt.currencyFromLocalnameRequired("WST"),
+  // Megajoule
+  MegaJ: Qudt.unitFromLocalnameRequired("MegaJ"),
+  // Planck Frequency
+  PlanckFrequency: Qudt.unitFromLocalnameRequired("PlanckFrequency"),
+  // Calorie (thermochemical) Per Second
+  CAL_TH__PER__SEC: Qudt.unitFromLocalnameRequired("CAL_TH-PER-SEC"),
+  // Newtonmetersekunden pro Radian
+  N__M__SEC__PER__RAD: Qudt.unitFromLocalnameRequired("N-M-SEC-PER-RAD"),
+  // Meter per Farad
+  M__PER__FARAD: Qudt.unitFromLocalnameRequired("M-PER-FARAD"),
+  // Indian Rupee
+  INR_Currency: Qudt.currencyFromLocalnameRequired("INR"),
+  // WIR Franc (complementary currency)
+  CHW_Currency: Qudt.currencyFromLocalnameRequired("CHW"),
+  // New Turkish Lira
+  TRY_Currency: Qudt.currencyFromLocalnameRequired("TRY"),
+  // Short Ton per Hour
+  TON_SHORT__PER__HR: Qudt.unitFromLocalnameRequired("TON_SHORT-PER-HR"),
+  // Euro per watt
+  EUR__PER__W: Qudt.unitFromLocalnameRequired("EUR-PER-W"),
+  // Square metres cubic Hertz
+  M2__HZ3: Qudt.unitFromLocalnameRequired("M2-HZ3"),
+  // Palladium (one Troy ounce)
+  XPD_Currency: Qudt.currencyFromLocalnameRequired("XPD"),
+  // Kiloroentgen
+  KiloR: Qudt.unitFromLocalnameRequired("KiloR"),
+  // Kilo Electron Volt per Micrometre
+  KiloEV__PER__MicroM: Qudt.unitFromLocalnameRequired("KiloEV-PER-MicroM"),
+  // Ngultrum
+  BTN_Currency: Qudt.currencyFromLocalnameRequired("BTN"),
+  // Hectopascal Liter Per Second
+  HectoPA__L__PER__SEC: Qudt.unitFromLocalnameRequired("HectoPA-L-PER-SEC"),
+  // Pound Force Foot
+  LB_F__FT: Qudt.unitFromLocalnameRequired("LB_F-FT"),
+  // Watt per Square Inch
+  W__PER__IN2: Qudt.unitFromLocalnameRequired("W-PER-IN2"),
+  // Decalitre
+  DecaL: Qudt.unitFromLocalnameRequired("DecaL"),
+  // Gray
+  GRAY: Qudt.unitFromLocalnameRequired("GRAY"),
+  // Square metres per Hertz
+  M2__PER__HZ: Qudt.unitFromLocalnameRequired("M2-PER-HZ"),
+  // Long Furlong
+  FUR_Long: Qudt.unitFromLocalnameRequired("FUR_Long"),
+  // Ounce (avoirdupois) Per Gallon (UK)
+  OZ__PER__GAL_UK: Qudt.unitFromLocalnameRequired("OZ-PER-GAL_UK"),
+  // Calorie (international Table) Per Second Square Centimetre kelvin
+  CAL_IT__PER__SEC__CentiM2__K: Qudt.unitFromLocalnameRequired(
+    "CAL_IT-PER-SEC-CentiM2-K"
+  ),
+  // Megabit per Second
+  MegaBIT__PER__SEC: Qudt.unitFromLocalnameRequired("MegaBIT-PER-SEC"),
+  // Decibel Carrier Unit
+  DeciB_C: Qudt.unitFromLocalnameRequired("DeciB_C"),
+  // Hectopascal Cubic Metre Per Second
+  HectoPA__M3__PER__SEC: Qudt.unitFromLocalnameRequired("HectoPA-M3-PER-SEC"),
+  // Henry Per Kiloohm
+  H__PER__KiloOHM: Qudt.unitFromLocalnameRequired("H-PER-KiloOHM"),
+  // Millilitre Per Minute
+  MilliL__PER__MIN: Qudt.unitFromLocalnameRequired("MilliL-PER-MIN"),
+  // bekerel
+  BQ: Qudt.unitFromLocalnameRequired("BQ"),
+  // siemens
+  S: Qudt.unitFromLocalnameRequired("S"),
+  // Abampere Square centimetre
+  A_Ab__CentiM2: Qudt.unitFromLocalnameRequired("A_Ab-CentiM2"),
+  // Giga Electron Volt
+  GigaEV: Qudt.unitFromLocalnameRequired("GigaEV"),
+  // Erg Per Gram Second
+  ERG__PER__GM__SEC: Qudt.unitFromLocalnameRequired("ERG-PER-GM-SEC"),
+  // Week
+  WK: Qudt.unitFromLocalnameRequired("WK"),
+  // Reciprocal Square Kilogram
+  PER__KiloGM2: Qudt.unitFromLocalnameRequired("PER-KiloGM2"),
+  // DEG_C_GROWING_CEREAL
+  DEG_C_GROWING_CEREAL: Qudt.unitFromLocalnameRequired("DEG_C_GROWING_CEREAL"),
+  // US Dollar
+  USD_Currency: Qudt.currencyFromLocalnameRequired("USD"),
+  // Degree Fahrenheit per Minute
+  DEG_F__PER__MIN: Qudt.unitFromLocalnameRequired("DEG_F-PER-MIN"),
+  // Joule Meter per Mole
+  J__M__PER__MOL: Qudt.unitFromLocalnameRequired("J-M-PER-MOL"),
+  // Cubic Millimetre Per Cubic Metre
+  MilliM3__PER__M3: Qudt.unitFromLocalnameRequired("MilliM3-PER-M3"),
+  // CFA Franc BCEAO
+  XOF_Currency: Qudt.currencyFromLocalnameRequired("XOF"),
+  // square meters per hectare
+  M2__PER__HA: Qudt.unitFromLocalnameRequired("M2-PER-HA"),
+  // UIC franc (special settlement currency)
+  XFU_Currency: Qudt.currencyFromLocalnameRequired("XFU"),
+  // British Thermal Unit (international Table) Per Pound Degree Rankine
+  BTU_IT__PER__LB_F__DEG_R: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-PER-LB_F-DEG_R"
+  ),
+  // Riel
+  KHR_Currency: Qudt.currencyFromLocalnameRequired("KHR"),
+  // Square Mile
+  MI2: Qudt.unitFromLocalnameRequired("MI2"),
+  // Forint
+  HUF_Currency: Qudt.currencyFromLocalnameRequired("HUF"),
+  // Kilogram Square Millimetre
+  KiloGM__MilliM2: Qudt.unitFromLocalnameRequired("KiloGM-MilliM2"),
+  // Picograms per kilogram
+  PicoGM__PER__KiloGM: Qudt.unitFromLocalnameRequired("PicoGM-PER-KiloGM"),
+  // pascal saat per meter kubik
+  PA__SEC__PER__M3: Qudt.unitFromLocalnameRequired("PA-SEC-PER-M3"),
+  // European Unit of Account 9 (E.U.A.-9) (Bonds market unit)
+  XBC_Currency: Qudt.currencyFromLocalnameRequired("XBC"),
+  // Number per picoliter
+  NUM__PER__PicoL: Qudt.unitFromLocalnameRequired("NUM-PER-PicoL"),
+  // Barrel (UK Petroleum) Per Hour
+  BBL_UK_PET__PER__HR: Qudt.unitFromLocalnameRequired("BBL_UK_PET-PER-HR"),
+  // Millimoles per cubic metre per day
+  MilliMOL__PER__M3__DAY: Qudt.unitFromLocalnameRequired("MilliMOL-PER-M3-DAY"),
+  // Hundred Weight - Short
+  CWT_SHORT: Qudt.unitFromLocalnameRequired("CWT_SHORT"),
+  // darjah celsius
+  DEG_C: Qudt.unitFromLocalnameRequired("DEG_C"),
+  // Lari
+  GEL_Currency: Qudt.currencyFromLocalnameRequired("GEL"),
+  // Planck Volume
+  PlanckVolume: Qudt.unitFromLocalnameRequired("PlanckVolume"),
+  // Foot Pound per Square Foot
+  FT__LB_F__PER__FT2: Qudt.unitFromLocalnameRequired("FT-LB_F-PER-FT2"),
+  // Cubic Decimetre Per Minute
+  DeciM3__PER__MIN: Qudt.unitFromLocalnameRequired("DeciM3-PER-MIN"),
+  // Micropoise
+  MicroPOISE: Qudt.unitFromLocalnameRequired("MicroPOISE"),
+  // Euro per watt second
+  EUR__PER__W__SEC: Qudt.unitFromLocalnameRequired("EUR-PER-W-SEC"),
+  // Megavolt
+  MegaV: Qudt.unitFromLocalnameRequired("MegaV"),
+  // Square Inch
+  IN2: Qudt.unitFromLocalnameRequired("IN2"),
+  // Pound Force Second per Square Foot
+  LB_F__SEC__PER__FT2: Qudt.unitFromLocalnameRequired("LB_F-SEC-PER-FT2"),
+  // Milligram Per Cubic Metre
+  MilliGM__PER__M3: Qudt.unitFromLocalnameRequired("MilliGM-PER-M3"),
+  // PetaCoulomb
+  PetaC: Qudt.unitFromLocalnameRequired("PetaC"),
+  // Newton Metre Squared per Ampere
+  N__M2__PER__A: Qudt.unitFromLocalnameRequired("N-M2-PER-A"),
+  // Gill (US) Per Minute
+  GI_US__PER__MIN: Qudt.unitFromLocalnameRequired("GI_US-PER-MIN"),
+  // Picosecond
+  PicoSEC: Qudt.unitFromLocalnameRequired("PicoSEC"),
+  // Pascal metres
+  PA__M: Qudt.unitFromLocalnameRequired("PA-M"),
+  // Degrees Celsius kilogram per square metre
+  DEG_C__KiloGM__PER__M2: Qudt.unitFromLocalnameRequired("DEG_C-KiloGM-PER-M2"),
+  // Joule Per Metre
+  J__PER__M: Qudt.unitFromLocalnameRequired("J-PER-M"),
+  // Square metres Hertz^4
+  M2__HZ4: Qudt.unitFromLocalnameRequired("M2-HZ4"),
+  // Millilitre Per Second
+  MilliL__PER__SEC: Qudt.unitFromLocalnameRequired("MilliL-PER-SEC"),
+  // Kilo British Thermal Unit (International Definition) per Hour
+  KiloBTU_IT__PER__HR: Qudt.unitFromLocalnameRequired("KiloBTU_IT-PER-HR"),
+  // Reciprocal Weber
+  PER__WB: Qudt.unitFromLocalnameRequired("PER-WB"),
+  // Planck Impedance
+  PlanckImpedance: Qudt.unitFromLocalnameRequired("PlanckImpedance"),
+  // Pound Force per Foot
+  LB_F__PER__FT: Qudt.unitFromLocalnameRequired("LB_F-PER-FT"),
+  // Parts per billion
+  PPB: Qudt.unitFromLocalnameRequired("PPB"),
+  // Mil Angle (NATO)
+  MIL: Qudt.unitFromLocalnameRequired("MIL"),
+  // Nanolitre
+  NanoL: Qudt.unitFromLocalnameRequired("NanoL"),
+  // New Taiwan Dollar
+  TWD_Currency: Qudt.currencyFromLocalnameRequired("TWD"),
+  // Micromoles per gram
+  MicroMOL__PER__GM: Qudt.unitFromLocalnameRequired("MicroMOL-PER-GM"),
+  // Coulomb Per Cubic Centimetre
+  C__PER__CentiM3: Qudt.unitFromLocalnameRequired("C-PER-CentiM3"),
+  // BTU per Hour Square Foot
+  BTU_IT__PER__HR__FT2: Qudt.unitFromLocalnameRequired("BTU_IT-PER-HR-FT2"),
+  // Milliroentgen Equivalent Man
+  MilliR_man: Qudt.unitFromLocalnameRequired("MilliR_man"),
+  // Ounce Mass
+  OZ_M: Qudt.unitFromLocalnameRequired("OZ_M"),
+  // Milliwatt Per Square Metre
+  MilliW__PER__M2: Qudt.unitFromLocalnameRequired("MilliW-PER-M2"),
+  // Watt per Square Metre Steradian
+  W__PER__M2__SR: Qudt.unitFromLocalnameRequired("W-PER-M2-SR"),
+  // Guinea Franc
+  GNF_Currency: Qudt.currencyFromLocalnameRequired("GNF"),
+  // Gram Per Litre
+  GM__PER__L: Qudt.unitFromLocalnameRequired("GM-PER-L"),
+  // Abvolt
+  V_Ab: Qudt.unitFromLocalnameRequired("V_Ab"),
+  // Moles per cubic metre per second
+  MOL__PER__M3__SEC: Qudt.unitFromLocalnameRequired("MOL-PER-M3-SEC"),
+  // Degree per Second
+  DEG__PER__SEC: Qudt.unitFromLocalnameRequired("DEG-PER-SEC"),
+  // MegaBTU_IT
+  MegaBTU_IT: Qudt.unitFromLocalnameRequired("MegaBTU_IT"),
+  // Kelvin second
+  K__SEC: Qudt.unitFromLocalnameRequired("K-SEC"),
+  // Beaufort
+  BFT: Qudt.unitFromLocalnameRequired("BFT"),
+  // Reciprocal Second Square Meter
+  PER__SEC__M2: Qudt.unitFromLocalnameRequired("PER-SEC-M2"),
+  // Second per Radian Cubic Meter
+  SEC__PER__RAD__M3: Qudt.unitFromLocalnameRequired("SEC-PER-RAD-M3"),
+  // Mole Per Cubic Decimeter
+  MOL__PER__DeciM3: Qudt.unitFromLocalnameRequired("MOL-PER-DeciM3"),
+  // Decimetre
+  DeciM: Qudt.unitFromLocalnameRequired("DeciM"),
+  // Sidereal Hour
+  HR_Sidereal: Qudt.unitFromLocalnameRequired("HR_Sidereal"),
+  // Nat per Second
+  NAT__PER__SEC: Qudt.unitFromLocalnameRequired("NAT-PER-SEC"),
+  // Som
+  KGS_Currency: Qudt.currencyFromLocalnameRequired("KGS"),
+  // Reciprocal Kilovolt Ampere Hour
+  PER__KiloV__A__HR: Qudt.unitFromLocalnameRequired("PER-KiloV-A-HR"),
+  // Cubic Inch Per Hour
+  IN3__PER__HR: Qudt.unitFromLocalnameRequired("IN3-PER-HR"),
+  // Kelvin per Second
+  K__PER__SEC: Qudt.unitFromLocalnameRequired("K-PER-SEC"),
+  // Statfarad
+  FARAD_Stat: Qudt.unitFromLocalnameRequired("FARAD_Stat"),
+  // NanoKAT
+  NanoKAT: Qudt.unitFromLocalnameRequired("NanoKAT"),
+  // Nanosiemens Per Metre
+  NanoS__PER__M: Qudt.unitFromLocalnameRequired("NanoS-PER-M"),
+  // Millisiemens
+  MilliS: Qudt.unitFromLocalnameRequired("MilliS"),
+  // Pascal per Hour
+  PA__PER__HR: Qudt.unitFromLocalnameRequired("PA-PER-HR"),
+  // Electric Susceptibility Unit
+  SUSCEPTIBILITY_ELEC: Qudt.unitFromLocalnameRequired("SUSCEPTIBILITY_ELEC"),
+  // Coulomb Per Square Millimeter
+  C__PER__MilliM2: Qudt.unitFromLocalnameRequired("C-PER-MilliM2"),
+  // Mho
+  MHO: Qudt.unitFromLocalnameRequired("MHO"),
+  // Kilogram per Hectare
+  KiloGM__PER__HA: Qudt.unitFromLocalnameRequired("KiloGM-PER-HA"),
+  // Russian Ruble
+  RUB_Currency: Qudt.currencyFromLocalnameRequired("RUB"),
+  // Newton Metre Per Ampere
+  N__M__PER__A: Qudt.unitFromLocalnameRequired("N-M-PER-A"),
+  // جول لكل كلفن
+  J__PER__K: Qudt.unitFromLocalnameRequired("J-PER-K"),
+  // Inch per Minute
+  IN__PER__MIN: Qudt.unitFromLocalnameRequired("IN-PER-MIN"),
+  // τετραγωνικό μέτρο
+  M2: Qudt.unitFromLocalnameRequired("M2"),
+  // Mole Degree Celsius
+  MOL__DEG_C: Qudt.unitFromLocalnameRequired("MOL-DEG_C"),
+  // Degree Rankine per Minute
+  DEG_R__PER__MIN: Qudt.unitFromLocalnameRequired("DEG_R-PER-MIN"),
+  // FemtoGram
+  FemtoGM: Qudt.unitFromLocalnameRequired("FemtoGM"),
+  // Million US Dollars per Flight
+  MDOLLAR__PER__FLIGHT: Qudt.unitFromLocalnameRequired("MDOLLAR-PER-FLIGHT"),
+  // Cubic Centimetres per Gram
+  CentiM3__PER__GM: Qudt.unitFromLocalnameRequired("CentiM3-PER-GM"),
+  // Decagram
+  DecaGM: Qudt.unitFromLocalnameRequired("DecaGM"),
+  // YottaCoulomb
+  YottaC: Qudt.unitFromLocalnameRequired("YottaC"),
+  // Hertz per Volt
+  HZ__PER__V: Qudt.unitFromLocalnameRequired("HZ-PER-V"),
+  // Microgram Per MilliLitre
+  MicroGM__PER__MilliL: Qudt.unitFromLocalnameRequired("MicroGM-PER-MilliL"),
+  // Loti
+  LSL_Currency: Qudt.currencyFromLocalnameRequired("LSL"),
+  // Square Centimetre Minute
+  CentiM2__MIN: Qudt.unitFromLocalnameRequired("CentiM2-MIN"),
+  // PebiByte
+  PebiBYTE: Qudt.unitFromLocalnameRequired("PebiBYTE"),
+  // Kilocurie
+  KiloCi: Qudt.unitFromLocalnameRequired("KiloCi"),
+  // Kilometer per Hour
+  KiloM__PER__HR: Qudt.unitFromLocalnameRequired("KiloM-PER-HR"),
+  // Millilitre Per Kilogram
+  MilliL__PER__KiloGM: Qudt.unitFromLocalnameRequired("MilliL-PER-KiloGM"),
+  // Square Metre per Steradian Joule
+  M2__PER__SR__J: Qudt.unitFromLocalnameRequired("M2-PER-SR-J"),
+  // United States Dollar (next day) (funds code)
+  USN_Currency: Qudt.currencyFromLocalnameRequired("USN"),
+  // Degree Celsius week
+  DEG_C__WK: Qudt.unitFromLocalnameRequired("DEG_C-WK"),
+  // Lunar mass
+  LunarMass: Qudt.unitFromLocalnameRequired("LunarMass"),
+  // Watt hour per square metre
+  W__HR__PER__M2: Qudt.unitFromLocalnameRequired("W-HR-PER-M2"),
+  // Galileo
+  GALILEO: Qudt.unitFromLocalnameRequired("GALILEO"),
+  // Kilogram Square Centimetre
+  KiloGM__CentiM2: Qudt.unitFromLocalnameRequired("KiloGM-CentiM2"),
+  // MicroGAL
+  MicroGAL: Qudt.unitFromLocalnameRequired("MicroGAL"),
+  // Sample per second
+  SAMPLE__PER__SEC: Qudt.unitFromLocalnameRequired("SAMPLE-PER-SEC"),
+  // metric tonne per hectare
+  TON_Metric__PER__HA: Qudt.unitFromLocalnameRequired("TON_Metric-PER-HA"),
+  // Kilogram_force Meter Per Second
+  KiloGM_F__M__PER__SEC: Qudt.unitFromLocalnameRequired("KiloGM_F-M-PER-SEC"),
+  // British Thermal Unit (Thermochemical Definition)
+  BTU_TH: Qudt.unitFromLocalnameRequired("BTU_TH"),
+  // Gs
+  Gs: Qudt.unitFromLocalnameRequired("Gs"),
+  // Reciprocal Joule Cubic Meter
+  PER__J__M3: Qudt.unitFromLocalnameRequired("PER-J-M3"),
+  // Planck Density
+  PlanckDensity: Qudt.unitFromLocalnameRequired("PlanckDensity"),
+  // Square Metre per Joule
+  M2__PER__J: Qudt.unitFromLocalnameRequired("M2-PER-J"),
+  // Hectolitre
+  HectoL: Qudt.unitFromLocalnameRequired("HectoL"),
+  // Square Meter Kelvin per Watt
+  M2__K__PER__W: Qudt.unitFromLocalnameRequired("M2-K-PER-W"),
+  // Number per gram
+  NUM__PER__GM: Qudt.unitFromLocalnameRequired("NUM-PER-GM"),
+  // Milligrams per square metre per second
+  MilliGM__PER__M2__SEC: Qudt.unitFromLocalnameRequired("MilliGM-PER-M2-SEC"),
+  // Sidereal Year
+  YR_Sidereal: Qudt.unitFromLocalnameRequired("YR_Sidereal"),
+  // East Caribbean Dollar
+  XCD_Currency: Qudt.currencyFromLocalnameRequired("XCD"),
+  // United States Dollar (same day) (funds code)
+  USS_Currency: Qudt.currencyFromLocalnameRequired("USS"),
+  // Calorie (thermochemical) Per Gram
+  CAL_TH__PER__GM: Qudt.unitFromLocalnameRequired("CAL_TH-PER-GM"),
+  // Venezuelan bolvar
+  VES_Currency: Qudt.currencyFromLocalnameRequired("VES"),
+  // M0pt
+  M0pt: Qudt.unitFromLocalnameRequired("M0pt"),
+  // Milliwatts per square metre per nanometre
+  MilliW__PER__M2__NanoM: Qudt.unitFromLocalnameRequired("MilliW-PER-M2-NanoM"),
+  // radián por segundo
+  RAD__PER__SEC: Qudt.unitFromLocalnameRequired("RAD-PER-SEC"),
+  // Pascal Litre Per Second
+  PA__L__PER__SEC: Qudt.unitFromLocalnameRequired("PA-L-PER-SEC"),
+  // Inch
+  IN: Qudt.unitFromLocalnameRequired("IN"),
+  // Terajoule
+  TeraJ: Qudt.unitFromLocalnameRequired("TeraJ"),
+  // Latvian Lats
+  LVL_Currency: Qudt.currencyFromLocalnameRequired("LVL"),
+  // kilogram
+  KiloGM: Qudt.unitFromLocalnameRequired("KiloGM"),
+  // Kilocalorie per Gram
+  KiloCAL__PER__GM: Qudt.unitFromLocalnameRequired("KiloCAL-PER-GM"),
+  // Cubic microns per millilitre
+  MicroM3__PER__MilliL: Qudt.unitFromLocalnameRequired("MicroM3-PER-MilliL"),
+  // Moles per square metre
+  MOL__PER__M2: Qudt.unitFromLocalnameRequired("MOL-PER-M2"),
+  // Square Yard
+  YD2: Qudt.unitFromLocalnameRequired("YD2"),
+  // Nanometer
+  NanoM: Qudt.unitFromLocalnameRequired("NanoM"),
+  // Ounce (US Fluid) Per Minute
+  OZ_VOL_US__PER__MIN: Qudt.unitFromLocalnameRequired("OZ_VOL_US-PER-MIN"),
+  // Slug per Foot
+  SLUG__PER__FT: Qudt.unitFromLocalnameRequired("SLUG-PER-FT"),
+  // metro por segundo
+  M__PER__SEC: Qudt.unitFromLocalnameRequired("M-PER-SEC"),
+  // Degree Celsius Per Kelvin
+  DEG_C__PER__K: Qudt.unitFromLocalnameRequired("DEG_C-PER-K"),
+  // Cubic Metre per Kilogram
+  M3__PER__KiloGM: Qudt.unitFromLocalnameRequired("M3-PER-KiloGM"),
+  // Reciprocal Millimetre
+  PER__MilliM: Qudt.unitFromLocalnameRequired("PER-MilliM"),
+  // Gill (US) Per Hour
+  GI_US__PER__HR: Qudt.unitFromLocalnameRequired("GI_US-PER-HR"),
+  // Moles per square metre per second per metre per steradian
+  MOL__PER__M2__SEC__M__SR: Qudt.unitFromLocalnameRequired(
+    "MOL-PER-M2-SEC-M-SR"
+  ),
+  // Cubic Metre Per Day
+  M3__PER__DAY: Qudt.unitFromLocalnameRequired("M3-PER-DAY"),
+  // Gilbert
+  GI: Qudt.unitFromLocalnameRequired("GI"),
+  // ακτίνιο
+  RAD: Qudt.unitFromLocalnameRequired("RAD"),
+  // Cubic Foot Per Minute Square Foot
+  FT3__PER__MIN__FT2: Qudt.unitFromLocalnameRequired("FT3-PER-MIN-FT2"),
+  // 摩尔
+  MOL: Qudt.unitFromLocalnameRequired("MOL"),
+  // Dalasi
+  GMD_Currency: Qudt.currencyFromLocalnameRequired("GMD"),
+  // Metre per Kelvin
+  M__PER__K: Qudt.unitFromLocalnameRequired("M-PER-K"),
+  // steradian
+  SR: Qudt.unitFromLocalnameRequired("SR"),
+  // Abvolt per centimeter
+  V_Ab__PER__CentiM: Qudt.unitFromLocalnameRequired("V_Ab-PER-CentiM"),
+  // Foot Lambert
+  LA_FT: Qudt.unitFromLocalnameRequired("LA_FT"),
+  // AttoCoulomb
+  AttoC: Qudt.unitFromLocalnameRequired("AttoC"),
+  // Danish Krone
+  DKK_Currency: Qudt.currencyFromLocalnameRequired("DKK"),
+  // BTU per Square Foot
+  BTU_IT__PER__FT2: Qudt.unitFromLocalnameRequired("BTU_IT-PER-FT2"),
+  // Microlitre Per Litre
+  MicroL__PER__L: Qudt.unitFromLocalnameRequired("MicroL-PER-L"),
+  // Parts per trillion
+  PPTR: Qudt.unitFromLocalnameRequired("PPTR"),
+  // Tonne Per Minute
+  TON_Metric__PER__MIN: Qudt.unitFromLocalnameRequired("TON_Metric-PER-MIN"),
+  // Abvolt Second
+  V_Ab__SEC: Qudt.unitFromLocalnameRequired("V_Ab-SEC"),
+  // Ounce (US Fluid) Per Second
+  OZ_VOL_US__PER__SEC: Qudt.unitFromLocalnameRequired("OZ_VOL_US-PER-SEC"),
+  // siemens per metre
+  S__PER__M: Qudt.unitFromLocalnameRequired("S-PER-M"),
   // Pound per Foot Hour
   LB__PER__FT__HR: Qudt.unitFromLocalnameRequired("LB-PER-FT-HR"),
+  // Psi Liter Per Second
+  PSI__L__PER__SEC: Qudt.unitFromLocalnameRequired("PSI-L-PER-SEC"),
+  // KiloTon Per Jaar
+  KiloTONNE__PER__YR: Qudt.unitFromLocalnameRequired("KiloTONNE-PER-YR"),
+  // Cubic Yard Per Second
+  YD3__PER__SEC: Qudt.unitFromLocalnameRequired("YD3-PER-SEC"),
+  // MicroSievert per hour
+  MicroSV__PER__HR: Qudt.unitFromLocalnameRequired("MicroSV-PER-HR"),
+  // Femtojoule
+  FemtoJ: Qudt.unitFromLocalnameRequired("FemtoJ"),
+  // Diopter
+  DIOPTER: Qudt.unitFromLocalnameRequired("DIOPTER"),
+  // Sidereal Day
+  DAY_Sidereal: Qudt.unitFromLocalnameRequired("DAY_Sidereal"),
+  // Square Foot
+  FT2: Qudt.unitFromLocalnameRequired("FT2"),
+  // PlanckTemperature
+  PlanckTemperature: Qudt.unitFromLocalnameRequired("PlanckTemperature"),
+  // Foot Pound Force
+  FT__LB_F: Qudt.unitFromLocalnameRequired("FT-LB_F"),
+  // Nanomoles per litre per day
+  NanoMOL__PER__L__DAY: Qudt.unitFromLocalnameRequired("NanoMOL-PER-L-DAY"),
+  // Percent per day
+  PERCENT__PER__DAY: Qudt.unitFromLocalnameRequired("PERCENT-PER-DAY"),
+  // Ounce (UK Fluid) Per Hour
+  OZ_VOL_UK__PER__HR: Qudt.unitFromLocalnameRequired("OZ_VOL_UK-PER-HR"),
+  // Failures In Time
+  failures__in__time: Qudt.unitFromLocalnameRequired("failures-in-time"),
+  // Grain per Gallon
+  GRAIN__PER__GAL: Qudt.unitFromLocalnameRequired("GRAIN-PER-GAL"),
+  // Megajoule Per Hour
+  MegaJ__PER__HR: Qudt.unitFromLocalnameRequired("MegaJ-PER-HR"),
+  // Dram (UK)
+  DRAM_UK: Qudt.unitFromLocalnameRequired("DRAM_UK"),
+  // Millipascal Second
+  MilliPA__SEC: Qudt.unitFromLocalnameRequired("MilliPA-SEC"),
+  // Joule per Square Meter
+  J__PER__M2: Qudt.unitFromLocalnameRequired("J-PER-M2"),
+  // MegaDOLLAR_US
+  MegaDOLLAR_US: Qudt.unitFromLocalnameRequired("MegaDOLLAR_US"),
+  // Kilogram Per Jaar
+  KiloGM__PER__YR: Qudt.unitFromLocalnameRequired("KiloGM-PER-YR"),
+  // Hartley
+  HART: Qudt.unitFromLocalnameRequired("HART"),
+  // PetaByte
+  PetaBYTE: Qudt.unitFromLocalnameRequired("PetaBYTE"),
+  // Slug Per Hour
+  SLUG__PER__HR: Qudt.unitFromLocalnameRequired("SLUG-PER-HR"),
+  // BTU per Second Square Foot
+  BTU_IT__PER__SEC__FT2: Qudt.unitFromLocalnameRequired("BTU_IT-PER-SEC-FT2"),
+  // Reciprocal Metre
+  PER__M: Qudt.unitFromLocalnameRequired("PER-M"),
+  // cubic centimetre
+  CentiM3: Qudt.unitFromLocalnameRequired("CentiM3"),
+  // Abfarad
+  FARAD_Ab: Qudt.unitFromLocalnameRequired("FARAD_Ab"),
+  // Planck Area
+  PlanckArea: Qudt.unitFromLocalnameRequired("PlanckArea"),
+  // Reciprocal Second Steradian
+  PER__SEC__SR: Qudt.unitFromLocalnameRequired("PER-SEC-SR"),
+  // Gram Per Mole
+  GM__PER__MOL: Qudt.unitFromLocalnameRequired("GM-PER-MOL"),
+  // Erg Per Gram
+  ERG__PER__GM: Qudt.unitFromLocalnameRequired("ERG-PER-GM"),
+  // Nanohenry
+  NanoH: Qudt.unitFromLocalnameRequired("NanoH"),
+  // Fiji Dollar
+  FJD_Currency: Qudt.currencyFromLocalnameRequired("FJD"),
+  // Degree Fahrenheit Hour Square Foot per British Thermal Unit (thermochemical)
+  DEG_F__HR__FT2__PER__BTU_TH: Qudt.unitFromLocalnameRequired(
+    "DEG_F-HR-FT2-PER-BTU_TH"
+  ),
+  // Pascal Second Per Bar
+  PA__SEC__PER__BAR: Qudt.unitFromLocalnameRequired("PA-SEC-PER-BAR"),
+  // Tablespoon
+  TBSP: Qudt.unitFromLocalnameRequired("TBSP"),
+  // Stokes
+  ST: Qudt.unitFromLocalnameRequired("ST"),
+  // Bushel (UK) Per Hour
+  BU_UK__PER__HR: Qudt.unitFromLocalnameRequired("BU_UK-PER-HR"),
+  // Rial Omani
+  OMR_Currency: Qudt.currencyFromLocalnameRequired("OMR"),
+  // BREATH
+  BREATH: Qudt.unitFromLocalnameRequired("BREATH"),
+  // Cyprus Pound
+  CYP_Currency: Qudt.currencyFromLocalnameRequired("CYP"),
+  // Pound per Inch
+  LB__PER__IN: Qudt.unitFromLocalnameRequired("LB-PER-IN"),
+  // Litre Per Kelvin
+  L__PER__K: Qudt.unitFromLocalnameRequired("L-PER-K"),
+  // Cubic Meter per Kilogram Square Second
+  M3__PER__KiloGM__SEC2: Qudt.unitFromLocalnameRequired("M3-PER-KiloGM-SEC2"),
+  // Microhenry
+  MicroH: Qudt.unitFromLocalnameRequired("MicroH"),
+  // Weber Per Millimetre
+  WB__PER__MilliM: Qudt.unitFromLocalnameRequired("WB-PER-MilliM"),
+  // Pound (avoirdupois) Per Square Inch
+  LB__PER__IN2: Qudt.unitFromLocalnameRequired("LB-PER-IN2"),
+  // Ampere per Radian
+  A__PER__RAD: Qudt.unitFromLocalnameRequired("A-PER-RAD"),
+  // coulomb meter persegi
+  C__M2: Qudt.unitFromLocalnameRequired("C-M2"),
+  // Foot Of Mercury
+  FT_HG: Qudt.unitFromLocalnameRequired("FT_HG"),
+  // Tex
+  TEX: Qudt.unitFromLocalnameRequired("TEX"),
+  // British Thermal Unit (international Table) Per Hour Square Foot degree Rankine
+  BTU_IT__PER__HR__FT2__DEG_R: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-PER-HR-FT2-DEG_R"
+  ),
+  // Bar
+  BAR: Qudt.unitFromLocalnameRequired("BAR"),
+  // Degree Fahrenheit Hour Square Foot per British Thermal Unit (international Table)
+  DEG_F__HR__FT2__PER__BTU_IT: Qudt.unitFromLocalnameRequired(
+    "DEG_F-HR-FT2-PER-BTU_IT"
+  ),
+  // Degree Baume (origin Scale)
+  DEGREE_BAUME: Qudt.unitFromLocalnameRequired("DEGREE_BAUME"),
+  // Cubic Centimetre Per Cubic Metre
+  CentiM3__PER__M3: Qudt.unitFromLocalnameRequired("CentiM3-PER-M3"),
+  // Millicoulomb Per Kilogram
+  MilliC__PER__KiloGM: Qudt.unitFromLocalnameRequired("MilliC-PER-KiloGM"),
+  // Ounce (avoirdupois) Per Minute
+  OZ__PER__MIN: Qudt.unitFromLocalnameRequired("OZ-PER-MIN"),
+  // Degree per Hour
+  DEG__PER__HR: Qudt.unitFromLocalnameRequired("DEG-PER-HR"),
+  // Pascal Square Root Meter
+  PA__M0pt5: Qudt.unitFromLocalnameRequired("PA-M0pt5"),
+  // Percent per metre
+  PERCENT__PER__M: Qudt.unitFromLocalnameRequired("PERCENT-PER-M"),
+  // Dyne Second Per Centimetre
+  DYN__SEC__PER__CentiM: Qudt.unitFromLocalnameRequired("DYN-SEC-PER-CentiM"),
+  // Kilogram Kelvin
+  KiloGM__K: Qudt.unitFromLocalnameRequired("KiloGM-K"),
+  // Millihenry
+  MilliH: Qudt.unitFromLocalnameRequired("MilliH"),
+  // Newtons per cubic metre
+  N__PER__M3: Qudt.unitFromLocalnameRequired("N-PER-M3"),
+  // Gram Per Cubic Metre
+  GM__PER__M3: Qudt.unitFromLocalnameRequired("GM-PER-M3"),
+  // Metres to the power four per second
+  M4__PER__SEC: Qudt.unitFromLocalnameRequired("M4-PER-SEC"),
+  // Quartic Coulomb Metre per Cubic Energy
+  C4__M4__PER__J3: Qudt.unitFromLocalnameRequired("C4-M4-PER-J3"),
+  // Ton (US)
+  TON_US: Qudt.unitFromLocalnameRequired("TON_US"),
+  // Dram (US)
+  DRAM_US: Qudt.unitFromLocalnameRequired("DRAM_US"),
+  // Faraday
+  F: Qudt.unitFromLocalnameRequired("F"),
+  // Joule Square Metre per Kilogram
+  J__M2__PER__KiloGM: Qudt.unitFromLocalnameRequired("J-M2-PER-KiloGM"),
+  // Degree API
+  DEGREE_API: Qudt.unitFromLocalnameRequired("DEGREE_API"),
+  // HectoCoulomb
+  HectoC: Qudt.unitFromLocalnameRequired("HectoC"),
+  // Kiloampere Per Metre
+  KiloA__PER__M: Qudt.unitFromLocalnameRequired("KiloA-PER-M"),
+  // Kilovolt Ampere Reactive Hour
+  KiloV__A_Reactive__HR: Qudt.unitFromLocalnameRequired("KiloV-A_Reactive-HR"),
+  // 1000I
+  _1000I: Qudt.unitFromLocalnameRequired("1000I"),
+  // Millimeter Per Hour
+  MilliM__PER__HR: Qudt.unitFromLocalnameRequired("MilliM-PER-HR"),
+  // Lao kip
+  LAK_Currency: Qudt.currencyFromLocalnameRequired("LAK"),
+  // Kelvin Per Kelvin
+  K__PER__K: Qudt.unitFromLocalnameRequired("K-PER-K"),
+  // Planck Length
+  PlanckLength: Qudt.unitFromLocalnameRequired("PlanckLength"),
+  // Peck (US Dry) Per Day
+  PK_US_DRY__PER__DAY: Qudt.unitFromLocalnameRequired("PK_US_DRY-PER-DAY"),
+  // Kilohertz Metre
+  KiloHZ__M: Qudt.unitFromLocalnameRequired("KiloHZ-M"),
+  // Pascal metres per second
+  PA__M__PER__SEC: Qudt.unitFromLocalnameRequired("PA-M-PER-SEC"),
+  // Microhenry Per Metre
+  MicroH__PER__M: Qudt.unitFromLocalnameRequired("MicroH-PER-M"),
+  // Long Ton per Cubic Yard
+  TON_LONG__PER__YD3: Qudt.unitFromLocalnameRequired("TON_LONG-PER-YD3"),
+  // Pound Mass
+  LB: Qudt.unitFromLocalnameRequired("LB"),
+  // Nanogram Per Kilogram
+  NanoGM__PER__KiloGM: Qudt.unitFromLocalnameRequired("NanoGM-PER-KiloGM"),
+  // Percent per week
+  PERCENT__PER__WK: Qudt.unitFromLocalnameRequired("PERCENT-PER-WK"),
+  // Imperial Mass Ounce per Square Yard
+  OZ__PER__YD2: Qudt.unitFromLocalnameRequired("OZ-PER-YD2"),
+  // Milligal
+  MilliGAL: Qudt.unitFromLocalnameRequired("MilliGAL"),
+  // Reciprocal Bar
+  PER__BAR: Qudt.unitFromLocalnameRequired("PER-BAR"),
+  // Tonne
+  TONNE: Qudt.unitFromLocalnameRequired("TONNE"),
+  // Nanometer Per Centimeter PSI
+  NanoM__PER__CentiM__PSI: Qudt.unitFromLocalnameRequired(
+    "NanoM-PER-CentiM-PSI"
+  ),
+  // Ampere Per Centimeter
+  A__PER__CentiM: Qudt.unitFromLocalnameRequired("A-PER-CentiM"),
+  // Board Foot
+  FBM: Qudt.unitFromLocalnameRequired("FBM"),
+  // Millirads per hour
+  MilliRAD_R__PER__HR: Qudt.unitFromLocalnameRequired("MilliRAD_R-PER-HR"),
+  // Solar mass
+  SolarMass: Qudt.unitFromLocalnameRequired("SolarMass"),
+  // Degree Celsius per Hour
+  DEG_C__PER__HR: Qudt.unitFromLocalnameRequired("DEG_C-PER-HR"),
+  // Gram Per Millilitre
+  GM__PER__MilliL: Qudt.unitFromLocalnameRequired("GM-PER-MilliL"),
+  // Newton Centimeter
+  N__CentiM: Qudt.unitFromLocalnameRequired("N-CentiM"),
+  // Barrel (US) Per Minute
+  BBL_US__PER__MIN: Qudt.unitFromLocalnameRequired("BBL_US-PER-MIN"),
+  // Barn
+  BARN: Qudt.unitFromLocalnameRequired("BARN"),
+  // MilliRad
+  MilliRAD_R: Qudt.unitFromLocalnameRequired("MilliRAD_R"),
+  // Tropical Year
+  YR_TROPICAL: Qudt.unitFromLocalnameRequired("YR_TROPICAL"),
+  // Convertible Marks
+  BAM_Currency: Qudt.currencyFromLocalnameRequired("BAM"),
+  // BTU per Square Foot Second Degree Fahrenheit
+  BTU_IT__PER__FT2__SEC__DEG_F: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-PER-FT2-SEC-DEG_F"
+  ),
+  // Reciprocal Square Electron Volt
+  PER__EV2: Qudt.unitFromLocalnameRequired("PER-EV2"),
+  // Unknown
+  UNKNOWN: Qudt.unitFromLocalnameRequired("UNKNOWN"),
+  // Watt per Square Centimeter
+  W__PER__CentiM2: Qudt.unitFromLocalnameRequired("W-PER-CentiM2"),
+  // Barrel (US)
+  BBL_US: Qudt.unitFromLocalnameRequired("BBL_US"),
+  // Square Foot Second Degree Fahrenheit
+  FT2__SEC__DEG_F: Qudt.unitFromLocalnameRequired("FT2-SEC-DEG_F"),
+  // Electronvolt Per Meter
+  EV__PER__M: Qudt.unitFromLocalnameRequired("EV-PER-M"),
+  // Pound Degree Fahrenheit
+  LB__DEG_F: Qudt.unitFromLocalnameRequired("LB-DEG_F"),
+  // Milliampere Hour
+  MilliA__HR: Qudt.unitFromLocalnameRequired("MilliA-HR"),
+  // Degree Rankine per Hour
+  DEG_R__PER__HR: Qudt.unitFromLocalnameRequired("DEG_R-PER-HR"),
+  // Pound (avoirdupois) Per Gallon (UK)
+  LB__PER__GAL_UK: Qudt.unitFromLocalnameRequired("LB-PER-GAL_UK"),
+  // Haiti Gourde
+  HTG_Currency: Qudt.currencyFromLocalnameRequired("HTG"),
+  // British Thermal Unit (IT) Per Cubic Foot
+  BTU_IT__PER__FT3: Qudt.unitFromLocalnameRequired("BTU_IT-PER-FT3"),
+  // PSI
+  PSI: Qudt.unitFromLocalnameRequired("PSI"),
+  // Millinewton
+  MilliN: Qudt.unitFromLocalnameRequired("MilliN"),
+  // Yuan Renminbi
+  CNY_Currency: Qudt.currencyFromLocalnameRequired("CNY"),
+  // Square Coulomb Square Metre per Joule
+  C2__M2__PER__J: Qudt.unitFromLocalnameRequired("C2-M2-PER-J"),
+  // Microsiemens Per Centimetre
+  MicroS__PER__CentiM: Qudt.unitFromLocalnameRequired("MicroS-PER-CentiM"),
+  // Imperial Ounce Force
+  OZ_F: Qudt.unitFromLocalnameRequired("OZ_F"),
+  // Cubic Centimeter Per Kelvin
+  CentiM3__PER__K: Qudt.unitFromLocalnameRequired("CentiM3-PER-K"),
+  // Ounce (UK Fluid) Per Minute
+  OZ_VOL_UK__PER__MIN: Qudt.unitFromLocalnameRequired("OZ_VOL_UK-PER-MIN"),
+  // Kilometre per Second
+  KiloM__PER__SEC: Qudt.unitFromLocalnameRequired("KiloM-PER-SEC"),
+  // Armenian Dram
+  AMD_Currency: Qudt.currencyFromLocalnameRequired("AMD"),
+  // British Thermal Unit (thermochemical) Per Hour
+  BTU_TH__PER__HR: Qudt.unitFromLocalnameRequired("BTU_TH-PER-HR"),
+  // Micromoles per gram per hour
+  MicroMOL__PER__GM__HR: Qudt.unitFromLocalnameRequired("MicroMOL-PER-GM-HR"),
+  // Platinum (one Troy ounce)
+  XPT_Currency: Qudt.currencyFromLocalnameRequired("XPT"),
+  // Pound Mass (avoirdupois) Per Square Foot
+  LB__PER__FT2: Qudt.unitFromLocalnameRequired("LB-PER-FT2"),
+  // Pint (UK) Per Second
+  PINT_UK__PER__SEC: Qudt.unitFromLocalnameRequired("PINT_UK-PER-SEC"),
+  // Kilograms per metre per second
+  KiloGM__PER__M__SEC: Qudt.unitFromLocalnameRequired("KiloGM-PER-M-SEC"),
+  // Megawatt Hour
+  MegaW__HR: Qudt.unitFromLocalnameRequired("MegaW-HR"),
+  // Terawatt
+  TeraW: Qudt.unitFromLocalnameRequired("TeraW"),
+  // Long Ton (uk) Per Day
+  TON_UK__PER__DAY: Qudt.unitFromLocalnameRequired("TON_UK-PER-DAY"),
+  // Planck Energy
+  PlanckEnergy: Qudt.unitFromLocalnameRequired("PlanckEnergy"),
+  // Square Centimetre Second
+  CentiM2__SEC: Qudt.unitFromLocalnameRequired("CentiM2-SEC"),
+  // Hour Square Foot
+  HR__FT2: Qudt.unitFromLocalnameRequired("HR-FT2"),
+  // W-M2
+  W__M2: Qudt.unitFromLocalnameRequired("W-M2"),
+  // Metre per Minute
+  M__PER__MIN: Qudt.unitFromLocalnameRequired("M-PER-MIN"),
+  // pascal
+  PA: Qudt.unitFromLocalnameRequired("PA"),
+  // Litre Per Hour
+  L__PER__HR: Qudt.unitFromLocalnameRequired("L-PER-HR"),
+  // Kilograms per square kilometre
+  KiloGM__PER__KiloM2: Qudt.unitFromLocalnameRequired("KiloGM-PER-KiloM2"),
+  // British Thermal Unit (thermochemical) Per Pound Degree Fahrenheit
+  BTU_TH__PER__LB__DEG_F: Qudt.unitFromLocalnameRequired("BTU_TH-PER-LB-DEG_F"),
+  // Newton Square Metre
+  N__M2: Qudt.unitFromLocalnameRequired("N-M2"),
+  // Pound per Cubic Inch
+  LB__PER__IN3: Qudt.unitFromLocalnameRequired("LB-PER-IN3"),
+  // Kilogram Per Minute
+  KiloGM__PER__MIN: Qudt.unitFromLocalnameRequired("KiloGM-PER-MIN"),
+  // Becquerel per Kilogram
+  BQ__PER__KiloGM: Qudt.unitFromLocalnameRequired("BQ-PER-KiloGM"),
+  // Boiler Horsepower
+  HP_Boiler: Qudt.unitFromLocalnameRequired("HP_Boiler"),
+  // Picograms
+  PicoGM: Qudt.unitFromLocalnameRequired("PicoGM"),
+  // Microvolt
+  MicroV: Qudt.unitFromLocalnameRequired("MicroV"),
+  // Gram Degree Celsius
+  GM__PER__DEG_C: Qudt.unitFromLocalnameRequired("GM-PER-DEG_C"),
+  // Reciprocal Angstrom
+  PER__ANGSTROM: Qudt.unitFromLocalnameRequired("PER-ANGSTROM"),
+  // Joule per Kilogram Kelvin
+  J__PER__KiloGM__K: Qudt.unitFromLocalnameRequired("J-PER-KiloGM-K"),
+  // Ton (US Shipping)
+  TON_SHIPPING_US: Qudt.unitFromLocalnameRequired("TON_SHIPPING_US"),
+  // Reciprocal Cubic Yard
+  PER__YD3: Qudt.unitFromLocalnameRequired("PER-YD3"),
+  // Grains per Cubic Metre
+  GRAIN__PER__M3: Qudt.unitFromLocalnameRequired("GRAIN-PER-M3"),
+  // Ouguiya
+  MRU_Currency: Qudt.currencyFromLocalnameRequired("MRU"),
+  // Decigram
+  DeciGM: Qudt.unitFromLocalnameRequired("DeciGM"),
+  // Reciprocal Mole
+  PER__MOL: Qudt.unitFromLocalnameRequired("PER-MOL"),
+  // PicoCoulomb
+  PicoC: Qudt.unitFromLocalnameRequired("PicoC"),
+  // Kip
+  KIP_F: Qudt.unitFromLocalnameRequired("KIP_F"),
+  // tonne per hectare
+  TONNE__PER__HA: Qudt.unitFromLocalnameRequired("TONNE-PER-HA"),
+  // DeciNewton
+  DeciN: Qudt.unitFromLocalnameRequired("DeciN"),
+  // US Survey Foot
+  FT_US: Qudt.unitFromLocalnameRequired("FT_US"),
+  // Millibar Litre Per Second
+  MilliBAR__L__PER__SEC: Qudt.unitFromLocalnameRequired("MilliBAR-L-PER-SEC"),
+  // MicroSievert
+  MicroSV: Qudt.unitFromLocalnameRequired("MicroSV"),
+  // Gram Per Minute
+  GM__PER__MIN: Qudt.unitFromLocalnameRequired("GM-PER-MIN"),
+  // Quetzal
+  GTQ_Currency: Qudt.currencyFromLocalnameRequired("GTQ"),
+  // Pound Force per Square Foot
+  LB_F__PER__FT2: Qudt.unitFromLocalnameRequired("LB_F-PER-FT2"),
+  // Quart (US Liquid) Per Day
+  QT_US__PER__DAY: Qudt.unitFromLocalnameRequired("QT_US-PER-DAY"),
+  // Cubic Yard Per Degree Fahrenheit
+  YD3__PER__DEG_F: Qudt.unitFromLocalnameRequired("YD3-PER-DEG_F"),
+  // Ton (UK)
+  TON_UK: Qudt.unitFromLocalnameRequired("TON_UK"),
+  // Baht
+  THB_Currency: Qudt.currencyFromLocalnameRequired("THB"),
+  // Foot Pound Force per Second
+  FT__LB_F__PER__SEC: Qudt.unitFromLocalnameRequired("FT-LB_F-PER-SEC"),
+  // Croatian Kuna
+  HRK_Currency: Qudt.currencyFromLocalnameRequired("HRK"),
+  // Megagram Per Hectare
+  MegaGM__PER__HA: Qudt.unitFromLocalnameRequired("MegaGM-PER-HA"),
+  // Centigram
+  CentiGM: Qudt.unitFromLocalnameRequired("CentiGM"),
+  // Gill (US) Per Second
+  GI_US__PER__SEC: Qudt.unitFromLocalnameRequired("GI_US-PER-SEC"),
+  // Square Foot per Second
+  FT2__PER__SEC: Qudt.unitFromLocalnameRequired("FT2-PER-SEC"),
+  // Kelvin square metres per kilogram per second
+  K__M2__PER__KiloGM__SEC: Qudt.unitFromLocalnameRequired(
+    "K-M2-PER-KiloGM-SEC"
+  ),
+  // Microgram Per Kilogram
+  MicroGM__PER__KiloGM: Qudt.unitFromLocalnameRequired("MicroGM-PER-KiloGM"),
+  // Relative Permeability
+  PERMEABILITY_REL: Qudt.unitFromLocalnameRequired("PERMEABILITY_REL"),
+  // Pound Force per Inch
+  LB_F__PER__IN: Qudt.unitFromLocalnameRequired("LB_F-PER-IN"),
+  // ZettaCoulomb
+  ZettaC: Qudt.unitFromLocalnameRequired("ZettaC"),
+  // Brunei Dollar
+  BND_Currency: Qudt.currencyFromLocalnameRequired("BND"),
+  // TeraByte
+  TeraBYTE: Qudt.unitFromLocalnameRequired("TeraBYTE"),
+  // Watt seconds per square metre
+  W__SEC__PER__M2: Qudt.unitFromLocalnameRequired("W-SEC-PER-M2"),
+  // nanosecond
+  NanoSEC: Qudt.unitFromLocalnameRequired("NanoSEC"),
+  // Hong Kong Dollar
+  HKD_Currency: Qudt.currencyFromLocalnameRequired("HKD"),
+  // Seconds per metre
+  SEC__PER__M: Qudt.unitFromLocalnameRequired("SEC-PER-M"),
+  // Kilo Electron Volt
+  KiloEV: Qudt.unitFromLocalnameRequired("KiloEV"),
+  // Rem
+  REM: Qudt.unitFromLocalnameRequired("REM"),
+  // Parts Per Million per Kelvin
+  PPM__PER__K: Qudt.unitFromLocalnameRequired("PPM-PER-K"),
+  // Square Metre per Mole
+  M2__PER__MOL: Qudt.unitFromLocalnameRequired("M2-PER-MOL"),
+  // Cubic Decameter
+  DecaM3: Qudt.unitFromLocalnameRequired("DecaM3"),
+  // Millilitre Per Day
+  MilliL__PER__DAY: Qudt.unitFromLocalnameRequired("MilliL-PER-DAY"),
+  // Reciprocal Day
+  PER__DAY: Qudt.unitFromLocalnameRequired("PER-DAY"),
+  // Sri Lanka Rupee
+  LKR_Currency: Qudt.currencyFromLocalnameRequired("LKR"),
+  // MDOLLAR
+  MDOLLAR: Qudt.unitFromLocalnameRequired("MDOLLAR"),
+  // Newton metre per metre
+  N__M__PER__M: Qudt.unitFromLocalnameRequired("N-M-PER-M"),
+  // Kilojoule Per Kelvin
+  KiloJ__PER__K: Qudt.unitFromLocalnameRequired("KiloJ-PER-K"),
+  // ohm
+  OHM: Qudt.unitFromLocalnameRequired("OHM"),
+  // Gigaohm
+  GigaOHM: Qudt.unitFromLocalnameRequired("GigaOHM"),
+  // Hectometre
+  HectoM: Qudt.unitFromLocalnameRequired("HectoM"),
+  // Cubic Centimeter per Mole Second
+  M3__PER__MOL__SEC: Qudt.unitFromLocalnameRequired("M3-PER-MOL-SEC"),
+  // Franklin
+  FR: Qudt.unitFromLocalnameRequired("FR"),
+  // Bushel (UK) Per Second
+  BU_UK__PER__SEC: Qudt.unitFromLocalnameRequired("BU_UK-PER-SEC"),
+  // Peso Uruguayo
+  UYU_Currency: Qudt.currencyFromLocalnameRequired("UYU"),
+  // Dry Gallon US
+  GAL_US_DRY: Qudt.unitFromLocalnameRequired("GAL_US_DRY"),
+  // घन मीटर
+  M3: Qudt.unitFromLocalnameRequired("M3"),
+  // Microgram per Square Inch
+  MicroGM__PER__IN2: Qudt.unitFromLocalnameRequired("MicroGM-PER-IN2"),
+  // Ampere per Joule
+  A__PER__J: Qudt.unitFromLocalnameRequired("A-PER-J"),
+  // Mega Electron Volt
+  MegaEV: Qudt.unitFromLocalnameRequired("MegaEV"),
+  // PicoPascal
+  PicoPA: Qudt.unitFromLocalnameRequired("PicoPA"),
+  // KiloINDIV
+  KiloINDIV: Qudt.unitFromLocalnameRequired("KiloINDIV"),
+  // Megagram
+  MegaGM: Qudt.unitFromLocalnameRequired("MegaGM"),
+  // US Liquid Ounce
+  OZ_VOL_US: Qudt.unitFromLocalnameRequired("OZ_VOL_US"),
+  // Calorie (15 Degrees C)
+  CAL_15_DEG_C: Qudt.unitFromLocalnameRequired("CAL_15_DEG_C"),
+  // Milliampere Hour per Gram
+  MilliA__HR__PER__GM: Qudt.unitFromLocalnameRequired("MilliA-HR-PER-GM"),
+  // Centimetres per thousand years
+  CentiM__PER__KiloYR: Qudt.unitFromLocalnameRequired("CentiM-PER-KiloYR"),
+  // microampere
+  MicroA: Qudt.unitFromLocalnameRequired("MicroA"),
+  // V_Stat-CentiM
+  V_Stat__CentiM: Qudt.unitFromLocalnameRequired("V_Stat-CentiM"),
+  // Pound per Cubic Yard
+  LB__PER__YD3: Qudt.unitFromLocalnameRequired("LB-PER-YD3"),
+  // MicroCurie
+  MicroCi: Qudt.unitFromLocalnameRequired("MicroCi"),
+  // British Thermal Unit (thermochemical) Foot Per Hour Square Foot degree Fahrenheit
+  BTU_TH__FT__PER__HR__FT2__DEG_F: Qudt.unitFromLocalnameRequired(
+    "BTU_TH-FT-PER-HR-FT2-DEG_F"
+  ),
+  // Darcy
+  DARCY: Qudt.unitFromLocalnameRequired("DARCY"),
+  // Ounce (avoirdupois) Inch
+  OZ__IN: Qudt.unitFromLocalnameRequired("OZ-IN"),
+  // Hartree
+  E_h: Qudt.unitFromLocalnameRequired("E_h"),
+  // Degree Fahrenheit per Hour
+  DEG_F__PER__HR: Qudt.unitFromLocalnameRequired("DEG_F-PER-HR"),
+  // Quart (UK Liquid) Per Second
+  QT_UK__PER__SEC: Qudt.unitFromLocalnameRequired("QT_UK-PER-SEC"),
+  // Slug per Foot Second
+  SLUG__PER__FT__SEC: Qudt.unitFromLocalnameRequired("SLUG-PER-FT-SEC"),
+  // Pascal per Minute
+  PA__PER__MIN: Qudt.unitFromLocalnameRequired("PA-PER-MIN"),
+  // Cubic Decimeter Per Cubic Meter
+  DeciM3__PER__M3: Qudt.unitFromLocalnameRequired("DeciM3-PER-M3"),
+  // Square Metres square Hertz
+  M2__HZ2: Qudt.unitFromLocalnameRequired("M2-HZ2"),
+  // Watt Per Kilogram
+  W__PER__KiloGM: Qudt.unitFromLocalnameRequired("W-PER-KiloGM"),
+  // Micromoles per kilogram
+  MicroMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("MicroMOL-PER-KiloGM"),
+  // Square Inch Per Second
+  IN2__PER__SEC: Qudt.unitFromLocalnameRequired("IN2-PER-SEC"),
+  // KibiByte
+  KibiBYTE: Qudt.unitFromLocalnameRequired("KibiBYTE"),
+  // Micro Joule
+  MicroJ: Qudt.unitFromLocalnameRequired("MicroJ"),
+  // Moles per square metre per second
+  MOL__PER__M2__SEC: Qudt.unitFromLocalnameRequired("MOL-PER-M2-SEC"),
+  // milligrams per decilitre
+  MilliGM__PER__DeciL: Qudt.unitFromLocalnameRequired("MilliGM-PER-DeciL"),
+  // DeciTonne
+  DeciTONNE: Qudt.unitFromLocalnameRequired("DeciTONNE"),
+  // Millilitre Per Kelvin
+  MilliL__PER__K: Qudt.unitFromLocalnameRequired("MilliL-PER-K"),
+  // Falkland Islands Pound
+  FKP_Currency: Qudt.currencyFromLocalnameRequired("FKP"),
+  // Henry Per Ohm
+  H__PER__OHM: Qudt.unitFromLocalnameRequired("H-PER-OHM"),
+  // Degree Balling
+  DEGREE_BALLING: Qudt.unitFromLocalnameRequired("DEGREE_BALLING"),
+  // Coulomb per Cubic Metre
+  C__PER__M3: Qudt.unitFromLocalnameRequired("C-PER-M3"),
+  // Kelvin per Hour
+  K__PER__HR: Qudt.unitFromLocalnameRequired("K-PER-HR"),
+  // Yemeni Rial
+  YER_Currency: Qudt.currencyFromLocalnameRequired("YER"),
+  // European Monetary Unit (E.M.U.-6) (Bonds market unit)
+  XBB_Currency: Qudt.currencyFromLocalnameRequired("XBB"),
+  // Comoro Franc
+  KMF_Currency: Qudt.currencyFromLocalnameRequired("KMF"),
+  // grams Carbon per square meter per day
+  GM_Carbon__PER__M2__DAY: Qudt.unitFromLocalnameRequired(
+    "GM_Carbon-PER-M2-DAY"
+  ),
+  // Manat
+  TMT_Currency: Qudt.currencyFromLocalnameRequired("TMT"),
+  // Milligrams per cubic metre per second
+  MilliGM__PER__M3__SEC: Qudt.unitFromLocalnameRequired("MilliGM-PER-M3-SEC"),
+  // Newton per Kilogram
+  N__PER__KiloGM: Qudt.unitFromLocalnameRequired("N-PER-KiloGM"),
+  // Millibar
+  MilliBAR: Qudt.unitFromLocalnameRequired("MilliBAR"),
+  // Kilonewton Metre per Degree
+  KiloN__M__PER__DEG: Qudt.unitFromLocalnameRequired("KiloN-M-PER-DEG"),
+  // Square Meter Per Newton
+  M2__PER__N: Qudt.unitFromLocalnameRequired("M2-PER-N"),
+  // Nanometer Per Centimeter Megapascal
+  NanoM__PER__CentiM__MegaPA: Qudt.unitFromLocalnameRequired(
+    "NanoM-PER-CentiM-MegaPA"
+  ),
+  // Pound Mole
+  LB__MOL: Qudt.unitFromLocalnameRequired("LB-MOL"),
+  // Minute
+  MIN: Qudt.unitFromLocalnameRequired("MIN"),
+  // Nanowatt
+  NanoW: Qudt.unitFromLocalnameRequired("NanoW"),
+  // Micrograms per square metre per day
+  MicroGM__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MicroGM-PER-M2-DAY"),
+  // Pula
+  BWP_Currency: Qudt.currencyFromLocalnameRequired("BWP"),
+  // Milligram Per Metre
+  MilliGM__PER__M: Qudt.unitFromLocalnameRequired("MilliGM-PER-M"),
+  // Watt Second
+  W__SEC: Qudt.unitFromLocalnameRequired("W-SEC"),
+  // GibiByte
+  GibiBYTE: Qudt.unitFromLocalnameRequired("GibiBYTE"),
+  // Joule per Gram Kelvin
+  J__PER__GM__K: Qudt.unitFromLocalnameRequired("J-PER-GM-K"),
+  // Kilomole Per Second
+  KiloMOL__PER__SEC: Qudt.unitFromLocalnameRequired("KiloMOL-PER-SEC"),
+  // Microwatt
+  MicroW: Qudt.unitFromLocalnameRequired("MicroW"),
+  // Watthour per Cubic meter
+  W__HR__PER__M3: Qudt.unitFromLocalnameRequired("W-HR-PER-M3"),
+  // Quartic Meter
+  M4: Qudt.unitFromLocalnameRequired("M4"),
+  // Millicurie
+  MilliCi: Qudt.unitFromLocalnameRequired("MilliCi"),
+  // Sudanese Pound
+  SDG_Currency: Qudt.currencyFromLocalnameRequired("SDG"),
+  // Kiloampere Per Square Metre
+  KiloA__PER__M2: Qudt.unitFromLocalnameRequired("KiloA-PER-M2"),
+  // Attojoule Second
+  AttoJ__SEC: Qudt.unitFromLocalnameRequired("AttoJ-SEC"),
+  // MegaBIT
+  MegaBIT: Qudt.unitFromLocalnameRequired("MegaBIT"),
+  // Knot per Second
+  KN__PER__SEC: Qudt.unitFromLocalnameRequired("KN-PER-SEC"),
+  // Burundian Franc
+  BIF_Currency: Qudt.currencyFromLocalnameRequired("BIF"),
+  // Gill (US) Per Day
+  GI_US__PER__DAY: Qudt.unitFromLocalnameRequired("GI_US-PER-DAY"),
+  // MilliTorr
+  MilliTORR: Qudt.unitFromLocalnameRequired("MilliTORR"),
+  // Short Ton (us) Per Day
+  TON_US__PER__DAY: Qudt.unitFromLocalnameRequired("TON_US-PER-DAY"),
+  // Abhenry
+  H_Ab: Qudt.unitFromLocalnameRequired("H_Ab"),
+  // Litres per micromole
+  L__PER__MicroMOL: Qudt.unitFromLocalnameRequired("L-PER-MicroMOL"),
+  // Ampere Per Millimetre
+  A__PER__MilliM: Qudt.unitFromLocalnameRequired("A-PER-MilliM"),
+  // Bushel (US Dry) Per Minute
+  BU_US_DRY__PER__MIN: Qudt.unitFromLocalnameRequired("BU_US_DRY-PER-MIN"),
+  // Millimole
+  MilliMOL: Qudt.unitFromLocalnameRequired("MilliMOL"),
+  // Micrometre
+  MicroM: Qudt.unitFromLocalnameRequired("MicroM"),
+  // Exajoule
+  ExaJ: Qudt.unitFromLocalnameRequired("ExaJ"),
+  // कूलम्ब
+  C: Qudt.unitFromLocalnameRequired("C"),
+  // Reciprocal Cubic Centimetre
+  PER__CentiM3: Qudt.unitFromLocalnameRequired("PER-CentiM3"),
+  // Short Ton
+  TON_SHORT: Qudt.unitFromLocalnameRequired("TON_SHORT"),
+  // Volt Per Microsecond
+  V__PER__MicroSEC: Qudt.unitFromLocalnameRequired("V-PER-MicroSEC"),
+  // chain
+  CH: Qudt.unitFromLocalnameRequired("CH"),
+  // Milligram Per Hectare
+  MilliGM__PER__HA: Qudt.unitFromLocalnameRequired("MilliGM-PER-HA"),
+  // Centimeter Per Kelvin
+  CentiM__PER__K: Qudt.unitFromLocalnameRequired("CentiM-PER-K"),
+  // Ounce (UK Fluid) Per Second
+  OZ_VOL_UK__PER__SEC: Qudt.unitFromLocalnameRequired("OZ_VOL_UK-PER-SEC"),
+  // Gram Per Day
+  GM__PER__DAY: Qudt.unitFromLocalnameRequired("GM-PER-DAY"),
+  // Microbar
+  MicroBAR: Qudt.unitFromLocalnameRequired("MicroBAR"),
+  // Grams per square centimetre per year
+  GM__PER__CentiM2__YR: Qudt.unitFromLocalnameRequired("GM-PER-CentiM2-YR"),
+  // Millihenry Per Ohm
+  MilliH__PER__OHM: Qudt.unitFromLocalnameRequired("MilliH-PER-OHM"),
+  // Millijoule
+  MilliJ: Qudt.unitFromLocalnameRequired("MilliJ"),
+  // Kroon
+  EEK_Currency: Qudt.currencyFromLocalnameRequired("EEK"),
+  // Centimetre Of Mercury
+  CentiM_HG: Qudt.unitFromLocalnameRequired("CentiM_HG"),
+  // Decibel
+  DeciB: Qudt.unitFromLocalnameRequired("DeciB"),
+  // Femtometre
+  FemtoM: Qudt.unitFromLocalnameRequired("FemtoM"),
+  // Litre Per Kilogram
+  L__PER__KiloGM: Qudt.unitFromLocalnameRequired("L-PER-KiloGM"),
+  // joule second
+  J__SEC: Qudt.unitFromLocalnameRequired("J-SEC"),
+  // Teaspoon
+  TSP: Qudt.unitFromLocalnameRequired("TSP"),
+  // Litre Per Litre
+  L__PER__L: Qudt.unitFromLocalnameRequired("L-PER-L"),
+  // Watt per Steradian
+  W__PER__SR: Qudt.unitFromLocalnameRequired("W-PER-SR"),
+  // Dyne per Square Centimetre
+  DYN__PER__CentiM2: Qudt.unitFromLocalnameRequired("DYN-PER-CentiM2"),
+  // Parts per thousand per hour
+  PPTH__PER__HR: Qudt.unitFromLocalnameRequired("PPTH-PER-HR"),
+  // Nanograms per square metre per Pascal per second
+  NanoGM__PER__M2__PA__SEC: Qudt.unitFromLocalnameRequired(
+    "NanoGM-PER-M2-PA-SEC"
+  ),
+  // Kilobit per Second
+  KiloBIT__PER__SEC: Qudt.unitFromLocalnameRequired("KiloBIT-PER-SEC"),
+  // Therm US
+  THM_US: Qudt.unitFromLocalnameRequired("THM_US"),
+  // watt
+  W: Qudt.unitFromLocalnameRequired("W"),
+  // Degree
+  DEG: Qudt.unitFromLocalnameRequired("DEG"),
+  // Swedish Krona
+  SEK_Currency: Qudt.currencyFromLocalnameRequired("SEK"),
+  // Nanomoles per micromole
+  NanoMOL__PER__MicroMOL: Qudt.unitFromLocalnameRequired(
+    "NanoMOL-PER-MicroMOL"
+  ),
+  // Megagram Per Cubic Meter
+  MegaGM__PER__M3: Qudt.unitFromLocalnameRequired("MegaGM-PER-M3"),
+  // Degree Fahrenheit per Second
+  DEG_F__PER__SEC: Qudt.unitFromLocalnameRequired("DEG_F-PER-SEC"),
+  // Millilitre Per Square Centimetre Second
+  MilliL__PER__CentiM2__SEC: Qudt.unitFromLocalnameRequired(
+    "MilliL-PER-CentiM2-SEC"
+  ),
+  // European Unit of Account 17 (E.U.A.-17) (Bonds market unit)
+  XBD_Currency: Qudt.currencyFromLocalnameRequired("XBD"),
+  // Millimoles per cubic metre
+  MilliMOL__PER__M3: Qudt.unitFromLocalnameRequired("MilliMOL-PER-M3"),
+  // Kilovolt Ampere
+  KiloV__A: Qudt.unitFromLocalnameRequired("KiloV-A"),
+  // square metre per square second kelvin
+  M2__PER__SEC2__K: Qudt.unitFromLocalnameRequired("M2-PER-SEC2-K"),
+  // Pound Mole Degree Fahrenheit
+  LB__MOL__DEG_F: Qudt.unitFromLocalnameRequired("LB-MOL-DEG_F"),
+  // Pound per Gallon
+  LB__PER__GAL: Qudt.unitFromLocalnameRequired("LB-PER-GAL"),
+  // Milligravity
+  MilliG: Qudt.unitFromLocalnameRequired("MilliG"),
+  // Deaths per 1000 individuals per year
+  DEATHS__PER__1000I__YR: Qudt.unitFromLocalnameRequired("DEATHS-PER-1000I-YR"),
+  // Euro per watt hour
+  EUR__PER__W__HR: Qudt.unitFromLocalnameRequired("EUR-PER-W-HR"),
+  // Megaton of Oil Equivalent
+  MegaTOE: Qudt.unitFromLocalnameRequired("MegaTOE"),
+  // Reciprocal steradian
+  PER__SR: Qudt.unitFromLocalnameRequired("PER-SR"),
+  // Qatari Rial
+  QAR_Currency: Qudt.currencyFromLocalnameRequired("QAR"),
+  // Gram Per Kilometre
+  GM__PER__KiloM: Qudt.unitFromLocalnameRequired("GM-PER-KiloM"),
+  // Erlang
+  ERLANG: Qudt.unitFromLocalnameRequired("ERLANG"),
+  // grams per decilitre
+  GM__PER__DeciL: Qudt.unitFromLocalnameRequired("GM-PER-DeciL"),
+  // Kilovolt Ampere Hour
+  KiloV__A__HR: Qudt.unitFromLocalnameRequired("KiloV-A-HR"),
+  // South Korean Won
+  KRW_Currency: Qudt.currencyFromLocalnameRequired("KRW"),
+  // Libyan Dinar
+  LYD_Currency: Qudt.currencyFromLocalnameRequired("LYD"),
+  // Planck Momentum
+  PlanckMomentum: Qudt.unitFromLocalnameRequired("PlanckMomentum"),
+  // Rwanda Franc
+  RWF_Currency: Qudt.currencyFromLocalnameRequired("RWF"),
+  // Bar Liter Per Second
+  BAR__L__PER__SEC: Qudt.unitFromLocalnameRequired("BAR-L-PER-SEC"),
+  // Cayman Islands Dollar
+  KYD_Currency: Qudt.currencyFromLocalnameRequired("KYD"),
+  // Micromoles per litre
+  MicroMOL__PER__L: Qudt.unitFromLocalnameRequired("MicroMOL-PER-L"),
+  // Foot per Second
+  FT__PER__SEC: Qudt.unitFromLocalnameRequired("FT-PER-SEC"),
+  // Megajoule Per Square Metre
+  MegaJ__PER__M2: Qudt.unitFromLocalnameRequired("MegaJ-PER-M2"),
+  // Nanokatal Per Liter
+  NanoKAT__PER__L: Qudt.unitFromLocalnameRequired("NanoKAT-PER-L"),
+  // amper bölü metre kare
+  A__PER__M2: Qudt.unitFromLocalnameRequired("A-PER-M2"),
+  // Ounce Troy
+  OZ_TROY: Qudt.unitFromLocalnameRequired("OZ_TROY"),
+  // Erg per Cubic Centimetre
+  ERG__PER__CentiM3: Qudt.unitFromLocalnameRequired("ERG-PER-CentiM3"),
+  // Degree Baume (US Heavy)
+  DEGREE_BAUME_US_HEAVY: Qudt.unitFromLocalnameRequired(
+    "DEGREE_BAUME_US_HEAVY"
+  ),
+  // Atmosphere Cubic Meter per Mole
+  ATM__M3__PER__MOL: Qudt.unitFromLocalnameRequired("ATM-M3-PER-MOL"),
+  // Centibar
+  CentiBAR: Qudt.unitFromLocalnameRequired("CentiBAR"),
+  // Newton Metre Per Square Metre
+  N__M__PER__M2: Qudt.unitFromLocalnameRequired("N-M-PER-M2"),
+  // Dec
+  DECADE: Qudt.unitFromLocalnameRequired("DECADE"),
+  // Tonne Per Day
+  TON_Metric__PER__DAY: Qudt.unitFromLocalnameRequired("TON_Metric-PER-DAY"),
+  // Hectobar
+  HectoBAR: Qudt.unitFromLocalnameRequired("HectoBAR"),
+  // Gram Millimeter
+  GM__MilliM: Qudt.unitFromLocalnameRequired("GM-MilliM"),
+  // Teraohm
+  TeraOHM: Qudt.unitFromLocalnameRequired("TeraOHM"),
+  // Joule Second per Mole
+  J__SEC__PER__MOL: Qudt.unitFromLocalnameRequired("J-SEC-PER-MOL"),
+  // Number per milligram
+  NUM__PER__MilliGM: Qudt.unitFromLocalnameRequired("NUM-PER-MilliGM"),
+  // Milli ArcSecond
+  MilliARCSEC: Qudt.unitFromLocalnameRequired("MilliARCSEC"),
+  // Hectopascal Per Kelvin
+  HectoPA__PER__K: Qudt.unitFromLocalnameRequired("HectoPA-PER-K"),
+  // Gauss
+  GAUSS: Qudt.unitFromLocalnameRequired("GAUSS"),
+  // Moles per gram per hour
+  MOL__PER__GM__HR: Qudt.unitFromLocalnameRequired("MOL-PER-GM-HR"),
+  // Milliwatts per square metre per nanometre per steradian
+  MilliW__PER__M2__NanoM__SR: Qudt.unitFromLocalnameRequired(
+    "MilliW-PER-M2-NanoM-SR"
+  ),
+  // Reciprocal Square Giga Electron Volt Unit
+  PER__GigaEV2: Qudt.unitFromLocalnameRequired("PER-GigaEV2"),
+  // Somali Shilling
+  SOS_Currency: Qudt.currencyFromLocalnameRequired("SOS"),
+  // Centipoise Per Bar
+  CentiPOISE__PER__BAR: Qudt.unitFromLocalnameRequired("CentiPOISE-PER-BAR"),
+  // Hartley per Second
+  HART__PER__SEC: Qudt.unitFromLocalnameRequired("HART-PER-SEC"),
+  // Tonne Per Second (metric Ton)
+  TON_Metric__PER__SEC: Qudt.unitFromLocalnameRequired("TON_Metric-PER-SEC"),
+  // Microhenry Per Kiloohm
+  MicroH__PER__KiloOHM: Qudt.unitFromLocalnameRequired("MicroH-PER-KiloOHM"),
+  // BTU per Square Foot Hour Degree Fahrenheit
+  BTU_IT__PER__FT2__HR__DEG_F: Qudt.unitFromLocalnameRequired(
+    "BTU_IT-PER-FT2-HR-DEG_F"
+  ),
+  // Pound Force per Square Inch
+  LB_F__PER__IN2: Qudt.unitFromLocalnameRequired("LB_F-PER-IN2"),
+  // Torr
+  TORR: Qudt.unitFromLocalnameRequired("TORR"),
+  // Colombian Peso
+  COP_Currency: Qudt.currencyFromLocalnameRequired("COP"),
+  // Milligrams per square metre per hour
+  MilliGM__PER__M2__HR: Qudt.unitFromLocalnameRequired("MilliGM-PER-M2-HR"),
+  // Cubic Centimeter Per Minute
+  CentiM3__PER__MIN: Qudt.unitFromLocalnameRequired("CentiM3-PER-MIN"),
+  // Neper
+  NP: Qudt.unitFromLocalnameRequired("NP"),
+  // MilliKAT
+  MilliKAT: Qudt.unitFromLocalnameRequired("MilliKAT"),
+  // Million Years
+  MegaYR: Qudt.unitFromLocalnameRequired("MegaYR"),
+  // millimoles per litre
+  MilliMOL__PER__L: Qudt.unitFromLocalnameRequired("MilliMOL-PER-L"),
+  // MicroGray
+  MicroGRAY: Qudt.unitFromLocalnameRequired("MicroGRAY"),
+  // Shake
+  SH: Qudt.unitFromLocalnameRequired("SH"),
+  // Shannon per Second
+  SHANNON__PER__SEC: Qudt.unitFromLocalnameRequired("SHANNON-PER-SEC"),
+  // Bar Cubic Meter Per Second
+  BAR__M3__PER__SEC: Qudt.unitFromLocalnameRequired("BAR-M3-PER-SEC"),
+  // Revolution per Second
+  REV__PER__SEC: Qudt.unitFromLocalnameRequired("REV-PER-SEC"),
+  // Joule
+  J: Qudt.unitFromLocalnameRequired("J"),
+  // Bushel (UK) Per Minute
+  BU_UK__PER__MIN: Qudt.unitFromLocalnameRequired("BU_UK-PER-MIN"),
+  // Degree Brix
+  DEGREE_BRIX: Qudt.unitFromLocalnameRequired("DEGREE_BRIX"),
+  // Kilonewton
+  KiloN: Qudt.unitFromLocalnameRequired("KiloN"),
+  // Ban
+  BAN: Qudt.unitFromLocalnameRequired("BAN"),
+  // Pound Mole
+  MOL_LB: Qudt.unitFromLocalnameRequired("MOL_LB"),
+  // Coulomb per Meter
+  C__PER__M: Qudt.unitFromLocalnameRequired("C-PER-M"),
+  // Millibar Per Bar
+  MilliBAR__PER__BAR: Qudt.unitFromLocalnameRequired("MilliBAR-PER-BAR"),
+  // Picokatal Per Liter
+  PicoKAT__PER__L: Qudt.unitFromLocalnameRequired("PicoKAT-PER-L"),
+  // Gold (one Troy ounce)
+  XAU_Currency: Qudt.currencyFromLocalnameRequired("XAU"),
+  // Reciprocal millisecond
+  PER__MilliSEC: Qudt.unitFromLocalnameRequired("PER-MilliSEC"),
+  // Coulomb Per Square Centimeter
+  C__PER__CentiM2: Qudt.unitFromLocalnameRequired("C-PER-CentiM2"),
+  // Reciprocal metre per nanometre per steradian
+  PER__M__NanoM__SR: Qudt.unitFromLocalnameRequired("PER-M-NanoM-SR"),
+  // प्रति मीटर वैबर
+  WB__PER__M: Qudt.unitFromLocalnameRequired("WB-PER-M"),
+  // Millimole Per Gram
+  MilliMOL__PER__GM: Qudt.unitFromLocalnameRequired("MilliMOL-PER-GM"),
+  // Abtesla
+  T_Ab: Qudt.unitFromLocalnameRequired("T_Ab"),
+  // Decinewton Metre
+  DeciN__M: Qudt.unitFromLocalnameRequired("DeciN-M"),
+  // Reciprocal metre per second
+  PER__M__SEC: Qudt.unitFromLocalnameRequired("PER-M-SEC"),
+  // atomic-number
+  Z: Qudt.unitFromLocalnameRequired("Z"),
+  // Peck (UK) Per Minute
+  PK_UK__PER__MIN: Qudt.unitFromLocalnameRequired("PK_UK-PER-MIN"),
+  // Megahertz Metre
+  MegaHZ__M: Qudt.unitFromLocalnameRequired("MegaHZ-M"),
+  // MegaW
+  MegaW: Qudt.unitFromLocalnameRequired("MegaW"),
+  // Kilopascal
+  KiloPA: Qudt.unitFromLocalnameRequired("KiloPA"),
+  // Iceland Krona
+  ISK_Currency: Qudt.currencyFromLocalnameRequired("ISK"),
+  // Mole Per Minute
+  MOL__PER__MIN: Qudt.unitFromLocalnameRequired("MOL-PER-MIN"),
+  // Newton Per Centimeter
+  N__PER__CentiM: Qudt.unitFromLocalnameRequired("N-PER-CentiM"),
+  // Ounce (avoirdupois) Per Gallon (US)
+  OZ__PER__GAL_US: Qudt.unitFromLocalnameRequired("OZ-PER-GAL_US"),
+  // International Unit per Litre
+  IU__PER__L: Qudt.unitFromLocalnameRequired("IU-PER-L"),
+  // Breath per Minute
+  BREATH__PER__MIN: Qudt.unitFromLocalnameRequired("BREATH-PER-MIN"),
+  // tonne per hectare per year
+  TONNE__PER__HA__YR: Qudt.unitFromLocalnameRequired("TONNE-PER-HA-YR"),
+  // Afghani
+  AFN_Currency: Qudt.currencyFromLocalnameRequired("AFN"),
+  // Gallon (UK) Per Day
+  GAL_UK__PER__DAY: Qudt.unitFromLocalnameRequired("GAL_UK-PER-DAY"),
+  // Kilobar
+  KiloBAR: Qudt.unitFromLocalnameRequired("KiloBAR"),
+  // Ampere per Square Meter Square Kelvin
+  A__PER__M2__K2: Qudt.unitFromLocalnameRequired("A-PER-M2-K2"),
+  // Microgram Per Deciliter
+  MicroGM__PER__DeciL: Qudt.unitFromLocalnameRequired("MicroGM-PER-DeciL"),
+  // Kilohertz
+  KiloHZ: Qudt.unitFromLocalnameRequired("KiloHZ"),
+  // Centimetre Per Hour
+  CentiM__PER__HR: Qudt.unitFromLocalnameRequired("CentiM-PER-HR"),
+  // Kiloampere Hour
+  KiloA__HR: Qudt.unitFromLocalnameRequired("KiloA-HR"),
+  // millisecond
+  MilliSEC: Qudt.unitFromLocalnameRequired("MilliSEC"),
+  // Planck Angular Frequency
+  PlanckFrequency_Ang: Qudt.unitFromLocalnameRequired("PlanckFrequency_Ang"),
+  // Gallon (US Liquid) Per Second
+  GAL_US__PER__SEC: Qudt.unitFromLocalnameRequired("GAL_US-PER-SEC"),
+  // Barye
+  BARYE: Qudt.unitFromLocalnameRequired("BARYE"),
+  // Gill (UK) Per Minute
+  GI_UK__PER__MIN: Qudt.unitFromLocalnameRequired("GI_UK-PER-MIN"),
+  // Milligram Per Millilitre
+  MilliGM__PER__MilliL: Qudt.unitFromLocalnameRequired("MilliGM-PER-MilliL"),
+  // Pint (UK) Per Day
+  PINT_UK__PER__DAY: Qudt.unitFromLocalnameRequired("PINT_UK-PER-DAY"),
+  // MilliSiemens per metre
+  MilliS__PER__M: Qudt.unitFromLocalnameRequired("MilliS-PER-M"),
+  // Millimetre of Mercury
+  MilliM_HG: Qudt.unitFromLocalnameRequired("MilliM_HG"),
+  // kiloampere
+  KiloA: Qudt.unitFromLocalnameRequired("KiloA"),
+  // Watt per Gram
+  W__PER__GM: Qudt.unitFromLocalnameRequired("W-PER-GM"),
+  // Quart (UK Liquid) Per Minute
+  QT_UK__PER__MIN: Qudt.unitFromLocalnameRequired("QT_UK-PER-MIN"),
+  // Microgravity
+  MicroG: Qudt.unitFromLocalnameRequired("MicroG"),
+  // DeciCoulomb
+  DeciC: Qudt.unitFromLocalnameRequired("DeciC"),
+  // Second Square Foot
+  SEC__FT2: Qudt.unitFromLocalnameRequired("SEC-FT2"),
+  // Joules per square centimetre per day
+  J__PER__CentiM2__DAY: Qudt.unitFromLocalnameRequired("J-PER-CentiM2-DAY"),
+  // Pound (avoirdupois) Per Day
+  LB__PER__DAY: Qudt.unitFromLocalnameRequired("LB-PER-DAY"),
+  // Ampere je Meter
+  A__PER__M: Qudt.unitFromLocalnameRequired("A-PER-M"),
+  // KiloYear
+  KiloYR: Qudt.unitFromLocalnameRequired("KiloYR"),
+  // Square Second
+  SEC2: Qudt.unitFromLocalnameRequired("SEC2"),
+  // Picograms per litre
+  PicoGM__PER__L: Qudt.unitFromLocalnameRequired("PicoGM-PER-L"),
+  // Square Degrees Celsius per second
+  DEG_C2__PER__SEC: Qudt.unitFromLocalnameRequired("DEG_C2-PER-SEC"),
+  // Nanogram Per Cubic Metre
+  NanoGM__PER__M3: Qudt.unitFromLocalnameRequired("NanoGM-PER-M3"),
+  // Mexican Peso
+  MXN_Currency: Qudt.currencyFromLocalnameRequired("MXN"),
+  // US Gallon per Minute
+  GAL_US__PER__MIN: Qudt.unitFromLocalnameRequired("GAL_US-PER-MIN"),
+  // Megahertz
+  MegaHZ: Qudt.unitFromLocalnameRequired("MegaHZ"),
+  // Millimole Per Kilogram
+  MilliMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("MilliMOL-PER-KiloGM"),
+  // Kiloweber Per Meter
+  KiloWB__PER__M: Qudt.unitFromLocalnameRequired("KiloWB-PER-M"),
+  // Cubic Centimeter Per Day
+  CentiM3__PER__DAY: Qudt.unitFromLocalnameRequired("CentiM3-PER-DAY"),
+  // kelvin per watt
+  K__PER__W: Qudt.unitFromLocalnameRequired("K-PER-W"),
+  // Picometre
+  PicoM: Qudt.unitFromLocalnameRequired("PicoM"),
+  // Millilitre Per Hour
+  MilliL__PER__HR: Qudt.unitFromLocalnameRequired("MilliL-PER-HR"),
+  // Yard
+  YD: Qudt.unitFromLocalnameRequired("YD"),
+  // Absiemen
+  S_Ab: Qudt.unitFromLocalnameRequired("S_Ab"),
+  // Bar Per Kelvin
+  BAR__PER__K: Qudt.unitFromLocalnameRequired("BAR-PER-K"),
+  // Joule per Mole Kelvin
+  J__PER__MOL__K: Qudt.unitFromLocalnameRequired("J-PER-MOL-K"),
+  // Litre Per Second Per Square Metre
+  L__PER__SEC__M2: Qudt.unitFromLocalnameRequired("L-PER-SEC-M2"),
+  // Number per microlitre
+  NUM__PER__MicroL: Qudt.unitFromLocalnameRequired("NUM-PER-MicroL"),
+  // nanograms per decilitre
+  NanoGM__PER__DeciL: Qudt.unitFromLocalnameRequired("NanoGM-PER-DeciL"),
+  // Bahamian Dollar
+  BSD_Currency: Qudt.currencyFromLocalnameRequired("BSD"),
+  // Planck Charge
+  PlanckCharge: Qudt.unitFromLocalnameRequired("PlanckCharge"),
+  // Gon
+  GON: Qudt.unitFromLocalnameRequired("GON"),
+  // Metric Perm
+  PERM_Metric: Qudt.unitFromLocalnameRequired("PERM_Metric"),
   // BTU (TH) Foot per Square Foot Hour Degree Fahrenheit
   BTU_TH__FT__PER__FT2__HR__DEG_F: Qudt.unitFromLocalnameRequired(
     "BTU_TH-FT-PER-FT2-HR-DEG_F"
   ),
   // Mongolian Tugrik
   MNT_Currency: Qudt.currencyFromLocalnameRequired("MNT"),
-  // Light Year
-  LY: Qudt.unitFromLocalnameRequired("LY"),
-  // Yard Per Degree Fahrenheit
-  YD__PER__DEG_F: Qudt.unitFromLocalnameRequired("YD-PER-DEG_F"),
-  // Burundian Franc
-  BIF_Currency: Qudt.currencyFromLocalnameRequired("BIF"),
-  // Deaths per Million individuals per year
-  DEATHS__PER__MegaINDIV__YR: Qudt.unitFromLocalnameRequired(
-    "DEATHS-PER-MegaINDIV-YR"
-  ),
-  // Erg per Second
-  ERG__PER__SEC: Qudt.unitFromLocalnameRequired("ERG-PER-SEC"),
-  // Pascal Second Per Bar
-  PA__SEC__PER__BAR: Qudt.unitFromLocalnameRequired("PA-SEC-PER-BAR"),
-  // Metres per year
-  M__PER__YR: Qudt.unitFromLocalnameRequired("M-PER-YR"),
-  // Pound Sterling
-  GBP_Currency: Qudt.currencyFromLocalnameRequired("GBP"),
-  // kilosecond
-  KiloSEC: Qudt.unitFromLocalnameRequired("KiloSEC"),
-  // Dyne Second Per Centimetre
-  DYN__SEC__PER__CentiM: Qudt.unitFromLocalnameRequired("DYN-SEC-PER-CentiM"),
-  // Centimeter
-  CentiM: Qudt.unitFromLocalnameRequired("CentiM"),
-  // Romanian New Leu
-  RON_Currency: Qudt.currencyFromLocalnameRequired("RON"),
-  // European Unit of Account 9 (E.U.A.-9) (Bonds market unit)
-  XBC_Currency: Qudt.currencyFromLocalnameRequired("XBC"),
-  // Calorie per Gram Degree Celsius
-  KiloCAL__PER__GM__DEG_C: Qudt.unitFromLocalnameRequired(
-    "KiloCAL-PER-GM-DEG_C"
-  ),
-  // Millimetre
-  MilliM: Qudt.unitFromLocalnameRequired("MilliM"),
-  // Quart (US Liquid) Per Hour
-  QT_US__PER__HR: Qudt.unitFromLocalnameRequired("QT_US-PER-HR"),
-  // DeciSiemens
-  DeciS: Qudt.unitFromLocalnameRequired("DeciS"),
-  // Brunei Dollar
-  BND_Currency: Qudt.currencyFromLocalnameRequired("BND"),
-  // Degree per Second
-  DEG__PER__SEC: Qudt.unitFromLocalnameRequired("DEG-PER-SEC"),
-  // Kilobecquerel
-  KiloBQ: Qudt.unitFromLocalnameRequired("KiloBQ"),
-  // amper bölü metre kare
-  A__PER__M2: Qudt.unitFromLocalnameRequired("A-PER-M2"),
-  // square metre per square second kelvin
-  M2__PER__SEC2__K: Qudt.unitFromLocalnameRequired("M2-PER-SEC2-K"),
-  // Horsepower (metric)
-  HP_Metric: Qudt.unitFromLocalnameRequired("HP_Metric"),
-  // Million US Dollars
-  MegaUSD_Currency: Qudt.currencyFromLocalnameRequired("MegaUSD"),
-  // MegaCoulomb
-  MegaC: Qudt.unitFromLocalnameRequired("MegaC"),
-  // Kilocalorie (thermochemical)
-  KiloCAL_TH: Qudt.unitFromLocalnameRequired("KiloCAL_TH"),
-  // Kilonewton
-  KiloN: Qudt.unitFromLocalnameRequired("KiloN"),
-  // Rod
-  ROD: Qudt.unitFromLocalnameRequired("ROD"),
-  // Rayl
-  RAYL: Qudt.unitFromLocalnameRequired("RAYL"),
-  // Quart (UK Liquid) Per Hour
-  QT_UK__PER__HR: Qudt.unitFromLocalnameRequired("QT_UK-PER-HR"),
-  // Bahraini Dinar
-  BHD_Currency: Qudt.currencyFromLocalnameRequired("BHD"),
-  // Nanohenry
-  NanoH: Qudt.unitFromLocalnameRequired("NanoH"),
-  // MILLE
-  MILLE: Qudt.unitFromLocalnameRequired("MILLE"),
-  // Lumen per Watt
-  LM__PER__W: Qudt.unitFromLocalnameRequired("LM-PER-W"),
-  // British Thermal Unit (thermochemical) Per Pound Degree Fahrenheit
-  BTU_TH__PER__LB__DEG_F: Qudt.unitFromLocalnameRequired("BTU_TH-PER-LB-DEG_F"),
-  // Bit
-  BIT: Qudt.unitFromLocalnameRequired("BIT"),
-  // Kilovolt
-  KiloV: Qudt.unitFromLocalnameRequired("KiloV"),
-  // Gallon (UK) Per Minute
-  GAL_UK__PER__MIN: Qudt.unitFromLocalnameRequired("GAL_UK-PER-MIN"),
-  // Costa Rican Colon
-  CRC_Currency: Qudt.currencyFromLocalnameRequired("CRC"),
-  // Degree Baume (US Heavy)
-  DEGREE_BAUME_US_HEAVY: Qudt.unitFromLocalnameRequired(
-    "DEGREE_BAUME_US_HEAVY"
-  ),
-  // Abcoulomb per Square Centimetre
-  C_Ab__PER__CentiM2: Qudt.unitFromLocalnameRequired("C_Ab-PER-CentiM2"),
-  // KiloCoulomb
-  KiloC: Qudt.unitFromLocalnameRequired("KiloC"),
-  // Lux Hour
-  LUX__HR: Qudt.unitFromLocalnameRequired("LUX-HR"),
-  // Micrograms per gram
-  MicroGM__PER__GM: Qudt.unitFromLocalnameRequired("MicroGM-PER-GM"),
-  // Ton (US)
-  TON_US: Qudt.unitFromLocalnameRequired("TON_US"),
-  // Gram Per Square Centimetre
-  GM__PER__CentiM2: Qudt.unitFromLocalnameRequired("GM-PER-CentiM2"),
-  // Pennyweight
-  Pennyweight: Qudt.unitFromLocalnameRequired("Pennyweight"),
-  // Watt per Kelvin
-  W__PER__K: Qudt.unitFromLocalnameRequired("W-PER-K"),
-  // Kilovolt Ampere Reactive
-  KiloV__A_Reactive: Qudt.unitFromLocalnameRequired("KiloV-A_Reactive"),
-  // Abfarad per Centimeter
-  FARAD_Ab__PER__CentiM: Qudt.unitFromLocalnameRequired("FARAD_Ab-PER-CentiM"),
-  // Milligram Per Liter
-  MilliGM__PER__L: Qudt.unitFromLocalnameRequired("MilliGM-PER-L"),
-  // Square Yard
-  YD2: Qudt.unitFromLocalnameRequired("YD2"),
-  // U.S. Perm
-  PERM_US: Qudt.unitFromLocalnameRequired("PERM_US"),
-  // FemtoMole
-  FemtoMOL: Qudt.unitFromLocalnameRequired("FemtoMOL"),
-  // Joule per Gram Kelvin
-  J__PER__GM__K: Qudt.unitFromLocalnameRequired("J-PER-GM-K"),
-  // Kilogram Per Second Per Square Metre
-  KiloGM__PER__SEC__M2: Qudt.unitFromLocalnameRequired("KiloGM-PER-SEC-M2"),
-  // DEATHS
-  DEATHS: Qudt.unitFromLocalnameRequired("DEATHS"),
-  // Libyan Dinar
-  LYD_Currency: Qudt.currencyFromLocalnameRequired("LYD"),
-  // Millisiemens
-  MilliS: Qudt.unitFromLocalnameRequired("MilliS"),
-  // Conventional Millimetre Of Water
-  MilliM_H2O: Qudt.unitFromLocalnameRequired("MilliM_H2O"),
-  // Relative Permeability
-  PERMEABILITY_REL: Qudt.unitFromLocalnameRequired("PERMEABILITY_REL"),
-  // Centilitre
-  CentiL: Qudt.unitFromLocalnameRequired("CentiL"),
-  // Reciprocal Micrometre
-  PER__MicroM: Qudt.unitFromLocalnameRequired("PER-MicroM"),
-  // Nanometer Per Centimeter PSI
-  NanoM__PER__CentiM__PSI: Qudt.unitFromLocalnameRequired(
-    "NanoM-PER-CentiM-PSI"
-  ),
-  // Watt per Meter Kelvin
-  W__PER__M__K: Qudt.unitFromLocalnameRequired("W-PER-M-K"),
-  // Nat
-  NAT: Qudt.unitFromLocalnameRequired("NAT"),
-  // Inverse Square Planck Mass
-  PER__PlanckMass2: Qudt.unitFromLocalnameRequired("PER-PlanckMass2"),
-  // Gram Per Day
-  GM__PER__DAY: Qudt.unitFromLocalnameRequired("GM-PER-DAY"),
-  // Newton Per Centimeter
-  N__PER__CentiM: Qudt.unitFromLocalnameRequired("N-PER-CentiM"),
-  // Bar Per Kelvin
-  BAR__PER__K: Qudt.unitFromLocalnameRequired("BAR-PER-K"),
-  // Square Foot per BTU Inch
-  FT2__PER__BTU_IT__IN: Qudt.unitFromLocalnameRequired("FT2-PER-BTU_IT-IN"),
-  // Metre per Square Second
-  M__PER__SEC2: Qudt.unitFromLocalnameRequired("M-PER-SEC2"),
-  // Samoan Tala
-  WST_Currency: Qudt.currencyFromLocalnameRequired("WST"),
-  // Nuevo Sol
-  PEN_Currency: Qudt.currencyFromLocalnameRequired("PEN"),
-  // Slug per Foot Second
-  SLUG__PER__FT__SEC: Qudt.unitFromLocalnameRequired("SLUG-PER-FT-SEC"),
-  // Cubic Foot Per Minute Square Foot
-  FT3__PER__MIN__FT2: Qudt.unitFromLocalnameRequired("FT3-PER-MIN-FT2"),
-  // Kilohertz
-  KiloHZ: Qudt.unitFromLocalnameRequired("KiloHZ"),
-  // siemens
-  S: Qudt.unitFromLocalnameRequired("S"),
-  // Kilomole Per Minute
-  KiloMOL__PER__MIN: Qudt.unitFromLocalnameRequired("KiloMOL-PER-MIN"),
-  // Millipascal
-  MilliPA: Qudt.unitFromLocalnameRequired("MilliPA"),
-  // Ton (US Shipping)
-  TON_SHIPPING_US: Qudt.unitFromLocalnameRequired("TON_SHIPPING_US"),
-  // Abohm
-  OHM_Ab: Qudt.unitFromLocalnameRequired("OHM_Ab"),
-  // Gs
-  Gs: Qudt.unitFromLocalnameRequired("Gs"),
-  // Calorie (thermochemical) Per Gram Degree Celsius
-  CAL_TH__PER__GM__DEG_C: Qudt.unitFromLocalnameRequired("CAL_TH-PER-GM-DEG_C"),
-  // Micromoles per mole
-  MicroMOL__PER__MOL: Qudt.unitFromLocalnameRequired("MicroMOL-PER-MOL"),
-  // Newton Per Ampere
-  N__PER__A: Qudt.unitFromLocalnameRequired("N-PER-A"),
-  // siemens per metre
-  S__PER__M: Qudt.unitFromLocalnameRequired("S-PER-M"),
-  // Percent
-  PERCENT: Qudt.unitFromLocalnameRequired("PERCENT"),
-  // seconde
-  SEC: Qudt.unitFromLocalnameRequired("SEC"),
-  // British Thermal Unit (mean)
-  BTU_MEAN: Qudt.unitFromLocalnameRequired("BTU_MEAN"),
-  // Erlang
-  ERLANG: Qudt.unitFromLocalnameRequired("ERLANG"),
-  // Pint (US Liquid) Per Minute
-  PINT_US__PER__MIN: Qudt.unitFromLocalnameRequired("PINT_US-PER-MIN"),
-  // Ounce Troy
-  OZ_TROY: Qudt.unitFromLocalnameRequired("OZ_TROY"),
-  // Foot Pound Force per Second
-  FT__LB_F__PER__SEC: Qudt.unitFromLocalnameRequired("FT-LB_F-PER-SEC"),
-  // Kilograms per square kilometre
-  KiloGM__PER__KiloM2: Qudt.unitFromLocalnameRequired("KiloGM-PER-KiloM2"),
-  // سیورت
-  SV: Qudt.unitFromLocalnameRequired("SV"),
-  // Bushel (US Dry) Per Day
-  BU_US_DRY__PER__DAY: Qudt.unitFromLocalnameRequired("BU_US_DRY-PER-DAY"),
-  // Reciprocal Square Electron Volt
-  PER__EV2: Qudt.unitFromLocalnameRequired("PER-EV2"),
-  // Newton Centimeter
-  N__CentiM: Qudt.unitFromLocalnameRequired("N-CentiM"),
-  // Decalitre
-  DecaL: Qudt.unitFromLocalnameRequired("DecaL"),
-  // Nanogram Per Kilogram
-  NanoGM__PER__KiloGM: Qudt.unitFromLocalnameRequired("NanoGM-PER-KiloGM"),
-  // Unit Pole
-  UnitPole: Qudt.unitFromLocalnameRequired("UnitPole"),
-  // Millimoles per cubic metre per day
-  MilliMOL__PER__M3__DAY: Qudt.unitFromLocalnameRequired("MilliMOL-PER-M3-DAY"),
-  // Radian per Hour
-  RAD__PER__HR: Qudt.unitFromLocalnameRequired("RAD-PER-HR"),
-  // Acre
-  AC: Qudt.unitFromLocalnameRequired("AC"),
-  // British Thermal Unit (international Table) Per Minute
-  BTU_IT__PER__MIN: Qudt.unitFromLocalnameRequired("BTU_IT-PER-MIN"),
-  // MicroTorr
-  MicroTORR: Qudt.unitFromLocalnameRequired("MicroTORR"),
-  // ньютон-секунда
-  N__SEC: Qudt.unitFromLocalnameRequired("N-SEC"),
-  // Decibars per year
-  DeciBAR__PER__YR: Qudt.unitFromLocalnameRequired("DeciBAR-PER-YR"),
-  // Kilometer per Hour
-  KiloM__PER__HR: Qudt.unitFromLocalnameRequired("KiloM-PER-HR"),
-  // Comoro Franc
-  KMF_Currency: Qudt.currencyFromLocalnameRequired("KMF"),
-  // Microhenry Per Metre
-  MicroH__PER__M: Qudt.unitFromLocalnameRequired("MicroH-PER-M"),
-  // Darcy
-  DARCY: Qudt.unitFromLocalnameRequired("DARCY"),
-  // Joule per Cubic Meter Kelvin
-  J__PER__M3__K: Qudt.unitFromLocalnameRequired("J-PER-M3-K"),
-  // Decibel
-  DeciB: Qudt.unitFromLocalnameRequired("DeciB"),
-  // NanoBecquerel
-  NanoBQ: Qudt.unitFromLocalnameRequired("NanoBQ"),
-  // Ounce (UK Fluid) Per Day
-  OZ_VOL_UK__PER__DAY: Qudt.unitFromLocalnameRequired("OZ_VOL_UK-PER-DAY"),
-  // US Peck
-  PK_US_DRY: Qudt.unitFromLocalnameRequired("PK_US_DRY"),
-  // Becquerels per litre
-  BQ__PER__L: Qudt.unitFromLocalnameRequired("BQ-PER-L"),
-  // Kelvin Pascals per second
-  K__PA__PER__SEC: Qudt.unitFromLocalnameRequired("K-PA-PER-SEC"),
-  // Femtolitre
-  FemtoL: Qudt.unitFromLocalnameRequired("FemtoL"),
-  // Centimetres per thousand years
-  CentiM__PER__KiloYR: Qudt.unitFromLocalnameRequired("CentiM-PER-KiloYR"),
-  // Abvolt
-  V_Ab: Qudt.unitFromLocalnameRequired("V_Ab"),
-  // Nanograms per square metre per Pascal per second
-  NanoGM__PER__M2__PA__SEC: Qudt.unitFromLocalnameRequired(
-    "NanoGM-PER-M2-PA-SEC"
-  ),
-  // Dalton
-  Da: Qudt.unitFromLocalnameRequired("Da"),
-  // Gigajoule per Square Metre
-  GigaJ__PER__M2: Qudt.unitFromLocalnameRequired("GigaJ-PER-M2"),
-  // Kilocoulomb Per Cubic Meter
-  KiloC__PER__M3: Qudt.unitFromLocalnameRequired("KiloC-PER-M3"),
-  // Year
-  YR: Qudt.unitFromLocalnameRequired("YR"),
-  // Long Furlong
-  FUR_Long: Qudt.unitFromLocalnameRequired("FUR_Long"),
-  // Cubic Yard Per Second
-  YD3__PER__SEC: Qudt.unitFromLocalnameRequired("YD3-PER-SEC"),
-  // Millilitre
-  MilliL: Qudt.unitFromLocalnameRequired("MilliL"),
-  // W-M2
-  W__M2: Qudt.unitFromLocalnameRequired("W-M2"),
-  // Calorie (international Table) Per Gram Degree Celsius
-  CAL_IT__PER__GM__DEG_C: Qudt.unitFromLocalnameRequired("CAL_IT-PER-GM-DEG_C"),
-  // Kilogram per Meter
-  KiloGM__PER__M: Qudt.unitFromLocalnameRequired("KiloGM-PER-M"),
-  // Special Drawing Rights
-  XDR_Currency: Qudt.currencyFromLocalnameRequired("XDR"),
-  // Millijoule
-  MilliJ: Qudt.unitFromLocalnameRequired("MilliJ"),
-  // वोल्ट
-  V: Qudt.unitFromLocalnameRequired("V"),
-  // CASES
-  CASES: Qudt.unitFromLocalnameRequired("CASES"),
-  // Millipascal Second
-  MilliPA__SEC: Qudt.unitFromLocalnameRequired("MilliPA-SEC"),
-  // Pound Troy
-  LB_T: Qudt.unitFromLocalnameRequired("LB_T"),
-  // Millihenry Per Ohm
-  MilliH__PER__OHM: Qudt.unitFromLocalnameRequired("MilliH-PER-OHM"),
-  // Indian Rupee
-  INR_Currency: Qudt.currencyFromLocalnameRequired("INR"),
-  // Cubic Yard Per Degree Fahrenheit
-  YD3__PER__DEG_F: Qudt.unitFromLocalnameRequired("YD3-PER-DEG_F"),
-  // Kilojoule Per Mole
-  KiloJ__PER__MOL: Qudt.unitFromLocalnameRequired("KiloJ-PER-MOL"),
-  // Watt per Square Meter Quartic Kelvin
-  W__PER__M2__K4: Qudt.unitFromLocalnameRequired("W-PER-M2-K4"),
-  // katal
-  KAT: Qudt.unitFromLocalnameRequired("KAT"),
-  // Euro per watt
-  EUR__PER__W: Qudt.unitFromLocalnameRequired("EUR-PER-W"),
-  // Lari
-  GEL_Currency: Qudt.currencyFromLocalnameRequired("GEL"),
-  // Month
-  MO: Qudt.unitFromLocalnameRequired("MO"),
-  // Newton Metre Per Ampere
-  N__M__PER__A: Qudt.unitFromLocalnameRequired("N-M-PER-A"),
-  // FemtoCoulomb
-  FemtoC: Qudt.unitFromLocalnameRequired("FemtoC"),
-  // Fraction
-  FRACTION: Qudt.unitFromLocalnameRequired("FRACTION"),
-  // Milligrams per cubic metre per hour
-  MilliGM__PER__M3__HR: Qudt.unitFromLocalnameRequired("MilliGM-PER-M3-HR"),
-  // Becquerels second per cubic metre
-  BQ__SEC__PER__M3: Qudt.unitFromLocalnameRequired("BQ-SEC-PER-M3"),
-  // 伏特每米
-  V__PER__M: Qudt.unitFromLocalnameRequired("V-PER-M"),
-  // Lempira
-  HNL_Currency: Qudt.currencyFromLocalnameRequired("HNL"),
-  // Imperial Pint
-  PINT: Qudt.unitFromLocalnameRequired("PINT"),
-  // CFA Franc BCEAO
-  XOF_Currency: Qudt.currencyFromLocalnameRequired("XOF"),
-  // Slug per Foot
-  SLUG__PER__FT: Qudt.unitFromLocalnameRequired("SLUG-PER-FT"),
-  // steradian
-  SR: Qudt.unitFromLocalnameRequired("SR"),
-  // Therm US
-  THM_US: Qudt.unitFromLocalnameRequired("THM_US"),
-  // Sidereal Minute
-  MIN_Sidereal: Qudt.unitFromLocalnameRequired("MIN_Sidereal"),
-  // Gigabase Pair
-  GigaBasePair: Qudt.unitFromLocalnameRequired("GigaBasePair"),
-  // Nanofarad
-  NanoFARAD: Qudt.unitFromLocalnameRequired("NanoFARAD"),
-  // Kiloweber Per Meter
-  KiloWB__PER__M: Qudt.unitFromLocalnameRequired("KiloWB-PER-M"),
-  // Millimeter Per Hour
-  MilliM__PER__HR: Qudt.unitFromLocalnameRequired("MilliM-PER-HR"),
-  // Gigajoule Per Hour
-  GigaJ__PER__HR: Qudt.unitFromLocalnameRequired("GigaJ-PER-HR"),
-  // Kilogram per Gigajoule
-  KiloGM__PER__GigaJ: Qudt.unitFromLocalnameRequired("KiloGM-PER-GigaJ"),
-  // Square Meter per Kilogram
-  M2__PER__KiloGM: Qudt.unitFromLocalnameRequired("M2-PER-KiloGM"),
-  // Convertible Marks
-  BAM_Currency: Qudt.currencyFromLocalnameRequired("BAM"),
-  // Kelvin Meter Per Watt
-  K__M__PER__W: Qudt.unitFromLocalnameRequired("K-M-PER-W"),
-  // Microfarad Per Meter
-  MicroFARAD__PER__M: Qudt.unitFromLocalnameRequired("MicroFARAD-PER-M"),
-  // Millilitre Per Second
-  MilliL__PER__SEC: Qudt.unitFromLocalnameRequired("MilliL-PER-SEC"),
-  // BTU per Pound Mole Degree Fahrenheit
-  BTU_IT__PER__MOL_LB__DEG_F: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-PER-MOL_LB-DEG_F"
-  ),
-  // PetaByte
-  PetaBYTE: Qudt.unitFromLocalnameRequired("PetaBYTE"),
-  // Vatu
-  VUV_Currency: Qudt.currencyFromLocalnameRequired("VUV"),
-  // Ampere per Gram
-  A__PER__GM: Qudt.unitFromLocalnameRequired("A-PER-GM"),
-  // Katal Per Litre
-  KAT__PER__L: Qudt.unitFromLocalnameRequired("KAT-PER-L"),
-  // Pound Force per Square Inch
-  LB_F__PER__IN2: Qudt.unitFromLocalnameRequired("LB_F-PER-IN2"),
-  // Bar Cubic Meter Per Second
-  BAR__M3__PER__SEC: Qudt.unitFromLocalnameRequired("BAR-M3-PER-SEC"),
-  // Picolitre
-  PicoL: Qudt.unitFromLocalnameRequired("PicoL"),
-  // Quarter (UK)
-  Quarter_UK: Qudt.unitFromLocalnameRequired("Quarter_UK"),
-  // US Dry Pint
-  PINT_US_DRY: Qudt.unitFromLocalnameRequired("PINT_US_DRY"),
-  // Picowatts per square centimetre per litre
-  PicoW__PER__CentiM2__L: Qudt.unitFromLocalnameRequired("PicoW-PER-CentiM2-L"),
-  // Square Micrometre
-  MicroM2: Qudt.unitFromLocalnameRequired("MicroM2"),
-  // Cubic Foot per Second
-  FT3__PER__SEC: Qudt.unitFromLocalnameRequired("FT3-PER-SEC"),
-  // Hectopascals per hour
-  HectoPA__PER__HR: Qudt.unitFromLocalnameRequired("HectoPA-PER-HR"),
-  // Nat per Second
-  NAT__PER__SEC: Qudt.unitFromLocalnameRequired("NAT-PER-SEC"),
-  // Millibar Per Kelvin
-  MilliBAR__PER__K: Qudt.unitFromLocalnameRequired("MilliBAR-PER-K"),
-  // milliradian
-  MilliRAD: Qudt.unitFromLocalnameRequired("MilliRAD"),
-  // Cedi
-  GHS_Currency: Qudt.currencyFromLocalnameRequired("GHS"),
-  // Kilocalorie (thermochemical) Per Hour
-  KiloCAL_TH__PER__HR: Qudt.unitFromLocalnameRequired("KiloCAL_TH-PER-HR"),
-  // Mega Hertz per Tesla
-  MegaHZ__PER__T: Qudt.unitFromLocalnameRequired("MegaHZ-PER-T"),
-  // Centimetre of Water
-  CM_H2O: Qudt.unitFromLocalnameRequired("CM_H2O"),
-  // grams per decilitre
-  GM__PER__DeciL: Qudt.unitFromLocalnameRequired("GM-PER-DeciL"),
-  // Centibar
-  CentiBAR: Qudt.unitFromLocalnameRequired("CentiBAR"),
-  // Statampere per Square Centimetre
-  A_Stat__PER__CentiM2: Qudt.unitFromLocalnameRequired("A_Stat-PER-CentiM2"),
-  // Milligrams per square metre per day
-  MilliGM__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MilliGM-PER-M2-DAY"),
-  // Ounce (US Fluid) Per Minute
-  OZ_VOL_US__PER__MIN: Qudt.unitFromLocalnameRequired("OZ_VOL_US-PER-MIN"),
-  // Failures In Time
-  failures__in__time: Qudt.unitFromLocalnameRequired("failures-in-time"),
-  // Square Foot per Hour
-  FT2__PER__HR: Qudt.unitFromLocalnameRequired("FT2-PER-HR"),
-  // Coulomb per Mole
-  C__PER__MOL: Qudt.unitFromLocalnameRequired("C-PER-MOL"),
-  // Becquerel per Square Meter
-  BQ__PER__M2: Qudt.unitFromLocalnameRequired("BQ-PER-M2"),
-  // Foot per Square Second
-  FT__PER__SEC2: Qudt.unitFromLocalnameRequired("FT-PER-SEC2"),
-  // Hundredweight (UK)
-  Hundredweight_UK: Qudt.unitFromLocalnameRequired("Hundredweight_UK"),
-  // Ounce (avoirdupois) Per Day
-  OZ__PER__DAY: Qudt.unitFromLocalnameRequired("OZ-PER-DAY"),
-  // Hong Kong Dollar
-  HKD_Currency: Qudt.currencyFromLocalnameRequired("HKD"),
-  // Slug per Second
-  SLUG__PER__SEC: Qudt.unitFromLocalnameRequired("SLUG-PER-SEC"),
-  // Unidades de formento (Funds code)
-  CLF_Currency: Qudt.currencyFromLocalnameRequired("CLF"),
-  // Gigaohm
-  GigaOHM: Qudt.unitFromLocalnameRequired("GigaOHM"),
-  // Lambert
-  LA: Qudt.unitFromLocalnameRequired("LA"),
-  // Square Metre per Joule
-  M2__PER__J: Qudt.unitFromLocalnameRequired("M2-PER-J"),
-  // Barrel (UK Petroleum) Per Minute
-  BBL_UK_PET__PER__MIN: Qudt.unitFromLocalnameRequired("BBL_UK_PET-PER-MIN"),
-  // coulomb al metro quadrato
-  C__PER__M2: Qudt.unitFromLocalnameRequired("C-PER-M2"),
-  // Megagram
-  MegaGM: Qudt.unitFromLocalnameRequired("MegaGM"),
-  // Cubic Inch Per Second
-  IN3__PER__SEC: Qudt.unitFromLocalnameRequired("IN3-PER-SEC"),
-  // Foot
-  FT: Qudt.unitFromLocalnameRequired("FT"),
-  // newton-mètre
-  N__M: Qudt.unitFromLocalnameRequired("N-M"),
-  // Bushel (US Dry) Per Hour
-  BU_US_DRY__PER__HR: Qudt.unitFromLocalnameRequired("BU_US_DRY-PER-HR"),
-  // Rwanda Franc
-  RWF_Currency: Qudt.currencyFromLocalnameRequired("RWF"),
-  // Pound Force Second per Square Inch
-  LB_F__SEC__PER__IN2: Qudt.unitFromLocalnameRequired("LB_F-SEC-PER-IN2"),
-  // Syrian Pound
-  SYP_Currency: Qudt.currencyFromLocalnameRequired("SYP"),
-  // Ton of Oil Equivalent
-  TOE: Qudt.unitFromLocalnameRequired("TOE"),
-  // Canadian Dollar
-  CAD_Currency: Qudt.currencyFromLocalnameRequired("CAD"),
-  // Kilogram Per Square Centimeter
-  KiloGM__PER__CentiM2: Qudt.unitFromLocalnameRequired("KiloGM-PER-CentiM2"),
-  // Ampere per Degree Celsius
-  A__PER__DEG_C: Qudt.unitFromLocalnameRequired("A-PER-DEG_C"),
-  // KiloWeber
-  KiloWB: Qudt.unitFromLocalnameRequired("KiloWB"),
-  // Bar
-  BAR: Qudt.unitFromLocalnameRequired("BAR"),
-  // millisecond
-  MilliSEC: Qudt.unitFromLocalnameRequired("MilliSEC"),
-  // Picometre
-  PicoM: Qudt.unitFromLocalnameRequired("PicoM"),
-  // British Thermal Unit (international Table) Per Pound Degree Rankine
-  BTU_IT__PER__LB_F__DEG_R: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-PER-LB_F-DEG_R"
-  ),
-  // Solar mass
-  SolarMass: Qudt.unitFromLocalnameRequired("SolarMass"),
-  // Degree Fahrenheit per Second
-  DEG_F__PER__SEC: Qudt.unitFromLocalnameRequired("DEG_F-PER-SEC"),
-  // Planck Energy
-  PlanckEnergy: Qudt.unitFromLocalnameRequired("PlanckEnergy"),
-  // Yard
-  YD: Qudt.unitFromLocalnameRequired("YD"),
-  // Gauss
-  GAUSS: Qudt.unitFromLocalnameRequired("GAUSS"),
-  // Square Centimetre Minute
-  CentiM2__MIN: Qudt.unitFromLocalnameRequired("CentiM2-MIN"),
-  // Degree Rankine
-  DEG_R: Qudt.unitFromLocalnameRequired("DEG_R"),
-  // Reciprocal Picometre
-  PER__PicoM: Qudt.unitFromLocalnameRequired("PER-PicoM"),
-  // nanograms per decilitre
-  NanoGM__PER__DeciL: Qudt.unitFromLocalnameRequired("NanoGM-PER-DeciL"),
-  // millimetres per day
-  MilliM__PER__DAY: Qudt.unitFromLocalnameRequired("MilliM-PER-DAY"),
-  // Nanolitre
-  NanoL: Qudt.unitFromLocalnameRequired("NanoL"),
-  // CFP franc
-  XPF_Currency: Qudt.currencyFromLocalnameRequired("XPF"),
-  // Micromoles per litre per day
-  MicroM__PER__L__DAY: Qudt.unitFromLocalnameRequired("MicroM-PER-L-DAY"),
-  // NanoCoulomb
-  NanoC: Qudt.unitFromLocalnameRequired("NanoC"),
-  // Centigram
-  CentiGM: Qudt.unitFromLocalnameRequired("CentiGM"),
-  // Milliwatts per square centimetre per micrometre per steradian
-  MilliW__PER__CentiM2__MicroM__SR: Qudt.unitFromLocalnameRequired(
-    "MilliW-PER-CentiM2-MicroM-SR"
-  ),
-  // Kuwaiti Dinar
-  KWD_Currency: Qudt.currencyFromLocalnameRequired("KWD"),
-  // Kilometre per Second
-  KiloM__PER__SEC: Qudt.unitFromLocalnameRequired("KiloM-PER-SEC"),
-  // Square microns per millilitre
-  MicroM__PER__MilliL: Qudt.unitFromLocalnameRequired("MicroM-PER-MilliL"),
-  // Lek
-  ALL_Currency: Qudt.currencyFromLocalnameRequired("ALL"),
-  // radián por segundo
-  RAD__PER__SEC: Qudt.unitFromLocalnameRequired("RAD-PER-SEC"),
-  // Euro per watt second
-  EUR__PER__W__SEC: Qudt.unitFromLocalnameRequired("EUR-PER-W-SEC"),
-  // Square degree
-  DEG2: Qudt.unitFromLocalnameRequired("DEG2"),
-  // Psi Liter Per Second
-  PSI__L__PER__SEC: Qudt.unitFromLocalnameRequired("PSI-L-PER-SEC"),
-  // Milligram Per Day
-  MilliGM__PER__DAY: Qudt.unitFromLocalnameRequired("MilliGM-PER-DAY"),
-  // Breath per Minute
-  BREATH__PER__MIN: Qudt.unitFromLocalnameRequired("BREATH-PER-MIN"),
-  // Femtograms per kilogram
-  FemtoGM__PER__KiloGM: Qudt.unitFromLocalnameRequired("FemtoGM-PER-KiloGM"),
-  // DeciCoulomb
-  DeciC: Qudt.unitFromLocalnameRequired("DeciC"),
-  // Kilogram Square Second
-  KiloGM__SEC2: Qudt.unitFromLocalnameRequired("KiloGM-SEC2"),
-  // Becquerel per Cubic Metre
-  BQ__PER__M3: Qudt.unitFromLocalnameRequired("BQ-PER-M3"),
-  // square metre per Kilowatt
-  M2__PER__KiloW: Qudt.unitFromLocalnameRequired("M2-PER-KiloW"),
-  // Slug
-  SLUG: Qudt.unitFromLocalnameRequired("SLUG"),
-  // Gill (US) Per Day
-  GI_US__PER__DAY: Qudt.unitFromLocalnameRequired("GI_US-PER-DAY"),
-  // bushel (UK)
-  BU_UK: Qudt.unitFromLocalnameRequired("BU_UK"),
-  // Million Years
-  MegaYR: Qudt.unitFromLocalnameRequired("MegaYR"),
-  // Square Metre per Steradian Joule
-  M2__PER__SR__J: Qudt.unitFromLocalnameRequired("M2-PER-SR-J"),
-  // Mile per Hour
-  MI__PER__HR: Qudt.unitFromLocalnameRequired("MI-PER-HR"),
-  // Square metres cubic Hertz
-  M2__HZ3: Qudt.unitFromLocalnameRequired("M2-HZ3"),
-  // Croatian Kuna
-  HRK_Currency: Qudt.currencyFromLocalnameRequired("HRK"),
-  // Square Foot Hour Degree Fahrenheit per BTU
-  FT2__HR__DEG_F__PER__BTU_IT: Qudt.unitFromLocalnameRequired(
-    "FT2-HR-DEG_F-PER-BTU_IT"
-  ),
-  // NanoMole
-  NanoMOL: Qudt.unitFromLocalnameRequired("NanoMOL"),
-  // New Israeli Shekel
-  ILS_Currency: Qudt.currencyFromLocalnameRequired("ILS"),
-  // Pound Force per Pound
-  LB_F__PER__LB: Qudt.unitFromLocalnameRequired("LB_F-PER-LB"),
-  // Ton of Refrigeration
-  TON_FG: Qudt.unitFromLocalnameRequired("TON_FG"),
-  // Statampere
-  A_Stat: Qudt.unitFromLocalnameRequired("A_Stat"),
-  // Imperial Mass Ounce per Square Foot
-  OZ__PER__FT2: Qudt.unitFromLocalnameRequired("OZ-PER-FT2"),
-  // decisiemens per metre
-  DeciS__PER__M: Qudt.unitFromLocalnameRequired("DeciS-PER-M"),
-  // Maxwell
-  MX: Qudt.unitFromLocalnameRequired("MX"),
-  // Imperial Mass Ounce per Gallon
-  OZ__PER__GAL: Qudt.unitFromLocalnameRequired("OZ-PER-GAL"),
-  // Millilitres per square metre per day
-  MilliL__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MilliL-PER-M2-DAY"),
-  // metro por segundo
-  M__PER__SEC: Qudt.unitFromLocalnameRequired("M-PER-SEC"),
-  // Saint Helena Pound
-  SHP_Currency: Qudt.currencyFromLocalnameRequired("SHP"),
-  // Cord
-  CORD: Qudt.unitFromLocalnameRequired("CORD"),
-  // Mega Electron Volt per Speed of Light
-  MegaEV__PER__SpeedOfLight: Qudt.unitFromLocalnameRequired(
-    "MegaEV-PER-SpeedOfLight"
-  ),
-  // Cubic Decimetre Per Hour
-  DeciM3__PER__HR: Qudt.unitFromLocalnameRequired("DeciM3-PER-HR"),
-  // Kelvin square metres per kilogram per second
-  K__M2__PER__KiloGM__SEC: Qudt.unitFromLocalnameRequired(
-    "K-M2-PER-KiloGM-SEC"
-  ),
-  // Joule per Square Tesla
-  J__PER__T2: Qudt.unitFromLocalnameRequired("J-PER-T2"),
-  // Leone
-  SLE_Currency: Qudt.currencyFromLocalnameRequired("SLE"),
-  // International Table calorie
-  CAL_IT: Qudt.unitFromLocalnameRequired("CAL_IT"),
-  // Grain Per Gallon (US)
-  GRAIN__PER__GAL_US: Qudt.unitFromLocalnameRequired("GRAIN-PER-GAL_US"),
-  // Kilogram per Square Second
-  KiloGM__PER__SEC2: Qudt.unitFromLocalnameRequired("KiloGM-PER-SEC2"),
-  // Ounce Mass
-  OZ: Qudt.unitFromLocalnameRequired("OZ"),
-  // Solomon Islands Dollar
-  SBD_Currency: Qudt.currencyFromLocalnameRequired("SBD"),
-  // Kilomole Per Cubic Metre
-  KiloMOL__PER__M3: Qudt.unitFromLocalnameRequired("KiloMOL-PER-M3"),
-  // Kilopond
-  KiloP: Qudt.unitFromLocalnameRequired("KiloP"),
-  // Ton of Refrigeration Hour
-  TON_FG__HR: Qudt.unitFromLocalnameRequired("TON_FG-HR"),
-  // GM_DRY
-  GM_DRY: Qudt.unitFromLocalnameRequired("GM_DRY"),
-  // Joule per Cubic Meter
-  J__PER__M3: Qudt.unitFromLocalnameRequired("J-PER-M3"),
-  // Gravity
-  G: Qudt.unitFromLocalnameRequired("G"),
-  // Gill (UK) Per Second
-  GI_UK__PER__SEC: Qudt.unitFromLocalnameRequired("GI_UK-PER-SEC"),
-  // Micrograms per litre per hour
-  MicroGM__PER__L__HR: Qudt.unitFromLocalnameRequired("MicroGM-PER-L-HR"),
-  // Cubic microns per cubic metre
-  MicroM3__PER__M3: Qudt.unitFromLocalnameRequired("MicroM3-PER-M3"),
-  // milligrams per decilitre
-  MilliGM__PER__DeciL: Qudt.unitFromLocalnameRequired("MilliGM-PER-DeciL"),
-  // Qatari Rial
-  QAR_Currency: Qudt.currencyFromLocalnameRequired("QAR"),
-  // Planck Time
-  PlanckTime: Qudt.unitFromLocalnameRequired("PlanckTime"),
-  // Nanograms
-  NanoGM: Qudt.unitFromLocalnameRequired("NanoGM"),
-  // Reciprocal Week
-  PER__WK: Qudt.unitFromLocalnameRequired("PER-WK"),
-  // Planck Charge
-  PlanckCharge: Qudt.unitFromLocalnameRequired("PlanckCharge"),
-  // Parts per million
-  PPM: Qudt.unitFromLocalnameRequired("PPM"),
-  // Euro per kilowatt hour
-  EUR__PER__KiloW__HR: Qudt.unitFromLocalnameRequired("EUR-PER-KiloW-HR"),
-  // Kenyan Shilling
-  KES_Currency: Qudt.currencyFromLocalnameRequired("KES"),
-  // Oersted Centimetre
-  OERSTED__CentiM: Qudt.unitFromLocalnameRequired("OERSTED-CentiM"),
-  // US Gallon per Day
-  GAL_US__PER__DAY: Qudt.unitFromLocalnameRequired("GAL_US-PER-DAY"),
-  // British Thermal Unit (TH) Per Cubic Foot
-  BTU_TH__PER__FT3: Qudt.unitFromLocalnameRequired("BTU_TH-PER-FT3"),
-  // Watts per square metre per metre
-  W__PER__M2__M: Qudt.unitFromLocalnameRequired("W-PER-M2-M"),
-  // Moldovan Leu
-  MDL_Currency: Qudt.currencyFromLocalnameRequired("MDL"),
-  // Mole per Kilogram Pascal
-  MOL__PER__KiloGM__PA: Qudt.unitFromLocalnameRequired("MOL-PER-KiloGM-PA"),
-  // Reciprocal Square Kilogram
-  PER__KiloGM2: Qudt.unitFromLocalnameRequired("PER-KiloGM2"),
-  // हर्ट्ज प्रति कैल्विन
-  HZ__PER__K: Qudt.unitFromLocalnameRequired("HZ-PER-K"),
-  // Pound Degree Rankine
-  LB__DEG_R: Qudt.unitFromLocalnameRequired("LB-DEG_R"),
-  // Pint (UK) Per Day
-  PINT_UK__PER__DAY: Qudt.unitFromLocalnameRequired("PINT_UK-PER-DAY"),
-  // Milliliter per Gram
-  MilliL__PER__GM: Qudt.unitFromLocalnameRequired("MilliL-PER-GM"),
-  // KiloPound Force
-  KiloLB_F: Qudt.unitFromLocalnameRequired("KiloLB_F"),
-  // Circular Mil
-  MIL_Circ: Qudt.unitFromLocalnameRequired("MIL_Circ"),
-  // Micromoles per square metre
-  MicroMOL__PER__M2: Qudt.unitFromLocalnameRequired("MicroMOL-PER-M2"),
-  // Millibecquerels per square metre per day
-  MilliBQ__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MilliBQ-PER-M2-DAY"),
-  // GM_Nitrogen
-  GM_Nitrogen: Qudt.unitFromLocalnameRequired("GM_Nitrogen"),
-  // Foot Pound Force per Square Foot Second
-  FT__LB_F__PER__FT2__SEC: Qudt.unitFromLocalnameRequired(
-    "FT-LB_F-PER-FT2-SEC"
-  ),
-  // Short Ton per Cubic Yard
-  TON_SHORT__PER__YD3: Qudt.unitFromLocalnameRequired("TON_SHORT-PER-YD3"),
-  // Gallon (US) Per Hour
-  GAL_US__PER__HR: Qudt.unitFromLocalnameRequired("GAL_US-PER-HR"),
-  // Megagram Per Cubic Meter
-  MegaGM__PER__M3: Qudt.unitFromLocalnameRequired("MegaGM-PER-M3"),
-  // BTU (TH) Inch per Square Foot Hour Degree Fahrenheit
-  BTU_TH__IN__PER__FT2__HR__DEG_F: Qudt.unitFromLocalnameRequired(
-    "BTU_TH-IN-PER-FT2-HR-DEG_F"
-  ),
-  // Hartley per Second
-  HART__PER__SEC: Qudt.unitFromLocalnameRequired("HART-PER-SEC"),
-  // Decilitre
-  DeciL: Qudt.unitFromLocalnameRequired("DeciL"),
-  // Gram Per Hour
-  GM__PER__HR: Qudt.unitFromLocalnameRequired("GM-PER-HR"),
-  // Coulomb Per Kilogram Second
-  C__PER__KiloGM__SEC: Qudt.unitFromLocalnameRequired("C-PER-KiloGM-SEC"),
-  // FRAME
-  FRAME: Qudt.unitFromLocalnameRequired("FRAME"),
-  // Peck (US Dry) Per Day
-  PK_US_DRY__PER__DAY: Qudt.unitFromLocalnameRequired("PK_US_DRY-PER-DAY"),
-  // Gigabecquerel
-  GigaBQ: Qudt.unitFromLocalnameRequired("GigaBQ"),
-  // Pound Force Inch
-  LB_F__IN: Qudt.unitFromLocalnameRequired("LB_F-IN"),
-  // Therm US per Hour
-  THM_US__PER__HR: Qudt.unitFromLocalnameRequired("THM_US-PER-HR"),
-  // Kilogram per Hectare
-  KiloGM__PER__HA: Qudt.unitFromLocalnameRequired("KiloGM-PER-HA"),
-  // Sample per second
-  SAMPLE__PER__SEC: Qudt.unitFromLocalnameRequired("SAMPLE-PER-SEC"),
-  // BTU per Square Foot Hour Degree Fahrenheit
-  BTU_IT__PER__FT2__HR__DEG_F: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-PER-FT2-HR-DEG_F"
-  ),
-  // Tonne Per Day
-  TON_Metric__PER__DAY: Qudt.unitFromLocalnameRequired("TON_Metric-PER-DAY"),
-  // Denar
-  MKD_Currency: Qudt.currencyFromLocalnameRequired("MKD"),
-  // Acidity
-  PH: Qudt.unitFromLocalnameRequired("PH"),
-  // Inch per Square second
-  IN__PER__SEC2: Qudt.unitFromLocalnameRequired("IN-PER-SEC2"),
-  // Pound Mole
-  MOL_LB: Qudt.unitFromLocalnameRequired("MOL_LB"),
-  // Pound Mole Degree Fahrenheit
-  LB__MOL__DEG_F: Qudt.unitFromLocalnameRequired("LB-MOL-DEG_F"),
-  // Pint (US Liquid) Per Second
-  PINT_US__PER__SEC: Qudt.unitFromLocalnameRequired("PINT_US-PER-SEC"),
-  // Degree Celsius per Minute
-  DEG_C__PER__MIN: Qudt.unitFromLocalnameRequired("DEG_C-PER-MIN"),
-  // Kelvin second
-  K__SEC: Qudt.unitFromLocalnameRequired("K-SEC"),
   // Dyne
   DYN: Qudt.unitFromLocalnameRequired("DYN"),
-  // Pound Mass (avoirdupois) Square Inch
-  LB__IN2: Qudt.unitFromLocalnameRequired("LB-IN2"),
-  // Planck Force
-  PlanckForce: Qudt.unitFromLocalnameRequired("PlanckForce"),
-  // Degree Fahrenheit Hour Square Foot per British Thermal Unit (thermochemical)
-  DEG_F__HR__FT2__PER__BTU_TH: Qudt.unitFromLocalnameRequired(
-    "DEG_F-HR-FT2-PER-BTU_TH"
-  ),
-  // Thousand Cubic Foot
-  Kilo__FT3: Qudt.unitFromLocalnameRequired("Kilo-FT3"),
-  // Ouguiya
-  MRU_Currency: Qudt.currencyFromLocalnameRequired("MRU"),
-  // Ounce (UK Fluid) Per Minute
-  OZ_VOL_UK__PER__MIN: Qudt.unitFromLocalnameRequired("OZ_VOL_UK-PER-MIN"),
-  // Millimoles per cubic metre
-  MilliMOL__PER__M3: Qudt.unitFromLocalnameRequired("MilliMOL-PER-M3"),
-  // Weber Per Millimetre
-  WB__PER__MilliM: Qudt.unitFromLocalnameRequired("WB-PER-MilliM"),
-  // metr krychlový na mol
-  M3__PER__MOL: Qudt.unitFromLocalnameRequired("M3-PER-MOL"),
-  // weber
-  WB: Qudt.unitFromLocalnameRequired("WB"),
-  // Gram Degree Celsius
-  GM__PER__DEG_C: Qudt.unitFromLocalnameRequired("GM-PER-DEG_C"),
-  // Joule Per Gram
-  J__PER__GM: Qudt.unitFromLocalnameRequired("J-PER-GM"),
-  // MicroGAL
-  MicroGAL: Qudt.unitFromLocalnameRequired("MicroGAL"),
-  // Knot per Second
-  KN__PER__SEC: Qudt.unitFromLocalnameRequired("KN-PER-SEC"),
-  // Kilocalorie (mean)
-  KiloCAL_Mean: Qudt.unitFromLocalnameRequired("KiloCAL_Mean"),
-  // Inch per Second
-  IN__PER__SEC: Qudt.unitFromLocalnameRequired("IN-PER-SEC"),
-  // nanoampere
-  NanoA: Qudt.unitFromLocalnameRequired("NanoA"),
-  // Nanofarad Per Meter
-  NanoFARAD__PER__M: Qudt.unitFromLocalnameRequired("NanoFARAD-PER-M"),
-  // Joule Square Meter
-  J__M2: Qudt.unitFromLocalnameRequired("J-M2"),
-  // Million US Dollars per Year
-  MillionUSD__PER__YR: Qudt.unitFromLocalnameRequired("MillionUSD-PER-YR"),
-  // Bulgarian Lev
-  BGN_Currency: Qudt.currencyFromLocalnameRequired("BGN"),
-  // Erg
-  ERG: Qudt.unitFromLocalnameRequired("ERG"),
-  // Gigacoulomb Per Cubic Meter
-  GigaC__PER__M3: Qudt.unitFromLocalnameRequired("GigaC-PER-M3"),
-  // Petajoule
-  PetaJ: Qudt.unitFromLocalnameRequired("PetaJ"),
-  // Foot Lambert
-  LA_FT: Qudt.unitFromLocalnameRequired("LA_FT"),
-  // United Arab Emirates dirham
-  AED_Currency: Qudt.currencyFromLocalnameRequired("AED"),
-  // Microhenry Per Ohm
-  MicroH__PER__OHM: Qudt.unitFromLocalnameRequired("MicroH-PER-OHM"),
-  // Rufiyaa
-  MVR_Currency: Qudt.currencyFromLocalnameRequired("MVR"),
-  // Short Ton (US) Per Cubic Yard
-  TON_US__PER__YD3: Qudt.unitFromLocalnameRequired("TON_US-PER-YD3"),
-  // Degree per Hour
-  DEG__PER__HR: Qudt.unitFromLocalnameRequired("DEG-PER-HR"),
-  // Pound Force Foot Per Pound
-  KiloLB_F__FT__PER__LB: Qudt.unitFromLocalnameRequired("KiloLB_F-FT-PER-LB"),
-  // Milliroentgen Equivalent Man
-  MilliR_man: Qudt.unitFromLocalnameRequired("MilliR_man"),
-  // International Unit per milliliter
-  IU__PER__MilliL: Qudt.unitFromLocalnameRequired("IU-PER-MilliL"),
-  // Millibecquerels per litre
-  MilliBQ__PER__L: Qudt.unitFromLocalnameRequired("MilliBQ-PER-L"),
-  // Cuban Peso
-  CUP_Currency: Qudt.currencyFromLocalnameRequired("CUP"),
-  // Gigabit per Second
-  GigaBIT__PER__SEC: Qudt.unitFromLocalnameRequired("GigaBIT-PER-SEC"),
-  // Reciprocal Square Joule
-  PER__J2: Qudt.unitFromLocalnameRequired("PER-J2"),
-  // Candlepower
-  CP: Qudt.unitFromLocalnameRequired("CP"),
-  // Erg Per Centimeter
-  ERG__PER__CentiM: Qudt.unitFromLocalnameRequired("ERG-PER-CentiM"),
-  // Square Inch
-  IN2: Qudt.unitFromLocalnameRequired("IN2"),
-  // Assay Ton
-  TON_Assay: Qudt.unitFromLocalnameRequired("TON_Assay"),
-  // Azerbaijanian Manat
-  AZN_Currency: Qudt.currencyFromLocalnameRequired("AZN"),
-  // Newtons per cubic metre
-  N__PER__M3: Qudt.unitFromLocalnameRequired("N-PER-M3"),
-  // Millimetre of Mercury - Absolute
-  MilliM_HGA: Qudt.unitFromLocalnameRequired("MilliM_HGA"),
-  // Watthour
-  W__HR: Qudt.unitFromLocalnameRequired("W-HR"),
-  // Square Decimetre
-  DeciM2: Qudt.unitFromLocalnameRequired("DeciM2"),
-  // Uzbekistan Som
-  UZS_Currency: Qudt.currencyFromLocalnameRequired("UZS"),
-  // Electron Volt
-  EV: Qudt.unitFromLocalnameRequired("EV"),
-  // Kilogram_force Metre
-  KiloGM_F__M: Qudt.unitFromLocalnameRequired("KiloGM_F-M"),
-  // atomic-number
-  Z: Qudt.unitFromLocalnameRequired("Z"),
-  // Newton Square Metre
-  N__M2: Qudt.unitFromLocalnameRequired("N-M2"),
-  // Barrel (US) Per Minute
-  BBL_US__PER__MIN: Qudt.unitFromLocalnameRequired("BBL_US-PER-MIN"),
-  // Volt Per Millimetre
-  V__PER__MilliM: Qudt.unitFromLocalnameRequired("V-PER-MilliM"),
-  // New Turkish Lira
-  TRY_Currency: Qudt.currencyFromLocalnameRequired("TRY"),
-  // Biot
-  BIOT: Qudt.unitFromLocalnameRequired("BIOT"),
-  // Psi Cubic Inch Per Second
-  PSI__IN3__PER__SEC: Qudt.unitFromLocalnameRequired("PSI-IN3-PER-SEC"),
-  // BBL_US_PET
-  BBL_US_PET: Qudt.unitFromLocalnameRequired("BBL_US_PET"),
-  // Rad
-  RAD_R: Qudt.unitFromLocalnameRequired("RAD_R"),
-  // Hectopascal
-  HectoPA: Qudt.unitFromLocalnameRequired("HectoPA"),
-  // Standard Atmosphere
-  ATM: Qudt.unitFromLocalnameRequired("ATM"),
-  // Technical Atmosphere
-  ATM_T: Qudt.unitFromLocalnameRequired("ATM_T"),
-  // Gram Millimeter
-  GM__MilliM: Qudt.unitFromLocalnameRequired("GM-MilliM"),
-  // Pound Mole
-  LB__MOL: Qudt.unitFromLocalnameRequired("LB-MOL"),
-  // Ohm Square Meter per Meter
-  OHM__M2__PER__M: Qudt.unitFromLocalnameRequired("OHM-M2-PER-M"),
-  // Kilogram Per Cubic Decimeter
-  KiloGM__PER__DeciM3: Qudt.unitFromLocalnameRequired("KiloGM-PER-DeciM3"),
-  // Gigahertz Metre
-  GigaHZ__M: Qudt.unitFromLocalnameRequired("GigaHZ-M"),
-  // Kip per Square Inch
-  KIP_F__PER__IN2: Qudt.unitFromLocalnameRequired("KIP_F-PER-IN2"),
-  // International Unit per milligram
-  IU__PER__MilliGM: Qudt.unitFromLocalnameRequired("IU-PER-MilliGM"),
-  // Cubic Foot
-  FT3: Qudt.unitFromLocalnameRequired("FT3"),
-  // Dec
-  DECADE: Qudt.unitFromLocalnameRequired("DECADE"),
-  // Square Foot per Second
-  FT2__PER__SEC: Qudt.unitFromLocalnameRequired("FT2-PER-SEC"),
-  // Pound per Cubic Inch
-  LB__PER__IN3: Qudt.unitFromLocalnameRequired("LB-PER-IN3"),
-  // Number per square kilometre
-  NUM__PER__KiloM2: Qudt.unitFromLocalnameRequired("NUM-PER-KiloM2"),
-  // Reciprocal Liter
-  PER__L: Qudt.unitFromLocalnameRequired("PER-L"),
-  // Mho
-  MHO: Qudt.unitFromLocalnameRequired("MHO"),
-  // Metric DeciTON
-  DeciTON_Metric: Qudt.unitFromLocalnameRequired("DeciTON_Metric"),
-  // Calorie (international Table) Per Second Centimetre Kelvin
-  CAL_IT__PER__SEC__CentiM__K: Qudt.unitFromLocalnameRequired(
-    "CAL_IT-PER-SEC-CentiM-K"
-  ),
-  // Microvolt
-  MicroV: Qudt.unitFromLocalnameRequired("MicroV"),
-  // Reciprocal Square Giga Electron Volt Unit
-  PER__GigaEV2: Qudt.unitFromLocalnameRequired("PER-GigaEV2"),
-  // Watt Per Cubic Metre
-  W__PER__M3: Qudt.unitFromLocalnameRequired("W-PER-M3"),
-  // Microsiemens
-  MicroS: Qudt.unitFromLocalnameRequired("MicroS"),
-  // Percent Relative Humidity
-  PERCENT_RH: Qudt.unitFromLocalnameRequired("PERCENT_RH"),
-  // Foot Candle
-  FC: Qudt.unitFromLocalnameRequired("FC"),
-  // Millifarad
-  MilliFARAD: Qudt.unitFromLocalnameRequired("MilliFARAD"),
-  // Reciprocal metre per nanometre
-  PER__M__NanoM: Qudt.unitFromLocalnameRequired("PER-M-NanoM"),
-  // Moles per square metre per second per metre per steradian
-  MOL__PER__M2__SEC__M__SR: Qudt.unitFromLocalnameRequired(
-    "MOL-PER-M2-SEC-M-SR"
-  ),
-  // Absiemen
-  S_Ab: Qudt.unitFromLocalnameRequired("S_Ab"),
-  // ExaCoulomb
-  ExaC: Qudt.unitFromLocalnameRequired("ExaC"),
-  // Mean Gregorian Month
-  MO_MeanGREGORIAN: Qudt.unitFromLocalnameRequired("MO_MeanGREGORIAN"),
-  // Nanogram Per Cubic Metre
-  NanoGM__PER__M3: Qudt.unitFromLocalnameRequired("NanoGM-PER-M3"),
-  // Tonne Per Second
-  TONNE__PER__SEC: Qudt.unitFromLocalnameRequired("TONNE-PER-SEC"),
-  // कूलम्ब
-  C: Qudt.unitFromLocalnameRequired("C"),
-  // Parts per Ten Million
-  PPTM: Qudt.unitFromLocalnameRequired("PPTM"),
-  // Euro per watt hour
-  EUR__PER__W__HR: Qudt.unitFromLocalnameRequired("EUR-PER-W-HR"),
-  // Unknown
-  UNKNOWN: Qudt.unitFromLocalnameRequired("UNKNOWN"),
-  // Naira
-  NGN_Currency: Qudt.currencyFromLocalnameRequired("NGN"),
-  // Pint (UK) Per Second
-  PINT_UK__PER__SEC: Qudt.unitFromLocalnameRequired("PINT_UK-PER-SEC"),
-  // Venezuelan bolvar
-  VES_Currency: Qudt.currencyFromLocalnameRequired("VES"),
-  // Micromoles per litre
-  MicroMOL__PER__L: Qudt.unitFromLocalnameRequired("MicroMOL-PER-L"),
-  // Teraohm
-  TeraOHM: Qudt.unitFromLocalnameRequired("TeraOHM"),
-  // Calorie (thermochemical) Per Gram
-  CAL_TH__PER__GM: Qudt.unitFromLocalnameRequired("CAL_TH-PER-GM"),
-  // Gram Per Kilometre
-  GM__PER__KiloM: Qudt.unitFromLocalnameRequired("GM-PER-KiloM"),
-  // Stathenry
-  H_Stat: Qudt.unitFromLocalnameRequired("H_Stat"),
-  // Kelvin metres
-  K__M: Qudt.unitFromLocalnameRequired("K-M"),
-  // Megajoule Per Hour
-  MegaJ__PER__HR: Qudt.unitFromLocalnameRequired("MegaJ-PER-HR"),
-  // Oct
-  OCT: Qudt.unitFromLocalnameRequired("OCT"),
-  // Bangladeshi Taka
-  BDT_Currency: Qudt.currencyFromLocalnameRequired("BDT"),
-  // Mega Hertz per Kelvin
-  MegaHZ__PER__K: Qudt.unitFromLocalnameRequired("MegaHZ-PER-K"),
-  // Millilitre Per Square Centimetre Second
-  MilliL__PER__CentiM2__SEC: Qudt.unitFromLocalnameRequired(
-    "MilliL-PER-CentiM2-SEC"
-  ),
-  // Kilocalorie (international Table)
-  KiloCAL_IT: Qudt.unitFromLocalnameRequired("KiloCAL_IT"),
-  // Reciprocal gram
-  PER__GM: Qudt.unitFromLocalnameRequired("PER-GM"),
-  // PebiByte
-  PebiBYTE: Qudt.unitFromLocalnameRequired("PebiBYTE"),
-  // Decilitre Per Gram
-  DeciL__PER__GM: Qudt.unitFromLocalnameRequired("DeciL-PER-GM"),
-  // Statfarad
-  FARAD_Stat: Qudt.unitFromLocalnameRequired("FARAD_Stat"),
-  // Mole Kelvin
-  MOL__K: Qudt.unitFromLocalnameRequired("MOL-K"),
-  // British Thermal Unit (international Table) Inch Per Hour Square Foot Degree Fahrenheit
-  BTU_IT__IN__PER__FT2__HR__DEG_F: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-IN-PER-FT2-HR-DEG_F"
-  ),
-  // Kilonewton per cubic metre
-  KiloN__PER__M3: Qudt.unitFromLocalnameRequired("KiloN-PER-M3"),
-  // Australian Dollar
-  AUD_Currency: Qudt.currencyFromLocalnameRequired("AUD"),
-  // Percent per day
-  PERCENT__PER__DAY: Qudt.unitFromLocalnameRequired("PERCENT-PER-DAY"),
-  // Planck Density
-  PlanckDensity: Qudt.unitFromLocalnameRequired("PlanckDensity"),
-  // Manat
-  TMT_Currency: Qudt.currencyFromLocalnameRequired("TMT"),
-  // GAL
-  GAL: Qudt.unitFromLocalnameRequired("GAL"),
-  // Newton Metre Per Square Metre
-  N__M__PER__M2: Qudt.unitFromLocalnameRequired("N-M-PER-M2"),
-  // Ounce (US Fluid) Per Day
-  OZ_VOL_US__PER__DAY: Qudt.unitFromLocalnameRequired("OZ_VOL_US-PER-DAY"),
-  // Calorie (15 Degrees C)
-  CAL_15_DEG_C: Qudt.unitFromLocalnameRequired("CAL_15_DEG_C"),
-  // Joule Per Second
-  J__PER__SEC: Qudt.unitFromLocalnameRequired("J-PER-SEC"),
-  // Armenian Dram
-  AMD_Currency: Qudt.currencyFromLocalnameRequired("AMD"),
-  // KiloYear
-  KiloYR: Qudt.unitFromLocalnameRequired("KiloYR"),
-  // Newton per Kilogram
-  N__PER__KiloGM: Qudt.unitFromLocalnameRequired("N-PER-KiloGM"),
-  // Calorie (thermochemical) Per Minute
-  CAL_TH__PER__MIN: Qudt.unitFromLocalnameRequired("CAL_TH-PER-MIN"),
-  // Reciprocal Cubic Inch
-  PER__IN3: Qudt.unitFromLocalnameRequired("PER-IN3"),
-  // square metre per watt
-  M2__PER__W: Qudt.unitFromLocalnameRequired("M2-PER-W"),
-  // Megabar
-  MegaBAR: Qudt.unitFromLocalnameRequired("MegaBAR"),
-  // Joule per Kilogram Kelvin
-  J__PER__KiloGM__K: Qudt.unitFromLocalnameRequired("J-PER-KiloGM-K"),
-  // Moles per Square Meter per Day
-  MOL__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MOL-PER-M2-DAY"),
-  // BTU per Pound Degree Rankine
-  BTU_IT__PER__LB__DEG_R: Qudt.unitFromLocalnameRequired("BTU_IT-PER-LB-DEG_R"),
-  // Henry Per Kiloohm
-  H__PER__KiloOHM: Qudt.unitFromLocalnameRequired("H-PER-KiloOHM"),
-  // Peck (US Dry) Per Minute
-  PK_US_DRY__PER__MIN: Qudt.unitFromLocalnameRequired("PK_US_DRY-PER-MIN"),
-  // Pound Force Foot Per Ampere
-  KiloLB_F__FT__PER__A: Qudt.unitFromLocalnameRequired("KiloLB_F-FT-PER-A"),
-  // Kilometre
-  KiloM: Qudt.unitFromLocalnameRequired("KiloM"),
-  // Sudanese Pound
-  SDG_Currency: Qudt.currencyFromLocalnameRequired("SDG"),
-  // BREATH
-  BREATH: Qudt.unitFromLocalnameRequired("BREATH"),
-  // Kilocalorie (thermochemical) Per Minute
-  KiloCAL_TH__PER__MIN: Qudt.unitFromLocalnameRequired("KiloCAL_TH-PER-MIN"),
-  // Kilogram Force Per Square Millimetre
-  KiloGM_F__PER__MilliM2: Qudt.unitFromLocalnameRequired(
-    "KiloGM_F-PER-MilliM2"
-  ),
-  // Square metres per gram of dry sediment
-  M2__PER__GM_DRY: Qudt.unitFromLocalnameRequired("M2-PER-GM_DRY"),
-  // Millilitre Per Day
-  MilliL__PER__DAY: Qudt.unitFromLocalnameRequired("MilliL-PER-DAY"),
-  // Slug per Cubic Foot
-  SLUG__PER__FT3: Qudt.unitFromLocalnameRequired("SLUG-PER-FT3"),
-  // Kiloampere Per Square Metre
-  KiloA__PER__M2: Qudt.unitFromLocalnameRequired("KiloA-PER-M2"),
-  // Parts Per Million per Kelvin
-  PPM__PER__K: Qudt.unitFromLocalnameRequired("PPM-PER-K"),
-  // Peso Uruguayo
-  UYU_Currency: Qudt.currencyFromLocalnameRequired("UYU"),
-  // Microgram Per Deciliter
-  MicroGM__PER__DeciL: Qudt.unitFromLocalnameRequired("MicroGM-PER-DeciL"),
-  // Guyana Dollar
-  GYD_Currency: Qudt.currencyFromLocalnameRequired("GYD"),
-  // Square Meter Kelvin per Watt
-  M2__K__PER__W: Qudt.unitFromLocalnameRequired("M2-K-PER-W"),
-  // Reciprocal Kelvin
-  PER__K: Qudt.unitFromLocalnameRequired("PER-K"),
-  // Kilogram Per Day
-  KiloGM__PER__DAY: Qudt.unitFromLocalnameRequired("KiloGM-PER-DAY"),
-  // Mean Julian Month
-  MO_MeanJulian: Qudt.unitFromLocalnameRequired("MO_MeanJulian"),
-  // Square Nanometer
-  NanoM2: Qudt.unitFromLocalnameRequired("NanoM2"),
-  // Henry Per Ohm
-  H__PER__OHM: Qudt.unitFromLocalnameRequired("H-PER-OHM"),
-  // Number per square metre
-  NUM__PER__M2: Qudt.unitFromLocalnameRequired("NUM-PER-M2"),
-  // Gram Force
-  GM_F: Qudt.unitFromLocalnameRequired("GM_F"),
-  // Milliampere Per Millimeter
-  MilliA__PER__MilliM: Qudt.unitFromLocalnameRequired("MilliA-PER-MilliM"),
-  // Cubic Inch Per Hour
-  IN3__PER__HR: Qudt.unitFromLocalnameRequired("IN3-PER-HR"),
-  // square meters per hectare
-  M2__PER__HA: Qudt.unitFromLocalnameRequired("M2-PER-HA"),
-  // Nanograms Per Square Centimeter
-  NanoGM__PER__CentiM2: Qudt.unitFromLocalnameRequired("NanoGM-PER-CentiM2"),
-  // Micrograms per square metre per day
-  MicroGM__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MicroGM-PER-M2-DAY"),
-  // Kilogram per Second
-  KiloGM__PER__SEC: Qudt.unitFromLocalnameRequired("KiloGM-PER-SEC"),
-  // Kilogram per Square Meter Square Second
-  KiloGM__PER__M2__SEC2: Qudt.unitFromLocalnameRequired("KiloGM-PER-M2-SEC2"),
-  // Swedish Krona
-  SEK_Currency: Qudt.currencyFromLocalnameRequired("SEK"),
-  // Vietnamese ??ng
-  VND_Currency: Qudt.currencyFromLocalnameRequired("VND"),
-  // Rupiah
-  IDR_Currency: Qudt.currencyFromLocalnameRequired("IDR"),
-  // are
-  ARE: Qudt.unitFromLocalnameRequired("ARE"),
-  // Dyne Per Centimetre
-  DYN__PER__CentiM: Qudt.unitFromLocalnameRequired("DYN-PER-CentiM"),
-  // Cubic Centimeter per Mole Second
-  M3__PER__MOL__SEC: Qudt.unitFromLocalnameRequired("M3-PER-MOL-SEC"),
-  // Litre Per Litre
-  L__PER__L: Qudt.unitFromLocalnameRequired("L-PER-L"),
-  // Quart (UK Liquid) Per Day
-  QT_UK__PER__DAY: Qudt.unitFromLocalnameRequired("QT_UK-PER-DAY"),
-  // International Unit
-  IU: Qudt.unitFromLocalnameRequired("IU"),
-  // Bar Liter Per Second
-  BAR__L__PER__SEC: Qudt.unitFromLocalnameRequired("BAR-L-PER-SEC"),
-  // British Thermal Unit (international Table) Per Hour Square Foot degree Rankine
-  BTU_IT__PER__HR__FT2__DEG_R: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-PER-HR-FT2-DEG_R"
-  ),
-  // Loti
-  LSL_Currency: Qudt.currencyFromLocalnameRequired("LSL"),
-  // Erg Second
-  ERG__SEC: Qudt.unitFromLocalnameRequired("ERG-SEC"),
-  // Foot Pound Force Second
-  FT__LB_F__SEC: Qudt.unitFromLocalnameRequired("FT-LB_F-SEC"),
-  // nanosecond
-  NanoSEC: Qudt.unitFromLocalnameRequired("NanoSEC"),
-  // British Thermal Unit (international Table) Inch Per Hour Square Foot degree Fahrenheit
-  BTU_IT__IN__PER__HR__FT2__DEG_F: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-IN-PER-HR-FT2-DEG_F"
-  ),
-  // kilonewton metre per degree metre
-  KiloN__M__PER__DEG__M: Qudt.unitFromLocalnameRequired("KiloN-M-PER-DEG-M"),
-  // Microbecquerels per kilogram
-  MicroBQ__PER__KiloGM: Qudt.unitFromLocalnameRequired("MicroBQ-PER-KiloGM"),
-  // Egyptian Pound
-  EGP_Currency: Qudt.currencyFromLocalnameRequired("EGP"),
-  // Peck (UK) Per Second
-  PK_UK__PER__SEC: Qudt.unitFromLocalnameRequired("PK_UK-PER-SEC"),
-  // BTU (TH) Inch per Square Foot Second Degree Fahrenheit
-  BTU_TH__IN__PER__FT2__SEC__DEG_F: Qudt.unitFromLocalnameRequired(
-    "BTU_TH-IN-PER-FT2-SEC-DEG_F"
-  ),
-  // Megajoule Per Second
-  MegaJ__PER__SEC: Qudt.unitFromLocalnameRequired("MegaJ-PER-SEC"),
-  // Microgram
-  MicroGM: Qudt.unitFromLocalnameRequired("MicroGM"),
-  // GigaBIT
-  GigaBIT: Qudt.unitFromLocalnameRequired("GigaBIT"),
-  // YottaCoulomb
-  YottaC: Qudt.unitFromLocalnameRequired("YottaC"),
-  // W-M2-PER-SR
-  W__M2__PER__SR: Qudt.unitFromLocalnameRequired("W-M2-PER-SR"),
-  // Nanohenry Per Meter
-  NanoH__PER__M: Qudt.unitFromLocalnameRequired("NanoH-PER-M"),
-  // Number per picoliter
-  NUM__PER__PicoL: Qudt.unitFromLocalnameRequired("NUM-PER-PicoL"),
-  // Tex
-  TEX: Qudt.unitFromLocalnameRequired("TEX"),
-  // Tonne Per Second (metric Ton)
-  TON_Metric__PER__SEC: Qudt.unitFromLocalnameRequired("TON_Metric-PER-SEC"),
-  // Reciprocal Weber
-  PER__WB: Qudt.unitFromLocalnameRequired("PER-WB"),
-  // French Gauge
-  GAUGE_FR: Qudt.unitFromLocalnameRequired("GAUGE_FR"),
-  // Hectogram
-  HectoGM: Qudt.unitFromLocalnameRequired("HectoGM"),
-  // Som
-  KGS_Currency: Qudt.currencyFromLocalnameRequired("KGS"),
-  // Micromole per micromole of biomass per day
-  MicroMOL__PER__MicroMOL__DAY: Qudt.unitFromLocalnameRequired(
-    "MicroMOL-PER-MicroMOL-DAY"
-  ),
-  // Nanograms per litre
-  NanoGM__PER__L: Qudt.unitFromLocalnameRequired("NanoGM-PER-L"),
-  // Milligram Per Hectare
-  MilliGM__PER__HA: Qudt.unitFromLocalnameRequired("MilliGM-PER-HA"),
-  // Millibar Per Bar
-  MilliBAR__PER__BAR: Qudt.unitFromLocalnameRequired("MilliBAR-PER-BAR"),
-  // Nanosiemens Per Metre
-  NanoS__PER__M: Qudt.unitFromLocalnameRequired("NanoS-PER-M"),
-  // Volt Ampere Hour
-  V__A__HR: Qudt.unitFromLocalnameRequired("V-A-HR"),
-  // Bolivian Mvdol (Funds code)
-  BOV_Currency: Qudt.currencyFromLocalnameRequired("BOV"),
-  // Chilean Peso
-  CLP_Currency: Qudt.currencyFromLocalnameRequired("CLP"),
-  // BTU per Second Square Foot
-  BTU_IT__PER__SEC__FT2: Qudt.unitFromLocalnameRequired("BTU_IT-PER-SEC-FT2"),
-  // Millilitre Per Kelvin
-  MilliL__PER__K: Qudt.unitFromLocalnameRequired("MilliL-PER-K"),
-  // Slug per Square Foot
-  SLUG__PER__FT2: Qudt.unitFromLocalnameRequired("SLUG-PER-FT2"),
-  // Seychelles Rupee
-  SCR_Currency: Qudt.currencyFromLocalnameRequired("SCR"),
-  // Diopter
-  DIOPTER: Qudt.unitFromLocalnameRequired("DIOPTER"),
-  // Poise Per Bar
-  POISE__PER__BAR: Qudt.unitFromLocalnameRequired("POISE-PER-BAR"),
-  // Mile US Statute
-  MI_US: Qudt.unitFromLocalnameRequired("MI_US"),
-  // Kilo Electron Volt per Micrometre
-  KiloEV__PER__MicroM: Qudt.unitFromLocalnameRequired("KiloEV-PER-MicroM"),
-  // Mole Per Minute
-  MOL__PER__MIN: Qudt.unitFromLocalnameRequired("MOL-PER-MIN"),
-  // Millinewton Meter
-  MilliN__M: Qudt.unitFromLocalnameRequired("MilliN-M"),
-  // Decimetre
-  DeciM: Qudt.unitFromLocalnameRequired("DeciM"),
-  // Quart (US Liquid) Per Second
-  QT_US__PER__SEC: Qudt.unitFromLocalnameRequired("QT_US-PER-SEC"),
-  // Long Hundred Weight
-  CWT_LONG: Qudt.unitFromLocalnameRequired("CWT_LONG"),
-  // Danish Krone
-  DKK_Currency: Qudt.currencyFromLocalnameRequired("DKK"),
-  // Barrel (US Petroleum) Per Hour
-  BBL_US_PET__PER__HR: Qudt.unitFromLocalnameRequired("BBL_US_PET-PER-HR"),
-  // UIC franc (special settlement currency)
-  XFU_Currency: Qudt.currencyFromLocalnameRequired("XFU"),
-  // Electronvolt Per Meter
-  EV__PER__M: Qudt.unitFromLocalnameRequired("EV-PER-M"),
-  // Millimeter Per Minute
-  MilliM__PER__MIN: Qudt.unitFromLocalnameRequired("MilliM-PER-MIN"),
-  // Cubic Millimeter
-  MilliM3: Qudt.unitFromLocalnameRequired("MilliM3"),
-  // Parts Per Ten Million per Kelvin
-  PPTM__PER__K: Qudt.unitFromLocalnameRequired("PPTM-PER-K"),
-  // Saudi Riyal
-  SAR_Currency: Qudt.currencyFromLocalnameRequired("SAR"),
-  // Millivolt Per Meter
-  MilliV__PER__M: Qudt.unitFromLocalnameRequired("MilliV-PER-M"),
-  // Fluid Ounce (UK)
-  OZ_VOL_UK: Qudt.unitFromLocalnameRequired("OZ_VOL_UK"),
-  // Pascal Per Meter
-  PA__PER__M: Qudt.unitFromLocalnameRequired("PA-PER-M"),
-  // Kilogram Force
-  KiloGM_F: Qudt.unitFromLocalnameRequired("KiloGM_F"),
-  // Kilogram Square Millimetre
-  KiloGM__MilliM2: Qudt.unitFromLocalnameRequired("KiloGM-MilliM2"),
-  // Nephelometry Turbidity Unit
-  NTU: Qudt.unitFromLocalnameRequired("NTU"),
-  // Kilocalorie per Gram
-  KiloCAL__PER__GM: Qudt.unitFromLocalnameRequired("KiloCAL-PER-GM"),
-  // Millimole Per Gram
-  MilliMOL__PER__GM: Qudt.unitFromLocalnameRequired("MilliMOL-PER-GM"),
-  // Nanomoles per litre
-  NanoMOL__PER__L: Qudt.unitFromLocalnameRequired("NanoMOL-PER-L"),
-  // Millimoles per square metre per second
-  MilliMOL__PER__M2__SEC: Qudt.unitFromLocalnameRequired("MilliMOL-PER-M2-SEC"),
-  // Cases per 1000 individuals per year
-  CASES__PER__KiloINDIV__YR: Qudt.unitFromLocalnameRequired(
-    "CASES-PER-KiloINDIV-YR"
-  ),
-  // Pakistan Rupee
-  PKR_Currency: Qudt.currencyFromLocalnameRequired("PKR"),
-  // Cubic Centimetre Per Cubic Centimetre
-  CentiM3__PER__CentiM3: Qudt.unitFromLocalnameRequired("CentiM3-PER-CentiM3"),
-  // Microgram per Square Inch
-  MicroGM__PER__IN2: Qudt.unitFromLocalnameRequired("MicroGM-PER-IN2"),
-  // Byte
-  BYTE: Qudt.unitFromLocalnameRequired("BYTE"),
-  // Revolution per Second
-  REV__PER__SEC: Qudt.unitFromLocalnameRequired("REV-PER-SEC"),
-  // Thermochemical Calorie
-  CAL_TH: Qudt.unitFromLocalnameRequired("CAL_TH"),
-  // Megaton of Oil Equivalent
-  MegaTOE: Qudt.unitFromLocalnameRequired("MegaTOE"),
-  // Micromole
-  MicroMOL: Qudt.unitFromLocalnameRequired("MicroMOL"),
-  // Degrees Celsius kilogram per square metre
-  DEG_C__KiloGM__PER__M2: Qudt.unitFromLocalnameRequired("DEG_C-KiloGM-PER-M2"),
-  // Kilomole
-  KiloMOL: Qudt.unitFromLocalnameRequired("KiloMOL"),
-  // Reciprocal Tesla Metre
-  PER__T__M: Qudt.unitFromLocalnameRequired("PER-T-M"),
-  // Gram Per Cubic Centimeter
-  GM__PER__CentiM3: Qudt.unitFromLocalnameRequired("GM-PER-CentiM3"),
-  // Kilometres per day
-  KiloM__PER__DAY: Qudt.unitFromLocalnameRequired("KiloM-PER-DAY"),
-  // pascal saat per meter kubik
-  PA__SEC__PER__M3: Qudt.unitFromLocalnameRequired("PA-SEC-PER-M3"),
-  // Grams per square centimetre per year
-  GM__PER__CentiM2__YR: Qudt.unitFromLocalnameRequired("GM-PER-CentiM2-YR"),
-  // Kilogram per Square Metre
-  KiloGM__PER__M2: Qudt.unitFromLocalnameRequired("KiloGM-PER-M2"),
-  // Quart (US Liquid) Per Day
-  QT_US__PER__DAY: Qudt.unitFromLocalnameRequired("QT_US-PER-DAY"),
-  // Kilogram per Hour
-  KiloGM__PER__HR: Qudt.unitFromLocalnameRequired("KiloGM-PER-HR"),
-  // Degree Oechsle
-  DEGREE_OECHSLE: Qudt.unitFromLocalnameRequired("DEGREE_OECHSLE"),
-  // Poundal per Square Foot
-  PDL__PER__FT2: Qudt.unitFromLocalnameRequired("PDL-PER-FT2"),
-  // Short Ton (us) Per Day
-  TON_US__PER__DAY: Qudt.unitFromLocalnameRequired("TON_US-PER-DAY"),
-  // Number per cubic millimeter
-  NUM__PER__MilliM3: Qudt.unitFromLocalnameRequired("NUM-PER-MilliM3"),
-  // BTU Foot
-  BTU_IT__FT: Qudt.unitFromLocalnameRequired("BTU_IT-FT"),
-  // Reciprocal Second Square Metre Steradian
-  PER__SEC__M2__SR: Qudt.unitFromLocalnameRequired("PER-SEC-M2-SR"),
-  // Millilitre Per Cubic Meter
-  MilliL__PER__M3: Qudt.unitFromLocalnameRequired("MilliL-PER-M3"),
-  // European Unit of Account 17 (E.U.A.-17) (Bonds market unit)
-  XBD_Currency: Qudt.currencyFromLocalnameRequired("XBD"),
-  // Newton Square Metre Per Square Kilogram
-  N__M2__PER__KiloGM2: Qudt.unitFromLocalnameRequired("N-M2-PER-KiloGM2"),
-  // Trinidad and Tobago Dollar
-  TTD_Currency: Qudt.currencyFromLocalnameRequired("TTD"),
-  // Long Ton (uk) Per Day
-  TON_UK__PER__DAY: Qudt.unitFromLocalnameRequired("TON_UK-PER-DAY"),
-  // Abvolt Second
-  V_Ab__SEC: Qudt.unitFromLocalnameRequired("V_Ab-SEC"),
-  // Reciprocal Hour
-  PER__HR: Qudt.unitFromLocalnameRequired("PER-HR"),
-  // Square Pascal Second
-  PA2__SEC: Qudt.unitFromLocalnameRequired("PA2-SEC"),
-  // Megajoule Per Cubic Meter
-  MegaJ__PER__M3: Qudt.unitFromLocalnameRequired("MegaJ-PER-M3"),
-  // Millimole Per Kilogram
-  MilliMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("MilliMOL-PER-KiloGM"),
-  // Square metres per square Hertz
-  M2__PER__HZ2: Qudt.unitFromLocalnameRequired("M2-PER-HZ2"),
-  // Picomoles per litre per day
-  PicoMOL__PER__L__DAY: Qudt.unitFromLocalnameRequired("PicoMOL-PER-L-DAY"),
-  // Square Inch Per Second
-  IN2__PER__SEC: Qudt.unitFromLocalnameRequired("IN2-PER-SEC"),
-  // Kilograms per metre per square second
-  KiloGM__PER__M__SEC2: Qudt.unitFromLocalnameRequired("KiloGM-PER-M-SEC2"),
-  // Megapascal Square Root Meter
-  MegaPA__M0pt5: Qudt.unitFromLocalnameRequired("MegaPA-M0pt5"),
-  // Imperial Mass Ounce per Cubic Inch
-  OZ__PER__IN3: Qudt.unitFromLocalnameRequired("OZ-PER-IN3"),
-  // BTU per Square Foot Second Degree Fahrenheit
-  BTU_IT__PER__FT2__SEC__DEG_F: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-PER-FT2-SEC-DEG_F"
-  ),
-  // Reciprocal Second
-  PER__SEC: Qudt.unitFromLocalnameRequired("PER-SEC"),
-  // Kilo Byte
-  KiloBYTE: Qudt.unitFromLocalnameRequired("KiloBYTE"),
-  // Micromoles per square metre per second
-  MicroMOL__PER__M2__SEC: Qudt.unitFromLocalnameRequired("MicroMOL-PER-M2-SEC"),
-  // Kilopond
-  KiloPOND: Qudt.unitFromLocalnameRequired("KiloPOND"),
-  // Picokatal Per Liter
-  PicoKAT__PER__L: Qudt.unitFromLocalnameRequired("PicoKAT-PER-L"),
-  // Barbados Dollar
-  BBD_Currency: Qudt.currencyFromLocalnameRequired("BBD"),
-  // Newton second per Cubic Meter
-  N__SEC__PER__M3: Qudt.unitFromLocalnameRequired("N-SEC-PER-M3"),
-  // MicroGray
-  MicroGRAY: Qudt.unitFromLocalnameRequired("MicroGRAY"),
-  // Centipoise Per Bar
-  CentiPOISE__PER__BAR: Qudt.unitFromLocalnameRequired("CentiPOISE-PER-BAR"),
-  // Elementary Charge
-  ElementaryCharge: Qudt.unitFromLocalnameRequired("ElementaryCharge"),
-  // Metre per Minute
-  M__PER__MIN: Qudt.unitFromLocalnameRequired("M-PER-MIN"),
-  // Square Meter Per Newton
-  M2__PER__N: Qudt.unitFromLocalnameRequired("M2-PER-N"),
-  // Kiloampere Per Metre
-  KiloA__PER__M: Qudt.unitFromLocalnameRequired("KiloA-PER-M"),
-  // Surinam Dollar
-  SRD_Currency: Qudt.currencyFromLocalnameRequired("SRD"),
-  // Attojoule
-  AttoJ: Qudt.unitFromLocalnameRequired("AttoJ"),
-  // Millilitre Per Litre
-  MilliL__PER__L: Qudt.unitFromLocalnameRequired("MilliL-PER-L"),
-  // MegaINDIV
-  MegaINDIV: Qudt.unitFromLocalnameRequired("MegaINDIV"),
-  // Square Foot Second Degree Fahrenheit
-  FT2__SEC__DEG_F: Qudt.unitFromLocalnameRequired("FT2-SEC-DEG_F"),
-  // Quintic Meter
-  M5: Qudt.unitFromLocalnameRequired("M5"),
-  // North Korean Won
-  KPW_Currency: Qudt.currencyFromLocalnameRequired("KPW"),
-  // Millihenry
-  MilliH: Qudt.unitFromLocalnameRequired("MilliH"),
-  // Degree Plato
-  DEGREE_PLATO: Qudt.unitFromLocalnameRequired("DEGREE_PLATO"),
-  // Kilolitre
-  KiloL: Qudt.unitFromLocalnameRequired("KiloL"),
-  // Degree Celsius per Second
-  DEG_C__PER__SEC: Qudt.unitFromLocalnameRequired("DEG_C-PER-SEC"),
-  // Microwatt Per Square Meter
-  MicroW__PER__M2: Qudt.unitFromLocalnameRequired("MicroW-PER-M2"),
-  // Ounce (US Fluid) Per Hour
-  OZ_VOL_US__PER__HR: Qudt.unitFromLocalnameRequired("OZ_VOL_US-PER-HR"),
-  // YoctoCoulomb
-  YoctoC: Qudt.unitFromLocalnameRequired("YoctoC"),
-  // Nanomoles per gram per second
-  NanoMOL__PER__GM__SEC: Qudt.unitFromLocalnameRequired("NanoMOL-PER-GM-SEC"),
-  // Nanotesla
-  NanoT: Qudt.unitFromLocalnameRequired("NanoT"),
-  // Mole Per Litre
-  MOL__PER__L: Qudt.unitFromLocalnameRequired("MOL-PER-L"),
-  // Reciprocal Day
-  PER__DAY: Qudt.unitFromLocalnameRequired("PER-DAY"),
-  // PlanckTemperature
-  PlanckTemperature: Qudt.unitFromLocalnameRequired("PlanckTemperature"),
-  // Kilocoulomb Per Square Meter
-  KiloC__PER__M2: Qudt.unitFromLocalnameRequired("KiloC-PER-M2"),
-  // Bushel (UK) Per Hour
-  BU_UK__PER__HR: Qudt.unitFromLocalnameRequired("BU_UK-PER-HR"),
-  // Reciprocal Pascal per second
-  PER__PA__SEC: Qudt.unitFromLocalnameRequired("PER-PA-SEC"),
-  // Grain per Gallon
-  GRAIN__PER__GAL: Qudt.unitFromLocalnameRequired("GRAIN-PER-GAL"),
-  // Ton Energy
-  TonEnergy: Qudt.unitFromLocalnameRequired("TonEnergy"),
   // Number per hour
   NUM__PER__HR: Qudt.unitFromLocalnameRequired("NUM-PER-HR"),
-  // Pound Mass (avoirdupois) Inch
-  LB__IN: Qudt.unitFromLocalnameRequired("LB-IN"),
-  // Volt Second Per Meter
-  V__SEC__PER__M: Qudt.unitFromLocalnameRequired("V-SEC-PER-M"),
-  // Parsec
-  PARSEC: Qudt.unitFromLocalnameRequired("PARSEC"),
-  // MilliBecquerel
-  MilliBQ: Qudt.unitFromLocalnameRequired("MilliBQ"),
-  // BTU per Degree Rankine
-  BTU_IT__PER__DEG_R: Qudt.unitFromLocalnameRequired("BTU_IT-PER-DEG_R"),
-  // Gigawatt
-  GigaW: Qudt.unitFromLocalnameRequired("GigaW"),
-  // Ounce (UK Fluid) Per Hour
-  OZ_VOL_UK__PER__HR: Qudt.unitFromLocalnameRequired("OZ_VOL_UK-PER-HR"),
-  // Tunisian Dinar
-  TND_Currency: Qudt.currencyFromLocalnameRequired("TND"),
-  // grams Carbon per square meter per day
-  GM_Carbon__PER__M2__DAY: Qudt.unitFromLocalnameRequired(
-    "GM_Carbon-PER-M2-DAY"
-  ),
-  // Nanomoles per cubic centimetre per hour
-  NanoMOL__PER__CentiM3__HR: Qudt.unitFromLocalnameRequired(
-    "NanoMOL-PER-CentiM3-HR"
-  ),
-  // BTU per Square Foot
-  BTU_IT__PER__FT2: Qudt.unitFromLocalnameRequired("BTU_IT-PER-FT2"),
-  // Kilograms per square metre per second
-  KiloGM__PER__M2__SEC: Qudt.unitFromLocalnameRequired("KiloGM-PER-M2-SEC"),
-  // MicroSievert
-  MicroSV: Qudt.unitFromLocalnameRequired("MicroSV"),
-  // Ampere Square Meter Per Joule Second
-  A__M2__PER__J__SEC: Qudt.unitFromLocalnameRequired("A-M2-PER-J-SEC"),
-  // Ampere per Square Meter Square Kelvin
-  A__PER__M2__K2: Qudt.unitFromLocalnameRequired("A-PER-M2-K2"),
-  // Kilocalorie per Centimeter Second Degree Celsius
-  KiloCAL__PER__CentiM__SEC__DEG_C: Qudt.unitFromLocalnameRequired(
-    "KiloCAL-PER-CentiM-SEC-DEG_C"
-  ),
-  // Megajoule
-  MegaJ: Qudt.unitFromLocalnameRequired("MegaJ"),
-  // Megalitre
-  MegaL: Qudt.unitFromLocalnameRequired("MegaL"),
-  // Millinewton Per Meter
-  MilliN__PER__M: Qudt.unitFromLocalnameRequired("MilliN-PER-M"),
-  // kBTU per Square Foot
-  KiloBTU_IT__PER__FT2: Qudt.unitFromLocalnameRequired("KiloBTU_IT-PER-FT2"),
-  // Hryvnia
-  UAH_Currency: Qudt.currencyFromLocalnameRequired("UAH"),
   // Debye
   Debye: Qudt.unitFromLocalnameRequired("Debye"),
-  // 1000000I
-  _1000000I: Qudt.unitFromLocalnameRequired("1000000I"),
-  // Milligram Per Second
-  MilliGM__PER__SEC: Qudt.unitFromLocalnameRequired("MilliGM-PER-SEC"),
-  // Gigawatt Hour
-  GigaW__HR: Qudt.unitFromLocalnameRequired("GigaW-HR"),
-  // Degree Brix
-  DEGREE_BRIX: Qudt.unitFromLocalnameRequired("DEGREE_BRIX"),
-  // MegaSiemens
-  MegaS: Qudt.unitFromLocalnameRequired("MegaS"),
-  // Mole Per Hour
-  MOL__PER__HR: Qudt.unitFromLocalnameRequired("MOL-PER-HR"),
-  // ohm
-  OHM: Qudt.unitFromLocalnameRequired("OHM"),
-  // Tonne Per Cubic Metre
-  TON_Metric__PER__M3: Qudt.unitFromLocalnameRequired("TON_Metric-PER-M3"),
-  // Cubic Decimeter Per Second
-  DeciM3__PER__SEC: Qudt.unitFromLocalnameRequired("DeciM3-PER-SEC"),
-  // Hertz per Tesla
-  HZ__PER__T: Qudt.unitFromLocalnameRequired("HZ-PER-T"),
-  // Bermuda Dollar
-  BMD_Currency: Qudt.currencyFromLocalnameRequired("BMD"),
-  // ZeptoCoulomb
-  ZeptoC: Qudt.unitFromLocalnameRequired("ZeptoC"),
-  // Mega Electron Volt Femtometer
-  MegaEV__FemtoM: Qudt.unitFromLocalnameRequired("MegaEV-FemtoM"),
-  // Nanomoles per kilogram
-  NanoMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("NanoMOL-PER-KiloGM"),
-  // Kilowatt hour per square metre
-  KiloW__HR__PER__M2: Qudt.unitFromLocalnameRequired("KiloW-HR-PER-M2"),
-  // Cubic Foot per Minute
-  FT3__PER__MIN: Qudt.unitFromLocalnameRequired("FT3-PER-MIN"),
-  // Short Ton
-  TON_SHORT: Qudt.unitFromLocalnameRequired("TON_SHORT"),
-  // Euro per square metre
-  EUR__PER__M2: Qudt.unitFromLocalnameRequired("EUR-PER-M2"),
-  // microampere
-  MicroA: Qudt.unitFromLocalnameRequired("MicroA"),
-  // Micrometre Per Kelvin
-  MicroM__PER__K: Qudt.unitFromLocalnameRequired("MicroM-PER-K"),
-  // Tonne Per Cubic Metre
-  TONNE__PER__M3: Qudt.unitFromLocalnameRequired("TONNE-PER-M3"),
-  // Picomoles per kilogram
-  PicoMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("PicoMOL-PER-KiloGM"),
-  // Dyne Centimeter
-  DYN__CentiM: Qudt.unitFromLocalnameRequired("DYN-CentiM"),
-  // Joule Meter per Mole
-  J__M__PER__MOL: Qudt.unitFromLocalnameRequired("J-M-PER-MOL"),
-  // Micrometre
-  MicroM: Qudt.unitFromLocalnameRequired("MicroM"),
-  // Decigram
-  DeciGM: Qudt.unitFromLocalnameRequired("DeciGM"),
-  // Kilovolt Ampere
-  KiloV__A: Qudt.unitFromLocalnameRequired("KiloV-A"),
-  // Kilojoule
-  KiloJ: Qudt.unitFromLocalnameRequired("KiloJ"),
-  // Mile per Second
-  MI__PER__SEC: Qudt.unitFromLocalnameRequired("MI-PER-SEC"),
-  // ExbiByte
-  ExbiBYTE: Qudt.unitFromLocalnameRequired("ExbiBYTE"),
-  // Gon
-  GON: Qudt.unitFromLocalnameRequired("GON"),
-  // Litres per micromole
-  L__PER__MicroMOL: Qudt.unitFromLocalnameRequired("L-PER-MicroMOL"),
-  // Kilogram Per Jaar
-  KiloGM__PER__YR: Qudt.unitFromLocalnameRequired("KiloGM-PER-YR"),
-  // Bushel (US Dry) Per Minute
-  BU_US_DRY__PER__MIN: Qudt.unitFromLocalnameRequired("BU_US_DRY-PER-MIN"),
-  // Kilonewton Meter
-  KiloN__M: Qudt.unitFromLocalnameRequired("KiloN-M"),
-  // Number per microlitre
-  NUM__PER__MicroL: Qudt.unitFromLocalnameRequired("NUM-PER-MicroL"),
-  // PicoKAT
-  PicoKAT: Qudt.unitFromLocalnameRequired("PicoKAT"),
-  // Uganda Shilling
-  UGX_Currency: Qudt.currencyFromLocalnameRequired("UGX"),
-  // Degree Fahrenheit per Square Second
-  DEG_F__PER__SEC2: Qudt.unitFromLocalnameRequired("DEG_F-PER-SEC2"),
-  // Millicurie
-  MilliCi: Qudt.unitFromLocalnameRequired("MilliCi"),
-  // Decibel Referred to 1mw
-  DeciB_M: Qudt.unitFromLocalnameRequired("DeciB_M"),
-  // Newton Per Square Millimeter
-  N__PER__MilliM2: Qudt.unitFromLocalnameRequired("N-PER-MilliM2"),
-  // Watt per Square Metre Steradian
-  W__PER__M2__SR: Qudt.unitFromLocalnameRequired("W-PER-M2-SR"),
-  // Pound per Foot Second
-  LB__PER__FT__SEC: Qudt.unitFromLocalnameRequired("LB-PER-FT-SEC"),
-  // Nanobecquerels per litre
-  NanoBQ__PER__L: Qudt.unitFromLocalnameRequired("NanoBQ-PER-L"),
-  // Cubic Metre Per Day
-  M3__PER__DAY: Qudt.unitFromLocalnameRequired("M3-PER-DAY"),
-  // Katal Per Microliter
-  KAT__PER__MicroL: Qudt.unitFromLocalnameRequired("KAT-PER-MicroL"),
-  // Reciprocal Centimeter
-  PER__CentiM: Qudt.unitFromLocalnameRequired("PER-CentiM"),
-  // darjah celsius
-  DEG_C: Qudt.unitFromLocalnameRequired("DEG_C"),
-  // Kilo British Thermal Unit (Thermochemical Definition)
-  KiloBTU_TH: Qudt.unitFromLocalnameRequired("KiloBTU_TH"),
-  // Degree Celsius Per Kelvin
-  DEG_C__PER__K: Qudt.unitFromLocalnameRequired("DEG_C-PER-K"),
-  // Degree Fahrenheit Hour Square Foot per British Thermal Unit (international Table)
-  DEG_F__HR__FT2__PER__BTU_IT: Qudt.unitFromLocalnameRequired(
-    "DEG_F-HR-FT2-PER-BTU_IT"
-  ),
-  // Kilogram Square Centimetre
-  KiloGM__CentiM2: Qudt.unitFromLocalnameRequired("KiloGM-CentiM2"),
-  // Square Metres square Hertz
-  M2__HZ2: Qudt.unitFromLocalnameRequired("M2-HZ2"),
-  // Imperial Gallon
-  GAL_IMP: Qudt.unitFromLocalnameRequired("GAL_IMP"),
-  // Electronvolt Per Angstrom
-  EV__PER__ANGSTROM: Qudt.unitFromLocalnameRequired("EV-PER-ANGSTROM"),
-  // Reciprocal Joule Cubic Meter
-  PER__J__M3: Qudt.unitFromLocalnameRequired("PER-J-M3"),
-  // SAMPLE
-  SAMPLE: Qudt.unitFromLocalnameRequired("SAMPLE"),
-  // Relative Electromagnetic Permeability
-  PERMEABILITY_EM_REL: Qudt.unitFromLocalnameRequired("PERMEABILITY_EM_REL"),
-  // British Thermal Unit (international Table) Per Pound Degree Fahrenheit
-  BTU_IT__PER__LB_F__DEG_F: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-PER-LB_F-DEG_F"
-  ),
-  // Planck Current Density
-  PlanckCurrentDensity: Qudt.unitFromLocalnameRequired("PlanckCurrentDensity"),
-  // Watt hour per square metre
-  W__HR__PER__M2: Qudt.unitFromLocalnameRequired("W-HR-PER-M2"),
-  // Pascal Second Per Metre
-  PA__SEC__PER__M: Qudt.unitFromLocalnameRequired("PA-SEC-PER-M"),
-  // Ounce (avoirdupois) Foot
-  OZ__FT: Qudt.unitFromLocalnameRequired("OZ-FT"),
-  // BTU per Hour Square Foot
-  BTU_IT__PER__HR__FT2: Qudt.unitFromLocalnameRequired("BTU_IT-PER-HR-FT2"),
-  // Kelvin per Second
-  K__PER__SEC: Qudt.unitFromLocalnameRequired("K-PER-SEC"),
-  // Teaspoon
-  TSP: Qudt.unitFromLocalnameRequired("TSP"),
-  // Fathom
-  FATH: Qudt.unitFromLocalnameRequired("FATH"),
-  // Frame per Second
-  FRAME__PER__SEC: Qudt.unitFromLocalnameRequired("FRAME-PER-SEC"),
-  // Mil Angle (NATO)
-  MIL: Qudt.unitFromLocalnameRequired("MIL"),
-  // Siemens Square metre per mole
-  S__M2__PER__MOL: Qudt.unitFromLocalnameRequired("S-M2-PER-MOL"),
-  // Foot Pound per Square Foot
-  FT__LB_F__PER__FT2: Qudt.unitFromLocalnameRequired("FT-LB_F-PER-FT2"),
-  // Kilowatt
-  KiloW: Qudt.unitFromLocalnameRequired("KiloW"),
-  // Mesh
-  MESH: Qudt.unitFromLocalnameRequired("MESH"),
-  // Gram Per Gram
-  GM__PER__GM: Qudt.unitFromLocalnameRequired("GM-PER-GM"),
-  // joule por quilograma grau celsius
-  J__PER__KiloGM__DEG_C: Qudt.unitFromLocalnameRequired("J-PER-KiloGM-DEG_C"),
-  // Square metres per Hertz
-  M2__PER__HZ: Qudt.unitFromLocalnameRequired("M2-PER-HZ"),
-  // Balboa
-  PAB_Currency: Qudt.currencyFromLocalnameRequired("PAB"),
-  // PicoPascal
-  PicoPA: Qudt.unitFromLocalnameRequired("PicoPA"),
-  // South Korean Won
-  KRW_Currency: Qudt.currencyFromLocalnameRequired("KRW"),
-  // Cubic Coulomb Metre per Square Joule
-  C3__M__PER__J2: Qudt.unitFromLocalnameRequired("C3-M-PER-J2"),
-  // Quartic Meter
-  M4: Qudt.unitFromLocalnameRequired("M4"),
-  // Pascal per Hour
-  PA__PER__HR: Qudt.unitFromLocalnameRequired("PA-PER-HR"),
-  // Abhenry
-  H_Ab: Qudt.unitFromLocalnameRequired("H_Ab"),
-  // Reciprocal Millimetre
-  PER__MilliM: Qudt.unitFromLocalnameRequired("PER-MilliM"),
-  // Bushel (UK) Per Second
-  BU_UK__PER__SEC: Qudt.unitFromLocalnameRequired("BU_UK-PER-SEC"),
-  // Reciprocal metre per steradian
-  PER__M__SR: Qudt.unitFromLocalnameRequired("PER-M-SR"),
-  // Kiloroentgen
-  KiloR: Qudt.unitFromLocalnameRequired("KiloR"),
-  // Nanomoles per micromole
-  NanoMOL__PER__MicroMOL: Qudt.unitFromLocalnameRequired(
-    "NanoMOL-PER-MicroMOL"
-  ),
-  // Kilopascal Per Kelvin
-  KiloPA__PER__K: Qudt.unitFromLocalnameRequired("KiloPA-PER-K"),
-  // Degree Fahrenheit
-  DEG_F: Qudt.unitFromLocalnameRequired("DEG_F"),
-  // Foot per Minute
-  FT__PER__MIN: Qudt.unitFromLocalnameRequired("FT-PER-MIN"),
-  // Reciprocal Cubic Yard
-  PER__YD3: Qudt.unitFromLocalnameRequired("PER-YD3"),
-  // Gray per Second
-  GRAY__PER__SEC: Qudt.unitFromLocalnameRequired("GRAY-PER-SEC"),
-  // Hertz Meter
-  HZ__M: Qudt.unitFromLocalnameRequired("HZ-M"),
-  // Bushel (US Dry) Per Second
-  BU_US_DRY__PER__SEC: Qudt.unitFromLocalnameRequired("BU_US_DRY-PER-SEC"),
-  // Kip
-  KIP_F: Qudt.unitFromLocalnameRequired("KIP_F"),
-  // Reciprocal Cubic Meter
-  PER__M3: Qudt.unitFromLocalnameRequired("PER-M3"),
-  // KiloTon Per Jaar
-  KiloTONNE__PER__YR: Qudt.unitFromLocalnameRequired("KiloTONNE-PER-YR"),
-  // Nanometer Per Centimeter Megapascal
-  NanoM__PER__CentiM__MegaPA: Qudt.unitFromLocalnameRequired(
-    "NanoM-PER-CentiM-MegaPA"
-  ),
-  // Cordoba Oro
-  NIO_Currency: Qudt.currencyFromLocalnameRequired("NIO"),
-  // Kilocalorie Per Second
-  KiloCAL__PER__SEC: Qudt.unitFromLocalnameRequired("KiloCAL-PER-SEC"),
-  // Hectometre
-  HectoM: Qudt.unitFromLocalnameRequired("HectoM"),
-  // International Unit per Litre
-  IU__PER__L: Qudt.unitFromLocalnameRequired("IU-PER-L"),
-  // Ngultrum
-  BTN_Currency: Qudt.currencyFromLocalnameRequired("BTN"),
-  // Kilopascal Per Bar
-  KiloPA__PER__BAR: Qudt.unitFromLocalnameRequired("KiloPA-PER-BAR"),
-  // Barrel (UK Petroleum) Per Second
-  BBL_UK_PET__PER__SEC: Qudt.unitFromLocalnameRequired("BBL_UK_PET-PER-SEC"),
-  // Inch of Water
-  IN_H2O: Qudt.unitFromLocalnameRequired("IN_H2O"),
-  // Micromoles per kilogram
-  MicroMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("MicroMOL-PER-KiloGM"),
-  // Watt per Square Inch
-  W__PER__IN2: Qudt.unitFromLocalnameRequired("W-PER-IN2"),
-  // Kilomole Per Second
-  KiloMOL__PER__SEC: Qudt.unitFromLocalnameRequired("KiloMOL-PER-SEC"),
-  // Cubic Angstrom
-  ANGSTROM3: Qudt.unitFromLocalnameRequired("ANGSTROM3"),
-  // Percent per hour
-  PERCENT__PER__HR: Qudt.unitFromLocalnameRequired("PERCENT-PER-HR"),
-  // Moles per square metre per second per metre
-  MOL__PER__M2__SEC__M: Qudt.unitFromLocalnameRequired("MOL-PER-M2-SEC-M"),
-  // Bahamian Dollar
-  BSD_Currency: Qudt.currencyFromLocalnameRequired("BSD"),
-  // Abcoulomb
-  C_Ab: Qudt.unitFromLocalnameRequired("C_Ab"),
-  // Centimetre Second Degree Celsius
-  CentiM__SEC__DEG_C: Qudt.unitFromLocalnameRequired("CentiM-SEC-DEG_C"),
-  // US Gallon per Minute
-  GAL_US__PER__MIN: Qudt.unitFromLocalnameRequired("GAL_US-PER-MIN"),
-  // Milligram Per Square Centimetre
-  MilliGM__PER__CentiM2: Qudt.unitFromLocalnameRequired("MilliGM-PER-CentiM2"),
-  // Femtomoles per litre
-  FemtoMOL__PER__L: Qudt.unitFromLocalnameRequired("FemtoMOL-PER-L"),
-  // Decibar
-  DeciBAR: Qudt.unitFromLocalnameRequired("DeciBAR"),
-  // Number per gram
-  NUM__PER__GM: Qudt.unitFromLocalnameRequired("NUM-PER-GM"),
-  // Grade
-  GR: Qudt.unitFromLocalnameRequired("GR"),
-  // Number per 100 grams
-  NUM__PER__HectoGM: Qudt.unitFromLocalnameRequired("NUM-PER-HectoGM"),
-  // Nanometer
-  NanoM: Qudt.unitFromLocalnameRequired("NanoM"),
-  // Board Foot
-  FBM: Qudt.unitFromLocalnameRequired("FBM"),
-  // Counts per second
-  NUM__PER__SEC: Qudt.unitFromLocalnameRequired("NUM-PER-SEC"),
-  // Square Centimetre Second
-  CentiM2__SEC: Qudt.unitFromLocalnameRequired("CentiM2-SEC"),
-  // Millicoulomb Per Square Meter
-  MilliC__PER__M2: Qudt.unitFromLocalnameRequired("MilliC-PER-M2"),
-  // Long Ton per Cubic Yard
-  TON_LONG__PER__YD3: Qudt.unitFromLocalnameRequired("TON_LONG-PER-YD3"),
-  // Statcoulomb per Mole
-  C_Stat__PER__MOL: Qudt.unitFromLocalnameRequired("C_Stat-PER-MOL"),
-  // Cubic Metre per Second
-  M3__PER__SEC: Qudt.unitFromLocalnameRequired("M3-PER-SEC"),
-  // Unitless
-  UNITLESS: Qudt.unitFromLocalnameRequired("UNITLESS"),
-  // Magnetic Susceptibility Unit
-  SUSCEPTIBILITY_MAG: Qudt.unitFromLocalnameRequired("SUSCEPTIBILITY_MAG"),
-  // Gallon (UK) Per Hour
-  GAL_UK__PER__HR: Qudt.unitFromLocalnameRequired("GAL_UK-PER-HR"),
-  // Kelvin per Tesla
-  K__PER__T: Qudt.unitFromLocalnameRequired("K-PER-T"),
-  // घन मीटर
-  M3: Qudt.unitFromLocalnameRequired("M3"),
-  // Meganewton Meter
-  MegaN__M: Qudt.unitFromLocalnameRequired("MegaN-M"),
-  // Pound Mass (avoirdupois) Per Square Foot
-  LB__PER__FT2: Qudt.unitFromLocalnameRequired("LB-PER-FT2"),
-  // Newtonmetersekunden pro Meter
-  N__M__SEC__PER__M: Qudt.unitFromLocalnameRequired("N-M-SEC-PER-M"),
-  // Peck (UK) Per Day
-  PK_UK__PER__DAY: Qudt.unitFromLocalnameRequired("PK_UK-PER-DAY"),
-  // Rem
-  REM: Qudt.unitFromLocalnameRequired("REM"),
-  // New Zealand Dollar
-  NZD_Currency: Qudt.currencyFromLocalnameRequired("NZD"),
-  // Microgram Per Cubic Metre
-  MicroGM__PER__M3: Qudt.unitFromLocalnameRequired("MicroGM-PER-M3"),
-  // Hectopascal Cubic Metre Per Second
-  HectoPA__M3__PER__SEC: Qudt.unitFromLocalnameRequired("HectoPA-M3-PER-SEC"),
-  // Square metres per Hertz per degree
-  M2__PER__HZ__DEG: Qudt.unitFromLocalnameRequired("M2-PER-HZ-DEG"),
-  // Unidad de Valor Real
-  COU_Currency: Qudt.currencyFromLocalnameRequired("COU"),
-  // Kilocalorie per Square Centimeter
-  KiloCAL__PER__CentiM2: Qudt.unitFromLocalnameRequired("KiloCAL-PER-CentiM2"),
-  // Number per nanoliter
-  NUM__PER__NanoL: Qudt.unitFromLocalnameRequired("NUM-PER-NanoL"),
-  // Degree Fahrenheit Hour
-  DEG_F__HR: Qudt.unitFromLocalnameRequired("DEG_F-HR"),
-  // Milligal
-  MilliGAL: Qudt.unitFromLocalnameRequired("MilliGAL"),
-  // Microfarad Per Kilometre
-  MicroFARAD__PER__KiloM: Qudt.unitFromLocalnameRequired(
-    "MicroFARAD-PER-KiloM"
-  ),
-  // Planck Angular Frequency
-  PlanckFrequency_Ang: Qudt.unitFromLocalnameRequired("PlanckFrequency_Ang"),
-  // Phot
-  PHOT: Qudt.unitFromLocalnameRequired("PHOT"),
-  // bushel (US)
-  BU_US: Qudt.unitFromLocalnameRequired("BU_US"),
-  // Reciprocal Meter Kelvin
-  PER__M__K: Qudt.unitFromLocalnameRequired("PER-M-K"),
-  // Cubic micrometres (microns)
-  MicroM3: Qudt.unitFromLocalnameRequired("MicroM3"),
-  // Malagasy Ariary
-  MGA_Currency: Qudt.currencyFromLocalnameRequired("MGA"),
-  // Micromoles per second
-  MicroMOL__PER__SEC: Qudt.unitFromLocalnameRequired("MicroMOL-PER-SEC"),
-  // Abvolt per centimeter
-  V_Ab__PER__CentiM: Qudt.unitFromLocalnameRequired("V_Ab-PER-CentiM"),
-  // Ampere Turn
-  AT: Qudt.unitFromLocalnameRequired("AT"),
-  // Kilocalorie (international Table) Per Hour Metre Degree Celsius
-  KiloCAL_IT__PER__HR__M__DEG_C: Qudt.unitFromLocalnameRequired(
-    "KiloCAL_IT-PER-HR-M-DEG_C"
-  ),
-  // NanoKAT
-  NanoKAT: Qudt.unitFromLocalnameRequired("NanoKAT"),
-  // Nanomoles per micromole per day
-  NanoMOL__PER__MicroMOL__DAY: Qudt.unitFromLocalnameRequired(
-    "NanoMOL-PER-MicroMOL-DAY"
-  ),
-  // hertz
-  HZ: Qudt.unitFromLocalnameRequired("HZ"),
-  // British Thermal Unit (international Table) Inch Per Second Square Foot degree Fahrenheit
-  BTU_IT__IN__PER__SEC__FT2__DEG_F: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-IN-PER-SEC-FT2-DEG_F"
-  ),
-  // Watt seconds per square metre
-  W__SEC__PER__M2: Qudt.unitFromLocalnameRequired("W-SEC-PER-M2"),
-  // FLIGHT
-  FLIGHT: Qudt.unitFromLocalnameRequired("FLIGHT"),
-  // Aruban Guilder
-  AWG_Currency: Qudt.currencyFromLocalnameRequired("AWG"),
-  // Millisiemens Per Centimeter
-  MilliS__PER__CentiM: Qudt.unitFromLocalnameRequired("MilliS-PER-CentiM"),
-  // Jamaican Dollar
-  JMD_Currency: Qudt.currencyFromLocalnameRequired("JMD"),
-  // Volt Per Microsecond
-  V__PER__MicroSEC: Qudt.unitFromLocalnameRequired("V-PER-MicroSEC"),
-  // ZettaCoulomb
-  ZettaC: Qudt.unitFromLocalnameRequired("ZettaC"),
-  // Quart (UK Liquid) Per Minute
-  QT_UK__PER__MIN: Qudt.unitFromLocalnameRequired("QT_UK-PER-MIN"),
-  // Joule Per Square Centimeter
-  J__PER__CentiM2: Qudt.unitFromLocalnameRequired("J-PER-CentiM2"),
-  // Philippine Peso
-  PHP_Currency: Qudt.currencyFromLocalnameRequired("PHP"),
-  // Degree Celsius per Hour
-  DEG_C__PER__HR: Qudt.unitFromLocalnameRequired("DEG_C-PER-HR"),
-  // Grain
-  GRAIN: Qudt.unitFromLocalnameRequired("GRAIN"),
-  // Kroon
-  EEK_Currency: Qudt.currencyFromLocalnameRequired("EEK"),
-  // Colombian Peso
-  COP_Currency: Qudt.currencyFromLocalnameRequired("COP"),
-  // cubic centimetre
-  CentiM3: Qudt.unitFromLocalnameRequired("CentiM3"),
-  // Microgram per square centimetre
-  MicroG__PER__CentiM2: Qudt.unitFromLocalnameRequired("MicroG-PER-CentiM2"),
-  // Atomic mass unit
-  AMU: Qudt.unitFromLocalnameRequired("AMU"),
-  // Deaths per 1000 individuals per year
-  DEATHS__PER__1000I__YR: Qudt.unitFromLocalnameRequired("DEATHS-PER-1000I-YR"),
-  // Microwatt
-  MicroW: Qudt.unitFromLocalnameRequired("MicroW"),
-  // Square Centimeter
-  CentiM2: Qudt.unitFromLocalnameRequired("CentiM2"),
-  // Degree
-  DEG: Qudt.unitFromLocalnameRequired("DEG"),
-  // Femtograms per litre
-  FemtoGM__PER__L: Qudt.unitFromLocalnameRequired("FemtoGM-PER-L"),
-  // Kilocurie
-  KiloCi: Qudt.unitFromLocalnameRequired("KiloCi"),
-  // Tonne Per Hour
-  TONNE__PER__HR: Qudt.unitFromLocalnameRequired("TONNE-PER-HR"),
-  // Joule Per Hour
-  J__PER__HR: Qudt.unitFromLocalnameRequired("J-PER-HR"),
-  // Kilogram Per Square Foot
-  KiloGM__PER__FT2: Qudt.unitFromLocalnameRequired("KiloGM-PER-FT2"),
-  // Mega Electron Volt
-  MegaEV: Qudt.unitFromLocalnameRequired("MegaEV"),
-  // Percent per metre
-  PERCENT__PER__M: Qudt.unitFromLocalnameRequired("PERCENT-PER-M"),
-  // Week
-  WK: Qudt.unitFromLocalnameRequired("WK"),
-  // Barye
-  BARYE: Qudt.unitFromLocalnameRequired("BARYE"),
-  // Kilogram Force Per Square Meter
-  KiloGM_F__PER__M2: Qudt.unitFromLocalnameRequired("KiloGM_F-PER-M2"),
-  // Ampere je Meter
-  A__PER__M: Qudt.unitFromLocalnameRequired("A-PER-M"),
-  // Milligram Per Cubic Metre
-  MilliGM__PER__M3: Qudt.unitFromLocalnameRequired("MilliGM-PER-M3"),
-  // Mebibyte
-  MebiBYTE: Qudt.unitFromLocalnameRequired("MebiBYTE"),
-  // Milliampere Per Inch
-  MilliA__PER__IN: Qudt.unitFromLocalnameRequired("MilliA-PER-IN"),
-  // ArcMinute
-  ARCMIN: Qudt.unitFromLocalnameRequired("ARCMIN"),
-  // Square Meter Hour Degree Celsius Per Kilocalorie (international Table)
-  M2__HR__DEG_C__PER__KiloCAL_IT: Qudt.unitFromLocalnameRequired(
-    "M2-HR-DEG_C-PER-KiloCAL_IT"
-  ),
-  // Gill (UK) Per Hour
-  GI_UK__PER__HR: Qudt.unitFromLocalnameRequired("GI_UK-PER-HR"),
-  // Kilogram Square Meter Per Second
-  KiloGM__M2__PER__SEC: Qudt.unitFromLocalnameRequired("KiloGM-M2-PER-SEC"),
+  // Liberian Dollar
+  LRD_Currency: Qudt.currencyFromLocalnameRequired("LRD"),
+  // Metre per Hour
+  M__PER__HR: Qudt.unitFromLocalnameRequired("M-PER-HR"),
+  // Grad
+  GRAD: Qudt.unitFromLocalnameRequired("GRAD"),
+  // Nuevo Sol
+  PEN_Currency: Qudt.currencyFromLocalnameRequired("PEN"),
+  // Ounce (US Fluid) Per Day
+  OZ_VOL_US__PER__DAY: Qudt.unitFromLocalnameRequired("OZ_VOL_US-PER-DAY"),
   // Unified Atomic Mass Unit
   U: Qudt.unitFromLocalnameRequired("U"),
-  // Millidegree Celsius
-  MilliDEG_C: Qudt.unitFromLocalnameRequired("MilliDEG_C"),
-  // pascal
-  PA: Qudt.unitFromLocalnameRequired("PA"),
-  // Picofarad Per Meter
-  PicoFARAD__PER__M: Qudt.unitFromLocalnameRequired("PicoFARAD-PER-M"),
-  // Quart (UK)
-  QT_UK: Qudt.unitFromLocalnameRequired("QT_UK"),
-  // Cubic Meter per Hectare
-  M3__PER__HA: Qudt.unitFromLocalnameRequired("M3-PER-HA"),
-  // Mega Pound Force
-  MegaLB_F: Qudt.unitFromLocalnameRequired("MegaLB_F"),
-  // Megasiemens Per Meter
-  MegaS__PER__M: Qudt.unitFromLocalnameRequired("MegaS-PER-M"),
-  // Planck Volt
-  PlanckVolt: Qudt.unitFromLocalnameRequired("PlanckVolt"),
-  // Microatmospheres
-  MicroATM: Qudt.unitFromLocalnameRequired("MicroATM"),
-  // Pint (UK)
-  PINT_UK: Qudt.unitFromLocalnameRequired("PINT_UK"),
-  // Stokes
-  ST: Qudt.unitFromLocalnameRequired("ST"),
-  // Megapascal
-  MegaPA: Qudt.unitFromLocalnameRequired("MegaPA"),
-  // Millirads per hour
-  MilliRAD_R__PER__HR: Qudt.unitFromLocalnameRequired("MilliRAD_R-PER-HR"),
-  // Pula
-  BWP_Currency: Qudt.currencyFromLocalnameRequired("BWP"),
-  // MicroCurie
-  MicroCi: Qudt.unitFromLocalnameRequired("MicroCi"),
-  // Picowatt Per Square Metre
-  PicoW__PER__M2: Qudt.unitFromLocalnameRequired("PicoW-PER-M2"),
-  // Kiloampere Hour
-  KiloA__HR: Qudt.unitFromLocalnameRequired("KiloA-HR"),
-  // Pascal per Minute
-  PA__PER__MIN: Qudt.unitFromLocalnameRequired("PA-PER-MIN"),
-  // Reads Per Kilobase
-  RPK: Qudt.unitFromLocalnameRequired("RPK"),
-  // Bushel (UK) Per Minute
-  BU_UK__PER__MIN: Qudt.unitFromLocalnameRequired("BU_UK-PER-MIN"),
-  // Square pascal per square second
-  PA2__PER__SEC2: Qudt.unitFromLocalnameRequired("PA2-PER-SEC2"),
-  // US Gallon
-  GAL_US: Qudt.unitFromLocalnameRequired("GAL_US"),
-  // Algerian Dinar
-  DZD_Currency: Qudt.currencyFromLocalnameRequired("DZD"),
-  // Planck Pressure
-  PlanckPressure: Qudt.unitFromLocalnameRequired("PlanckPressure"),
-  // AttoCoulomb
-  AttoC: Qudt.unitFromLocalnameRequired("AttoC"),
-  // Jordanian Dinar
-  JOD_Currency: Qudt.currencyFromLocalnameRequired("JOD"),
-  // Cubic Meter per Hour
-  M3__PER__HR: Qudt.unitFromLocalnameRequired("M3-PER-HR"),
-  // Picosecond
-  PicoSEC: Qudt.unitFromLocalnameRequired("PicoSEC"),
-  // Mole per Cubic Metre
-  MOL__PER__M3: Qudt.unitFromLocalnameRequired("MOL-PER-M3"),
-  // Foot per Second
-  FT__PER__SEC: Qudt.unitFromLocalnameRequired("FT-PER-SEC"),
-  // Kilogram Per Kilogram
-  KiloGM__PER__KiloGM: Qudt.unitFromLocalnameRequired("KiloGM-PER-KiloGM"),
-  // Haiti Gourde
-  HTG_Currency: Qudt.currencyFromLocalnameRequired("HTG"),
-  // Square Millimeter
-  MilliM2: Qudt.unitFromLocalnameRequired("MilliM2"),
-  // Pound per Foot
-  LB__PER__FT: Qudt.unitFromLocalnameRequired("LB-PER-FT"),
-  // Square Millimeter Per Second
-  MilliM2__PER__SEC: Qudt.unitFromLocalnameRequired("MilliM2-PER-SEC"),
-  // Milligram Per Gram
-  MilliGM__PER__GM: Qudt.unitFromLocalnameRequired("MilliGM-PER-GM"),
-  // Megagram Per Hectare
-  MegaGM__PER__HA: Qudt.unitFromLocalnameRequired("MegaGM-PER-HA"),
-  // Minute
-  MIN: Qudt.unitFromLocalnameRequired("MIN"),
-  // Abampere Square centimetre
-  A_Ab__CentiM2: Qudt.unitFromLocalnameRequired("A_Ab-CentiM2"),
-  // Radian Square Meter per Kilogram
-  RAD__M2__PER__KiloGM: Qudt.unitFromLocalnameRequired("RAD-M2-PER-KiloGM"),
-  // Bit per Second
-  BIT__PER__SEC: Qudt.unitFromLocalnameRequired("BIT-PER-SEC"),
-  // Palladium (one Troy ounce)
-  XPD_Currency: Qudt.currencyFromLocalnameRequired("XPD"),
-  // mètre carré par seconde
-  M2__PER__SEC: Qudt.unitFromLocalnameRequired("M2-PER-SEC"),
-  // Barad
-  BARAD: Qudt.unitFromLocalnameRequired("BARAD"),
-  // Euro per kilowatt
-  EUR__PER__KiloW: Qudt.unitFromLocalnameRequired("EUR-PER-KiloW"),
-  // Gram Per Mole
-  GM__PER__MOL: Qudt.unitFromLocalnameRequired("GM-PER-MOL"),
-  // Microsiemens Per Centimetre
-  MicroS__PER__CentiM: Qudt.unitFromLocalnameRequired("MicroS-PER-CentiM"),
-  // BTU (IT) Inch per Square Foot Second Degree Fahrenheit
-  BTU_IT__IN__PER__FT2__SEC__DEG_F: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-IN-PER-FT2-SEC-DEG_F"
-  ),
-  // Degrees per metre
-  DEG__PER__M: Qudt.unitFromLocalnameRequired("DEG-PER-M"),
-  // Pound Degree Fahrenheit
-  LB__DEG_F: Qudt.unitFromLocalnameRequired("LB-DEG_F"),
-  // Tonne Per Hour
-  TON_Metric__PER__HR: Qudt.unitFromLocalnameRequired("TON_Metric-PER-HR"),
-  // MicroGals per metre
-  MicroGAL__PER__M: Qudt.unitFromLocalnameRequired("MicroGAL-PER-M"),
-  // Metres to the power four per second
-  M4__PER__SEC: Qudt.unitFromLocalnameRequired("M4-PER-SEC"),
-  // Serbian Dinar
-  RSD_Currency: Qudt.currencyFromLocalnameRequired("RSD"),
-  // Liter Per Minute
-  L__PER__MIN: Qudt.unitFromLocalnameRequired("L-PER-MIN"),
-  // Mega byte
-  MegaBYTE: Qudt.unitFromLocalnameRequired("MegaBYTE"),
-  // Pint (UK) Per Hour
-  PINT_UK__PER__HR: Qudt.unitFromLocalnameRequired("PINT_UK-PER-HR"),
-  // Picoamps per micromole per litre
-  PicoA__PER__MicroMOL__L: Qudt.unitFromLocalnameRequired(
-    "PicoA-PER-MicroMOL-L"
-  ),
-  // Planck Momentum
-  PlanckMomentum: Qudt.unitFromLocalnameRequired("PlanckMomentum"),
-  // BTU-IT-PER-lb
-  BTU_IT__PER__LB: Qudt.unitFromLocalnameRequired("BTU_IT-PER-LB"),
-  // Moles per gram per hour
-  MOL__PER__GM__HR: Qudt.unitFromLocalnameRequired("MOL-PER-GM-HR"),
-  // Watts per square metre per nanometre per steradian
-  W__PER__M2__NanoM__SR: Qudt.unitFromLocalnameRequired("W-PER-M2-NanoM-SR"),
-  // Coulomb per Kilogram
-  C__PER__KiloGM: Qudt.unitFromLocalnameRequired("C-PER-KiloGM"),
-  // Microbecquerel
-  MicroBQ: Qudt.unitFromLocalnameRequired("MicroBQ"),
-  // Mole Per Second
-  MOL__PER__SEC: Qudt.unitFromLocalnameRequired("MOL-PER-SEC"),
-  // Kilopound Force Per Square Inch
-  KiloLB_F__PER__IN2: Qudt.unitFromLocalnameRequired("KiloLB_F-PER-IN2"),
-  // Square Foot
-  FT2: Qudt.unitFromLocalnameRequired("FT2"),
-  // Euro
-  EUR_Currency: Qudt.currencyFromLocalnameRequired("EUR"),
-  // Tablespoon
-  TBSP: Qudt.unitFromLocalnameRequired("TBSP"),
-  // Pascal per Kelvin
-  PA__PER__K: Qudt.unitFromLocalnameRequired("PA-PER-K"),
-  // Pound Force per Foot
-  LB_F__PER__FT: Qudt.unitFromLocalnameRequired("LB_F-PER-FT"),
-  // candela per square metre
-  CD__PER__M2: Qudt.unitFromLocalnameRequired("CD-PER-M2"),
-  // Cubic Metre per Kelvin
-  M3__PER__K: Qudt.unitFromLocalnameRequired("M3-PER-K"),
-  // Candela per Square Inch
-  CD__PER__IN2: Qudt.unitFromLocalnameRequired("CD-PER-IN2"),
-  // Degree Rankine per Minute
-  DEG_R__PER__MIN: Qudt.unitFromLocalnameRequired("DEG_R-PER-MIN"),
-  // Hectare
-  HA: Qudt.unitFromLocalnameRequired("HA"),
-  // Micropascal
-  MicroPA: Qudt.unitFromLocalnameRequired("MicroPA"),
+  // Watts per square metre per metre
+  W__PER__M2__M: Qudt.unitFromLocalnameRequired("W-PER-M2-M"),
+  // Abfarad per Centimeter
+  FARAD_Ab__PER__CentiM: Qudt.unitFromLocalnameRequired("FARAD_Ab-PER-CentiM"),
+  // roentgen equivalent man
+  R_man: Qudt.unitFromLocalnameRequired("R_man"),
+  // Statampere per Square Centimetre
+  A_Stat__PER__CentiM2: Qudt.unitFromLocalnameRequired("A_Stat-PER-CentiM2"),
+  // Milliampere Per Inch
+  MilliA__PER__IN: Qudt.unitFromLocalnameRequired("MilliA-PER-IN"),
+  // Kilopond
+  KiloPOND: Qudt.unitFromLocalnameRequired("KiloPOND"),
   // Pound per Minute
   LB__PER__MIN: Qudt.unitFromLocalnameRequired("LB-PER-MIN"),
-  // Square metres per square second
-  M2__PER__SEC2: Qudt.unitFromLocalnameRequired("M2-PER-SEC2"),
-  // Millibar Cubic Metre Per Second
-  MilliBAR__M3__PER__SEC: Qudt.unitFromLocalnameRequired("MilliBAR-M3-PER-SEC"),
-  // Mol per Tonne
-  MOL__PER__TONNE: Qudt.unitFromLocalnameRequired("MOL-PER-TONNE"),
-  // Sidereal Day
-  DAY_Sidereal: Qudt.unitFromLocalnameRequired("DAY_Sidereal"),
-  // Moroccan Dirham
-  MAD_Currency: Qudt.currencyFromLocalnameRequired("MAD"),
-  // Revolution
-  REV: Qudt.unitFromLocalnameRequired("REV"),
-  // Degree Balling
-  DEGREE_BALLING: Qudt.unitFromLocalnameRequired("DEGREE_BALLING"),
-  // Metric Ton
-  TON_Metric: Qudt.unitFromLocalnameRequired("TON_Metric"),
-  // Pound Mass
-  LB: Qudt.unitFromLocalnameRequired("LB"),
-  // joule second
-  J__SEC: Qudt.unitFromLocalnameRequired("J-SEC"),
-  // Quadratmeter je Volt und Sekunde
-  M2__PER__V__SEC: Qudt.unitFromLocalnameRequired("M2-PER-V-SEC"),
-  // Pataca
-  MOP_Currency: Qudt.currencyFromLocalnameRequired("MOP"),
-  // Bushel (UK) Per Day
-  BU_UK__PER__DAY: Qudt.unitFromLocalnameRequired("BU_UK-PER-DAY"),
-  // Mile per Minute
-  MI__PER__MIN: Qudt.unitFromLocalnameRequired("MI-PER-MIN"),
-  // Milliwatts per square metre per nanometre
-  MilliW__PER__M2__NanoM: Qudt.unitFromLocalnameRequired("MilliW-PER-M2-NanoM"),
-  // tonne per hectare per year
-  TONNE__PER__HA__YR: Qudt.unitFromLocalnameRequired("TONNE-PER-HA-YR"),
-  // Long Ton (UK) Per Cubic Yard
-  TON_UK__PER__YD3: Qudt.unitFromLocalnameRequired("TON_UK-PER-YD3"),
-  // Dyne per Square Centimetre
-  DYN__PER__CentiM2: Qudt.unitFromLocalnameRequired("DYN-PER-CentiM2"),
-  // Psi Per Psi
-  PSI__PER__PSI: Qudt.unitFromLocalnameRequired("PSI-PER-PSI"),
-  // Dominican Peso
-  DOP_Currency: Qudt.currencyFromLocalnameRequired("DOP"),
-  // Litre
-  L: Qudt.unitFromLocalnameRequired("L"),
-  // Kilogauss
-  KiloGAUSS: Qudt.unitFromLocalnameRequired("KiloGAUSS"),
-  // Minute Angle
-  MIN_Angle: Qudt.unitFromLocalnameRequired("MIN_Angle"),
-  // Quetzal
-  GTQ_Currency: Qudt.currencyFromLocalnameRequired("GTQ"),
-  // BTU per Pound Mole Degree Fahrenheit
-  BTU_IT__PER__MOL__DEG_F: Qudt.unitFromLocalnameRequired(
-    "BTU_IT-PER-MOL-DEG_F"
-  ),
-  // Milliwatt Per Square Metre
-  MilliW__PER__M2: Qudt.unitFromLocalnameRequired("MilliW-PER-M2"),
-  // Milligray
-  MilliGRAY: Qudt.unitFromLocalnameRequired("MilliGRAY"),
-  // Microohm
-  MicroOHM: Qudt.unitFromLocalnameRequired("MicroOHM"),
-  // Pascal Square Root Meter
-  PA__M0pt5: Qudt.unitFromLocalnameRequired("PA-M0pt5"),
-  // Electric Susceptibility Unit
-  SUSCEPTIBILITY_ELEC: Qudt.unitFromLocalnameRequired("SUSCEPTIBILITY_ELEC"),
-  // East Caribbean Dollar
-  XCD_Currency: Qudt.currencyFromLocalnameRequired("XCD"),
-  // Pound (avoirdupois) Per Second
-  LB__PER__SEC: Qudt.unitFromLocalnameRequired("LB-PER-SEC"),
-  // Watt per Square Metre Pascal
-  W__PER__M2__PA: Qudt.unitFromLocalnameRequired("W-PER-M2-PA"),
-  // Calorie (thermochemical) Per Second Centimetre Kelvin
-  CAL_TH__PER__SEC__CentiM__K: Qudt.unitFromLocalnameRequired(
-    "CAL_TH-PER-SEC-CentiM-K"
-  ),
-  // Number per Year
-  NUM__PER__YR: Qudt.unitFromLocalnameRequired("NUM-PER-YR"),
-  // Siemens Per Centimetre
-  S__PER__CentiM: Qudt.unitFromLocalnameRequired("S-PER-CentiM"),
-  // Megabecquerel
-  MegaBQ: Qudt.unitFromLocalnameRequired("MegaBQ"),
-  // Reciprocal Second Square Meter
-  PER__SEC__M2: Qudt.unitFromLocalnameRequired("PER-SEC-M2"),
-  // Lithuanian Litas
-  LTL_Currency: Qudt.currencyFromLocalnameRequired("LTL"),
-  // New Taiwan Dollar
-  TWD_Currency: Qudt.currencyFromLocalnameRequired("TWD"),
-  // Register Ton
-  RT: Qudt.unitFromLocalnameRequired("RT"),
-  // Square Degrees Celsius per second
-  DEG_C2__PER__SEC: Qudt.unitFromLocalnameRequired("DEG_C2-PER-SEC"),
-  // pascal-seconde
-  PA__SEC: Qudt.unitFromLocalnameRequired("PA-SEC"),
-  // Joules per square centimetre per day
-  J__PER__CentiM2__DAY: Qudt.unitFromLocalnameRequired("J-PER-CentiM2-DAY"),
-  // MilliW
-  MilliW: Qudt.unitFromLocalnameRequired("MilliW"),
-  // Somali Shilling
-  SOS_Currency: Qudt.currencyFromLocalnameRequired("SOS"),
-  // Degree per Square Second
-  DEG__PER__SEC2: Qudt.unitFromLocalnameRequired("DEG-PER-SEC2"),
-  // Reciprocal Year
-  PER__YR: Qudt.unitFromLocalnameRequired("PER-YR"),
-  // Pound (avoirdupois) Per Gallon (US)
-  LB__PER__GAL_US: Qudt.unitFromLocalnameRequired("LB-PER-GAL_US"),
-  // Picohenry
-  PicoH: Qudt.unitFromLocalnameRequired("PicoH"),
-  // Planck Impedance
-  PlanckImpedance: Qudt.unitFromLocalnameRequired("PlanckImpedance"),
-  // Microlitre Per Litre
-  MicroL__PER__L: Qudt.unitFromLocalnameRequired("MicroL-PER-L"),
-  // بل
-  B: Qudt.unitFromLocalnameRequired("B"),
-  // Milliohm
-  MilliOHM: Qudt.unitFromLocalnameRequired("MilliOHM"),
-  // Metre per Kelvin
-  M__PER__K: Qudt.unitFromLocalnameRequired("M-PER-K"),
-  // Forint
-  HUF_Currency: Qudt.currencyFromLocalnameRequired("HUF"),
-  // MilliCoulomb
-  MilliC: Qudt.unitFromLocalnameRequired("MilliC"),
-  // Megavolt Ampere Hour
-  MegaV__A__HR: Qudt.unitFromLocalnameRequired("MegaV-A-HR"),
-  // Pica
-  PCA: Qudt.unitFromLocalnameRequired("PCA"),
-  // Gallon (UK)
-  GAL_UK: Qudt.unitFromLocalnameRequired("GAL_UK"),
-  // CentiMole
-  CentiMOL: Qudt.unitFromLocalnameRequired("CentiMOL"),
-  // Guarani
-  PYG_Currency: Qudt.currencyFromLocalnameRequired("PYG"),
-  // Reciprocal metre per second
-  PER__M__SEC: Qudt.unitFromLocalnameRequired("PER-M-SEC"),
-  // Mega British Thermal Unit (International Definition) per Hour
-  MegaBTU_IT__PER__HR: Qudt.unitFromLocalnameRequired("MegaBTU_IT-PER-HR"),
-  // Volt Per Inch
-  V__PER__IN: Qudt.unitFromLocalnameRequired("V-PER-IN"),
-  // Cubic Centimeter Per Day
-  CentiM3__PER__DAY: Qudt.unitFromLocalnameRequired("CentiM3-PER-DAY"),
-  // Pound Mass (avoirdupois) Square Foot
-  LB__FT2: Qudt.unitFromLocalnameRequired("LB-FT2"),
-  // Square Metre per Steradian
-  M2__PER__SR: Qudt.unitFromLocalnameRequired("M2-PER-SR"),
-  // Reciprocal Square Meter
-  PER__M2: Qudt.unitFromLocalnameRequired("PER-M2"),
-  // Volt per Kelvin
-  V__PER__K: Qudt.unitFromLocalnameRequired("V-PER-K"),
-  // Square Second
-  SEC2: Qudt.unitFromLocalnameRequired("SEC2"),
-  // Radian per Square Second
-  RAD__PER__SEC2: Qudt.unitFromLocalnameRequired("RAD-PER-SEC2"),
-  // Foot Of Mercury
-  FT_HG: Qudt.unitFromLocalnameRequired("FT_HG"),
-  // Square metres Hertz^4
-  M2__HZ4: Qudt.unitFromLocalnameRequired("M2-HZ4"),
-  // Cubic Meter Per Minute
-  M3__PER__MIN: Qudt.unitFromLocalnameRequired("M3-PER-MIN"),
-  // Cubic Centimeter Per Kelvin
-  CentiM3__PER__K: Qudt.unitFromLocalnameRequired("CentiM3-PER-K"),
-  // WIR Franc (complementary currency)
-  CHW_Currency: Qudt.currencyFromLocalnameRequired("CHW"),
-  // Centinewton Meter
-  CentiN__M: Qudt.unitFromLocalnameRequired("CentiN-M"),
-  // BTU per Pound Mole
-  BTU_IT__PER__MOL_LB: Qudt.unitFromLocalnameRequired("BTU_IT-PER-MOL_LB"),
-  // kelvin per watt
-  K__PER__W: Qudt.unitFromLocalnameRequired("K-PER-W"),
-  // Cubic Metre per Kilogram
-  M3__PER__KiloGM: Qudt.unitFromLocalnameRequired("M3-PER-KiloGM"),
-  // Gram Per Millilitre
-  GM__PER__MilliL: Qudt.unitFromLocalnameRequired("GM-PER-MilliL"),
-  // ArcSecond
-  ARCSEC: Qudt.unitFromLocalnameRequired("ARCSEC"),
-  // M0pt
-  M0pt: Qudt.unitFromLocalnameRequired("M0pt"),
-  // Reciprocal square second
-  PER__SEC2: Qudt.unitFromLocalnameRequired("PER-SEC2"),
-  // Meganewton
-  MegaN: Qudt.unitFromLocalnameRequired("MegaN"),
-  // Megahertz Metre
-  MegaHZ__M: Qudt.unitFromLocalnameRequired("MegaHZ-M"),
-  // Megapascal Per Kelvin
-  MegaPA__PER__K: Qudt.unitFromLocalnameRequired("MegaPA-PER-K"),
-  // Nanograms per microlitre
-  NanoGM__PER__MicroL: Qudt.unitFromLocalnameRequired("NanoGM-PER-MicroL"),
-  // Newton Per Square Centimetre
-  N__PER__CentiM2: Qudt.unitFromLocalnameRequired("N-PER-CentiM2"),
-  // Kwanza
-  AOA_Currency: Qudt.currencyFromLocalnameRequired("AOA"),
-  // Cubic microns per millilitre
-  MicroM3__PER__MilliL: Qudt.unitFromLocalnameRequired("MicroM3-PER-MilliL"),
-  // Millilitre Per Hour
-  MilliL__PER__HR: Qudt.unitFromLocalnameRequired("MilliL-PER-HR"),
-  // US Survey Foot
-  FT_US: Qudt.unitFromLocalnameRequired("FT_US"),
-  // Megavolt Ampere
-  MegaV__A: Qudt.unitFromLocalnameRequired("MegaV-A"),
-  // Square Volt per Square Kelvin
-  V2__PER__K2: Qudt.unitFromLocalnameRequired("V2-PER-K2"),
-  // Slovak Koruna
-  SKK_Currency: Qudt.currencyFromLocalnameRequired("SKK"),
-  // Lumen
-  LM: Qudt.unitFromLocalnameRequired("LM"),
-  // Tonne Per Minute
-  TONNE__PER__MIN: Qudt.unitFromLocalnameRequired("TONNE-PER-MIN"),
-  // Pound Force Second per Square Foot
-  LB_F__SEC__PER__FT2: Qudt.unitFromLocalnameRequired("LB_F-SEC-PER-FT2"),
-  // Degrees Celsius per year
-  DEG_C__PER__YR: Qudt.unitFromLocalnameRequired("DEG_C-PER-YR"),
-  // Denier
-  Denier: Qudt.unitFromLocalnameRequired("Denier"),
-  // Ampere Turn per Inch
-  AT__PER__IN: Qudt.unitFromLocalnameRequired("AT-PER-IN"),
-  // THM_EEC
-  THM_EEC: Qudt.unitFromLocalnameRequired("THM_EEC"),
-  // Calorie (thermochemical) Per Centimetre Second Degree Celsius
-  CAL_TH__PER__CentiM__SEC__DEG_C: Qudt.unitFromLocalnameRequired(
-    "CAL_TH-PER-CentiM-SEC-DEG_C"
-  ),
-  // Statvolt per Centimeter
-  V_Stat__PER__CentiM: Qudt.unitFromLocalnameRequired("V_Stat-PER-CentiM"),
-  // Nanometer Per Millimeter Megapascal
-  NanoM__PER__MilliM__MegaPA: Qudt.unitFromLocalnameRequired(
-    "NanoM-PER-MilliM-MegaPA"
-  ),
-  // Tonne Per Day
-  TONNE__PER__DAY: Qudt.unitFromLocalnameRequired("TONNE-PER-DAY"),
-  // Barn
-  BARN: Qudt.unitFromLocalnameRequired("BARN"),
-  // coulomb meter persegi
-  C__M2: Qudt.unitFromLocalnameRequired("C-M2"),
-  // Ounce (avoirdupois) Inch
-  OZ__IN: Qudt.unitFromLocalnameRequired("OZ-IN"),
-  // Stilb
-  STILB: Qudt.unitFromLocalnameRequired("STILB"),
-  // Beaufort
-  BFT: Qudt.unitFromLocalnameRequired("BFT"),
-  // Square centimeters per gram
-  CentiM2__PER__GM: Qudt.unitFromLocalnameRequired("CentiM2-PER-GM"),
-  // MPSI
-  MegaPSI: Qudt.unitFromLocalnameRequired("MegaPSI"),
-  // tesla
-  T: Qudt.unitFromLocalnameRequired("T"),
-  // Gill (US) Per Hour
-  GI_US__PER__HR: Qudt.unitFromLocalnameRequired("GI_US-PER-HR"),
-  // Stone (UK)
-  Stone_UK: Qudt.unitFromLocalnameRequired("Stone_UK"),
-  // Gallon (US Liquid) Per Second
-  GAL_US__PER__SEC: Qudt.unitFromLocalnameRequired("GAL_US-PER-SEC"),
-  // Watt per Gram
-  W__PER__GM: Qudt.unitFromLocalnameRequired("W-PER-GM"),
-  // BTU per Pound Degree Fahrenheit
-  BTU_IT__PER__LB__DEG_F: Qudt.unitFromLocalnameRequired("BTU_IT-PER-LB-DEG_F"),
-  // Gross Tonnage
-  GT: Qudt.unitFromLocalnameRequired("GT"),
-  // Microbecquerels per litre
-  MicroBQ__PER__L: Qudt.unitFromLocalnameRequired("MicroBQ-PER-L"),
-  // Gram Per Cubic Decimetre
-  GM__PER__DeciM3: Qudt.unitFromLocalnameRequired("GM-PER-DeciM3"),
-  // radian per metre
-  RAD__PER__M: Qudt.unitFromLocalnameRequired("RAD-PER-M"),
-  // MDOLLAR
-  MDOLLAR: Qudt.unitFromLocalnameRequired("MDOLLAR"),
-  // GigaCoulomb
-  GigaC: Qudt.unitFromLocalnameRequired("GigaC"),
-  // Number per cubic metre
-  NUM__PER__M3: Qudt.unitFromLocalnameRequired("NUM-PER-M3"),
-  // meter persegi per meter
-  M2__PER__M: Qudt.unitFromLocalnameRequired("M2-PER-M"),
-  // Cubic Decimeter Per Cubic Meter
-  DeciM3__PER__M3: Qudt.unitFromLocalnameRequired("DeciM3-PER-M3"),
-  // Ounce (US Fluid) Per Second
-  OZ_VOL_US__PER__SEC: Qudt.unitFromLocalnameRequired("OZ_VOL_US-PER-SEC"),
-  // Mil Length
-  MilLength: Qudt.unitFromLocalnameRequired("MilLength"),
-  // Roentgen
-  R: Qudt.unitFromLocalnameRequired("R"),
-  // Reciprocal Kilovolt Ampere Hour
-  PER__KiloV__A__HR: Qudt.unitFromLocalnameRequired("PER-KiloV-A-HR"),
-  // Number per metre
-  NUM__PER__M: Qudt.unitFromLocalnameRequired("NUM-PER-M"),
-  // Shannon
-  SHANNON: Qudt.unitFromLocalnameRequired("SHANNON"),
-  // V-M
-  V__M: Qudt.unitFromLocalnameRequired("V-M"),
-  // Barrel (US Petroleum) Per Second
-  BBL_US_PET__PER__SEC: Qudt.unitFromLocalnameRequired("BBL_US_PET-PER-SEC"),
-  // T-SEC
-  T__SEC: Qudt.unitFromLocalnameRequired("T-SEC"),
-  // Terawatt
-  TeraW: Qudt.unitFromLocalnameRequired("TeraW"),
-  // Watt per Square Meter Kelvin
-  W__PER__M2__K: Qudt.unitFromLocalnameRequired("W-PER-M2-K"),
-  // Millitesla
-  MilliT: Qudt.unitFromLocalnameRequired("MilliT"),
-  // Kilobar
-  KiloBAR: Qudt.unitFromLocalnameRequired("KiloBAR"),
-  // Newtonmeter pro Radian
-  N__M__PER__RAD: Qudt.unitFromLocalnameRequired("N-M-PER-RAD"),
-  // Dram (UK)
-  DRAM_UK: Qudt.unitFromLocalnameRequired("DRAM_UK"),
-  // Ounce (UK Fluid) Per Second
-  OZ_VOL_UK__PER__SEC: Qudt.unitFromLocalnameRequired("OZ_VOL_UK-PER-SEC"),
-  // Furlong
-  FUR: Qudt.unitFromLocalnameRequired("FUR"),
-  // PicoCoulomb
-  PicoC: Qudt.unitFromLocalnameRequired("PicoC"),
-  // Kilocalorie per Mole Degree Celsius
-  KiloCAL__PER__MOL__DEG_C: Qudt.unitFromLocalnameRequired(
-    "KiloCAL-PER-MOL-DEG_C"
-  ),
-  // Malawi Kwacha
-  MWK_Currency: Qudt.currencyFromLocalnameRequired("MWK"),
-  // Pound Force per Square Inch Second
-  LB_F__PER__IN2__SEC: Qudt.unitFromLocalnameRequired("LB_F-PER-IN2-SEC"),
-  // Newtons Per Square Metre
-  N__PER__M2: Qudt.unitFromLocalnameRequired("N-PER-M2"),
-  // Milli-inch
-  MilliIN: Qudt.unitFromLocalnameRequired("MilliIN"),
-  // Degree Rankine per Second
-  DEG_R__PER__SEC: Qudt.unitFromLocalnameRequired("DEG_R-PER-SEC"),
-  // Penny Weight
-  DWT: Qudt.unitFromLocalnameRequired("DWT"),
-  // Flight
-  Flight: Qudt.unitFromLocalnameRequired("Flight"),
-  // meter kelvin
-  M__K: Qudt.unitFromLocalnameRequired("M-K"),
-  // Poise
-  POISE: Qudt.unitFromLocalnameRequired("POISE"),
-  // Millimetre Per Year
-  MilliM__PER__YR: Qudt.unitFromLocalnameRequired("MilliM-PER-YR"),
-  // CentiCoulomb
-  CentiC: Qudt.unitFromLocalnameRequired("CentiC"),
-  // Relative Permittivity
-  PERMITTIVITY_REL: Qudt.unitFromLocalnameRequired("PERMITTIVITY_REL"),
-  // Kilomol per Kilogram
-  KiloMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("KiloMOL-PER-KiloGM"),
-  // Statsiemens
-  S_Stat: Qudt.unitFromLocalnameRequired("S_Stat"),
-  // فولت. أمبير
-  V__A: Qudt.unitFromLocalnameRequired("V-A"),
-  // Tropical Year
-  YR_TROPICAL: Qudt.unitFromLocalnameRequired("YR_TROPICAL"),
-  // Microinch
-  MicroIN: Qudt.unitFromLocalnameRequired("MicroIN"),
-  // Newton Meter Per Kilogram
-  N__M__PER__KiloGM: Qudt.unitFromLocalnameRequired("N-M-PER-KiloGM"),
-  // Watts per metre
-  W__PER__M: Qudt.unitFromLocalnameRequired("W-PER-M"),
-  // प्रति मीटर वैबर
-  WB__PER__M: Qudt.unitFromLocalnameRequired("WB-PER-M"),
-  // Kelvin metres per second
-  K__M__PER__SEC: Qudt.unitFromLocalnameRequired("K-M-PER-SEC"),
-  // Foot Pound Force per Minute
-  FT__LB_F__PER__MIN: Qudt.unitFromLocalnameRequired("FT-LB_F-PER-MIN"),
-  // Pascal per Second
-  PA__PER__SEC: Qudt.unitFromLocalnameRequired("PA-PER-SEC"),
-  // Barrel (US)
-  BBL_US: Qudt.unitFromLocalnameRequired("BBL_US"),
-  // Ampere Turn per Meter
-  AT__PER__M: Qudt.unitFromLocalnameRequired("AT-PER-M"),
-  // Gold franc (special settlement currency)
-  XFO_Currency: Qudt.currencyFromLocalnameRequired("XFO"),
-  // Centimole per litre
-  CentiMOL__PER__L: Qudt.unitFromLocalnameRequired("CentiMOL-PER-L"),
-  // Micromho
-  MicroMHO: Qudt.unitFromLocalnameRequired("MicroMHO"),
-  // Gamma
-  Gamma: Qudt.unitFromLocalnameRequired("Gamma"),
-  // Pound Mole Degree Fahrenheit
-  MOL_LB__DEG_F: Qudt.unitFromLocalnameRequired("MOL_LB-DEG_F"),
-  // Coulomb Per Cubic Millimeter
-  C__PER__MilliM3: Qudt.unitFromLocalnameRequired("C-PER-MilliM3"),
-  // Liter Per Day
-  L__PER__DAY: Qudt.unitFromLocalnameRequired("L-PER-DAY"),
-  // Reciprocal metre per nanometre per steradian
-  PER__M__NanoM__SR: Qudt.unitFromLocalnameRequired("PER-M-NanoM-SR"),
-  // Kilograms per metre per hour
-  KiloGM__PER__M__HR: Qudt.unitFromLocalnameRequired("KiloGM-PER-M-HR"),
-  // Lunar mass
-  LunarMass: Qudt.unitFromLocalnameRequired("LunarMass"),
-  // Microhenry Per Kiloohm
-  MicroH__PER__KiloOHM: Qudt.unitFromLocalnameRequired("MicroH-PER-KiloOHM"),
-  // Cubic Foot Per Degree Fahrenheit
-  FT3__PER__DEG_F: Qudt.unitFromLocalnameRequired("FT3-PER-DEG_F"),
-  // Radian per Minute
-  RAD__PER__MIN: Qudt.unitFromLocalnameRequired("RAD-PER-MIN"),
-  // MegaBIT
-  MegaBIT: Qudt.unitFromLocalnameRequired("MegaBIT"),
-  // Kilograms per cubic metre per second
-  KiloGM__PER__M3__SEC: Qudt.unitFromLocalnameRequired("KiloGM-PER-M3-SEC"),
-  // Millisievert
-  MilliSV: Qudt.unitFromLocalnameRequired("MilliSV"),
-  // Kilopascal
-  KiloPA: Qudt.unitFromLocalnameRequired("KiloPA"),
-  // Kelvin per Square Second
-  K__PER__SEC2: Qudt.unitFromLocalnameRequired("K-PER-SEC2"),
-  // Coulomb Per Square Millimeter
-  C__PER__MilliM2: Qudt.unitFromLocalnameRequired("C-PER-MilliM2"),
-  // Millilitre Per Minute
-  MilliL__PER__MIN: Qudt.unitFromLocalnameRequired("MilliL-PER-MIN"),
-  // Micromoles per gram per second
-  MicroMOL__PER__GM__SEC: Qudt.unitFromLocalnameRequired("MicroMOL-PER-GM-SEC"),
-  // Nanomoles per microgram per hour
-  NanoMOL__PER__MicroGM__HR: Qudt.unitFromLocalnameRequired(
-    "NanoMOL-PER-MicroGM-HR"
-  ),
-  // Calorie (international Table) Per Second Square Centimetre kelvin
-  CAL_IT__PER__SEC__CentiM2__K: Qudt.unitFromLocalnameRequired(
-    "CAL_IT-PER-SEC-CentiM2-K"
-  ),
-  // Russian Ruble
-  RUB_Currency: Qudt.currencyFromLocalnameRequired("RUB"),
-  // Megacoulomb Per Square Metre
-  MegaC__PER__M2: Qudt.unitFromLocalnameRequired("MegaC-PER-M2"),
-  // joule par tesla
-  J__PER__T: Qudt.unitFromLocalnameRequired("J-PER-T"),
-  // Kiloohm
-  KiloOHM: Qudt.unitFromLocalnameRequired("KiloOHM"),
-  // Square metre seconds per radian
-  M2__SEC__PER__RAD: Qudt.unitFromLocalnameRequired("M2-SEC-PER-RAD"),
-  // Pound Force Per Square Inch Degree Fahrenheit
-  LB_F__PER__IN2__DEG_F: Qudt.unitFromLocalnameRequired("LB_F-PER-IN2-DEG_F"),
-  // Practical Salinity Unit
-  PSU: Qudt.unitFromLocalnameRequired("PSU"),
-  // Foot Pound Force per Hour
-  FT__LB_F__PER__HR: Qudt.unitFromLocalnameRequired("FT-LB_F-PER-HR"),
-  // kilogram
-  KiloGM: Qudt.unitFromLocalnameRequired("KiloGM"),
-  // Foot per Day
-  FT__PER__DAY: Qudt.unitFromLocalnameRequired("FT-PER-DAY"),
-  // Millicoulomb Per Cubic Meter
-  MilliC__PER__M3: Qudt.unitFromLocalnameRequired("MilliC-PER-M3"),
-  // Foot Lambert
-  FT__LA: Qudt.unitFromLocalnameRequired("FT-LA"),
-  // Dry Gallon US
-  GAL_US_DRY: Qudt.unitFromLocalnameRequired("GAL_US_DRY"),
-  // Watts per square metre per inverse metre per steradian
-  W__M__PER__M2__SR: Qudt.unitFromLocalnameRequired("W-M-PER-M2-SR"),
-  // Neper
-  NP: Qudt.unitFromLocalnameRequired("NP"),
+  // Swiss Franc
+  CHF_Currency: Qudt.currencyFromLocalnameRequired("CHF"),
+  // Abcoulomb
+  C_Ab: Qudt.unitFromLocalnameRequired("C_Ab"),
+  // Mean Gregorian Month
+  MO_MeanGREGORIAN: Qudt.unitFromLocalnameRequired("MO_MeanGREGORIAN"),
+  // Grain
+  GRAIN: Qudt.unitFromLocalnameRequired("GRAIN"),
+  // Mohm
+  MOHM: Qudt.unitFromLocalnameRequired("MOHM"),
   // Megavolt Ampere Reactive Hour
   MegaV__A_Reactive__HR: Qudt.unitFromLocalnameRequired("MegaV-A_Reactive-HR"),
-  // Degree Baume (US Light)
-  DEGREE_BAUME_US_LIGHT: Qudt.unitFromLocalnameRequired(
-    "DEGREE_BAUME_US_LIGHT"
-  ),
-  // Tonne Per Year
-  TONNE__PER__YR: Qudt.unitFromLocalnameRequired("TONNE-PER-YR"),
-  // Litre Per Kelvin
-  L__PER__K: Qudt.unitFromLocalnameRequired("L-PER-K"),
-  // Meter Kelvin per Watt
-  M__K__PER__W: Qudt.unitFromLocalnameRequired("M-K-PER-W"),
-  // kelvin
-  K: Qudt.unitFromLocalnameRequired("K"),
-  // Ampere Hour
-  A__HR: Qudt.unitFromLocalnameRequired("A-HR"),
-  // US Dry Quart
-  QT_US_DRY: Qudt.unitFromLocalnameRequired("QT_US_DRY"),
-  // Milligram Per Kilogram
-  MilliGM__PER__KiloGM: Qudt.unitFromLocalnameRequired("MilliGM-PER-KiloGM"),
-  // Millivolt Per Minute
-  MilliV__PER__MIN: Qudt.unitFromLocalnameRequired("MilliV-PER-MIN"),
-  // Sri Lanka Rupee
-  LKR_Currency: Qudt.currencyFromLocalnameRequired("LKR"),
-  // Square Foot Degree Fahrenheit
-  FT2__DEG_F: Qudt.unitFromLocalnameRequired("FT2-DEG_F"),
-  // Barrel
-  BBL: Qudt.unitFromLocalnameRequired("BBL"),
-  // Kelvin per metre
-  K__PER__M: Qudt.unitFromLocalnameRequired("K-PER-M"),
-  // PicoSiemens
-  PicoS: Qudt.unitFromLocalnameRequired("PicoS"),
-  // Meter Kilogram
-  M__KiloGM: Qudt.unitFromLocalnameRequired("M-KiloGM"),
+  // Cubic Meter per Hectare
+  M3__PER__HA: Qudt.unitFromLocalnameRequired("M3-PER-HA"),
+  // Imperial Mass Ounce per Square Foot
+  OZ__PER__FT2: Qudt.unitFromLocalnameRequired("OZ-PER-FT2"),
+  // astronomical-unit
+  AU: Qudt.unitFromLocalnameRequired("AU"),
+  // Electron Volt Second
+  EV__SEC: Qudt.unitFromLocalnameRequired("EV-SEC"),
+  // Foot Pound Force per Hour
+  FT__LB_F__PER__HR: Qudt.unitFromLocalnameRequired("FT-LB_F-PER-HR"),
+  // Pound Force Per Square Inch Degree Fahrenheit
+  LB_F__PER__IN2__DEG_F: Qudt.unitFromLocalnameRequired("LB_F-PER-IN2-DEG_F"),
+  // Stone (UK)
+  Stone_UK: Qudt.unitFromLocalnameRequired("Stone_UK"),
+  // Milligram Per Gram
+  MilliGM__PER__GM: Qudt.unitFromLocalnameRequired("MilliGM-PER-GM"),
+  // Kilojoule Per Mole
+  KiloJ__PER__MOL: Qudt.unitFromLocalnameRequired("KiloJ-PER-MOL"),
+  // Rufiyaa
+  MVR_Currency: Qudt.currencyFromLocalnameRequired("MVR"),
+  // Silver (one Troy ounce)
+  XAG_Currency: Qudt.currencyFromLocalnameRequired("XAG"),
+  // Pound Force Second per Square Inch
+  LB_F__SEC__PER__IN2: Qudt.unitFromLocalnameRequired("LB_F-SEC-PER-IN2"),
   // Terahertz
   TeraHZ: Qudt.unitFromLocalnameRequired("TeraHZ"),
-  // Degree Fahrenheit per Minute
-  DEG_F__PER__MIN: Qudt.unitFromLocalnameRequired("DEG_F-PER-MIN"),
-  // Yemeni Rial
-  YER_Currency: Qudt.currencyFromLocalnameRequired("YER"),
-  // Kilogram Force per Square Centimeter
-  KiloGM_F__PER__CentiM2: Qudt.unitFromLocalnameRequired(
-    "KiloGM_F-PER-CentiM2"
-  ),
-  // Picograms per gram
-  PicoGM__PER__GM: Qudt.unitFromLocalnameRequired("PicoGM-PER-GM"),
-  // Clo
-  CLO: Qudt.unitFromLocalnameRequired("CLO"),
-  // Gill (UK)
-  GI_UK: Qudt.unitFromLocalnameRequired("GI_UK"),
-  // Microtesla
-  MicroT: Qudt.unitFromLocalnameRequired("MicroT"),
-  // Iraqi Dinar
-  IQD_Currency: Qudt.currencyFromLocalnameRequired("IQD"),
-  // Kilo Electron Volt
-  KiloEV: Qudt.unitFromLocalnameRequired("KiloEV"),
-  // Barrel (US) Per Day
-  BBL_US__PER__DAY: Qudt.unitFromLocalnameRequired("BBL_US-PER-DAY"),
-  // V_Stat-CentiM
-  V_Stat__CentiM: Qudt.unitFromLocalnameRequired("V_Stat-CentiM"),
-  // Gram Per Kilogram
-  GM__PER__KiloGM: Qudt.unitFromLocalnameRequired("GM-PER-KiloGM"),
-  // Joule per Kilogram
-  J__PER__KiloGM: Qudt.unitFromLocalnameRequired("J-PER-KiloGM"),
-  // bekerel
-  BQ: Qudt.unitFromLocalnameRequired("BQ"),
-  // Pound (avoirdupois) Per Gallon (UK)
-  LB__PER__GAL_UK: Qudt.unitFromLocalnameRequired("LB-PER-GAL_UK"),
-  // ньютон-метр-секунда
-  N__M__SEC: Qudt.unitFromLocalnameRequired("N-M-SEC"),
-  // Kilo British Thermal Unit (International Definition)
-  KiloBTU_IT: Qudt.unitFromLocalnameRequired("KiloBTU_IT"),
-  // Platinum (one Troy ounce)
-  XPT_Currency: Qudt.currencyFromLocalnameRequired("XPT"),
-  // vatio por metro cuadrado
-  W__PER__M2: Qudt.unitFromLocalnameRequired("W-PER-M2"),
-  // Ampere Square Metre
-  A__M2: Qudt.unitFromLocalnameRequired("A-M2"),
-  // Singapore Dollar
-  SGD_Currency: Qudt.currencyFromLocalnameRequired("SGD"),
-  // United States Dollar (same day) (funds code)
-  USS_Currency: Qudt.currencyFromLocalnameRequired("USS"),
-  // генри
-  H: Qudt.unitFromLocalnameRequired("H"),
-  // MilliSiemens per metre
-  MilliS__PER__M: Qudt.unitFromLocalnameRequired("MilliS-PER-M"),
-  // Planck Power
-  PlanckPower: Qudt.unitFromLocalnameRequired("PlanckPower"),
   // Deaths per 1000 individuals per year
   DEATHS__PER__KiloINDIV__YR: Qudt.unitFromLocalnameRequired(
     "DEATHS-PER-KiloINDIV-YR"
   ),
-  // Ampere Per Square Centimetre
-  A__PER__CentiM2: Qudt.unitFromLocalnameRequired("A-PER-CentiM2"),
-  // Square metres Hertz
-  M2__HZ: Qudt.unitFromLocalnameRequired("M2-HZ"),
-  // Cubic Centimeter Per Hour
-  CentiM3__PER__HR: Qudt.unitFromLocalnameRequired("CentiM3-PER-HR"),
-  // fermi
-  FM: Qudt.unitFromLocalnameRequired("FM"),
-  // BEAT
-  BEAT: Qudt.unitFromLocalnameRequired("BEAT"),
-  // Kilogram_force Meter Per Second
-  KiloGM_F__M__PER__SEC: Qudt.unitFromLocalnameRequired("KiloGM_F-M-PER-SEC"),
-  // Planck Area
-  PlanckArea: Qudt.unitFromLocalnameRequired("PlanckArea"),
-  // Ounce (avoirdupois) Per Minute
-  OZ__PER__MIN: Qudt.unitFromLocalnameRequired("OZ-PER-MIN"),
-  // Hundred Weight - Short
-  CWT_SHORT: Qudt.unitFromLocalnameRequired("CWT_SHORT"),
-  // Kilomole Per Hour
-  KiloMOL__PER__HR: Qudt.unitFromLocalnameRequired("KiloMOL-PER-HR"),
-  // Reciprocal Cubic Meter Second
-  PER__M3__SEC: Qudt.unitFromLocalnameRequired("PER-M3-SEC"),
-  // Statcoulomb per Square Centimeter
-  C_Stat__PER__CentiM2: Qudt.unitFromLocalnameRequired("C_Stat-PER-CentiM2"),
-  // Microgram per square centimetre
-  MicroGM__PER__CentiM2: Qudt.unitFromLocalnameRequired("MicroGM-PER-CentiM2"),
-  // Gram Per Minute
-  GM__PER__MIN: Qudt.unitFromLocalnameRequired("GM-PER-MIN"),
-  // Millimoles per square metre
-  MilliMOL__PER__M2: Qudt.unitFromLocalnameRequired("MilliMOL-PER-M2"),
-  // Erg per Gram
-  ERG__PER__G: Qudt.unitFromLocalnameRequired("ERG-PER-G"),
-  // τετραγωνικό μέτρο
-  M2: Qudt.unitFromLocalnameRequired("M2"),
-  // Reciprocal Cubic Centimetre
-  PER__CentiM3: Qudt.unitFromLocalnameRequired("PER-CentiM3"),
-  // Coulomb Per Square Centimeter
-  C__PER__CentiM2: Qudt.unitFromLocalnameRequired("C-PER-CentiM2"),
-  // DecaCoulomb
-  DecaC: Qudt.unitFromLocalnameRequired("DecaC"),
-  // Slug Per Hour
-  SLUG__PER__HR: Qudt.unitFromLocalnameRequired("SLUG-PER-HR"),
+  // Saint Helena Pound
+  SHP_Currency: Qudt.currencyFromLocalnameRequired("SHP"),
+  // Katal Per Microliter
+  KAT__PER__MicroL: Qudt.unitFromLocalnameRequired("KAT-PER-MicroL"),
+  // Nautical Mile per Minute
+  MI_N__PER__MIN: Qudt.unitFromLocalnameRequired("MI_N-PER-MIN"),
+  // PicoSiemens
+  PicoS: Qudt.unitFromLocalnameRequired("PicoS"),
+  // Kilogram Force
+  KiloGM_F: Qudt.unitFromLocalnameRequired("KiloGM_F"),
+  // Degree Baume (US Light)
+  DEGREE_BAUME_US_LIGHT: Qudt.unitFromLocalnameRequired(
+    "DEGREE_BAUME_US_LIGHT"
+  ),
+  // Peck (US Dry) Per Minute
+  PK_US_DRY__PER__MIN: Qudt.unitFromLocalnameRequired("PK_US_DRY-PER-MIN"),
+  // Frame per Second
+  FRAME__PER__SEC: Qudt.unitFromLocalnameRequired("FRAME-PER-SEC"),
   // Picomoles per cubic metre
   PicoMOL__PER__M3: Qudt.unitFromLocalnameRequired("PicoMOL-PER-M3"),
-  // Kilocalorie Per Minute
-  KiloCAL__PER__MIN: Qudt.unitFromLocalnameRequired("KiloCAL-PER-MIN"),
-  // BTU per Hour
-  BTU_IT__PER__HR: Qudt.unitFromLocalnameRequired("BTU_IT-PER-HR"),
-  // Abampere
-  A_Ab: Qudt.unitFromLocalnameRequired("A_Ab"),
-  // Centimetre Of Mercury
-  CentiM_HG: Qudt.unitFromLocalnameRequired("CentiM_HG"),
-  // Hectobar
-  HectoBAR: Qudt.unitFromLocalnameRequired("HectoBAR"),
-  // Ounce (avoirdupois) Per Cubic Yard
-  OZ__PER__YD3: Qudt.unitFromLocalnameRequired("OZ-PER-YD3"),
-  // Ounce (avoirdupois) Per Second
-  OZ__PER__SEC: Qudt.unitFromLocalnameRequired("OZ-PER-SEC"),
-  // Kilobyte per Second
-  KiloBYTE__PER__SEC: Qudt.unitFromLocalnameRequired("KiloBYTE-PER-SEC"),
-  // Kilocalorie
-  KiloCAL: Qudt.unitFromLocalnameRequired("KiloCAL"),
-  // Guinea Franc
-  GNF_Currency: Qudt.currencyFromLocalnameRequired("GNF"),
-  // Kilogram Force Metre Per Square Centimetre
-  KiloGM_F__M__PER__CentiM2: Qudt.unitFromLocalnameRequired(
-    "KiloGM_F-M-PER-CentiM2"
-  ),
-  // Peck (US Dry) Per Second
-  PK_US_DRY__PER__SEC: Qudt.unitFromLocalnameRequired("PK_US_DRY-PER-SEC"),
-  // Carat
-  CARAT: Qudt.unitFromLocalnameRequired("CARAT"),
-  // Farad per Meter
-  FARAD__PER__M: Qudt.unitFromLocalnameRequired("FARAD-PER-M"),
-  // Joule per Kilogram Kelvin Cubic Metre
-  J__PER__KiloGM__K__M3: Qudt.unitFromLocalnameRequired("J-PER-KiloGM-K-M3"),
-  // tonne per hectare
-  TONNE__PER__HA: Qudt.unitFromLocalnameRequired("TONNE-PER-HA"),
-  // Curie
-  Ci: Qudt.unitFromLocalnameRequired("Ci"),
-  // Square metres per gram
-  M2__PER__GM: Qudt.unitFromLocalnameRequired("M2-PER-GM"),
-  // Centimeter Per Kelvin
-  CentiM__PER__K: Qudt.unitFromLocalnameRequired("CentiM-PER-K"),
-  // Iranian Rial
-  IRR_Currency: Qudt.currencyFromLocalnameRequired("IRR"),
-  // Bar Per Bar
-  BAR__PER__BAR: Qudt.unitFromLocalnameRequired("BAR-PER-BAR"),
-  // Millidarcy
-  MilliDARCY: Qudt.unitFromLocalnameRequired("MilliDARCY"),
-  // Gill (US)
-  GI_US: Qudt.unitFromLocalnameRequired("GI_US"),
-  // microradian
-  MicroRAD: Qudt.unitFromLocalnameRequired("MicroRAD"),
-  // Revolution per Minute
-  REV__PER__MIN: Qudt.unitFromLocalnameRequired("REV-PER-MIN"),
-  // Brazilian Real
-  BRL_Currency: Qudt.currencyFromLocalnameRequired("BRL"),
-  // lumen second
-  LM__SEC: Qudt.unitFromLocalnameRequired("LM-SEC"),
-  // Dobra
-  STN_Currency: Qudt.currencyFromLocalnameRequired("STN"),
-  // Peck (UK) Per Minute
-  PK_UK__PER__MIN: Qudt.unitFromLocalnameRequired("PK_UK-PER-MIN"),
-  // Dyne Second Per Cubic Centimetre
-  DYN__SEC__PER__CentiM3: Qudt.unitFromLocalnameRequired("DYN-SEC-PER-CentiM3"),
-  // British Thermal Unit (thermochemical) Per Hour
-  BTU_TH__PER__HR: Qudt.unitFromLocalnameRequired("BTU_TH-PER-HR"),
-  // Megapascal Litre Per Second
-  MegaPA__L__PER__SEC: Qudt.unitFromLocalnameRequired("MegaPA-L-PER-SEC"),
-  // Joule per Mole Kelvin
-  J__PER__MOL__K: Qudt.unitFromLocalnameRequired("J-PER-MOL-K"),
-  // Picomoles per cubic metre per second
-  PicoMOL__PER__M3__SEC: Qudt.unitFromLocalnameRequired("PicoMOL-PER-M3-SEC"),
-  // Mach
-  MACH: Qudt.unitFromLocalnameRequired("MACH"),
-  // Square centimetres per second
-  CentiM2__PER__SEC: Qudt.unitFromLocalnameRequired("CentiM2-PER-SEC"),
-  // MilliTorr
-  MilliTORR: Qudt.unitFromLocalnameRequired("MilliTORR"),
-  // Mauritius Rupee
-  MUR_Currency: Qudt.currencyFromLocalnameRequired("MUR"),
-  // Pascal metres
-  PA__M: Qudt.unitFromLocalnameRequired("PA-M"),
-  // Square Metre per Mole
-  M2__PER__MOL: Qudt.unitFromLocalnameRequired("M2-PER-MOL"),
-  // Millimoles per mole
-  MilliMOL__PER__MOL: Qudt.unitFromLocalnameRequired("MilliMOL-PER-MOL"),
-  // CentiNewton
-  CentiN: Qudt.unitFromLocalnameRequired("CentiN"),
-  // Kilocalorie per Square Centimetre Second
-  KiloCAL__PER__CentiM2__SEC: Qudt.unitFromLocalnameRequired(
-    "KiloCAL-PER-CentiM2-SEC"
-  ),
-  // Calorie (international Table) Per Gram
-  CAL_IT__PER__GM: Qudt.unitFromLocalnameRequired("CAL_IT-PER-GM"),
-  // Microbar
-  MicroBAR: Qudt.unitFromLocalnameRequired("MicroBAR"),
-  // Millibecquerels per gram
-  MilliBQ__PER__GM: Qudt.unitFromLocalnameRequired("MilliBQ-PER-GM"),
-  // KiloBIT
-  KiloBIT: Qudt.unitFromLocalnameRequired("KiloBIT"),
-  // Ampere per Joule
-  A__PER__J: Qudt.unitFromLocalnameRequired("A-PER-J"),
-  // Square Mile
-  MI2: Qudt.unitFromLocalnameRequired("MI2"),
-  // Megavolt Ampere Reactive
-  MegaV__A_Reactive: Qudt.unitFromLocalnameRequired("MegaV-A_Reactive"),
-  // MegaBTU_IT
-  MegaBTU_IT: Qudt.unitFromLocalnameRequired("MegaBTU_IT"),
-  // Nanomoles per litre per hour
-  NanoMOL__PER__L__HR: Qudt.unitFromLocalnameRequired("NanoMOL-PER-L-HR"),
-  // Cases per 1000 individuals per year
-  CASES__PER__1000I__YR: Qudt.unitFromLocalnameRequired("CASES-PER-1000I-YR"),
-  // Milligram Per Metre
-  MilliGM__PER__M: Qudt.unitFromLocalnameRequired("MilliGM-PER-M"),
-  // Femtomoles per kilogram
-  FemtoMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("FemtoMOL-PER-KiloGM"),
-  // Cubic Centimetre Per Mole
-  CentiM3__PER__MOL: Qudt.unitFromLocalnameRequired("CentiM3-PER-MOL"),
-  // Gill (UK) Per Minute
-  GI_UK__PER__MIN: Qudt.unitFromLocalnameRequired("GI_UK-PER-MIN"),
-  // Cubic Millimetre per Gram
-  MilliM3__PER__GM: Qudt.unitFromLocalnameRequired("MilliM3-PER-GM"),
-  // Colony Forming Unit
-  CFU: Qudt.unitFromLocalnameRequired("CFU"),
-  // DeciTonne
-  DeciTONNE: Qudt.unitFromLocalnameRequired("DeciTONNE"),
-  // Reciprocal Milliliter
-  PER__MilliL: Qudt.unitFromLocalnameRequired("PER-MilliL"),
-  // Gram Per Meter
-  GM__PER__M: Qudt.unitFromLocalnameRequired("GM-PER-M"),
-  // European Composite Unit (EURCO) (Bonds market unit)
-  XBA_Currency: Qudt.currencyFromLocalnameRequired("XBA"),
-  // Peck (UK) Per Hour
-  PK_UK__PER__HR: Qudt.unitFromLocalnameRequired("PK_UK-PER-HR"),
-  // British Thermal Unit (IT) Per Cubic Foot
-  BTU_IT__PER__FT3: Qudt.unitFromLocalnameRequired("BTU_IT-PER-FT3"),
-  // Parts per thousand
-  PPTH: Qudt.unitFromLocalnameRequired("PPTH"),
-  // TeraByte
-  TeraBYTE: Qudt.unitFromLocalnameRequired("TeraBYTE"),
-  // Milligrams per square metre per hour
-  MilliGM__PER__M2__HR: Qudt.unitFromLocalnameRequired("MilliGM-PER-M2-HR"),
-  // Micropoise
-  MicroPOISE: Qudt.unitFromLocalnameRequired("MicroPOISE"),
-  // MilliKAT
-  MilliKAT: Qudt.unitFromLocalnameRequired("MilliKAT"),
-  // Giga Electron Volt
-  GigaEV: Qudt.unitFromLocalnameRequired("GigaEV"),
-  // Kilogram Per Millimeter
-  KiloGM__PER__MilliM: Qudt.unitFromLocalnameRequired("KiloGM-PER-MilliM"),
-  // Cubic Centimeter Per Minute
-  CentiM3__PER__MIN: Qudt.unitFromLocalnameRequired("CentiM3-PER-MIN"),
-  // Number per square centimetre per thousand years
-  NUM__PER__CentiM__KiloYR: Qudt.unitFromLocalnameRequired(
-    "NUM-PER-CentiM-KiloYR"
-  ),
-  // Kilocalorie per Square Centimetre Minute
-  KiloCAL__PER__CentiM2__MIN: Qudt.unitFromLocalnameRequired(
-    "KiloCAL-PER-CentiM2-MIN"
-  ),
-  // Dalasi
-  GMD_Currency: Qudt.currencyFromLocalnameRequired("GMD"),
-  // Inch per Minute
-  IN__PER__MIN: Qudt.unitFromLocalnameRequired("IN-PER-MIN"),
-  // kilogram meter per saat
-  KiloGM__M__PER__SEC: Qudt.unitFromLocalnameRequired("KiloGM-M-PER-SEC"),
-  // Degree Celsius week
-  DEG_C__WK: Qudt.unitFromLocalnameRequired("DEG_C-WK"),
-  // Kilocalorie (thermochemical) Per Second
-  KiloCAL_TH__PER__SEC: Qudt.unitFromLocalnameRequired("KiloCAL_TH-PER-SEC"),
-  // International Mile
-  MI: Qudt.unitFromLocalnameRequired("MI"),
-  // Liberian Dollar
-  LRD_Currency: Qudt.currencyFromLocalnameRequired("LRD"),
-  // Kilonewton per metre
-  KiloN__PER__M: Qudt.unitFromLocalnameRequired("KiloN-PER-M"),
-  // Megavolt Per Metre
-  MegaV__PER__M: Qudt.unitFromLocalnameRequired("MegaV-PER-M"),
-  // Torr
-  TORR: Qudt.unitFromLocalnameRequired("TORR"),
-  // Reciprocal millisecond
-  PER__MilliSEC: Qudt.unitFromLocalnameRequired("PER-MilliSEC"),
-  // Moles per square metre per second
-  MOL__PER__M2__SEC: Qudt.unitFromLocalnameRequired("MOL-PER-M2-SEC"),
-  // Pound (avoirdupois) Per Day
-  LB__PER__DAY: Qudt.unitFromLocalnameRequired("LB-PER-DAY"),
-  // newton metre per degree metre
-  N__M__PER__DEG__M: Qudt.unitFromLocalnameRequired("N-M-PER-DEG-M"),
-  // Million US Dollars per Flight
-  MDOLLAR__PER__FLIGHT: Qudt.unitFromLocalnameRequired("MDOLLAR-PER-FLIGHT"),
-  // Cubic Meter per Square Second
-  M3__PER__SEC2: Qudt.unitFromLocalnameRequired("M3-PER-SEC2"),
-  // Galileo
-  GALILEO: Qudt.unitFromLocalnameRequired("GALILEO"),
-  // Nautical Mile per Hour
-  MI_N__PER__HR: Qudt.unitFromLocalnameRequired("MI_N-PER-HR"),
-  // Kilovolt Ampere Hour
-  KiloV__A__HR: Qudt.unitFromLocalnameRequired("KiloV-A-HR"),
-  // Conventional Centimetre Of Water
-  CentiM_H2O: Qudt.unitFromLocalnameRequired("CentiM_H2O"),
-  // Litre Per Second Per Square Metre
-  L__PER__SEC__M2: Qudt.unitFromLocalnameRequired("L-PER-SEC-M2"),
-  // SpeedOfLight
-  SpeedOfLight: Qudt.unitFromLocalnameRequired("SpeedOfLight"),
-  // Electron Volt per Kelvin
-  EV__PER__K: Qudt.unitFromLocalnameRequired("EV-PER-K"),
-  // Picofarad
-  PicoFARAD: Qudt.unitFromLocalnameRequired("PicoFARAD"),
-  // grams per square meter per day
-  GM__PER__M2__DAY: Qudt.unitFromLocalnameRequired("GM-PER-M2-DAY"),
-  // Millicoulomb Per Kilogram
-  MilliC__PER__KiloGM: Qudt.unitFromLocalnameRequired("MilliC-PER-KiloGM"),
-  // Megabit per Second
-  MegaBIT__PER__SEC: Qudt.unitFromLocalnameRequired("MegaBIT-PER-SEC"),
-  // Kilogram Per Litre
-  KiloGM__PER__L: Qudt.unitFromLocalnameRequired("KiloGM-PER-L"),
-  // United States Dollar (next day) (funds code)
-  USN_Currency: Qudt.currencyFromLocalnameRequired("USN"),
-  // Gram Per Litre
-  GM__PER__L: Qudt.unitFromLocalnameRequired("GM-PER-L"),
-  // Sidereal Year
-  YR_Sidereal: Qudt.unitFromLocalnameRequired("YR_Sidereal"),
-  // kilogram na kubični sekunda kelvin
-  KiloGM__PER__SEC3__K: Qudt.unitFromLocalnameRequired("KiloGM-PER-SEC3-K"),
-  // Barrel (UK Petroleum) Per Day
-  BBL_UK_PET__PER__DAY: Qudt.unitFromLocalnameRequired("BBL_UK_PET-PER-DAY"),
-  // जूल प्रति मोल (इकाई)
-  J__PER__MOL: Qudt.unitFromLocalnameRequired("J-PER-MOL"),
-  // Megaampere
-  MegaA: Qudt.unitFromLocalnameRequired("MegaA"),
-  // US Liquid Pint
-  PINT_US: Qudt.unitFromLocalnameRequired("PINT_US"),
-  // Faraday
-  F: Qudt.unitFromLocalnameRequired("F"),
-  // Megaohm
-  MegaOHM: Qudt.unitFromLocalnameRequired("MegaOHM"),
-  // Degree Fahrenheit Hour per BTU
-  DEG_F__HR__PER__BTU_IT: Qudt.unitFromLocalnameRequired("DEG_F-HR-PER-BTU_IT"),
-  // MillionUSD
-  MillionUSD: Qudt.unitFromLocalnameRequired("MillionUSD"),
-  // luks
-  LUX: Qudt.unitFromLocalnameRequired("LUX"),
-  // KiloTonne
-  KiloTONNE: Qudt.unitFromLocalnameRequired("KiloTONNE"),
-  // Hundredweight (US)
-  Hundredweight_US: Qudt.unitFromLocalnameRequired("Hundredweight_US"),
-  // Litre Per Mole
-  L__PER__MOL: Qudt.unitFromLocalnameRequired("L-PER-MOL"),
-  // Joule per Kilogram Kelvin per Pascal
-  J__PER__KiloGM__K__PA: Qudt.unitFromLocalnameRequired("J-PER-KiloGM-K-PA"),
-  // Statcoulomb
-  C_Stat: Qudt.unitFromLocalnameRequired("C_Stat"),
-  // Milligrams per square metre per second
-  MilliGM__PER__M2__SEC: Qudt.unitFromLocalnameRequired("MilliGM-PER-M2-SEC"),
-  // Grad
-  GRAD: Qudt.unitFromLocalnameRequired("GRAD"),
-  // Gram
-  GM: Qudt.unitFromLocalnameRequired("GM"),
-  // Watt per Steradian
-  W__PER__SR: Qudt.unitFromLocalnameRequired("W-PER-SR"),
-  // MilliGals per month
-  MilliGAL__PER__MO: Qudt.unitFromLocalnameRequired("MilliGAL-PER-MO"),
-  // Micromoles per square metre per hour
-  MicroMOL__PER__M2__HR: Qudt.unitFromLocalnameRequired("MicroMOL-PER-M2-HR"),
-  // MicroSievert per hour
-  MicroSV__PER__HR: Qudt.unitFromLocalnameRequired("MicroSV-PER-HR"),
-  // KibiByte
-  KibiBYTE: Qudt.unitFromLocalnameRequired("KibiBYTE"),
-  // TeraCoulomb
-  TeraC: Qudt.unitFromLocalnameRequired("TeraC"),
-  // Gallon (UK) Per Day
-  GAL_UK__PER__DAY: Qudt.unitFromLocalnameRequired("GAL_UK-PER-DAY"),
-  // Decibel Carrier Unit
-  DeciB_C: Qudt.unitFromLocalnameRequired("DeciB_C"),
-  // Reciprocal Angstrom
-  PER__ANGSTROM: Qudt.unitFromLocalnameRequired("PER-ANGSTROM"),
-  // South African Rand
-  ZAR_Currency: Qudt.currencyFromLocalnameRequired("ZAR"),
-  // BTU per Pound Mole
-  BTU_IT__PER__LB__MOL: Qudt.unitFromLocalnameRequired("BTU_IT-PER-LB-MOL"),
-  // Newton Second per Meter
-  N__SEC__PER__M: Qudt.unitFromLocalnameRequired("N-SEC-PER-M"),
-  // Cubic Inch per Minute
-  IN3__PER__MIN: Qudt.unitFromLocalnameRequired("IN3-PER-MIN"),
-  // Newtonmetersekunden pro Radian
-  N__M__SEC__PER__RAD: Qudt.unitFromLocalnameRequired("N-M-SEC-PER-RAD"),
-  // reciprocal degree Celsius
-  PER__DEG_C: Qudt.unitFromLocalnameRequired("PER-DEG_C"),
-  // Norwegian Krone
-  NOK_Currency: Qudt.currencyFromLocalnameRequired("NOK"),
-  // decisecond
-  DeciSEC: Qudt.unitFromLocalnameRequired("DeciSEC"),
-  // Stathenry per Centimeter
-  H_Stat__PER__CentiM: Qudt.unitFromLocalnameRequired("H_Stat-PER-CentiM"),
-  // Nanowatt
-  NanoW: Qudt.unitFromLocalnameRequired("NanoW"),
-  // Micrograms per cubic metre per hour
-  MicroGM__PER__M3__HR: Qudt.unitFromLocalnameRequired("MicroGM-PER-M3-HR"),
-  // centimeter per second
-  CentiM__PER__SEC: Qudt.unitFromLocalnameRequired("CentiM-PER-SEC"),
-  // Kilograms per metre per second
-  KiloGM__PER__M__SEC: Qudt.unitFromLocalnameRequired("KiloGM-PER-M-SEC"),
-  // Terawatt Hour
-  TeraW__HR: Qudt.unitFromLocalnameRequired("TeraW-HR"),
-  // Cubic Metre Per Square Metre
-  M3__PER__M2: Qudt.unitFromLocalnameRequired("M3-PER-M2"),
-  // Nakfa
-  ERN_Currency: Qudt.currencyFromLocalnameRequired("ERN"),
-  // Micronewton
-  MicroN: Qudt.unitFromLocalnameRequired("MicroN"),
-  // Moles per square metre per second per steradian
-  MOL__PER__M2__SEC__SR: Qudt.unitFromLocalnameRequired("MOL-PER-M2-SEC-SR"),
-  // Microvolt Per Metre
-  MicroV__PER__M: Qudt.unitFromLocalnameRequired("MicroV-PER-M"),
-  // Dots Per Inch
-  DPI: Qudt.unitFromLocalnameRequired("DPI"),
-  // Nanosiemens Per Centimetre
-  NanoS__PER__CentiM: Qudt.unitFromLocalnameRequired("NanoS-PER-CentiM"),
-  // Megaampere Per Square Meter
-  MegaA__PER__M2: Qudt.unitFromLocalnameRequired("MegaA-PER-M2"),
-  // Heart Beats per Minute
-  BEAT__PER__MIN: Qudt.unitFromLocalnameRequired("BEAT-PER-MIN"),
-  // Reciprocal Psi
-  PER__PSI: Qudt.unitFromLocalnameRequired("PER-PSI"),
-  // Reciprocal Second Steradian
-  PER__SEC__SR: Qudt.unitFromLocalnameRequired("PER-SEC-SR"),
-  // Millimetre of Mercury
-  MilliM_HG: Qudt.unitFromLocalnameRequired("MilliM_HG"),
-  // T-M
-  T__M: Qudt.unitFromLocalnameRequired("T-M"),
-  // Microgram Per MilliLitre
-  MicroGM__PER__MilliL: Qudt.unitFromLocalnameRequired("MicroGM-PER-MilliL"),
-  // Hectopascal Per Bar
-  HectoPA__PER__BAR: Qudt.unitFromLocalnameRequired("HectoPA-PER-BAR"),
-  // grams Nitrogen per square meter per day
-  GM_Nitrogen__PER__M2__DAY: Qudt.unitFromLocalnameRequired(
-    "GM_Nitrogen-PER-M2-DAY"
-  ),
-  // Pascal Litre Per Second
-  PA__L__PER__SEC: Qudt.unitFromLocalnameRequired("PA-L-PER-SEC"),
-  // Kilogram per Mega BTU
-  KiloGM__PER__MegaBTU_IT: Qudt.unitFromLocalnameRequired(
-    "KiloGM-PER-MegaBTU_IT"
-  ),
-  // Microgram Per Liter
-  MicroGM__PER__L: Qudt.unitFromLocalnameRequired("MicroGM-PER-L"),
-  // Number per litre
-  NUM__PER__L: Qudt.unitFromLocalnameRequired("NUM-PER-L"),
-  // Ounce (avoirdupois) Per Hour
-  OZ__PER__HR: Qudt.unitFromLocalnameRequired("OZ-PER-HR"),
-  // Kilovolt Per Metre
-  KiloV__PER__M: Qudt.unitFromLocalnameRequired("KiloV-PER-M"),
-  // Reciprocal micromole per litre
-  PER__MicroMOL__L: Qudt.unitFromLocalnameRequired("PER-MicroMOL-L"),
-  // Attojoule Second
-  AttoJ__SEC: Qudt.unitFromLocalnameRequired("AttoJ-SEC"),
-  // Nanograms per millilitre
-  NanoGM__PER__MilliL: Qudt.unitFromLocalnameRequired("NanoGM-PER-MilliL"),
+  // Mega Hertz per Kelvin
+  MegaHZ__PER__K: Qudt.unitFromLocalnameRequired("MegaHZ-PER-K"),
+  // Foot Poundal
+  FT__PDL: Qudt.unitFromLocalnameRequired("FT-PDL"),
+  // Micrograms per gram
+  MicroGM__PER__GM: Qudt.unitFromLocalnameRequired("MicroGM-PER-GM"),
+  // Cubic Decimetre Per Hour
+  DeciM3__PER__HR: Qudt.unitFromLocalnameRequired("DeciM3-PER-HR"),
+  // Quintic Meter
+  M5: Qudt.unitFromLocalnameRequired("M5"),
+  // Henry per Meter
+  H__PER__M: Qudt.unitFromLocalnameRequired("H-PER-M"),
+  // Meter Kelvin per Watt
+  M__K__PER__W: Qudt.unitFromLocalnameRequired("M-K-PER-W"),
+  // Bit
+  BIT: Qudt.unitFromLocalnameRequired("BIT"),
+  // Square Millimeter
+  MilliM2: Qudt.unitFromLocalnameRequired("MilliM2"),
+  // Kilogram Per Kilomol
+  KiloGM__PER__KiloMOL: Qudt.unitFromLocalnameRequired("KiloGM-PER-KiloMOL"),
+  // Reciprocal Micrometre
+  PER__MicroM: Qudt.unitFromLocalnameRequired("PER-MicroM"),
+  // Cubic Meter Per Cubic Meter
+  M3__PER__M3: Qudt.unitFromLocalnameRequired("M3-PER-M3"),
+  // Cubic Meter Per Minute
+  M3__PER__MIN: Qudt.unitFromLocalnameRequired("M3-PER-MIN"),
   // Foot Pound Force per Square Meter
   FT__LB_F__PER__M2: Qudt.unitFromLocalnameRequired("FT-LB_F-PER-M2"),
-  // Milligram Per Minute
-  MilliGM__PER__MIN: Qudt.unitFromLocalnameRequired("MilliGM-PER-MIN"),
-  // Kilogram per Mol
-  KiloGM__PER__MOL: Qudt.unitFromLocalnameRequired("KiloGM-PER-MOL"),
-  // Candela per Lumen
-  CD__PER__LM: Qudt.unitFromLocalnameRequired("CD-PER-LM"),
-  // British Thermal Unit (International Definition)
-  BTU_IT: Qudt.unitFromLocalnameRequired("BTU_IT"),
-  // Kilogram Square Meter
-  KiloGM__M2: Qudt.unitFromLocalnameRequired("KiloGM-M2"),
-  // Nanograms per square centimeter per day
-  NanoGM__PER__CentiM2__DAY: Qudt.unitFromLocalnameRequired(
-    "NanoGM-PER-CentiM2-DAY"
-  ),
-  // Centistokes
-  CentiST: Qudt.unitFromLocalnameRequired("CentiST"),
-  // Watts per square metre per metre per steradian
-  W__PER__M2__M__SR: Qudt.unitFromLocalnameRequired("W-PER-M2-M-SR"),
-  // Ampere Per Square Millimetre
-  A__PER__MilliM2: Qudt.unitFromLocalnameRequired("A-PER-MilliM2"),
-  // ohm-mètre
-  OHM__M: Qudt.unitFromLocalnameRequired("OHM-M"),
-  // Milligrams per cubic metre per day
-  MilliGM__PER__M3__DAY: Qudt.unitFromLocalnameRequired("MilliGM-PER-M3-DAY"),
-  // WIR Euro (complementary currency)
-  CHE_Currency: Qudt.currencyFromLocalnameRequired("CHE"),
-  // Kilopascal Per Millimeter
-  KiloPA__PER__MilliM: Qudt.unitFromLocalnameRequired("KiloPA-PER-MilliM"),
-  // Ton Force (US Short)
-  TON_F_US: Qudt.unitFromLocalnameRequired("TON_F_US"),
-  // Millilitre Per Kilogram
-  MilliL__PER__KiloGM: Qudt.unitFromLocalnameRequired("MilliL-PER-KiloGM"),
-  // Degree Fahrenheit Per Kelvin
-  DEG_F__PER__K: Qudt.unitFromLocalnameRequired("DEG_F-PER-K"),
-  // Picowatt
-  PicoW: Qudt.unitFromLocalnameRequired("PicoW"),
-  // Milliampere Hour per Gram
-  MilliA__HR__PER__GM: Qudt.unitFromLocalnameRequired("MilliA-HR-PER-GM"),
-  // Micromoles per litre per hour
-  MicroMOL__PER__L__HR: Qudt.unitFromLocalnameRequired("MicroMOL-PER-L-HR"),
-  // Pascal metres per second
-  PA__M__PER__SEC: Qudt.unitFromLocalnameRequired("PA-M-PER-SEC"),
-  // Peck (US Dry) Per Hour
-  PK_US_DRY__PER__HR: Qudt.unitFromLocalnameRequired("PK_US_DRY-PER-HR"),
-  // Coulomb per Meter
-  C__PER__M: Qudt.unitFromLocalnameRequired("C-PER-M"),
-  // Kelvin Per Kelvin
-  K__PER__K: Qudt.unitFromLocalnameRequired("K-PER-K"),
-  // TebiByte
-  TebiBYTE: Qudt.unitFromLocalnameRequired("TebiBYTE"),
-  // Cubic Kilometer per Square Second
-  KiloM3__PER__SEC2: Qudt.unitFromLocalnameRequired("KiloM3-PER-SEC2"),
-  // Imperial Ounce Force Inch
-  OZ_F__IN: Qudt.unitFromLocalnameRequired("OZ_F-IN"),
-  // Cubic Foot Per Day
-  FT3__PER__DAY: Qudt.unitFromLocalnameRequired("FT3-PER-DAY"),
-  // Boliviano
-  BOB_Currency: Qudt.currencyFromLocalnameRequired("BOB"),
-  // Tenge
-  KZT_Currency: Qudt.currencyFromLocalnameRequired("KZT"),
-  // Cubic Yard Per Hour
-  YD3__PER__HR: Qudt.unitFromLocalnameRequired("YD3-PER-HR"),
-  // Gram Force Per Square Centimetre
-  GM_F__PER__CentiM2: Qudt.unitFromLocalnameRequired("GM_F-PER-CentiM2"),
-  // Microcoulomb Per Cubic Metre
-  MicroC__PER__M3: Qudt.unitFromLocalnameRequired("MicroC-PER-M3"),
-  // Kilonewton Metre per Degree
-  KiloN__M__PER__DEG: Qudt.unitFromLocalnameRequired("KiloN-M-PER-DEG"),
-  // Electron Volt per Tesla
-  EV__PER__T: Qudt.unitFromLocalnameRequired("EV-PER-T"),
-  // Newton Meter per Meter per Radian
-  N__M__PER__M__RAD: Qudt.unitFromLocalnameRequired("N-M-PER-M-RAD"),
-  // Inch
-  IN: Qudt.unitFromLocalnameRequired("IN"),
-  // MegaDOLLAR_US
-  MegaDOLLAR_US: Qudt.unitFromLocalnameRequired("MegaDOLLAR_US"),
-  // Nanokatal Per Liter
-  NanoKAT__PER__L: Qudt.unitFromLocalnameRequired("NanoKAT-PER-L"),
-  // ExaByte
-  ExaBYTE: Qudt.unitFromLocalnameRequired("ExaBYTE"),
-  // Watts per square metre per nanometre
-  W__PER__M2__NanoM: Qudt.unitFromLocalnameRequired("W-PER-M2-NanoM"),
-  // Knot
-  KN: Qudt.unitFromLocalnameRequired("KN"),
-  // HectoCoulomb
-  HectoC: Qudt.unitFromLocalnameRequired("HectoC"),
-  // Megapascal Per Bar
-  MegaPA__PER__BAR: Qudt.unitFromLocalnameRequired("MegaPA-PER-BAR"),
-  // Kilowatthour
-  KiloW__HR: Qudt.unitFromLocalnameRequired("KiloW-HR"),
-  // Cubic Centimeter Per Second
-  CentiM3__PER__SEC: Qudt.unitFromLocalnameRequired("CentiM3-PER-SEC"),
-  // Millibar
-  MilliBAR: Qudt.unitFromLocalnameRequired("MilliBAR"),
-  // Reciprocal Metre
-  PER__M: Qudt.unitFromLocalnameRequired("PER-M"),
-  // Micro Joule
-  MicroJ: Qudt.unitFromLocalnameRequired("MicroJ"),
-  // Cubic Millimetre Per Cubic Metre
-  MilliM3__PER__M3: Qudt.unitFromLocalnameRequired("MilliM3-PER-M3"),
-  // Number per square metre per day
-  NUM__PER__M2__DAY: Qudt.unitFromLocalnameRequired("NUM-PER-M2-DAY"),
-  // Square Metre Steradian
-  M2__SR: Qudt.unitFromLocalnameRequired("M2-SR"),
-  // MilliAmpere
-  MilliA: Qudt.unitFromLocalnameRequired("MilliA"),
+  // Kelvin Pascals per second
+  K__PA__PER__SEC: Qudt.unitFromLocalnameRequired("K-PA-PER-SEC"),
+  // Nat
+  NAT: Qudt.unitFromLocalnameRequired("NAT"),
+  // Mole per Cubic Metre
+  MOL__PER__M3: Qudt.unitFromLocalnameRequired("MOL-PER-M3"),
+  // Quadratmeter je Volt und Sekunde
+  M2__PER__V__SEC: Qudt.unitFromLocalnameRequired("M2-PER-V-SEC"),
+  // Pound per Foot Second
+  LB__PER__FT__SEC: Qudt.unitFromLocalnameRequired("LB-PER-FT-SEC"),
+  // Erg per Gram
+  ERG__PER__G: Qudt.unitFromLocalnameRequired("ERG-PER-G"),
+  // Reciprocal Tesla Metre
+  PER__T__M: Qudt.unitFromLocalnameRequired("PER-T-M"),
+  // Pound per Hour
+  LB__PER__HR: Qudt.unitFromLocalnameRequired("LB-PER-HR"),
+  // Kilogram per Hour
+  KiloGM__PER__HR: Qudt.unitFromLocalnameRequired("KiloGM-PER-HR"),
+  // ньютон-секунда
+  N__SEC: Qudt.unitFromLocalnameRequired("N-SEC"),
+  // Becquerel per Cubic Metre
+  BQ__PER__M3: Qudt.unitFromLocalnameRequired("BQ-PER-M3"),
+  // Microtesla
+  MicroT: Qudt.unitFromLocalnameRequired("MicroT"),
+  // Special Drawing Rights
+  XDR_Currency: Qudt.currencyFromLocalnameRequired("XDR"),
+  // Cubic Foot Per Degree Fahrenheit
+  FT3__PER__DEG_F: Qudt.unitFromLocalnameRequired("FT3-PER-DEG_F"),
+  // Gill (UK) Per Hour
+  GI_UK__PER__HR: Qudt.unitFromLocalnameRequired("GI_UK-PER-HR"),
+  // Square Meter per Kelvin
+  M2__PER__K: Qudt.unitFromLocalnameRequired("M2-PER-K"),
+  // Pound Force per Pound
+  LB_F__PER__LB: Qudt.unitFromLocalnameRequired("LB_F-PER-LB"),
+  // Sextic Centietre
+  CentiM6: Qudt.unitFromLocalnameRequired("CentiM6"),
+  // Cubic Metre per Second
+  M3__PER__SEC: Qudt.unitFromLocalnameRequired("M3-PER-SEC"),
   // Planck Mass
   PlanckMass: Qudt.unitFromLocalnameRequired("PlanckMass"),
-  // Boiler Horsepower
-  HP_Boiler: Qudt.unitFromLocalnameRequired("HP_Boiler"),
-  // CFA Franc BEAC
-  XAF_Currency: Qudt.currencyFromLocalnameRequired("XAF"),
-  // MicroKAT
-  MicroKAT: Qudt.unitFromLocalnameRequired("MicroKAT"),
-  // astronomical-unit
-  AU: Qudt.unitFromLocalnameRequired("AU"),
-  // Pint (US Liquid) Per Hour
-  PINT_US__PER__HR: Qudt.unitFromLocalnameRequired("PINT_US-PER-HR"),
+  // Kilogram per Mol
+  KiloGM__PER__MOL: Qudt.unitFromLocalnameRequired("KiloGM-PER-MOL"),
+  // Ounce (avoirdupois) Per Second
+  OZ__PER__SEC: Qudt.unitFromLocalnameRequired("OZ-PER-SEC"),
+  // Femtolitre
+  FemtoL: Qudt.unitFromLocalnameRequired("FemtoL"),
+  // Ton Energy
+  TonEnergy: Qudt.unitFromLocalnameRequired("TonEnergy"),
+  // Pascal Second Per Metre
+  PA__SEC__PER__M: Qudt.unitFromLocalnameRequired("PA-SEC-PER-M"),
+  // Reciprocal Milliliter
+  PER__MilliL: Qudt.unitFromLocalnameRequired("PER-MilliL"),
+  // Singapore Dollar
+  SGD_Currency: Qudt.currencyFromLocalnameRequired("SGD"),
+  // Millibar Cubic Metre Per Second
+  MilliBAR__M3__PER__SEC: Qudt.unitFromLocalnameRequired("MilliBAR-M3-PER-SEC"),
+  // Vietnamese ??ng
+  VND_Currency: Qudt.currencyFromLocalnameRequired("VND"),
+  // Reciprocal Pascal per second
+  PER__PA__SEC: Qudt.unitFromLocalnameRequired("PER-PA-SEC"),
+  // Square metres per gram of dry sediment
+  M2__PER__GM_DRY: Qudt.unitFromLocalnameRequired("M2-PER-GM_DRY"),
+  // Volt Ampere Reactive
+  V__A_Reactive: Qudt.unitFromLocalnameRequired("V-A_Reactive"),
+  // Mile per Minute
+  MI__PER__MIN: Qudt.unitFromLocalnameRequired("MI-PER-MIN"),
+  // Algerian Dinar
+  DZD_Currency: Qudt.currencyFromLocalnameRequired("DZD"),
+  // Gallon (UK) Per Second
+  GAL_UK__PER__SEC: Qudt.unitFromLocalnameRequired("GAL_UK-PER-SEC"),
+  // Reciprocal Meter Kelvin
+  PER__M__K: Qudt.unitFromLocalnameRequired("PER-M-K"),
+  // Revolution per Minute
+  REV__PER__MIN: Qudt.unitFromLocalnameRequired("REV-PER-MIN"),
+  // ExaCoulomb
+  ExaC: Qudt.unitFromLocalnameRequired("ExaC"),
+  // Deaths per Million individuals per year
+  DEATHS__PER__MegaINDIV__YR: Qudt.unitFromLocalnameRequired(
+    "DEATHS-PER-MegaINDIV-YR"
+  ),
+  // Pound (avoirdupois) Per Second
+  LB__PER__SEC: Qudt.unitFromLocalnameRequired("LB-PER-SEC"),
+  // Gigajoule per Square Metre
+  GigaJ__PER__M2: Qudt.unitFromLocalnameRequired("GigaJ-PER-M2"),
+  // Candela per Square Inch
+  CD__PER__IN2: Qudt.unitFromLocalnameRequired("CD-PER-IN2"),
+  // Psi Cubic Yard Per Second
+  PSI__YD3__PER__SEC: Qudt.unitFromLocalnameRequired("PSI-YD3-PER-SEC"),
+  // Gigacoulomb Per Cubic Meter
+  GigaC__PER__M3: Qudt.unitFromLocalnameRequired("GigaC-PER-M3"),
+  // Kilopond
+  KiloP: Qudt.unitFromLocalnameRequired("KiloP"),
+  // ampere
+  A: Qudt.unitFromLocalnameRequired("A"),
+  // BTU per Pound Degree Fahrenheit
+  BTU_IT__PER__LB__DEG_F: Qudt.unitFromLocalnameRequired("BTU_IT-PER-LB-DEG_F"),
+  // Micronewton
+  MicroN: Qudt.unitFromLocalnameRequired("MicroN"),
+  // Nanograms Per Square Centimeter
+  NanoGM__PER__CentiM2: Qudt.unitFromLocalnameRequired("NanoGM-PER-CentiM2"),
+  // Colony Forming Unit
+  CFU: Qudt.unitFromLocalnameRequired("CFU"),
+  // New Zealand Dollar
+  NZD_Currency: Qudt.currencyFromLocalnameRequired("NZD"),
+  // Cubic Foot per Minute
+  FT3__PER__MIN: Qudt.unitFromLocalnameRequired("FT3-PER-MIN"),
+  // Kilogram per Second
+  KiloGM__PER__SEC: Qudt.unitFromLocalnameRequired("KiloGM-PER-SEC"),
+  // BTU per Hour
+  BTU_IT__PER__HR: Qudt.unitFromLocalnameRequired("BTU_IT-PER-HR"),
+  // Bangladeshi Taka
+  BDT_Currency: Qudt.currencyFromLocalnameRequired("BDT"),
   // BTU (IT) Foot per Square Foot Hour Degree Fahrenheit
   BTU_IT__FT__PER__FT2__HR__DEG_F: Qudt.unitFromLocalnameRequired(
     "BTU_IT-FT-PER-FT2-HR-DEG_F"
   ),
-  // Ethiopian Birr
-  ETB_Currency: Qudt.currencyFromLocalnameRequired("ETB"),
-  // Erg per Square Centimeter Second
-  ERG__PER__CentiM2__SEC: Qudt.unitFromLocalnameRequired("ERG-PER-CentiM2-SEC"),
-  // Metre per Hour
-  M__PER__HR: Qudt.unitFromLocalnameRequired("M-PER-HR"),
-  // Kilogram Per Cubic Centimeter
-  KiloGM__PER__CentiM3: Qudt.unitFromLocalnameRequired("KiloGM-PER-CentiM3"),
-  // Degree per Minute
-  DEG__PER__MIN: Qudt.unitFromLocalnameRequired("DEG-PER-MIN"),
-  // Volt Ampere Reactive
-  V__A_Reactive: Qudt.unitFromLocalnameRequired("V-A_Reactive"),
-  // Hertz per Volt
-  HZ__PER__V: Qudt.unitFromLocalnameRequired("HZ-PER-V"),
-  // GM_Carbon
-  GM_Carbon: Qudt.unitFromLocalnameRequired("GM_Carbon"),
-  // coulomb meter
-  C__M: Qudt.unitFromLocalnameRequired("C-M"),
-  // Second per Radian Cubic Meter
-  SEC__PER__RAD__M3: Qudt.unitFromLocalnameRequired("SEC-PER-RAD-M3"),
-  // Statmho
-  MHO_Stat: Qudt.unitFromLocalnameRequired("MHO_Stat"),
-  // Hour
-  HR: Qudt.unitFromLocalnameRequired("HR"),
-  // Foot Per Degree Fahrenheit
-  FT__PER__DEG_F: Qudt.unitFromLocalnameRequired("FT-PER-DEG_F"),
-  // Quart (US Liquid) Per Minute
-  QT_US__PER__MIN: Qudt.unitFromLocalnameRequired("QT_US-PER-MIN"),
-  // Square Kelvin
-  K2: Qudt.unitFromLocalnameRequired("K2"),
-  // Exajoule
-  ExaJ: Qudt.unitFromLocalnameRequired("ExaJ"),
-  // Dry Barrel (US)
-  BBL_US_DRY: Qudt.unitFromLocalnameRequired("BBL_US_DRY"),
-  // Reciprocal Cubic Foot
-  PER__FT3: Qudt.unitFromLocalnameRequired("PER-FT3"),
-  // Cayman Islands Dollar
-  KYD_Currency: Qudt.currencyFromLocalnameRequired("KYD"),
-  // millimoles per litre
-  MilliMOL__PER__L: Qudt.unitFromLocalnameRequired("MilliMOL-PER-L"),
-  // Afghani
-  AFN_Currency: Qudt.currencyFromLocalnameRequired("AFN"),
-  // Reciprocal Pascal
-  PER__PA: Qudt.unitFromLocalnameRequired("PER-PA"),
-  // Fractional area
-  FA: Qudt.unitFromLocalnameRequired("FA"),
-  // Megacoulomb Per Cubic Meter
-  MegaC__PER__M3: Qudt.unitFromLocalnameRequired("MegaC-PER-M3"),
-  // Micronewton Meter
-  MicroN__M: Qudt.unitFromLocalnameRequired("MicroN-M"),
-  // Reciprocal Henry
-  PER__H: Qudt.unitFromLocalnameRequired("PER-H"),
-  // Quad
-  QUAD: Qudt.unitFromLocalnameRequired("QUAD"),
-  // Pascal Cubic Metre Per Second
-  PA__M3__PER__SEC: Qudt.unitFromLocalnameRequired("PA-M3-PER-SEC"),
-  // Calorie (mean)
-  CAL_MEAN: Qudt.unitFromLocalnameRequired("CAL_MEAN"),
-  // Kilopascal Square Metre per Gram
-  KiloPA__M2__PER__GM: Qudt.unitFromLocalnameRequired("KiloPA-M2-PER-GM"),
-  // FemtoGram
-  FemtoGM: Qudt.unitFromLocalnameRequired("FemtoGM"),
-  // Degree Twaddell
-  DEGREE_TWADDELL: Qudt.unitFromLocalnameRequired("DEGREE_TWADDELL"),
-  // Planck Frequency
-  PlanckFrequency: Qudt.unitFromLocalnameRequired("PlanckFrequency"),
-  // Centimole per kilogram
-  CentiMOL__PER__KiloGM: Qudt.unitFromLocalnameRequired("CentiMOL-PER-KiloGM"),
-  // Imperial Mass Ounce per Square Yard
-  OZ__PER__YD2: Qudt.unitFromLocalnameRequired("OZ-PER-YD2"),
-  // Moles per cubic metre per second
-  MOL__PER__M3__SEC: Qudt.unitFromLocalnameRequired("MOL-PER-M3-SEC"),
-  // MicroCoulomb
-  MicroC: Qudt.unitFromLocalnameRequired("MicroC"),
-  // Millivolt
-  MilliV: Qudt.unitFromLocalnameRequired("MilliV"),
-  // Quartic Inch
-  IN4: Qudt.unitFromLocalnameRequired("IN4"),
-  // Swiss Franc
-  CHF_Currency: Qudt.currencyFromLocalnameRequired("CHF"),
-  // Czech Koruna
-  CZK_Currency: Qudt.currencyFromLocalnameRequired("CZK"),
-  // Foot of Water
-  FT_H2O: Qudt.unitFromLocalnameRequired("FT_H2O"),
-  // Cubic Inch
-  IN3: Qudt.unitFromLocalnameRequired("IN3"),
-  // Reciprocal Month
-  PER__MO: Qudt.unitFromLocalnameRequired("PER-MO"),
-  // Kilovolt Ampere Reactive Hour
-  KiloV__A_Reactive__HR: Qudt.unitFromLocalnameRequired("KiloV-A_Reactive-HR"),
-  // MegaW
-  MegaW: Qudt.unitFromLocalnameRequired("MegaW"),
-  // Number per milligram
-  NUM__PER__MilliGM: Qudt.unitFromLocalnameRequired("NUM-PER-MilliGM"),
-  // Calorie (thermochemical) Per Second
-  CAL_TH__PER__SEC: Qudt.unitFromLocalnameRequired("CAL_TH-PER-SEC"),
-  // Joule Second per Mole
-  J__SEC__PER__MOL: Qudt.unitFromLocalnameRequired("J-SEC-PER-MOL"),
-  // Poundal
-  PDL: Qudt.unitFromLocalnameRequired("PDL"),
-  // Zloty
-  PLN_Currency: Qudt.currencyFromLocalnameRequired("PLN"),
-  // Millimetre Per Second
-  MilliM__PER__SEC: Qudt.unitFromLocalnameRequired("MilliM-PER-SEC"),
-  // Coulomb per Cubic Metre
-  C__PER__M3: Qudt.unitFromLocalnameRequired("C-PER-M3"),
-  // Picograms per kilogram
-  PicoGM__PER__KiloGM: Qudt.unitFromLocalnameRequired("PicoGM-PER-KiloGM"),
-  // Reciprocal Square Meter Second
-  PER__M2__SEC: Qudt.unitFromLocalnameRequired("PER-M2-SEC"),
-  // Degree Celsius Centimetre
-  DEG_C__CentiM: Qudt.unitFromLocalnameRequired("DEG_C-CentiM"),
-  // Malaysian Ringgit
-  MYR_Currency: Qudt.currencyFromLocalnameRequired("MYR"),
-  // Foot Poundal
-  FT__PDL: Qudt.unitFromLocalnameRequired("FT-PDL"),
-  // US Dollar
-  USD_Currency: Qudt.currencyFromLocalnameRequired("USD"),
-  // Seconds per metre
-  SEC__PER__M: Qudt.unitFromLocalnameRequired("SEC-PER-M"),
-  // Latvian Lats
-  LVL_Currency: Qudt.currencyFromLocalnameRequired("LVL"),
-  // Parts per trillion by volume
-  PPTR_VOL: Qudt.unitFromLocalnameRequired("PPTR_VOL"),
-  // Cubic Decimetre
-  DeciM3: Qudt.unitFromLocalnameRequired("DeciM3"),
-  // Micromoles per square metre per day
-  MicroMOL__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MicroMOL-PER-M2-DAY"),
-  // Millimoles per square metre per day
-  MilliMOL__PER__M2__DAY: Qudt.unitFromLocalnameRequired("MilliMOL-PER-M2-DAY"),
-  // microsecond
-  MicroSEC: Qudt.unitFromLocalnameRequired("MicroSEC"),
-  // Gram Per Millimetre
-  GM__PER__MilliM: Qudt.unitFromLocalnameRequired("GM-PER-MilliM"),
-  // Kilogram Per Minute
-  KiloGM__PER__MIN: Qudt.unitFromLocalnameRequired("KiloGM-PER-MIN"),
-  // Pound per Cubic Foot
-  LB__PER__FT3: Qudt.unitFromLocalnameRequired("LB-PER-FT3"),
-  // Megapascal Cubic Metre Per Second
-  MegaPA__M3__PER__SEC: Qudt.unitFromLocalnameRequired("MegaPA-M3-PER-SEC"),
-  // Kilosiemens Per Metre
-  KiloS__PER__M: Qudt.unitFromLocalnameRequired("KiloS-PER-M"),
-  // Imperial Ounce Force
-  OZ_F: Qudt.unitFromLocalnameRequired("OZ_F"),
-  // Pascal metres per square second
-  PA__M__PER__SEC2: Qudt.unitFromLocalnameRequired("PA-M-PER-SEC2"),
-  // Decametre
-  DecaM: Qudt.unitFromLocalnameRequired("DecaM"),
-  // Square Foot Hour Degree Fahrenheit
-  FT2__HR__DEG_F: Qudt.unitFromLocalnameRequired("FT2-HR-DEG_F"),
-  // BU_US_DRY
-  BU_US_DRY: Qudt.unitFromLocalnameRequired("BU_US_DRY"),
-  // Millibecquerels per kilogram
-  MilliBQ__PER__KiloGM: Qudt.unitFromLocalnameRequired("MilliBQ-PER-KiloGM"),
-  // Square centimetres per cubic centimetre
-  CentiM2__PER__CentiM3: Qudt.unitFromLocalnameRequired("CentiM2-PER-CentiM3"),
-  // Reciprocal Mole
-  PER__MOL: Qudt.unitFromLocalnameRequired("PER-MOL"),
-  // Megahertz
-  MegaHZ: Qudt.unitFromLocalnameRequired("MegaHZ"),
-  // Hectopascal Liter Per Second
-  HectoPA__L__PER__SEC: Qudt.unitFromLocalnameRequired("HectoPA-L-PER-SEC"),
-  // square meter per square meter
-  M2__PER__M2: Qudt.unitFromLocalnameRequired("M2-PER-M2"),
-  // Foot per Hour
-  FT__PER__HR: Qudt.unitFromLocalnameRequired("FT-PER-HR"),
-  // Newton metre per metre
-  N__M__PER__M: Qudt.unitFromLocalnameRequired("N-M-PER-M"),
-  // US Liquid Ounce
-  OZ_VOL_US: Qudt.unitFromLocalnameRequired("OZ_VOL_US"),
+  // KiloPound Force
+  KiloLB_F: Qudt.unitFromLocalnameRequired("KiloLB_F"),
+  // Unitless
+  UNITLESS: Qudt.unitFromLocalnameRequired("UNITLESS"),
+  // MillionUSD
+  MillionUSD: Qudt.unitFromLocalnameRequired("MillionUSD"),
+  // Percent per hour
+  PERCENT__PER__HR: Qudt.unitFromLocalnameRequired("PERCENT-PER-HR"),
+  // kilosecond
+  KiloSEC: Qudt.unitFromLocalnameRequired("KiloSEC"),
+  // Long Hundred Weight
+  CWT_LONG: Qudt.unitFromLocalnameRequired("CWT_LONG"),
+  // Picosiemens Per Metre
+  PicoS__PER__M: Qudt.unitFromLocalnameRequired("PicoS-PER-M"),
+  // Horsepower (metric)
+  HP_Metric: Qudt.unitFromLocalnameRequired("HP_Metric"),
+  // Liter Per Day
+  L__PER__DAY: Qudt.unitFromLocalnameRequired("L-PER-DAY"),
+  // Gigawatt
+  GigaW: Qudt.unitFromLocalnameRequired("GigaW"),
+  // Pint (US Liquid) Per Second
+  PINT_US__PER__SEC: Qudt.unitFromLocalnameRequired("PINT_US-PER-SEC"),
+  // Slug per Second
+  SLUG__PER__SEC: Qudt.unitFromLocalnameRequired("SLUG-PER-SEC"),
+  // Volt Per Millimetre
+  V__PER__MilliM: Qudt.unitFromLocalnameRequired("V-PER-MilliM"),
+  // Kilocalorie (international Table)
+  KiloCAL_IT: Qudt.unitFromLocalnameRequired("KiloCAL_IT"),
+  // Gigawatt Hour
+  GigaW__HR: Qudt.unitFromLocalnameRequired("GigaW-HR"),
+  // Namibian Dollar
+  NAD_Currency: Qudt.currencyFromLocalnameRequired("NAD"),
+  // Slug per Cubic Foot
+  SLUG__PER__FT3: Qudt.unitFromLocalnameRequired("SLUG-PER-FT3"),
+  // генри
+  H: Qudt.unitFromLocalnameRequired("H"),
+  // Millibar Per Kelvin
+  MilliBAR__PER__K: Qudt.unitFromLocalnameRequired("MilliBAR-PER-K"),
+  // Newton je Meter
+  N__PER__M: Qudt.unitFromLocalnameRequired("N-PER-M"),
+  // Electron Volt per Tesla
+  EV__PER__T: Qudt.unitFromLocalnameRequired("EV-PER-T"),
+  // Meganewton Meter
+  MegaN__M: Qudt.unitFromLocalnameRequired("MegaN-M"),
+  // Mile per Second
+  MI__PER__SEC: Qudt.unitFromLocalnameRequired("MI-PER-SEC"),
+  // Gill (UK) Per Day
+  GI_UK__PER__DAY: Qudt.unitFromLocalnameRequired("GI_UK-PER-DAY"),
+  // Femtograms per litre
+  FemtoGM__PER__L: Qudt.unitFromLocalnameRequired("FemtoGM-PER-L"),
+  // Milliweber
+  MilliWB: Qudt.unitFromLocalnameRequired("MilliWB"),
+  // Brazilian Real
+  BRL_Currency: Qudt.currencyFromLocalnameRequired("BRL"),
+  // Litre Per Second
+  L__PER__SEC: Qudt.unitFromLocalnameRequired("L-PER-SEC"),
+  // Milligram Per Liter
+  MilliGM__PER__L: Qudt.unitFromLocalnameRequired("MilliGM-PER-L"),
+  // Quartic Millimetre
+  MilliM4: Qudt.unitFromLocalnameRequired("MilliM4"),
+  // Watts per square metre per metre per steradian
+  W__PER__M2__M__SR: Qudt.unitFromLocalnameRequired("W-PER-M2-M-SR"),
+  // Horsepower
+  HP: Qudt.unitFromLocalnameRequired("HP"),
+  // Pound Mass (avoirdupois) Inch
+  LB__IN: Qudt.unitFromLocalnameRequired("LB-IN"),
+  // Pound Sterling
+  GBP_Currency: Qudt.currencyFromLocalnameRequired("GBP"),
 };
 
 // QuantityKinds
@@ -56963,10 +56984,10 @@ export const Units = {
   quantityKind.addApplicableUnitIri("http://qudt.org/vocab/unit/MilliV");
   quantityKind.addApplicableUnitIri("http://qudt.org/vocab/unit/V_Ab");
   quantityKind.addApplicableUnitIri("http://qudt.org/vocab/unit/PlanckVolt");
-  quantityKind.addExactMatchIri("http://qudt.org/vocab/quantitykind/Voltage");
   quantityKind.addExactMatchIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotential"
   );
+  quantityKind.addExactMatchIri("http://qudt.org/vocab/quantitykind/Voltage");
   quantityKind.addExactMatchIri(
     "http://qudt.org/vocab/quantitykind/EnergyPerElectricCharge"
   );
@@ -58203,10 +58224,10 @@ export const Units = {
   quantityKind.addApplicableUnitIri("http://qudt.org/vocab/unit/MilliV");
   quantityKind.addApplicableUnitIri("http://qudt.org/vocab/unit/V_Ab");
   quantityKind.addApplicableUnitIri("http://qudt.org/vocab/unit/PlanckVolt");
-  quantityKind.addExactMatchIri("http://qudt.org/vocab/quantitykind/Voltage");
   quantityKind.addExactMatchIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotential"
   );
+  quantityKind.addExactMatchIri("http://qudt.org/vocab/quantitykind/Voltage");
   quantityKind.addExactMatchIri(
     "http://qudt.org/vocab/quantitykind/ElectricPotentialDifference"
   );
@@ -74062,10 +74083,10 @@ export const Units = {
   quantityKind.addApplicableUnitIri("http://qudt.org/vocab/unit/MegaYR");
   quantityKind.addApplicableUnitIri("http://qudt.org/vocab/unit/MO_MeanJulian");
   quantityKind.addBroaderQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/SpecificImpulse"
+    "http://qudt.org/vocab/quantitykind/Time"
   );
   quantityKind.addBroaderQuantityKindIri(
-    "http://qudt.org/vocab/quantitykind/Time"
+    "http://qudt.org/vocab/quantitykind/SpecificImpulse"
   );
   config.quantityKinds.set(
     "http://qudt.org/vocab/quantitykind/SpecificImpulseByWeight",
@@ -76086,10 +76107,10 @@ export const Units = {
     "http://qudt.org/vocab/quantitykind/Energy"
   );
   quantityKind.addExactMatchIri(
-    "http://qudt.org/vocab/quantitykind/InternalEnergy"
+    "http://qudt.org/vocab/quantitykind/EnergyInternal"
   );
   quantityKind.addExactMatchIri(
-    "http://qudt.org/vocab/quantitykind/EnergyInternal"
+    "http://qudt.org/vocab/quantitykind/InternalEnergy"
   );
   config.quantityKinds.set(
     "http://qudt.org/vocab/quantitykind/ThermodynamicEnergy",
@@ -79079,2845 +79100,2845 @@ export const Units = {
 }
 
 export const QuantityKinds = {
-  // Specific Heats Ratio
-  SpecificHeatsRatio:
-    Qudt.quantityKindFromLocalnameRequired("SpecificHeatsRatio"),
-  // Product of Inertia in the Z axis
-  PRODUCT__OF__INERTIA_Z: Qudt.quantityKindFromLocalnameRequired(
-    "PRODUCT-OF-INERTIA_Z"
+  // Diffusion Coefficient for Fluence Rate
+  DiffusionCoefficientForFluenceRate: Qudt.quantityKindFromLocalnameRequired(
+    "DiffusionCoefficientForFluenceRate"
   ),
-  // Wellenlänge
-  Wavelength: Qudt.quantityKindFromLocalnameRequired("Wavelength"),
-  // Photosynthetic Photon Flux
-  PhotosyntheticPhotonFlux: Qudt.quantityKindFromLocalnameRequired(
-    "PhotosyntheticPhotonFlux"
+  // Gravitational Attraction
+  GravitationalAttraction: Qudt.quantityKindFromLocalnameRequired(
+    "GravitationalAttraction"
   ),
-  // Water Solubility
-  Solubility_Water: Qudt.quantityKindFromLocalnameRequired("Solubility_Water"),
-  // Maximum Beta-Particle Energy
-  MaximumBeta__ParticleEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "MaximumBeta-ParticleEnergy"
+  // Reactivity
+  Reactivity: Qudt.quantityKindFromLocalnameRequired("Reactivity"),
+  // Specific Impulse by Weight
+  SpecificImpulseByWeight: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificImpulseByWeight"
   ),
-  // Debye Angular Frequency
-  DebyeAngularFrequency: Qudt.quantityKindFromLocalnameRequired(
-    "DebyeAngularFrequency"
+  // Vapor Permeability
+  VaporPermeability:
+    Qudt.quantityKindFromLocalnameRequired("VaporPermeability"),
+  // Linear Energy Transfer
+  LinearEnergyTransfer: Qudt.quantityKindFromLocalnameRequired(
+    "LinearEnergyTransfer"
   ),
-  // Lande g-Factor
-  LandeGFactor: Qudt.quantityKindFromLocalnameRequired("LandeGFactor"),
-  // Exit Plane Cross-sectional Area
-  ExitPlaneCrossSectionalArea: Qudt.quantityKindFromLocalnameRequired(
-    "ExitPlaneCrossSectionalArea"
+  // Mechanical Impedance
+  MechanicalImpedance: Qudt.quantityKindFromLocalnameRequired(
+    "MechanicalImpedance"
   ),
-  // Electric Charge Line Density
-  ElectricChargeLineDensity: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricChargeLineDensity"
-  ),
-  // Closest Approach Radius
-  ClosestApproachRadius: Qudt.quantityKindFromLocalnameRequired(
-    "ClosestApproachRadius"
-  ),
-  // Tension
-  Tension: Qudt.quantityKindFromLocalnameRequired("Tension"),
-  // Thermal Utilization Factor For Fission
-  ThermalUtilizationFactorForFission: Qudt.quantityKindFromLocalnameRequired(
-    "ThermalUtilizationFactorForFission"
-  ),
-  // Biodegredation Half Life
-  BiodegredationHalfLife: Qudt.quantityKindFromLocalnameRequired(
-    "BiodegredationHalfLife"
-  ),
-  // Scalar Magnetic Potential
-  ScalarMagneticPotential: Qudt.quantityKindFromLocalnameRequired(
-    "ScalarMagneticPotential"
-  ),
-  // Thermal Diffusivity
-  ThermalDiffusivity:
-    Qudt.quantityKindFromLocalnameRequired("ThermalDiffusivity"),
-  // Flux
-  Flux: Qudt.quantityKindFromLocalnameRequired("Flux"),
-  // Power per area quartic temperature
-  PowerPerAreaQuarticTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "PowerPerAreaQuarticTemperature"
-  ),
-  // Density In Combustion Chamber
-  DensityInCombustionChamber: Qudt.quantityKindFromLocalnameRequired(
-    "DensityInCombustionChamber"
-  ),
-  // Mass per Electric Charge
-  MassPerElectricCharge: Qudt.quantityKindFromLocalnameRequired(
-    "MassPerElectricCharge"
-  ),
-  // osvetljenost
-  Illuminance: Qudt.quantityKindFromLocalnameRequired("Illuminance"),
-  // Quality Factor
-  QualityFactor: Qudt.quantityKindFromLocalnameRequired("QualityFactor"),
-  // Angle Of Attack
-  AngleOfAttack: Qudt.quantityKindFromLocalnameRequired("AngleOfAttack"),
-  // Exit Plane Temperature
-  ExitPlaneTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "ExitPlaneTemperature"
-  ),
-  // Particle Number Density
-  ParticleNumberDensity: Qudt.quantityKindFromLocalnameRequired(
-    "ParticleNumberDensity"
-  ),
-  // Multiplication Factor
-  MultiplicationFactor: Qudt.quantityKindFromLocalnameRequired(
-    "MultiplicationFactor"
-  ),
-  // Voltage Phasor
-  VoltagePhasor: Qudt.quantityKindFromLocalnameRequired("VoltagePhasor"),
-  // Specific Heat Capacity
-  SpecificHeatCapacity: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificHeatCapacity"
-  ),
-  // Grand Canonical Partition Function
-  GrandCanonicalPartitionFunction: Qudt.quantityKindFromLocalnameRequired(
-    "GrandCanonicalPartitionFunction"
-  ),
+  // Specific Volume
+  SpecificVolume: Qudt.quantityKindFromLocalnameRequired("SpecificVolume"),
   // Gruneisen Parameter
   GruneisenParameter:
     Qudt.quantityKindFromLocalnameRequired("GruneisenParameter"),
-  // Payload Ratio
-  PayloadRatio: Qudt.quantityKindFromLocalnameRequired("PayloadRatio"),
-  // ciepło
-  Heat: Qudt.quantityKindFromLocalnameRequired("Heat"),
-  // Reverberation Time
-  ReverberationTime:
-    Qudt.quantityKindFromLocalnameRequired("ReverberationTime"),
-  // Temperature Gradient
-  TemperatureGradient: Qudt.quantityKindFromLocalnameRequired(
-    "TemperatureGradient"
-  ),
-  // Average Head End Pressure
-  AverageHeadEndPressure: Qudt.quantityKindFromLocalnameRequired(
-    "AverageHeadEndPressure"
-  ),
-  // Electric charge per area
-  ElectricChargePerArea: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricChargePerArea"
-  ),
-  // Specific Energy Imparted
-  SpecificEnergyImparted: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificEnergyImparted"
-  ),
-  // Total Current Density
-  TotalCurrentDensity: Qudt.quantityKindFromLocalnameRequired(
-    "TotalCurrentDensity"
-  ),
-  // Lagrange Function
-  LagrangeFunction: Qudt.quantityKindFromLocalnameRequired("LagrangeFunction"),
-  // Second Stage Mass Ratio
-  SecondStageMassRatio: Qudt.quantityKindFromLocalnameRequired(
-    "SecondStageMassRatio"
-  ),
-  // Molar Entropy
-  MolarEntropy: Qudt.quantityKindFromLocalnameRequired("MolarEntropy"),
-  // Structural Efficiency
-  StructuralEfficiency: Qudt.quantityKindFromLocalnameRequired(
-    "StructuralEfficiency"
-  ),
-  // Characteristic Acoustic Impedance
-  CharacteristicAcousticImpedance: Qudt.quantityKindFromLocalnameRequired(
-    "CharacteristicAcousticImpedance"
-  ),
-  // Acceleration Of Gravity
-  AccelerationOfGravity: Qudt.quantityKindFromLocalnameRequired(
-    "AccelerationOfGravity"
-  ),
-  // Admittance
-  Admittance: Qudt.quantityKindFromLocalnameRequired("Admittance"),
-  // Total Current
-  TotalCurrent: Qudt.quantityKindFromLocalnameRequired("TotalCurrent"),
   // Complex Power
   ComplexPower: Qudt.quantityKindFromLocalnameRequired("ComplexPower"),
-  // Generalized Force
-  GeneralizedMomentum: Qudt.quantityKindFromLocalnameRequired(
-    "GeneralizedMomentum"
-  ),
-  // Molar Energy
-  MolarEnergy: Qudt.quantityKindFromLocalnameRequired("MolarEnergy"),
-  // Particle Fluence Rate
-  ParticleFluenceRate: Qudt.quantityKindFromLocalnameRequired(
-    "ParticleFluenceRate"
-  ),
-  // Binding Fraction
-  BindingFraction: Qudt.quantityKindFromLocalnameRequired("BindingFraction"),
-  // Orbital Angular Momentum Quantum Number
-  OrbitalAngularMomentumQuantumNumber: Qudt.quantityKindFromLocalnameRequired(
-    "OrbitalAngularMomentumQuantumNumber"
-  ),
-  // Correlated Color Temperature
-  CorrelatedColorTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "CorrelatedColorTemperature"
-  ),
-  // Equilibrium Constant
-  EquilibriumConstant: Qudt.quantityKindFromLocalnameRequired(
-    "EquilibriumConstant"
-  ),
-  // Specific heat capacity at constant pressure
-  SpecificHeatCapacityAtConstantPressure:
-    Qudt.quantityKindFromLocalnameRequired(
-      "SpecificHeatCapacityAtConstantPressure"
-    ),
-  // Kerma Rate
-  KermaRate: Qudt.quantityKindFromLocalnameRequired("KermaRate"),
-  // Particle Fluence
-  ParticleFluence: Qudt.quantityKindFromLocalnameRequired("ParticleFluence"),
-  // Coercivity
-  Coercivity: Qudt.quantityKindFromLocalnameRequired("Coercivity"),
-  // Delta u,v
-  Duv: Qudt.quantityKindFromLocalnameRequired("Duv"),
-  // Fundamental Reciprocal Lattice Vector
-  FundamentalReciprocalLatticeVector: Qudt.quantityKindFromLocalnameRequired(
-    "FundamentalReciprocalLatticeVector"
-  ),
-  // Permeability
-  Permeability: Qudt.quantityKindFromLocalnameRequired("Permeability"),
-  // Ion Concentration
-  LuminousIntensityDistribution: Qudt.quantityKindFromLocalnameRequired(
-    "LuminousIntensityDistribution"
-  ),
+  // 皮相電力
+  ApparentPower: Qudt.quantityKindFromLocalnameRequired("ApparentPower"),
+  // Ion Current
+  IonCurrent: Qudt.quantityKindFromLocalnameRequired("IonCurrent"),
+  // Incidence
+  Incidence: Qudt.quantityKindFromLocalnameRequired("Incidence"),
   // Impedance
   Impedance: Qudt.quantityKindFromLocalnameRequired("Impedance"),
-  // Phase speed of sound
-  PhaseSpeedOfSound:
-    Qudt.quantityKindFromLocalnameRequired("PhaseSpeedOfSound"),
-  // Radiant Fluence Rate
-  RadiantFluenceRate:
-    Qudt.quantityKindFromLocalnameRequired("RadiantFluenceRate"),
-  // Standard Chemical Potential
-  StandardChemicalPotential: Qudt.quantityKindFromLocalnameRequired(
-    "StandardChemicalPotential"
+  // Section Modulus
+  SectionModulus: Qudt.quantityKindFromLocalnameRequired("SectionModulus"),
+  // Molar Flow Rate
+  MolarFlowRate: Qudt.quantityKindFromLocalnameRequired("MolarFlowRate"),
+  // Area per Time
+  AreaPerTime: Qudt.quantityKindFromLocalnameRequired("AreaPerTime"),
+  // cost per area
+  CostPerArea: Qudt.quantityKindFromLocalnameRequired("CostPerArea"),
+  // Density Of The Exhaust Gases
+  DensityOfTheExhaustGases: Qudt.quantityKindFromLocalnameRequired(
+    "DensityOfTheExhaustGases"
   ),
-  // Blood Glucose Level
-  BloodGlucoseLevel:
-    Qudt.quantityKindFromLocalnameRequired("BloodGlucoseLevel"),
-  // Energy per electric charge
-  EnergyPerElectricCharge: Qudt.quantityKindFromLocalnameRequired(
-    "EnergyPerElectricCharge"
+  // Hyperfine Structure Quantum Number
+  HyperfineStructureQuantumNumber: Qudt.quantityKindFromLocalnameRequired(
+    "HyperfineStructureQuantumNumber"
   ),
-  // Conduction Speed
-  ConductionSpeed: Qudt.quantityKindFromLocalnameRequired("ConductionSpeed"),
-  // Curvature
-  Curvature: Qudt.quantityKindFromLocalnameRequired("Curvature"),
-  // Lower Critical Magnetic Flux Density
-  LowerCriticalMagneticFluxDensity: Qudt.quantityKindFromLocalnameRequired(
-    "LowerCriticalMagneticFluxDensity"
-  ),
-  // Dose Equivalent
-  DoseEquivalent: Qudt.quantityKindFromLocalnameRequired("DoseEquivalent"),
-  // Nozzle Throat Diameter
-  NozzleThroatDiameter: Qudt.quantityKindFromLocalnameRequired(
-    "NozzleThroatDiameter"
-  ),
-  // Kelajuan cahaya
-  SpeedOfLight: Qudt.quantityKindFromLocalnameRequired("SpeedOfLight"),
-  // Fast Fission Factor
-  FastFissionFactor:
-    Qudt.quantityKindFromLocalnameRequired("FastFissionFactor"),
-  // Radiative Heat Transfer
-  RadiativeHeatTransfer: Qudt.quantityKindFromLocalnameRequired(
-    "RadiativeHeatTransfer"
-  ),
-  // Initial Nozzle Throat Diameter
-  InitialNozzleThroatDiameter: Qudt.quantityKindFromLocalnameRequired(
-    "InitialNozzleThroatDiameter"
+  // Specific Gibbs Energy
+  SpecificGibbsEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificGibbsEnergy"
   ),
   // Magnetic Dipole Moment
   MagneticDipoleMoment: Qudt.quantityKindFromLocalnameRequired(
     "MagneticDipoleMoment"
   ),
-  // Area Time Temperature
-  AreaTimeTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "AreaTimeTemperature"
+  // Electromagnetic Energy Density
+  ElectromagneticEnergyDensity: Qudt.quantityKindFromLocalnameRequired(
+    "ElectromagneticEnergyDensity"
   ),
-  // Relative Pressure Coefficient
-  RelativePressureCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "RelativePressureCoefficient"
-  ),
-  // Center of Gravity in the Y axis
-  CenterOfGravity_Y:
-    Qudt.quantityKindFromLocalnameRequired("CenterOfGravity_Y"),
-  // Lorenz Coefficient
-  LorenzCoefficient:
-    Qudt.quantityKindFromLocalnameRequired("LorenzCoefficient"),
-  // Energy Fluence
-  EnergyFluence: Qudt.quantityKindFromLocalnameRequired("EnergyFluence"),
-  // Heart Rate
-  HeartRate: Qudt.quantityKindFromLocalnameRequired("HeartRate"),
-  // Poisson Ratio
-  PoissonRatio: Qudt.quantityKindFromLocalnameRequired("PoissonRatio"),
-  // Acidity
-  Basicity: Qudt.quantityKindFromLocalnameRequired("Basicity"),
-  // Force Magnitude
-  ForceMagnitude: Qudt.quantityKindFromLocalnameRequired("ForceMagnitude"),
-  // Generalized Coordinate
-  GeneralizedCoordinate: Qudt.quantityKindFromLocalnameRequired(
-    "GeneralizedCoordinate"
-  ),
-  // Linked Flux
-  LinkedFlux: Qudt.quantityKindFromLocalnameRequired("LinkedFlux"),
-  // Average Energy Loss per Elementary Charge Produced
-  AverageEnergyLossPerElementaryChargeProduced:
-    Qudt.quantityKindFromLocalnameRequired(
-      "AverageEnergyLossPerElementaryChargeProduced"
-    ),
-  // Data Rate
-  DataRate: Qudt.quantityKindFromLocalnameRequired("DataRate"),
-  // Absorbed Dose
-  AbsorbedDose: Qudt.quantityKindFromLocalnameRequired("AbsorbedDose"),
-  // Blood Glucose Level by Mass
-  BloodGlucoseLevel_Mass: Qudt.quantityKindFromLocalnameRequired(
-    "BloodGlucoseLevel_Mass"
-  ),
-  // Fläche pro Heizlast
-  AreaPerPower: Qudt.quantityKindFromLocalnameRequired("AreaPerPower"),
-  // Calorific Value
-  HeatingValue: Qudt.quantityKindFromLocalnameRequired("HeatingValue"),
-  // Web Time
-  WebTime: Qudt.quantityKindFromLocalnameRequired("WebTime"),
-  // Force per Electric Charge
-  ForcePerElectricCharge: Qudt.quantityKindFromLocalnameRequired(
-    "ForcePerElectricCharge"
-  ),
-  // Thermal Diffusion Coefficient
-  ThermalDiffusionRatioCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "ThermalDiffusionRatioCoefficient"
-  ),
-  // Vapor Permeability
-  VaporPermeability:
-    Qudt.quantityKindFromLocalnameRequired("VaporPermeability"),
-  // Exhaust Stream Power
-  ExhaustStreamPower:
-    Qudt.quantityKindFromLocalnameRequired("ExhaustStreamPower"),
-  // Permeance
-  Permeance: Qudt.quantityKindFromLocalnameRequired("Permeance"),
-  // Apogee Radius
-  ApogeeRadius: Qudt.quantityKindFromLocalnameRequired("ApogeeRadius"),
-  // angolo solido
-  SolidAngle: Qudt.quantityKindFromLocalnameRequired("SolidAngle"),
-  // Migration Length
-  MigrationLength: Qudt.quantityKindFromLocalnameRequired("MigrationLength"),
-  // Energy and work per mass amount of substance
-  EnergyPerMassAmountOfSubstance: Qudt.quantityKindFromLocalnameRequired(
-    "EnergyPerMassAmountOfSubstance"
-  ),
-  // Olfactory Threshold
-  OlfactoryThreshold:
-    Qudt.quantityKindFromLocalnameRequired("OlfactoryThreshold"),
-  // Equivalent absorption area
-  EquivalentAbsorptionArea: Qudt.quantityKindFromLocalnameRequired(
-    "EquivalentAbsorptionArea"
-  ),
-  // Показатель адиабаты
-  IsentropicExponent:
-    Qudt.quantityKindFromLocalnameRequired("IsentropicExponent"),
-  // Permeability Ratio
-  PermeabilityRatio:
-    Qudt.quantityKindFromLocalnameRequired("PermeabilityRatio"),
-  // Thermal Utilization Factor
-  ThermalUtilizationFactor: Qudt.quantityKindFromLocalnameRequired(
-    "ThermalUtilizationFactor"
-  ),
-  // Sound particle acceleration
-  SoundParticleAcceleration: Qudt.quantityKindFromLocalnameRequired(
-    "SoundParticleAcceleration"
-  ),
-  // Effective Multiplication Factor
-  EffectiveMultiplicationFactor: Qudt.quantityKindFromLocalnameRequired(
-    "EffectiveMultiplicationFactor"
-  ),
-  // Energy Fluence Rate
-  EnergyFluenceRate:
-    Qudt.quantityKindFromLocalnameRequired("EnergyFluenceRate"),
-  // Flächenlast
-  PlanarForce: Qudt.quantityKindFromLocalnameRequired("PlanarForce"),
-  // Density
-  Density: Qudt.quantityKindFromLocalnameRequired("Density"),
-  // InternalConversionFactor
-  InternalConversionFactor: Qudt.quantityKindFromLocalnameRequired(
-    "InternalConversionFactor"
-  ),
-  // Reaction Energy
-  ReactionEnergy: Qudt.quantityKindFromLocalnameRequired("ReactionEnergy"),
-  // Standard Absolute Activity
-  StandardAbsoluteActivity: Qudt.quantityKindFromLocalnameRequired(
-    "StandardAbsoluteActivity"
-  ),
-  // Chromaticity
-  Chromaticity: Qudt.quantityKindFromLocalnameRequired("Chromaticity"),
   // Positive Length
   NonNegativeLength:
     Qudt.quantityKindFromLocalnameRequired("NonNegativeLength"),
-  // विद्युत्-क्षेत्र
-  ElectricFieldStrength: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricFieldStrength"
+  // Propagation coefficient
+  PropagationCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "PropagationCoefficient"
   ),
-  // Electric Current Phasor
-  ElectricCurrentPhasor: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricCurrentPhasor"
+  // Shear Stress
+  ShearStress: Qudt.quantityKindFromLocalnameRequired("ShearStress"),
+  // Atom Scattering Factor
+  AtomScatteringFactor: Qudt.quantityKindFromLocalnameRequired(
+    "AtomScatteringFactor"
   ),
-  // Drag Force
-  DragForce: Qudt.quantityKindFromLocalnameRequired("DragForce"),
-  // Equilibrium Constant on Pressure Basis
-  EquilibriumConstantOnPressureBasis: Qudt.quantityKindFromLocalnameRequired(
-    "EquilibriumConstantOnPressureBasis"
+  // First Moment of Area
+  FirstMomentOfArea:
+    Qudt.quantityKindFromLocalnameRequired("FirstMomentOfArea"),
+  // RF-Power Level
+  RF__Power: Qudt.quantityKindFromLocalnameRequired("RF-Power"),
+  // elektryczny moment kwadrupolowy
+  ElectricQuadrupoleMoment: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricQuadrupoleMoment"
   ),
-  // Linear Ionization
-  LinearIonization: Qudt.quantityKindFromLocalnameRequired("LinearIonization"),
-  // Mass Temperature
-  MassTemperature: Qudt.quantityKindFromLocalnameRequired("MassTemperature"),
-  // Mass Fraction of Water
-  MassFractionOfWater: Qudt.quantityKindFromLocalnameRequired(
-    "MassFractionOfWater"
+  // Thrust
+  Thrust: Qudt.quantityKindFromLocalnameRequired("Thrust"),
+  // Initial Vehicle Mass
+  InitialVehicleMass:
+    Qudt.quantityKindFromLocalnameRequired("InitialVehicleMass"),
+  // Ambient Pressure
+  AmbientPressure: Qudt.quantityKindFromLocalnameRequired("AmbientPressure"),
+  // Structural Efficiency
+  StructuralEfficiency: Qudt.quantityKindFromLocalnameRequired(
+    "StructuralEfficiency"
   ),
-  // Absorbed Dose Rate
-  AbsorbedDoseRate: Qudt.quantityKindFromLocalnameRequired("AbsorbedDoseRate"),
-  // Sound Particle Displacement
-  SoundParticleDisplacement: Qudt.quantityKindFromLocalnameRequired(
-    "SoundParticleDisplacement"
+  // Horizontal Velocity
+  HorizontalVelocity:
+    Qudt.quantityKindFromLocalnameRequired("HorizontalVelocity"),
+  // श्यानता
+  DynamicViscosity: Qudt.quantityKindFromLocalnameRequired("DynamicViscosity"),
+  // Total Angular Momentum Quantum Number
+  TotalAngularMomentumQuantumNumber: Qudt.quantityKindFromLocalnameRequired(
+    "TotalAngularMomentumQuantumNumber"
   ),
-  // Warping Moment
-  WarpingMoment: Qudt.quantityKindFromLocalnameRequired("WarpingMoment"),
-  // Electric Current per Unit Temperature
-  ElectricCurrentPerUnitTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricCurrentPerUnitTemperature"
+  // Heat Flux Density
+  HeatFluxDensity: Qudt.quantityKindFromLocalnameRequired("HeatFluxDensity"),
+  // London Penetration Depth
+  LondonPenetrationDepth: Qudt.quantityKindFromLocalnameRequired(
+    "LondonPenetrationDepth"
   ),
-  // Magnetic Area Moment
-  MagneticAreaMoment:
-    Qudt.quantityKindFromLocalnameRequired("MagneticAreaMoment"),
-  // Ускоре́ние
-  Acceleration: Qudt.quantityKindFromLocalnameRequired("Acceleration"),
-  // Area per Time
-  AreaPerTime: Qudt.quantityKindFromLocalnameRequired("AreaPerTime"),
-  // Nozzle Throat Pressure
-  NozzleThroatPressure: Qudt.quantityKindFromLocalnameRequired(
-    "NozzleThroatPressure"
+  // Friction Coefficient
+  FrictionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "FrictionCoefficient"
   ),
-  // Luminous Efficacy
-  LuminousEfficacy: Qudt.quantityKindFromLocalnameRequired("LuminousEfficacy"),
-  // Pressure Burning Rate Constant
-  PressureBurningRateConstant: Qudt.quantityKindFromLocalnameRequired(
-    "PressureBurningRateConstant"
+  // Energy Expenditure
+  EnergyExpenditure:
+    Qudt.quantityKindFromLocalnameRequired("EnergyExpenditure"),
+  // Linear Electric Current Density
+  LinearElectricCurrentDensity: Qudt.quantityKindFromLocalnameRequired(
+    "LinearElectricCurrentDensity"
   ),
+  // Compressibility
+  Compressibility: Qudt.quantityKindFromLocalnameRequired("Compressibility"),
+  // Level Width
+  LevelWidth: Qudt.quantityKindFromLocalnameRequired("LevelWidth"),
+  // Energiekosten
+  CostPerUnitEnergy:
+    Qudt.quantityKindFromLocalnameRequired("CostPerUnitEnergy"),
+  // Relative Mass Excess
+  RelativeMassExcess:
+    Qudt.quantityKindFromLocalnameRequired("RelativeMassExcess"),
+  // Specific Entropy
+  SpecificEntropy: Qudt.quantityKindFromLocalnameRequired("SpecificEntropy"),
+  // impulso angolare
+  AngularImpulse: Qudt.quantityKindFromLocalnameRequired("AngularImpulse"),
+  // Larmor Angular Frequency
+  CyclotronAngularFrequency: Qudt.quantityKindFromLocalnameRequired(
+    "CyclotronAngularFrequency"
+  ),
+  // Turbidity
+  Turbidity: Qudt.quantityKindFromLocalnameRequired("Turbidity"),
+  // Magnetic Quantum Number
+  MagneticQuantumNumber: Qudt.quantityKindFromLocalnameRequired(
+    "MagneticQuantumNumber"
+  ),
+  // Cubic Electric Dipole Moment per Square Energy
+  ElectricDipoleMoment_CubicPerEnergy_Squared:
+    Qudt.quantityKindFromLocalnameRequired(
+      "ElectricDipoleMoment_CubicPerEnergy_Squared"
+    ),
+  // ऊष्मा धारिता
+  HeatCapacity: Qudt.quantityKindFromLocalnameRequired("HeatCapacity"),
   // Time averaged sound intensity
   TimeAveragedSoundIntensity: Qudt.quantityKindFromLocalnameRequired(
     "TimeAveragedSoundIntensity"
   ),
-  // Pressure Ratio
-  PressureRatio: Qudt.quantityKindFromLocalnameRequired("PressureRatio"),
-  // Molar Heat Capacity
-  MolarHeatCapacity:
-    Qudt.quantityKindFromLocalnameRequired("MolarHeatCapacity"),
-  // 无功功率
-  ReactivePower: Qudt.quantityKindFromLocalnameRequired("ReactivePower"),
-  // Over-range distance
-  OverRangeDistance:
-    Qudt.quantityKindFromLocalnameRequired("OverRangeDistance"),
-  // Exposure
-  Exposure: Qudt.quantityKindFromLocalnameRequired("Exposure"),
-  // True Exhaust Velocity
-  TrueExhaustVelocity: Qudt.quantityKindFromLocalnameRequired(
-    "TrueExhaustVelocity"
-  ),
-  // Specific Heat Volume
-  SpecificHeatVolume:
-    Qudt.quantityKindFromLocalnameRequired("SpecificHeatVolume"),
-  // Neutron Yield per Absorption
-  NeutronYieldPerAbsorption: Qudt.quantityKindFromLocalnameRequired(
-    "NeutronYieldPerAbsorption"
-  ),
-  // 截面二次轴矩
-  SecondMomentOfArea:
-    Qudt.quantityKindFromLocalnameRequired("SecondMomentOfArea"),
-  // Peltier Coefficient
-  PeltierCoefficient:
-    Qudt.quantityKindFromLocalnameRequired("PeltierCoefficient"),
-  // Photon Radiance
-  PhotonRadiance: Qudt.quantityKindFromLocalnameRequired("PhotonRadiance"),
-  // Thrust
-  Thrust: Qudt.quantityKindFromLocalnameRequired("Thrust"),
-  // Chemical Consumption per Mass
-  ChemicalConsumptionPerMass: Qudt.quantityKindFromLocalnameRequired(
-    "ChemicalConsumptionPerMass"
-  ),
-  // Planck Function
-  PlanckFunction: Qudt.quantityKindFromLocalnameRequired("PlanckFunction"),
-  // Mean Lifetime
-  MeanLifetime: Qudt.quantityKindFromLocalnameRequired("MeanLifetime"),
-  // كمية المادة
-  AmountOfSubstance:
-    Qudt.quantityKindFromLocalnameRequired("AmountOfSubstance"),
-  // g-Factor of Nucleus
-  GFactorOfNucleus: Qudt.quantityKindFromLocalnameRequired("GFactorOfNucleus"),
-  // differenza di potenziale elettrico
-  ElectricPotentialDifference: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricPotentialDifference"
-  ),
-  // Total Mass Stopping Power
-  TotalMassStoppingPower: Qudt.quantityKindFromLocalnameRequired(
-    "TotalMassStoppingPower"
-  ),
-  // Donor Density
-  DonorDensity: Qudt.quantityKindFromLocalnameRequired("DonorDensity"),
-  // Ratio of Specific Heat Capacities
-  RatioOfSpecificHeatCapacities: Qudt.quantityKindFromLocalnameRequired(
-    "RatioOfSpecificHeatCapacities"
-  ),
-  // Macroscopic Cross-section
-  MacroscopicCrossSection: Qudt.quantityKindFromLocalnameRequired(
-    "MacroscopicCrossSection"
-  ),
-  // Specific Activity
-  SpecificActivity: Qudt.quantityKindFromLocalnameRequired("SpecificActivity"),
-  // Time Squared
-  Time_Squared: Qudt.quantityKindFromLocalnameRequired("Time_Squared"),
-  // Vorticity
-  Vorticity: Qudt.quantityKindFromLocalnameRequired("Vorticity"),
   // Action
   Action: Qudt.quantityKindFromLocalnameRequired("Action"),
-  // Cubic Electric Dipole Moment per Square Energy
-  CubicElectricDipoleMomentPerSquareEnergy:
-    Qudt.quantityKindFromLocalnameRequired(
-      "CubicElectricDipoleMomentPerSquareEnergy"
-    ),
-  // Time Percentage
-  TimePercentage: Qudt.quantityKindFromLocalnameRequired("TimePercentage"),
-  // Amount of Substance per Unit Volume
-  AmountOfSubstancePerUnitVolume: Qudt.quantityKindFromLocalnameRequired(
-    "AmountOfSubstancePerUnitVolume"
+  // Burn Rate
+  BurnRate: Qudt.quantityKindFromLocalnameRequired("BurnRate"),
+  // Fast Fission Factor
+  FastFissionFactor:
+    Qudt.quantityKindFromLocalnameRequired("FastFissionFactor"),
+  // temperature difference
+  TemperatureDifference: Qudt.quantityKindFromLocalnameRequired(
+    "TemperatureDifference"
   ),
-  // Emissivity
-  Emissivity: Qudt.quantityKindFromLocalnameRequired("Emissivity"),
-  // Boiling Point Temperature
-  BoilingPoint: Qudt.quantityKindFromLocalnameRequired("BoilingPoint"),
-  // Temperature Amount of Substance
-  TemperatureAmountOfSubstance: Qudt.quantityKindFromLocalnameRequired(
-    "TemperatureAmountOfSubstance"
+  // Long-Range Order Parameter
+  Long__RangeOrderParameter: Qudt.quantityKindFromLocalnameRequired(
+    "Long-RangeOrderParameter"
   ),
-  // Drag Coefficient
-  DragCoefficient: Qudt.quantityKindFromLocalnameRequired("DragCoefficient"),
-  // Positive Length
-  PositiveLength: Qudt.quantityKindFromLocalnameRequired("PositiveLength"),
-  // Çiftlenim sabiti
-  CouplingFactor: Qudt.quantityKindFromLocalnameRequired("CouplingFactor"),
+  // Volume Fraction
+  VolumeFraction: Qudt.quantityKindFromLocalnameRequired("VolumeFraction"),
   // semiperiodo
   Half__Life: Qudt.quantityKindFromLocalnameRequired("Half-Life"),
-  // Linear Force
-  LinearStiffness: Qudt.quantityKindFromLocalnameRequired("LinearStiffness"),
-  // Canonical Partition Function
-  CanonicalPartitionFunction: Qudt.quantityKindFromLocalnameRequired(
-    "CanonicalPartitionFunction"
+  // Center of Gravity in the Y axis
+  CenterOfGravity_Y:
+    Qudt.quantityKindFromLocalnameRequired("CenterOfGravity_Y"),
+  // ładunek elektryczny
+  ElectricCharge: Qudt.quantityKindFromLocalnameRequired("ElectricCharge"),
+  // Action Time
+  ActionTime: Qudt.quantityKindFromLocalnameRequired("ActionTime"),
+  // Resonance Energy
+  ResonanceEnergy: Qudt.quantityKindFromLocalnameRequired("ResonanceEnergy"),
+  // Systolic Blood Pressure
+  SystolicBloodPressure: Qudt.quantityKindFromLocalnameRequired(
+    "SystolicBloodPressure"
   ),
-  // Current Linkage
-  CurrentLinkage: Qudt.quantityKindFromLocalnameRequired("CurrentLinkage"),
-  // Microbial Formation
-  MicrobialFormation:
-    Qudt.quantityKindFromLocalnameRequired("MicrobialFormation"),
-  // Combined Non Evaporative Heat Transfer Coefficient
-  CombinedNonEvaporativeHeatTransferCoefficient:
-    Qudt.quantityKindFromLocalnameRequired(
-      "CombinedNonEvaporativeHeatTransferCoefficient"
-    ),
-  // Exchange Integral
-  ExchangeIntegral: Qudt.quantityKindFromLocalnameRequired("ExchangeIntegral"),
-  // energia livre de Helmholtz
-  HelmholtzEnergy: Qudt.quantityKindFromLocalnameRequired("HelmholtzEnergy"),
-  // Energy per Area
-  EnergyPerArea: Qudt.quantityKindFromLocalnameRequired("EnergyPerArea"),
-  // Altitude
-  Altitude: Qudt.quantityKindFromLocalnameRequired("Altitude"),
-  // Specific Enthalpy
-  SpecificEnthalpy: Qudt.quantityKindFromLocalnameRequired("SpecificEnthalpy"),
-  // Tenaga kinetik
-  EnergyKinetic: Qudt.quantityKindFromLocalnameRequired("EnergyKinetic"),
-  // Sound volume velocity
-  SoundVolumeVelocity: Qudt.quantityKindFromLocalnameRequired(
-    "SoundVolumeVelocity"
+  // Warping Moment
+  WarpingMoment: Qudt.quantityKindFromLocalnameRequired("WarpingMoment"),
+  // Specific Helmholtz Energy
+  SpecificHelmholtzEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificHelmholtzEnergy"
   ),
-  // Ketumpatan arus elektrik
-  ElectricCurrentDensity: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricCurrentDensity"
+  // Stage Propellant Mass
+  StagePropellantMass: Qudt.quantityKindFromLocalnameRequired(
+    "StagePropellantMass"
   ),
   // Illuminance
   SphericalIlluminance: Qudt.quantityKindFromLocalnameRequired(
     "SphericalIlluminance"
   ),
-  // Dry Volume
-  DryVolume: Qudt.quantityKindFromLocalnameRequired("DryVolume"),
-  // Specific Impulse by Mass
-  SpecificImpulseByMass: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificImpulseByMass"
+  // Superconduction Transition Temperature
+  SuperconductionTransitionTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "SuperconductionTransitionTemperature"
   ),
-  // Transmittance Density
-  TransmittanceDensity: Qudt.quantityKindFromLocalnameRequired(
-    "TransmittanceDensity"
+  // Mechanical Mobility
+  MechanicalMobility:
+    Qudt.quantityKindFromLocalnameRequired("MechanicalMobility"),
+  // Area Time Temperature
+  AreaTimeTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "AreaTimeTemperature"
   ),
-  // Chemical Affinity
-  ChemicalAffinity: Qudt.quantityKindFromLocalnameRequired("ChemicalAffinity"),
-  // Ionic Charge
-  IonicCharge: Qudt.quantityKindFromLocalnameRequired("IonicCharge"),
-  // Length Temperature Time
-  LengthTemperatureTime: Qudt.quantityKindFromLocalnameRequired(
-    "LengthTemperatureTime"
+  // Source Voltage
+  SourceVoltage: Qudt.quantityKindFromLocalnameRequired("SourceVoltage"),
+  // Reaction Rate Constant
+  SecondOrderReactionRateConstant: Qudt.quantityKindFromLocalnameRequired(
+    "SecondOrderReactionRateConstant"
   ),
-  // Pressure Coefficient
-  PressureCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "PressureCoefficient"
+  // Specific Activity
+  SpecificActivity: Qudt.quantityKindFromLocalnameRequired("SpecificActivity"),
+  // Turns
+  Turns: Qudt.quantityKindFromLocalnameRequired("Turns"),
+  // Electric charge per amount of substance
+  ElectricChargePerAmountOfSubstance: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricChargePerAmountOfSubstance"
+  ),
+  // Vision Thresholds
+  VisionThresholds: Qudt.quantityKindFromLocalnameRequired("VisionThresholds"),
+  // Rotational Mass
+  RotationalMass: Qudt.quantityKindFromLocalnameRequired("RotationalMass"),
+  // Mass Number
+  MassNumber: Qudt.quantityKindFromLocalnameRequired("MassNumber"),
+  // Inverse Square Mass
+  InverseMass_Squared: Qudt.quantityKindFromLocalnameRequired(
+    "InverseMass_Squared"
+  ),
+  // Drag Force
+  DragForce: Qudt.quantityKindFromLocalnameRequired("DragForce"),
+  // Effective Exhaustvelocity
+  EffectiveExhaustVelocity: Qudt.quantityKindFromLocalnameRequired(
+    "EffectiveExhaustVelocity"
+  ),
+  // Mortality Rate
+  MortalityRate: Qudt.quantityKindFromLocalnameRequired("MortalityRate"),
+  // Electric Current per Angle
+  ElectricCurrentPerAngle: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricCurrentPerAngle"
+  ),
+  // Principal Quantum Number
+  PrincipalQuantumNumber: Qudt.quantityKindFromLocalnameRequired(
+    "PrincipalQuantumNumber"
   ),
   // Spatial Summation Function
   SpatialSummationFunction: Qudt.quantityKindFromLocalnameRequired(
     "SpatialSummationFunction"
   ),
-  // Head End Pressure
-  HeadEndPressure: Qudt.quantityKindFromLocalnameRequired("HeadEndPressure"),
-  // Period
-  Period: Qudt.quantityKindFromLocalnameRequired("Period"),
-  // Resistance
-  Resistance: Qudt.quantityKindFromLocalnameRequired("Resistance"),
-  // Fermi Angular Wavenumber
-  FermiAngularWavenumber: Qudt.quantityKindFromLocalnameRequired(
-    "FermiAngularWavenumber"
+  // Total Cross-section
+  TotalCrossSection:
+    Qudt.quantityKindFromLocalnameRequired("TotalCrossSection"),
+  // Time Percentage
+  TimePercentage: Qudt.quantityKindFromLocalnameRequired("TimePercentage"),
+  // Relative Luminous Flux
+  RelativeLuminousFlux: Qudt.quantityKindFromLocalnameRequired(
+    "RelativeLuminousFlux"
   ),
-  // Earth Closest Approach Vehicle Velocity
-  EarthClosestApproachVehicleVelocity: Qudt.quantityKindFromLocalnameRequired(
-    "EarthClosestApproachVehicleVelocity"
+  // teplota
+  CelsiusTemperature:
+    Qudt.quantityKindFromLocalnameRequired("CelsiusTemperature"),
+  // Electron Radius
+  ElectronRadius: Qudt.quantityKindFromLocalnameRequired("ElectronRadius"),
+  // Photon Radiance
+  PhotonRadiance: Qudt.quantityKindFromLocalnameRequired("PhotonRadiance"),
+  // Entalpi
+  Enthalpy: Qudt.quantityKindFromLocalnameRequired("Enthalpy"),
+  // Permittivity
+  Permittivity: Qudt.quantityKindFromLocalnameRequired("Permittivity"),
+  // Generalized Coordinate
+  GeneralizedCoordinate: Qudt.quantityKindFromLocalnameRequired(
+    "GeneralizedCoordinate"
   ),
-  // volume
-  CartesianVolume: Qudt.quantityKindFromLocalnameRequired("CartesianVolume"),
-  // Normal Stress
-  NormalStress: Qudt.quantityKindFromLocalnameRequired("NormalStress"),
-  // Vehicle Velocity
-  VehicleVelocity: Qudt.quantityKindFromLocalnameRequired("VehicleVelocity"),
-  // Second Axial Moment of Area
-  SecondAxialMomentOfArea: Qudt.quantityKindFromLocalnameRequired(
-    "SecondAxialMomentOfArea"
+  // Acceleration Of Gravity
+  AccelerationOfGravity: Qudt.quantityKindFromLocalnameRequired(
+    "AccelerationOfGravity"
   ),
-  // vitesse  acoustique d‘une particule
-  SoundParticleVelocity: Qudt.quantityKindFromLocalnameRequired(
-    "SoundParticleVelocity"
+  // Flight Path Angle
+  FlightPathAngle: Qudt.quantityKindFromLocalnameRequired("FlightPathAngle"),
+  // Temperature Ratio
+  TemperatureRatio: Qudt.quantityKindFromLocalnameRequired("TemperatureRatio"),
+  // Displacement
+  Displacement: Qudt.quantityKindFromLocalnameRequired("Displacement"),
+  // Characteristic Acoustic Impedance
+  CharacteristicAcousticImpedance: Qudt.quantityKindFromLocalnameRequired(
+    "CharacteristicAcousticImpedance"
   ),
-  // Loss Angle
-  LossAngle: Qudt.quantityKindFromLocalnameRequired("LossAngle"),
-  // Force per Angle
-  ForcePerAngle: Qudt.quantityKindFromLocalnameRequired("ForcePerAngle"),
-  // Auditory Thresholds
-  AuditoryThresholds:
-    Qudt.quantityKindFromLocalnameRequired("AuditoryThresholds"),
-  // Displacement Vector of Ion
-  DisplacementVectorOfIon: Qudt.quantityKindFromLocalnameRequired(
-    "DisplacementVectorOfIon"
-  ),
-  // puissance
-  Power: Qudt.quantityKindFromLocalnameRequired("Power"),
-  // Dose Equivalent Quality Factor
-  DoseEquivalentQualityFactor: Qudt.quantityKindFromLocalnameRequired(
-    "DoseEquivalentQualityFactor"
+  // Electron Density
+  ElectronDensity: Qudt.quantityKindFromLocalnameRequired("ElectronDensity"),
+  // PH
+  PH: Qudt.quantityKindFromLocalnameRequired("PH"),
+  // fugacitate
+  Fugacity: Qudt.quantityKindFromLocalnameRequired("Fugacity"),
+  // Effective Mass
+  EffectiveMass: Qudt.quantityKindFromLocalnameRequired("EffectiveMass"),
+  // Linear Acceleration
+  LinearAcceleration:
+    Qudt.quantityKindFromLocalnameRequired("LinearAcceleration"),
+  // Payload Mass
+  PayloadMass: Qudt.quantityKindFromLocalnameRequired("PayloadMass"),
+  // Specific Optical Rotatory Power
+  SpecificOpticalRotatoryPower: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificOpticalRotatoryPower"
   ),
   // Electric Field
   ElectricField: Qudt.quantityKindFromLocalnameRequired("ElectricField"),
-  // Intinsic Carrier Density
-  IntinsicCarrierDensity: Qudt.quantityKindFromLocalnameRequired(
-    "IntinsicCarrierDensity"
+  // Flash Point Temperature
+  FlashPoint: Qudt.quantityKindFromLocalnameRequired("FlashPoint"),
+  // Radius of Curvature
+  RadiusOfCurvature:
+    Qudt.quantityKindFromLocalnameRequired("RadiusOfCurvature"),
+  // Length Ratio
+  LengthRatio: Qudt.quantityKindFromLocalnameRequired("LengthRatio"),
+  // energia interna
+  EnergyInternal: Qudt.quantityKindFromLocalnameRequired("EnergyInternal"),
+  // Expansion Ratio
+  ExpansionRatio: Qudt.quantityKindFromLocalnameRequired("ExpansionRatio"),
+  // Linear Force
+  LinearForce: Qudt.quantityKindFromLocalnameRequired("LinearForce"),
+  // Inverse Time
+  InverseTime: Qudt.quantityKindFromLocalnameRequired("InverseTime"),
+  // Total Ionization
+  TotalIonization: Qudt.quantityKindFromLocalnameRequired("TotalIonization"),
+  // éclairement énergétique
+  Irradiance: Qudt.quantityKindFromLocalnameRequired("Irradiance"),
+  // Linear Density
+  LinearDensity: Qudt.quantityKindFromLocalnameRequired("LinearDensity"),
+  // Standard Absolute Activity
+  StandardAbsoluteActivity: Qudt.quantityKindFromLocalnameRequired(
+    "StandardAbsoluteActivity"
+  ),
+  // Thermal Resistivity
+  ThermalResistivity:
+    Qudt.quantityKindFromLocalnameRequired("ThermalResistivity"),
+  // Internal Energy
+  InternalEnergy: Qudt.quantityKindFromLocalnameRequired("InternalEnergy"),
+  // Nozzle Throat Diameter
+  NozzleThroatDiameter: Qudt.quantityKindFromLocalnameRequired(
+    "NozzleThroatDiameter"
+  ),
+  // Absolute Humidity
+  AbsoluteHumidity: Qudt.quantityKindFromLocalnameRequired("AbsoluteHumidity"),
+  // Static Friction
+  StaticFriction: Qudt.quantityKindFromLocalnameRequired("StaticFriction"),
+  // Mass per Time
+  MassPerTime: Qudt.quantityKindFromLocalnameRequired("MassPerTime"),
+  // Incidence Rate
+  IncidenceRate: Qudt.quantityKindFromLocalnameRequired("IncidenceRate"),
+  // Length Force
+  LengthByForce: Qudt.quantityKindFromLocalnameRequired("LengthByForce"),
+  // Pressure Coefficient
+  PressureCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "PressureCoefficient"
+  ),
+  // Cubic Electric Dipole Moment per Square Energy
+  CubicElectricDipoleMomentPerSquareEnergy:
+    Qudt.quantityKindFromLocalnameRequired(
+      "CubicElectricDipoleMomentPerSquareEnergy"
+    ),
+  // Mean Lifetime
+  MeanLifetime: Qudt.quantityKindFromLocalnameRequired("MeanLifetime"),
+  // Degree of Dissociation
+  DegreeOfDissociation: Qudt.quantityKindFromLocalnameRequired(
+    "DegreeOfDissociation"
+  ),
+  // Resistivity
+  Resistivity: Qudt.quantityKindFromLocalnameRequired("Resistivity"),
+  // differenza di potenziale elettrico
+  ElectricPotentialDifference: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricPotentialDifference"
+  ),
+  // Phase speed of sound
+  PhaseSpeedOfSound:
+    Qudt.quantityKindFromLocalnameRequired("PhaseSpeedOfSound"),
+  // Torque per Angle
+  TorquePerAngle: Qudt.quantityKindFromLocalnameRequired("TorquePerAngle"),
+  // Torque per Length
+  TorquePerLength: Qudt.quantityKindFromLocalnameRequired("TorquePerLength"),
+  // Inert Mass
+  INERT__MASS: Qudt.quantityKindFromLocalnameRequired("INERT-MASS"),
+  // True Exhaust Velocity
+  TrueExhaustVelocity: Qudt.quantityKindFromLocalnameRequired(
+    "TrueExhaustVelocity"
   ),
   // Amount of Substance of Concentration
   AmountOfSubstanceConcentration: Qudt.quantityKindFromLocalnameRequired(
     "AmountOfSubstanceConcentration"
   ),
-  // Mass Defect
-  MassDefect: Qudt.quantityKindFromLocalnameRequired("MassDefect"),
-  // Mean Energy Imparted
-  MeanEnergyImparted:
-    Qudt.quantityKindFromLocalnameRequired("MeanEnergyImparted"),
-  // Inverse Length Temperature
-  InverseLengthTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "InverseLengthTemperature"
-  ),
-  // Reaction Rate Constant
-  SecondOrderReactionRateConstant: Qudt.quantityKindFromLocalnameRequired(
-    "SecondOrderReactionRateConstant"
-  ),
-  // Mass Ratio
-  MassRatio: Qudt.quantityKindFromLocalnameRequired("MassRatio"),
-  // Debye Angular Wavenumber
-  DebyeAngularWavenumber: Qudt.quantityKindFromLocalnameRequired(
-    "DebyeAngularWavenumber"
-  ),
-  // Spectral Angular Cross-section
-  SpectralAngularCrossSection: Qudt.quantityKindFromLocalnameRequired(
-    "SpectralAngularCrossSection"
-  ),
-  // Extent of Reaction
-  ExtentOfReaction: Qudt.quantityKindFromLocalnameRequired("ExtentOfReaction"),
-  // Time Ratio
-  TimeRatio: Qudt.quantityKindFromLocalnameRequired("TimeRatio"),
-  // Signal Strength
-  SignalStrength: Qudt.quantityKindFromLocalnameRequired("SignalStrength"),
-  // Width
-  Width: Qudt.quantityKindFromLocalnameRequired("Width"),
-  // Electric Displacement
-  ElectricDisplacement: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricDisplacement"
-  ),
-  // Instantaneous Power
-  InstantaneousPower:
-    Qudt.quantityKindFromLocalnameRequired("InstantaneousPower"),
-  // energia libera di Gibbs
-  GibbsEnergy: Qudt.quantityKindFromLocalnameRequired("GibbsEnergy"),
-  // Packing Fraction
-  PackingFraction: Qudt.quantityKindFromLocalnameRequired("PackingFraction"),
-  // Systolic Blood Pressure
-  SystolicBloodPressure: Qudt.quantityKindFromLocalnameRequired(
-    "SystolicBloodPressure"
-  ),
-  // Volume Fraction
-  VolumeFraction: Qudt.quantityKindFromLocalnameRequired("VolumeFraction"),
-  // współczynnik rozszerzalności objętościowej
-  CubicExpansionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "CubicExpansionCoefficient"
-  ),
-  // Force Per Area Time
-  ForcePerAreaTime: Qudt.quantityKindFromLocalnameRequired("ForcePerAreaTime"),
-  // Path Length
-  PathLength: Qudt.quantityKindFromLocalnameRequired("PathLength"),
-  // Position Vector
-  PositionVector: Qudt.quantityKindFromLocalnameRequired("PositionVector"),
-  // Rotational Mass
-  RotationalMass: Qudt.quantityKindFromLocalnameRequired("RotationalMass"),
-  // Product of Inertia
-  PRODUCT__OF__INERTIA:
-    Qudt.quantityKindFromLocalnameRequired("PRODUCT-OF-INERTIA"),
-  // Acceptor Ionization Energy
-  AcceptorIonizationEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "AcceptorIonizationEnergy"
-  ),
-  // Neel Temperature
-  NeelTemperature: Qudt.quantityKindFromLocalnameRequired("NeelTemperature"),
-  // Voltage Ratio
-  VoltageRatio: Qudt.quantityKindFromLocalnameRequired("VoltageRatio"),
-  // Shear Modulus
-  ShearModulus: Qudt.quantityKindFromLocalnameRequired("ShearModulus"),
-  // Molecular Mass
-  MolecularMass: Qudt.quantityKindFromLocalnameRequired("MolecularMass"),
-  // Morbidity Rate
-  MorbidityRate: Qudt.quantityKindFromLocalnameRequired("MorbidityRate"),
-  // Horizontal Velocity
-  HorizontalVelocity:
-    Qudt.quantityKindFromLocalnameRequired("HorizontalVelocity"),
-  // Statistical Weight
-  StatisticalWeight:
-    Qudt.quantityKindFromLocalnameRequired("StatisticalWeight"),
-  // Photosynthetic Photon Flux Density
-  PhotosyntheticPhotonFluxDensity: Qudt.quantityKindFromLocalnameRequired(
-    "PhotosyntheticPhotonFluxDensity"
-  ),
-  // entropie
-  Entropy: Qudt.quantityKindFromLocalnameRequired("Entropy"),
-  // Spectral Cross-section
-  SpectralCrossSection: Qudt.quantityKindFromLocalnameRequired(
-    "SpectralCrossSection"
-  ),
-  // Cold Receptor Threshold
-  ColdReceptorThreshold: Qudt.quantityKindFromLocalnameRequired(
-    "ColdReceptorThreshold"
-  ),
-  // Mass Property Uncertainty
-  MASS__PROPERTY__UNCERTAINTY: Qudt.quantityKindFromLocalnameRequired(
-    "MASS-PROPERTY-UNCERTAINTY"
-  ),
-  // Heat Flow Rate
-  HeatFlowRate: Qudt.quantityKindFromLocalnameRequired("HeatFlowRate"),
-  // Count
-  Count: Qudt.quantityKindFromLocalnameRequired("Count"),
-  // Mass Of Electrical Power Supply
-  MassOfElectricalPowerSupply: Qudt.quantityKindFromLocalnameRequired(
-    "MassOfElectricalPowerSupply"
-  ),
-  // Length per Unit Electric Current
-  LengthPerUnitElectricCurrent: Qudt.quantityKindFromLocalnameRequired(
-    "LengthPerUnitElectricCurrent"
-  ),
-  // Halaju bersudut
-  AngularVelocity: Qudt.quantityKindFromLocalnameRequired("AngularVelocity"),
-  // Henry's Law Volatility Constant
-  HenrysLawVolatilityConstant: Qudt.quantityKindFromLocalnameRequired(
-    "HenrysLawVolatilityConstant"
-  ),
-  // Combined Non Evaporative Heat Transfer Coefficient
-  EvaporativeHeatTransferCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "EvaporativeHeatTransferCoefficient"
-  ),
-  // Liquid Volume
-  LiquidVolume: Qudt.quantityKindFromLocalnameRequired("LiquidVolume"),
-  // Radiance
-  Radiance: Qudt.quantityKindFromLocalnameRequired("Radiance"),
-  // Power Area per Solid Angle
-  PowerAreaPerSolidAngle: Qudt.quantityKindFromLocalnameRequired(
-    "PowerAreaPerSolidAngle"
-  ),
-  // Hydraulic Permeability
-  HydraulicPermeability: Qudt.quantityKindFromLocalnameRequired(
-    "HydraulicPermeability"
-  ),
-  // Relative Humidity
-  RelativeHumidity: Qudt.quantityKindFromLocalnameRequired("RelativeHumidity"),
-  // Average Logarithmic Energy Decrement
-  AverageLogarithmicEnergyDecrement: Qudt.quantityKindFromLocalnameRequired(
-    "AverageLogarithmicEnergyDecrement"
-  ),
-  // Mobility Ratio
-  MobilityRatio: Qudt.quantityKindFromLocalnameRequired("MobilityRatio"),
-  // 动量
-  Momentum: Qudt.quantityKindFromLocalnameRequired("Momentum"),
-  // Aeric Heat Flow Rate
-  AreicHeatFlowRate:
-    Qudt.quantityKindFromLocalnameRequired("AreicHeatFlowRate"),
-  // Concentration
-  Concentration: Qudt.quantityKindFromLocalnameRequired("Concentration"),
-  // opór cieplny
-  ThermalResistance:
-    Qudt.quantityKindFromLocalnameRequired("ThermalResistance"),
-  // Specific Acoustic Impedance
-  SpecificAcousticImpedance: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificAcousticImpedance"
-  ),
-  // Vacuum Thrust
-  VacuumThrust: Qudt.quantityKindFromLocalnameRequired("VacuumThrust"),
-  // Atomic Mass
-  AtomicMass: Qudt.quantityKindFromLocalnameRequired("AtomicMass"),
-  // Relative Mass Ratio of Vapour
-  RelativeMassRatioOfVapour: Qudt.quantityKindFromLocalnameRequired(
-    "RelativeMassRatioOfVapour"
-  ),
-  // Charge Number
-  ChargeNumber: Qudt.quantityKindFromLocalnameRequired("ChargeNumber"),
-  // Electromagnetic Wave Phase Speed
-  ElectromagneticWavePhaseSpeed: Qudt.quantityKindFromLocalnameRequired(
-    "ElectromagneticWavePhaseSpeed"
-  ),
-  // Reflectivity
-  Reflectivity: Qudt.quantityKindFromLocalnameRequired("Reflectivity"),
-  // Action Time
-  ActionTime: Qudt.quantityKindFromLocalnameRequired("ActionTime"),
-  // Non-Leakage Probability
-  Non__LeakageProbability: Qudt.quantityKindFromLocalnameRequired(
-    "Non-LeakageProbability"
-  ),
-  // Susceptance
-  Susceptance: Qudt.quantityKindFromLocalnameRequired("Susceptance"),
-  // Electrical Power To Mass Ratio
-  ElectricalPowerToMassRatio: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricalPowerToMassRatio"
-  ),
-  // momento di dipolo elettrico
-  ElectricDipoleMoment: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricDipoleMoment"
-  ),
-  // Diffusion Area
-  DiffusionArea: Qudt.quantityKindFromLocalnameRequired("DiffusionArea"),
-  // عدد الموجة
-  Wavenumber: Qudt.quantityKindFromLocalnameRequired("Wavenumber"),
-  // specific weight
-  SpecificWeight: Qudt.quantityKindFromLocalnameRequired("SpecificWeight"),
-  // Predicted Mass
-  PREDICTED__MASS: Qudt.quantityKindFromLocalnameRequired("PREDICTED-MASS"),
-  // Compressibility Factor
-  CompressibilityFactor: Qudt.quantityKindFromLocalnameRequired(
-    "CompressibilityFactor"
-  ),
-  // flusso magnetico
-  MagneticFlux: Qudt.quantityKindFromLocalnameRequired("MagneticFlux"),
-  // Diffusion Coefficient for Fluence Rate
-  DiffusionCoefficientForFluenceRate: Qudt.quantityKindFromLocalnameRequired(
-    "DiffusionCoefficientForFluenceRate"
-  ),
-  // Melting Point Temperature
-  MeltingPoint: Qudt.quantityKindFromLocalnameRequired("MeltingPoint"),
-  // Magnetic Susceptability
-  MagneticSusceptability: Qudt.quantityKindFromLocalnameRequired(
-    "MagneticSusceptability"
-  ),
-  // Length Force
-  LengthByForce: Qudt.quantityKindFromLocalnameRequired("LengthByForce"),
-  // Mass Concentration of Water
-  MassConcentrationOfWater: Qudt.quantityKindFromLocalnameRequired(
-    "MassConcentrationOfWater"
-  ),
-  // Adaptation
-  Adaptation: Qudt.quantityKindFromLocalnameRequired("Adaptation"),
-  // Video Frame Rate
-  VideoFrameRate: Qudt.quantityKindFromLocalnameRequired("VideoFrameRate"),
-  // Ignition interval time
-  IgnitionIntervalTime: Qudt.quantityKindFromLocalnameRequired(
-    "IgnitionIntervalTime"
-  ),
-  // podatność elektryczna
-  ElectricSusceptibility: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricSusceptibility"
+  // Curvature
+  CurvatureFromRadius: Qudt.quantityKindFromLocalnameRequired(
+    "CurvatureFromRadius"
   ),
   // Contract End Item (CEI) Specification Mass.
   CONTRACT__END__ITEM__SPECIFICATION__MASS:
     Qudt.quantityKindFromLocalnameRequired(
       "CONTRACT-END-ITEM-SPECIFICATION-MASS"
     ),
-  // Magnetization Field
-  MagnetizationField:
-    Qudt.quantityKindFromLocalnameRequired("MagnetizationField"),
-  // Square Energy
-  SquareEnergy: Qudt.quantityKindFromLocalnameRequired("SquareEnergy"),
-  // Gustatory Threshold
-  GustatoryThreshold:
-    Qudt.quantityKindFromLocalnameRequired("GustatoryThreshold"),
-  // Hole Density
-  HoleDensity: Qudt.quantityKindFromLocalnameRequired("HoleDensity"),
-  // Static Friction
-  StaticFriction: Qudt.quantityKindFromLocalnameRequired("StaticFriction"),
-  // Thrust Coefficient
-  ThrustCoefficient:
-    Qudt.quantityKindFromLocalnameRequired("ThrustCoefficient"),
-  // Ventilation Rate per Floor Area
-  VentilationRatePerFloorArea: Qudt.quantityKindFromLocalnameRequired(
-    "VentilationRatePerFloorArea"
-  ),
-  // Viscosity
-  Viscosity: Qudt.quantityKindFromLocalnameRequired("Viscosity"),
-  // ऊष्मा धारिता
-  HeatCapacity: Qudt.quantityKindFromLocalnameRequired("HeatCapacity"),
-  // induktivitás
-  Inductance: Qudt.quantityKindFromLocalnameRequired("Inductance"),
-  // Area Thermal Expansion
-  AreaThermalExpansion: Qudt.quantityKindFromLocalnameRequired(
-    "AreaThermalExpansion"
-  ),
-  // Flash Point Temperature
-  FlashPoint: Qudt.quantityKindFromLocalnameRequired("FlashPoint"),
-  // Sound reduction index
-  SoundReductionIndex: Qudt.quantityKindFromLocalnameRequired(
-    "SoundReductionIndex"
-  ),
-  // Acidity
-  Acidity: Qudt.quantityKindFromLocalnameRequired("Acidity"),
-  // Mass Fraction of Dry Matter
-  MassFractionOfDryMatter: Qudt.quantityKindFromLocalnameRequired(
-    "MassFractionOfDryMatter"
-  ),
-  // Mortality Rate
-  MortalityRate: Qudt.quantityKindFromLocalnameRequired("MortalityRate"),
-  // Source Voltage
-  SourceVoltage: Qudt.quantityKindFromLocalnameRequired("SourceVoltage"),
-  // Transmittance
-  Transmittance: Qudt.quantityKindFromLocalnameRequired("Transmittance"),
-  // teplota
-  CelsiusTemperature:
-    Qudt.quantityKindFromLocalnameRequired("CelsiusTemperature"),
-  // eficiência
-  Efficiency: Qudt.quantityKindFromLocalnameRequired("Efficiency"),
-  // Propellant Burn Rate
-  PropellantBurnRate:
-    Qudt.quantityKindFromLocalnameRequired("PropellantBurnRate"),
-  // Thermal Admittance
-  ThermalAdmittance:
-    Qudt.quantityKindFromLocalnameRequired("ThermalAdmittance"),
-  // Thermodynamic Critical Magnetic Flux Density
-  ThermodynamicCriticalMagneticFluxDensity:
-    Qudt.quantityKindFromLocalnameRequired(
-      "ThermodynamicCriticalMagneticFluxDensity"
-    ),
-  // Section Area Integral
-  SectionAreaIntegral: Qudt.quantityKindFromLocalnameRequired(
-    "SectionAreaIntegral"
-  ),
-  // Thermal Efficiency
-  ThermalEfficiency:
-    Qudt.quantityKindFromLocalnameRequired("ThermalEfficiency"),
-  // Constringence
-  Constringence: Qudt.quantityKindFromLocalnameRequired("Constringence"),
-  // electromotive force
-  ElectromotiveForce:
-    Qudt.quantityKindFromLocalnameRequired("ElectromotiveForce"),
-  // Specific Optical Rotatory Power
-  SpecificOpticalRotatoryPower: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificOpticalRotatoryPower"
-  ),
-  // Positive Plane Angle
-  PositivePlaneAngle:
-    Qudt.quantityKindFromLocalnameRequired("PositivePlaneAngle"),
-  // Photo Threshold of Awareness Function
-  PhotoThresholdOfAwarenessFunction: Qudt.quantityKindFromLocalnameRequired(
-    "PhotoThresholdOfAwarenessFunction"
-  ),
-  // Osmotic Coefficient
-  OsmoticCoefficient:
-    Qudt.quantityKindFromLocalnameRequired("OsmoticCoefficient"),
-  // Time Temperature
-  TimeTemperature: Qudt.quantityKindFromLocalnameRequired("TimeTemperature"),
-  // Угловое ускорение
-  AngularAcceleration: Qudt.quantityKindFromLocalnameRequired(
-    "AngularAcceleration"
-  ),
-  // Average Specific Impulse
-  AverageSpecificImpulse: Qudt.quantityKindFromLocalnameRequired(
-    "AverageSpecificImpulse"
-  ),
-  // Turns
-  Turns: Qudt.quantityKindFromLocalnameRequired("Turns"),
-  // Final Or Current Vehicle Mass
-  FinalOrCurrentVehicleMass: Qudt.quantityKindFromLocalnameRequired(
-    "FinalOrCurrentVehicleMass"
-  ),
-  // Mass Of Solid Booster
-  MassOfSolidBooster:
-    Qudt.quantityKindFromLocalnameRequired("MassOfSolidBooster"),
-  // Dimensionless Ratio
-  DimensionlessRatio:
-    Qudt.quantityKindFromLocalnameRequired("DimensionlessRatio"),
-  // Surface Coefficient of Heat Transfer
-  SurfaceCoefficientOfHeatTransfer: Qudt.quantityKindFromLocalnameRequired(
-    "SurfaceCoefficientOfHeatTransfer"
-  ),
-  // Thermodynamic Energy
-  ThermodynamicEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "ThermodynamicEnergy"
-  ),
-  // Temperature per Time Squared
-  TemperaturePerTime_Squared: Qudt.quantityKindFromLocalnameRequired(
-    "TemperaturePerTime_Squared"
-  ),
-  // Thermal Resistivity
-  ThermalResistivity:
-    Qudt.quantityKindFromLocalnameRequired("ThermalResistivity"),
-  // Stress
-  Stress: Qudt.quantityKindFromLocalnameRequired("Stress"),
-  // Volume per Unit Area
-  VolumePerArea: Qudt.quantityKindFromLocalnameRequired("VolumePerArea"),
-  // Center of Gravity in the Z axis
-  CENTER__OF__GRAVITY_Z: Qudt.quantityKindFromLocalnameRequired(
-    "CENTER-OF-GRAVITY_Z"
-  ),
-  // liczba neutronowa
-  NeutronNumber: Qudt.quantityKindFromLocalnameRequired("NeutronNumber"),
-  // Electric Charge Density
-  ElectricChargeDensity: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricChargeDensity"
-  ),
-  // Static pressure
-  StaticPressure: Qudt.quantityKindFromLocalnameRequired("StaticPressure"),
-  // temperatura thermodynamica absoluta
-  ThermodynamicTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "ThermodynamicTemperature"
-  ),
-  // Square Energy
-  Energy_Squared: Qudt.quantityKindFromLocalnameRequired("Energy_Squared"),
-  // Molar Absorption Coefficient
-  MolarAbsorptionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "MolarAbsorptionCoefficient"
-  ),
   // Mass Amount of Substance Temperature
   MassAmountOfSubstanceTemperature: Qudt.quantityKindFromLocalnameRequired(
     "MassAmountOfSubstanceTemperature"
   ),
-  // Mechanical Mobility
-  MechanicalMobility:
-    Qudt.quantityKindFromLocalnameRequired("MechanicalMobility"),
-  // Active Power
-  ActivePower: Qudt.quantityKindFromLocalnameRequired("ActivePower"),
-  // Conductivity
-  Conductivity: Qudt.quantityKindFromLocalnameRequired("Conductivity"),
-  // Magnetomotive Force
-  MagnetomotiveForce:
-    Qudt.quantityKindFromLocalnameRequired("MagnetomotiveForce"),
-  // volume molar
-  MolarVolume: Qudt.quantityKindFromLocalnameRequired("MolarVolume"),
-  // Mean Free Path
-  MeanFreePath: Qudt.quantityKindFromLocalnameRequired("MeanFreePath"),
-  // Thermal Diffusion Ratio
-  ThermalDiffusionRatio: Qudt.quantityKindFromLocalnameRequired(
-    "ThermalDiffusionRatio"
-  ),
-  // Soil Adsorption Coefficient
-  SoilAdsorptionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "SoilAdsorptionCoefficient"
-  ),
-  // Length Ratio
-  LengthRatio: Qudt.quantityKindFromLocalnameRequired("LengthRatio"),
-  // Temperature Ratio
-  TemperatureRatio: Qudt.quantityKindFromLocalnameRequired("TemperatureRatio"),
-  // PH
-  PH: Qudt.quantityKindFromLocalnameRequired("PH"),
-  // Diastolic Blood Pressure
-  DiastolicBloodPressure: Qudt.quantityKindFromLocalnameRequired(
-    "DiastolicBloodPressure"
-  ),
-  // Photon Intensity
-  PhotonIntensity: Qudt.quantityKindFromLocalnameRequired("PhotonIntensity"),
-  // čas
-  Time: Qudt.quantityKindFromLocalnameRequired("Time"),
-  // Angular Momentum per Angle
-  AngularMomentumPerAngle: Qudt.quantityKindFromLocalnameRequired(
-    "AngularMomentumPerAngle"
-  ),
-  // Debye Temperature
-  DebyeTemperature: Qudt.quantityKindFromLocalnameRequired("DebyeTemperature"),
-  // Linear Strain
-  LinearStrain: Qudt.quantityKindFromLocalnameRequired("LinearStrain"),
-  // Specific Surface Area
-  SpecificSurfaceArea: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificSurfaceArea"
-  ),
-  // Effective Mass
-  EffectiveMass: Qudt.quantityKindFromLocalnameRequired("EffectiveMass"),
-  // Mass Excess
-  MassExcess: Qudt.quantityKindFromLocalnameRequired("MassExcess"),
-  // תדירות
-  Frequency: Qudt.quantityKindFromLocalnameRequired("Frequency"),
-  // Payload Mass
-  PayloadMass: Qudt.quantityKindFromLocalnameRequired("PayloadMass"),
-  // Residual Resistivity
-  ResidualResistivity: Qudt.quantityKindFromLocalnameRequired(
-    "ResidualResistivity"
-  ),
-  // Slowing-Down Density
-  Slowing__DownDensity: Qudt.quantityKindFromLocalnameRequired(
-    "Slowing-DownDensity"
-  ),
-  // Sound intensity
-  SoundIntensity: Qudt.quantityKindFromLocalnameRequired("SoundIntensity"),
-  // Anschaffungskosten pro Watt
-  CostPerUnitPower: Qudt.quantityKindFromLocalnameRequired("CostPerUnitPower"),
-  // London Penetration Depth
-  LondonPenetrationDepth: Qudt.quantityKindFromLocalnameRequired(
-    "LondonPenetrationDepth"
-  ),
-  // Rotational Stiffness
-  RotationalStiffness: Qudt.quantityKindFromLocalnameRequired(
-    "RotationalStiffness"
-  ),
-  // Ion Density
-  IonDensity: Qudt.quantityKindFromLocalnameRequired("IonDensity"),
-  // Level Width
-  LevelWidth: Qudt.quantityKindFromLocalnameRequired("LevelWidth"),
-  // Upper Critical Magnetic Flux Density
-  UpperCriticalMagneticFluxDensity: Qudt.quantityKindFromLocalnameRequired(
-    "UpperCriticalMagneticFluxDensity"
-  ),
-  // Gap Energy
-  GapEnergy: Qudt.quantityKindFromLocalnameRequired("GapEnergy"),
-  // Inverse Permittivity
-  InversePermittivity: Qudt.quantityKindFromLocalnameRequired(
-    "InversePermittivity"
-  ),
-  // Bevel Gear Pitch Angle
-  BevelGearPitchAngle: Qudt.quantityKindFromLocalnameRequired(
-    "BevelGearPitchAngle"
-  ),
-  // Radius of Curvature
-  RadiusOfCurvature:
-    Qudt.quantityKindFromLocalnameRequired("RadiusOfCurvature"),
-  // Bragg Angle
-  BraggAngle: Qudt.quantityKindFromLocalnameRequired("BraggAngle"),
-  // Molar Conductivity
-  MolarConductivity:
-    Qudt.quantityKindFromLocalnameRequired("MolarConductivity"),
-  // Magnetic flux per unit length
-  MagneticFluxPerUnitLength: Qudt.quantityKindFromLocalnameRequired(
-    "MagneticFluxPerUnitLength"
-  ),
-  // Prevalence
-  Prevalence: Qudt.quantityKindFromLocalnameRequired("Prevalence"),
-  // Thrust To Weight Ratio
-  ThrustToWeightRatio: Qudt.quantityKindFromLocalnameRequired(
-    "ThrustToWeightRatio"
-  ),
-  // Max Sea Level Thrust
-  MaxSeaLevelThrust:
-    Qudt.quantityKindFromLocalnameRequired("MaxSeaLevelThrust"),
-  // Sound pressure
-  SoundPressure: Qudt.quantityKindFromLocalnameRequired("SoundPressure"),
-  // Bending Moment of Force
-  BendingMomentOfForce: Qudt.quantityKindFromLocalnameRequired(
-    "BendingMomentOfForce"
-  ),
-  // Radiant Emmitance
-  RadiantEmmitance: Qudt.quantityKindFromLocalnameRequired("RadiantEmmitance"),
-  // Voltage Percentage
-  VoltagePercentage:
-    Qudt.quantityKindFromLocalnameRequired("VoltagePercentage"),
-  // area per length
-  AreaPerLength: Qudt.quantityKindFromLocalnameRequired("AreaPerLength"),
-  // инвариантная масса
-  RestMass: Qudt.quantityKindFromLocalnameRequired("RestMass"),
-  // Thermal Transmittance
-  ThermalTransmittance: Qudt.quantityKindFromLocalnameRequired(
-    "ThermalTransmittance"
-  ),
-  // Warm Receptor Threshold
-  WarmReceptorThreshold: Qudt.quantityKindFromLocalnameRequired(
-    "WarmReceptorThreshold"
-  ),
-  // Loss Factor
-  LossFactor: Qudt.quantityKindFromLocalnameRequired("LossFactor"),
-  // Power per Area Angle
-  PowerPerAreaAngle:
-    Qudt.quantityKindFromLocalnameRequired("PowerPerAreaAngle"),
-  // Control Mass.
-  CONTROL__MASS: Qudt.quantityKindFromLocalnameRequired("CONTROL-MASS"),
-  // Polarizability
-  Polarizability: Qudt.quantityKindFromLocalnameRequired("Polarizability"),
-  // Radiant Intensity
-  RadiantIntensity: Qudt.quantityKindFromLocalnameRequired("RadiantIntensity"),
-  // Spectral Radiant Energy Density
-  SpectralRadiantEnergyDensity: Qudt.quantityKindFromLocalnameRequired(
-    "SpectralRadiantEnergyDensity"
-  ),
-  // Volumic Electromagnetic Energy
-  VolumicElectromagneticEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "VolumicElectromagneticEnergy"
-  ),
-  // Resistance Percentage
-  ResistancePercentage: Qudt.quantityKindFromLocalnameRequired(
-    "ResistancePercentage"
-  ),
-  // Stress-Optic Coefficient
-  StressOpticCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "StressOpticCoefficient"
-  ),
-  // Radial Distance
-  RadialDistance: Qudt.quantityKindFromLocalnameRequired("RadialDistance"),
-  // Gain
-  Gain: Qudt.quantityKindFromLocalnameRequired("Gain"),
-  // Maximum Operating Pressure
-  MaximumOperatingPressure: Qudt.quantityKindFromLocalnameRequired(
-    "MaximumOperatingPressure"
-  ),
+  // Particle Current
+  ParticleCurrent: Qudt.quantityKindFromLocalnameRequired("ParticleCurrent"),
+  // Radiant Fluence
+  RadiantFluence: Qudt.quantityKindFromLocalnameRequired("RadiantFluence"),
   // Temperature per Time
   TemperaturePerTime:
     Qudt.quantityKindFromLocalnameRequired("TemperaturePerTime"),
-  // Energy Per Square Magnetic Flux Density
-  EnergyPerSquareMagneticFluxDensity: Qudt.quantityKindFromLocalnameRequired(
-    "EnergyPerSquareMagneticFluxDensity"
+  // Specific Acoustic Impedance
+  SpecificAcousticImpedance: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificAcousticImpedance"
   ),
-  // Magnetic Quantum Number
-  MagneticQuantumNumber: Qudt.quantityKindFromLocalnameRequired(
-    "MagneticQuantumNumber"
-  ),
-  // Specific Power
-  SpecificPower: Qudt.quantityKindFromLocalnameRequired("SpecificPower"),
-  // Temperature per Magnetic Flux Density
-  TemperaturePerMagneticFluxDensity: Qudt.quantityKindFromLocalnameRequired(
-    "TemperaturePerMagneticFluxDensity"
-  ),
-  // Energy Expenditure
-  EnergyExpenditure:
-    Qudt.quantityKindFromLocalnameRequired("EnergyExpenditure"),
-  // Radiosity
-  Radiosity: Qudt.quantityKindFromLocalnameRequired("Radiosity"),
-  // Number Density
-  NumberDensity: Qudt.quantityKindFromLocalnameRequired("NumberDensity"),
-  // Conductance
-  Conductance: Qudt.quantityKindFromLocalnameRequired("Conductance"),
-  // Propagation coefficient
-  PropagationCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "PropagationCoefficient"
-  ),
-  // Kreisfrequenz
-  AngularFrequency: Qudt.quantityKindFromLocalnameRequired("AngularFrequency"),
-  // Web Time Average Pressure
-  WebTimeAveragePressure: Qudt.quantityKindFromLocalnameRequired(
-    "WebTimeAveragePressure"
-  ),
-  // Moment of Inertia in the Y axis
-  MOMENT__OF__INERTIA_Y: Qudt.quantityKindFromLocalnameRequired(
-    "MOMENT-OF-INERTIA_Y"
-  ),
-  // larghezza
-  Breadth: Qudt.quantityKindFromLocalnameRequired("Breadth"),
-  // Activity
-  Activity: Qudt.quantityKindFromLocalnameRequired("Activity"),
-  // Reflectance
-  Reflectance: Qudt.quantityKindFromLocalnameRequired("Reflectance"),
-  // Circulation
-  Circulation: Qudt.quantityKindFromLocalnameRequired("Circulation"),
-  // Modulus of Elasticity
-  ModulusOfElasticity: Qudt.quantityKindFromLocalnameRequired(
-    "ModulusOfElasticity"
-  ),
-  // Energy Level
-  EnergyLevel: Qudt.quantityKindFromLocalnameRequired("EnergyLevel"),
-  // Specific Electrical Current
-  SpecificElectricCurrent: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificElectricCurrent"
-  ),
-  // Electric Charge Volume Density
-  ElectricChargeVolumeDensity: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricChargeVolumeDensity"
-  ),
-  // Depth
-  Depth: Qudt.quantityKindFromLocalnameRequired("Depth"),
-  // Orbital Angular Momentum per Unit Mass
-  OrbitalAngularMomentumPerUnitMass: Qudt.quantityKindFromLocalnameRequired(
-    "OrbitalAngularMomentumPerUnitMass"
-  ),
-  // Volume
-  Volume: Qudt.quantityKindFromLocalnameRequired("Volume"),
-  // cost per area
-  CostPerArea: Qudt.quantityKindFromLocalnameRequired("CostPerArea"),
-  // Electric Charge Per Mass
-  ElectricChargePerMass: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricChargePerMass"
-  ),
-  // Diffusionskoeffizient
-  DiffusionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "DiffusionCoefficient"
-  ),
-  // Electric Charge Surface Density
-  ElectricChargeSurfaceDensity: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricChargeSurfaceDensity"
-  ),
-  // Berat
-  Weight: Qudt.quantityKindFromLocalnameRequired("Weight"),
-  // Oberflächenspannung
-  SurfaceTension: Qudt.quantityKindFromLocalnameRequired("SurfaceTension"),
-  // Flight Path Angle
-  FlightPathAngle: Qudt.quantityKindFromLocalnameRequired("FlightPathAngle"),
-  // Force Per Area
-  ForcePerArea: Qudt.quantityKindFromLocalnameRequired("ForcePerArea"),
-  // Luminous Exposure
-  LuminousExposure: Qudt.quantityKindFromLocalnameRequired("LuminousExposure"),
-  // Number of Particles
-  NumberOfParticles:
-    Qudt.quantityKindFromLocalnameRequired("NumberOfParticles"),
-  // Relative Luminous Flux
-  RelativeLuminousFlux: Qudt.quantityKindFromLocalnameRequired(
-    "RelativeLuminousFlux"
-  ),
-  // Electric Current per Angle
-  ElectricCurrentPerAngle: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricCurrentPerAngle"
-  ),
-  // Particle Position Vector
-  ParticlePositionVector: Qudt.quantityKindFromLocalnameRequired(
-    "ParticlePositionVector"
-  ),
-  // Respiratory Rate
-  RespiratoryRate: Qudt.quantityKindFromLocalnameRequired("RespiratoryRate"),
-  // Body Mass Index
-  BodyMassIndex: Qudt.quantityKindFromLocalnameRequired("BodyMassIndex"),
-  // Electric Flux
-  ElectricFlux: Qudt.quantityKindFromLocalnameRequired("ElectricFlux"),
-  // Generalized Velocity
-  GeneralizedVelocity: Qudt.quantityKindFromLocalnameRequired(
-    "GeneralizedVelocity"
-  ),
-  // Specific Impulse
-  SpecificImpulse: Qudt.quantityKindFromLocalnameRequired("SpecificImpulse"),
-  // Thermal Expansion Coefficient
-  ThermalExpansionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "ThermalExpansionCoefficient"
-  ),
-  // Mechanical Impedance
-  MechanicalImpedance: Qudt.quantityKindFromLocalnameRequired(
-    "MechanicalImpedance"
-  ),
-  // Ion Current
-  IonCurrent: Qudt.quantityKindFromLocalnameRequired("IonCurrent"),
-  // Dry Mass
-  DRY__MASS: Qudt.quantityKindFromLocalnameRequired("DRY-MASS"),
-  // Activity Concentration
-  ActivityConcentration: Qudt.quantityKindFromLocalnameRequired(
-    "ActivityConcentration"
-  ),
-  // Total Linear Stopping Power
-  TotalLinearStoppingPower: Qudt.quantityKindFromLocalnameRequired(
-    "TotalLinearStoppingPower"
-  ),
-  // Specific Heat Capacity at Saturation
-  SpecificHeatCapacityAtSaturation: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificHeatCapacityAtSaturation"
-  ),
-  // Thrust To Mass Ratio
-  ThrustToMassRatio:
-    Qudt.quantityKindFromLocalnameRequired("ThrustToMassRatio"),
-  // Exhaust Gases Specific Heat
-  ExhaustGasesSpecificHeat: Qudt.quantityKindFromLocalnameRequired(
-    "ExhaustGasesSpecificHeat"
-  ),
-  // Resistivity
-  Resistivity: Qudt.quantityKindFromLocalnameRequired("Resistivity"),
-  // Angular Cross-section
-  AngularCrossSection: Qudt.quantityKindFromLocalnameRequired(
-    "AngularCrossSection"
-  ),
-  // Center of Gravity in the X axis
-  CenterOfGravity_X:
-    Qudt.quantityKindFromLocalnameRequired("CenterOfGravity_X"),
-  // Coefficient of heat transfer
-  CoefficientOfHeatTransfer: Qudt.quantityKindFromLocalnameRequired(
-    "CoefficientOfHeatTransfer"
-  ),
-  // polarizzabilità elettrica
-  ElectricPolarizability: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricPolarizability"
-  ),
-  // Nozzle Throat Cross-sectional Area
-  NozzleThroatCrossSectionalArea: Qudt.quantityKindFromLocalnameRequired(
-    "NozzleThroatCrossSectionalArea"
-  ),
-  // spin
-  Spin: Qudt.quantityKindFromLocalnameRequired("Spin"),
-  // Relative Mass Excess
-  RelativeMassExcess:
-    Qudt.quantityKindFromLocalnameRequired("RelativeMassExcess"),
-  // Mutual Inductance
-  MutualInductance: Qudt.quantityKindFromLocalnameRequired("MutualInductance"),
-  // Burgers Vector
-  BurgersVector: Qudt.quantityKindFromLocalnameRequired("BurgersVector"),
-  // Density Of The Exhaust Gases
-  DensityOfTheExhaustGases: Qudt.quantityKindFromLocalnameRequired(
-    "DensityOfTheExhaustGases"
-  ),
-  // Elliptical Orbit Perigee Velocity
-  EllipticalOrbitPerigeeVelocity: Qudt.quantityKindFromLocalnameRequired(
-    "EllipticalOrbitPerigeeVelocity"
-  ),
-  // Heat Flux Density
-  HeatFluxDensity: Qudt.quantityKindFromLocalnameRequired("HeatFluxDensity"),
-  // Order of Reflection
-  OrderOfReflection:
-    Qudt.quantityKindFromLocalnameRequired("OrderOfReflection"),
-  // Relative Mass Concentration of Vapour
-  RelativeMassConcentrationOfVapour: Qudt.quantityKindFromLocalnameRequired(
-    "RelativeMassConcentrationOfVapour"
-  ),
-  // Diffusion Length
-  DiffusionLength: Qudt.quantityKindFromLocalnameRequired("DiffusionLength"),
-  // Nuclear Radius
-  NuclearRadius: Qudt.quantityKindFromLocalnameRequired("NuclearRadius"),
-  // Web Time Average Thrust
-  WebTimeAverageThrust: Qudt.quantityKindFromLocalnameRequired(
-    "WebTimeAverageThrust"
-  ),
-  // Resistance Ratio
-  ResistanceRatio: Qudt.quantityKindFromLocalnameRequired("ResistanceRatio"),
-  // Specific Electric Charge
-  SpecificElectricCharge: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificElectricCharge"
-  ),
-  // Slowing-Down Area
-  Slowing__DownArea: Qudt.quantityKindFromLocalnameRequired("Slowing-DownArea"),
-  // Electric Current per Unit Energy
-  ElectricCurrentPerUnitEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricCurrentPerUnitEnergy"
-  ),
-  // Momentum per Angle
-  MomentumPerAngle: Qudt.quantityKindFromLocalnameRequired("MomentumPerAngle"),
-  // Donor Ionization Energy
-  DonorIonizationEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "DonorIonizationEnergy"
-  ),
-  // Moisture Diffusivity
-  MoistureDiffusivity: Qudt.quantityKindFromLocalnameRequired(
-    "MoistureDiffusivity"
-  ),
-  // Larmor Angular Frequency
-  LarmorAngularFrequency: Qudt.quantityKindFromLocalnameRequired(
-    "LarmorAngularFrequency"
-  ),
-  // نقطه کوری
-  CurieTemperature: Qudt.quantityKindFromLocalnameRequired("CurieTemperature"),
-  // Isothermal Moisture Capacity
-  IsothermalMoistureCapacity: Qudt.quantityKindFromLocalnameRequired(
-    "IsothermalMoistureCapacity"
-  ),
-  // Beta Disintegration Energy
-  BetaDisintegrationEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "BetaDisintegrationEnergy"
-  ),
-  // Larmor Angular Frequency
-  CyclotronAngularFrequency: Qudt.quantityKindFromLocalnameRequired(
-    "CyclotronAngularFrequency"
-  ),
-  // Ionic Strength
-  IonicStrength: Qudt.quantityKindFromLocalnameRequired("IonicStrength"),
-  // Neutron Diffusion Length
-  NeutronDiffusionLength: Qudt.quantityKindFromLocalnameRequired(
-    "NeutronDiffusionLength"
-  ),
-  // سرعت صوت
-  SpeedOfSound: Qudt.quantityKindFromLocalnameRequired("SpeedOfSound"),
-  // Bulk Modulus
-  BulkModulus: Qudt.quantityKindFromLocalnameRequired("BulkModulus"),
-  // Angle of Optical Rotation
-  AngleOfOpticalRotation: Qudt.quantityKindFromLocalnameRequired(
-    "AngleOfOpticalRotation"
-  ),
-  // Thruster Power To Thrust Efficiency
-  ThrusterPowerToThrustEfficiency: Qudt.quantityKindFromLocalnameRequired(
-    "ThrusterPowerToThrustEfficiency"
-  ),
-  // Friction
-  Friction: Qudt.quantityKindFromLocalnameRequired("Friction"),
-  // Magnetic Reluctivity
-  MagneticReluctivity: Qudt.quantityKindFromLocalnameRequired(
-    "MagneticReluctivity"
-  ),
-  // Volumetric Flux
-  VolumetricFlux: Qudt.quantityKindFromLocalnameRequired("VolumetricFlux"),
-  // Linear Attenuation Coefficient
-  LinearAttenuationCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "LinearAttenuationCoefficient"
-  ),
-  // Molar Angular Momentum
-  MolarAngularMomentum: Qudt.quantityKindFromLocalnameRequired(
-    "MolarAngularMomentum"
-  ),
-  // Stage Structure Mass
-  StageStructuralMass: Qudt.quantityKindFromLocalnameRequired(
-    "StageStructuralMass"
-  ),
-  // श्यानता
-  KinematicViscosity:
-    Qudt.quantityKindFromLocalnameRequired("KinematicViscosity"),
-  // Nozzle Walls Thrust Reaction
-  NozzleWallsThrustReaction: Qudt.quantityKindFromLocalnameRequired(
-    "NozzleWallsThrustReaction"
-  ),
-  // Gross Lift-Off Weight
-  GROSS__LIFT__OFF__WEIGHT: Qudt.quantityKindFromLocalnameRequired(
-    "GROSS-LIFT-OFF-WEIGHT"
-  ),
-  // Dynamic Friction
-  DynamicFriction: Qudt.quantityKindFromLocalnameRequired("DynamicFriction"),
-  // Section Modulus
-  SectionModulus: Qudt.quantityKindFromLocalnameRequired("SectionModulus"),
-  // Mass Number
-  MassNumber: Qudt.quantityKindFromLocalnameRequired("MassNumber"),
-  // Exposure Rate
-  ExposureRate: Qudt.quantityKindFromLocalnameRequired("ExposureRate"),
-  // Second Polar Moment of Area
-  SecondPolarMomentOfArea: Qudt.quantityKindFromLocalnameRequired(
-    "SecondPolarMomentOfArea"
-  ),
-  // 压强、压力
-  Pressure: Qudt.quantityKindFromLocalnameRequired("Pressure"),
-  // API Gravity
-  Gravity_API: Qudt.quantityKindFromLocalnameRequired("Gravity_API"),
-  // Angular Reciprocal Lattice Vector
-  AngularReciprocalLatticeVector: Qudt.quantityKindFromLocalnameRequired(
-    "AngularReciprocalLatticeVector"
-  ),
-  // Diffusion Length (Solid State Physics)
-  SolidStateDiffusionLength: Qudt.quantityKindFromLocalnameRequired(
-    "SolidStateDiffusionLength"
-  ),
-  // Electric Propulsion Propellant Mass
-  ElectricPropulsionPropellantMass: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricPropulsionPropellantMass"
-  ),
-  // Atmospheric Pressure
-  AtmosphericPressure: Qudt.quantityKindFromLocalnameRequired(
-    "AtmosphericPressure"
-  ),
-  // Mass Energy Transfer Coefficient
-  MassEnergyTransferCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "MassEnergyTransferCoefficient"
-  ),
-  // Total Angular Momentum Quantum Number
-  TotalAngularMomentumQuantumNumber: Qudt.quantityKindFromLocalnameRequired(
-    "TotalAngularMomentumQuantumNumber"
-  ),
-  // Fermi Temperature
-  FermiTemperature: Qudt.quantityKindFromLocalnameRequired("FermiTemperature"),
-  // Linear Velocity
-  LinearVelocity: Qudt.quantityKindFromLocalnameRequired("LinearVelocity"),
-  // Inverse Energy
-  InverseEnergy: Qudt.quantityKindFromLocalnameRequired("InverseEnergy"),
-  // 速度
-  Velocity: Qudt.quantityKindFromLocalnameRequired("Velocity"),
-  // Linear Force
-  LinearForce: Qudt.quantityKindFromLocalnameRequired("LinearForce"),
-  // Power Per Area
-  PowerPerArea: Qudt.quantityKindFromLocalnameRequired("PowerPerArea"),
-  // RF-Power Level
-  RF__Power: Qudt.quantityKindFromLocalnameRequired("RF-Power"),
-  // Energy Per Square Magnetic Flux Density
-  EnergyPerMagneticFluxDensity_Squared: Qudt.quantityKindFromLocalnameRequired(
-    "EnergyPerMagneticFluxDensity_Squared"
-  ),
-  // Inverse Length
-  InverseLength: Qudt.quantityKindFromLocalnameRequired("InverseLength"),
-  // Diffusionskoeffizient
-  NeutronDiffusionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "NeutronDiffusionCoefficient"
-  ),
-  // Modulus Of Admittance
-  ModulusOfAdmittance: Qudt.quantityKindFromLocalnameRequired(
-    "ModulusOfAdmittance"
-  ),
-  // Mechanical Energy
-  MechanicalEnergy: Qudt.quantityKindFromLocalnameRequired("MechanicalEnergy"),
-  // Pressure Burning Rate Index
-  PressureBurningRateIndex: Qudt.quantityKindFromLocalnameRequired(
-    "PressureBurningRateIndex"
-  ),
-  // श्यानता
-  DynamicViscosity: Qudt.quantityKindFromLocalnameRequired("DynamicViscosity"),
-  // Molality of Solute
-  MolalityOfSolute: Qudt.quantityKindFromLocalnameRequired("MolalityOfSolute"),
-  // Superconductor Energy Gap
-  SuperconductorEnergyGap: Qudt.quantityKindFromLocalnameRequired(
-    "SuperconductorEnergyGap"
-  ),
-  // Mass Margin
-  MASS__MARGIN: Qudt.quantityKindFromLocalnameRequired("MASS-MARGIN"),
-  // Equilibrium Constant on Concentration Basis
-  EquilibriumConstantOnConcentrationBasis:
-    Qudt.quantityKindFromLocalnameRequired(
-      "EquilibriumConstantOnConcentrationBasis"
-    ),
-  // Amount of Substance of Fraction of B
-  AmountOfSubstanceFractionOfB: Qudt.quantityKindFromLocalnameRequired(
-    "AmountOfSubstanceFractionOfB"
-  ),
-  // Magnetic Polarization
-  MagneticPolarization: Qudt.quantityKindFromLocalnameRequired(
-    "MagneticPolarization"
-  ),
-  // Radius
-  Radius: Qudt.quantityKindFromLocalnameRequired("Radius"),
-  // Temperature
-  Temperature: Qudt.quantityKindFromLocalnameRequired("Temperature"),
-  // Molar Refractivity
-  MolarRefractivity:
-    Qudt.quantityKindFromLocalnameRequired("MolarRefractivity"),
-  // Growing Degree Days (Cereals)
-  GrowingDegreeDay_Cereal: Qudt.quantityKindFromLocalnameRequired(
-    "GrowingDegreeDay_Cereal"
-  ),
-  // Specific Gibbs Energy
-  SpecificGibbsEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificGibbsEnergy"
-  ),
-  // Inverse Volume
-  InverseVolume: Qudt.quantityKindFromLocalnameRequired("InverseVolume"),
-  // Cubic Electric Dipole Moment per Square Energy
-  ElectricDipoleMoment_CubicPerEnergy_Squared:
-    Qudt.quantityKindFromLocalnameRequired(
-      "ElectricDipoleMoment_CubicPerEnergy_Squared"
-    ),
-  // Resonance Energy
-  ResonanceEnergy: Qudt.quantityKindFromLocalnameRequired("ResonanceEnergy"),
-  // Power Area
-  PowerArea: Qudt.quantityKindFromLocalnameRequired("PowerArea"),
-  // Linear Density
-  LinearDensity: Qudt.quantityKindFromLocalnameRequired("LinearDensity"),
-  // Center of Gravity in the Z axis
-  CenterOfGravity_Z:
-    Qudt.quantityKindFromLocalnameRequired("CenterOfGravity_Z"),
-  // Mean Mass Range
-  MeanMassRange: Qudt.quantityKindFromLocalnameRequired("MeanMassRange"),
   // Voltage
   Voltage: Qudt.quantityKindFromLocalnameRequired("Voltage"),
-  // звуковая мощность
-  SoundPower: Qudt.quantityKindFromLocalnameRequired("SoundPower"),
-  // Electric Displacement Field
-  ElectricDisplacementField: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricDisplacementField"
-  ),
-  // Modulus of Linear Subgrade Reaction
-  ModulusOfLinearSubgradeReaction: Qudt.quantityKindFromLocalnameRequired(
-    "ModulusOfLinearSubgradeReaction"
-  ),
-  // Seebeck Coefficient
-  SeebeckCoefficient:
-    Qudt.quantityKindFromLocalnameRequired("SeebeckCoefficient"),
-  // Area Angle
-  AreaAngle: Qudt.quantityKindFromLocalnameRequired("AreaAngle"),
-  // Cross-section
-  CrossSection: Qudt.quantityKindFromLocalnameRequired("CrossSection"),
-  // Relative Partial Pressure
-  RelativePartialPressure: Qudt.quantityKindFromLocalnameRequired(
-    "RelativePartialPressure"
-  ),
-  // Length Mass
-  LengthMass: Qudt.quantityKindFromLocalnameRequired("LengthMass"),
-  // Compressibility
-  Compressibility: Qudt.quantityKindFromLocalnameRequired("Compressibility"),
-  // Eccentricity Of Orbit
-  EccentricityOfOrbit: Qudt.quantityKindFromLocalnameRequired(
-    "EccentricityOfOrbit"
-  ),
-  // Standard Gravitational Parameter
-  StandardGravitationalParameter: Qudt.quantityKindFromLocalnameRequired(
-    "StandardGravitationalParameter"
-  ),
-  // Inverse Square Energy
-  InverseEnergy_Squared: Qudt.quantityKindFromLocalnameRequired(
-    "InverseEnergy_Squared"
-  ),
-  // Work Function
-  WorkFunction: Qudt.quantityKindFromLocalnameRequired("WorkFunction"),
-  // Amount of Substance per Unit Mass
-  AmountOfSubstancePerUnitMass: Qudt.quantityKindFromLocalnameRequired(
-    "AmountOfSubstancePerUnitMass"
-  ),
-  // Catalytic Activity Concentration
-  CatalyticActivityConcentration: Qudt.quantityKindFromLocalnameRequired(
-    "CatalyticActivityConcentration"
-  ),
-  // Specific Internal Energy
-  SpecificInternalEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificInternalEnergy"
-  ),
-  // Modulus of Rotational Subgrade Reaction
-  ModulusOfRotationalSubgradeReaction: Qudt.quantityKindFromLocalnameRequired(
-    "ModulusOfRotationalSubgradeReaction"
-  ),
-  // Catalytic Activity
-  CatalyticActivity:
-    Qudt.quantityKindFromLocalnameRequired("CatalyticActivity"),
-  // Entalpi
-  Enthalpy: Qudt.quantityKindFromLocalnameRequired("Enthalpy"),
-  // Linear Acceleration
-  LinearAcceleration:
-    Qudt.quantityKindFromLocalnameRequired("LinearAcceleration"),
-  // Inverse Pressure
-  InversePressure: Qudt.quantityKindFromLocalnameRequired("InversePressure"),
-  // Acoustic Impediance
-  AcousticImpedance:
-    Qudt.quantityKindFromLocalnameRequired("AcousticImpedance"),
-  // Spin Quantum Number
-  SpinQuantumNumber:
-    Qudt.quantityKindFromLocalnameRequired("SpinQuantumNumber"),
-  // potencial magnético
-  MagneticVectorPotential: Qudt.quantityKindFromLocalnameRequired(
-    "MagneticVectorPotential"
-  ),
-  // Mass Of The Earth
-  MassOfTheEarth: Qudt.quantityKindFromLocalnameRequired("MassOfTheEarth"),
-  // Linear Absorption Coefficient
-  LinearAbsorptionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "LinearAbsorptionCoefficient"
-  ),
-  // Molecular Viscosity
-  MolecularViscosity:
-    Qudt.quantityKindFromLocalnameRequired("MolecularViscosity"),
-  // Ion Transport Number
-  IonTransportNumber:
-    Qudt.quantityKindFromLocalnameRequired("IonTransportNumber"),
-  // Mass Ratio of Water Vapour to Dry Gas
-  MassRatioOfWaterVapourToDryGas: Qudt.quantityKindFromLocalnameRequired(
-    "MassRatioOfWaterVapourToDryGas"
-  ),
-  // Exhaust Gas Mean Molecular Weight
-  ExhaustGasMeanMolecularWeight: Qudt.quantityKindFromLocalnameRequired(
-    "ExhaustGasMeanMolecularWeight"
-  ),
-  // Reactor Time Constant
-  ReactorTimeConstant: Qudt.quantityKindFromLocalnameRequired(
-    "ReactorTimeConstant"
-  ),
-  // ładunek elektryczny
-  ElectricCharge: Qudt.quantityKindFromLocalnameRequired("ElectricCharge"),
-  // Reynolds Number
-  ReynoldsNumber: Qudt.quantityKindFromLocalnameRequired("ReynoldsNumber"),
-  // Short-Range Order Parameter
-  Short__RangeOrderParameter: Qudt.quantityKindFromLocalnameRequired(
-    "Short-RangeOrderParameter"
-  ),
-  // Dissipance
-  Dissipance: Qudt.quantityKindFromLocalnameRequired("Dissipance"),
-  // Propellant Temperature
-  PropellantTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "PropellantTemperature"
-  ),
-  // Touch Thresholds
-  TouchThresholds: Qudt.quantityKindFromLocalnameRequired("TouchThresholds"),
-  // Shannon Diversity Index
-  ShannonDiversityIndex: Qudt.quantityKindFromLocalnameRequired(
-    "ShannonDiversityIndex"
-  ),
-  // Length Percentage
-  LengthPercentage: Qudt.quantityKindFromLocalnameRequired("LengthPercentage"),
-  // Relative Atomic Mass
-  RelativeAtomicMass:
-    Qudt.quantityKindFromLocalnameRequired("RelativeAtomicMass"),
-  // número de onda angular
-  AngularWavenumber:
-    Qudt.quantityKindFromLocalnameRequired("AngularWavenumber"),
-  // Stress Intensity Factor
-  StressIntensityFactor: Qudt.quantityKindFromLocalnameRequired(
-    "StressIntensityFactor"
-  ),
-  // Inverse Square Mass
-  InverseMass_Squared: Qudt.quantityKindFromLocalnameRequired(
-    "InverseMass_Squared"
-  ),
-  // Ion Concentration
-  IonConcentration: Qudt.quantityKindFromLocalnameRequired("IonConcentration"),
-  // Mass Flow Rate
-  MassFlowRate: Qudt.quantityKindFromLocalnameRequired("MassFlowRate"),
-  // Positive Dimensionless Ratio
-  PositiveDimensionlessRatio: Qudt.quantityKindFromLocalnameRequired(
-    "PositiveDimensionlessRatio"
-  ),
-  // Luminance
-  Luminance: Qudt.quantityKindFromLocalnameRequired("Luminance"),
-  // Atom Scattering Factor
-  AtomScatteringFactor: Qudt.quantityKindFromLocalnameRequired(
-    "AtomScatteringFactor"
-  ),
-  // Mass per Time
-  MassPerTime: Qudt.quantityKindFromLocalnameRequired("MassPerTime"),
-  // fugacitate
-  Fugacity: Qudt.quantityKindFromLocalnameRequired("Fugacity"),
-  // Mass Absorption Coefficient
-  MassAbsorptionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "MassAbsorptionCoefficient"
-  ),
-  // Thermal Conductance
-  ThermalConductance:
-    Qudt.quantityKindFromLocalnameRequired("ThermalConductance"),
-  // Orbital Radial Distance
-  OrbitalRadialDistance: Qudt.quantityKindFromLocalnameRequired(
-    "OrbitalRadialDistance"
-  ),
-  // Total Ionization
-  TotalIonization: Qudt.quantityKindFromLocalnameRequired("TotalIonization"),
-  // Mass Concentration of Water Vapour
-  MassConcentrationOfWaterVapour: Qudt.quantityKindFromLocalnameRequired(
-    "MassConcentrationOfWaterVapour"
-  ),
-  // Sound energy density
-  SoundEnergyDensity:
-    Qudt.quantityKindFromLocalnameRequired("SoundEnergyDensity"),
-  // Quantum Number
-  QuantumNumber: Qudt.quantityKindFromLocalnameRequired("QuantumNumber"),
-  // Stoichiometric Number
-  StoichiometricNumber: Qudt.quantityKindFromLocalnameRequired(
-    "StoichiometricNumber"
-  ),
-  // Radiant Energy Density
-  RadiantEnergyDensity: Qudt.quantityKindFromLocalnameRequired(
-    "RadiantEnergyDensity"
-  ),
-  // Tenaga keupayaan
-  PotentialEnergy: Qudt.quantityKindFromLocalnameRequired("PotentialEnergy"),
-  // Population
-  Population: Qudt.quantityKindFromLocalnameRequired("Population"),
-  // Richardson Constant
-  RichardsonConstant:
-    Qudt.quantityKindFromLocalnameRequired("RichardsonConstant"),
-  // Turbidity
-  Turbidity: Qudt.quantityKindFromLocalnameRequired("Turbidity"),
-  // Structure Factor
-  StructureFactor: Qudt.quantityKindFromLocalnameRequired("StructureFactor"),
-  // Target Bogie Mass
-  TARGET__BOGIE__MASS:
-    Qudt.quantityKindFromLocalnameRequired("TARGET-BOGIE-MASS"),
-  // Polar moment of inertia
-  PolarMomentOfInertia: Qudt.quantityKindFromLocalnameRequired(
-    "PolarMomentOfInertia"
-  ),
-  // Warping Constant
-  WarpingConstant: Qudt.quantityKindFromLocalnameRequired("WarpingConstant"),
-  // mobilità
-  Mobility: Qudt.quantityKindFromLocalnameRequired("Mobility"),
-  // Electric Current per Unit Length
-  ElectricCurrentPerUnitLength: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricCurrentPerUnitLength"
-  ),
-  // Cross-sectional Area
-  CrossSectionalArea:
-    Qudt.quantityKindFromLocalnameRequired("CrossSectionalArea"),
-  // मैक संख्या
-  MachNumber: Qudt.quantityKindFromLocalnameRequired("MachNumber"),
-  // Radiant Exposure
-  RadiantExposure: Qudt.quantityKindFromLocalnameRequired("RadiantExposure"),
-  // 慣性モーメント
-  MomentOfInertia: Qudt.quantityKindFromLocalnameRequired("MomentOfInertia"),
-  // Thermal Energy
-  ThermalEnergy: Qudt.quantityKindFromLocalnameRequired("ThermalEnergy"),
-  // Linear Momentum
-  LinearMomentum: Qudt.quantityKindFromLocalnameRequired("LinearMomentum"),
-  // Angle
-  Angle: Qudt.quantityKindFromLocalnameRequired("Angle"),
-  // Initial Expansion Ratio
-  InitialExpansionRatio: Qudt.quantityKindFromLocalnameRequired(
-    "InitialExpansionRatio"
-  ),
-  // Propellant Mean Bulk Temperature
-  PropellantMeanBulkTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "PropellantMeanBulkTemperature"
-  ),
-  // Hyperfine Structure Quantum Number
-  HyperfineStructureQuantumNumber: Qudt.quantityKindFromLocalnameRequired(
-    "HyperfineStructureQuantumNumber"
-  ),
-  // Mean Linear Range
-  MeanLinearRange: Qudt.quantityKindFromLocalnameRequired("MeanLinearRange"),
-  // Positive Dimensionless Ratio
-  NormalizedDimensionlessRatio: Qudt.quantityKindFromLocalnameRequired(
-    "NormalizedDimensionlessRatio"
-  ),
-  // اختلاف طور
-  PhaseDifference: Qudt.quantityKindFromLocalnameRequired("PhaseDifference"),
-  // Thermodynamic Entropy
-  ThermodynamicEntropy: Qudt.quantityKindFromLocalnameRequired(
-    "ThermodynamicEntropy"
-  ),
-  // Inverse Square Time
-  InverseSquareTime:
-    Qudt.quantityKindFromLocalnameRequired("InverseSquareTime"),
-  // fluctús lucis
-  LuminousFlux: Qudt.quantityKindFromLocalnameRequired("LuminousFlux"),
-  // Torque per Angle
-  TorquePerAngle: Qudt.quantityKindFromLocalnameRequired("TorquePerAngle"),
-  // indukcja magnetyczna
-  MagneticFluxDensity: Qudt.quantityKindFromLocalnameRequired(
-    "MagneticFluxDensity"
-  ),
-  // Mole Fraction
-  MoleFraction: Qudt.quantityKindFromLocalnameRequired("MoleFraction"),
-  // Ambient Pressure
-  AmbientPressure: Qudt.quantityKindFromLocalnameRequired("AmbientPressure"),
-  // Energy Density
-  EnergyDensity: Qudt.quantityKindFromLocalnameRequired("EnergyDensity"),
-  // Center of Gravity in the Y axis
-  CENTER__OF__GRAVITY_Y: Qudt.quantityKindFromLocalnameRequired(
-    "CENTER-OF-GRAVITY_Y"
-  ),
-  // Burn Time
-  BurnTime: Qudt.quantityKindFromLocalnameRequired("BurnTime"),
-  // معدل التمدد الحراري الخطي
-  LinearExpansionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "LinearExpansionCoefficient"
-  ),
-  // Mechanical surface impedance
-  MechanicalSurfaceImpedance: Qudt.quantityKindFromLocalnameRequired(
-    "MechanicalSurfaceImpedance"
-  ),
-  // Dew Point Temperature
-  DewPointTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "DewPointTemperature"
-  ),
-  // अपवर्तनांक
-  RefractiveIndex: Qudt.quantityKindFromLocalnameRequired("RefractiveIndex"),
-  // Asset
-  Asset: Qudt.quantityKindFromLocalnameRequired("Asset"),
-  // Coherence Length
-  CoherenceLength: Qudt.quantityKindFromLocalnameRequired("CoherenceLength"),
-  // Active Energy
-  ActiveEnergy: Qudt.quantityKindFromLocalnameRequired("ActiveEnergy"),
-  // Inert Mass
-  INERT__MASS: Qudt.quantityKindFromLocalnameRequired("INERT-MASS"),
-  // Shear Strain
-  ShearStrain: Qudt.quantityKindFromLocalnameRequired("ShearStrain"),
-  // Absolute Humidity
-  AbsoluteHumidity: Qudt.quantityKindFromLocalnameRequired("AbsoluteHumidity"),
-  // Slowing-Down Length
-  Slowing__DownLength:
-    Qudt.quantityKindFromLocalnameRequired("Slowing-DownLength"),
-  // temperature difference
-  TemperatureDifference: Qudt.quantityKindFromLocalnameRequired(
-    "TemperatureDifference"
-  ),
-  // Fission Fuel Utilization Factor
-  FissionFuelUtilizationFactor: Qudt.quantityKindFromLocalnameRequired(
-    "FissionFuelUtilizationFactor"
-  ),
-  // Relative Mass Defect
-  RelativeMassDefect:
-    Qudt.quantityKindFromLocalnameRequired("RelativeMassDefect"),
-  // Partial Pressure
-  PartialPressure: Qudt.quantityKindFromLocalnameRequired("PartialPressure"),
-  // Inverse Temperature
-  InverseTemperature:
-    Qudt.quantityKindFromLocalnameRequired("InverseTemperature"),
-  // Principal Quantum Number
-  PrincipalQuantumNumber: Qudt.quantityKindFromLocalnameRequired(
-    "PrincipalQuantumNumber"
-  ),
-  // Product of Inertia in the Y axis
-  PRODUCT__OF__INERTIA_Y: Qudt.quantityKindFromLocalnameRequired(
-    "PRODUCT-OF-INERTIA_Y"
-  ),
-  // factor de potencia
-  PowerFactor: Qudt.quantityKindFromLocalnameRequired("PowerFactor"),
-  // Electron Mean Free Path
-  ElectronMeanFreePath: Qudt.quantityKindFromLocalnameRequired(
-    "ElectronMeanFreePath"
-  ),
-  // Lichtstärke
-  LuminousIntensity:
-    Qudt.quantityKindFromLocalnameRequired("LuminousIntensity"),
-  // Flight Performance Reserve Propellant Mass
-  FLIGHT__PERFORMANCE__RESERVE__PROPELLANT__MASS:
-    Qudt.quantityKindFromLocalnameRequired(
-      "FLIGHT-PERFORMANCE-RESERVE-PROPELLANT-MASS"
-    ),
-  // jakost magnetnega polja
-  MagneticFieldStrength_H: Qudt.quantityKindFromLocalnameRequired(
-    "MagneticFieldStrength_H"
-  ),
-  // Debye-Waller Factor
-  Debye__WallerFactor:
-    Qudt.quantityKindFromLocalnameRequired("Debye-WallerFactor"),
-  // Fission Core Radius To Height Ratio
-  FissionCoreRadiusToHeightRatio: Qudt.quantityKindFromLocalnameRequired(
-    "FissionCoreRadiusToHeightRatio"
-  ),
-  // Cartesian Area
-  CartesianArea: Qudt.quantityKindFromLocalnameRequired("CartesianArea"),
-  // masa molar
-  MolarMass: Qudt.quantityKindFromLocalnameRequired("MolarMass"),
-  // Kinetic Energy
-  KineticEnergy: Qudt.quantityKindFromLocalnameRequired("KineticEnergy"),
-  // Initial Vehicle Mass
-  InitialVehicleMass:
-    Qudt.quantityKindFromLocalnameRequired("InitialVehicleMass"),
-  // Heat Capacity Ratio
-  HeatCapacityRatio:
-    Qudt.quantityKindFromLocalnameRequired("HeatCapacityRatio"),
-  // Volume Strain
-  VolumeStrain: Qudt.quantityKindFromLocalnameRequired("VolumeStrain"),
-  // Phase coefficient
-  PhaseCoefficient: Qudt.quantityKindFromLocalnameRequired("PhaseCoefficient"),
-  // Mass per Area
-  MassPerArea: Qudt.quantityKindFromLocalnameRequired("MassPerArea"),
-  // Product of Inertia in the X axis
-  PRODUCT__OF__INERTIA_X: Qudt.quantityKindFromLocalnameRequired(
-    "PRODUCT-OF-INERTIA_X"
-  ),
-  // Vision Thresholds
-  VisionThresholds: Qudt.quantityKindFromLocalnameRequired("VisionThresholds"),
-  // Reserve Mass
-  RESERVE__MASS: Qudt.quantityKindFromLocalnameRequired("RESERVE-MASS"),
-  // Energy Imparted
-  EnergyImparted: Qudt.quantityKindFromLocalnameRequired("EnergyImparted"),
-  // Lift Coefficient
-  LiftCoefficient: Qudt.quantityKindFromLocalnameRequired("LiftCoefficient"),
-  // Mass Fraction
-  MassFraction: Qudt.quantityKindFromLocalnameRequired("MassFraction"),
-  // Characteristic Velocity
-  CharacteristicVelocity: Qudt.quantityKindFromLocalnameRequired(
-    "CharacteristicVelocity"
-  ),
-  // 電位
-  ElectricPotential:
-    Qudt.quantityKindFromLocalnameRequired("ElectricPotential"),
-  // Landau-Ginzburg Number
-  Landau__GinzburgNumber: Qudt.quantityKindFromLocalnameRequired(
-    "Landau-GinzburgNumber"
-  ),
-  // Mass Amount of Substance
-  MassAmountOfSubstance: Qudt.quantityKindFromLocalnameRequired(
-    "MassAmountOfSubstance"
-  ),
-  // Curvature
-  CurvatureFromRadius: Qudt.quantityKindFromLocalnameRequired(
-    "CurvatureFromRadius"
-  ),
-  // Luminous Emmitance
-  LuminousEmittance:
-    Qudt.quantityKindFromLocalnameRequired("LuminousEmittance"),
-  // Thermal Insulance
-  ThermalInsulance: Qudt.quantityKindFromLocalnameRequired("ThermalInsulance"),
-  // Resonance Escape Probability For Fission
-  ResonanceEscapeProbabilityForFission: Qudt.quantityKindFromLocalnameRequired(
-    "ResonanceEscapeProbabilityForFission"
-  ),
-  // Sound exposure level
-  SoundExposureLevel:
-    Qudt.quantityKindFromLocalnameRequired("SoundExposureLevel"),
-  // Expansion Ratio
-  ExpansionRatio: Qudt.quantityKindFromLocalnameRequired("ExpansionRatio"),
-  // Mass Delivered
-  MASS__DELIVERED: Qudt.quantityKindFromLocalnameRequired("MASS-DELIVERED"),
-  // Phonon Mean Free Path
-  PhononMeanFreePath:
-    Qudt.quantityKindFromLocalnameRequired("PhononMeanFreePath"),
-  // Linear Electric Current
-  LinearElectricCurrent: Qudt.quantityKindFromLocalnameRequired(
-    "LinearElectricCurrent"
-  ),
-  // Specific thrust
-  SpecificThrust: Qudt.quantityKindFromLocalnameRequired("SpecificThrust"),
-  // Moment of Inertia in the Z axis
-  MOMENT__OF__INERTIA_Z: Qudt.quantityKindFromLocalnameRequired(
-    "MOMENT-OF-INERTIA_Z"
-  ),
-  // Polarization Field
-  PolarizationField:
-    Qudt.quantityKindFromLocalnameRequired("PolarizationField"),
-  // Gyromagnetic Ratio
-  GyromagneticRatio:
-    Qudt.quantityKindFromLocalnameRequired("GyromagneticRatio"),
-  // Energiekosten
-  CostPerUnitEnergy:
-    Qudt.quantityKindFromLocalnameRequired("CostPerUnitEnergy"),
-  // Displacement Current
-  DisplacementCurrent: Qudt.quantityKindFromLocalnameRequired(
-    "DisplacementCurrent"
-  ),
-  // Lethargy
-  Lethargy: Qudt.quantityKindFromLocalnameRequired("Lethargy"),
-  // Half-Value Thickness
-  Half__ValueThickness: Qudt.quantityKindFromLocalnameRequired(
-    "Half-ValueThickness"
-  ),
-  // Thomson Coefficient
-  ThomsonCoefficient:
-    Qudt.quantityKindFromLocalnameRequired("ThomsonCoefficient"),
-  // Distance Traveled During a Burn
-  DistanceTraveledDuringBurn: Qudt.quantityKindFromLocalnameRequired(
-    "DistanceTraveledDuringBurn"
-  ),
-  // Molar Optical Rotatory Power
-  MolarOpticalRotatoryPower: Qudt.quantityKindFromLocalnameRequired(
-    "MolarOpticalRotatoryPower"
-  ),
-  // Stochastic Process
-  StochasticProcess:
-    Qudt.quantityKindFromLocalnameRequired("StochasticProcess"),
-  // Mass per Length
-  MassPerLength: Qudt.quantityKindFromLocalnameRequired("MassPerLength"),
-  // Spectral Luminous Efficiency
-  SpectralLuminousEfficiency: Qudt.quantityKindFromLocalnameRequired(
-    "SpectralLuminousEfficiency"
-  ),
-  // Exit Plane Pressure
-  ExitPlanePressure:
-    Qudt.quantityKindFromLocalnameRequired("ExitPlanePressure"),
-  // Fundamental Lattice vector
-  FundamentalLatticeVector: Qudt.quantityKindFromLocalnameRequired(
-    "FundamentalLatticeVector"
-  ),
-  // Gravitational Attraction
-  GravitationalAttraction: Qudt.quantityKindFromLocalnameRequired(
-    "GravitationalAttraction"
-  ),
-  // Internal Energy
-  InternalEnergy: Qudt.quantityKindFromLocalnameRequired("InternalEnergy"),
-  // Force per Length
-  ForcePerLength: Qudt.quantityKindFromLocalnameRequired("ForcePerLength"),
-  // Luminous Flux per Area
-  LuminousFluxPerArea: Qudt.quantityKindFromLocalnameRequired(
-    "LuminousFluxPerArea"
-  ),
-  // energia radiante
-  RadiantEnergy: Qudt.quantityKindFromLocalnameRequired("RadiantEnergy"),
-  // Hamilton Function
-  HamiltonFunction: Qudt.quantityKindFromLocalnameRequired("HamiltonFunction"),
-  // Absolute Activity
-  AbsoluteActivity: Qudt.quantityKindFromLocalnameRequired("AbsoluteActivity"),
-  // Inverse amount of substance
-  InverseAmountOfSubstance: Qudt.quantityKindFromLocalnameRequired(
-    "InverseAmountOfSubstance"
-  ),
-  // Electron Affinity
-  ElectronAffinity: Qudt.quantityKindFromLocalnameRequired("ElectronAffinity"),
-  // Mass Concentration of Water To Dry Matter
-  MassRatioOfWaterToDryMatter: Qudt.quantityKindFromLocalnameRequired(
-    "MassRatioOfWaterToDryMatter"
-  ),
-  // polarização eléctrica
-  ElectricPolarization: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricPolarization"
-  ),
-  // Long-Range Order Parameter
-  Long__RangeOrderParameter: Qudt.quantityKindFromLocalnameRequired(
-    "Long-RangeOrderParameter"
-  ),
-  // Convective Heat Transfer
-  ConvectiveHeatTransfer: Qudt.quantityKindFromLocalnameRequired(
-    "ConvectiveHeatTransfer"
-  ),
-  // Thermal Energy Length
-  ThermalEnergyLength: Qudt.quantityKindFromLocalnameRequired(
-    "ThermalEnergyLength"
-  ),
-  // Fractional Amount of Substance
-  AmountOfSubstanceFraction: Qudt.quantityKindFromLocalnameRequired(
-    "AmountOfSubstanceFraction"
-  ),
-  // Maximum Expected Operating Thrust
-  MaxExpectedOperatingThrust: Qudt.quantityKindFromLocalnameRequired(
-    "MaxExpectedOperatingThrust"
-  ),
-  // Non-active Power
-  NonActivePower: Qudt.quantityKindFromLocalnameRequired("NonActivePower"),
-  // elektryczny moment kwadrupolowy
-  ElectricQuadrupoleMoment: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricQuadrupoleMoment"
-  ),
-  // éclairement énergétique
-  Irradiance: Qudt.quantityKindFromLocalnameRequired("Irradiance"),
-  // First Moment of Area
-  FirstMomentOfArea:
-    Qudt.quantityKindFromLocalnameRequired("FirstMomentOfArea"),
-  // Mass Growth Allowance
-  MASS__GROWTH__ALLOWANCE: Qudt.quantityKindFromLocalnameRequired(
-    "MASS-GROWTH-ALLOWANCE"
-  ),
-  // Currency Per Flight
-  CurrencyPerFlight:
-    Qudt.quantityKindFromLocalnameRequired("CurrencyPerFlight"),
-  // Mass Concentration
-  MassConcentration:
-    Qudt.quantityKindFromLocalnameRequired("MassConcentration"),
-  // Length Temperature
-  LengthTemperature:
-    Qudt.quantityKindFromLocalnameRequired("LengthTemperature"),
-  // área
-  Area: Qudt.quantityKindFromLocalnameRequired("Area"),
-  // عزم محورى
-  Torque: Qudt.quantityKindFromLocalnameRequired("Torque"),
-  // Radiant Fluence
-  RadiantFluence: Qudt.quantityKindFromLocalnameRequired("RadiantFluence"),
-  // Surface Density
-  SurfaceDensity: Qudt.quantityKindFromLocalnameRequired("SurfaceDensity"),
-  // Leakage Factor
-  LeakageFactor: Qudt.quantityKindFromLocalnameRequired("LeakageFactor"),
-  // Spin Quantum Number
-  NuclearSpinQuantumNumber: Qudt.quantityKindFromLocalnameRequired(
-    "NuclearSpinQuantumNumber"
-  ),
-  // Relative Molecular Mass
-  RelativeMolecularMass: Qudt.quantityKindFromLocalnameRequired(
-    "RelativeMolecularMass"
-  ),
-  // corrente elettrica
-  ElectricCurrent: Qudt.quantityKindFromLocalnameRequired("ElectricCurrent"),
-  // Maximum Expected Operating Pressure
-  MaximumExpectedOperatingPressure: Qudt.quantityKindFromLocalnameRequired(
-    "MaximumExpectedOperatingPressure"
-  ),
-  // Power Per Electric Charge
-  PowerPerElectricCharge: Qudt.quantityKindFromLocalnameRequired(
-    "PowerPerElectricCharge"
-  ),
-  // momento de dipolo magnético
-  MagneticMoment: Qudt.quantityKindFromLocalnameRequired("MagneticMoment"),
-  // Dimensionless
-  Dimensionless: Qudt.quantityKindFromLocalnameRequired("Dimensionless"),
-  // Heat Flow Rate per Unit Area
-  HeatFlowRatePerUnitArea: Qudt.quantityKindFromLocalnameRequired(
-    "HeatFlowRatePerUnitArea"
-  ),
-  // Modulus Of Impedance
-  ModulusOfImpedance:
-    Qudt.quantityKindFromLocalnameRequired("ModulusOfImpedance"),
-  // Visible Radiant Energy
-  VisibleRadiantEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "VisibleRadiantEnergy"
-  ),
-  // Ionization Energy
-  IonizationEnergy: Qudt.quantityKindFromLocalnameRequired("IonizationEnergy"),
-  // Source Voltage Between Substances
-  SourceVoltageBetweenSubstances: Qudt.quantityKindFromLocalnameRequired(
-    "SourceVoltageBetweenSubstances"
-  ),
-  // Linear Electric Current Density
-  LinearElectricCurrentDensity: Qudt.quantityKindFromLocalnameRequired(
-    "LinearElectricCurrentDensity"
-  ),
-  // energia
-  Energy: Qudt.quantityKindFromLocalnameRequired("Energy"),
-  // Fermi Energy
-  FermiEnergy: Qudt.quantityKindFromLocalnameRequired("FermiEnergy"),
-  // Vapor Pressure
-  VaporPressure: Qudt.quantityKindFromLocalnameRequired("VaporPressure"),
-  // Unknown
-  Unknown: Qudt.quantityKindFromLocalnameRequired("Unknown"),
-  // Thermal Diffusion Factor
-  ThermalDiffusionFactor: Qudt.quantityKindFromLocalnameRequired(
-    "ThermalDiffusionFactor"
-  ),
-  // Infinite Multiplication Factor
-  InfiniteMultiplicationFactor: Qudt.quantityKindFromLocalnameRequired(
-    "InfiniteMultiplicationFactor"
-  ),
-  // Volume Thermal Expansion
-  VolumeThermalExpansion: Qudt.quantityKindFromLocalnameRequired(
-    "VolumeThermalExpansion"
-  ),
-  // kerja
-  Work: Qudt.quantityKindFromLocalnameRequired("Work"),
-  // Einstein Transition Probability
-  EinsteinTransitionProbability: Qudt.quantityKindFromLocalnameRequired(
-    "EinsteinTransitionProbability"
-  ),
-  // Generalized Force
-  GeneralizedForce: Qudt.quantityKindFromLocalnameRequired("GeneralizedForce"),
-  // Thermal Conductivity
-  ThermalConductivity: Qudt.quantityKindFromLocalnameRequired(
-    "ThermalConductivity"
-  ),
-  // Jarak
-  Distance: Qudt.quantityKindFromLocalnameRequired("Distance"),
-  // Information Entropy
-  InformationEntropy:
-    Qudt.quantityKindFromLocalnameRequired("InformationEntropy"),
-  // Temperature Rate of Change
-  TemperatureRateOfChange: Qudt.quantityKindFromLocalnameRequired(
-    "TemperatureRateOfChange"
-  ),
   // Information flow rate
   InformationFlowRate: Qudt.quantityKindFromLocalnameRequired(
     "InformationFlowRate"
   ),
-  // Federkonstante Drehfeder
-  TorsionalSpringConstant: Qudt.quantityKindFromLocalnameRequired(
-    "TorsionalSpringConstant"
+  // Mass Fraction of Water
+  MassFractionOfWater: Qudt.quantityKindFromLocalnameRequired(
+    "MassFractionOfWater"
   ),
-  // Length Energy
-  LengthEnergy: Qudt.quantityKindFromLocalnameRequired("LengthEnergy"),
-  // Auxillary Magnetic Field
-  AuxillaryMagneticField: Qudt.quantityKindFromLocalnameRequired(
-    "AuxillaryMagneticField"
+  // Relative Mass Defect
+  RelativeMassDefect:
+    Qudt.quantityKindFromLocalnameRequired("RelativeMassDefect"),
+  // Combustion Chamber Temperature
+  CombustionChamberTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "CombustionChamberTemperature"
   ),
-  // masa
-  Mass: Qudt.quantityKindFromLocalnameRequired("Mass"),
-  // Max Operating Thrust
-  MaxOperatingThrust:
-    Qudt.quantityKindFromLocalnameRequired("MaxOperatingThrust"),
-  // Specific Impulse by Weight
-  SpecificImpulseByWeight: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificImpulseByWeight"
+  // Displacement Vector of Ion
+  DisplacementVectorOfIon: Qudt.quantityKindFromLocalnameRequired(
+    "DisplacementVectorOfIon"
   ),
-  // Electromagnetic Permeability Ratio
-  ElectromagneticPermeabilityRatio: Qudt.quantityKindFromLocalnameRequired(
-    "ElectromagneticPermeabilityRatio"
+  // Temperature Amount of Substance
+  TemperatureAmountOfSubstance: Qudt.quantityKindFromLocalnameRequired(
+    "TemperatureAmountOfSubstance"
   ),
-  // Strain
-  Strain: Qudt.quantityKindFromLocalnameRequired("Strain"),
-  // Bioconcentration Factor
-  BioconcentrationFactor: Qudt.quantityKindFromLocalnameRequired(
-    "BioconcentrationFactor"
+  // Electrical Power To Mass Ratio
+  ElectricalPowerToMassRatio: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricalPowerToMassRatio"
   ),
-  // Permittivity Ratio
-  PermittivityRatio:
-    Qudt.quantityKindFromLocalnameRequired("PermittivityRatio"),
-  // Attenuation Coefficient
-  AttenuationCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "AttenuationCoefficient"
-  ),
-  // Center of Gravity in the X axis
-  CENTER__OF__GRAVITY_X: Qudt.quantityKindFromLocalnameRequired(
-    "CENTER-OF-GRAVITY_X"
-  ),
-  // Absorptance
-  Absorptance: Qudt.quantityKindFromLocalnameRequired("Absorptance"),
-  // Electron Density
-  ElectronDensity: Qudt.quantityKindFromLocalnameRequired("ElectronDensity"),
-  // Inverse Square Energy
-  InverseSquareEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "InverseSquareEnergy"
-  ),
-  // Resonance Escape Probability
-  ResonanceEscapeProbability: Qudt.quantityKindFromLocalnameRequired(
-    "ResonanceEscapeProbability"
-  ),
-  // Average Vacuum Thrust
-  AverageVacuumThrust: Qudt.quantityKindFromLocalnameRequired(
-    "AverageVacuumThrust"
-  ),
-  // Effective Exhaustvelocity
-  EffectiveExhaustVelocity: Qudt.quantityKindFromLocalnameRequired(
-    "EffectiveExhaustVelocity"
-  ),
-  // Reflectance Factor
-  ReflectanceFactor:
-    Qudt.quantityKindFromLocalnameRequired("ReflectanceFactor"),
-  // Specific Energy
-  SpecificEnergy: Qudt.quantityKindFromLocalnameRequired("SpecificEnergy"),
-  // Delta-V
-  DELTA__V: Qudt.quantityKindFromLocalnameRequired("DELTA-V"),
-  // Fish Biotransformation Half Life
-  FishBiotransformationHalfLife: Qudt.quantityKindFromLocalnameRequired(
-    "FishBiotransformationHalfLife"
-  ),
-  // Superconduction Transition Temperature
-  SuperconductionTransitionTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "SuperconductionTransitionTemperature"
-  ),
-  // Total Angular Momentum
-  TotalAngularMomentum: Qudt.quantityKindFromLocalnameRequired(
-    "TotalAngularMomentum"
-  ),
-  // Length Molar Energy
-  LengthMolarEnergy:
-    Qudt.quantityKindFromLocalnameRequired("LengthMolarEnergy"),
-  // Volume Flow Rate
-  VolumeFlowRate: Qudt.quantityKindFromLocalnameRequired("VolumeFlowRate"),
-  // Temporal Summation Function
-  TemporalSummationFunction: Qudt.quantityKindFromLocalnameRequired(
-    "TemporalSummationFunction"
-  ),
-  // Torque per Length
-  TorquePerLength: Qudt.quantityKindFromLocalnameRequired("TorquePerLength"),
-  // Carrier LifetIme
-  CarrierLifetime: Qudt.quantityKindFromLocalnameRequired("CarrierLifetime"),
-  // Surface Activity Density
-  SurfaceActivityDensity: Qudt.quantityKindFromLocalnameRequired(
-    "SurfaceActivityDensity"
-  ),
-  // אורך
-  Length: Qudt.quantityKindFromLocalnameRequired("Length"),
-  // impulso angolare
-  AngularImpulse: Qudt.quantityKindFromLocalnameRequired("AngularImpulse"),
-  // Permeability
-  ElectromagneticPermeability: Qudt.quantityKindFromLocalnameRequired(
-    "ElectromagneticPermeability"
-  ),
-  // Quartic Electric Dipole Moment per Cubic Energy
-  QuarticElectricDipoleMomentPerCubicEnergy:
-    Qudt.quantityKindFromLocalnameRequired(
-      "QuarticElectricDipoleMomentPerCubicEnergy"
-    ),
-  // Alpha Disintegration Energy
-  AlphaDisintegrationEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "AlphaDisintegrationEnergy"
-  ),
-  // Signal Detection Threshold
-  SignalDetectionThreshold: Qudt.quantityKindFromLocalnameRequired(
-    "SignalDetectionThreshold"
-  ),
-  // Atomic Number
-  AtomicNumber: Qudt.quantityKindFromLocalnameRequired("AtomicNumber"),
-  // Lattice Plane Spacing
-  LatticePlaneSpacing: Qudt.quantityKindFromLocalnameRequired(
-    "LatticePlaneSpacing"
-  ),
-  // Atomic Charge
-  AtomicCharge: Qudt.quantityKindFromLocalnameRequired("AtomicCharge"),
-  // ポインティングベクトル
-  PoyntingVector: Qudt.quantityKindFromLocalnameRequired("PoyntingVector"),
-  // Equilibrium Position Vector of Ion
-  EquilibriumPositionVectorOfIon: Qudt.quantityKindFromLocalnameRequired(
-    "EquilibriumPositionVectorOfIon"
-  ),
-  // Thickness
-  Thickness: Qudt.quantityKindFromLocalnameRequired("Thickness"),
-  // Lift Force
-  LiftForce: Qudt.quantityKindFromLocalnameRequired("LiftForce"),
-  // Rocket Atmospheric Transverse Force
-  RocketAtmosphericTransverseForce: Qudt.quantityKindFromLocalnameRequired(
-    "RocketAtmosphericTransverseForce"
-  ),
-  // Burn Rate
-  BurnRate: Qudt.quantityKindFromLocalnameRequired("BurnRate"),
-  // Kerma
-  Kerma: Qudt.quantityKindFromLocalnameRequired("Kerma"),
-  // numero di massa
-  NucleonNumber: Qudt.quantityKindFromLocalnameRequired("NucleonNumber"),
-  // Isentropic Compressibility
-  IsentropicCompressibility: Qudt.quantityKindFromLocalnameRequired(
-    "IsentropicCompressibility"
-  ),
-  // Radiance Factor
-  RadianceFactor: Qudt.quantityKindFromLocalnameRequired("RadianceFactor"),
-  // Area Ratio
-  AreaRatio: Qudt.quantityKindFromLocalnameRequired("AreaRatio"),
-  // Conductive Heat Transfer Rate
-  ConductiveHeatTransferRate: Qudt.quantityKindFromLocalnameRequired(
-    "ConductiveHeatTransferRate"
-  ),
+  // factor de potencia
+  PowerFactor: Qudt.quantityKindFromLocalnameRequired("PowerFactor"),
+  // Active Power
+  ActivePower: Qudt.quantityKindFromLocalnameRequired("ActivePower"),
+  // Anschaffungskosten pro Watt
+  CostPerUnitPower: Qudt.quantityKindFromLocalnameRequired("CostPerUnitPower"),
   // Linear Thermal Expansion
   LinearThermalExpansion: Qudt.quantityKindFromLocalnameRequired(
     "LinearThermalExpansion"
   ),
-  // Electric charge per amount of substance
-  ElectricChargePerAmountOfSubstance: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricChargePerAmountOfSubstance"
-  ),
-  // Angular Distance
-  AngularDistance: Qudt.quantityKindFromLocalnameRequired("AngularDistance"),
-  // Capacity
-  Capacity: Qudt.quantityKindFromLocalnameRequired("Capacity"),
-  // Density of states
-  DensityOfStates: Qudt.quantityKindFromLocalnameRequired("DensityOfStates"),
-  // Initial Velocity
-  InitialVelocity: Qudt.quantityKindFromLocalnameRequired("InitialVelocity"),
-  // Area Time
-  AreaTime: Qudt.quantityKindFromLocalnameRequired("AreaTime"),
-  // Moment of Force
-  MomentOfForce: Qudt.quantityKindFromLocalnameRequired("MomentOfForce"),
-  // Electric Charge Linear Density
-  ElectricChargeLinearDensity: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricChargeLinearDensity"
-  ),
-  // Hall Coefficient
-  HallCoefficient: Qudt.quantityKindFromLocalnameRequired("HallCoefficient"),
-  // Reactance
-  Reactance: Qudt.quantityKindFromLocalnameRequired("Reactance"),
-  // Neutron Yield per Fission
-  NeutronYieldPerFission: Qudt.quantityKindFromLocalnameRequired(
-    "NeutronYieldPerFission"
-  ),
-  // Massieu Function
-  MassieuFunction: Qudt.quantityKindFromLocalnameRequired("MassieuFunction"),
-  // Total Pressure
-  TotalPressure: Qudt.quantityKindFromLocalnameRequired("TotalPressure"),
-  // Luminous Energy
-  LuminousEnergy: Qudt.quantityKindFromLocalnameRequired("LuminousEnergy"),
-  // 电导率
-  ElectricConductivity: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricConductivity"
-  ),
-  // Group Speed of Sound
-  GroupSpeedOfSound:
-    Qudt.quantityKindFromLocalnameRequired("GroupSpeedOfSound"),
-  // Macroscopic Total Cross-section
-  MacroscopicTotalCrossSection: Qudt.quantityKindFromLocalnameRequired(
-    "MacroscopicTotalCrossSection"
-  ),
-  // Displacement
-  Displacement: Qudt.quantityKindFromLocalnameRequired("Displacement"),
-  // Specific Helmholtz Energy
-  SpecificHelmholtzEnergy: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificHelmholtzEnergy"
-  ),
-  // Linear Energy Transfer
-  LinearEnergyTransfer: Qudt.quantityKindFromLocalnameRequired(
-    "LinearEnergyTransfer"
-  ),
-  // Strain Energy Density
-  StrainEnergyDensity: Qudt.quantityKindFromLocalnameRequired(
-    "StrainEnergyDensity"
-  ),
-  // Inverse Magnetic Flux
-  InverseMagneticFlux: Qudt.quantityKindFromLocalnameRequired(
-    "InverseMagneticFlux"
-  ),
+  // Microbial Formation
+  MicrobialFormation:
+    Qudt.quantityKindFromLocalnameRequired("MicrobialFormation"),
+  // Adaptation
+  Adaptation: Qudt.quantityKindFromLocalnameRequired("Adaptation"),
   // Volumetric Heat Capacity
   VolumetricHeatCapacity: Qudt.quantityKindFromLocalnameRequired(
     "VolumetricHeatCapacity"
-  ),
-  // Angular Momentum
-  AngularMomentum: Qudt.quantityKindFromLocalnameRequired("AngularMomentum"),
-  // Capacitance
-  Capacitance: Qudt.quantityKindFromLocalnameRequired("Capacitance"),
-  // Decay Constant
-  DecayConstant: Qudt.quantityKindFromLocalnameRequired("DecayConstant"),
-  // Specific Volume
-  SpecificVolume: Qudt.quantityKindFromLocalnameRequired("SpecificVolume"),
-  // Total Cross-section
-  TotalCrossSection:
-    Qudt.quantityKindFromLocalnameRequired("TotalCrossSection"),
-  // Nominal Ascent Propellant Mass
-  NOMINAL__ASCENT__PROPELLANT__MASS: Qudt.quantityKindFromLocalnameRequired(
-    "NOMINAL-ASCENT-PROPELLANT-MASS"
-  ),
-  // Speed
-  Speed: Qudt.quantityKindFromLocalnameRequired("Speed"),
-  // Molar Flow Rate
-  MolarFlowRate: Qudt.quantityKindFromLocalnameRequired("MolarFlowRate"),
-  // Rovinný úhel
-  PlaneAngle: Qudt.quantityKindFromLocalnameRequired("PlaneAngle"),
-  // 利得
-  SoundPressureLevel:
-    Qudt.quantityKindFromLocalnameRequired("SoundPressureLevel"),
-  // Incidence
-  Incidence: Qudt.quantityKindFromLocalnameRequired("Incidence"),
-  // Particle Current
-  ParticleCurrent: Qudt.quantityKindFromLocalnameRequired("ParticleCurrent"),
-  // Luminous Flux Ratio
-  LuminousFluxRatio:
-    Qudt.quantityKindFromLocalnameRequired("LuminousFluxRatio"),
-  // Molar Attenuation Coefficient
-  MolarAttenuationCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "MolarAttenuationCoefficient"
-  ),
-  // Molar Mass variation due to Pressure
-  AmountOfSubstancePerUnitMassPressure: Qudt.quantityKindFromLocalnameRequired(
-    "AmountOfSubstancePerUnitMassPressure"
   ),
   // مختصات دکارتی
   CartesianCoordinates: Qudt.quantityKindFromLocalnameRequired(
     "CartesianCoordinates"
   ),
-  // Micro Canonical Partition Function
-  MicroCanonicalPartitionFunction: Qudt.quantityKindFromLocalnameRequired(
-    "MicroCanonicalPartitionFunction"
+  // Lower Critical Magnetic Flux Density
+  LowerCriticalMagneticFluxDensity: Qudt.quantityKindFromLocalnameRequired(
+    "LowerCriticalMagneticFluxDensity"
   ),
-  // 等温压缩率
-  IsothermalCompressibility: Qudt.quantityKindFromLocalnameRequired(
-    "IsothermalCompressibility"
+  // Propellant Temperature
+  PropellantTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "PropellantTemperature"
   ),
-  // 直径
-  Diameter: Qudt.quantityKindFromLocalnameRequired("Diameter"),
-  // Relaxation TIme
-  RelaxationTIme: Qudt.quantityKindFromLocalnameRequired("RelaxationTIme"),
-  // Dynamic Pressure
-  DynamicPressure: Qudt.quantityKindFromLocalnameRequired("DynamicPressure"),
-  // Propellant Mass
-  PropellantMass: Qudt.quantityKindFromLocalnameRequired("PropellantMass"),
-  // Fuel Bias
-  FUEL__BIAS: Qudt.quantityKindFromLocalnameRequired("FUEL-BIAS"),
-  // Energy Per Area Electric Charge
-  EnergyPerAreaElectricCharge: Qudt.quantityKindFromLocalnameRequired(
-    "EnergyPerAreaElectricCharge"
-  ),
-  // Wirkleistung
-  ElectricPower: Qudt.quantityKindFromLocalnameRequired("ElectricPower"),
-  // intervalo logarítmico de frequência
-  LogarithmicFrequencyInterval: Qudt.quantityKindFromLocalnameRequired(
-    "LogarithmicFrequencyInterval"
-  ),
-  // energia interna
-  EnergyInternal: Qudt.quantityKindFromLocalnameRequired("EnergyInternal"),
-  // Inverse Time
-  InverseTime: Qudt.quantityKindFromLocalnameRequired("InverseTime"),
-  // Inverse Square Mass
-  InverseSquareMass:
-    Qudt.quantityKindFromLocalnameRequired("InverseSquareMass"),
-  // چگالی شار الکتریکی
-  ElectricFluxDensity: Qudt.quantityKindFromLocalnameRequired(
-    "ElectricFluxDensity"
-  ),
-  // Friction Coefficient
-  FrictionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "FrictionCoefficient"
-  ),
-  // Sound exposure
-  SoundExposure: Qudt.quantityKindFromLocalnameRequired("SoundExposure"),
-  // Specific Heat Pressure
-  SpecificHeatPressure: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificHeatPressure"
-  ),
-  // Degree of Dissociation
-  DegreeOfDissociation: Qudt.quantityKindFromLocalnameRequired(
-    "DegreeOfDissociation"
-  ),
-  // Linear Compressibility
-  LinearCompressibility: Qudt.quantityKindFromLocalnameRequired(
-    "LinearCompressibility"
-  ),
-  // Mass Attenuation Coefficient
-  MassAttenuationCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "MassAttenuationCoefficient"
-  ),
-  // Nuclear Quadrupole Moment
-  NuclearQuadrupoleMoment: Qudt.quantityKindFromLocalnameRequired(
-    "NuclearQuadrupoleMoment"
-  ),
-  // Incidence Proportion
-  IncidenceProportion: Qudt.quantityKindFromLocalnameRequired(
-    "IncidenceProportion"
-  ),
-  // Total Atomic Stopping Power
-  TotalAtomicStoppingPower: Qudt.quantityKindFromLocalnameRequired(
-    "TotalAtomicStoppingPower"
-  ),
-  // Amount of Substance of Concentration of B
-  AmountOfSubstanceConcentrationOfB: Qudt.quantityKindFromLocalnameRequired(
-    "AmountOfSubstanceConcentrationOfB"
-  ),
-  // Energy per temperature
-  EnergyPerTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "EnergyPerTemperature"
-  ),
-  // Rest Energy
-  RestEnergy: Qudt.quantityKindFromLocalnameRequired("RestEnergy"),
+  // Atomic Charge
+  AtomicCharge: Qudt.quantityKindFromLocalnameRequired("AtomicCharge"),
+  // Thrust Coefficient
+  ThrustCoefficient:
+    Qudt.quantityKindFromLocalnameRequired("ThrustCoefficient"),
   // Vertical Velocity
   VerticalVelocity: Qudt.quantityKindFromLocalnameRequired("VerticalVelocity"),
-  // Water Horsepower
-  WaterHorsepower: Qudt.quantityKindFromLocalnameRequired("WaterHorsepower"),
-  // Area Temperature
-  AreaTemperature: Qudt.quantityKindFromLocalnameRequired("AreaTemperature"),
-  // Lattice Vector
-  LatticeVector: Qudt.quantityKindFromLocalnameRequired("LatticeVector"),
-  // Buckling Factor
-  BucklingFactor: Qudt.quantityKindFromLocalnameRequired("BucklingFactor"),
-  // Activity Coefficient
-  ActivityCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "ActivityCoefficient"
+  // Halaju bersudut
+  AngularVelocity: Qudt.quantityKindFromLocalnameRequired("AngularVelocity"),
+  // Sound energy density
+  SoundEnergyDensity:
+    Qudt.quantityKindFromLocalnameRequired("SoundEnergyDensity"),
+  // Canonical Partition Function
+  CanonicalPartitionFunction: Qudt.quantityKindFromLocalnameRequired(
+    "CanonicalPartitionFunction"
   ),
-  // Particle Source Density
-  ParticleSourceDensity: Qudt.quantityKindFromLocalnameRequired(
-    "ParticleSourceDensity"
+  // Average Vacuum Thrust
+  AverageVacuumThrust: Qudt.quantityKindFromLocalnameRequired(
+    "AverageVacuumThrust"
   ),
-  // Volume per Unit Time
-  VolumePerUnitTime:
-    Qudt.quantityKindFromLocalnameRequired("VolumePerUnitTime"),
-  // Magnetic Field
-  MagneticField: Qudt.quantityKindFromLocalnameRequired("MagneticField"),
-  // Reluctance
-  Reluctance: Qudt.quantityKindFromLocalnameRequired("Reluctance"),
-  // Înălțime
-  Height: Qudt.quantityKindFromLocalnameRequired("Height"),
-  // yoğunluk
-  MassDensity: Qudt.quantityKindFromLocalnameRequired("MassDensity"),
-  // Inverse Time Temperature
-  InverseTimeTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "InverseTimeTemperature"
+  // Heat Flow Rate per Unit Area
+  HeatFlowRatePerUnitArea: Qudt.quantityKindFromLocalnameRequired(
+    "HeatFlowRatePerUnitArea"
   ),
-  // Logarithm of Octanol Water Partition Coefficient
-  LogOctanolWaterPartitionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "LogOctanolWaterPartitionCoefficient"
+  // volume molar
+  MolarVolume: Qudt.quantityKindFromLocalnameRequired("MolarVolume"),
+  // Sound power level
+  SoundPowerLevel: Qudt.quantityKindFromLocalnameRequired("SoundPowerLevel"),
+  // Neutron Yield per Absorption
+  NeutronYieldPerAbsorption: Qudt.quantityKindFromLocalnameRequired(
+    "NeutronYieldPerAbsorption"
   ),
-  // Elliptical Orbit Apogee Velocity
-  EllipticalOrbitApogeeVelocity: Qudt.quantityKindFromLocalnameRequired(
-    "EllipticalOrbitApogeeVelocity"
+  // Inverse Square Energy
+  InverseEnergy_Squared: Qudt.quantityKindFromLocalnameRequired(
+    "InverseEnergy_Squared"
   ),
-  // Relative Mass Density
-  RelativeMassDensity: Qudt.quantityKindFromLocalnameRequired(
-    "RelativeMassDensity"
+  // Ventilation Rate per Floor Area
+  VentilationRatePerFloorArea: Qudt.quantityKindFromLocalnameRequired(
+    "VentilationRatePerFloorArea"
   ),
-  // Migration Area
-  MigrationArea: Qudt.quantityKindFromLocalnameRequired("MigrationArea"),
-  // Fission Multiplication Factor
-  FissionMultiplicationFactor: Qudt.quantityKindFromLocalnameRequired(
-    "FissionMultiplicationFactor"
-  ),
-  // Recombination Coefficient
-  RecombinationCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "RecombinationCoefficient"
+  // نقطه کوری
+  CurieTemperature: Qudt.quantityKindFromLocalnameRequired("CurieTemperature"),
+  // Energy Per Square Magnetic Flux Density
+  EnergyPerMagneticFluxDensity_Squared: Qudt.quantityKindFromLocalnameRequired(
+    "EnergyPerMagneticFluxDensity_Squared"
   ),
   // Atomic Attenuation Coefficient
   AtomicAttenuationCoefficient: Qudt.quantityKindFromLocalnameRequired(
     "AtomicAttenuationCoefficient"
   ),
+  // Modulus of Linear Subgrade Reaction
+  ModulusOfLinearSubgradeReaction: Qudt.quantityKindFromLocalnameRequired(
+    "ModulusOfLinearSubgradeReaction"
+  ),
+  // Non-active Power
+  NonActivePower: Qudt.quantityKindFromLocalnameRequired("NonActivePower"),
+  // Quantum Number
+  QuantumNumber: Qudt.quantityKindFromLocalnameRequired("QuantumNumber"),
+  // Catalytic Activity
+  CatalyticActivity:
+    Qudt.quantityKindFromLocalnameRequired("CatalyticActivity"),
+  // Volume
+  Volume: Qudt.quantityKindFromLocalnameRequired("Volume"),
+  // Lichtstärke
+  LuminousIntensity:
+    Qudt.quantityKindFromLocalnameRequired("LuminousIntensity"),
+  // Linear Force
+  LinearStiffness: Qudt.quantityKindFromLocalnameRequired("LinearStiffness"),
+  // Thruster Power To Thrust Efficiency
+  ThrusterPowerToThrustEfficiency: Qudt.quantityKindFromLocalnameRequired(
+    "ThrusterPowerToThrustEfficiency"
+  ),
+  // אורך
+  Length: Qudt.quantityKindFromLocalnameRequired("Length"),
+  // Magnetic flux per unit length
+  MagneticFluxPerUnitLength: Qudt.quantityKindFromLocalnameRequired(
+    "MagneticFluxPerUnitLength"
+  ),
+  // Peltier Coefficient
+  PeltierCoefficient:
+    Qudt.quantityKindFromLocalnameRequired("PeltierCoefficient"),
+  // Nozzle Walls Thrust Reaction
+  NozzleWallsThrustReaction: Qudt.quantityKindFromLocalnameRequired(
+    "NozzleWallsThrustReaction"
+  ),
+  // temperatura thermodynamica absoluta
+  ThermodynamicTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "ThermodynamicTemperature"
+  ),
+  // Elliptical Orbit Apogee Velocity
+  EllipticalOrbitApogeeVelocity: Qudt.quantityKindFromLocalnameRequired(
+    "EllipticalOrbitApogeeVelocity"
+  ),
+  // Energy per temperature
+  EnergyPerTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "EnergyPerTemperature"
+  ),
+  // Tenaga keupayaan
+  PotentialEnergy: Qudt.quantityKindFromLocalnameRequired("PotentialEnergy"),
+  // Web Time Average Thrust
+  WebTimeAverageThrust: Qudt.quantityKindFromLocalnameRequired(
+    "WebTimeAverageThrust"
+  ),
+  // Photosynthetic Photon Flux Density
+  PhotosyntheticPhotonFluxDensity: Qudt.quantityKindFromLocalnameRequired(
+    "PhotosyntheticPhotonFluxDensity"
+  ),
+  // Center of Mass (CoM)
+  CENTER__OF__MASS: Qudt.quantityKindFromLocalnameRequired("CENTER-OF-MASS"),
+  // Ionic Strength
+  IonicStrength: Qudt.quantityKindFromLocalnameRequired("IonicStrength"),
+  // Modulus Of Impedance
+  ModulusOfImpedance:
+    Qudt.quantityKindFromLocalnameRequired("ModulusOfImpedance"),
+  // Center of Gravity in the X axis
+  CenterOfGravity_X:
+    Qudt.quantityKindFromLocalnameRequired("CenterOfGravity_X"),
+  // Electric Charge Density
+  ElectricChargeDensity: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricChargeDensity"
+  ),
+  // Inverse Pressure
+  InversePressure: Qudt.quantityKindFromLocalnameRequired("InversePressure"),
+  // Relative Molecular Mass
+  RelativeMolecularMass: Qudt.quantityKindFromLocalnameRequired(
+    "RelativeMolecularMass"
+  ),
+  // Length Energy
+  LengthEnergy: Qudt.quantityKindFromLocalnameRequired("LengthEnergy"),
+  // Acidity
+  Basicity: Qudt.quantityKindFromLocalnameRequired("Basicity"),
+  // Napierian Absorbance
+  NapierianAbsorbance: Qudt.quantityKindFromLocalnameRequired(
+    "NapierianAbsorbance"
+  ),
+  // Incidence Proportion
+  IncidenceProportion: Qudt.quantityKindFromLocalnameRequired(
+    "IncidenceProportion"
+  ),
+  // Prevalence
+  Prevalence: Qudt.quantityKindFromLocalnameRequired("Prevalence"),
+  // Heat Flow Rate
+  HeatFlowRate: Qudt.quantityKindFromLocalnameRequired("HeatFlowRate"),
+  // Magnetic Susceptability
+  MagneticSusceptability: Qudt.quantityKindFromLocalnameRequired(
+    "MagneticSusceptability"
+  ),
+  // Volume Flow Rate
+  VolumeFlowRate: Qudt.quantityKindFromLocalnameRequired("VolumeFlowRate"),
+  // jakost magnetnega polja
+  MagneticFieldStrength_H: Qudt.quantityKindFromLocalnameRequired(
+    "MagneticFieldStrength_H"
+  ),
+  // Mechanical Energy
+  MechanicalEnergy: Qudt.quantityKindFromLocalnameRequired("MechanicalEnergy"),
+  // Molar Heat Capacity
+  MolarHeatCapacity:
+    Qudt.quantityKindFromLocalnameRequired("MolarHeatCapacity"),
+  // Magnetomotive Force
+  MagnetomotiveForce:
+    Qudt.quantityKindFromLocalnameRequired("MagnetomotiveForce"),
+  // Warping Constant
+  WarpingConstant: Qudt.quantityKindFromLocalnameRequired("WarpingConstant"),
+  // Thermodynamic Energy
+  ThermodynamicEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "ThermodynamicEnergy"
+  ),
+  // Displacement Current
+  DisplacementCurrent: Qudt.quantityKindFromLocalnameRequired(
+    "DisplacementCurrent"
+  ),
+  // Massic Activity
+  MassicActivity: Qudt.quantityKindFromLocalnameRequired("MassicActivity"),
+  // Pressure Percentage
+  PressurePercentage:
+    Qudt.quantityKindFromLocalnameRequired("PressurePercentage"),
   // Magnetic Tension
   MagneticTension: Qudt.quantityKindFromLocalnameRequired("MagneticTension"),
-  // Stała Madelunga
-  MadelungConstant: Qudt.quantityKindFromLocalnameRequired("MadelungConstant"),
-  // Single Stage Launcher Mass Ratio
-  SingleStageLauncherMassRatio: Qudt.quantityKindFromLocalnameRequired(
-    "SingleStageLauncherMassRatio"
+  // Amount of Substance of Fraction of B
+  AmountOfSubstanceFractionOfB: Qudt.quantityKindFromLocalnameRequired(
+    "AmountOfSubstanceFractionOfB"
   ),
-  // Stage Propellant Mass
-  StagePropellantMass: Qudt.quantityKindFromLocalnameRequired(
-    "StagePropellantMass"
+  // Equilibrium Constant on Pressure Basis
+  EquilibriumConstantOnPressureBasis: Qudt.quantityKindFromLocalnameRequired(
+    "EquilibriumConstantOnPressureBasis"
   ),
-  // Energy Density of States
-  EnergyDensityOfStates: Qudt.quantityKindFromLocalnameRequired(
-    "EnergyDensityOfStates"
+  // Specific Energy Imparted
+  SpecificEnergyImparted: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificEnergyImparted"
   ),
-  // Gene Family Abundance
-  GeneFamilyAbundance: Qudt.quantityKindFromLocalnameRequired(
-    "GeneFamilyAbundance"
+  // Propellant Mass
+  PropellantMass: Qudt.quantityKindFromLocalnameRequired("PropellantMass"),
+  // Slowing-Down Area
+  Slowing__DownArea: Qudt.quantityKindFromLocalnameRequired("Slowing-DownArea"),
+  // Mass Of The Earth
+  MassOfTheEarth: Qudt.quantityKindFromLocalnameRequired("MassOfTheEarth"),
+  // masa
+  Mass: Qudt.quantityKindFromLocalnameRequired("Mass"),
+  // Diffusion Area
+  DiffusionArea: Qudt.quantityKindFromLocalnameRequired("DiffusionArea"),
+  // Ion Concentration
+  IonConcentration: Qudt.quantityKindFromLocalnameRequired("IonConcentration"),
+  // Fermi Temperature
+  FermiTemperature: Qudt.quantityKindFromLocalnameRequired("FermiTemperature"),
+  // Center of Gravity in the X axis
+  CENTER__OF__GRAVITY_X: Qudt.quantityKindFromLocalnameRequired(
+    "CENTER-OF-GRAVITY_X"
   ),
-  // Atmospheric Hydroxylation Rate
-  AtmosphericHydroxylationRate: Qudt.quantityKindFromLocalnameRequired(
-    "AtmosphericHydroxylationRate"
+  // Inverse Volume
+  InverseVolume: Qudt.quantityKindFromLocalnameRequired("InverseVolume"),
+  // Total Mass Stopping Power
+  TotalMassStoppingPower: Qudt.quantityKindFromLocalnameRequired(
+    "TotalMassStoppingPower"
   ),
-  // Static Friction Coefficient
-  StaticFrictionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "StaticFrictionCoefficient"
+  // Area Time
+  AreaTime: Qudt.quantityKindFromLocalnameRequired("AreaTime"),
+  // Bevel Gear Pitch Angle
+  BevelGearPitchAngle: Qudt.quantityKindFromLocalnameRequired(
+    "BevelGearPitchAngle"
   ),
-  // قدرة إشعاعية
-  RadiantFlux: Qudt.quantityKindFromLocalnameRequired("RadiantFlux"),
-  // Mass per Area Time
-  MassPerAreaTime: Qudt.quantityKindFromLocalnameRequired("MassPerAreaTime"),
-  // Acceptor Density
-  AcceptorDensity: Qudt.quantityKindFromLocalnameRequired("AcceptorDensity"),
-  // Reactivity
-  Reactivity: Qudt.quantityKindFromLocalnameRequired("Reactivity"),
-  // Molecular Concentration
-  MolecularConcentration: Qudt.quantityKindFromLocalnameRequired(
-    "MolecularConcentration"
+  // Thermal Insulance
+  ThermalInsulance: Qudt.quantityKindFromLocalnameRequired("ThermalInsulance"),
+  // Second Axial Moment of Area
+  SecondAxialMomentOfArea: Qudt.quantityKindFromLocalnameRequired(
+    "SecondAxialMomentOfArea"
   ),
-  // Specific heat capacity at constant volume
-  SpecificHeatCapacityAtConstantVolume: Qudt.quantityKindFromLocalnameRequired(
-    "SpecificHeatCapacityAtConstantVolume"
+  // Çiftlenim sabiti
+  CouplingFactor: Qudt.quantityKindFromLocalnameRequired("CouplingFactor"),
+  // Control Mass.
+  CONTROL__MASS: Qudt.quantityKindFromLocalnameRequired("CONTROL-MASS"),
+  // Electric Charge Surface Density
+  ElectricChargeSurfaceDensity: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricChargeSurfaceDensity"
   ),
-  // Inverse Square Time
-  InverseTime_Squared: Qudt.quantityKindFromLocalnameRequired(
-    "InverseTime_Squared"
+  // 電位
+  ElectricPotential:
+    Qudt.quantityKindFromLocalnameRequired("ElectricPotential"),
+  // Surface Activity Density
+  SurfaceActivityDensity: Qudt.quantityKindFromLocalnameRequired(
+    "SurfaceActivityDensity"
   ),
-  // Specific Entropy
-  SpecificEntropy: Qudt.quantityKindFromLocalnameRequired("SpecificEntropy"),
-  // Quartic Electric Dipole Moment per Cubic Energy
-  ElectricDipoleMoment_QuarticPerEnergy_Cubic:
-    Qudt.quantityKindFromLocalnameRequired(
-      "ElectricDipoleMoment_QuarticPerEnergy_Cubic"
-    ),
-  // potencial químico
-  ChemicalPotential:
-    Qudt.quantityKindFromLocalnameRequired("ChemicalPotential"),
-  // Electrolytic Conductivity
-  ElectrolyticConductivity: Qudt.quantityKindFromLocalnameRequired(
-    "ElectrolyticConductivity"
+  // Friction
+  Friction: Qudt.quantityKindFromLocalnameRequired("Friction"),
+  // Conductive Heat Transfer Rate
+  ConductiveHeatTransferRate: Qudt.quantityKindFromLocalnameRequired(
+    "ConductiveHeatTransferRate"
   ),
   // First Stage Mass Ratio
   FirstStageMassRatio: Qudt.quantityKindFromLocalnameRequired(
     "FirstStageMassRatio"
   ),
-  // Massic Activity
-  MassicActivity: Qudt.quantityKindFromLocalnameRequired("MassicActivity"),
-  // Magnetisierung
-  Magnetization: Qudt.quantityKindFromLocalnameRequired("Magnetization"),
-  // Sound power level
-  SoundPowerLevel: Qudt.quantityKindFromLocalnameRequired("SoundPowerLevel"),
+  // Polar moment of inertia
+  PolarMomentOfInertia: Qudt.quantityKindFromLocalnameRequired(
+    "PolarMomentOfInertia"
+  ),
+  // induktivitás
+  Inductance: Qudt.quantityKindFromLocalnameRequired("Inductance"),
+  // Modulus Of Admittance
+  ModulusOfAdmittance: Qudt.quantityKindFromLocalnameRequired(
+    "ModulusOfAdmittance"
+  ),
+  // Energy Fluence Rate
+  EnergyFluenceRate:
+    Qudt.quantityKindFromLocalnameRequired("EnergyFluenceRate"),
+  // Electromagnetic Permeability Ratio
+  ElectromagneticPermeabilityRatio: Qudt.quantityKindFromLocalnameRequired(
+    "ElectromagneticPermeabilityRatio"
+  ),
+  // Polarization Field
+  PolarizationField:
+    Qudt.quantityKindFromLocalnameRequired("PolarizationField"),
+  // Electric Charge Linear Density
+  ElectricChargeLinearDensity: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricChargeLinearDensity"
+  ),
+  // Power Area
+  PowerArea: Qudt.quantityKindFromLocalnameRequired("PowerArea"),
+  // Particle Source Density
+  ParticleSourceDensity: Qudt.quantityKindFromLocalnameRequired(
+    "ParticleSourceDensity"
+  ),
+  // Volume per Unit Area
+  VolumePerArea: Qudt.quantityKindFromLocalnameRequired("VolumePerArea"),
+  // Angular Distance
+  AngularDistance: Qudt.quantityKindFromLocalnameRequired("AngularDistance"),
+  // Coherence Length
+  CoherenceLength: Qudt.quantityKindFromLocalnameRequired("CoherenceLength"),
+  // Single Stage Launcher Mass Ratio
+  SingleStageLauncherMassRatio: Qudt.quantityKindFromLocalnameRequired(
+    "SingleStageLauncherMassRatio"
+  ),
+  // Molar Attenuation Coefficient
+  MolarAttenuationCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "MolarAttenuationCoefficient"
+  ),
+  // Dimensionless
+  Dimensionless: Qudt.quantityKindFromLocalnameRequired("Dimensionless"),
+  // Ion Concentration
+  LuminousIntensityDistribution: Qudt.quantityKindFromLocalnameRequired(
+    "LuminousIntensityDistribution"
+  ),
+  // Period
+  Period: Qudt.quantityKindFromLocalnameRequired("Period"),
+  // Radius
+  Radius: Qudt.quantityKindFromLocalnameRequired("Radius"),
+  // Inverse Time Temperature
+  InverseTimeTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "InverseTimeTemperature"
+  ),
+  // Linear Velocity
+  LinearVelocity: Qudt.quantityKindFromLocalnameRequired("LinearVelocity"),
+  // Propellant Burn Rate
+  PropellantBurnRate:
+    Qudt.quantityKindFromLocalnameRequired("PropellantBurnRate"),
+  // Area Ratio
+  AreaRatio: Qudt.quantityKindFromLocalnameRequired("AreaRatio"),
+  // Linear Electric Current
+  LinearElectricCurrent: Qudt.quantityKindFromLocalnameRequired(
+    "LinearElectricCurrent"
+  ),
+  // Intinsic Carrier Density
+  IntinsicCarrierDensity: Qudt.quantityKindFromLocalnameRequired(
+    "IntinsicCarrierDensity"
+  ),
+  // Second Stage Mass Ratio
+  SecondStageMassRatio: Qudt.quantityKindFromLocalnameRequired(
+    "SecondStageMassRatio"
+  ),
+  // Sound pressure
+  SoundPressure: Qudt.quantityKindFromLocalnameRequired("SoundPressure"),
+  // Cross-sectional Area
+  CrossSectionalArea:
+    Qudt.quantityKindFromLocalnameRequired("CrossSectionalArea"),
+  // Positive Dimensionless Ratio
+  NormalizedDimensionlessRatio: Qudt.quantityKindFromLocalnameRequired(
+    "NormalizedDimensionlessRatio"
+  ),
+  // Strain
+  Strain: Qudt.quantityKindFromLocalnameRequired("Strain"),
+  // Force Per Area Time
+  ForcePerAreaTime: Qudt.quantityKindFromLocalnameRequired("ForcePerAreaTime"),
+  // Length Mass
+  LengthMass: Qudt.quantityKindFromLocalnameRequired("LengthMass"),
+  // indukcja magnetyczna
+  MagneticFluxDensity: Qudt.quantityKindFromLocalnameRequired(
+    "MagneticFluxDensity"
+  ),
+  // Mass Fraction of Dry Matter
+  MassFractionOfDryMatter: Qudt.quantityKindFromLocalnameRequired(
+    "MassFractionOfDryMatter"
+  ),
+  // Reflectance Factor
+  ReflectanceFactor:
+    Qudt.quantityKindFromLocalnameRequired("ReflectanceFactor"),
+  // Total Atomic Stopping Power
+  TotalAtomicStoppingPower: Qudt.quantityKindFromLocalnameRequired(
+    "TotalAtomicStoppingPower"
+  ),
+  // Luminous Energy
+  LuminousEnergy: Qudt.quantityKindFromLocalnameRequired("LuminousEnergy"),
+  // Force Magnitude
+  ForceMagnitude: Qudt.quantityKindFromLocalnameRequired("ForceMagnitude"),
+  // Temperature Rate of Change
+  TemperatureRateOfChange: Qudt.quantityKindFromLocalnameRequired(
+    "TemperatureRateOfChange"
+  ),
+  // Generalized Velocity
+  GeneralizedVelocity: Qudt.quantityKindFromLocalnameRequired(
+    "GeneralizedVelocity"
+  ),
+  // Lattice Plane Spacing
+  LatticePlaneSpacing: Qudt.quantityKindFromLocalnameRequired(
+    "LatticePlaneSpacing"
+  ),
+  // Drag Coefficient
+  DragCoefficient: Qudt.quantityKindFromLocalnameRequired("DragCoefficient"),
+  // Ion Density
+  IonDensity: Qudt.quantityKindFromLocalnameRequired("IonDensity"),
+  // 无功功率
+  ReactivePower: Qudt.quantityKindFromLocalnameRequired("ReactivePower"),
+  // Electric Current per Unit Energy
+  ElectricCurrentPerUnitEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricCurrentPerUnitEnergy"
+  ),
+  // osvetljenost
+  Illuminance: Qudt.quantityKindFromLocalnameRequired("Illuminance"),
+  // Phonon Mean Free Path
+  PhononMeanFreePath:
+    Qudt.quantityKindFromLocalnameRequired("PhononMeanFreePath"),
+  // Exit Plane Cross-sectional Area
+  ExitPlaneCrossSectionalArea: Qudt.quantityKindFromLocalnameRequired(
+    "ExitPlaneCrossSectionalArea"
+  ),
+  // Donor Density
+  DonorDensity: Qudt.quantityKindFromLocalnameRequired("DonorDensity"),
+  // Mass Excess
+  MassExcess: Qudt.quantityKindFromLocalnameRequired("MassExcess"),
+  // قدرة إشعاعية
+  RadiantFlux: Qudt.quantityKindFromLocalnameRequired("RadiantFlux"),
+  // Photon Intensity
+  PhotonIntensity: Qudt.quantityKindFromLocalnameRequired("PhotonIntensity"),
+  // Equilibrium Position Vector of Ion
+  EquilibriumPositionVectorOfIon: Qudt.quantityKindFromLocalnameRequired(
+    "EquilibriumPositionVectorOfIon"
+  ),
+  // Atmospheric Hydroxylation Rate
+  AtmosphericHydroxylationRate: Qudt.quantityKindFromLocalnameRequired(
+    "AtmosphericHydroxylationRate"
+  ),
+  // Soil Adsorption Coefficient
+  SoilAdsorptionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "SoilAdsorptionCoefficient"
+  ),
+  // Molecular Viscosity
+  MolecularViscosity:
+    Qudt.quantityKindFromLocalnameRequired("MolecularViscosity"),
+  // Larmor Angular Frequency
+  LarmorAngularFrequency: Qudt.quantityKindFromLocalnameRequired(
+    "LarmorAngularFrequency"
+  ),
+  // Activity Thresholds
+  ActivityThresholds:
+    Qudt.quantityKindFromLocalnameRequired("ActivityThresholds"),
+  // विद्युत्-क्षेत्र
+  ElectricFieldStrength: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricFieldStrength"
+  ),
+  // Water Solubility
+  Solubility_Water: Qudt.quantityKindFromLocalnameRequired("Solubility_Water"),
+  // Hamilton Function
+  HamiltonFunction: Qudt.quantityKindFromLocalnameRequired("HamiltonFunction"),
+  // Orbital Radial Distance
+  OrbitalRadialDistance: Qudt.quantityKindFromLocalnameRequired(
+    "OrbitalRadialDistance"
+  ),
+  // Relative Mass Density
+  RelativeMassDensity: Qudt.quantityKindFromLocalnameRequired(
+    "RelativeMassDensity"
+  ),
+  // Conductivity
+  Conductivity: Qudt.quantityKindFromLocalnameRequired("Conductivity"),
+  // Thermodynamic Entropy
+  ThermodynamicEntropy: Qudt.quantityKindFromLocalnameRequired(
+    "ThermodynamicEntropy"
+  ),
+  // Inverse Length Temperature
+  InverseLengthTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "InverseLengthTemperature"
+  ),
+  // Inverse Square Energy
+  InverseSquareEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "InverseSquareEnergy"
+  ),
+  // 慣性モーメント
+  MomentOfInertia: Qudt.quantityKindFromLocalnameRequired("MomentOfInertia"),
+  // Currency
+  Currency: Qudt.quantityKindFromLocalnameRequired("Currency"),
+  // Mass Absorption Coefficient
+  MassAbsorptionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "MassAbsorptionCoefficient"
+  ),
+  // Vacuum Thrust
+  VacuumThrust: Qudt.quantityKindFromLocalnameRequired("VacuumThrust"),
+  // Maximum Expected Operating Thrust
+  MaxExpectedOperatingThrust: Qudt.quantityKindFromLocalnameRequired(
+    "MaxExpectedOperatingThrust"
+  ),
+  // mobilità
+  Mobility: Qudt.quantityKindFromLocalnameRequired("Mobility"),
+  // Circulation
+  Circulation: Qudt.quantityKindFromLocalnameRequired("Circulation"),
+  // Exposure
+  Exposure: Qudt.quantityKindFromLocalnameRequired("Exposure"),
+  // Number of Particles
+  NumberOfParticles:
+    Qudt.quantityKindFromLocalnameRequired("NumberOfParticles"),
+  // Voltage Percentage
+  VoltagePercentage:
+    Qudt.quantityKindFromLocalnameRequired("VoltagePercentage"),
+  // Coercivity
+  Coercivity: Qudt.quantityKindFromLocalnameRequired("Coercivity"),
+  // Inverse Length
+  InverseLength: Qudt.quantityKindFromLocalnameRequired("InverseLength"),
+  // Growing Degree Days (Cereals)
+  GrowingDegreeDay_Cereal: Qudt.quantityKindFromLocalnameRequired(
+    "GrowingDegreeDay_Cereal"
+  ),
+  // Sound Particle Displacement
+  SoundParticleDisplacement: Qudt.quantityKindFromLocalnameRequired(
+    "SoundParticleDisplacement"
+  ),
+  // Specific Heat Capacity at Saturation
+  SpecificHeatCapacityAtSaturation: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificHeatCapacityAtSaturation"
+  ),
+  // Current Linkage
+  CurrentLinkage: Qudt.quantityKindFromLocalnameRequired("CurrentLinkage"),
+  // Mass Concentration of Water
+  MassConcentrationOfWater: Qudt.quantityKindFromLocalnameRequired(
+    "MassConcentrationOfWater"
+  ),
+  // ciepło
+  Heat: Qudt.quantityKindFromLocalnameRequired("Heat"),
+  // Mass Fraction
+  MassFraction: Qudt.quantityKindFromLocalnameRequired("MassFraction"),
+  // معدل التمدد الحراري الخطي
+  LinearExpansionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "LinearExpansionCoefficient"
+  ),
+  // Burn Time
+  BurnTime: Qudt.quantityKindFromLocalnameRequired("BurnTime"),
+  // Standard Chemical Potential
+  StandardChemicalPotential: Qudt.quantityKindFromLocalnameRequired(
+    "StandardChemicalPotential"
+  ),
+  // polarização eléctrica
+  ElectricPolarization: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricPolarization"
+  ),
+  // Luminous Flux Ratio
+  LuminousFluxRatio:
+    Qudt.quantityKindFromLocalnameRequired("LuminousFluxRatio"),
+  // Cartesian Area
+  CartesianArea: Qudt.quantityKindFromLocalnameRequired("CartesianArea"),
+  // Electric Flux
+  ElectricFlux: Qudt.quantityKindFromLocalnameRequired("ElectricFlux"),
+  // Dose Equivalent Quality Factor
+  DoseEquivalentQualityFactor: Qudt.quantityKindFromLocalnameRequired(
+    "DoseEquivalentQualityFactor"
+  ),
+  // Molar Refractivity
+  MolarRefractivity:
+    Qudt.quantityKindFromLocalnameRequired("MolarRefractivity"),
+  // Energy per electric charge
+  EnergyPerElectricCharge: Qudt.quantityKindFromLocalnameRequired(
+    "EnergyPerElectricCharge"
+  ),
   // Modulus of Subgrade Reaction
   ModulusOfSubgradeReaction: Qudt.quantityKindFromLocalnameRequired(
     "ModulusOfSubgradeReaction"
   ),
+  // Force per Length
+  ForcePerLength: Qudt.quantityKindFromLocalnameRequired("ForcePerLength"),
+  // Standard Gravitational Parameter
+  StandardGravitationalParameter: Qudt.quantityKindFromLocalnameRequired(
+    "StandardGravitationalParameter"
+  ),
+  // Temporal Summation Function
+  TemporalSummationFunction: Qudt.quantityKindFromLocalnameRequired(
+    "TemporalSummationFunction"
+  ),
+  // अपवर्तनांक
+  RefractiveIndex: Qudt.quantityKindFromLocalnameRequired("RefractiveIndex"),
+  // Vorticity
+  Vorticity: Qudt.quantityKindFromLocalnameRequired("Vorticity"),
+  // Cross-section
+  CrossSection: Qudt.quantityKindFromLocalnameRequired("CrossSection"),
+  // Biodegredation Half Life
+  BiodegredationHalfLife: Qudt.quantityKindFromLocalnameRequired(
+    "BiodegredationHalfLife"
+  ),
+  // Slowing-Down Length
+  Slowing__DownLength:
+    Qudt.quantityKindFromLocalnameRequired("Slowing-DownLength"),
+  // Combined Non Evaporative Heat Transfer Coefficient
+  CombinedNonEvaporativeHeatTransferCoefficient:
+    Qudt.quantityKindFromLocalnameRequired(
+      "CombinedNonEvaporativeHeatTransferCoefficient"
+    ),
+  // Alpha Disintegration Energy
+  AlphaDisintegrationEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "AlphaDisintegrationEnergy"
+  ),
+  // Photo Threshold of Awareness Function
+  PhotoThresholdOfAwarenessFunction: Qudt.quantityKindFromLocalnameRequired(
+    "PhotoThresholdOfAwarenessFunction"
+  ),
+  // Resonance Escape Probability For Fission
+  ResonanceEscapeProbabilityForFission: Qudt.quantityKindFromLocalnameRequired(
+    "ResonanceEscapeProbabilityForFission"
+  ),
+  // Показатель адиабаты
+  IsentropicExponent:
+    Qudt.quantityKindFromLocalnameRequired("IsentropicExponent"),
+  // Molar Energy
+  MolarEnergy: Qudt.quantityKindFromLocalnameRequired("MolarEnergy"),
+  // Stress-Optic Coefficient
+  StressOpticCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "StressOpticCoefficient"
+  ),
+  // Elliptical Orbit Perigee Velocity
+  EllipticalOrbitPerigeeVelocity: Qudt.quantityKindFromLocalnameRequired(
+    "EllipticalOrbitPerigeeVelocity"
+  ),
+  // Osmotic Coefficient
+  OsmoticCoefficient:
+    Qudt.quantityKindFromLocalnameRequired("OsmoticCoefficient"),
+  // Reactance
+  Reactance: Qudt.quantityKindFromLocalnameRequired("Reactance"),
+  // Temperature per Magnetic Flux Density
+  TemperaturePerMagneticFluxDensity: Qudt.quantityKindFromLocalnameRequired(
+    "TemperaturePerMagneticFluxDensity"
+  ),
+  // Average Specific Impulse
+  AverageSpecificImpulse: Qudt.quantityKindFromLocalnameRequired(
+    "AverageSpecificImpulse"
+  ),
+  // Density In Combustion Chamber
+  DensityInCombustionChamber: Qudt.quantityKindFromLocalnameRequired(
+    "DensityInCombustionChamber"
+  ),
+  // Conductance
+  Conductance: Qudt.quantityKindFromLocalnameRequired("Conductance"),
+  // Stage Structure Mass
+  StageStructuralMass: Qudt.quantityKindFromLocalnameRequired(
+    "StageStructuralMass"
+  ),
+  // Thermal Admittance
+  ThermalAdmittance:
+    Qudt.quantityKindFromLocalnameRequired("ThermalAdmittance"),
+  // Quartic Electric Dipole Moment per Cubic Energy
+  QuarticElectricDipoleMomentPerCubicEnergy:
+    Qudt.quantityKindFromLocalnameRequired(
+      "QuarticElectricDipoleMomentPerCubicEnergy"
+    ),
+  // Bulk Modulus
+  BulkModulus: Qudt.quantityKindFromLocalnameRequired("BulkModulus"),
+  // Coefficient of heat transfer
+  CoefficientOfHeatTransfer: Qudt.quantityKindFromLocalnameRequired(
+    "CoefficientOfHeatTransfer"
+  ),
+  // Scalar Magnetic Potential
+  ScalarMagneticPotential: Qudt.quantityKindFromLocalnameRequired(
+    "ScalarMagneticPotential"
+  ),
+  // spin
+  Spin: Qudt.quantityKindFromLocalnameRequired("Spin"),
+  // Moment of Inertia in the Y axis
+  MOMENT__OF__INERTIA_Y: Qudt.quantityKindFromLocalnameRequired(
+    "MOMENT-OF-INERTIA_Y"
+  ),
+  // Energy per Area
+  EnergyPerArea: Qudt.quantityKindFromLocalnameRequired("EnergyPerArea"),
+  // energia radiante
+  RadiantEnergy: Qudt.quantityKindFromLocalnameRequired("RadiantEnergy"),
+  // Temperature
+  Temperature: Qudt.quantityKindFromLocalnameRequired("Temperature"),
+  // Area Temperature
+  AreaTemperature: Qudt.quantityKindFromLocalnameRequired("AreaTemperature"),
+  // Activity
+  Activity: Qudt.quantityKindFromLocalnameRequired("Activity"),
+  // Seebeck Coefficient
+  SeebeckCoefficient:
+    Qudt.quantityKindFromLocalnameRequired("SeebeckCoefficient"),
+  // Unknown
+  Unknown: Qudt.quantityKindFromLocalnameRequired("Unknown"),
+  // Data Rate
+  DataRate: Qudt.quantityKindFromLocalnameRequired("DataRate"),
+  // Exposure Rate
+  ExposureRate: Qudt.quantityKindFromLocalnameRequired("ExposureRate"),
+  // Linked Flux
+  LinkedFlux: Qudt.quantityKindFromLocalnameRequired("LinkedFlux"),
+  // Landau-Ginzburg Number
+  Landau__GinzburgNumber: Qudt.quantityKindFromLocalnameRequired(
+    "Landau-GinzburgNumber"
+  ),
+  // Product of Inertia in the Y axis
+  PRODUCT__OF__INERTIA_Y: Qudt.quantityKindFromLocalnameRequired(
+    "PRODUCT-OF-INERTIA_Y"
+  ),
+  // Spectral Luminous Efficiency
+  SpectralLuminousEfficiency: Qudt.quantityKindFromLocalnameRequired(
+    "SpectralLuminousEfficiency"
+  ),
+  // Molecular Mass
+  MolecularMass: Qudt.quantityKindFromLocalnameRequired("MolecularMass"),
+  // Positive Length
+  PositiveLength: Qudt.quantityKindFromLocalnameRequired("PositiveLength"),
+  // Section Area Integral
+  SectionAreaIntegral: Qudt.quantityKindFromLocalnameRequired(
+    "SectionAreaIntegral"
+  ),
+  // Path Length
+  PathLength: Qudt.quantityKindFromLocalnameRequired("PathLength"),
+  // Relative Humidity
+  RelativeHumidity: Qudt.quantityKindFromLocalnameRequired("RelativeHumidity"),
+  // Earth Closest Approach Vehicle Velocity
+  EarthClosestApproachVehicleVelocity: Qudt.quantityKindFromLocalnameRequired(
+    "EarthClosestApproachVehicleVelocity"
+  ),
+  // intervalo logarítmico de frequência
+  LogarithmicFrequencyInterval: Qudt.quantityKindFromLocalnameRequired(
+    "LogarithmicFrequencyInterval"
+  ),
+  // momento de dipolo magnético
+  MagneticMoment: Qudt.quantityKindFromLocalnameRequired("MagneticMoment"),
+  // Înălțime
+  Height: Qudt.quantityKindFromLocalnameRequired("Height"),
+  // Resistance Ratio
+  ResistanceRatio: Qudt.quantityKindFromLocalnameRequired("ResistanceRatio"),
+  // звуковая мощность
+  SoundPower: Qudt.quantityKindFromLocalnameRequired("SoundPower"),
+  // Final Or Current Vehicle Mass
+  FinalOrCurrentVehicleMass: Qudt.quantityKindFromLocalnameRequired(
+    "FinalOrCurrentVehicleMass"
+  ),
+  // corrente elettrica
+  ElectricCurrent: Qudt.quantityKindFromLocalnameRequired("ElectricCurrent"),
+  // Order of Reflection
+  OrderOfReflection:
+    Qudt.quantityKindFromLocalnameRequired("OrderOfReflection"),
+  // Area Thermal Expansion
+  AreaThermalExpansion: Qudt.quantityKindFromLocalnameRequired(
+    "AreaThermalExpansion"
+  ),
+  // Absorbed Dose
+  AbsorbedDose: Qudt.quantityKindFromLocalnameRequired("AbsorbedDose"),
+  // Inverse Permittivity
+  InversePermittivity: Qudt.quantityKindFromLocalnameRequired(
+    "InversePermittivity"
+  ),
+  // Energy Density
+  EnergyDensity: Qudt.quantityKindFromLocalnameRequired("EnergyDensity"),
+  // potencial magnético
+  MagneticVectorPotential: Qudt.quantityKindFromLocalnameRequired(
+    "MagneticVectorPotential"
+  ),
+  // Positive Dimensionless Ratio
+  PositiveDimensionlessRatio: Qudt.quantityKindFromLocalnameRequired(
+    "PositiveDimensionlessRatio"
+  ),
+  // Thermal Utilization Factor For Fission
+  ThermalUtilizationFactorForFission: Qudt.quantityKindFromLocalnameRequired(
+    "ThermalUtilizationFactorForFission"
+  ),
+  // Fundamental Reciprocal Lattice Vector
+  FundamentalReciprocalLatticeVector: Qudt.quantityKindFromLocalnameRequired(
+    "FundamentalReciprocalLatticeVector"
+  ),
+  // Neel Temperature
+  NeelTemperature: Qudt.quantityKindFromLocalnameRequired("NeelTemperature"),
+  // Mass Ratio of Water Vapour to Dry Gas
+  MassRatioOfWaterVapourToDryGas: Qudt.quantityKindFromLocalnameRequired(
+    "MassRatioOfWaterVapourToDryGas"
+  ),
+  // energia
+  Energy: Qudt.quantityKindFromLocalnameRequired("Energy"),
+  // Molar Entropy
+  MolarEntropy: Qudt.quantityKindFromLocalnameRequired("MolarEntropy"),
+  // Body Mass Index
+  BodyMassIndex: Qudt.quantityKindFromLocalnameRequired("BodyMassIndex"),
+  // Specific Electric Charge
+  SpecificElectricCharge: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificElectricCharge"
+  ),
+  // Temperature Gradient
+  TemperatureGradient: Qudt.quantityKindFromLocalnameRequired(
+    "TemperatureGradient"
+  ),
+  // Delta u,v
+  Duv: Qudt.quantityKindFromLocalnameRequired("Duv"),
+  // Flux
+  Flux: Qudt.quantityKindFromLocalnameRequired("Flux"),
+  // Fission Core Radius To Height Ratio
+  FissionCoreRadiusToHeightRatio: Qudt.quantityKindFromLocalnameRequired(
+    "FissionCoreRadiusToHeightRatio"
+  ),
+  // 直径
+  Diameter: Qudt.quantityKindFromLocalnameRequired("Diameter"),
+  // Mass Amount of Substance
+  MassAmountOfSubstance: Qudt.quantityKindFromLocalnameRequired(
+    "MassAmountOfSubstance"
+  ),
+  // Activity Concentration
+  ActivityConcentration: Qudt.quantityKindFromLocalnameRequired(
+    "ActivityConcentration"
+  ),
+  // Bragg Angle
+  BraggAngle: Qudt.quantityKindFromLocalnameRequired("BraggAngle"),
+  // Mutual Inductance
+  MutualInductance: Qudt.quantityKindFromLocalnameRequired("MutualInductance"),
+  // Moment of Inertia in the Z axis
+  MOMENT__OF__INERTIA_Z: Qudt.quantityKindFromLocalnameRequired(
+    "MOMENT-OF-INERTIA_Z"
+  ),
+  // Closest Approach Radius
+  ClosestApproachRadius: Qudt.quantityKindFromLocalnameRequired(
+    "ClosestApproachRadius"
+  ),
+  // Number Density
+  NumberDensity: Qudt.quantityKindFromLocalnameRequired("NumberDensity"),
+  // Maximum Operating Pressure
+  MaximumOperatingPressure: Qudt.quantityKindFromLocalnameRequired(
+    "MaximumOperatingPressure"
+  ),
+  // Atomic Number
+  AtomicNumber: Qudt.quantityKindFromLocalnameRequired("AtomicNumber"),
+  // Lande g-Factor
+  LandeGFactor: Qudt.quantityKindFromLocalnameRequired("LandeGFactor"),
+  // Combined Non Evaporative Heat Transfer Coefficient
+  EvaporativeHeatTransferCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "EvaporativeHeatTransferCoefficient"
+  ),
+  // electromotive force
+  ElectromotiveForce:
+    Qudt.quantityKindFromLocalnameRequired("ElectromotiveForce"),
+  // Inverse amount of substance
+  InverseAmountOfSubstance: Qudt.quantityKindFromLocalnameRequired(
+    "InverseAmountOfSubstance"
+  ),
+  // Mass Delivered
+  MASS__DELIVERED: Qudt.quantityKindFromLocalnameRequired("MASS-DELIVERED"),
+  // Particle Position Vector
+  ParticlePositionVector: Qudt.quantityKindFromLocalnameRequired(
+    "ParticlePositionVector"
+  ),
+  // API Gravity
+  Gravity_API: Qudt.quantityKindFromLocalnameRequired("Gravity_API"),
+  // Max Operating Thrust
+  MaxOperatingThrust:
+    Qudt.quantityKindFromLocalnameRequired("MaxOperatingThrust"),
+  // Total Pressure
+  TotalPressure: Qudt.quantityKindFromLocalnameRequired("TotalPressure"),
+  // Mechanical surface impedance
+  MechanicalSurfaceImpedance: Qudt.quantityKindFromLocalnameRequired(
+    "MechanicalSurfaceImpedance"
+  ),
+  // Electric Charge Volume Density
+  ElectricChargeVolumeDensity: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricChargeVolumeDensity"
+  ),
+  // Wellenlänge
+  Wavelength: Qudt.quantityKindFromLocalnameRequired("Wavelength"),
+  // Force Per Area
+  ForcePerArea: Qudt.quantityKindFromLocalnameRequired("ForcePerArea"),
+  // عزم محورى
+  Torque: Qudt.quantityKindFromLocalnameRequired("Torque"),
+  // Radiosity
+  Radiosity: Qudt.quantityKindFromLocalnameRequired("Radiosity"),
+  // Thrust To Weight Ratio
+  ThrustToWeightRatio: Qudt.quantityKindFromLocalnameRequired(
+    "ThrustToWeightRatio"
+  ),
+  // Olfactory Threshold
+  OlfactoryThreshold:
+    Qudt.quantityKindFromLocalnameRequired("OlfactoryThreshold"),
+  // Relative Atomic Mass
+  RelativeAtomicMass:
+    Qudt.quantityKindFromLocalnameRequired("RelativeAtomicMass"),
+  // Permeance
+  Permeance: Qudt.quantityKindFromLocalnameRequired("Permeance"),
+  // Acceptor Ionization Energy
+  AcceptorIonizationEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "AcceptorIonizationEnergy"
+  ),
+  // Charge Number
+  ChargeNumber: Qudt.quantityKindFromLocalnameRequired("ChargeNumber"),
+  // Angular Cross-section
+  AngularCrossSection: Qudt.quantityKindFromLocalnameRequired(
+    "AngularCrossSection"
+  ),
+  // Total Angular Momentum
+  TotalAngularMomentum: Qudt.quantityKindFromLocalnameRequired(
+    "TotalAngularMomentum"
+  ),
+  // Pressure Burning Rate Constant
+  PressureBurningRateConstant: Qudt.quantityKindFromLocalnameRequired(
+    "PressureBurningRateConstant"
+  ),
+  // specific weight
+  SpecificWeight: Qudt.quantityKindFromLocalnameRequired("SpecificWeight"),
+  // Mass Temperature
+  MassTemperature: Qudt.quantityKindFromLocalnameRequired("MassTemperature"),
+  // Mass Defect
+  MassDefect: Qudt.quantityKindFromLocalnameRequired("MassDefect"),
+  // Logarithm of Octanol Water Partition Coefficient
+  LogOctanolWaterPartitionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "LogOctanolWaterPartitionCoefficient"
+  ),
+  // Max Sea Level Thrust
+  MaxSeaLevelThrust:
+    Qudt.quantityKindFromLocalnameRequired("MaxSeaLevelThrust"),
+  // Power per area quartic temperature
+  PowerPerAreaQuarticTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "PowerPerAreaQuarticTemperature"
+  ),
+  // Exit Plane Pressure
+  ExitPlanePressure:
+    Qudt.quantityKindFromLocalnameRequired("ExitPlanePressure"),
+  // Liquid Volume
+  LiquidVolume: Qudt.quantityKindFromLocalnameRequired("LiquidVolume"),
+  // Hydraulic Permeability
+  HydraulicPermeability: Qudt.quantityKindFromLocalnameRequired(
+    "HydraulicPermeability"
+  ),
+  // 动量
+  Momentum: Qudt.quantityKindFromLocalnameRequired("Momentum"),
+  // Viscosity
+  Viscosity: Qudt.quantityKindFromLocalnameRequired("Viscosity"),
+  // momento di dipolo elettrico
+  ElectricDipoleMoment: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricDipoleMoment"
+  ),
+  // Spin Quantum Number
+  SpinQuantumNumber:
+    Qudt.quantityKindFromLocalnameRequired("SpinQuantumNumber"),
+  // Activity Coefficient
+  ActivityCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "ActivityCoefficient"
+  ),
+  // Correlated Color Temperature
+  CorrelatedColorTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "CorrelatedColorTemperature"
+  ),
+  // Pressure Loss per Length
+  PressureLossPerLength: Qudt.quantityKindFromLocalnameRequired(
+    "PressureLossPerLength"
+  ),
+  // Population
+  Population: Qudt.quantityKindFromLocalnameRequired("Population"),
+  // vitesse  acoustique d‘une particule
+  SoundParticleVelocity: Qudt.quantityKindFromLocalnameRequired(
+    "SoundParticleVelocity"
+  ),
+  // Electric Propulsion Propellant Mass
+  ElectricPropulsionPropellantMass: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricPropulsionPropellantMass"
+  ),
+  // Center of Gravity in the Z axis
+  CenterOfGravity_Z:
+    Qudt.quantityKindFromLocalnameRequired("CenterOfGravity_Z"),
   // Time Squared
   TimeSquared: Qudt.quantityKindFromLocalnameRequired("TimeSquared"),
-  // Electromagnetic Energy Density
-  ElectromagneticEnergyDensity: Qudt.quantityKindFromLocalnameRequired(
-    "ElectromagneticEnergyDensity"
+  // Luminous Exposure
+  LuminousExposure: Qudt.quantityKindFromLocalnameRequired("LuminousExposure"),
+  // Permeability
+  ElectromagneticPermeability: Qudt.quantityKindFromLocalnameRequired(
+    "ElectromagneticPermeability"
   ),
-  // force
-  Force: Qudt.quantityKindFromLocalnameRequired("Force"),
+  // Amount of Substance per Unit Mass
+  AmountOfSubstancePerUnitMass: Qudt.quantityKindFromLocalnameRequired(
+    "AmountOfSubstancePerUnitMass"
+  ),
+  // Specific Heat Volume
+  SpecificHeatVolume:
+    Qudt.quantityKindFromLocalnameRequired("SpecificHeatVolume"),
+  // angolo solido
+  SolidAngle: Qudt.quantityKindFromLocalnameRequired("SolidAngle"),
+  // Hall Coefficient
+  HallCoefficient: Qudt.quantityKindFromLocalnameRequired("HallCoefficient"),
+  // Rest Energy
+  RestEnergy: Qudt.quantityKindFromLocalnameRequired("RestEnergy"),
+  // Dry Volume
+  DryVolume: Qudt.quantityKindFromLocalnameRequired("DryVolume"),
+  // Sound intensity
+  SoundIntensity: Qudt.quantityKindFromLocalnameRequired("SoundIntensity"),
+  // Equilibrium Constant on Concentration Basis
+  EquilibriumConstantOnConcentrationBasis:
+    Qudt.quantityKindFromLocalnameRequired(
+      "EquilibriumConstantOnConcentrationBasis"
+    ),
+  // 截面二次轴矩
+  SecondMomentOfArea:
+    Qudt.quantityKindFromLocalnameRequired("SecondMomentOfArea"),
+  // Radiant Emmitance
+  RadiantEmmitance: Qudt.quantityKindFromLocalnameRequired("RadiantEmmitance"),
+  // Ionization Energy
+  IonizationEnergy: Qudt.quantityKindFromLocalnameRequired("IonizationEnergy"),
+  // Linear Momentum
+  LinearMomentum: Qudt.quantityKindFromLocalnameRequired("LinearMomentum"),
+  // मैक संख्या
+  MachNumber: Qudt.quantityKindFromLocalnameRequired("MachNumber"),
+  // Inverse Temperature
+  InverseTemperature:
+    Qudt.quantityKindFromLocalnameRequired("InverseTemperature"),
+  // Static Friction Coefficient
+  StaticFrictionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "StaticFrictionCoefficient"
+  ),
+  // Thermal Transmittance
+  ThermalTransmittance: Qudt.quantityKindFromLocalnameRequired(
+    "ThermalTransmittance"
+  ),
+  // Permeability Ratio
+  PermeabilityRatio:
+    Qudt.quantityKindFromLocalnameRequired("PermeabilityRatio"),
+  // Stoichiometric Number
+  StoichiometricNumber: Qudt.quantityKindFromLocalnameRequired(
+    "StoichiometricNumber"
+  ),
+  // fluctús lucis
+  LuminousFlux: Qudt.quantityKindFromLocalnameRequired("LuminousFlux"),
+  // Buckling Factor
+  BucklingFactor: Qudt.quantityKindFromLocalnameRequired("BucklingFactor"),
+  // Linear Attenuation Coefficient
+  LinearAttenuationCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "LinearAttenuationCoefficient"
+  ),
+  // InternalConversionFactor
+  InternalConversionFactor: Qudt.quantityKindFromLocalnameRequired(
+    "InternalConversionFactor"
+  ),
+  // 等温压缩率
+  IsothermalCompressibility: Qudt.quantityKindFromLocalnameRequired(
+    "IsothermalCompressibility"
+  ),
+  // Position Vector
+  PositionVector: Qudt.quantityKindFromLocalnameRequired("PositionVector"),
+  // Bioconcentration Factor
+  BioconcentrationFactor: Qudt.quantityKindFromLocalnameRequired(
+    "BioconcentrationFactor"
+  ),
+  // Fish Biotransformation Half Life
+  FishBiotransformationHalfLife: Qudt.quantityKindFromLocalnameRequired(
+    "FishBiotransformationHalfLife"
+  ),
+  // Reaction Energy
+  ReactionEnergy: Qudt.quantityKindFromLocalnameRequired("ReactionEnergy"),
+  // Planck Function
+  PlanckFunction: Qudt.quantityKindFromLocalnameRequired("PlanckFunction"),
+  // Diffusionskoeffizient
+  DiffusionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "DiffusionCoefficient"
+  ),
+  // Mass per Area
+  MassPerArea: Qudt.quantityKindFromLocalnameRequired("MassPerArea"),
+  // Binding Fraction
+  BindingFraction: Qudt.quantityKindFromLocalnameRequired("BindingFraction"),
+  // Conduction Speed
+  ConductionSpeed: Qudt.quantityKindFromLocalnameRequired("ConductionSpeed"),
+  // Second Polar Moment of Area
+  SecondPolarMomentOfArea: Qudt.quantityKindFromLocalnameRequired(
+    "SecondPolarMomentOfArea"
+  ),
+  // Specific Power
+  SpecificPower: Qudt.quantityKindFromLocalnameRequired("SpecificPower"),
+  // Square Energy
+  SquareEnergy: Qudt.quantityKindFromLocalnameRequired("SquareEnergy"),
+  // Source Voltage Between Substances
+  SourceVoltageBetweenSubstances: Qudt.quantityKindFromLocalnameRequired(
+    "SourceVoltageBetweenSubstances"
+  ),
+  // Extent of Reaction
+  ExtentOfReaction: Qudt.quantityKindFromLocalnameRequired("ExtentOfReaction"),
+  // Dimensionless Ratio
+  DimensionlessRatio:
+    Qudt.quantityKindFromLocalnameRequired("DimensionlessRatio"),
+  // Propellant Mean Bulk Temperature
+  PropellantMeanBulkTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "PropellantMeanBulkTemperature"
+  ),
+  // Angle Of Attack
+  AngleOfAttack: Qudt.quantityKindFromLocalnameRequired("AngleOfAttack"),
+  // Electromagnetic Wave Phase Speed
+  ElectromagneticWavePhaseSpeed: Qudt.quantityKindFromLocalnameRequired(
+    "ElectromagneticWavePhaseSpeed"
+  ),
+  // Angular Momentum
+  AngularMomentum: Qudt.quantityKindFromLocalnameRequired("AngularMomentum"),
+  // Macroscopic Cross-section
+  MacroscopicCrossSection: Qudt.quantityKindFromLocalnameRequired(
+    "MacroscopicCrossSection"
+  ),
+  // Kerma
+  Kerma: Qudt.quantityKindFromLocalnameRequired("Kerma"),
+  // Shear Modulus
+  ShearModulus: Qudt.quantityKindFromLocalnameRequired("ShearModulus"),
+  // Gain
+  Gain: Qudt.quantityKindFromLocalnameRequired("Gain"),
+  // Average Energy Loss per Elementary Charge Produced
+  AverageEnergyLossPerElementaryChargeProduced:
+    Qudt.quantityKindFromLocalnameRequired(
+      "AverageEnergyLossPerElementaryChargeProduced"
+    ),
+  // Moment of Force
+  MomentOfForce: Qudt.quantityKindFromLocalnameRequired("MomentOfForce"),
+  // Spectral Angular Cross-section
+  SpectralAngularCrossSection: Qudt.quantityKindFromLocalnameRequired(
+    "SpectralAngularCrossSection"
+  ),
+  // Inverse Square Time
+  InverseTime_Squared: Qudt.quantityKindFromLocalnameRequired(
+    "InverseTime_Squared"
+  ),
+  // Thermodynamic Critical Magnetic Flux Density
+  ThermodynamicCriticalMagneticFluxDensity:
+    Qudt.quantityKindFromLocalnameRequired(
+      "ThermodynamicCriticalMagneticFluxDensity"
+    ),
+  // area per length
+  AreaPerLength: Qudt.quantityKindFromLocalnameRequired("AreaPerLength"),
+  // Tension
+  Tension: Qudt.quantityKindFromLocalnameRequired("Tension"),
+  // Radiance Factor
+  RadianceFactor: Qudt.quantityKindFromLocalnameRequired("RadianceFactor"),
+  // Group Speed of Sound
+  GroupSpeedOfSound:
+    Qudt.quantityKindFromLocalnameRequired("GroupSpeedOfSound"),
+  // Active Energy
+  ActiveEnergy: Qudt.quantityKindFromLocalnameRequired("ActiveEnergy"),
+  // Instantaneous Power
+  InstantaneousPower:
+    Qudt.quantityKindFromLocalnameRequired("InstantaneousPower"),
+  // Thermal Diffusivity
+  ThermalDiffusivity:
+    Qudt.quantityKindFromLocalnameRequired("ThermalDiffusivity"),
+  // Nozzle Throat Pressure
+  NozzleThroatPressure: Qudt.quantityKindFromLocalnameRequired(
+    "NozzleThroatPressure"
+  ),
+  // Electric Charge Per Mass
+  ElectricChargePerMass: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricChargePerMass"
+  ),
+  // Quality Factor
+  QualityFactor: Qudt.quantityKindFromLocalnameRequired("QualityFactor"),
+  // Atmospheric Pressure
+  AtmosphericPressure: Qudt.quantityKindFromLocalnameRequired(
+    "AtmosphericPressure"
+  ),
+  // Carrier LifetIme
+  CarrierLifetime: Qudt.quantityKindFromLocalnameRequired("CarrierLifetime"),
+  // Gross Lift-Off Weight
+  GROSS__LIFT__OFF__WEIGHT: Qudt.quantityKindFromLocalnameRequired(
+    "GROSS-LIFT-OFF-WEIGHT"
+  ),
+  // Diffusion Length (Solid State Physics)
+  SolidStateDiffusionLength: Qudt.quantityKindFromLocalnameRequired(
+    "SolidStateDiffusionLength"
+  ),
+  // Diastolic Blood Pressure
+  DiastolicBloodPressure: Qudt.quantityKindFromLocalnameRequired(
+    "DiastolicBloodPressure"
+  ),
+  // Over-range distance
+  OverRangeDistance:
+    Qudt.quantityKindFromLocalnameRequired("OverRangeDistance"),
+  // volume
+  CartesianVolume: Qudt.quantityKindFromLocalnameRequired("CartesianVolume"),
+  // Specific Surface Area
+  SpecificSurfaceArea: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificSurfaceArea"
+  ),
+  // Einstein Transition Probability
+  EinsteinTransitionProbability: Qudt.quantityKindFromLocalnameRequired(
+    "EinsteinTransitionProbability"
+  ),
+  // Energy Level
+  EnergyLevel: Qudt.quantityKindFromLocalnameRequired("EnergyLevel"),
+  // Absolute Activity
+  AbsoluteActivity: Qudt.quantityKindFromLocalnameRequired("AbsoluteActivity"),
+  // Exchange Integral
+  ExchangeIntegral: Qudt.quantityKindFromLocalnameRequired("ExchangeIntegral"),
+  // Specific Heat Pressure
+  SpecificHeatPressure: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificHeatPressure"
+  ),
+  // Fläche pro Heizlast
+  AreaPerPower: Qudt.quantityKindFromLocalnameRequired("AreaPerPower"),
+  // Acceptor Density
+  AcceptorDensity: Qudt.quantityKindFromLocalnameRequired("AcceptorDensity"),
+  // Area Angle
+  AreaAngle: Qudt.quantityKindFromLocalnameRequired("AreaAngle"),
+  // Energy Per Area Electric Charge
+  EnergyPerAreaElectricCharge: Qudt.quantityKindFromLocalnameRequired(
+    "EnergyPerAreaElectricCharge"
+  ),
+  // Concentration
+  Concentration: Qudt.quantityKindFromLocalnameRequired("Concentration"),
+  // Web Time
+  WebTime: Qudt.quantityKindFromLocalnameRequired("WebTime"),
+  // Ignition interval time
+  IgnitionIntervalTime: Qudt.quantityKindFromLocalnameRequired(
+    "IgnitionIntervalTime"
+  ),
+  // 电导率
+  ElectricConductivity: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricConductivity"
+  ),
+  // Chromaticity
+  Chromaticity: Qudt.quantityKindFromLocalnameRequired("Chromaticity"),
+  // liczba neutronowa
+  NeutronNumber: Qudt.quantityKindFromLocalnameRequired("NeutronNumber"),
+  // Ionic Charge
+  IonicCharge: Qudt.quantityKindFromLocalnameRequired("IonicCharge"),
+  // Jarak
+  Distance: Qudt.quantityKindFromLocalnameRequired("Distance"),
+  // Lethargy
+  Lethargy: Qudt.quantityKindFromLocalnameRequired("Lethargy"),
+  // Beta Disintegration Energy
+  BetaDisintegrationEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "BetaDisintegrationEnergy"
+  ),
+  // Power per Area Angle
+  PowerPerAreaAngle:
+    Qudt.quantityKindFromLocalnameRequired("PowerPerAreaAngle"),
+  // Mass Energy Transfer Coefficient
+  MassEnergyTransferCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "MassEnergyTransferCoefficient"
+  ),
+  // Chemical Consumption per Mass
+  ChemicalConsumptionPerMass: Qudt.quantityKindFromLocalnameRequired(
+    "ChemicalConsumptionPerMass"
+  ),
+  // Mean Mass Range
+  MeanMassRange: Qudt.quantityKindFromLocalnameRequired("MeanMassRange"),
+  // Modulus of Elasticity
+  ModulusOfElasticity: Qudt.quantityKindFromLocalnameRequired(
+    "ModulusOfElasticity"
+  ),
+  // Molar Optical Rotatory Power
+  MolarOpticalRotatoryPower: Qudt.quantityKindFromLocalnameRequired(
+    "MolarOpticalRotatoryPower"
+  ),
+  // Stała Madelunga
+  MadelungConstant: Qudt.quantityKindFromLocalnameRequired("MadelungConstant"),
+  // Specific Impulse by Mass
+  SpecificImpulseByMass: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificImpulseByMass"
+  ),
+  // Square Energy
+  Energy_Squared: Qudt.quantityKindFromLocalnameRequired("Energy_Squared"),
+  // Mass per Length
+  MassPerLength: Qudt.quantityKindFromLocalnameRequired("MassPerLength"),
+  // Length Temperature Time
+  LengthTemperatureTime: Qudt.quantityKindFromLocalnameRequired(
+    "LengthTemperatureTime"
+  ),
+  // Mean Free Path
+  MeanFreePath: Qudt.quantityKindFromLocalnameRequired("MeanFreePath"),
+  // Dynamic Pressure
+  DynamicPressure: Qudt.quantityKindFromLocalnameRequired("DynamicPressure"),
+  // Radiative Heat Transfer
+  RadiativeHeatTransfer: Qudt.quantityKindFromLocalnameRequired(
+    "RadiativeHeatTransfer"
+  ),
+  // Mass Ratio
+  MassRatio: Qudt.quantityKindFromLocalnameRequired("MassRatio"),
+  // Magnetic Polarization
+  MagneticPolarization: Qudt.quantityKindFromLocalnameRequired(
+    "MagneticPolarization"
+  ),
+  // Henry's Law Volatility Constant
+  HenrysLawVolatilityConstant: Qudt.quantityKindFromLocalnameRequired(
+    "HenrysLawVolatilityConstant"
+  ),
+  // Specific Enthalpy
+  SpecificEnthalpy: Qudt.quantityKindFromLocalnameRequired("SpecificEnthalpy"),
+  // Thomson Coefficient
+  ThomsonCoefficient:
+    Qudt.quantityKindFromLocalnameRequired("ThomsonCoefficient"),
+  // Relative Partial Pressure
+  RelativePartialPressure: Qudt.quantityKindFromLocalnameRequired(
+    "RelativePartialPressure"
+  ),
+  // Recombination Coefficient
+  RecombinationCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "RecombinationCoefficient"
+  ),
+  // Half-Value Thickness
+  Half__ValueThickness: Qudt.quantityKindFromLocalnameRequired(
+    "Half-ValueThickness"
+  ),
+  // Voltage Ratio
+  VoltageRatio: Qudt.quantityKindFromLocalnameRequired("VoltageRatio"),
+  // Gyromagnetic Ratio
+  GyromagneticRatio:
+    Qudt.quantityKindFromLocalnameRequired("GyromagneticRatio"),
+  // Thermal Diffusion Ratio
+  ThermalDiffusionRatio: Qudt.quantityKindFromLocalnameRequired(
+    "ThermalDiffusionRatio"
+  ),
+  // Equilibrium Constant
+  EquilibriumConstant: Qudt.quantityKindFromLocalnameRequired(
+    "EquilibriumConstant"
+  ),
+  // Volumetric Flux
+  VolumetricFlux: Qudt.quantityKindFromLocalnameRequired("VolumetricFlux"),
+  // Surface Density
+  SurfaceDensity: Qudt.quantityKindFromLocalnameRequired("SurfaceDensity"),
+  // Structure Factor
+  StructureFactor: Qudt.quantityKindFromLocalnameRequired("StructureFactor"),
+  // Fermi Energy
+  FermiEnergy: Qudt.quantityKindFromLocalnameRequired("FermiEnergy"),
+  // Reynolds Number
+  ReynoldsNumber: Qudt.quantityKindFromLocalnameRequired("ReynoldsNumber"),
+  // Auxillary Magnetic Field
+  AuxillaryMagneticField: Qudt.quantityKindFromLocalnameRequired(
+    "AuxillaryMagneticField"
+  ),
+  // عدد الموجة
+  Wavenumber: Qudt.quantityKindFromLocalnameRequired("Wavenumber"),
+  // اختلاف طور
+  PhaseDifference: Qudt.quantityKindFromLocalnameRequired("PhaseDifference"),
+  // Nominal Ascent Propellant Mass
+  NOMINAL__ASCENT__PROPELLANT__MASS: Qudt.quantityKindFromLocalnameRequired(
+    "NOMINAL-ASCENT-PROPELLANT-MASS"
+  ),
+  // Thrust To Mass Ratio
+  ThrustToMassRatio:
+    Qudt.quantityKindFromLocalnameRequired("ThrustToMassRatio"),
+  // podatność elektryczna
+  ElectricSusceptibility: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricSusceptibility"
+  ),
+  // Stress Intensity Factor
+  StressIntensityFactor: Qudt.quantityKindFromLocalnameRequired(
+    "StressIntensityFactor"
+  ),
+  // Resonance Escape Probability
+  ResonanceEscapeProbability: Qudt.quantityKindFromLocalnameRequired(
+    "ResonanceEscapeProbability"
+  ),
+  // Thermal Energy Length
+  ThermalEnergyLength: Qudt.quantityKindFromLocalnameRequired(
+    "ThermalEnergyLength"
+  ),
+  // Density
+  Density: Qudt.quantityKindFromLocalnameRequired("Density"),
+  // Atomic Mass
+  AtomicMass: Qudt.quantityKindFromLocalnameRequired("AtomicMass"),
+  // Dose Equivalent
+  DoseEquivalent: Qudt.quantityKindFromLocalnameRequired("DoseEquivalent"),
+  // Diffusion Length
+  DiffusionLength: Qudt.quantityKindFromLocalnameRequired("DiffusionLength"),
+  // Calorific Value
+  HeatingValue: Qudt.quantityKindFromLocalnameRequired("HeatingValue"),
+  // Angle
+  Angle: Qudt.quantityKindFromLocalnameRequired("Angle"),
+  // Ion Transport Number
+  IonTransportNumber:
+    Qudt.quantityKindFromLocalnameRequired("IonTransportNumber"),
+  // Ускоре́ние
+  Acceleration: Qudt.quantityKindFromLocalnameRequired("Acceleration"),
+  // Static pressure
+  StaticPressure: Qudt.quantityKindFromLocalnameRequired("StaticPressure"),
+  // Currency Per Flight
+  CurrencyPerFlight:
+    Qudt.quantityKindFromLocalnameRequired("CurrencyPerFlight"),
+  // Mass Flow Rate
+  MassFlowRate: Qudt.quantityKindFromLocalnameRequired("MassFlowRate"),
+  // Lagrange Function
+  LagrangeFunction: Qudt.quantityKindFromLocalnameRequired("LagrangeFunction"),
+  // Capacitance
+  Capacitance: Qudt.quantityKindFromLocalnameRequired("Capacitance"),
+  // entropie
+  Entropy: Qudt.quantityKindFromLocalnameRequired("Entropy"),
+  // Curvature
+  Curvature: Qudt.quantityKindFromLocalnameRequired("Curvature"),
+  // Permeability
+  Permeability: Qudt.quantityKindFromLocalnameRequired("Permeability"),
+  // Non-Leakage Probability
+  Non__LeakageProbability: Qudt.quantityKindFromLocalnameRequired(
+    "Non-LeakageProbability"
+  ),
+  // Relative Mass Concentration of Vapour
+  RelativeMassConcentrationOfVapour: Qudt.quantityKindFromLocalnameRequired(
+    "RelativeMassConcentrationOfVapour"
+  ),
+  // Molar Mass variation due to Pressure
+  AmountOfSubstancePerUnitMassPressure: Qudt.quantityKindFromLocalnameRequired(
+    "AmountOfSubstancePerUnitMassPressure"
+  ),
+  // Partial Pressure
+  PartialPressure: Qudt.quantityKindFromLocalnameRequired("PartialPressure"),
+  // Mass Property Uncertainty
+  MASS__PROPERTY__UNCERTAINTY: Qudt.quantityKindFromLocalnameRequired(
+    "MASS-PROPERTY-UNCERTAINTY"
+  ),
+  // Tekanan osmotik
+  OsmoticPressure: Qudt.quantityKindFromLocalnameRequired("OsmoticPressure"),
+  // Nuclear Quadrupole Moment
+  NuclearQuadrupoleMoment: Qudt.quantityKindFromLocalnameRequired(
+    "NuclearQuadrupoleMoment"
+  ),
+  // Power Area per Solid Angle
+  PowerAreaPerSolidAngle: Qudt.quantityKindFromLocalnameRequired(
+    "PowerAreaPerSolidAngle"
+  ),
+  // Fission Fuel Utilization Factor
+  FissionFuelUtilizationFactor: Qudt.quantityKindFromLocalnameRequired(
+    "FissionFuelUtilizationFactor"
+  ),
+  // Decay Constant
+  DecayConstant: Qudt.quantityKindFromLocalnameRequired("DecayConstant"),
+  // инвариантная масса
+  RestMass: Qudt.quantityKindFromLocalnameRequired("RestMass"),
+  // Sound reduction index
+  SoundReductionIndex: Qudt.quantityKindFromLocalnameRequired(
+    "SoundReductionIndex"
+  ),
+  // Specific heat capacity at constant volume
+  SpecificHeatCapacityAtConstantVolume: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificHeatCapacityAtConstantVolume"
+  ),
+  // Rotational Stiffness
+  RotationalStiffness: Qudt.quantityKindFromLocalnameRequired(
+    "RotationalStiffness"
+  ),
+  // Federkonstante Drehfeder
+  TorsionalSpringConstant: Qudt.quantityKindFromLocalnameRequired(
+    "TorsionalSpringConstant"
+  ),
+  // Exit Plane Temperature
+  ExitPlaneTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "ExitPlaneTemperature"
+  ),
+  // Gene Family Abundance
+  GeneFamilyAbundance: Qudt.quantityKindFromLocalnameRequired(
+    "GeneFamilyAbundance"
+  ),
+  // Mass Margin
+  MASS__MARGIN: Qudt.quantityKindFromLocalnameRequired("MASS-MARGIN"),
+  // Specific Heat Capacity
+  SpecificHeatCapacity: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificHeatCapacity"
+  ),
+  // Bending Moment of Force
+  BendingMomentOfForce: Qudt.quantityKindFromLocalnameRequired(
+    "BendingMomentOfForce"
+  ),
+  // Thermal Efficiency
+  ThermalEfficiency:
+    Qudt.quantityKindFromLocalnameRequired("ThermalEfficiency"),
+  // Power Per Electric Charge
+  PowerPerElectricCharge: Qudt.quantityKindFromLocalnameRequired(
+    "PowerPerElectricCharge"
+  ),
+  // Reluctance
+  Reluctance: Qudt.quantityKindFromLocalnameRequired("Reluctance"),
+  // masa molar
+  MolarMass: Qudt.quantityKindFromLocalnameRequired("MolarMass"),
+  // Exhaust Gas Mean Molecular Weight
+  ExhaustGasMeanMolecularWeight: Qudt.quantityKindFromLocalnameRequired(
+    "ExhaustGasMeanMolecularWeight"
+  ),
+  // Reserve Mass
+  RESERVE__MASS: Qudt.quantityKindFromLocalnameRequired("RESERVE-MASS"),
+  // Voltage Phasor
+  VoltagePhasor: Qudt.quantityKindFromLocalnameRequired("VoltagePhasor"),
+  // Mass per Area Time
+  MassPerAreaTime: Qudt.quantityKindFromLocalnameRequired("MassPerAreaTime"),
+  // energia libera di Gibbs
+  GibbsEnergy: Qudt.quantityKindFromLocalnameRequired("GibbsEnergy"),
+  // Distance Traveled During a Burn
+  DistanceTraveledDuringBurn: Qudt.quantityKindFromLocalnameRequired(
+    "DistanceTraveledDuringBurn"
+  ),
+  // Ketumpatan arus elektrik
+  ElectricCurrentDensity: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricCurrentDensity"
+  ),
+  // Polarizability
+  Polarizability: Qudt.quantityKindFromLocalnameRequired("Polarizability"),
+  // Amount of Substance per Unit Volume
+  AmountOfSubstancePerUnitVolume: Qudt.quantityKindFromLocalnameRequired(
+    "AmountOfSubstancePerUnitVolume"
+  ),
+  // Exhaust Gases Specific Heat
+  ExhaustGasesSpecificHeat: Qudt.quantityKindFromLocalnameRequired(
+    "ExhaustGasesSpecificHeat"
+  ),
+  // Generalized Force
+  GeneralizedForce: Qudt.quantityKindFromLocalnameRequired("GeneralizedForce"),
+  // Electric Displacement
+  ElectricDisplacement: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricDisplacement"
+  ),
+  // larghezza
+  Breadth: Qudt.quantityKindFromLocalnameRequired("Breadth"),
+  // Electric Current Phasor
+  ElectricCurrentPhasor: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricCurrentPhasor"
+  ),
+  // Length Molar Energy
+  LengthMolarEnergy:
+    Qudt.quantityKindFromLocalnameRequired("LengthMolarEnergy"),
+  // Electron Affinity
+  ElectronAffinity: Qudt.quantityKindFromLocalnameRequired("ElectronAffinity"),
+  // Fuel Bias
+  FUEL__BIAS: Qudt.quantityKindFromLocalnameRequired("FUEL-BIAS"),
+  // Angle of Optical Rotation
+  AngleOfOpticalRotation: Qudt.quantityKindFromLocalnameRequired(
+    "AngleOfOpticalRotation"
+  ),
+  // Ratio of Specific Heat Capacities
+  RatioOfSpecificHeatCapacities: Qudt.quantityKindFromLocalnameRequired(
+    "RatioOfSpecificHeatCapacities"
+  ),
+  // Volumic Electromagnetic Energy
+  VolumicElectromagneticEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "VolumicElectromagneticEnergy"
+  ),
+  // Touch Thresholds
+  TouchThresholds: Qudt.quantityKindFromLocalnameRequired("TouchThresholds"),
+  // Debye-Waller Factor
+  Debye__WallerFactor:
+    Qudt.quantityKindFromLocalnameRequired("Debye-WallerFactor"),
+  // Respiratory Rate
+  RespiratoryRate: Qudt.quantityKindFromLocalnameRequired("RespiratoryRate"),
+  // Linear Absorption Coefficient
+  LinearAbsorptionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "LinearAbsorptionCoefficient"
+  ),
+  // 压强、压力
+  Pressure: Qudt.quantityKindFromLocalnameRequired("Pressure"),
+  // Thermal Energy
+  ThermalEnergy: Qudt.quantityKindFromLocalnameRequired("ThermalEnergy"),
+  // Capacity
+  Capacity: Qudt.quantityKindFromLocalnameRequired("Capacity"),
+  // Molality of Solute
+  MolalityOfSolute: Qudt.quantityKindFromLocalnameRequired("MolalityOfSolute"),
+  // Thermal Conductance
+  ThermalConductance:
+    Qudt.quantityKindFromLocalnameRequired("ThermalConductance"),
+  // Dynamic Friction
+  DynamicFriction: Qudt.quantityKindFromLocalnameRequired("DynamicFriction"),
+  // Mass Concentration of Water To Dry Matter
+  MassRatioOfWaterToDryMatter: Qudt.quantityKindFromLocalnameRequired(
+    "MassRatioOfWaterToDryMatter"
+  ),
+  // Amount of Substance of Concentration of B
+  AmountOfSubstanceConcentrationOfB: Qudt.quantityKindFromLocalnameRequired(
+    "AmountOfSubstanceConcentrationOfB"
+  ),
+  // Strain Energy Density
+  StrainEnergyDensity: Qudt.quantityKindFromLocalnameRequired(
+    "StrainEnergyDensity"
+  ),
+  // چگالی شار الکتریکی
+  ElectricFluxDensity: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricFluxDensity"
+  ),
+  // Molar Angular Momentum
+  MolarAngularMomentum: Qudt.quantityKindFromLocalnameRequired(
+    "MolarAngularMomentum"
+  ),
+  // flusso magnetico
+  MagneticFlux: Qudt.quantityKindFromLocalnameRequired("MagneticFlux"),
+  // Lift Coefficient
+  LiftCoefficient: Qudt.quantityKindFromLocalnameRequired("LiftCoefficient"),
+  // Target Bogie Mass
+  TARGET__BOGIE__MASS:
+    Qudt.quantityKindFromLocalnameRequired("TARGET-BOGIE-MASS"),
+  // Transmittance
+  Transmittance: Qudt.quantityKindFromLocalnameRequired("Transmittance"),
+  // Payload Ratio
+  PayloadRatio: Qudt.quantityKindFromLocalnameRequired("PayloadRatio"),
+  // Heat Capacity Ratio
+  HeatCapacityRatio:
+    Qudt.quantityKindFromLocalnameRequired("HeatCapacityRatio"),
+  // Electric Current per Unit Temperature
+  ElectricCurrentPerUnitTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricCurrentPerUnitTemperature"
+  ),
+  // Resistance
+  Resistance: Qudt.quantityKindFromLocalnameRequired("Resistance"),
+  // Isentropic Compressibility
+  IsentropicCompressibility: Qudt.quantityKindFromLocalnameRequired(
+    "IsentropicCompressibility"
+  ),
+  // Inverse Energy
+  InverseEnergy: Qudt.quantityKindFromLocalnameRequired("InverseEnergy"),
+  // Thermal Expansion Coefficient
+  ThermalExpansionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "ThermalExpansionCoefficient"
+  ),
+  // Angular Momentum per Angle
+  AngularMomentumPerAngle: Qudt.quantityKindFromLocalnameRequired(
+    "AngularMomentumPerAngle"
+  ),
+  // Signal Strength
+  SignalStrength: Qudt.quantityKindFromLocalnameRequired("SignalStrength"),
+  // Energy and work per mass amount of substance
+  EnergyPerMassAmountOfSubstance: Qudt.quantityKindFromLocalnameRequired(
+    "EnergyPerMassAmountOfSubstance"
+  ),
+  // Kerma Rate
+  KermaRate: Qudt.quantityKindFromLocalnameRequired("KermaRate"),
+  // Upper Critical Magnetic Flux Density
+  UpperCriticalMagneticFluxDensity: Qudt.quantityKindFromLocalnameRequired(
+    "UpperCriticalMagneticFluxDensity"
+  ),
+  // Altitude
+  Altitude: Qudt.quantityKindFromLocalnameRequired("Altitude"),
+  // Energy Fluence
+  EnergyFluence: Qudt.quantityKindFromLocalnameRequired("EnergyFluence"),
+  // Mass Of Solid Booster
+  MassOfSolidBooster:
+    Qudt.quantityKindFromLocalnameRequired("MassOfSolidBooster"),
+  // Web Time Average Pressure
+  WebTimeAveragePressure: Qudt.quantityKindFromLocalnameRequired(
+    "WebTimeAveragePressure"
+  ),
+  // Mass Concentration of Water Vapour
+  MassConcentrationOfWaterVapour: Qudt.quantityKindFromLocalnameRequired(
+    "MassConcentrationOfWaterVapour"
+  ),
+  // Average Head End Pressure
+  AverageHeadEndPressure: Qudt.quantityKindFromLocalnameRequired(
+    "AverageHeadEndPressure"
+  ),
+  // Lorenz Coefficient
+  LorenzCoefficient:
+    Qudt.quantityKindFromLocalnameRequired("LorenzCoefficient"),
+  // Kelajuan cahaya
+  SpeedOfLight: Qudt.quantityKindFromLocalnameRequired("SpeedOfLight"),
+  // Transmittance Density
+  TransmittanceDensity: Qudt.quantityKindFromLocalnameRequired(
+    "TransmittanceDensity"
+  ),
+  // Residual Resistivity
+  ResidualResistivity: Qudt.quantityKindFromLocalnameRequired(
+    "ResidualResistivity"
+  ),
+  // współczynnik rozszerzalności objętościowej
+  CubicExpansionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "CubicExpansionCoefficient"
+  ),
+  // Molar Conductivity
+  MolarConductivity:
+    Qudt.quantityKindFromLocalnameRequired("MolarConductivity"),
+  // čas
+  Time: Qudt.quantityKindFromLocalnameRequired("Time"),
+  // Burgers Vector
+  BurgersVector: Qudt.quantityKindFromLocalnameRequired("BurgersVector"),
+  // Luminous Flux per Area
+  LuminousFluxPerArea: Qudt.quantityKindFromLocalnameRequired(
+    "LuminousFluxPerArea"
+  ),
+  // Relative Mass Ratio of Vapour
+  RelativeMassRatioOfVapour: Qudt.quantityKindFromLocalnameRequired(
+    "RelativeMassRatioOfVapour"
+  ),
+  // Density of states
+  DensityOfStates: Qudt.quantityKindFromLocalnameRequired("DensityOfStates"),
+  // Head End Pressure
+  HeadEndPressure: Qudt.quantityKindFromLocalnameRequired("HeadEndPressure"),
+  // Maximum Beta-Particle Energy
+  MaximumBeta__ParticleEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "MaximumBeta-ParticleEnergy"
+  ),
+  // Resistance Percentage
+  ResistancePercentage: Qudt.quantityKindFromLocalnameRequired(
+    "ResistancePercentage"
+  ),
+  // Specific Energy
+  SpecificEnergy: Qudt.quantityKindFromLocalnameRequired("SpecificEnergy"),
+  // Relaxation TIme
+  RelaxationTIme: Qudt.quantityKindFromLocalnameRequired("RelaxationTIme"),
+  // Massieu Function
+  MassieuFunction: Qudt.quantityKindFromLocalnameRequired("MassieuFunction"),
+  // Electric charge per area
+  ElectricChargePerArea: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricChargePerArea"
+  ),
+  // Mean Linear Range
+  MeanLinearRange: Qudt.quantityKindFromLocalnameRequired("MeanLinearRange"),
+  // Pressure Burning Rate Index
+  PressureBurningRateIndex: Qudt.quantityKindFromLocalnameRequired(
+    "PressureBurningRateIndex"
+  ),
+  // Neutron Yield per Fission
+  NeutronYieldPerFission: Qudt.quantityKindFromLocalnameRequired(
+    "NeutronYieldPerFission"
+  ),
+  // Inverse Square Time
+  InverseSquareTime:
+    Qudt.quantityKindFromLocalnameRequired("InverseSquareTime"),
+  // Equivalent absorption area
+  EquivalentAbsorptionArea: Qudt.quantityKindFromLocalnameRequired(
+    "EquivalentAbsorptionArea"
+  ),
+  // Photosynthetic Photon Flux
+  PhotosyntheticPhotonFlux: Qudt.quantityKindFromLocalnameRequired(
+    "PhotosyntheticPhotonFlux"
+  ),
+  // Thickness
+  Thickness: Qudt.quantityKindFromLocalnameRequired("Thickness"),
+  // Total Current Density
+  TotalCurrentDensity: Qudt.quantityKindFromLocalnameRequired(
+    "TotalCurrentDensity"
+  ),
+  // سرعت صوت
+  SpeedOfSound: Qudt.quantityKindFromLocalnameRequired("SpeedOfSound"),
+  // Lattice Vector
+  LatticeVector: Qudt.quantityKindFromLocalnameRequired("LatticeVector"),
+  // Radial Distance
+  RadialDistance: Qudt.quantityKindFromLocalnameRequired("RadialDistance"),
+  // Specific Heats Ratio
+  SpecificHeatsRatio:
+    Qudt.quantityKindFromLocalnameRequired("SpecificHeatsRatio"),
+  // Magnetic Reluctivity
+  MagneticReluctivity: Qudt.quantityKindFromLocalnameRequired(
+    "MagneticReluctivity"
+  ),
+  // Loss Angle
+  LossAngle: Qudt.quantityKindFromLocalnameRequired("LossAngle"),
+  // كمية المادة
+  AmountOfSubstance:
+    Qudt.quantityKindFromLocalnameRequired("AmountOfSubstance"),
+  // Multiplication Factor
+  MultiplicationFactor: Qudt.quantityKindFromLocalnameRequired(
+    "MultiplicationFactor"
+  ),
+  // Particle Number Density
+  ParticleNumberDensity: Qudt.quantityKindFromLocalnameRequired(
+    "ParticleNumberDensity"
+  ),
+  // Mass Growth Allowance
+  MASS__GROWTH__ALLOWANCE: Qudt.quantityKindFromLocalnameRequired(
+    "MASS-GROWTH-ALLOWANCE"
+  ),
+  // Force per Angle
+  ForcePerAngle: Qudt.quantityKindFromLocalnameRequired("ForcePerAngle"),
+  // Normal Stress
+  NormalStress: Qudt.quantityKindFromLocalnameRequired("NormalStress"),
+  // Thermal Diffusion Factor
+  ThermalDiffusionFactor: Qudt.quantityKindFromLocalnameRequired(
+    "ThermalDiffusionFactor"
+  ),
+  // puissance
+  Power: Qudt.quantityKindFromLocalnameRequired("Power"),
+  // Absorptance
+  Absorptance: Qudt.quantityKindFromLocalnameRequired("Absorptance"),
+  // Mass per Electric Charge
+  MassPerElectricCharge: Qudt.quantityKindFromLocalnameRequired(
+    "MassPerElectricCharge"
+  ),
+  // Electron Mean Free Path
+  ElectronMeanFreePath: Qudt.quantityKindFromLocalnameRequired(
+    "ElectronMeanFreePath"
+  ),
+  // תדירות
+  Frequency: Qudt.quantityKindFromLocalnameRequired("Frequency"),
+  // Time Temperature
+  TimeTemperature: Qudt.quantityKindFromLocalnameRequired("TimeTemperature"),
+  // Initial Expansion Ratio
+  InitialExpansionRatio: Qudt.quantityKindFromLocalnameRequired(
+    "InitialExpansionRatio"
+  ),
+  // Diffusionskoeffizient
+  NeutronDiffusionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "NeutronDiffusionCoefficient"
+  ),
+  // yoğunluk
+  MassDensity: Qudt.quantityKindFromLocalnameRequired("MassDensity"),
+  // Count
+  Count: Qudt.quantityKindFromLocalnameRequired("Count"),
+  // Flächenlast
+  PlanarForce: Qudt.quantityKindFromLocalnameRequired("PlanarForce"),
+  // Acidity
+  Acidity: Qudt.quantityKindFromLocalnameRequired("Acidity"),
+  // Luminance
+  Luminance: Qudt.quantityKindFromLocalnameRequired("Luminance"),
+  // Attenuation Coefficient
+  AttenuationCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "AttenuationCoefficient"
+  ),
+  // energia livre de Helmholtz
+  HelmholtzEnergy: Qudt.quantityKindFromLocalnameRequired("HelmholtzEnergy"),
+  // Melting Point Temperature
+  MeltingPoint: Qudt.quantityKindFromLocalnameRequired("MeltingPoint"),
+  // Spectral Radiant Energy Density
+  SpectralRadiantEnergyDensity: Qudt.quantityKindFromLocalnameRequired(
+    "SpectralRadiantEnergyDensity"
+  ),
+  // Debye Temperature
+  DebyeTemperature: Qudt.quantityKindFromLocalnameRequired("DebyeTemperature"),
+  // Power Per Area
+  PowerPerArea: Qudt.quantityKindFromLocalnameRequired("PowerPerArea"),
+  // Specific thrust
+  SpecificThrust: Qudt.quantityKindFromLocalnameRequired("SpecificThrust"),
+  // kerja
+  Work: Qudt.quantityKindFromLocalnameRequired("Work"),
+  // Hole Density
+  HoleDensity: Qudt.quantityKindFromLocalnameRequired("HoleDensity"),
+  // Magnetisierung
+  Magnetization: Qudt.quantityKindFromLocalnameRequired("Magnetization"),
+  // Length Temperature
+  LengthTemperature:
+    Qudt.quantityKindFromLocalnameRequired("LengthTemperature"),
+  // Depth
+  Depth: Qudt.quantityKindFromLocalnameRequired("Depth"),
+  // Lift Force
+  LiftForce: Qudt.quantityKindFromLocalnameRequired("LiftForce"),
+  // Macroscopic Total Cross-section
+  MacroscopicTotalCrossSection: Qudt.quantityKindFromLocalnameRequired(
+    "MacroscopicTotalCrossSection"
+  ),
+  // Pressure Ratio
+  PressureRatio: Qudt.quantityKindFromLocalnameRequired("PressureRatio"),
+  // Debye Angular Wavenumber
+  DebyeAngularWavenumber: Qudt.quantityKindFromLocalnameRequired(
+    "DebyeAngularWavenumber"
+  ),
+  // Угловое ускорение
+  AngularAcceleration: Qudt.quantityKindFromLocalnameRequired(
+    "AngularAcceleration"
+  ),
+  // Linear Strain
+  LinearStrain: Qudt.quantityKindFromLocalnameRequired("LinearStrain"),
+  // potencial químico
+  ChemicalPotential:
+    Qudt.quantityKindFromLocalnameRequired("ChemicalPotential"),
+  // Center of Gravity in the Z axis
+  CENTER__OF__GRAVITY_Z: Qudt.quantityKindFromLocalnameRequired(
+    "CENTER-OF-GRAVITY_Z"
+  ),
+  // Reflectivity
+  Reflectivity: Qudt.quantityKindFromLocalnameRequired("Reflectivity"),
+  // Total Linear Stopping Power
+  TotalLinearStoppingPower: Qudt.quantityKindFromLocalnameRequired(
+    "TotalLinearStoppingPower"
+  ),
+  // polarizzabilità elettrica
+  ElectricPolarizability: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricPolarizability"
+  ),
+  // Shear Strain
+  ShearStrain: Qudt.quantityKindFromLocalnameRequired("ShearStrain"),
+  // Momentum per Angle
+  MomentumPerAngle: Qudt.quantityKindFromLocalnameRequired("MomentumPerAngle"),
+  // Energy Per Square Magnetic Flux Density
+  EnergyPerSquareMagneticFluxDensity: Qudt.quantityKindFromLocalnameRequired(
+    "EnergyPerSquareMagneticFluxDensity"
+  ),
+  // Apogee Radius
+  ApogeeRadius: Qudt.quantityKindFromLocalnameRequired("ApogeeRadius"),
+  // Characteristic Velocity
+  CharacteristicVelocity: Qudt.quantityKindFromLocalnameRequired(
+    "CharacteristicVelocity"
+  ),
+  // Heart Rate
+  HeartRate: Qudt.quantityKindFromLocalnameRequired("HeartRate"),
+  // Mole Fraction
+  MoleFraction: Qudt.quantityKindFromLocalnameRequired("MoleFraction"),
+  // Force per Electric Charge
+  ForcePerElectricCharge: Qudt.quantityKindFromLocalnameRequired(
+    "ForcePerElectricCharge"
+  ),
+  // Effective Multiplication Factor
+  EffectiveMultiplicationFactor: Qudt.quantityKindFromLocalnameRequired(
+    "EffectiveMultiplicationFactor"
+  ),
+  // Signal Detection Threshold
+  SignalDetectionThreshold: Qudt.quantityKindFromLocalnameRequired(
+    "SignalDetectionThreshold"
+  ),
+  // Sound volume velocity
+  SoundVolumeVelocity: Qudt.quantityKindFromLocalnameRequired(
+    "SoundVolumeVelocity"
+  ),
+  // Constringence
+  Constringence: Qudt.quantityKindFromLocalnameRequired("Constringence"),
+  // Volume Strain
+  VolumeStrain: Qudt.quantityKindFromLocalnameRequired("VolumeStrain"),
+  // Sound exposure
+  SoundExposure: Qudt.quantityKindFromLocalnameRequired("SoundExposure"),
+  // área
+  Area: Qudt.quantityKindFromLocalnameRequired("Area"),
+  // Dry Mass
+  DRY__MASS: Qudt.quantityKindFromLocalnameRequired("DRY-MASS"),
+  // Dynamic Friction Coefficient
+  DynamicFrictionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "DynamicFrictionCoefficient"
+  ),
+  // Fractional Amount of Substance
+  AmountOfSubstanceFraction: Qudt.quantityKindFromLocalnameRequired(
+    "AmountOfSubstanceFraction"
+  ),
+  // Time Ratio
+  TimeRatio: Qudt.quantityKindFromLocalnameRequired("TimeRatio"),
+  // número de onda angular
+  AngularWavenumber:
+    Qudt.quantityKindFromLocalnameRequired("AngularWavenumber"),
+  // Reflectance
+  Reflectance: Qudt.quantityKindFromLocalnameRequired("Reflectance"),
+  // Slowing-Down Density
+  Slowing__DownDensity: Qudt.quantityKindFromLocalnameRequired(
+    "Slowing-DownDensity"
+  ),
+  // Phase coefficient
+  PhaseCoefficient: Qudt.quantityKindFromLocalnameRequired("PhaseCoefficient"),
+  // Radiance
+  Radiance: Qudt.quantityKindFromLocalnameRequired("Radiance"),
+  // Radiant Energy Density
+  RadiantEnergyDensity: Qudt.quantityKindFromLocalnameRequired(
+    "RadiantEnergyDensity"
+  ),
+  // Luminous Efficacy
+  LuminousEfficacy: Qudt.quantityKindFromLocalnameRequired("LuminousEfficacy"),
+  // Quartic Electric Dipole Moment per Cubic Energy
+  ElectricDipoleMoment_QuarticPerEnergy_Cubic:
+    Qudt.quantityKindFromLocalnameRequired(
+      "ElectricDipoleMoment_QuarticPerEnergy_Cubic"
+    ),
+  // Cold Receptor Threshold
+  ColdReceptorThreshold: Qudt.quantityKindFromLocalnameRequired(
+    "ColdReceptorThreshold"
+  ),
+  // Susceptance
+  Susceptance: Qudt.quantityKindFromLocalnameRequired("Susceptance"),
+  // Orbital Angular Momentum per Unit Mass
+  OrbitalAngularMomentumPerUnitMass: Qudt.quantityKindFromLocalnameRequired(
+    "OrbitalAngularMomentumPerUnitMass"
+  ),
+  // ポインティングベクトル
+  PoyntingVector: Qudt.quantityKindFromLocalnameRequired("PoyntingVector"),
+  // Product of Inertia
+  PRODUCT__OF__INERTIA:
+    Qudt.quantityKindFromLocalnameRequired("PRODUCT-OF-INERTIA"),
+  // श्यानता
+  KinematicViscosity:
+    Qudt.quantityKindFromLocalnameRequired("KinematicViscosity"),
+  // Delta-V
+  DELTA__V: Qudt.quantityKindFromLocalnameRequired("DELTA-V"),
+  // Volume per Unit Time
+  VolumePerUnitTime:
+    Qudt.quantityKindFromLocalnameRequired("VolumePerUnitTime"),
+  // Auditory Thresholds
+  AuditoryThresholds:
+    Qudt.quantityKindFromLocalnameRequired("AuditoryThresholds"),
+  // Richardson Constant
+  RichardsonConstant:
+    Qudt.quantityKindFromLocalnameRequired("RichardsonConstant"),
+  // 利得
+  SoundPressureLevel:
+    Qudt.quantityKindFromLocalnameRequired("SoundPressureLevel"),
+  // Specific Impulse
+  SpecificImpulse: Qudt.quantityKindFromLocalnameRequired("SpecificImpulse"),
+  // Inverse Magnetic Flux
+  InverseMagneticFlux: Qudt.quantityKindFromLocalnameRequired(
+    "InverseMagneticFlux"
+  ),
+  // Fundamental Lattice vector
+  FundamentalLatticeVector: Qudt.quantityKindFromLocalnameRequired(
+    "FundamentalLatticeVector"
+  ),
+  // Luminous Emmitance
+  LuminousEmittance:
+    Qudt.quantityKindFromLocalnameRequired("LuminousEmittance"),
+  // Permittivity Ratio
+  PermittivityRatio:
+    Qudt.quantityKindFromLocalnameRequired("PermittivityRatio"),
+  // Length per Unit Electric Current
+  LengthPerUnitElectricCurrent: Qudt.quantityKindFromLocalnameRequired(
+    "LengthPerUnitElectricCurrent"
+  ),
+  // Molecular Concentration
+  MolecularConcentration: Qudt.quantityKindFromLocalnameRequired(
+    "MolecularConcentration"
+  ),
+  // Compressibility Factor
+  CompressibilityFactor: Qudt.quantityKindFromLocalnameRequired(
+    "CompressibilityFactor"
+  ),
+  // Video Frame Rate
+  VideoFrameRate: Qudt.quantityKindFromLocalnameRequired("VideoFrameRate"),
+  // Electric Charge Line Density
+  ElectricChargeLineDensity: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricChargeLineDensity"
+  ),
+  // Blood Glucose Level
+  BloodGlucoseLevel:
+    Qudt.quantityKindFromLocalnameRequired("BloodGlucoseLevel"),
+  // Convective Heat Transfer
+  ConvectiveHeatTransfer: Qudt.quantityKindFromLocalnameRequired(
+    "ConvectiveHeatTransfer"
+  ),
+  // Flight Performance Reserve Propellant Mass
+  FLIGHT__PERFORMANCE__RESERVE__PROPELLANT__MASS:
+    Qudt.quantityKindFromLocalnameRequired(
+      "FLIGHT-PERFORMANCE-RESERVE-PROPELLANT-MASS"
+    ),
+  // Energy Imparted
+  EnergyImparted: Qudt.quantityKindFromLocalnameRequired("EnergyImparted"),
+  // Surface Coefficient of Heat Transfer
+  SurfaceCoefficientOfHeatTransfer: Qudt.quantityKindFromLocalnameRequired(
+    "SurfaceCoefficientOfHeatTransfer"
+  ),
+  // 速度
+  Velocity: Qudt.quantityKindFromLocalnameRequired("Velocity"),
+  // Vapor Pressure
+  VaporPressure: Qudt.quantityKindFromLocalnameRequired("VaporPressure"),
+  // Packing Fraction
+  PackingFraction: Qudt.quantityKindFromLocalnameRequired("PackingFraction"),
+  // Fission Multiplication Factor
+  FissionMultiplicationFactor: Qudt.quantityKindFromLocalnameRequired(
+    "FissionMultiplicationFactor"
+  ),
+  // eficiência
+  Efficiency: Qudt.quantityKindFromLocalnameRequired("Efficiency"),
+  // Specific Internal Energy
+  SpecificInternalEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificInternalEnergy"
+  ),
+  // Molar Absorption Coefficient
+  MolarAbsorptionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "MolarAbsorptionCoefficient"
+  ),
+  // Micro Canonical Partition Function
+  MicroCanonicalPartitionFunction: Qudt.quantityKindFromLocalnameRequired(
+    "MicroCanonicalPartitionFunction"
+  ),
+  // Thermal Conductivity
+  ThermalConductivity: Qudt.quantityKindFromLocalnameRequired(
+    "ThermalConductivity"
+  ),
+  // Work Function
+  WorkFunction: Qudt.quantityKindFromLocalnameRequired("WorkFunction"),
+  // Fermi Angular Wavenumber
+  FermiAngularWavenumber: Qudt.quantityKindFromLocalnameRequired(
+    "FermiAngularWavenumber"
+  ),
+  // Relative Pressure Coefficient
+  RelativePressureCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "RelativePressureCoefficient"
+  ),
+  // Neutron Diffusion Length
+  NeutronDiffusionLength: Qudt.quantityKindFromLocalnameRequired(
+    "NeutronDiffusionLength"
+  ),
+  // Absorbed Dose Rate
+  AbsorbedDoseRate: Qudt.quantityKindFromLocalnameRequired("AbsorbedDoseRate"),
+  // Berat
+  Weight: Qudt.quantityKindFromLocalnameRequired("Weight"),
+  // Nozzle Throat Cross-sectional Area
+  NozzleThroatCrossSectionalArea: Qudt.quantityKindFromLocalnameRequired(
+    "NozzleThroatCrossSectionalArea"
+  ),
+  // Time Squared
+  Time_Squared: Qudt.quantityKindFromLocalnameRequired("Time_Squared"),
+  // Mass Of Electrical Power Supply
+  MassOfElectricalPowerSupply: Qudt.quantityKindFromLocalnameRequired(
+    "MassOfElectricalPowerSupply"
+  ),
+  // Gap Energy
+  GapEnergy: Qudt.quantityKindFromLocalnameRequired("GapEnergy"),
+  // Octanol Air Partition Coefficient
+  LogOctanolAirPartitionCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "LogOctanolAirPartitionCoefficient"
+  ),
+  // Rocket Atmospheric Transverse Force
+  RocketAtmosphericTransverseForce: Qudt.quantityKindFromLocalnameRequired(
+    "RocketAtmosphericTransverseForce"
+  ),
+  // Predicted Mass
+  PREDICTED__MASS: Qudt.quantityKindFromLocalnameRequired("PREDICTED-MASS"),
+  // Center of Gravity in the Y axis
+  CENTER__OF__GRAVITY_Y: Qudt.quantityKindFromLocalnameRequired(
+    "CENTER-OF-GRAVITY_Y"
+  ),
+  // Moisture Diffusivity
+  MoistureDiffusivity: Qudt.quantityKindFromLocalnameRequired(
+    "MoistureDiffusivity"
+  ),
+  // Thermal Utilization Factor
+  ThermalUtilizationFactor: Qudt.quantityKindFromLocalnameRequired(
+    "ThermalUtilizationFactor"
+  ),
+  // numero di massa
+  NucleonNumber: Qudt.quantityKindFromLocalnameRequired("NucleonNumber"),
+  // Infinite Multiplication Factor
+  InfiniteMultiplicationFactor: Qudt.quantityKindFromLocalnameRequired(
+    "InfiniteMultiplicationFactor"
+  ),
+  // opór cieplny
+  ThermalResistance:
+    Qudt.quantityKindFromLocalnameRequired("ThermalResistance"),
+  // Loss Factor
+  LossFactor: Qudt.quantityKindFromLocalnameRequired("LossFactor"),
+  // Electrolytic Conductivity
+  ElectrolyticConductivity: Qudt.quantityKindFromLocalnameRequired(
+    "ElectrolyticConductivity"
+  ),
+  // Spin Quantum Number
+  NuclearSpinQuantumNumber: Qudt.quantityKindFromLocalnameRequired(
+    "NuclearSpinQuantumNumber"
+  ),
+  // Specific heat capacity at constant pressure
+  SpecificHeatCapacityAtConstantPressure:
+    Qudt.quantityKindFromLocalnameRequired(
+      "SpecificHeatCapacityAtConstantPressure"
+    ),
+  // Initial Nozzle Throat Diameter
+  InitialNozzleThroatDiameter: Qudt.quantityKindFromLocalnameRequired(
+    "InitialNozzleThroatDiameter"
+  ),
+  // Information Entropy
+  InformationEntropy:
+    Qudt.quantityKindFromLocalnameRequired("InformationEntropy"),
+  // Statistical Weight
+  StatisticalWeight:
+    Qudt.quantityKindFromLocalnameRequired("StatisticalWeight"),
+  // Inverse Square Mass
+  InverseSquareMass:
+    Qudt.quantityKindFromLocalnameRequired("InverseSquareMass"),
+  // Specific Electrical Current
+  SpecificElectricCurrent: Qudt.quantityKindFromLocalnameRequired(
+    "SpecificElectricCurrent"
+  ),
+  // Aeric Heat Flow Rate
+  AreicHeatFlowRate:
+    Qudt.quantityKindFromLocalnameRequired("AreicHeatFlowRate"),
+  // Water Horsepower
+  WaterHorsepower: Qudt.quantityKindFromLocalnameRequired("WaterHorsepower"),
+  // Electric Current per Unit Length
+  ElectricCurrentPerUnitLength: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricCurrentPerUnitLength"
+  ),
+  // Poisson Ratio
+  PoissonRatio: Qudt.quantityKindFromLocalnameRequired("PoissonRatio"),
+  // Average Logarithmic Energy Decrement
+  AverageLogarithmicEnergyDecrement: Qudt.quantityKindFromLocalnameRequired(
+    "AverageLogarithmicEnergyDecrement"
+  ),
+  // g-Factor of Nucleus
+  GFactorOfNucleus: Qudt.quantityKindFromLocalnameRequired("GFactorOfNucleus"),
+  // Mass Concentration
+  MassConcentration:
+    Qudt.quantityKindFromLocalnameRequired("MassConcentration"),
+  // Mobility Ratio
+  MobilityRatio: Qudt.quantityKindFromLocalnameRequired("MobilityRatio"),
+  // Sound exposure level
+  SoundExposureLevel:
+    Qudt.quantityKindFromLocalnameRequired("SoundExposureLevel"),
+  // Stress
+  Stress: Qudt.quantityKindFromLocalnameRequired("Stress"),
+  // Eccentricity Of Orbit
+  EccentricityOfOrbit: Qudt.quantityKindFromLocalnameRequired(
+    "EccentricityOfOrbit"
+  ),
+  // Gustatory Threshold
+  GustatoryThreshold:
+    Qudt.quantityKindFromLocalnameRequired("GustatoryThreshold"),
   // Mass per Energy
   MassPerEnergy: Qudt.quantityKindFromLocalnameRequired("MassPerEnergy"),
-  // Permittivity
-  Permittivity: Qudt.quantityKindFromLocalnameRequired("Permittivity"),
-  // Electron Radius
-  ElectronRadius: Qudt.quantityKindFromLocalnameRequired("ElectronRadius"),
-  // Napierian Absorbance
-  NapierianAbsorbance: Qudt.quantityKindFromLocalnameRequired(
-    "NapierianAbsorbance"
+  // Donor Ionization Energy
+  DonorIonizationEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "DonorIonizationEnergy"
   ),
-  // Shear Stress
-  ShearStress: Qudt.quantityKindFromLocalnameRequired("ShearStress"),
-  // Currency
-  Currency: Qudt.quantityKindFromLocalnameRequired("Currency"),
-  // 皮相電力
-  ApparentPower: Qudt.quantityKindFromLocalnameRequired("ApparentPower"),
-  // Pressure Percentage
-  PressurePercentage:
-    Qudt.quantityKindFromLocalnameRequired("PressurePercentage"),
-  // Center of Mass (CoM)
-  CENTER__OF__MASS: Qudt.quantityKindFromLocalnameRequired("CENTER-OF-MASS"),
-  // Combustion Chamber Temperature
-  CombustionChamberTemperature: Qudt.quantityKindFromLocalnameRequired(
-    "CombustionChamberTemperature"
+  // Radiant Fluence Rate
+  RadiantFluenceRate:
+    Qudt.quantityKindFromLocalnameRequired("RadiantFluenceRate"),
+  // Reactor Time Constant
+  ReactorTimeConstant: Qudt.quantityKindFromLocalnameRequired(
+    "ReactorTimeConstant"
+  ),
+  // Product of Inertia in the Z axis
+  PRODUCT__OF__INERTIA_Z: Qudt.quantityKindFromLocalnameRequired(
+    "PRODUCT-OF-INERTIA_Z"
+  ),
+  // Morbidity Rate
+  MorbidityRate: Qudt.quantityKindFromLocalnameRequired("MorbidityRate"),
+  // Sound particle acceleration
+  SoundParticleAcceleration: Qudt.quantityKindFromLocalnameRequired(
+    "SoundParticleAcceleration"
+  ),
+  // Dew Point Temperature
+  DewPointTemperature: Qudt.quantityKindFromLocalnameRequired(
+    "DewPointTemperature"
+  ),
+  // Temperature per Time Squared
+  TemperaturePerTime_Squared: Qudt.quantityKindFromLocalnameRequired(
+    "TemperaturePerTime_Squared"
+  ),
+  // Isothermal Moisture Capacity
+  IsothermalMoistureCapacity: Qudt.quantityKindFromLocalnameRequired(
+    "IsothermalMoistureCapacity"
+  ),
+  // Superconductor Energy Gap
+  SuperconductorEnergyGap: Qudt.quantityKindFromLocalnameRequired(
+    "SuperconductorEnergyGap"
+  ),
+  // Linear Compressibility
+  LinearCompressibility: Qudt.quantityKindFromLocalnameRequired(
+    "LinearCompressibility"
+  ),
+  // Electric Displacement Field
+  ElectricDisplacementField: Qudt.quantityKindFromLocalnameRequired(
+    "ElectricDisplacementField"
+  ),
+  // Catalytic Activity Concentration
+  CatalyticActivityConcentration: Qudt.quantityKindFromLocalnameRequired(
+    "CatalyticActivityConcentration"
+  ),
+  // Particle Fluence Rate
+  ParticleFluenceRate: Qudt.quantityKindFromLocalnameRequired(
+    "ParticleFluenceRate"
+  ),
+  // Thermal Diffusion Coefficient
+  ThermalDiffusionRatioCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "ThermalDiffusionRatioCoefficient"
+  ),
+  // Radiant Exposure
+  RadiantExposure: Qudt.quantityKindFromLocalnameRequired("RadiantExposure"),
+  // Magnetic Area Moment
+  MagneticAreaMoment:
+    Qudt.quantityKindFromLocalnameRequired("MagneticAreaMoment"),
+  // Migration Area
+  MigrationArea: Qudt.quantityKindFromLocalnameRequired("MigrationArea"),
+  // Reverberation Time
+  ReverberationTime:
+    Qudt.quantityKindFromLocalnameRequired("ReverberationTime"),
+  // Acoustic Impediance
+  AcousticImpedance:
+    Qudt.quantityKindFromLocalnameRequired("AcousticImpedance"),
+  // Maximum Expected Operating Pressure
+  MaximumExpectedOperatingPressure: Qudt.quantityKindFromLocalnameRequired(
+    "MaximumExpectedOperatingPressure"
+  ),
+  // Initial Velocity
+  InitialVelocity: Qudt.quantityKindFromLocalnameRequired("InitialVelocity"),
+  // Linear Ionization
+  LinearIonization: Qudt.quantityKindFromLocalnameRequired("LinearIonization"),
+  // Length Percentage
+  LengthPercentage: Qudt.quantityKindFromLocalnameRequired("LengthPercentage"),
+  // Mean Energy Imparted
+  MeanEnergyImparted:
+    Qudt.quantityKindFromLocalnameRequired("MeanEnergyImparted"),
+  // Tenaga kinetik
+  EnergyKinetic: Qudt.quantityKindFromLocalnameRequired("EnergyKinetic"),
+  // Magnetic Field
+  MagneticField: Qudt.quantityKindFromLocalnameRequired("MagneticField"),
+  // Boiling Point Temperature
+  BoilingPoint: Qudt.quantityKindFromLocalnameRequired("BoilingPoint"),
+  // Oberflächenspannung
+  SurfaceTension: Qudt.quantityKindFromLocalnameRequired("SurfaceTension"),
+  // Evaporative Heat Transfer
+  EvaporativeHeatTransfer: Qudt.quantityKindFromLocalnameRequired(
+    "EvaporativeHeatTransfer"
+  ),
+  // Exhaust Stream Power
+  ExhaustStreamPower:
+    Qudt.quantityKindFromLocalnameRequired("ExhaustStreamPower"),
+  // Width
+  Width: Qudt.quantityKindFromLocalnameRequired("Width"),
+  // Debye Angular Frequency
+  DebyeAngularFrequency: Qudt.quantityKindFromLocalnameRequired(
+    "DebyeAngularFrequency"
+  ),
+  // Emissivity
+  Emissivity: Qudt.quantityKindFromLocalnameRequired("Emissivity"),
+  // Positive Plane Angle
+  PositivePlaneAngle:
+    Qudt.quantityKindFromLocalnameRequired("PositivePlaneAngle"),
+  // Orbital Angular Momentum Quantum Number
+  OrbitalAngularMomentumQuantumNumber: Qudt.quantityKindFromLocalnameRequired(
+    "OrbitalAngularMomentumQuantumNumber"
+  ),
+  // Asset
+  Asset: Qudt.quantityKindFromLocalnameRequired("Asset"),
+  // Warm Receptor Threshold
+  WarmReceptorThreshold: Qudt.quantityKindFromLocalnameRequired(
+    "WarmReceptorThreshold"
+  ),
+  // Total Current
+  TotalCurrent: Qudt.quantityKindFromLocalnameRequired("TotalCurrent"),
+  // Spectral Cross-section
+  SpectralCrossSection: Qudt.quantityKindFromLocalnameRequired(
+    "SpectralCrossSection"
+  ),
+  // Blood Glucose Level by Mass
+  BloodGlucoseLevel_Mass: Qudt.quantityKindFromLocalnameRequired(
+    "BloodGlucoseLevel_Mass"
+  ),
+  // Particle Fluence
+  ParticleFluence: Qudt.quantityKindFromLocalnameRequired("ParticleFluence"),
+  // Angular Reciprocal Lattice Vector
+  AngularReciprocalLatticeVector: Qudt.quantityKindFromLocalnameRequired(
+    "AngularReciprocalLatticeVector"
+  ),
+  // Modulus of Rotational Subgrade Reaction
+  ModulusOfRotationalSubgradeReaction: Qudt.quantityKindFromLocalnameRequired(
+    "ModulusOfRotationalSubgradeReaction"
   ),
   // Displacement Current Density
   DisplacementCurrentDensity: Qudt.quantityKindFromLocalnameRequired(
     "DisplacementCurrentDensity"
   ),
-  // Octanol Air Partition Coefficient
-  LogOctanolAirPartitionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "LogOctanolAirPartitionCoefficient"
+  // Shannon Diversity Index
+  ShannonDiversityIndex: Qudt.quantityKindFromLocalnameRequired(
+    "ShannonDiversityIndex"
   ),
+  // Vehicle Velocity
+  VehicleVelocity: Qudt.quantityKindFromLocalnameRequired("VehicleVelocity"),
+  // Magnetization Field
+  MagnetizationField:
+    Qudt.quantityKindFromLocalnameRequired("MagnetizationField"),
+  // Migration Length
+  MigrationLength: Qudt.quantityKindFromLocalnameRequired("MigrationLength"),
+  // Nuclear Radius
+  NuclearRadius: Qudt.quantityKindFromLocalnameRequired("NuclearRadius"),
+  // Visible Radiant Energy
+  VisibleRadiantEnergy: Qudt.quantityKindFromLocalnameRequired(
+    "VisibleRadiantEnergy"
+  ),
+  // Radiant Intensity
+  RadiantIntensity: Qudt.quantityKindFromLocalnameRequired("RadiantIntensity"),
+  // Wirkleistung
+  ElectricPower: Qudt.quantityKindFromLocalnameRequired("ElectricPower"),
+  // Energy Density of States
+  EnergyDensityOfStates: Qudt.quantityKindFromLocalnameRequired(
+    "EnergyDensityOfStates"
+  ),
+  // Rovinný úhel
+  PlaneAngle: Qudt.quantityKindFromLocalnameRequired("PlaneAngle"),
+  // Dissipance
+  Dissipance: Qudt.quantityKindFromLocalnameRequired("Dissipance"),
+  // Generalized Force
+  GeneralizedMomentum: Qudt.quantityKindFromLocalnameRequired(
+    "GeneralizedMomentum"
+  ),
+  // Kreisfrequenz
+  AngularFrequency: Qudt.quantityKindFromLocalnameRequired("AngularFrequency"),
+  // Kinetic Energy
+  KineticEnergy: Qudt.quantityKindFromLocalnameRequired("KineticEnergy"),
   // Serum or Plasma Level
   SerumOrPlasmaLevel:
     Qudt.quantityKindFromLocalnameRequired("SerumOrPlasmaLevel"),
-  // Tekanan osmotik
-  OsmoticPressure: Qudt.quantityKindFromLocalnameRequired("OsmoticPressure"),
-  // Incidence Rate
-  IncidenceRate: Qudt.quantityKindFromLocalnameRequired("IncidenceRate"),
-  // Pressure Loss per Length
-  PressureLossPerLength: Qudt.quantityKindFromLocalnameRequired(
-    "PressureLossPerLength"
+  // Chemical Affinity
+  ChemicalAffinity: Qudt.quantityKindFromLocalnameRequired("ChemicalAffinity"),
+  // Leakage Factor
+  LeakageFactor: Qudt.quantityKindFromLocalnameRequired("LeakageFactor"),
+  // Speed
+  Speed: Qudt.quantityKindFromLocalnameRequired("Speed"),
+  // Grand Canonical Partition Function
+  GrandCanonicalPartitionFunction: Qudt.quantityKindFromLocalnameRequired(
+    "GrandCanonicalPartitionFunction"
   ),
-  // Evaporative Heat Transfer
-  EvaporativeHeatTransfer: Qudt.quantityKindFromLocalnameRequired(
-    "EvaporativeHeatTransfer"
+  // Mass Attenuation Coefficient
+  MassAttenuationCoefficient: Qudt.quantityKindFromLocalnameRequired(
+    "MassAttenuationCoefficient"
   ),
-  // Activity Thresholds
-  ActivityThresholds:
-    Qudt.quantityKindFromLocalnameRequired("ActivityThresholds"),
-  // Dynamic Friction Coefficient
-  DynamicFrictionCoefficient: Qudt.quantityKindFromLocalnameRequired(
-    "DynamicFrictionCoefficient"
+  // Admittance
+  Admittance: Qudt.quantityKindFromLocalnameRequired("Admittance"),
+  // force
+  Force: Qudt.quantityKindFromLocalnameRequired("Force"),
+  // Product of Inertia in the X axis
+  PRODUCT__OF__INERTIA_X: Qudt.quantityKindFromLocalnameRequired(
+    "PRODUCT-OF-INERTIA_X"
+  ),
+  // Short-Range Order Parameter
+  Short__RangeOrderParameter: Qudt.quantityKindFromLocalnameRequired(
+    "Short-RangeOrderParameter"
+  ),
+  // Stochastic Process
+  StochasticProcess:
+    Qudt.quantityKindFromLocalnameRequired("StochasticProcess"),
+  // Volume Thermal Expansion
+  VolumeThermalExpansion: Qudt.quantityKindFromLocalnameRequired(
+    "VolumeThermalExpansion"
   ),
 };
 
@@ -82224,72 +82245,72 @@ export const QuantityKinds = {
 }
 
 export const Prefixes = {
-  // Mebi
-  Mebi: Qudt.prefixFromLocalnameRequired("Mebi"),
-  // Centi
-  Centi: Qudt.prefixFromLocalnameRequired("Centi"),
-  // Gibi
-  Gibi: Qudt.prefixFromLocalnameRequired("Gibi"),
-  // Milli
-  Milli: Qudt.prefixFromLocalnameRequired("Milli"),
-  // Pico
-  Pico: Qudt.prefixFromLocalnameRequired("Pico"),
-  // Giga
-  Giga: Qudt.prefixFromLocalnameRequired("Giga"),
-  // Deka
-  Deka: Qudt.prefixFromLocalnameRequired("Deka"),
-  // Tera
-  Tera: Qudt.prefixFromLocalnameRequired("Tera"),
-  // Pebi
-  Pebi: Qudt.prefixFromLocalnameRequired("Pebi"),
-  // Yocto
-  Yocto: Qudt.prefixFromLocalnameRequired("Yocto"),
-  // Tebi
-  Tebi: Qudt.prefixFromLocalnameRequired("Tebi"),
-  // Quecto
-  Quecto: Qudt.prefixFromLocalnameRequired("Quecto"),
-  // Quetta
-  Quetta: Qudt.prefixFromLocalnameRequired("Quetta"),
+  // Atto
+  Atto: Qudt.prefixFromLocalnameRequired("Atto"),
+  // Ronna
+  Ronna: Qudt.prefixFromLocalnameRequired("Ronna"),
   // Femto
   Femto: Qudt.prefixFromLocalnameRequired("Femto"),
-  // Kilo
-  Kilo: Qudt.prefixFromLocalnameRequired("Kilo"),
-  // Peta
-  Peta: Qudt.prefixFromLocalnameRequired("Peta"),
-  // Ronto
-  Ronto: Qudt.prefixFromLocalnameRequired("Ronto"),
-  // Kibi
-  Kibi: Qudt.prefixFromLocalnameRequired("Kibi"),
-  // Zepto
-  Zepto: Qudt.prefixFromLocalnameRequired("Zepto"),
-  // Deci
-  Deci: Qudt.prefixFromLocalnameRequired("Deci"),
+  // Deka
+  Deka: Qudt.prefixFromLocalnameRequired("Deka"),
+  // Centi
+  Centi: Qudt.prefixFromLocalnameRequired("Centi"),
   // Yobi
   Yobi: Qudt.prefixFromLocalnameRequired("Yobi"),
   // Exa
   Exa: Qudt.prefixFromLocalnameRequired("Exa"),
-  // Deca
-  Deca: Qudt.prefixFromLocalnameRequired("Deca"),
-  // Hecto
-  Hecto: Qudt.prefixFromLocalnameRequired("Hecto"),
-  // Ronna
-  Ronna: Qudt.prefixFromLocalnameRequired("Ronna"),
+  // Quetta
+  Quetta: Qudt.prefixFromLocalnameRequired("Quetta"),
+  // Quecto
+  Quecto: Qudt.prefixFromLocalnameRequired("Quecto"),
+  // Gibi
+  Gibi: Qudt.prefixFromLocalnameRequired("Gibi"),
+  // Pebi
+  Pebi: Qudt.prefixFromLocalnameRequired("Pebi"),
+  // Giga
+  Giga: Qudt.prefixFromLocalnameRequired("Giga"),
+  // Ronto
+  Ronto: Qudt.prefixFromLocalnameRequired("Ronto"),
+  // Kibi
+  Kibi: Qudt.prefixFromLocalnameRequired("Kibi"),
+  // Pico
+  Pico: Qudt.prefixFromLocalnameRequired("Pico"),
   // Nano
   Nano: Qudt.prefixFromLocalnameRequired("Nano"),
-  // Atto
-  Atto: Qudt.prefixFromLocalnameRequired("Atto"),
-  // Mega
-  Mega: Qudt.prefixFromLocalnameRequired("Mega"),
-  // Zetta
-  Zetta: Qudt.prefixFromLocalnameRequired("Zetta"),
-  // Yotta
-  Yotta: Qudt.prefixFromLocalnameRequired("Yotta"),
-  // Zebi
-  Zebi: Qudt.prefixFromLocalnameRequired("Zebi"),
+  // Hecto
+  Hecto: Qudt.prefixFromLocalnameRequired("Hecto"),
+  // Mebi
+  Mebi: Qudt.prefixFromLocalnameRequired("Mebi"),
+  // Tebi
+  Tebi: Qudt.prefixFromLocalnameRequired("Tebi"),
+  // Milli
+  Milli: Qudt.prefixFromLocalnameRequired("Milli"),
   // Exbi
   Exbi: Qudt.prefixFromLocalnameRequired("Exbi"),
+  // Deca
+  Deca: Qudt.prefixFromLocalnameRequired("Deca"),
+  // Peta
+  Peta: Qudt.prefixFromLocalnameRequired("Peta"),
+  // Kilo
+  Kilo: Qudt.prefixFromLocalnameRequired("Kilo"),
+  // Yocto
+  Yocto: Qudt.prefixFromLocalnameRequired("Yocto"),
+  // Yotta
+  Yotta: Qudt.prefixFromLocalnameRequired("Yotta"),
+  // Tera
+  Tera: Qudt.prefixFromLocalnameRequired("Tera"),
+  // Deci
+  Deci: Qudt.prefixFromLocalnameRequired("Deci"),
   // Micro
   Micro: Qudt.prefixFromLocalnameRequired("Micro"),
+  // Mega
+  Mega: Qudt.prefixFromLocalnameRequired("Mega"),
+  // Zebi
+  Zebi: Qudt.prefixFromLocalnameRequired("Zebi"),
+  // Zetta
+  Zetta: Qudt.prefixFromLocalnameRequired("Zetta"),
+  // Zepto
+  Zepto: Qudt.prefixFromLocalnameRequired("Zepto"),
 };
 
 // systemsOfUnit
@@ -82499,44 +82520,44 @@ export const Prefixes = {
 }
 
 export const SystemsOfUnits = {
-  // Unstated System Of Units
-  UNSTATED: Qudt.systemOfUnitsFromLocalnameRequired("UNSTATED"),
-  // SI System of Units (deprecated URI)
-  SOU_SI: Qudt.systemOfUnitsFromLocalnameRequired("SOU_SI"),
-  // CGS System of Units - EMU
-  CGS__EMU: Qudt.systemOfUnitsFromLocalnameRequired("CGS-EMU"),
-  // US Customary System of Units (deprecated URI)
-  SOU_USCS: Qudt.systemOfUnitsFromLocalnameRequired("SOU_USCS"),
-  // International System of Units
-  SI: Qudt.systemOfUnitsFromLocalnameRequired("SI"),
   // Planck System of Units (deprecated URI)
   SOU_PLANCK: Qudt.systemOfUnitsFromLocalnameRequired("SOU_PLANCK"),
-  // CGS System of Units (deprecated URI)
-  SOU_CGS: Qudt.systemOfUnitsFromLocalnameRequired("SOU_CGS"),
-  // Astronomic System Of Units
-  ASU: Qudt.systemOfUnitsFromLocalnameRequired("ASU"),
-  // US Customary Unit System
-  USCS: Qudt.systemOfUnitsFromLocalnameRequired("USCS"),
-  // Planck System of Units
-  PLANCK: Qudt.systemOfUnitsFromLocalnameRequired("PLANCK"),
-  // Imperial System of Units (deprecated URI)
-  SOU_IMPERIAL: Qudt.systemOfUnitsFromLocalnameRequired("SOU_IMPERIAL"),
-  // CGS System of Units
-  CGS: Qudt.systemOfUnitsFromLocalnameRequired("CGS"),
-  // CGS System of Units - Gaussian
-  CGS__GAUSS: Qudt.systemOfUnitsFromLocalnameRequired("CGS-GAUSS"),
-  // CGS System of Units ESU
-  CGS__ESU: Qudt.systemOfUnitsFromLocalnameRequired("CGS-ESU"),
-  // Astronomical System of Units (deprecated URI)
-  SOU_ASU: Qudt.systemOfUnitsFromLocalnameRequired("SOU_ASU"),
   // CGS-EMU System of Units (deprecated URI)
   SOU_CGS__EMU: Qudt.systemOfUnitsFromLocalnameRequired("SOU_CGS-EMU"),
-  // CGS-Gauss System of Units (deprecated URI)
-  SOU_CGS__GAUSS: Qudt.systemOfUnitsFromLocalnameRequired("SOU_CGS-GAUSS"),
-  // Imperial System of Units
-  IMPERIAL: Qudt.systemOfUnitsFromLocalnameRequired("IMPERIAL"),
+  // Astronomic System Of Units
+  ASU: Qudt.systemOfUnitsFromLocalnameRequired("ASU"),
+  // CGS System of Units (deprecated URI)
+  SOU_CGS: Qudt.systemOfUnitsFromLocalnameRequired("SOU_CGS"),
+  // CGS System of Units
+  CGS: Qudt.systemOfUnitsFromLocalnameRequired("CGS"),
+  // CGS System of Units - EMU
+  CGS__EMU: Qudt.systemOfUnitsFromLocalnameRequired("CGS-EMU"),
   // CGS-ESU System of Units (deprecated URI)
   SOU_CGS__ESU: Qudt.systemOfUnitsFromLocalnameRequired("SOU_CGS-ESU"),
+  // CGS System of Units - Gaussian
+  CGS__GAUSS: Qudt.systemOfUnitsFromLocalnameRequired("CGS-GAUSS"),
+  // International System of Units
+  SI: Qudt.systemOfUnitsFromLocalnameRequired("SI"),
+  // CGS System of Units ESU
+  CGS__ESU: Qudt.systemOfUnitsFromLocalnameRequired("CGS-ESU"),
+  // CGS-Gauss System of Units (deprecated URI)
+  SOU_CGS__GAUSS: Qudt.systemOfUnitsFromLocalnameRequired("SOU_CGS-GAUSS"),
+  // Planck System of Units
+  PLANCK: Qudt.systemOfUnitsFromLocalnameRequired("PLANCK"),
+  // Unstated System Of Units
+  UNSTATED: Qudt.systemOfUnitsFromLocalnameRequired("UNSTATED"),
+  // Astronomical System of Units (deprecated URI)
+  SOU_ASU: Qudt.systemOfUnitsFromLocalnameRequired("SOU_ASU"),
+  // Imperial System of Units (deprecated URI)
+  SOU_IMPERIAL: Qudt.systemOfUnitsFromLocalnameRequired("SOU_IMPERIAL"),
+  // SI System of Units (deprecated URI)
+  SOU_SI: Qudt.systemOfUnitsFromLocalnameRequired("SOU_SI"),
+  // US Customary System of Units (deprecated URI)
+  SOU_USCS: Qudt.systemOfUnitsFromLocalnameRequired("SOU_USCS"),
+  // Imperial System of Units
+  IMPERIAL: Qudt.systemOfUnitsFromLocalnameRequired("IMPERIAL"),
+  // US Customary Unit System
+  USCS: Qudt.systemOfUnitsFromLocalnameRequired("USCS"),
 };
 
 function getPrefix(iri: string): Prefix {
@@ -94895,8 +94916,8 @@ for (const unit of config.units.values()) {
   unit = getUnit("http://qudt.org/vocab/unit/MilliR_man");
   unit.setFactorUnits(
     new FactorUnits(
-      [new FactorUnit(getUnit("http://qudt.org/vocab/unit/SV"), 1)],
-      new Decimal("0.0001")
+      [new FactorUnit(getUnit("http://qudt.org/vocab/unit/R_man"), 1)],
+      new Decimal("0.0010")
     )
   );
   unit = getUnit("http://qudt.org/vocab/unit/MilliS");
@@ -98314,6 +98335,13 @@ for (const unit of config.units.values()) {
     new FactorUnits(
       [new FactorUnit(getUnit("http://qudt.org/vocab/unit/M3"), 1)],
       new Decimal("2.8316846592")
+    )
+  );
+  unit = getUnit("http://qudt.org/vocab/unit/R_man");
+  unit.setFactorUnits(
+    new FactorUnits(
+      [new FactorUnit(getUnit("http://qudt.org/vocab/unit/SV"), 1)],
+      new Decimal("0.01")
     )
   );
   unit = getUnit("http://qudt.org/vocab/unit/S");
