@@ -7,4 +7,8 @@ export const QudtNamespaces = Object.freeze({
   currency: new Namespace("http://qudt.org/vocab/currency/", "cur"),
   prefix: new Namespace("http://qudt.org/vocab/prefix/", "prefix"),
   systemOfUnits: new Namespace("http://qudt.org/vocab/sou/", "sou"),
+  dimensionVector: new Namespace(
+    "http://qudt.org/vocab/dimensionvector/",
+    "dv"
+  ),
 });

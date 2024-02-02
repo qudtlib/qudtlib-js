@@ -14,6 +14,7 @@ import { QuantityKind } from "../src/quantityKind";
 import { FactorUnit } from "../src/factorUnit";
 import { FactorUnits } from "../src/factorUnits";
 import { Unit } from "../src/unit";
+import { DimensionVector } from "../src/dimensionVector";
 
 const degC = new Unit(
   "http://qudt.org/vocab/unit/DEG_C",
@@ -738,4 +739,49 @@ describe.each([
       expect(factorUnits.generateAllLocalnamePossibilities()).toStrictEqual(
         expectedResult
       ))
+);
+
+describe.each([
+  [
+    [0, 0, 0, 0, 0, 0, 0, 1],
+    "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H0T0D1",
+    [0, 0, 0, 0, 0, 0, 0, 1],
+  ],
+  [
+    [1, -2, 0, 0, 0, 0, 0, 0],
+    "http://qudt.org/vocab/dimensionvector/A1E-2L0I0M0H0T0D0",
+    [1, -2, 0, 0, 0, 0, 0, 0],
+  ],
+  [
+    [1, 0.5, 0, 0, 0, 0, 0, 0],
+    "http://qudt.org/vocab/dimensionvector/A1E0pt5L0I0M0H0T0D0",
+    [1, 0.5, 0, 0, 0, 0, 0, 0],
+  ],
+  [
+    "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H0T0D1",
+    "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H0T0D1",
+    [0, 0, 0, 0, 0, 0, 0, 1],
+  ],
+  [
+    "http://qudt.org/vocab/dimensionvector/A1E-2L0I0M0H0T0D0",
+    "http://qudt.org/vocab/dimensionvector/A1E-2L0I0M0H0T0D0",
+    [1, -2, 0, 0, 0, 0, 0, 0],
+  ],
+  [
+    "http://qudt.org/vocab/dimensionvector/A1E0pt5L0I0M0H0T0D0",
+    "http://qudt.org/vocab/dimensionvector/A1E0pt5L0I0M0H0T0D0",
+    [1, 0.5, 0, 0, 0, 0, 0, 0],
+  ],
+])(
+  "DimensionVector.constructor",
+  (
+    vector: string | number[],
+    expectedDimVector: string,
+    expectedValues: number[]
+  ) =>
+    test(`new DimensionVector(${vector}).getDimensionVectorIri() = ${expectedDimVector}, .getValues = ${expectedValues}`, () => {
+      const dimVector = new DimensionVector(vector);
+      expect(dimVector.getDimensionVectorIri()).toBe(expectedDimVector);
+      expect(dimVector.getDimensionVectorIri()).toBe(expectedDimVector);
+    })
 );

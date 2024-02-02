@@ -23,6 +23,13 @@ export class Namespace {
     return iri;
   }
 
+  public getLocalnameIfFullNamespaceIri(iri: string): string {
+    if (this.isFullNamespaceIri(iri)) {
+      return iri.substring(this.baseIri.length);
+    }
+    return iri;
+  }
+
   public expand(abbreviatedIri: string): string {
     if (this.isAbbreviatedNamespaceIri(abbreviatedIri)) {
       return (
