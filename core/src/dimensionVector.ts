@@ -1,4 +1,6 @@
-import { QudtNamespaces } from "./qudtNamespaces";
+import { QudtNamespaces } from "./qudtNamespaces.js";
+import { isNullish } from "./utils.js";
+import { SupportsEquals } from "./baseTypes";
 
 /**
  * Represents the QUDT dimension vector and allows for converting between a dimension vector IRI and
@@ -8,7 +10,7 @@ import { QudtNamespaces } from "./qudtNamespaces";
  * dimension vector represents a ratio (causing all other dimensions to cancel each other out). It
  * never changes by multiplication, and its value is only 1 iff all other dimensions are 0.
  */
-export class DimensionVector {
+export class DimensionVector implements SupportsEquals<DimensionVector> {
   private static readonly DIMENSIONS = ["A", "E", "L", "I", "M", "H", "T", "D"];
   //public static final DecimalFormat FORMAT = new DecimalFormat("0.#");
   private static readonly FORMAT = new Intl.NumberFormat("en-US", {
@@ -19,6 +21,14 @@ export class DimensionVector {
   public static readonly DIMENSIONLESS = new DimensionVector([
     0, 0, 0, 0, 0, 0, 0, 1,
   ]);
+
+  private static readonly INDEX_AMOUNT_OF_SUBSTANCE = 0;
+  private static readonly INDEX_ELECTRIC_CURRENT = 1;
+  private static readonly INDEX_LENGTH = 2;
+  private static readonly INDEX_LUMINOUS_INTENSITY = 3;
+  private static readonly INDEX_MASS = 4;
+  private static readonly INDEX_TEMPERATURE = 5;
+  private static readonly INDEX_TIME = 6;
 
   private readonly dimensionVectorIri: string;
 
@@ -127,11 +137,34 @@ export class DimensionVector {
     return this.values;
   }
 
+  public getAmountOfSubstanceExponent() {
+    return this.values[DimensionVector.INDEX_AMOUNT_OF_SUBSTANCE];
+  }
+  public getElectricCurrentExponent() {
+    return this.values[DimensionVector.INDEX_ELECTRIC_CURRENT];
+  }
+
+  public getLenghExponent() {
+    return this.values[DimensionVector.INDEX_LENGTH];
+  }
+  public getLuminousIntensityExponent() {
+    return this.values[DimensionVector.INDEX_LUMINOUS_INTENSITY];
+  }
+  public getMassExponent() {
+    return this.values[DimensionVector.INDEX_MASS];
+  }
+  public getTemperatureExponent() {
+    return this.values[DimensionVector.INDEX_TEMPERATURE];
+  }
+  public getTimeExponent() {
+    return this.values[DimensionVector.INDEX_TIME];
+  }
+
   public multiply(by: number): DimensionVector {
     const mult: number[] = [];
     let isRatio = true;
     for (let i = 0; i < 7; i++) {
-      const multDim = this.values[i] * by;
+      const multDim = DimensionVector.noNegativeZero(this.values[i] * by);
       mult.push(multDim);
       if (multDim != 0) {
         isRatio = false;
@@ -149,8 +182,10 @@ export class DimensionVector {
   public combine(other: DimensionVector): DimensionVector {
     const combined: number[] = [];
     let isRatio = true;
-    for (let i = 0; i < 8; i++) {
-      combined[i] = this.values[i] + other.getValues()[i];
+    for (let i = 0; i < 7; i++) {
+      combined[i] = DimensionVector.noNegativeZero(
+        this.values[i] + other.getValues()[i]
+      );
       if (combined[i] != 0) {
         isRatio = false;
       }
@@ -159,7 +194,10 @@ export class DimensionVector {
     return new DimensionVector(combined);
   }
 
-  public equals(o: Object): boolean {
+  public equals(o: unknown): boolean {
+    if (isNullish(o)) {
+      return false;
+    }
     if (this === o) return true;
     if (!(o instanceof DimensionVector)) return false;
     const that = o as DimensionVector;

@@ -396,6 +396,15 @@ export class Qudt {
       requestedFactorUnits.generateAllLocalnamePossibilities();
 
     return (left: Unit, right: Unit) => {
+      if (left.factorUnits.equals(requestedFactorUnits)) {
+        if (!right.factorUnits.equals(requestedFactorUnits)) {
+          return -1;
+        }
+      } else {
+        if (right.factorUnits.equals(requestedFactorUnits)) {
+          return 1;
+        }
+      }
       if (left.getIriLocalname().indexOf("-") === -1) {
         if (right.getIriLocalname().indexOf("-") > -1) {
           return -1; // prefer a derived unit with a new name (such as W, J, N etc.)
