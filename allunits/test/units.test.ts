@@ -3,14 +3,14 @@ import {
   FactorUnit,
   FactorUnits,
   Prefix,
+  Prefixes,
   QuantityKind,
+  QuantityKinds,
   QuantityValue,
   Qudt,
-  Unit,
-  Prefixes,
-  Units,
-  QuantityKinds,
   SystemsOfUnits,
+  Unit,
+  Units,
 } from "../src/units";
 import { expect } from "@jest/globals";
 import { Decimal } from "decimal.js";
@@ -476,6 +476,17 @@ function exponentOrUnitToString(
 
 describe.each([
   [
+    28,
+    DerivedUnitSearchMode.BEST_MATCH,
+    ["http://qudt.org/vocab/unit/N-M-PER-M"],
+    Units.N,
+    1,
+    Units.M,
+    1,
+    Units.M,
+    -1,
+  ],
+  [
     15.5,
     DerivedUnitSearchMode.BEST_MATCH,
     [Units.KiloGM__PER__M2__SEC2],
@@ -861,7 +872,7 @@ describe.each([
   [
     26,
     DerivedUnitSearchMode.BEST_MATCH,
-    ["http://qudt.org/vocab/unit/J-PER-M2"],
+    ["http://qudt.org/vocab/unit/N-M-PER-M2"],
     Units.M,
     1,
     Units.N,
@@ -888,6 +899,47 @@ describe.each([
     )}`, () => {
       expect(actual.map((u) => u.iri).sort()).toStrictEqual(
         expectedAsStringArray
+      );
+    });
+  }
+);
+
+describe.each([
+  [1, Units.N],
+  [2, Units.KiloN__M],
+  [3, Units.KiloN__M__PER__M],
+  [4, Units.RAD__PER__SEC],
+  [5, Units.EUR__PER__W__HR],
+  [6, Units.W__PER__M3],
+  [7, Units.L__PER__SEC__M2],
+  [8, Units.EUR_Currency],
+  [9, Units.EUR__PER__M2],
+  [10, Units.M2__PER__M],
+  [11, Units.KiloN__PER__M2],
+  [12, Units.W__PER__M2],
+  [13, Units.CD__PER__M2],
+  [14, Units.EUR__PER__W],
+  [15, Units.LUX],
+  [16, Units.PA__M__PER__SEC],
+  [17, Units.CentiBAR],
+  //[18, Units.HZ],
+  [19, Units.BQ],
+  [20, Units.PA__PER__SEC],
+  [21, Units.J],
+  //[22, Units.N__M],
+])(
+  "Qudt.derivedUnitsFromExponentUnitPairs(Mode, (Unit | number)...) [recovering unit from its own factors]",
+  (caseId, unit) => {
+    const actual: Unit[] = Qudt.derivedUnitsFromFactorUnitSelection(
+      DerivedUnitSearchMode.BEST_MATCH,
+      unit.factorUnits
+    );
+    const expected = [unit];
+    test(`Case${caseId}: Qudt.derivedUnitsFromFactorUnitSelection(${modeToString(
+      DerivedUnitSearchMode.BEST_MATCH
+    )}`, () => {
+      expect(toSortedStringList(actual)).toStrictEqual(
+        toSortedStringList(expected)
       );
     });
   }

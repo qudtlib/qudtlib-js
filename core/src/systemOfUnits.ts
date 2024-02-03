@@ -2,7 +2,6 @@ import { SupportsEquals } from "./baseTypes.js";
 import { LangString } from "./langString.js";
 import { Unit } from "./unit.js";
 import { QudtNamespaces } from "./qudtNamespaces.js";
-import { isNullish } from "./utils";
 
 export class SystemOfUnits implements SupportsEquals<SystemOfUnits> {
   readonly iri: string;

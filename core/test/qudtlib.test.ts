@@ -785,3 +785,60 @@ describe.each([
       expect(dimVector.getDimensionVectorIri()).toBe(expectedDimVector);
     })
 );
+
+describe.each([
+  [
+    [0, 0, 0, 0, 0, 0, 0, 1],
+    "http://qudt.org/vocab/dimensionvector/A1E0L0I0M0H0T0D0",
+    [1, 0, 0, 0, 0, 0, 0, 0],
+  ],
+  [
+    [1, -2, 0, 0, 0, 0, 0, 0],
+    "http://qudt.org/vocab/dimensionvector/A-1E2L0I0M0H0T0D0",
+    [0, 0, 0, 0, 0, 0, 0, 1],
+  ],
+  [
+    [1, 0.5, 0, 0, 0, 0, 0, 0],
+    "http://qudt.org/vocab/dimensionvector/A1E0pt5L0I0M0H0T0D0",
+    [2, 1, 0, 0, 0, 0, 0, 0],
+  ],
+  [
+    "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H0T0D1",
+    "http://qudt.org/vocab/dimensionvector/A0E0L0I0M0H0T0D1",
+    [0, 0, 0, 0, 0, 0, 0, 1],
+  ],
+  [
+    "http://qudt.org/vocab/dimensionvector/A1E-2L0I0M0H0T0D0",
+    "http://qudt.org/vocab/dimensionvector/A0E0L0I1M1H0T0D0",
+    [1, -2, 0, 1, 1, 0, 0, 0],
+  ],
+])(
+  "DimensionVector.combine",
+  (
+    vector1: string | number[],
+    vector2: string | number[],
+    vectorCombined: string | number[]
+  ) =>
+    test(`new DimensionVector(${vector1}).combine(new DimensionVector(${vector2}) = new DimensionVector(${vectorCombined})`, () => {
+      const dimVector1 = new DimensionVector(vector1);
+      const dimVector2 = new DimensionVector(vector2);
+      const dimVectorCombined = DimensionVector.ofRequired(vectorCombined);
+      expect(dimVector1.combine(dimVector2)).toStrictEqual(dimVectorCombined);
+    })
+);
+
+describe.each([
+  [[0, 0, 0, 0, 0, 0, 0, 1], 0, [0, 0, 0, 0, 0, 0, 0, 1]],
+  [[1, -2, 0, 0, 0, 0, 0, 0], 0, [0, 0, 0, 0, 0, 0, 0, 1]],
+  [[1, 0.5, 0, 0, 0, 0, 0, 0], 2, [2, 1, 0, 0, 0, 0, 0, 0]],
+  [[1, -2, 0, 0, 0, 0, 0, 0], -1, [-1, 2, 0, 0, 0, 0, 0, 0]],
+  [[1, -2, 0, 0, 0, 0, 0, 0], 2, [2, -4, 0, 0, 0, 0, 0, 0]],
+])(
+  "DimensionVector.multiply",
+  (vector1: string | number[], factor: number, expected: string | number[]) =>
+    test(`new DimensionVector(${vector1}).multiply(${factor}) = new DimensionVector(${expected})`, () => {
+      const dimVector1 = new DimensionVector(vector1);
+      const dimVectorExpected = DimensionVector.ofRequired(expected);
+      expect(dimVector1.multiply(factor)).toStrictEqual(dimVectorExpected);
+    })
+);
