@@ -7,15 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 This Changelog contains the changes for all packages of this monorepo, which all use the same version at all times.
 
-## [Unreleased]
+## Unreleased
 
-### Changed
-
-- Bump qudtlib version to [2.1.35](https://github.com/qudt/qudt-public-repo/releases/tag/v2.1.35)
+## 6.3.0 - 2024-02-08
 
 ### Added
 
 - Added two units and a quantity kind pending upstream PR merging
+
+### Changed
+
+- Bump qudtlib version to [2.1.35](https://github.com/qudt/qudt-public-repo/releases/tag/v2.1.35)
 
 ## 6.2.1 - 2024-02-03
 
