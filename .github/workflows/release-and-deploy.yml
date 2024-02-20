@@ -78,7 +78,7 @@ jobs:
         run: |
           git add --all 
           git commit -m "Release ${{ env.NEW_VERSION }}"
-          git tag v${{ env.NEW_VERSION }}
+          git tag ${{ env.NEW_VERSION }}
 
       # Publish version to public repository
       - name: Publish
@@ -91,7 +91,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          git push -f origin && git push -f origin tags/v${{ env.NEW_VERSION }}
+          git push -f origin && git push -f origin tags/${{ env.NEW_VERSION }}
 
       # Read version changelog
       - id: get-changelog
