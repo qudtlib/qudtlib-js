@@ -1,6 +1,6 @@
 {
   "name": "@qudtlib/examples",
-  "version": "6.3.2-beta.0",
+  "version": "6.3.2",
   "description": "@qudtlib examples",
   "private": true,
   "engines": {
@@ -29,7 +29,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@qudtlib/allunits": "^6.3.2-beta.0",
+    "@qudtlib/allunits": "^6.3.2",
     "decimal.js": "10.4.2"
   }
 }
