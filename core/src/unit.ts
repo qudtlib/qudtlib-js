@@ -3,7 +3,7 @@ import { LangString } from "./langString.js";
 import { Prefix } from "./prefix.js";
 import { QuantityKind } from "./quantityKind.js";
 import { FactorUnit } from "./factorUnit.js";
-import { arrayContains, getLastIriElement, ZERO } from "./utils.js";
+import { arrayContains, getLastIriElement, isNullish, ZERO } from "./utils.js";
 import { FactorUnits } from "./factorUnits.js";
 import { Decimal } from "decimal.js";
 import { QudtNamespaces } from "./qudtNamespaces.js";
@@ -27,6 +27,7 @@ export class Unit implements SupportsEquals<Unit> {
   factorUnits: FactorUnits = FactorUnits.empty();
 
   readonly unitOfSystemIris: string[];
+  private static TEMPERATURE_DIFFERENCE = "TemperatureDifference";
   constructor(
     iri: string,
     quantityKindIris?: string[],
@@ -179,12 +180,18 @@ export class Unit implements SupportsEquals<Unit> {
     return unit.iri === "http://qudt.org/vocab/unit/UNITLESS";
   }
 
-  convert(value: Decimal, toUnit: Unit): Decimal {
-    if (!value) {
+  convert(value: Decimal, toUnit: Unit, quantityKind?: QuantityKind): Decimal {
+    if (isNullish(value)) {
       throw "Parameter 'value' is required";
     }
-    if (!toUnit) {
+    if (isNullish(toUnit)) {
       throw "Parameter 'toUnit' is required";
+    }
+    let ignoreOffset = false;
+    if (!isNullish(quantityKind)) {
+      if (quantityKind?.getIriLocalname() === Unit.TEMPERATURE_DIFFERENCE) {
+        ignoreOffset = true;
+      }
     }
     if (this.equals(toUnit)) {
       return value;
@@ -195,11 +202,19 @@ export class Unit implements SupportsEquals<Unit> {
     if (!this.isConvertible(toUnit)) {
       throw `Not convertible: ${this} -> ${toUnit}`;
     }
-    const fromOffset = this.conversionOffset ? this.conversionOffset : ZERO;
+    const fromOffset = ignoreOffset
+      ? ZERO
+      : this.conversionOffset
+      ? this.conversionOffset
+      : ZERO;
     const fromMultiplier = this.conversionMultiplier
       ? this.conversionMultiplier
       : new Decimal(1);
-    const toOffset = toUnit.conversionOffset ? toUnit.conversionOffset : ZERO;
+    const toOffset = ignoreOffset
+      ? ZERO
+      : toUnit.conversionOffset
+      ? toUnit.conversionOffset
+      : ZERO;
     const toMultiplier = toUnit.conversionMultiplier
       ? toUnit.conversionMultiplier
       : new Decimal(1);

@@ -13,6 +13,7 @@ import {
   OrderComparator,
   ONE,
   ZERO,
+  isNullish,
 } from "./utils.js";
 import { QuantityKind } from "./quantityKind.js";
 import { Prefix } from "./prefix.js";
@@ -608,7 +609,8 @@ export class Qudt {
   static convert(
     value: Decimal,
     fromUnit: Unit | string,
-    toUnit: Unit | string
+    toUnit: Unit | string,
+    quantityKind?: QuantityKind | string
   ): Decimal {
     if (!fromUnit) {
       throw "Parameter 'fromUnit' is required";
@@ -620,7 +622,12 @@ export class Qudt {
       typeof fromUnit === "string" ? Qudt.unitRequired(fromUnit) : fromUnit;
     const to: Unit =
       typeof toUnit === "string" ? Qudt.unitRequired(toUnit) : toUnit;
-    return from.convert(value, to);
+    const qk: QuantityKind | undefined = isNullish(quantityKind)
+      ? undefined
+      : typeof quantityKind === "string"
+      ? Qudt.quantityKindRequired(quantityKind)
+      : quantityKind;
+    return from.convert(value, to, qk);
   }
 
   /**
@@ -632,7 +639,8 @@ export class Qudt {
    */
   static convertQuantityValue(
     from: QuantityValue,
-    toUnit: Unit | string
+    toUnit: Unit | string,
+    quantityKind?: QuantityKind | string
   ): QuantityValue {
     if (!from) {
       throw "Parameter 'from' is required";
@@ -641,7 +649,12 @@ export class Qudt {
       throw "Parameter 'toUnit' is required";
     }
     const to = typeof toUnit === "string" ? Qudt.unitRequired(toUnit) : toUnit;
-    return from.convert(to);
+    const qk: QuantityKind | undefined = isNullish(quantityKind)
+      ? undefined
+      : typeof quantityKind === "string"
+      ? Qudt.quantityKindRequired(quantityKind)
+      : quantityKind;
+    return from.convert(to, qk);
   }
 
   /**
