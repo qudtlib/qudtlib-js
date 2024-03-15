@@ -1944,3 +1944,10 @@ test("Qudt.convert()[C to K] for TemperatureDifference", () => {
     )
   ).toStrictEqual(new Decimal(100));
 });
+
+test("Unit.isDefinedAsOtherUnit()", () => {
+  expect(
+      Units.L.isDefinedAsOtherUnit()
+
+  ).toBe(true);
+});

@@ -126,6 +126,13 @@ export class Unit implements SupportsEquals<Unit> {
     return this.factorUnits.hasFactorUnits();
   }
 
+  /**
+   * Returns true if this unit is defined to be another unit, such as litre is defined as cubic decimetre.
+   */
+  isDefinedAsOtherUnit(): boolean {
+    return this.factorUnits.isOneOtherUnitWithExponentOne()
+  }
+
   isScaled(): boolean {
     return !!this.scalingOfIri;
   }
