@@ -1,6 +1,6 @@
 {
   "name": "@qudtlib/allunits",
-  "version": "6.3.2",
+  "version": "6.4.0-beta.0",
   "description": "Package containing all QUDT units, quantityKinds, and prefixes",
   "main": "dist/cjs/units.js",
   "module": "dist/mjs/units.js",
@@ -48,7 +48,7 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "@qudtlib/core": "^6.3.2",
+    "@qudtlib/core": "^6.4.0-beta.0",
     "decimal.js": "10.4.2"
   }
 }
