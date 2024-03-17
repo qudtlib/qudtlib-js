@@ -1,6 +1,7 @@
 import { SupportsEquals } from "./baseTypes.js";
 import { Unit } from "./unit.js";
 import { Decimal } from "decimal.js";
+import { QuantityKind } from "./quantityKind";
 
 export class QuantityValue implements SupportsEquals<QuantityValue> {
   value: Decimal;
@@ -21,7 +22,10 @@ export class QuantityValue implements SupportsEquals<QuantityValue> {
     return this.value.toString() + this.unit.toString();
   }
 
-  convert(to: Unit) {
-    return new QuantityValue(this.unit.convert(this.value, to), to);
+  convert(to: Unit, quantityKind?: QuantityKind) {
+    return new QuantityValue(
+      this.unit.convert(this.value, to, quantityKind),
+      to
+    );
   }
 }
