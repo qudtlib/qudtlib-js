@@ -131,7 +131,7 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
     }
     if (
       this.factorUnits.length === 1 &&
-      ! this.factorUnits[0].unit.factorUnits.equals(this)
+      !this.factorUnits[0].unit.factorUnits.equals(this)
     ) {
       return true;
     }
@@ -148,20 +148,20 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
   /**
    * Returns true iff this factorUnits object has exactly one factor unit, which has exponent 1.
    */
-  isOneOtherUnitWithExponentOne(){
-    if (isNullish(this.factorUnits)){
+  isOneOtherUnitWithExponentOne() {
+    if (isNullish(this.factorUnits)) {
       return false;
     }
-    if(this.factorUnits.length !== 1){
+    if (this.factorUnits.length !== 1) {
       return false;
     }
     const factorUnit = this.factorUnits[0];
-    if (factorUnit.exponent !== 1){
+    if (factorUnit.exponent !== 1) {
       return false;
     }
-    if (factorUnit.unit.factorUnits.equals(this)){
+    if (factorUnit.unit.factorUnits.equals(this)) {
       return false;
-    };
+    }
     return true;
   }
 

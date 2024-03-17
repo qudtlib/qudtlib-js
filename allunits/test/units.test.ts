@@ -1946,8 +1946,5 @@ test("Qudt.convert()[C to K] for TemperatureDifference", () => {
 });
 
 test("Unit.isDefinedAsOtherUnit()", () => {
-  expect(
-      Units.L.isDefinedAsOtherUnit()
-
-  ).toBe(true);
+  expect(Units.L.isDefinedAsOtherUnit()).toBe(true);
 });

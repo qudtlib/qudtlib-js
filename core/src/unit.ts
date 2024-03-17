@@ -130,7 +130,7 @@ export class Unit implements SupportsEquals<Unit> {
    * Returns true if this unit is defined to be another unit, such as litre is defined as cubic decimetre.
    */
   isDefinedAsOtherUnit(): boolean {
-    return this.factorUnits.isOneOtherUnitWithExponentOne()
+    return this.factorUnits.isOneOtherUnitWithExponentOne();
   }
 
   isScaled(): boolean {
