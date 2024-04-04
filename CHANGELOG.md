@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 6.7.0 - 2024-04-04
+
 ### Fixed
 
 - Some spurious triples removed from the input to code generation - Extent of the problem is unclear but it is now fixed.
