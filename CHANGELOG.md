@@ -9,6 +9,10 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+### Changed
+
+- Upgrade QUDT to 2.1.37
+
 ## 6.4.0-beta.0 - 2024-03-17
 
 ## 6.3.2 - 2024-02-20
