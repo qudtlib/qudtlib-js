@@ -24,22 +24,42 @@ import { AssignmentProblem } from "./assignmentProblem.js";
 import { QuantityValue } from "./quantityValue.js";
 import { LangString } from "./langString.js";
 import { Decimal } from "decimal.js";
-3;
 import { QudtNamespaces } from "./qudtNamespaces.js";
 import { SystemOfUnits } from "./systemOfUnits.js";
+import { DimensionVector } from "./dimensionVector.js";
 
 export class QudtlibConfig {
   readonly units: Map<string, Unit>;
   readonly quantityKinds: Map<string, QuantityKind>;
   readonly prefixes: Map<string, Prefix>;
-
   readonly systemsOfUnits: Map<string, SystemOfUnits>;
+  readonly unitsByDimensionVector: Map<string, Array<Unit>>;
 
   constructor() {
     this.units = new Map<string, Unit>();
     this.quantityKinds = new Map<string, QuantityKind>();
     this.prefixes = new Map<string, Prefix>();
     this.systemsOfUnits = new Map<string, SystemOfUnits>();
+    this.unitsByDimensionVector = new Map<string, Array<Unit>>();
+  }
+
+  public indexUnitsByDimensionVector() {
+    this.units.forEach((u) => {
+      const dimVector = u.dimensionVectorIri;
+      if (!isNullish(dimVector)) {
+        let unitsWithSameDimVector = this.unitsByDimensionVector.get(
+          dimVector as string
+        );
+        if (isNullish(unitsWithSameDimVector)) {
+          unitsWithSameDimVector = [];
+          this.unitsByDimensionVector.set(
+            dimVector as string,
+            unitsWithSameDimVector
+          );
+        }
+        (unitsWithSameDimVector as Array<Unit>).push(u);
+      }
+    });
   }
 }
 
@@ -464,13 +484,48 @@ export class Qudt {
     initialFactorUnitSelection: FactorUnits
   ): Unit[] {
     const matchingUnits: Unit[] = [];
-    for (const unit of config.units.values()) {
+    const unitsWithSameDimVector = this.getUnitsByDimensionVector(
+      initialFactorUnitSelection.getDimensionVector()
+    );
+    if (
+      isNullish(unitsWithSameDimVector) ||
+      (unitsWithSameDimVector as Array<Unit>).length == 0
+    ) {
+      return [];
+    }
+    for (const unit of unitsWithSameDimVector as Array<Unit>) {
       if (unit.matches(initialFactorUnitSelection)) {
         matchingUnits.push(unit);
       }
     }
     arrayDeduplicate(matchingUnits, compareUsingEquals);
     return matchingUnits;
+  }
+
+  public static getUnitsByDimensionVector(
+    dimVector: DimensionVector | string
+  ): Array<Unit> {
+    let dimVectorIri: string | undefined = undefined;
+    if (typeof dimVector === "string") {
+      dimVectorIri = dimVector;
+    } else {
+      dimVectorIri = dimVector.getDimensionVectorIri();
+    }
+    const unitsWithSameDimVector =
+      config.unitsByDimensionVector.get(dimVectorIri);
+    if (isNullish(unitsWithSameDimVector)) {
+      return [];
+    }
+    return unitsWithSameDimVector as Array<Unit>;
+  }
+
+  public static getUnitsWithSameDimensionVector(unit: Unit) {
+    if (isNullish(unit.dimensionVectorIri)) {
+      throw new Error(
+        `unit ${unit.getIriAbbreviated()} does not have a dimension vector iri`
+      );
+    }
+    return this.getUnitsByDimensionVector(unit.dimensionVectorIri as string);
   }
 
   /**
@@ -487,7 +542,7 @@ export class Qudt {
       prefix instanceof Prefix ? prefix : this.prefixRequired(prefix);
     const theUnit =
       baseUnit instanceof Unit ? baseUnit : this.unitRequired(baseUnit);
-    for (const u of config.units.values()) {
+    for (const u of this.getUnitsWithSameDimensionVector(theUnit)) {
       if (u.prefix?.equals(thePrefix) && u.scalingOf?.equals(theUnit)) {
         return u;
       }

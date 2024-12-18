@@ -842,3 +842,18 @@ describe.each([
       expect(dimVector1.multiply(factor)).toStrictEqual(dimVectorExpected);
     })
 );
+
+describe.each([
+  [FactorUnits.ofFactorUnitSpec(m, 1), [0, 0, 1, 0, 0, 0, 0, 0]],
+  [FactorUnits.ofFactorUnitSpec(m, 2), [0, 0, 2, 0, 0, 0, 0, 0]],
+  [FactorUnits.ofFactorUnitSpec(m, -1), [0, 0, -1, 0, 0, 0, 0, 0]],
+  [FactorUnits.ofFactorUnitSpec(m, 1, degC, -1), [0, 0, 1, 0, 0, -1, 0, 0]],
+])(
+  "FactorUnits.getDimensionVector()",
+  (factorUnits: FactorUnits, expected: number[]) =>
+    test(`(${factorUnits}).getDimensionVector() = new DimensionVector(${expected})`, () => {
+      const dimVector1 = factorUnits.getDimensionVector();
+      const dimVectorExpected = DimensionVector.ofRequired(expected);
+      expect(dimVector1).toStrictEqual(dimVectorExpected);
+    })
+);

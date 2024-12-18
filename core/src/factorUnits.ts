@@ -8,6 +8,7 @@ import {
 } from "./utils.js";
 import { Unit } from "./unit.js";
 import { Decimal } from "decimal.js";
+import { DimensionVector } from "./dimensionVector.js";
 
 /**
  * Class representing a set of FactorUnits and a conversionMultiplier, so the units can be
@@ -17,6 +18,8 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
   private static readonly EMPTY_FACTOR_UNITS = new FactorUnits([], ONE);
   readonly factorUnits: FactorUnit[];
   readonly scaleFactor: Decimal;
+  private normalized?: FactorUnits = undefined;
+  private dimensionVector?: DimensionVector = undefined;
 
   constructor(factorUnits: FactorUnit[], scaleFactor: Decimal = ONE) {
     this.factorUnits = factorUnits;
@@ -166,6 +169,9 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
   }
 
   normalize(): FactorUnits {
+    if (!isNullish(this.normalized)) {
+      return this.normalized as FactorUnits;
+    }
     let normalized = null;
     if (this.hasFactorUnits()) {
       const mapped = this.factorUnits.map((fu) =>
@@ -178,7 +184,8 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
     if (!normalized.isRatioOfSameUnits()) {
       normalized = normalized.reduceExponents();
     }
-    return normalized.scale(this.scaleFactor);
+    this.normalized = normalized.scale(this.scaleFactor);
+    return this.normalized;
   }
 
   public expand(): FactorUnit[] {
@@ -226,6 +233,37 @@ export class FactorUnits implements SupportsEquals<FactorUnits> {
    */
   public denominator(): FactorUnits {
     return new FactorUnits(this.denominatorFactors());
+  }
+
+  public getDimensionVector(): DimensionVector {
+    if (isNullish(this.dimensionVector)) {
+      this.dimensionVector = this.computeDimensionVector();
+    }
+    return this.dimensionVector as DimensionVector;
+  }
+
+  private computeDimensionVector(): DimensionVector {
+    if (isNullish(this.factorUnits) || this.factorUnits.length == 0) {
+      return DimensionVector.DIMENSIONLESS;
+    }
+
+    let dv: DimensionVector | undefined = undefined;
+    for (const fu of this.factorUnits) {
+      const factorUnitFeatureVector = fu.getDimensionVector();
+      if (isNullish(factorUnitFeatureVector)) {
+        throw new Error(
+          `Cannot compute dimension vector of factor units ${this.toString()}: ${fu.unit.getIriAbbreviated()} does not have a dimension vector`
+        );
+      }
+      if (isNullish(dv)) {
+        dv = factorUnitFeatureVector;
+      } else {
+        dv = (dv as DimensionVector).combine(
+          factorUnitFeatureVector as DimensionVector
+        );
+      }
+    }
+    return dv as DimensionVector;
   }
 
   private denominatorFactors(): FactorUnit[] {
