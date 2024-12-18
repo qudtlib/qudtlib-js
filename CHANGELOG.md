@@ -9,6 +9,13 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+### Added
+
+- Speed up unit matching by
+  - indexing units by dimension vector
+  - preventing recalculation of normalized factor units by keeping the result
+- Add FactorUnits.getDimensionVector()
+
 ## 6.7.0 - 2024-04-04
 
 ### Fixed
