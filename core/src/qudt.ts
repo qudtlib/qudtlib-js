@@ -24,10 +24,9 @@ import { AssignmentProblem } from "./assignmentProblem.js";
 import { QuantityValue } from "./quantityValue.js";
 import { LangString } from "./langString.js";
 import { Decimal } from "decimal.js";
-3;
 import { QudtNamespaces } from "./qudtNamespaces.js";
 import { SystemOfUnits } from "./systemOfUnits.js";
-import { DimensionVector } from "./dimensionVector";
+import { DimensionVector } from "./dimensionVector.js";
 
 export class QudtlibConfig {
   readonly units: Map<string, Unit>;

@@ -8,7 +8,7 @@ import {
 } from "./utils.js";
 import { Unit } from "./unit.js";
 import { Decimal } from "decimal.js";
-import { DimensionVector } from "./dimensionVector";
+import { DimensionVector } from "./dimensionVector.js";
 
 /**
  * Class representing a set of FactorUnits and a conversionMultiplier, so the units can be
