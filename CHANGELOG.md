@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 6.8.1 - 2024-12-18
+
 ### Fixed
 
 - Add quantitykind constants for those quantitykinds that are defined in the currency file in QUDT.
