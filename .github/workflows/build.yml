@@ -1,0 +1,27 @@
+# releases the project with specified version bump
+# deploys it to the central npm repository
+name: Release and deploy to npm repository
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      # Set up java with maven cache
+      - name: Checkout
+        uses:
+          actions/checkout@v4
+          # Setup Node.js environment
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          cache: "npm"
+          registry-url: https://registry.npmjs.org/
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build and run tests
+        run: npm run build-complete
