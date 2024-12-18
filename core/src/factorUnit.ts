@@ -9,7 +9,7 @@ import {
 import { FactorUnits } from "./factorUnits.js";
 import { Unit } from "./unit.js";
 import { Decimal } from "decimal.js";
-import { DimensionVector } from "./dimensionVector";
+import { DimensionVector } from "./dimensionVector.js";
 
 /**
  * Combines a {@link Unit} and an exponent; some Units are a combination of {@link FactorUnit}s. If
