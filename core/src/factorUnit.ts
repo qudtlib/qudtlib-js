@@ -4,10 +4,12 @@ import {
   arrayEqualsIgnoreOrdering,
   checkInteger,
   compareUsingEquals,
+  isNullish,
 } from "./utils.js";
 import { FactorUnits } from "./factorUnits.js";
 import { Unit } from "./unit.js";
 import { Decimal } from "decimal.js";
+import { DimensionVector } from "./dimensionVector";
 
 /**
  * Combines a {@link Unit} and an exponent; some Units are a combination of {@link FactorUnit}s. If
@@ -196,6 +198,14 @@ export class FactorUnit implements SupportsEquals<FactorUnit> {
     return arrayDeduplicate(results, (left, right) =>
       arrayEqualsIgnoreOrdering(left, right, compareUsingEquals)
     );
+  }
+
+  public getDimensionVector(): DimensionVector | undefined {
+    if (isNullish(this.unit.dimensionVectorIri)) {
+      return undefined;
+    }
+    const dv = new DimensionVector(this.unit.dimensionVectorIri as string);
+    return dv.multiply(this.exponent);
   }
 
   static ofUnit(unit: Unit) {

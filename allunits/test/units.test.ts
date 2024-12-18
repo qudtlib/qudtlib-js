@@ -1835,7 +1835,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.SI) ", () => {
   expect(units.includes(Units.FT)).toBe(false);
   expect(units.includes(Units.OZ)).toBe(false);
   expect(units.includes(Units.N__PER__M3)).toBe(true);
-  expect(units.length).toBe(1058);
+  expect(units.length).toBe(1069);
 });
 
 test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
@@ -1851,7 +1851,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
   expect(units.includes(Units.FT)).toBe(true);
   expect(units.includes(Units.OZ)).toBe(true);
   expect(units.includes(Units.N__PER__M3)).toBe(false);
-  expect(units.length).toBe(425);
+  expect(units.length).toBe(429);
 });
 
 test("Unit.normalize()", () => {
@@ -1873,7 +1873,7 @@ describe.each([
   [Units.KiloM, SystemsOfUnits.IMPERIAL, Units.MI],
   [Units.KiloGM, SystemsOfUnits.IMPERIAL, Units.LB],
   [Units.NanoM, SystemsOfUnits.IMPERIAL, Units.MicroIN],
-  [Units.MegaGM, SystemsOfUnits.IMPERIAL, Units.TON_UK],
+  [Units.MegaGM, SystemsOfUnits.IMPERIAL, Units.TON_LONG],
 ])(`Find corresponding unit in given unit system`, (unit, system, expected) => {
   const actual = Qudt.correspondingUnitInSystem(unit, system) || "[no result]";
   const actualString =
