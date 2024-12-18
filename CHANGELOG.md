@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 6.8.0 - 2024-12-18
+
 ### Added
 
 - Speed up unit matching by
