@@ -129,16 +129,25 @@ export class Qudt {
     return Qudt.NAMESPACES.unit.makeIriInNamespace(localname);
   }
 
+  /**
+   * @deprecated The currencies have been moved back into the units graph. Just use the units methods.
+   */
   static currencyFromLocalname(localname: string): Unit | undefined {
-    return Qudt.unit(Qudt.currencyIriFromLocalname(localname));
+    return this.unitFromLocalname(localname);
   }
 
+  /**
+   * @deprecated The currencies have been moved back into the units graph. Just use the units methods.
+   */
   static currencyFromLocalnameRequired(localname: string): Unit {
-    return Qudt.unitRequired(Qudt.currencyIriFromLocalname(localname));
+    return this.unitFromLocalnameRequired(localname);
   }
 
+  /**
+   * @deprecated The currencies have been moved back into the units graph. Just use the units methods.
+   */
   static currencyIriFromLocalname(localname: string): string {
-    return Qudt.NAMESPACES.currency.makeIriInNamespace(localname);
+    return this.unitIriFromLocalname(localname);
   }
 
   static quantityKind(quantityKindIri: string): QuantityKind | undefined {
