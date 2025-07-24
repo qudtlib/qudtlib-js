@@ -1,3 +1,4 @@
 /**/dist/*
 /svelte-test/**
 /**/tmp/**
+/**/coverage/**
