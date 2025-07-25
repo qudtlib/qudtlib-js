@@ -43,12 +43,13 @@ const derived = Qudt.derivedUnitsFromExponentUnitPairs(
   Units.SEC,
   -2
 );
+console.log(derived);
 const newton = derived[0];
 value = new Decimal(250);
-converted = Qudt.convert(value, newton, Units.KiloP);
+converted = Qudt.convert(value, newton, Units.KiloPOND);
 console.log("\n# deriving N from (m kg s^-2):");
 console.log(
-  `${value}${newton.toString()} = ${converted}${Units.KiloP.toString()}`
+  `${value}${newton.toString()} = ${converted}${Units.KiloPOND.toString()}`
 ); // 250N = 25.492905324448206064kp
 
 // if you need the factor units, you can get them from the unit
@@ -78,12 +79,12 @@ console.log(`F =  (${factorsF})`); // F =  (C V^-1)
 console.log(`F =  (${leafFactorsF})`); // F =  (s A m^-1 kg^-1 s^2 m^-1 s A)
 
 // use `Qudt.simplifyFactorUnits(Unit[])` to aggreagte potential duplicate units
-const leafFactorsWsimplified = Qudt.simplifyFactorUnits(
+const leafFactorsWsimplified = Qudt.contractFactorUnits(
   Units.W.getLeafFactorUnitsWithCumulativeExponents()
 )
   .map((f) => f.toString())
   .join(" ");
-const leafFactorsFsimplified = Qudt.simplifyFactorUnits(
+const leafFactorsFsimplified = Qudt.contractFactorUnits(
   Units.F.getLeafFactorUnitsWithCumulativeExponents()
 )
   .map((f) => f.toString())

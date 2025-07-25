@@ -129,16 +129,25 @@ export class Qudt {
     return Qudt.NAMESPACES.unit.makeIriInNamespace(localname);
   }
 
+  /**
+   * @deprecated The currencies have been moved back into the units graph. Just use the units methods.
+   */
   static currencyFromLocalname(localname: string): Unit | undefined {
-    return Qudt.unit(Qudt.currencyIriFromLocalname(localname));
+    return this.unitFromLocalname(localname);
   }
 
+  /**
+   * @deprecated The currencies have been moved back into the units graph. Just use the units methods.
+   */
   static currencyFromLocalnameRequired(localname: string): Unit {
-    return Qudt.unitRequired(Qudt.currencyIriFromLocalname(localname));
+    return this.unitFromLocalnameRequired(localname);
   }
 
+  /**
+   * @deprecated The currencies have been moved back into the units graph. Just use the units methods.
+   */
   static currencyIriFromLocalname(localname: string): string {
-    return Qudt.NAMESPACES.currency.makeIriInNamespace(localname);
+    return this.unitIriFromLocalname(localname);
   }
 
   static quantityKind(quantityKindIri: string): QuantityKind | undefined {
@@ -542,10 +551,15 @@ export class Qudt {
       prefix instanceof Prefix ? prefix : this.prefixRequired(prefix);
     const theUnit =
       baseUnit instanceof Unit ? baseUnit : this.unitRequired(baseUnit);
-    for (const u of this.getUnitsWithSameDimensionVector(theUnit)) {
+    const candidates = this.getUnitsWithSameDimensionVector(theUnit);
+    for (const u of candidates) {
       if (u.prefix?.equals(thePrefix) && u.scalingOf?.equals(theUnit)) {
         return u;
       }
+    }
+    // special case: KiloGM is not a scaling of GM, it's the other way round. Handle special case here.
+    if (thePrefix.iri.endsWith("/Kilo") && theUnit.iri.endsWith("/GM")) {
+      return this.unitFromLocalname("KiloGM");
     }
     throw `No scaled unit found with base unit ${theUnit.toString()} and prefix ${thePrefix.toString()}`;
   }
