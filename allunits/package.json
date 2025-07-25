@@ -6,6 +6,7 @@
   "module": "dist/mjs/units.js",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/mjs/units.js",
       "require": "./dist/cjs/units.js"
     }
@@ -49,7 +50,7 @@
   },
   "dependencies": {
     "@qudtlib/core": "^6.8.1",
-    "decimal.js": "10.4.2",
+    "decimal.js": "10.6.0",
     "gulp-cli": "3.1.0",
     "gulp-sourcemaps": "2.6.5",
     "lerna": "8.2.3"

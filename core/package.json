@@ -6,6 +6,7 @@
   "module": "dist/mjs/qudtlib.js",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/mjs/qudtlib.js",
       "require": "./dist/cjs/qudtlib.js"
     }
@@ -50,6 +51,6 @@
     "typescript": "^4.7.4"
   },
   "dependencies": {
-    "decimal.js": "10.4.2"
+    "decimal.js": "10.6.0"
   }
 }
