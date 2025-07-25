@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 7.0.0-beta.0 - 2025-07-25
+
 ### Changed
 
 - Upgrade to QUDT 3.1.4
