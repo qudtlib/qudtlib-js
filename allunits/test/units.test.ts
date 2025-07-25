@@ -1808,9 +1808,9 @@ test("Qudt.testContractExponents()", () => {
     Units.FARAD.getLeafFactorUnitsWithCumulativeExponents()
   );
   expect(simplified.length).toBe(4);
-  expect(simplified.some((fu) => fu.equals(new FactorUnit(Units.KiloGM, -1)))).toBe(
-    true
-  );
+  expect(
+    simplified.some((fu) => fu.equals(new FactorUnit(Units.KiloGM, -1)))
+  ).toBe(true);
   expect(simplified.some((fu) => fu.equals(new FactorUnit(Units.M, -2)))).toBe(
     true
   );
