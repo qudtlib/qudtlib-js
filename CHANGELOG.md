@@ -9,7 +9,6 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
-
 ### Fixed
 
 - Adapted sorting of matching unis for given factors to match the behaviour of `qudtlib-java`
