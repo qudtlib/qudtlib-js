@@ -435,6 +435,36 @@ export class Qudt {
           return 1;
         }
       }
+      if (right.deprecated) {
+        if (!left.deprecated) {
+          return -1;
+        }
+      } else {
+        if (left.deprecated) {
+          return 1;
+        }
+      }
+      if (
+        right.isDefinedAsOtherUnit() &&
+        left.factorUnits.factorUnits?.length == 1 &&
+        left.factorUnits.factorUnits[0].unit.equals(right) &&
+        right.factorUnits.factorUnits[0].exponent ===
+          left.factorUnits.factorUnits[0]?.exponent
+      ) {
+        // if a unit is just another name of another unit with same exponent,
+        // prefer the other (thus L would be preferred over DeciM)
+        return -1;
+      }
+      if (
+        left.isDefinedAsOtherUnit() &&
+        right.factorUnits.factorUnits?.length == 1 &&
+        right.factorUnits.factorUnits[0].unit.equals(left) &&
+        left.factorUnits.factorUnits[0].exponent ===
+          right.factorUnits.factorUnits[0]?.exponent
+      ) {
+        return 1;
+      }
+
       if (left.getIriLocalname().indexOf("-") === -1) {
         if (right.getIriLocalname().indexOf("-") > -1) {
           return -1; // prefer a derived unit with a new name (such as W, J, N etc.)
@@ -443,50 +473,91 @@ export class Qudt {
         return 1;
       }
 
-      const leftDen: FactorUnits = left.factorUnits.denominator();
-      const rightDen: FactorUnits = right.factorUnits.denominator();
-      const leftFactorsDenCnt: number = leftDen.expand().length;
-      const rightFactorsDenCnt: number = rightDen.expand().length;
-      const reqFactorsDenCnt: number = reqDen.expand().length;
-      const diffFactorsCountDen =
-        Math.abs(reqFactorsDenCnt - leftFactorsDenCnt) -
-        Math.abs(reqFactorsDenCnt - rightFactorsDenCnt);
+      const diffFactorsCountDen = Qudt.expandedFactorsCountDiff(
+        left.factorUnits.denominator(),
+        right.factorUnits.denominator(),
+        reqDen
+      );
       if (diffFactorsCountDen != 0) {
         return diffFactorsCountDen;
       }
-
-      const leftNum: FactorUnits = left.factorUnits.numerator();
-      const rightNum: FactorUnits = right.factorUnits.denominator();
-      const leftFactorsNumCnt: number = leftNum.expand().length;
-      const rightFactorsNumCnt: number = rightNum.expand().length;
-      const reqFactorsNumCnt: number = reqNum.expand().length;
-      const diffFactorsCountNum: number =
-        Math.abs(reqFactorsNumCnt - leftFactorsNumCnt) -
-        Math.abs(reqFactorsNumCnt - rightFactorsNumCnt);
+      const diffFactorsCountNum = Qudt.expandedFactorsCountDiff(
+        left.factorUnits.numerator(),
+        right.factorUnits.numerator(),
+        reqNum
+      );
       if (diffFactorsCountNum != 0) {
         return diffFactorsCountNum;
       }
-      const leftCnt: number = left.factorUnits.expand().length;
-      const rightCnt: number = right.factorUnits.expand().length;
-      const reqCnt: number = requestedFactorUnits.expand().length;
-      if (leftCnt == reqCnt) {
-        if (rightCnt != reqCnt) {
+      const factorCountDiff = Qudt.expandedFactorsCountDiff(
+        left.factorUnits,
+        right.factorUnits,
+        requestedFactorUnits
+      );
+      if (factorCountDiff != 0) {
+        return factorCountDiff;
+      }
+      if (left.dependents >= 10 && left.dependents > 2 * right.dependents) {
+        return -1; // prefer a unit that has more dependents (other units that refer to
+        // it as their factor unit or base unit)
+      } else if (
+        right.dependents >= 10 &&
+        right.dependents > 2 * left.dependents
+      ) {
+        return 1;
+      }
+
+      const leftLocalname = left.getIriLocalname();
+      const rightLocalname = right.getIriLocalname();
+      if (reqLocalNamePossibilities.includes(leftLocalname)) {
+        if (!reqLocalNamePossibilities.includes(rightLocalname)) {
           return -1;
         }
+      } else if (reqLocalNamePossibilities.includes(rightLocalname)) {
+        return 1;
+      }
+      const leftUnderscores = Qudt.countUnderscores(leftLocalname);
+      const rightUnderscores = Qudt.countUnderscores(rightLocalname);
+      if (leftUnderscores < rightUnderscores) {
+        return -1; // prefer a unit without modifier in one of its components
+      } else if (leftUnderscores > rightUnderscores) {
+        return 1;
+      }
+      if (left.factorUnits.equals(reqNorm)) {
+        if (!right.factorUnits.equals(reqNorm)) {
+          return -1; // prefer a unit that matches the normalized factors exactly
+        }
       } else {
-        if (rightCnt == reqCnt) {
+        if (right.factorUnits.equals(reqNorm)) {
           return 1;
         }
       }
-      if (reqLocalNamePossibilities.includes(left.getIriLocalname())) {
-        if (!reqLocalNamePossibilities.includes(right.getIriLocalname())) {
-          return -1;
-        }
-      } else if (reqLocalNamePossibilities.includes(right.getIriLocalname())) {
-        return 1;
-      }
+
       return StringComparator(left.getIriLocalname(), right.getIriLocalname());
     };
+  }
+
+  private static countUnderscores(str: string): number {
+    if (!str) return 0;
+    let count = 0;
+    for (const char of str) {
+      if (char === "_") count++;
+    }
+    return count;
+  }
+
+  private static expandedFactorsCountDiff(
+    leftDen: FactorUnits,
+    rightDen: FactorUnits,
+    target: FactorUnits
+  ): number {
+    const leftFactorsDenCnt = leftDen.expand().length;
+    const rightFactorsDenCnt = rightDen.expand().length;
+    const reqFactorsDenCnt = target.expand().length;
+    const diffFactorsCountDen =
+      Math.abs(reqFactorsDenCnt - leftFactorsDenCnt) -
+      Math.abs(reqFactorsDenCnt - rightFactorsDenCnt);
+    return diffFactorsCountDen;
   }
 
   private static findMatchingUnits(
