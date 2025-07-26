@@ -21,6 +21,9 @@ export class Unit implements SupportsEquals<Unit> {
   readonly quantityKinds: QuantityKind[] = [];
   readonly exactMatchIris: string[];
   readonly symbol?: string;
+  readonly dependents: number;
+  readonly deprecated: boolean;
+  readonly generated: boolean;
   readonly scalingOfIri?: string;
   scalingOf?: Unit;
   readonly dimensionVectorIri?: string;
@@ -42,7 +45,10 @@ export class Unit implements SupportsEquals<Unit> {
     labels?: LangString[],
     currencyCode?: string,
     currencyNumber?: number,
-    unitOfSystemIris?: string[]
+    unitOfSystemIris?: string[],
+    dependents?: number,
+    deprecated?: boolean,
+    generated?: boolean
   ) {
     this.iri = iri;
     this.prefixIri = prefixIri;
@@ -82,6 +88,9 @@ export class Unit implements SupportsEquals<Unit> {
       this.unitOfSystemIris = unitOfSystemIris;
     }
     this.factorUnits = FactorUnits.ofUnit(this); //might be replaced later by this.setFactorUnits().
+    this.dependents = dependents ?? 0;
+    this.deprecated = deprecated ?? false;
+    this.generated = generated ?? false;
   }
 
   equals(other?: Unit): boolean {
