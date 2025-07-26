@@ -9,15 +9,17 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
-### Fixed
-
-- Adapted sorting of matching unis for given factors to match the behaviour of `qudtlib-java`
+## 7.0.0-beta.1 - 2025-07-26
 
 ### Added
 
 - Unit.deprecated - boolean indicating whether the unit is deprecated in QUDT
 - Unit.generated - boolean indicating whether the unit was generated as a required base unit / factor
 - Unit.dependents - int indicating the number of units this unit is a factor or a scalingOf base
+
+### Fixed
+
+- Adapted sorting of matching unis for given factors to match the behaviour of `qudtlib-java`
 
 ## 7.0.0-beta.0 - 2025-07-25
 
