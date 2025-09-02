@@ -9,6 +9,18 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+### Changed
+
+- Upgrade to QUDT 3.1.5
+  QUDT now contains many more language-specific `rdfs:label`s. QUDTLib selects only `en` and `en-US` labels
+  (`en` is standard and together with `en-US` the labels meet the expectations of most romanic language users)
+
+### Fixed
+
+- Fixed handling of Currency units.
+- Special handling of KiloGM in Qudt.scale()
+- Exported more functions
+
 ## 7.0.0-beta.1 - 2025-07-26
 
 ### Added
@@ -93,7 +105,7 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ### Changed
 
-- Simplified BEST_MATCH algorithm for obtaining a unit from a set of factor units. Recent additions to the data model (isScalingOf and factorUnit relationships) led to a larger set of candidates and the complexity of the previous algorithm led to very high computation time.
+- Simplified BEST_MATCH algorithm for obtaining a unit from a set of factor units. Recent additions to the data model (scalingOf and factorUnit relationships) led to a larger set of candidates and the complexity of the previous algorithm led to very high computation time.
 - Changed the behaviour of Unit.hasFactorUnits() such that for a FactorUnits object with only one top-level factor unit (such as [N^1]), the method returns false.
 
 ## 6.0.0 - 2023-12-15

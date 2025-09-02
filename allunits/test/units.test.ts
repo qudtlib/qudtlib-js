@@ -1867,7 +1867,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.SI) ", () => {
   expect(units.includes(Units.FT)).toBe(false);
   expect(units.includes(Units.OZ)).toBe(false);
   expect(units.includes(Units.N__PER__M3)).toBe(true);
-  expect(units.length).toBe(1153);
+  expect(units.length).toBe(1167);
 });
 
 test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
@@ -1883,7 +1883,7 @@ test("SystemOfUnits.allUnitsOfSystem(SystemsOfUnits.Imperial)", () => {
   expect(units.includes(Units.FT)).toBe(true);
   expect(units.includes(Units.OZ)).toBe(true);
   expect(units.includes(Units.N__PER__M3)).toBe(false);
-  expect(units.length).toBe(441);
+  expect(units.length).toBe(443);
 });
 
 test("Unit.normalize()", () => {
