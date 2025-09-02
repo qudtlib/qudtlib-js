@@ -89,7 +89,7 @@ export class Solution {
   }
 }
 
-class ValueWithIndex {
+export class ValueWithIndex {
   readonly value: number;
   readonly index: number;
 

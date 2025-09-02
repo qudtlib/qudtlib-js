@@ -112,13 +112,11 @@ export class Unit implements SupportsEquals<Unit> {
   }
 
   getIriAbbreviated(): string {
-    return this.isCurrencyUnit()
-      ? QudtNamespaces.currency.abbreviate(this.iri)
-      : QudtNamespaces.unit.abbreviate(this.iri);
+    return QudtNamespaces.unit.abbreviate(this.iri);
   }
 
   isCurrencyUnit(): boolean {
-    return QudtNamespaces.currency.isFullNamespaceIri(this.iri);
+    return this.getIriLocalname().startsWith("CCY_");
   }
 
   matchesFactorUnitSpec(...factorUnitSpec: (number | Unit)[]): boolean {

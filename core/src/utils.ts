@@ -5,7 +5,7 @@ export function getLastIriElement(iri: string) {
   return iri.replaceAll(/.+\/([^\/]+)/g, "$1");
 }
 
-interface EqualsComparator<Type> {
+export interface EqualsComparator<Type> {
   (left: Type, right: Type): boolean;
 }
 
