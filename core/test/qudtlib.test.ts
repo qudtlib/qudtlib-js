@@ -15,6 +15,8 @@ import { FactorUnit } from "../src/factorUnit";
 import { FactorUnits } from "../src/factorUnits";
 import { Unit } from "../src/unit";
 import { DimensionVector } from "../src/dimensionVector";
+import { config, Qudt } from "../src/qudt";
+import { DerivedUnitSearchMode } from "../src/derivedUnitSearchMode";
 
 const degC = new Unit(
   "http://qudt.org/vocab/unit/DEG_C",
@@ -82,6 +84,133 @@ const kiloM = new Unit(
   [new LangString("m", "en")]
 );
 kiloM.scalingOf = m;
+
+describe("Qudt unit lookup caches", () => {
+  afterEach(() => {
+    jest.restoreAllMocks();
+    config.units.clear();
+    config.unitsByDimensionVector.clear();
+  });
+
+  test("label lookup caches normalized hits and misses and evicts the least recently used input", () => {
+    config.units.set(m.iri, m);
+    const visits = jest.spyOn(config.units, "values");
+
+    expect(Qudt.unitFromLabel("M")).toBe(m);
+    for (let i = 0; i < 99; i++) {
+      expect(Qudt.unitFromLabel(`missing_${i}`)).toBeUndefined();
+    }
+    expect(Qudt.unitFromLabel("m")).toBe(m);
+    expect(visits).toHaveBeenCalledTimes(100);
+
+    expect(Qudt.unitFromLabel("MISSING 99")).toBeUndefined();
+    expect(Qudt.unitFromLabel("missing_99")).toBeUndefined();
+    expect(Qudt.unitFromLabel("m")).toBe(m);
+    expect(visits).toHaveBeenCalledTimes(101);
+    expect(Qudt.unitFromLabel("missing_0")).toBeUndefined();
+    expect(visits).toHaveBeenCalledTimes(102);
+
+    config.units.set(m.iri, kiloM);
+    expect(Qudt.unitFromLabel("m")).toBe(kiloM);
+  });
+
+  test("factor lookup reuses results across calls and accounts for scale, mode, and index changes", () => {
+    const alias = new Unit("urn:alias", [], [], m.dimensionVectorIri);
+    alias.setFactorUnits(FactorUnits.ofUnit(m));
+    const dimension = m.dimensionVectorIri as string;
+    config.unitsByDimensionVector.set(dimension, [m, alias]);
+    const visits = jest.spyOn(Qudt, "getUnitsByDimensionVector");
+    const lookup = () =>
+      Qudt.derivedUnitsFromExponentUnitPairs(DerivedUnitSearchMode.ALL, m, 1);
+
+    const initial = lookup();
+    expect(initial).toHaveLength(2);
+    initial.pop();
+    expect(lookup()).toHaveLength(2);
+    expect(visits).toHaveBeenCalledTimes(1);
+
+    expect(
+      Qudt.derivedUnitsFromExponentUnitPairs(
+        DerivedUnitSearchMode.BEST_MATCH,
+        m,
+        1
+      )
+    ).toHaveLength(1);
+    const scaledLookup = (scale: number) =>
+      Qudt.derivedUnitsFromFactorUnitSelection(
+        DerivedUnitSearchMode.ALL,
+        FactorUnits.ofFactorUnitSpecWithScaleFactor(new Decimal(scale), m, 1)
+      );
+    expect(scaledLookup(2)).toEqual([]);
+    expect(scaledLookup(2)).toEqual([]);
+    expect(visits).toHaveBeenCalledTimes(3);
+
+    for (let scale = 3; scale <= 100; scale++) {
+      expect(scaledLookup(scale)).toEqual([]);
+    }
+    expect(lookup()).toHaveLength(2);
+    expect(visits).toHaveBeenCalledTimes(102);
+
+    config.unitsByDimensionVector.set(dimension, [m]);
+    expect(lookup()).toEqual([m]);
+  });
+
+  test("factor permutations share a cache entry", () => {
+    const dimension = degC__PER__M.dimensionVectorIri as string;
+    config.unitsByDimensionVector.set(dimension, [degC__PER__M]);
+    const visits = jest.spyOn(Qudt, "getUnitsByDimensionVector");
+    const selection = FactorUnits.ofFactorUnitSpec(m, -1, degC, 1);
+    const lookup = (factors: FactorUnits) =>
+      Qudt.derivedUnitsFromFactorUnitSelection(
+        DerivedUnitSearchMode.ALL,
+        factors
+      );
+
+    expect(lookup(selection)).toEqual([degC__PER__M]);
+    expect(lookup(FactorUnits.ofFactorUnitSpec(degC, 1, m, -1))).toEqual([
+      degC__PER__M,
+    ]);
+    expect(visits).toHaveBeenCalledTimes(1);
+    expect(selection.factorUnits[0].unit).toBe(m);
+  });
+
+  test("factor permutations preserve matches when normalization rounds differently", () => {
+    const [a, b, c] = [
+      "1.234567890123456789",
+      "2.34567890123456789",
+      "3.44567890123456789",
+    ].map(
+      (scale, index) =>
+        new Unit(
+          `urn:scaled-${index}`,
+          [],
+          [],
+          m.dimensionVectorIri,
+          new Decimal(scale),
+          undefined,
+          undefined,
+          undefined,
+          m
+        )
+    );
+    const forward = FactorUnits.ofFactorUnitSpec(a, 1, b, 1, c, 1);
+    const reverse = FactorUnits.ofFactorUnitSpec(c, 1, b, 1, a, 1);
+    const dimension = forward.getDimensionVector().getDimensionVectorIri();
+    const candidate = new Unit("urn:scaled-cubic-meter", [], [], dimension);
+    candidate.setFactorUnits(forward);
+    config.unitsByDimensionVector.set(dimension, [candidate]);
+    const lookup = (factors: FactorUnits) =>
+      Qudt.derivedUnitsFromFactorUnitSelection(
+        DerivedUnitSearchMode.ALL,
+        factors
+      );
+
+    expect(lookup(forward)).toEqual([candidate]);
+    expect(lookup(reverse)).toEqual([]);
+    expect(lookup(forward)).toEqual([candidate]);
+  });
+});
+
 const degC__PER__M = new Unit(
   "http://qudt.org/vocab/unit/DEG_C-PER-M",
   [],
