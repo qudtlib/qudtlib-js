@@ -28,6 +28,65 @@ import { QudtNamespaces } from "./qudtNamespaces.js";
 import { SystemOfUnits } from "./systemOfUnits.js";
 import { DimensionVector } from "./dimensionVector.js";
 
+const UNIT_LOOKUP_CACHE_CAPACITY = 100;
+
+class UnitLookupCache<T> {
+  private readonly entries = new Map<string, T>();
+
+  getOrCompute(key: string, compute: () => T): T {
+    if (this.entries.has(key)) {
+      const value = this.entries.get(key) as T;
+      this.entries.delete(key);
+      this.entries.set(key, value);
+      return value;
+    }
+
+    const value = compute();
+    this.entries.set(key, value);
+    while (this.entries.size > UNIT_LOOKUP_CACHE_CAPACITY) {
+      this.entries.delete(this.entries.keys().next().value as string);
+    }
+    return value;
+  }
+
+  clear() {
+    this.entries.clear();
+  }
+}
+
+class UnitRegistryMap<T> extends Map<string, T> {
+  constructor(private readonly onChange: () => void) {
+    super();
+  }
+
+  override set(key: string, value: T): this {
+    super.set(key, value);
+    this.onChange();
+    return this;
+  }
+
+  override delete(key: string): boolean {
+    const deleted = super.delete(key);
+    if (deleted) this.onChange();
+    return deleted;
+  }
+
+  override clear() {
+    super.clear();
+    this.onChange();
+  }
+}
+
+interface DerivedUnitCacheEntry {
+  order: string;
+  dimensionVector: string;
+  normalized: FactorUnits;
+  units: Unit[];
+}
+
+const unitLabelCache = new UnitLookupCache<Unit | undefined>();
+const derivedUnitCache = new UnitLookupCache<DerivedUnitCacheEntry>();
+
 export class QudtlibConfig {
   readonly units: Map<string, Unit>;
   readonly quantityKinds: Map<string, QuantityKind>;
@@ -36,14 +95,25 @@ export class QudtlibConfig {
   readonly unitsByDimensionVector: Map<string, Array<Unit>>;
 
   constructor() {
-    this.units = new Map<string, Unit>();
+    this.units = new UnitRegistryMap(() => this.clearUnitLookupCaches());
     this.quantityKinds = new Map<string, QuantityKind>();
     this.prefixes = new Map<string, Prefix>();
     this.systemsOfUnits = new Map<string, SystemOfUnits>();
-    this.unitsByDimensionVector = new Map<string, Array<Unit>>();
+    this.unitsByDimensionVector = new UnitRegistryMap(() =>
+      this.clearUnitLookupCaches()
+    );
+  }
+
+  /** Call after editing labels, unit definitions, or dimension-vector buckets in place. */
+  public clearUnitLookupCaches() {
+    if (this === config) {
+      unitLabelCache.clear();
+      derivedUnitCache.clear();
+    }
   }
 
   public indexUnitsByDimensionVector() {
+    this.clearUnitLookupCaches();
     this.units.forEach((u) => {
       const dimVector = u.dimensionVectorIri;
       if (!isNullish(dimVector)) {
@@ -100,15 +170,15 @@ export class Qudt {
    * @return the first unit found
    */
   static unitFromLabel(label: string): Unit | undefined {
-    const matcher: LabelMatcher =
-      new CaseInsensitiveUnderscoreIgnoringLabelMatcher(label);
-    const firstMatch: Unit | undefined = findInIterable(
-      config.units.values(),
-      (u) =>
-        matcher.matchesLangStrings(u.labels) ||
-        (!!u.currencyCode && matcher.matchesString(u.currencyCode))
+    const matcher = new CaseInsensitiveUnderscoreIgnoringLabelMatcher(label);
+    return unitLabelCache.getOrCompute(matcher.compareForEquality, () =>
+      findInIterable(
+        config.units.values(),
+        (u) =>
+          matcher.matchesLangStrings(u.labels) ||
+          (!!u.currencyCode && matcher.matchesString(u.currencyCode))
+      )
     );
-    return firstMatch;
   }
 
   static unitFromLabelRequired(label: string): Unit {
@@ -397,21 +467,64 @@ export class Qudt {
     searchMode: DerivedUnitSearchMode,
     selection: FactorUnits
   ): Unit[] {
-    const matchingUnits = this.findMatchingUnits(selection);
-    if (searchMode === DerivedUnitSearchMode.ALL || matchingUnits.length < 2) {
-      return matchingUnits.sort(
-        Qudt.bestMatchForFactorUnitsComparator(selection)
-      );
-    } else {
-      const requestedUnits: FactorUnit[] =
-        selection.contractExponents().factorUnits;
-      return [
-        arrayMin(
-          matchingUnits,
-          Qudt.bestMatchForFactorUnitsComparator(selection)
-        ),
-      ];
+    const factors = this.factorCacheTokens(selection.factorUnits);
+    const order = factors.join(",");
+    const key = JSON.stringify([
+      searchMode,
+      selection.scaleFactor.valueOf(),
+      factors.sort(),
+    ]);
+    const entry = derivedUnitCache.getOrCompute(key, () => ({
+      order,
+      units: this.rankMatchingUnits(searchMode, selection),
+      dimensionVector: selection.getDimensionVector().getDimensionVectorIri(),
+      normalized: selection.normalize(),
+    }));
+
+    if (entry.order !== order) {
+      // Decimal multiplication can round differently across permutations.
+      const dimensionVector = selection
+        .getDimensionVector()
+        .getDimensionVectorIri();
+      const normalized = selection.normalize();
+      if (
+        entry.dimensionVector !== dimensionVector ||
+        !entry.normalized.equals(normalized)
+      ) {
+        entry.units = this.rankMatchingUnits(searchMode, selection);
+        entry.dimensionVector = dimensionVector;
+        entry.normalized = normalized;
+      }
+      entry.order = order;
     }
+    return entry.units.slice();
+  }
+
+  private static rankMatchingUnits(
+    searchMode: DerivedUnitSearchMode,
+    selection: FactorUnits
+  ): Unit[] {
+    const matchingUnits = this.findMatchingUnits(selection);
+    const comparator = Qudt.bestMatchForFactorUnitsComparator(selection);
+    if (searchMode === DerivedUnitSearchMode.ALL || matchingUnits.length < 2) {
+      return matchingUnits.sort(comparator);
+    }
+    return [arrayMin(matchingUnits, comparator)];
+  }
+
+  private static readonly factorUnitIds = new WeakMap<Unit, number>();
+  private static nextFactorUnitId = 0;
+
+  private static factorCacheTokens(factorUnits: FactorUnit[]): string[] {
+    // Ranking uses the original factors. Distinct Unit instances can share an IRI.
+    return factorUnits.map(({ unit, exponent }) => {
+      let id = Qudt.factorUnitIds.get(unit);
+      if (id === undefined) {
+        id = Qudt.nextFactorUnitId++;
+        Qudt.factorUnitIds.set(unit, id);
+      }
+      return `${id}:${exponent}`;
+    });
   }
 
   private static bestMatchForFactorUnitsComparator(
