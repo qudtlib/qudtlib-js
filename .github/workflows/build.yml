@@ -18,7 +18,7 @@ jobs:
         with:
           cache: "npm"
           registry-url: https://registry.npmjs.org/
-          node-version: "18"
+          node-version: "^24.22.3"
 
       - name: Install dependencies
         run: npm install

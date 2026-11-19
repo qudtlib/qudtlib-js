@@ -2,6 +2,11 @@
   "name": "@qudtlib/allunits",
   "version": "7.1.0",
   "description": "Package containing all QUDT units, quantityKinds, and prefixes",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/qudtlib/qudtlib-js.git",
+    "directory": "allunits"
+  },
   "main": "dist/cjs/units.js",
   "module": "dist/mjs/units.js",
   "exports": {
