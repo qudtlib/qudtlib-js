@@ -1,6 +1,6 @@
 {
   "name": "@qudtlib/core",
-  "version": "7.1.0",
+  "version": "7.2.0",
   "description": "Data model for QUDTLib",
   "repository": {
     "type": "git",

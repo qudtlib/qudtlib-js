@@ -9,6 +9,8 @@ This Changelog contains the changes for all packages of this monorepo, which all
 
 ## Unreleased
 
+## 7.2.0 - 2026-11-19
+
 ## 7.1.0 - 2025-09-03
 
 ## 7.1.0-beta.0 - 2025-09-02
